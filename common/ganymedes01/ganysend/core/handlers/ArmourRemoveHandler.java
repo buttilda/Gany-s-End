@@ -6,6 +6,13 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class ArmourRemoveHandler {
 
 	boolean isWearing = false;

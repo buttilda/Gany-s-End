@@ -18,6 +18,13 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class CommonProxy implements IGuiHandler {
 
 	public void registerTileEntities() {

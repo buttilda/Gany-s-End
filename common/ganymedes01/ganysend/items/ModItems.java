@@ -8,6 +8,13 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class ModItems {
 
 	// Items

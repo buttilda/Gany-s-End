@@ -1,5 +1,12 @@
 package ganymedes01.ganysend.lib;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class Reference {
 
 	public static final String MOD_ID = "ganysend";

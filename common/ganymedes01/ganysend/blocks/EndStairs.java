@@ -4,6 +4,13 @@ import ganymedes01.ganysend.GanysEnd;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class EndStairs extends BlockStairs {
 
 	protected EndStairs(int id, Block block) {

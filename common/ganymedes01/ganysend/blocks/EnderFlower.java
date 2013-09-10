@@ -7,6 +7,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.world.World;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class EnderFlower extends BlockFlower {
 
 	protected EnderFlower(int id) {

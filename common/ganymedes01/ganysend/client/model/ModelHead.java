@@ -7,6 +7,13 @@ import net.minecraft.entity.Entity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 @SideOnly(Side.CLIENT)
 public class ModelHead extends ModelSkeletonHead {
 

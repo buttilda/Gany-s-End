@@ -12,6 +12,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class EndiumBlock extends Block {
 
 	public EndiumBlock(int id) {

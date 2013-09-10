@@ -6,6 +6,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class TileEntityTimeManipulator extends TileEntity {
 
 	public boolean revertTime, advanceTime;

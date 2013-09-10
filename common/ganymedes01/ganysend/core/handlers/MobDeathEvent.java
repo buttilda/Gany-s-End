@@ -25,10 +25,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class MobDeathEvent {
 
 	@ForgeSubscribe
-	public void silverfishDeath(LivingDeathEvent event) {
+	public void modDeathEvent(LivingDeathEvent event) {
 		if (!event.entity.worldObj.isRemote)
 			if (event.source != CustomDamageSources.beheading) {
 				Random rand = new Random();

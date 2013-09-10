@@ -11,6 +11,13 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class TileEntityEntityShifter extends TileEntityBlockShifter {
 
 	public TileEntityEntityShifter() {

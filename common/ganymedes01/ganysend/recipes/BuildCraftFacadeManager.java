@@ -4,6 +4,13 @@ import ganymedes01.ganysend.blocks.ModBlocks;
 import net.minecraft.item.ItemStack;
 import buildcraft.api.transport.FacadeManager;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class BuildCraftFacadeManager {
 
 	public static void init() {

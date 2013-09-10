@@ -25,6 +25,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class TileEntityAdvancedFilteringHopper extends TileEntity implements IInventory {
 
 	private ItemStack[] inventory = new ItemStack[5];

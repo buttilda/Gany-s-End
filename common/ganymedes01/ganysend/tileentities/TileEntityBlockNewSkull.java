@@ -7,6 +7,13 @@ import net.minecraft.tileentity.TileEntitySkull;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class TileEntityBlockNewSkull extends TileEntitySkull {
 	private int skullType;
 	private int skullRotation;

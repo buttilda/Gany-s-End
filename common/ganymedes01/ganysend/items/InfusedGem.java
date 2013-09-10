@@ -15,6 +15,13 @@ import net.minecraft.util.Icon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class InfusedGem extends Item {
 
 	private static final String[] types = new String[] { "night", "day" };

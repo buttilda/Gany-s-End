@@ -7,6 +7,13 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class ContainerFilteringHopper extends Container {
 
 	TileEntityFilteringHopper hopper;

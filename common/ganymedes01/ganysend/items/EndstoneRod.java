@@ -5,6 +5,13 @@ import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.item.Item;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class EndstoneRod extends Item {
 
 	public EndstoneRod(int id) {

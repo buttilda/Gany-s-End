@@ -5,6 +5,13 @@ import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.item.ItemSimpleFoiled;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class EndiumIngot extends ItemSimpleFoiled {
 
 	public EndiumIngot(int id) {

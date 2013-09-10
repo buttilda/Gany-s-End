@@ -11,6 +11,13 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class SpeedyHopper extends BasicFilteringHopper {
 
 	public SpeedyHopper(int id) {

@@ -10,6 +10,13 @@ import java.io.DataInputStream;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public enum PacketTypeHandler {
 	TIME_MANIPULATOR(PacketTimeManipulator.class);
 

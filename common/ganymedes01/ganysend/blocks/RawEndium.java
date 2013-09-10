@@ -6,6 +6,13 @@ import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class RawEndium extends Block {
 
 	public RawEndium(int id) {
