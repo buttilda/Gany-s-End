@@ -11,6 +11,8 @@ import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityWitch;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
@@ -43,6 +45,11 @@ public class MobDeathEvent {
 								event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 5), 0.0F);
 							else
 								event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 4), 0.0F);
+						else if (event.entity instanceof EntityZombie)
+							if (((EntityZombie) event.entity).isVillager())
+								event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 14), 0.0F);
+							else if (event.entity instanceof EntityWitch)
+								event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 13), 0.0F);
 					} else if (event.entity instanceof EntityAnimal) {
 						if (!((EntityAnimal) event.entity).isChild())
 							if (event.entity instanceof EntityPig)
