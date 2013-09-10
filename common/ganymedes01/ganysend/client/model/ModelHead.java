@@ -147,6 +147,15 @@ public class ModelHead extends ModelSkeletonHead {
 		hat2.addChild(hat3);
 	}
 
+	public void setZombieVillager() {
+		head = (new ModelRenderer(this)).setTextureSize(64, 64);
+		head.setRotationPoint(0.0F, 0.0F, 0.0F);
+		head.setTextureOffset(0, 32).addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, 0.0F);
+		overlay = (new ModelRenderer(this)).setTextureSize(64, 64);
+		overlay.setRotationPoint(0.0F, -2.0F, 0.0F);
+		overlay.setTextureOffset(24, 32).addBox(-1.0F, -1.0F, -6.0F, 2, 4, 2, 0.0F);
+	}
+
 	@Override
 	public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
 		setRotationAngles(par2, par3, par4, par5, par6, par7, entity);

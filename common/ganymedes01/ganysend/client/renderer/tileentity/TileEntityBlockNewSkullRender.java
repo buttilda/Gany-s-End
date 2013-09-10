@@ -106,6 +106,9 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 			case 13:
 				model.setWitch();
 				break;
+			case 14:
+				model.setZombieVillager();
+				break;
 		}
 
 		model.render((Entity) null, 0.0F, 0.0F, 0.0F, skullRotation, 0.0F, 0.0625F);

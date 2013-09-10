@@ -24,7 +24,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemNewSkull extends ItemSkull {
 
-	private static final String[] skullTypes = new String[] { "blaze", "enderman", "pigman", "player", "spider", "caveSpider", "pig", "cow", "mooshroom", "sheep", "wolf", "villager", "chicken", "witch" };
+	private static final String[] skullTypes = new String[] { "blaze", "enderman", "pigman", "player", "spider", "caveSpider", "pig", "cow", "mooshroom", "sheep", "wolf", "villager", "chicken", "witch", "zombieVillager" };
 	@SideOnly(Side.CLIENT)
 	private Icon[] icons;
 

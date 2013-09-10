@@ -13,6 +13,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
@@ -82,12 +83,14 @@ public class EnderScythe extends ItemSword {
 					damageItem(item, player);
 					return true;
 				} else if (target instanceof EntityZombie) {
-					target.attackEntityFrom(DamageSource.generic, 21F);
 					if (target instanceof EntityPigZombie) {
-						target.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 2), 1F);
-						damageItem(item, player);
+						behead(item, target, player, 2);
+						return true;
+					} else if (((EntityZombie) target).isVillager()) {
+						behead(item, target, player, 14);
 						return true;
 					} else {
+						target.attackEntityFrom(DamageSource.generic, 50F);
 						target.entityDropItem(new ItemStack(Item.skull, 1, 2), 1F);
 						damageItem(item, player);
 						return true;
@@ -103,6 +106,9 @@ public class EnderScythe extends ItemSword {
 						behead(item, target, player, 5);
 					else
 						behead(item, target, player, 4);
+					return true;
+				} else if (target instanceof EntityWitch) {
+					behead(item, target, player, 13);
 					return true;
 				}
 			} else if (target instanceof EntityPlayer) {
