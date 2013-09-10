@@ -1,0 +1,19 @@
+
+v1.2.0
+-Fix: Nightvision not being cleared when player in water
+-Change: New endium armour texture
+-Change: End Stone Brick hardness
+-Added: Emulator
+-Change: slight changes to Ender Scythe and new textures
+-Added: Blaze, Enderman and Zombie Pigman heads
+-Added: Killing players with the scythe will now drop their heads
+
+v1.2.1
+-Fix: Block shifter and tile entities
+-Change: new recipe for ender toggler
+
+v1.3
+-Added: Filter hoppers
+-Added: New heads
+-Added: Time Manipulator and Infused Gems
+-Added: Entity Shifter
