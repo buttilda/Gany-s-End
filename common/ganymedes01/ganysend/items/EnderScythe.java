@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.core.utils.CustomDamageSources;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModMaterials;
 import ganymedes01.ganysend.lib.Strings;
@@ -29,7 +30,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -57,7 +57,7 @@ public class EnderScythe extends ItemSword {
 	}
 
 	private void behead(ItemStack item, EntityLivingBase target, EntityLivingBase player, int meta) {
-		target.attackEntityFrom(DamageSource.generic, 51F);
+		target.attackEntityFrom(CustomDamageSources.beheading, 51F);
 		target.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, meta), 1F);
 		damageItem(item, player);
 	}
@@ -68,7 +68,7 @@ public class EnderScythe extends ItemSword {
 			if (target instanceof EntityMob) {
 				if (target instanceof EntityCreeper) {
 					target.entityDropItem(new ItemStack(Item.skull.itemID, 1, 4), 1.0F);
-					target.attackEntityFrom(DamageSource.generic, 21F);
+					target.attackEntityFrom(CustomDamageSources.beheading, 21F);
 					damageItem(item, player);
 					return true;
 				} else if (target instanceof EntitySkeleton) {
@@ -79,7 +79,7 @@ public class EnderScythe extends ItemSword {
 						target.entityDropItem(new ItemStack(Item.skull, 1, 0), 1F);
 					else
 						return false;
-					target.attackEntityFrom(DamageSource.generic, 21F);
+					target.attackEntityFrom(CustomDamageSources.beheading, 21F);
 					damageItem(item, player);
 					return true;
 				} else if (target instanceof EntityZombie) {
@@ -90,7 +90,7 @@ public class EnderScythe extends ItemSword {
 						behead(item, target, player, 14);
 						return true;
 					} else {
-						target.attackEntityFrom(DamageSource.generic, 50F);
+						target.attackEntityFrom(CustomDamageSources.beheading, 50F);
 						target.entityDropItem(new ItemStack(Item.skull, 1, 2), 1F);
 						damageItem(item, player);
 						return true;
@@ -112,7 +112,7 @@ public class EnderScythe extends ItemSword {
 					return true;
 				}
 			} else if (target instanceof EntityPlayer) {
-				target.attackEntityFrom(DamageSource.generic, 10F);
+				target.attackEntityFrom(CustomDamageSources.beheading, 10F);
 				if (target.getHealth() <= 0.0F) {
 					ItemStack stack = new ItemStack(ModItems.itemNewSkull, 1, 3);
 					String username = ((EntityPlayer) target).username;

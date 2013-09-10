@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.core.handlers;
 
+import ganymedes01.ganysend.core.utils.CustomDamageSources;
 import ganymedes01.ganysend.items.ModItems;
 
 import java.util.Random;
@@ -26,39 +27,40 @@ public class MobDeathEvent {
 
 	@ForgeSubscribe
 	public void silverfishDeath(LivingDeathEvent event) {
-		if (!event.entity.worldObj.isRemote) {
-			Random rand = new Random();
-			if (rand.nextInt(100) == 50)
-				if (event.entity instanceof EntityMob) {
-					if (event.entity instanceof EntityPigZombie)
-						event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 2), 0.0F);
-					else if (event.entity instanceof EntityEnderman)
-						event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 1), 0.0F);
-					else if (event.entity instanceof EntityBlaze)
-						event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 0), 0.0F);
-					else if (event.entity instanceof EntitySpider)
-						if (event.entity instanceof EntityCaveSpider)
-							event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 5), 0.0F);
-						else
-							event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 4), 0.0F);
-				} else if (event.entity instanceof EntityAnimal) {
-					if (!((EntityAnimal) event.entity).isChild())
-						if (event.entity instanceof EntityPig)
-							event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 6), 0.0F);
-						else if (event.entity instanceof EntityCow)
-							if (event.entity instanceof EntityMooshroom)
-								event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 8), 0.0F);
+		if (!event.entity.worldObj.isRemote)
+			if (event.source != CustomDamageSources.beheading) {
+				Random rand = new Random();
+				if (rand.nextInt(100) == 50)
+					if (event.entity instanceof EntityMob) {
+						if (event.entity instanceof EntityPigZombie)
+							event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 2), 0.0F);
+						else if (event.entity instanceof EntityEnderman)
+							event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 1), 0.0F);
+						else if (event.entity instanceof EntityBlaze)
+							event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 0), 0.0F);
+						else if (event.entity instanceof EntitySpider)
+							if (event.entity instanceof EntityCaveSpider)
+								event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 5), 0.0F);
 							else
-								event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 7), 0.0F);
-						else if (event.entity instanceof EntitySheep)
-							event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 9), 0.0F);
-						else if (event.entity instanceof EntityWolf)
-							event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 10), 0.0F);
-						else if (event.entity instanceof EntityChicken)
-							event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 12), 0.0F);
-				} else if (event.entity instanceof EntityVillager)
-					if (!((EntityVillager) event.entity).isChild())
-						event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 11), 0.0F);
-		}
+								event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 4), 0.0F);
+					} else if (event.entity instanceof EntityAnimal) {
+						if (!((EntityAnimal) event.entity).isChild())
+							if (event.entity instanceof EntityPig)
+								event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 6), 0.0F);
+							else if (event.entity instanceof EntityCow)
+								if (event.entity instanceof EntityMooshroom)
+									event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 8), 0.0F);
+								else
+									event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 7), 0.0F);
+							else if (event.entity instanceof EntitySheep)
+								event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 9), 0.0F);
+							else if (event.entity instanceof EntityWolf)
+								event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 10), 0.0F);
+							else if (event.entity instanceof EntityChicken)
+								event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 12), 0.0F);
+					} else if (event.entity instanceof EntityVillager)
+						if (!((EntityVillager) event.entity).isChild())
+							event.entity.entityDropItem(new ItemStack(ModItems.itemNewSkull, 1, 11), 0.0F);
+			}
 	}
 }

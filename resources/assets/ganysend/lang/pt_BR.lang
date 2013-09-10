@@ -67,5 +67,7 @@ only=Só:
 pullall=Não
 but=Puxe:
 
-# Creative Tab localizations
+# Others localizations
 itemGroup.ganysend=Gany's End
+death.attack.ganysEndBehead=%1$s foi decapitado
+death.attack.ganysEndBehead.player=%1$s foi decapitado por %2$s
