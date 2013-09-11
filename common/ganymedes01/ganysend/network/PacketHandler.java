@@ -17,7 +17,7 @@ public class PacketHandler implements IPacketHandler {
 
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
-		CustomPacket packetEE = PacketTypeHandler.buildPacket(packet.data);
-		packetEE.execute(manager, player);
+		CustomPacket customPacket = PacketTypeHandler.buildPacket(packet.data);
+		customPacket.execute(manager, player);
 	}
 }
