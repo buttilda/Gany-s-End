@@ -32,6 +32,7 @@ public class BlocksID {
 	public static int ADVANCED_EXCLUSIVE_FILTERING_HOPPER_ID_DEFAULT = 2019;
 	public static int TIME_MANIPULATOR_ID_DEFAULT = 2020;
 	public static int ENTITY_SHIFTER_ID_DEFAULT = 2021;
+	public static int PLAYER_INVENTORY_ID_DEFAULT = 2022;
 
 	/* Current */
 	// Blocks
@@ -57,4 +58,5 @@ public class BlocksID {
 	public static int ADVANCED_EXCLUSIVE_FILTERING_HOPPER_ID;
 	public static int TIME_MANIPULATOR_ID;
 	public static int ENTITY_SHIFTER_ID;
+	public static int PLAYER_INVENTORY_ID;
 }

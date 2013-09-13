@@ -17,22 +17,21 @@ import cpw.mods.fml.common.network.Player;
  * 
  */
 
-public class PacketTimeManipulator extends CustomPacket {
+public class PacketPlayerInventory extends CustomPacket {
 
 	public int x, y, z;
-	public boolean revertTime, advanceTime;
+	public String playerName;
 
-	public PacketTimeManipulator() {
-		super(PacketTypeHandler.TIME_MANIPULATOR);
+	public PacketPlayerInventory() {
+		super(PacketTypeHandler.PLAYER_INVENTORY);
 	}
 
-	public PacketTimeManipulator(int x, int y, int z, boolean revertTime, boolean advanceTime) {
-		super(PacketTypeHandler.TIME_MANIPULATOR);
+	public PacketPlayerInventory(int x, int y, int z, String playerName) {
+		super(PacketTypeHandler.PLAYER_INVENTORY);
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.revertTime = revertTime;
-		this.advanceTime = advanceTime;
+		this.playerName = playerName;
 	}
 
 	@Override
@@ -40,8 +39,7 @@ public class PacketTimeManipulator extends CustomPacket {
 		data.writeInt(x);
 		data.writeInt(y);
 		data.writeInt(z);
-		data.writeBoolean(revertTime);
-		data.writeBoolean(advanceTime);
+		data.writeUTF(playerName);
 	}
 
 	@Override
@@ -49,12 +47,11 @@ public class PacketTimeManipulator extends CustomPacket {
 		x = data.readInt();
 		y = data.readInt();
 		z = data.readInt();
-		revertTime = data.readBoolean();
-		advanceTime = data.readBoolean();
+		playerName = data.readUTF();
 	}
 
 	@Override
 	public void execute(INetworkManager manager, Player player) {
-		GanysEnd.proxy.handleTimeManipulatorPacket(x, y, z, revertTime, advanceTime);
+		GanysEnd.proxy.handlePlayerInventoryPacket(x, y, z, playerName);
 	}
 }

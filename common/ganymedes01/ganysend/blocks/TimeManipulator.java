@@ -52,14 +52,14 @@ public class TimeManipulator extends BlockContainer {
 					if (player.getCurrentEquippedItem().getItemDamage() == 1) {
 						tile.revertTime = true;
 						tile.advanceTime = false;
-						GanysEnd.proxy.handleTileWithItemPacket(x, y, z, true, false);
+						GanysEnd.proxy.handleTimeManipulatorPacket(x, y, z, true, false);
 						if (!player.capabilities.isCreativeMode)
 							player.inventory.getCurrentItem().stackSize--;
 						return true;
 					} else if (player.getCurrentEquippedItem().getItemDamage() == 0) {
 						tile.revertTime = false;
 						tile.advanceTime = true;
-						GanysEnd.proxy.handleTileWithItemPacket(x, y, z, false, true);
+						GanysEnd.proxy.handleTimeManipulatorPacket(x, y, z, false, true);
 						if (!player.capabilities.isCreativeMode)
 							player.inventory.getCurrentItem().stackSize--;
 						return true;

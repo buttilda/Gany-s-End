@@ -38,6 +38,7 @@ public class ModBlocks {
 	public static Block advancedExclusiveFilteringHopper;
 	public static Block timeManipulator;
 	public static Block entityShifter;
+	public static Block playerInventory;
 
 	public static void init() {
 		enderFlower = new EnderFlower(BlocksID.ENDER_FLOWER_ID);
@@ -62,6 +63,7 @@ public class ModBlocks {
 		advancedExclusiveFilteringHopper = new AdvancedExclusiveFilteringHopper(BlocksID.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_ID);
 		timeManipulator = new TimeManipulator(BlocksID.TIME_MANIPULATOR_ID);
 		entityShifter = new EntityShifter(BlocksID.ENTITY_SHIFTER_ID);
+		playerInventory = new PlayerInventory(BlocksID.PLAYER_INVENTORY_ID);
 
 		registerNames();
 	}
@@ -89,5 +91,6 @@ public class ModBlocks {
 		GameRegistry.registerBlock(advancedExclusiveFilteringHopper, Strings.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_NAME);
 		GameRegistry.registerBlock(timeManipulator, Strings.TIME_MANIPULATOR_NAME);
 		GameRegistry.registerBlock(entityShifter, Strings.ENTITY_SHIFTER_NAME);
+		GameRegistry.registerBlock(playerInventory, Strings.PLAYER_INVENTORY_NAME);
 	}
 }

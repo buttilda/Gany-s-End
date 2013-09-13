@@ -11,6 +11,7 @@ import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 import ganymedes01.ganysend.tileentities.TileEntityBlockShifter;
 import ganymedes01.ganysend.tileentities.TileEntityEntityShifter;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
+import ganymedes01.ganysend.tileentities.TileEntityPlayerInventory;
 import ganymedes01.ganysend.tileentities.TileEntitySpeedyHopper;
 import ganymedes01.ganysend.tileentities.TileEntityTimeManipulator;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,13 +36,18 @@ public class CommonProxy implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileEntitySpeedyHopper.class, Strings.SPEEDY_HOPPER_NAME);
 		GameRegistry.registerTileEntity(TileEntityTimeManipulator.class, Strings.TIME_MANIPULATOR_NAME);
 		GameRegistry.registerTileEntity(TileEntityEntityShifter.class, Strings.ENTITY_SHIFTER_NAME);
+		GameRegistry.registerTileEntity(TileEntityPlayerInventory.class, Strings.PLAYER_INVENTORY_NAME);
 	}
 
 	public void registerRenderers() {
 
 	}
 
-	public void handleTileWithItemPacket(int x, int y, int z, boolean revertTime, boolean advanceTime) {
+	public void handleTimeManipulatorPacket(int x, int y, int z, boolean revertTime, boolean advanceTime) {
+
+	}
+
+	public void handlePlayerInventoryPacket(int x, int y, int z, String playerName) {
 
 	}
 

@@ -32,6 +32,7 @@ public class Strings {
 	public static final String ADVANCED_EXCLUSIVE_FILTERING_HOPPER_NAME = "advancedExclusiveFilteringHopper";
 	public static final String TIME_MANIPULATOR_NAME = "timeManipulator";
 	public static final String ENTITY_SHIFTER_NAME = "entityShifter";
+	public static final String PLAYER_INVENTORY_NAME = "playerInventory";
 
 	// Item names
 	public static final String ENDER_TAG_NAME = "enderTag";

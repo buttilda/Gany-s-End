@@ -2,6 +2,7 @@ package ganymedes01.ganysend.network;
 
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.network.packet.CustomPacket;
+import ganymedes01.ganysend.network.packet.PacketPlayerInventory;
 import ganymedes01.ganysend.network.packet.PacketTimeManipulator;
 
 import java.io.ByteArrayInputStream;
@@ -18,7 +19,8 @@ import net.minecraft.network.packet.Packet250CustomPayload;
  */
 
 public enum PacketTypeHandler {
-	TIME_MANIPULATOR(PacketTimeManipulator.class);
+	TIME_MANIPULATOR(PacketTimeManipulator.class),
+	PLAYER_INVENTORY(PacketPlayerInventory.class);
 
 	private Class<? extends CustomPacket> clazz;
 
