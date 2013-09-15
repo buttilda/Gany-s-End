@@ -34,7 +34,7 @@ public class ItemTimeLordRender implements IItemRenderer {
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		return type != ItemRenderType.FIRST_PERSON_HOLDING && type != ItemRenderType.FIRST_PERSON_MAP;
+		return type != ItemRenderType.FIRST_PERSON_MAP;
 	}
 
 	@Override
