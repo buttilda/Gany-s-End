@@ -105,7 +105,7 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 				model.setWolf();
 				break;
 			case 11:
-				model.setVillager();
+				model.setVillager(64);
 				break;
 			case 12:
 				model.setChicken();
@@ -115,6 +115,9 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 				break;
 			case 14:
 				model.setZombieVillager();
+				break;
+			case 15:
+				model.setVillager(128);
 				break;
 		}
 

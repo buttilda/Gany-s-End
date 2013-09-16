@@ -83,9 +83,10 @@ public class Utils {
 	private static final String CHICKEN_HEAD = "textures/entity/chicken.png";
 	private static final String WITCH_HEAD = "textures/entity/witch.png";
 	private static final String ZOMBIE_VILLAGER_HEAD = "textures/entity/zombie/zombie_villager.png";
+	private static final String IRON_GOLEM_HEAD = "textures/entity/iron_golem.png";
 
 	public static final ResourceLocation[] headTextures = new ResourceLocation[] { new ResourceLocation(BLAZE_HEAD), new ResourceLocation(ENDERMAN_HEAD), new ResourceLocation(PIGMAN_HEAD), new ResourceLocation(ENDERMAN_EYES), new ResourceLocation(SPIDER_HEAD),
 	new ResourceLocation(CAVE_SPIDER_HEAD), new ResourceLocation(PIG_HEAD), new ResourceLocation(COW_HEAD), new ResourceLocation(MOOSHROOM_HEAD), new ResourceLocation(SHEEP_HEAD), new ResourceLocation(WOLF_HEAD), new ResourceLocation(VILLAGER_HEAD), new ResourceLocation(CHICKEN_HEAD),
-	new ResourceLocation(WITCH_HEAD), new ResourceLocation(ZOMBIE_VILLAGER_HEAD) };
+	new ResourceLocation(WITCH_HEAD), new ResourceLocation(ZOMBIE_VILLAGER_HEAD), new ResourceLocation(IRON_GOLEM_HEAD) };
 
 }

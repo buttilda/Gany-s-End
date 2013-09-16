@@ -92,11 +92,11 @@ public class ModelHead extends ModelSkeletonHead {
 		overlay.setRotationPoint(0F, 0F, 0F);
 	}
 
-	public void setVillager() {
-		head = (new ModelRenderer(this)).setTextureSize(64, 64);
+	public void setVillager(int textureSize) {
+		head = (new ModelRenderer(this)).setTextureSize(textureSize, textureSize);
 		head.setRotationPoint(0.0F, 0.0F, 0.0F);
 		head.setTextureOffset(0, 0).addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, 0.0F);
-		overlay = (new ModelRenderer(this)).setTextureSize(64, 64);
+		overlay = (new ModelRenderer(this)).setTextureSize(textureSize, textureSize);
 		overlay.setRotationPoint(0.0F, -2.0F, 0.0F);
 		overlay.setTextureOffset(24, 0).addBox(-1.0F, -1.0F, -6.0F, 2, 4, 2, 0.0F);
 	}

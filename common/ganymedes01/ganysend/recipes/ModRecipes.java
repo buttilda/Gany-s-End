@@ -78,6 +78,7 @@ public class ModRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(Block.dragonEgg), new ItemStack(ModBlocks.timeManipulator));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.timeManipulator), "zyz", "yxy", "zyz", 'x', Block.dragonEgg, 'y', new ItemStack(Block.planks, 1, 1), 'z', Block.blockGold);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.entityShifter), "yzy", "wxw", "ywy", 'x', ModBlocks.enderpearlBrick, 'y', Item.ingotGold, 'z', Item.redstone, 'w', Block.glass);
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.playerInventory), "xxx", "yzy", "xxx", 'x', Block.whiteStone, 'y', Item.enderPearl, 'z', new ItemStack(ModItems.itemNewSkull, 1, 3));
 
 		// Ender Flower Recipes
 		GameRegistry.addRecipe(new ItemStack(Item.dyePowder, 2, 0), "xxx", " x ", "   ", 'x', ModBlocks.enderFlower); // Black
