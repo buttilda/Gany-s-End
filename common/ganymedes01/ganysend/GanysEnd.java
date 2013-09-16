@@ -4,7 +4,7 @@ import ganymedes01.ganysend.blocks.ModBlocks;
 import ganymedes01.ganysend.configuration.ConfigurationHandler;
 import ganymedes01.ganysend.core.handlers.ArmourRemoveHandler;
 import ganymedes01.ganysend.core.handlers.BonemealOnTheEndEvent;
-import ganymedes01.ganysend.core.handlers.MobDeathEvent;
+import ganymedes01.ganysend.core.handlers.EntityDeathEvent;
 import ganymedes01.ganysend.core.proxy.CommonProxy;
 import ganymedes01.ganysend.creativetab.CreativeTabEnd;
 import ganymedes01.ganysend.items.ModItems;
@@ -52,7 +52,7 @@ public class GanysEnd {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(new BonemealOnTheEndEvent());
-		MinecraftForge.EVENT_BUS.register(new MobDeathEvent());
+		MinecraftForge.EVENT_BUS.register(new EntityDeathEvent());
 		MinecraftForge.EVENT_BUS.register(new ArmourRemoveHandler());
 		ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MASTER + File.separator + Reference.MOD_ID + ".cfg"));
 		ModBlocks.init();

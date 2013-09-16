@@ -17,7 +17,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
  * 
  */
 
-public class MobDeathEvent {
+public class EntityDeathEvent {
 
 	@ForgeSubscribe
 	public void modDeathEvent(LivingDeathEvent event) {
