@@ -7,7 +7,6 @@ import ganymedes01.ganysend.core.handlers.BonemealOnTheEndEvent;
 import ganymedes01.ganysend.core.handlers.EntityDeathEvent;
 import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
 import ganymedes01.ganysend.core.proxy.CommonProxy;
-import ganymedes01.ganysend.core.utils.LogHelper;
 import ganymedes01.ganysend.core.utils.VersionHelper;
 import ganymedes01.ganysend.creativetab.CreativeTabEnd;
 import ganymedes01.ganysend.items.ModItems;
@@ -53,14 +52,16 @@ public class GanysEnd {
 
 	public static CreativeTabs endTab = new CreativeTabEnd();
 	public static boolean togglerShouldMakeSound = true;
+	public static boolean shouldDoVersionCheck = true;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		LogHelper.init();
-
 		ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MASTER + File.separator + Reference.MOD_ID + ".cfg"));
-		VersionHelper.execute();
-		TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
+
+		if (shouldDoVersionCheck) {
+			VersionHelper.execute();
+			TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
+		}
 
 		MinecraftForge.EVENT_BUS.register(new BonemealOnTheEndEvent());
 		MinecraftForge.EVENT_BUS.register(new EntityDeathEvent());

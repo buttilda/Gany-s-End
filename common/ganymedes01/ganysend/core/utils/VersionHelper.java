@@ -6,10 +6,21 @@ import ganymedes01.ganysend.lib.Strings;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import cpw.mods.fml.common.FMLLog;
+
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
 
 public class VersionHelper implements Runnable {
+	private static Logger logger = Logger.getLogger(Reference.MOD_ID.toUpperCase());
 	private static VersionHelper instance = new VersionHelper();
-	private static final String REMOTE_VERSION_XML_FILE = "https://raw.github.com/ganymedes01/Gany-s-End/master/Version.xml";
 	public static Properties remoteVersionProperties = new Properties();
 
 	public static final byte UNINITIALIZED = 0;
@@ -20,14 +31,14 @@ public class VersionHelper implements Runnable {
 
 	private static byte result = UNINITIALIZED;
 	public static String remoteVersion = null;
-	public static String remoteUpdateLocation = null;
+	public static String updateURL = null;
 
 	public static void checkVersion() {
 		InputStream remoteVersionRepoStream = null;
 		result = UNINITIALIZED;
 
 		try {
-			URL remoteVersionURL = new URL(REMOTE_VERSION_XML_FILE);
+			URL remoteVersionURL = new URL(Reference.VERSION_CHECK_FILE);
 			remoteVersionRepoStream = remoteVersionURL.openStream();
 			remoteVersionProperties.loadFromXML(remoteVersionRepoStream);
 			String remoteVersionProperty = remoteVersionProperties.getProperty(Reference.CHANNEL_NAME);
@@ -37,7 +48,7 @@ public class VersionHelper implements Runnable {
 				if (remoteVersionTokens.length >= 3) {
 					remoteVersion = remoteVersionTokens[0];
 					Reference.LATEST_VERSION = remoteVersionTokens[1];
-					remoteUpdateLocation = remoteVersionTokens[2];
+					updateURL = remoteVersionTokens[2];
 				} else
 					result = ERROR;
 
@@ -65,9 +76,9 @@ public class VersionHelper implements Runnable {
 
 	public static void logResult() {
 		if (result == CURRENT || result == OUTDATED)
-			LogHelper.info(getResultMessage());
+			logger.log(Level.INFO, getResultMessage());
 		else
-			LogHelper.warning(getResultMessage());
+			logger.log(Level.WARNING, getResultMessage());
 	}
 
 	public static String getResultMessage() {
@@ -77,7 +88,7 @@ public class VersionHelper implements Runnable {
 			case CURRENT:
 				return Strings.CURRENT_MESSAGE;
 			case OUTDATED:
-				if (remoteVersion != null && remoteUpdateLocation != null)
+				if (remoteVersion != null && updateURL != null)
 					return Strings.OUTDATED_MESSAGE;
 			case ERROR:
 				return Strings.VERSION_CHECK_FAIL_CONNECT;
@@ -90,7 +101,8 @@ public class VersionHelper implements Runnable {
 	}
 
 	public static String getResultMessageForClient() {
-		return Utils.CHAT_COLOUR_GREEN + "Gany's End" + Utils.CHAT_COLOUR_WHITE + " is outdated. New version available at: " + Utils.CHAT_COLOUR_GREEN + remoteUpdateLocation;
+		return Utils.CHAT_COLOUR_GOLD + Reference.MOD_NAME + Utils.CHAT_COLOUR_WHITE + " is " + Utils.CHAT_COLOUR_RED + "outdated" + Utils.CHAT_COLOUR_WHITE + ". Get " + Utils.CHAT_COLOUR_GOLD + Reference.LATEST_VERSION + Utils.CHAT_COLOUR_WHITE + " at: " + Utils.CHAT_COLOUR_GREEN +
+		updateURL;
 	}
 
 	public static byte getResult() {
@@ -100,7 +112,8 @@ public class VersionHelper implements Runnable {
 	@Override
 	public void run() {
 		int count = 0;
-		LogHelper.info(Strings.VERSION_CHECK_INIT);
+		logger.setParent(FMLLog.getLogger());
+		logger.log(Level.INFO, Strings.VERSION_CHECK_INIT);
 
 		try {
 			while (count < 3 - 1 && (result == UNINITIALIZED || result == ERROR)) {

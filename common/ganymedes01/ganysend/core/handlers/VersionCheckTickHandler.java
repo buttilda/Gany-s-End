@@ -9,6 +9,13 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public class VersionCheckTickHandler implements ITickHandler {
 
 	private static boolean initialized = false;

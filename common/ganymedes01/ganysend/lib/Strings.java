@@ -52,6 +52,7 @@ public class Strings {
 
 	// Others
 	public static final String TOGGLERS_SHOULD_MAKE_SOUND = "togglersShouldMakeSound";
+	public static final String SHOULD_DO_VERSION_CHECK = "shouldDoVersionCheck";
 
 	// Version check
 	public static final String VERSION_CHECK_INIT = "Starting version check.";
