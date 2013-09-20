@@ -37,8 +37,7 @@ public class TileEntityEnderFurnace extends TileEntity implements ISidedInventor
 	private int furnaceCookTime;
 
 	// Practically stolen from the vanilla furnace code
-	@Override
-	public void updateEntity() {
+	public void updateEntitys() {
 		boolean flag = furnaceBurnTime > 0;
 		boolean flag1 = false;
 		if (furnaceBurnTime > 0)
@@ -69,6 +68,50 @@ public class TileEntityEnderFurnace extends TileEntity implements ISidedInventor
 				EnderFurnace.updateFurnaceBlockState(furnaceBurnTime > 0, worldObj, xCoord, yCoord, zCoord);
 			}
 		}
+		if (flag1)
+			onInventoryChanged();
+	}
+
+	@Override
+	public void updateEntity() {
+		boolean flag = furnaceBurnTime > 0;
+		boolean flag1 = false;
+		if (furnaceBurnTime > 0)
+			--furnaceBurnTime;
+
+		if (!worldObj.isRemote) {
+			if (furnaceBurnTime == 0 && canSmelt()) {
+				currentItemBurnTime = furnaceBurnTime = getItemBurnTime(inventory[1]);
+
+				if (furnaceBurnTime > 0) {
+					flag1 = true;
+
+					if (inventory[1] != null) {
+						--inventory[1].stackSize;
+
+						if (inventory[1].stackSize == 0)
+							inventory[1] = inventory[1].getItem().getContainerItemStack(inventory[1]);
+					}
+				}
+			}
+
+			if (isBurning() && canSmelt()) {
+				++furnaceCookTime;
+
+				if (furnaceCookTime == 200) {
+					furnaceCookTime = 0;
+					smeltItem();
+					flag1 = true;
+				}
+			} else
+				furnaceCookTime = 0;
+
+			if (flag != furnaceBurnTime > 0) {
+				flag1 = true;
+				EnderFurnace.updateFurnaceBlockState(furnaceBurnTime > 0, worldObj, xCoord, yCoord, zCoord);
+			}
+		}
+
 		if (flag1)
 			onInventoryChanged();
 	}

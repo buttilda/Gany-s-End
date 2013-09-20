@@ -50,10 +50,7 @@ public class EndiumChestplate extends EndiumArmour {
 		if (player.isInWater()) {
 			itemStack.damageItem(1, player);
 			player.attackEntityFrom(DamageSource.generic, 1F);
-		} else {
-			player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 4, -3));
+		} else
 			player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 4, -1));
-			player.extinguish();
-		}
 	}
 }

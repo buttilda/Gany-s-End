@@ -67,8 +67,8 @@ public class ModBlocks {
 		timeManipulator = new TimeManipulator(ModIDs.TIME_MANIPULATOR_ID);
 		entityShifter = new EntityShifter(ModIDs.ENTITY_SHIFTER_ID);
 		playerInventory = new PlayerInventory(ModIDs.PLAYER_INVENTORY_ID);
-		enderFurnace = new EnderFurnace(ModIDs.ENDER_FURNACE_OFF_ID, false);
-		enderFurnace_off = new EnderFurnace(ModIDs.ENDER_FURNACE_ID, true);
+		enderFurnace = new EnderFurnace(ModIDs.ENDER_FURNACE_OFF_ID, true);
+		enderFurnace_off = new EnderFurnace(ModIDs.ENDER_FURNACE_ID, false);
 		solidWaterSource = new SolidWaterSource(ModIDs.SOLID_WATER_SOURCE_ID);
 
 		registerNames();

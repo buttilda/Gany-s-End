@@ -2,7 +2,7 @@ package ganymedes01.ganysend;
 
 import ganymedes01.ganysend.blocks.ModBlocks;
 import ganymedes01.ganysend.configuration.ConfigurationHandler;
-import ganymedes01.ganysend.core.handlers.ArmourRemoveHandler;
+import ganymedes01.ganysend.core.handlers.ArmourHandler;
 import ganymedes01.ganysend.core.handlers.BonemealOnTheEndEvent;
 import ganymedes01.ganysend.core.handlers.EntityDeathEvent;
 import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
@@ -65,7 +65,7 @@ public class GanysEnd {
 
 		MinecraftForge.EVENT_BUS.register(new BonemealOnTheEndEvent());
 		MinecraftForge.EVENT_BUS.register(new EntityDeathEvent());
-		MinecraftForge.EVENT_BUS.register(new ArmourRemoveHandler());
+		MinecraftForge.EVENT_BUS.register(new ArmourHandler());
 
 		ModBlocks.init();
 		ModItems.init();

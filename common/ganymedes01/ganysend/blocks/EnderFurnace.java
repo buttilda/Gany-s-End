@@ -8,15 +8,19 @@ import ganymedes01.ganysend.tileentities.TileEntityEnderFurnace;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -32,9 +36,8 @@ public class EnderFurnace extends BlockContainer {
 
 	private final boolean isActive;
 	private static boolean keepFurnaceInventory;
-
 	@SideOnly(Side.CLIENT)
-	private Icon blockSide, blockBottom, blockTop;
+	private Icon iconSide, iconFront;
 
 	public EnderFurnace(int id, boolean isActive) {
 		super(id, Material.rock);
@@ -45,7 +48,7 @@ public class EnderFurnace extends BlockContainer {
 		else
 			setLightValue(1.0F);
 		setStepSound(soundStoneFootstep);
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDER_FURNACE_NAME));
+		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDER_FURNACE_NAME + "_" + (isActive ? "on" : "off")));
 	}
 
 	@Override
@@ -84,22 +87,22 @@ public class EnderFurnace extends BlockContainer {
 		super.breakBlock(world, x, y, z, par5, par6);
 	}
 
-	public static void updateFurnaceBlockState(boolean par0, World par1World, int par2, int par3, int par4) {
-		int l = par1World.getBlockMetadata(par2, par3, par4);
-		TileEntity tileentity = par1World.getBlockTileEntity(par2, par3, par4);
+	public static void updateFurnaceBlockState(boolean isActive, World world, int x, int y, int z) {
+		int l = world.getBlockMetadata(x, y, z);
+		TileEntity tileentity = world.getBlockTileEntity(x, y, z);
 		keepFurnaceInventory = true;
 
-		if (par0)
-			par1World.setBlock(par2, par3, par4, ModBlocks.enderFurnace.blockID);
+		if (isActive)
+			world.setBlock(x, y, z, ModBlocks.enderFurnace.blockID);
 		else
-			par1World.setBlock(par2, par3, par4, ModBlocks.enderFurnace_off.blockID);
+			world.setBlock(x, y, z, ModBlocks.enderFurnace_off.blockID);
 
 		keepFurnaceInventory = false;
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
+		world.setBlockMetadataWithNotify(x, y, z, l, 2);
 
 		if (tileentity != null) {
 			tileentity.validate();
-			par1World.setBlockTileEntity(par2, par3, par4, tileentity);
+			world.setBlockTileEntity(x, y, z, tileentity);
 		}
 	}
 
@@ -114,9 +117,51 @@ public class EnderFurnace extends BlockContainer {
 	}
 
 	@Override
+	public void onBlockAdded(World world, int x, int y, int z) {
+		super.onBlockAdded(world, x, y, z);
+		setDefaultDirection(world, x, y, z);
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
+		int l = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+		if (l == 0)
+			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+		if (l == 1)
+			world.setBlockMetadataWithNotify(x, y, z, 5, 2);
+		if (l == 2)
+			world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+		if (l == 3)
+			world.setBlockMetadataWithNotify(x, y, z, 4, 2);
+		if (stack.hasDisplayName())
+			((TileEntityFurnace) world.getBlockTileEntity(x, y, z)).setGuiDisplayName(stack.getDisplayName());
+	}
+
+	private void setDefaultDirection(World world, int x, int y, int z) {
+		if (!world.isRemote) {
+			int l = world.getBlockId(x, y, z - 1);
+			int i1 = world.getBlockId(x, y, z + 1);
+			int j1 = world.getBlockId(x - 1, y, z);
+			int k1 = world.getBlockId(x + 1, y, z);
+			byte b0 = 3;
+
+			if (Block.opaqueCubeLookup[l] && !Block.opaqueCubeLookup[i1])
+				b0 = 3;
+			if (Block.opaqueCubeLookup[i1] && !Block.opaqueCubeLookup[l])
+				b0 = 2;
+			if (Block.opaqueCubeLookup[j1] && !Block.opaqueCubeLookup[k1])
+				b0 = 5;
+			if (Block.opaqueCubeLookup[k1] && !Block.opaqueCubeLookup[j1])
+				b0 = 4;
+
+			world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+		}
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int meta) {
-		return side == 0 ? blockBottom : (side == 1 ? blockTop : blockSide);
+		return side == 0 || side == 1 ? iconSide : side != meta ? blockIcon : iconFront;
 	}
 
 	@Override
@@ -124,9 +169,9 @@ public class EnderFurnace extends BlockContainer {
 	public void registerIcons(IconRegister reg) {
 		String textureName = Utils.getBlockTexture(Strings.ENDER_FURNACE_NAME, true);
 
-		blockTop = reg.registerIcon(textureName + "top_" + (isActive ? "on" : "off"));
-		blockSide = reg.registerIcon(textureName + "side");
-		blockBottom = reg.registerIcon(textureName + "bottom");
+		blockIcon = reg.registerIcon(textureName + "side");
+		iconFront = reg.registerIcon(textureName + "top_" + (isActive ? "on" : "off"));
+		iconSide = reg.registerIcon(textureName + "bottom");
 	}
 
 	@Override
