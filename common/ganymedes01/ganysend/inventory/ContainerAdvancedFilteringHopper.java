@@ -23,7 +23,7 @@ public class ContainerAdvancedFilteringHopper extends Container {
 		for (int i = 0; i < tile.getSizeInventory(); i++)
 			addSlotToContainer(new Slot(tile, i, 62 + i * 18, 20));
 
-		for (int i = tile.FILER_SLOT; i < tile.FILER_SLOT + tile.getFilterInventorySize(); i++)
+		for (int i = TileEntityAdvancedFilteringHopper.FILER_SLOT; i < TileEntityAdvancedFilteringHopper.FILER_SLOT + tile.getFilterInventorySize(); i++)
 			addSlotToContainer(new Slot(tile, i, -28 + i * 18, 38));
 
 		byte b0 = 69;

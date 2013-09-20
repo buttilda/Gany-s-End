@@ -23,6 +23,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EnderScythe extends ItemSword {
 
+	public static final float DAMAGE = 8F;
+
 	public EnderScythe(int id) {
 		super(id, ModMaterials.ENDIUM);
 		setMaxStackSize(1);
@@ -48,7 +50,7 @@ public class EnderScythe extends ItemSword {
 	public boolean onLeftClickEntity(ItemStack item, EntityPlayer player, Entity target) {
 		if (target instanceof EntityLivingBase)
 			if (!player.worldObj.isRemote) {
-				((EntityLivingBase) target).attackEntityFrom(CustomDamageSources.beheading, 10F);
+				((EntityLivingBase) target).attackEntityFrom(CustomDamageSources.beheading, DAMAGE);
 				damageItem(item, player);
 			}
 		return false;

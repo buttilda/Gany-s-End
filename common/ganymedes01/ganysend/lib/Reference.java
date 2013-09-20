@@ -24,4 +24,7 @@ public class Reference {
 	public static final String SERVER_PROXY_CLASS = "ganymedes01.ganysend.core.proxy.CommonProxy";
 	public static final String CLIENT_PROXY_CLASS = "ganymedes01.ganysend.core.proxy.ClientProxy";
 
+	public static final int ITEM_ID_BASE = 6500;
+	public static final int BLOCK_ID_BASE = 2000;
+
 }

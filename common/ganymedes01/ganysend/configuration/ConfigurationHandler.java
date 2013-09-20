@@ -1,8 +1,8 @@
 package ganymedes01.ganysend.configuration;
 
 import ganymedes01.ganysend.GanysEnd;
-import ganymedes01.ganysend.lib.BlocksID;
-import ganymedes01.ganysend.lib.ItemsID;
+import ganymedes01.ganysend.core.utils.IdGenerator;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 
@@ -22,6 +22,15 @@ import cpw.mods.fml.common.FMLLog;
 public class ConfigurationHandler {
 
 	public static Configuration configuration;
+	private static IdGenerator idGen = new IdGenerator(Reference.ITEM_ID_BASE, Reference.BLOCK_ID_BASE);
+
+	private static int configBlock(String name) {
+		return configuration.getBlock(name, idGen.getNextBlockID()).getInt(idGen.getLastBlockID());
+	}
+
+	private static int configItem(String name) {
+		return configuration.getItem(name, idGen.getNextItemID()).getInt(idGen.getLastItemID());
+	}
 
 	public static void init(File configFile) {
 		configuration = new Configuration(configFile);
@@ -30,44 +39,47 @@ public class ConfigurationHandler {
 			configuration.load();
 
 			// Blocks
-			BlocksID.ENDER_FLOWER_ID = configuration.getBlock(Strings.ENDER_FLOWER_NAME, BlocksID.ENDER_FLOWER_ID_DEFAULT).getInt(BlocksID.ENDER_FLOWER_ID_DEFAULT);
-			BlocksID.ENDSTONE_BRICK_ID = configuration.getBlock(Strings.ENDSTONE_BRICK_NAME, BlocksID.ENDSTONE_BRICK_ID_DEFAULT).getInt(BlocksID.ENDSTONE_BRICK_ID_DEFAULT);
-			BlocksID.ENDERPEARL_BLOCK_ID = configuration.getBlock(Strings.ENDERPEARL_BLOCK_NAME, BlocksID.ENDERPEARL_BLOCK_ID_DEFAULT).getInt(BlocksID.ENDERPEARL_BLOCK_ID_DEFAULT);
-			BlocksID.ENDERPEARL_BRICK_ID = configuration.getBlock(Strings.ENDERPEARL_BRICK_NAME, BlocksID.ENDERPEARL_BRICK_ID_DEFAULT).getInt(BlocksID.ENDERPEARL_BRICK_ID_DEFAULT);
-			BlocksID.ENDSTONE_STAIRS_ID = configuration.getBlock(Strings.ENDSTONE_STAIRS_NAME, BlocksID.ENDSTONE_STAIRS_ID_DEFAULT).getInt(BlocksID.ENDSTONE_STAIRS_ID_DEFAULT);
-			BlocksID.ENDERPEARL_BRICK_STAIRS_ID = configuration.getBlock(Strings.ENDERPEARL_BRICK_STAIRS_NAME, BlocksID.ENDERPEARL_BRICK_STAIRS_ID_DEFAULT).getInt(BlocksID.ENDERPEARL_BRICK_STAIRS_ID_DEFAULT);
-			BlocksID.ENDER_TOGGLER_ID = configuration.getBlock(Strings.ENDER_TOGGLER_NAME, BlocksID.ENDER_TOGGLER_ID_DEFAULT).getInt(BlocksID.ENDER_TOGGLER_ID_DEFAULT);
-			BlocksID.ENDER_TOGGLER_AIR_ID = configuration.getBlock(Strings.ENDER_TOGGLER_AIR_NAME, BlocksID.ENDER_TOGGLER_AIR_ID_DEFAULT).getInt(BlocksID.ENDER_TOGGLER_AIR_ID_DEFAULT);
-			BlocksID.BLOCK_SHIFTER_ID = configuration.getBlock(Strings.BLOCK_SHIFTER_NAME, BlocksID.BLOCK_SHIFTER_ID_DEFAULT).getInt(BlocksID.BLOCK_SHIFTER_ID_DEFAULT);
-			BlocksID.RAW_ENDIUM_ID = configuration.getBlock(Strings.RAW_ENDIUM_NAME, BlocksID.RAW_ENDIUM_ID_DEFAULT).getInt(BlocksID.RAW_ENDIUM_ID_DEFAULT);
-			BlocksID.ENDIUM_BLOCK_ID = configuration.getBlock(Strings.ENDIUM_BLOCK_NAME, BlocksID.ENDIUM_BLOCK_ID_DEFAULT).getInt(BlocksID.ENDIUM_BLOCK_ID_DEFAULT);
-			BlocksID.EMULATOR = configuration.getBlock(Strings.EMULATOR_NAME, BlocksID.EMULATOR_ID_DEFAULT).getInt(BlocksID.EMULATOR_ID_DEFAULT);
-			BlocksID.BLOCK_NEW_SKULL_ID = configuration.getBlock(Strings.BLOCK_NEW_SKULL_NAME, BlocksID.BLOCK_NEW_SKULL_ID_DEFAULT).getInt(BlocksID.BLOCK_NEW_SKULL_ID_DEFAULT);
-			BlocksID.BASIC_FILTERING_HOPPER_ID = configuration.getBlock(Strings.BASIC_FILTERING_HOPPER_NAME, BlocksID.BASIC_FILTERING_HOPPER_ID_DEFAULT).getInt(BlocksID.BASIC_FILTERING_HOPPER_ID_DEFAULT);
-			BlocksID.EXCLUSIVE_FILTERING_HOPPER_ID = configuration.getBlock(Strings.EXCLUSIVE_FILTERING_HOPPER_NAME, BlocksID.EXCLUSIVE_FILTERING_HOPPER_ID_DEFAULT).getInt(BlocksID.EXCLUSIVE_FILTERING_HOPPER_ID_DEFAULT);
-			BlocksID.SPEEDY_BASIC_FILTERING_HOPPER_ID = configuration.getBlock(Strings.SPEEDY_BASIC_FILTERING_HOPPER_NAME, BlocksID.SPEEDY_BASIC_FILTERING_HOPPER_ID_DEFAULT).getInt(BlocksID.SPEEDY_BASIC_FILTERING_HOPPER_ID_DEFAULT);
-			BlocksID.SPEEDY_EXCLUSIVE_FILTERING_HOPPER_ID = configuration.getBlock(Strings.SPEEDY_EXCLUSIVE_FILTERING_HOPPER_NAME, BlocksID.SPEEDY_EXCLUSIVE_FILTERING_HOPPER_ID_DEFAULT).getInt(BlocksID.SPEEDY_EXCLUSIVE_FILTERING_HOPPER_ID_DEFAULT);
-			BlocksID.SPEEDY_HOPPER_ID = configuration.getBlock(Strings.SPEEDY_HOPPER_NAME, BlocksID.SPEEDY_HOPPER_ID_DEFAULT).getInt(BlocksID.SPEEDY_HOPPER_ID_DEFAULT);
-			BlocksID.ADVANCED_FILTERING_HOPPER_ID = configuration.getBlock(Strings.ADVANCED_FILTERING_HOPPER_NAME, BlocksID.ADVANCED_FILTERING_HOPPER_ID_DEFAULT).getInt(BlocksID.ADVANCED_FILTERING_HOPPER_ID_DEFAULT);
-			BlocksID.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_ID = configuration.getBlock(Strings.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_NAME, BlocksID.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_ID_DEFAULT).getInt(BlocksID.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_ID_DEFAULT);
-			BlocksID.TIME_MANIPULATOR_ID = configuration.getBlock(Strings.TIME_MANIPULATOR_NAME, BlocksID.TIME_MANIPULATOR_ID_DEFAULT).getInt(BlocksID.TIME_MANIPULATOR_ID_DEFAULT);
-			BlocksID.ENTITY_SHIFTER_ID = configuration.getBlock(Strings.ENTITY_SHIFTER_NAME, BlocksID.ENTITY_SHIFTER_ID_DEFAULT).getInt(BlocksID.ENTITY_SHIFTER_ID_DEFAULT);
-			BlocksID.PLAYER_INVENTORY_ID = configuration.getBlock(Strings.PLAYER_INVENTORY_NAME, BlocksID.PLAYER_INVENTORY_ID_DEFAULT).getInt(BlocksID.PLAYER_INVENTORY_ID_DEFAULT);
+			ModIDs.ENDER_FLOWER_ID = configBlock(Strings.ENDER_FLOWER_NAME);
+			ModIDs.ENDSTONE_BRICK_ID = configBlock(Strings.ENDSTONE_BRICK_NAME);
+			ModIDs.ENDERPEARL_BLOCK_ID = configBlock(Strings.ENDERPEARL_BLOCK_NAME);
+			ModIDs.ENDERPEARL_BRICK_ID = configBlock(Strings.ENDERPEARL_BRICK_NAME);
+			ModIDs.ENDSTONE_STAIRS_ID = configBlock(Strings.ENDSTONE_STAIRS_NAME);
+			ModIDs.ENDERPEARL_BRICK_STAIRS_ID = configBlock(Strings.ENDERPEARL_BRICK_STAIRS_NAME);
+			ModIDs.ENDER_TOGGLER_ID = configBlock(Strings.ENDER_TOGGLER_NAME);
+			ModIDs.ENDER_TOGGLER_AIR_ID = configBlock(Strings.ENDER_TOGGLER_AIR_NAME);
+			ModIDs.BLOCK_SHIFTER_ID = configBlock(Strings.BLOCK_SHIFTER_NAME);
+			ModIDs.RAW_ENDIUM_ID = configBlock(Strings.RAW_ENDIUM_NAME);
+			ModIDs.ENDIUM_BLOCK_ID = configBlock(Strings.ENDIUM_BLOCK_NAME);
+			ModIDs.EMULATOR = configBlock(Strings.EMULATOR_NAME);
+			ModIDs.BLOCK_NEW_SKULL_ID = configBlock(Strings.BLOCK_NEW_SKULL_NAME);
+			ModIDs.BASIC_FILTERING_HOPPER_ID = configBlock(Strings.BASIC_FILTERING_HOPPER_NAME);
+			ModIDs.EXCLUSIVE_FILTERING_HOPPER_ID = configBlock(Strings.EXCLUSIVE_FILTERING_HOPPER_NAME);
+			ModIDs.SPEEDY_BASIC_FILTERING_HOPPER_ID = configBlock(Strings.SPEEDY_BASIC_FILTERING_HOPPER_NAME);
+			ModIDs.SPEEDY_EXCLUSIVE_FILTERING_HOPPER_ID = configBlock(Strings.SPEEDY_EXCLUSIVE_FILTERING_HOPPER_NAME);
+			ModIDs.SPEEDY_HOPPER_ID = configBlock(Strings.SPEEDY_HOPPER_NAME);
+			ModIDs.ADVANCED_FILTERING_HOPPER_ID = configBlock(Strings.ADVANCED_FILTERING_HOPPER_NAME);
+			ModIDs.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_ID = configBlock(Strings.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_NAME);
+			ModIDs.TIME_MANIPULATOR_ID = configBlock(Strings.TIME_MANIPULATOR_NAME);
+			ModIDs.ENTITY_SHIFTER_ID = configBlock(Strings.ENTITY_SHIFTER_NAME);
+			ModIDs.PLAYER_INVENTORY_ID = configBlock(Strings.PLAYER_INVENTORY_NAME);
+			ModIDs.ENDER_FURNACE_ID = configBlock(Strings.ENDER_FURNACE_NAME);
+			ModIDs.ENDER_FURNACE_OFF_ID = configBlock(Strings.ENDER_FURNACE_OFF_NAME);
+			ModIDs.SOLID_WATER_SOURCE_ID = configBlock(Strings.SOLID_WATER_SOURCE_NAME);
 
 			// Armour
-			ItemsID.ENDIUM_HELMET_ID = configuration.getItem(Strings.ENDIUM_HELMET_NAME, ItemsID.ENDIUM_HELMET_ID_DEFAULT).getInt(ItemsID.ENDIUM_HELMET_ID_DEFAULT);
-			ItemsID.ENDIUM_CHESTPLATE_ID = configuration.getItem(Strings.ENDIUM_CHESTPLATE_NAME, ItemsID.ENDIUM_CHESTPLATE_ID_DEFAULT).getInt(ItemsID.ENDIUM_CHESTPLATE_ID_DEFAULT);
-			ItemsID.ENDIUM_LEGGINGS_ID = configuration.getItem(Strings.ENDIUM_LEGGINGS_NAME, ItemsID.ENDIUM_LEGGINGS_ID_DEFAULT).getInt(ItemsID.ENDIUM_LEGGINGS_ID_DEFAULT);
-			ItemsID.ENDIUM_BOOTS_ID = configuration.getItem(Strings.ENDIUM_BOOTS_NAME, ItemsID.ENDIUM_BOOTS_ID_DEFAULT).getInt(ItemsID.ENDIUM_BOOTS_ID_DEFAULT);
+			ModIDs.ENDIUM_HELMET_ID = configItem(Strings.ENDIUM_HELMET_NAME);
+			ModIDs.ENDIUM_CHESTPLATE_ID = configItem(Strings.ENDIUM_CHESTPLATE_NAME);
+			ModIDs.ENDIUM_LEGGINGS_ID = configItem(Strings.ENDIUM_LEGGINGS_NAME);
+			ModIDs.ENDIUM_BOOTS_ID = configItem(Strings.ENDIUM_BOOTS_NAME);
 
 			// Items
-			ItemsID.ENDER_TAG_ID = configuration.getItem(Strings.ENDER_TAG_NAME, ItemsID.ENDER_TAG_ID_DEFAULT).getInt(ItemsID.ENDER_TAG_ID_DEFAULT);
-			ItemsID.ENDIUM_INGOT_ID = configuration.getItem(Strings.ENDIUM_INGOT_NAME, ItemsID.ENDIUM_INGOTS_ID_DEFAULT).getInt(ItemsID.ENDIUM_INGOTS_ID_DEFAULT);
-			ItemsID.ENDSTONE_ROD_ID = configuration.getItem(Strings.ENDSTONE_ROD_NAME, ItemsID.ENDSTONE_ROD_ID_DEFAULT).getInt(ItemsID.ENDSTONE_ROD_ID_DEFAULT);
-			ItemsID.ENDER_SCYTHE_ID = configuration.getItem(Strings.ENDER_SCYTHE_NAME, ItemsID.ENDER_SCYTHE_ID_DEFAULT).getInt(ItemsID.ENDER_SCYTHE_ID_DEFAULT);
-			ItemsID.INFINITE_BUCKET_ID = configuration.getItem(Strings.INFINITE_BUCKET_NAME, ItemsID.INFINITE_BUCKET_ID_DEFAULT).getInt(ItemsID.INFINITE_BUCKET_ID_DEFAULT);
-			ItemsID.ITEM_NEW_SKULL_ID = configuration.getItem(Strings.ITEM_NEW_SKULL_NAME, ItemsID.ITEM_NEW_SKULL_ID_DEFAULT).getInt(ItemsID.ITEM_NEW_SKULL_ID_DEFAULT);
-			ItemsID.INFUSED_GEM_ID = configuration.getItem(Strings.INFUSED_GEM_NAME, ItemsID.INFUSED_GEM_ID_DEFAULT).getInt(ItemsID.INFUSED_GEM_ID_DEFAULT);
+			ModIDs.ENDER_TAG_ID = configItem(Strings.ENDER_TAG_NAME);
+			ModIDs.ENDIUM_INGOT_ID = configItem(Strings.ENDIUM_INGOT_NAME);
+			ModIDs.ENDSTONE_ROD_ID = configItem(Strings.ENDSTONE_ROD_NAME);
+			ModIDs.ENDER_SCYTHE_ID = configItem(Strings.ENDER_SCYTHE_NAME);
+			ModIDs.INFINITE_BUCKET_ID = configItem(Strings.INFINITE_BUCKET_NAME);
+			ModIDs.ITEM_NEW_SKULL_ID = configItem(Strings.ITEM_NEW_SKULL_NAME);
+			ModIDs.INFUSED_GEM_ID = configItem(Strings.INFUSED_GEM_NAME);
 
 			// Others
 			GanysEnd.togglerShouldMakeSound = configuration.get("Others", Strings.TOGGLERS_SHOULD_MAKE_SOUND, true).getBoolean(true);
@@ -78,6 +90,5 @@ public class ConfigurationHandler {
 		} finally {
 			configuration.save();
 		}
-
 	}
 }

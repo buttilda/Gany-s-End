@@ -127,7 +127,7 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float angle) {
-		TileEntityBlockNewSkull tileSkull = (TileEntityBlockNewSkull) tile;;
+		TileEntityBlockNewSkull tileSkull = (TileEntityBlockNewSkull) tile;
 		renderHead((float) x, (float) y, (float) z, tileSkull.getBlockMetadata() & 7, tileSkull.func_82119_b() * 360 / 16.0F, tileSkull.getSkullType(), tileSkull.getExtraType());
 	}
 }

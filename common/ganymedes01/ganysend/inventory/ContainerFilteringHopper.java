@@ -29,7 +29,7 @@ public class ContainerFilteringHopper extends Container {
 			addSlotToContainer(new Slot(tile, i, b0 + i * 18, 20));
 
 		if (tile.isFilter())
-			addSlotToContainer(new Slot(tile, tile.FILER_SLOT, 152, 20));
+			addSlotToContainer(new Slot(tile, TileEntityFilteringHopper.FILER_SLOT, 152, 20));
 
 		b0 = 51;
 		for (int i = 0; i < 3; i++)

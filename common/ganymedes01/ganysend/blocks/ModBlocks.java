@@ -2,7 +2,7 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.lib.BlocksID;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -39,31 +39,37 @@ public class ModBlocks {
 	public static Block timeManipulator;
 	public static Block entityShifter;
 	public static Block playerInventory;
+	public static Block enderFurnace;
+	public static Block enderFurnace_off;
+	public static Block solidWaterSource;
 
 	public static void init() {
-		enderFlower = new EnderFlower(BlocksID.ENDER_FLOWER_ID);
-		endstoneBrick = new EndstoneBrick(BlocksID.ENDSTONE_BRICK_ID);
-		enderpearlBlock = new EnderPearlBlock(BlocksID.ENDERPEARL_BLOCK_ID).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDERPEARL_BLOCK_NAME)).setTextureName(Utils.getBlockTexture(Strings.ENDERPEARL_BLOCK_NAME, false));
-		enderpearlBrick = new EnderPearlBlock(BlocksID.ENDERPEARL_BRICK_ID).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDERPEARL_BRICK_NAME)).setTextureName(Utils.getBlockTexture(Strings.ENDERPEARL_BRICK_NAME, false));
-		endstoneStairs = new EndStairs(BlocksID.ENDSTONE_STAIRS_ID, endstoneBrick).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDSTONE_STAIRS_NAME));
-		enderpearlStairs = new EndStairs(BlocksID.ENDERPEARL_BRICK_STAIRS_ID, enderpearlBrick).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDERPEARL_BRICK_STAIRS_NAME));
-		enderToggler = new EnderToggler(BlocksID.ENDER_TOGGLER_ID);
-		enderToggler_air = new EnderTogglerAir(BlocksID.ENDER_TOGGLER_AIR_ID, GanysEnd.togglerShouldMakeSound);
-		blockShifter = new BlockShifter(BlocksID.BLOCK_SHIFTER_ID);
-		rawEndium = new RawEndium(BlocksID.RAW_ENDIUM_ID);
-		endiumBlock = new EndiumBlock(BlocksID.ENDIUM_BLOCK_ID);
-		emulator = new Emulator(BlocksID.EMULATOR);
-		blockNewSkull = new BlockNewSkull(BlocksID.BLOCK_NEW_SKULL_ID);
-		basicFilteringHopper = new BasicFilteringHopper(BlocksID.BASIC_FILTERING_HOPPER_ID);
-		exclusiveFilteringHopper = new ExclusiveFilteringHopper(BlocksID.EXCLUSIVE_FILTERING_HOPPER_ID);
-		speedyBasicFilteringHopper = new SpeedyBasicFilteringHopper(BlocksID.SPEEDY_BASIC_FILTERING_HOPPER_ID);
-		speedyExclusiveFilteringHopper = new SpeedyExclusiveFilteringHopper(BlocksID.SPEEDY_EXCLUSIVE_FILTERING_HOPPER_ID);
-		speedyHopper = new SpeedyHopper(BlocksID.SPEEDY_HOPPER_ID);
-		advancedFilteringHopper = new AdvancedFilteringHopper(BlocksID.ADVANCED_FILTERING_HOPPER_ID);
-		advancedExclusiveFilteringHopper = new AdvancedExclusiveFilteringHopper(BlocksID.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_ID);
-		timeManipulator = new TimeManipulator(BlocksID.TIME_MANIPULATOR_ID);
-		entityShifter = new EntityShifter(BlocksID.ENTITY_SHIFTER_ID);
-		playerInventory = new PlayerInventory(BlocksID.PLAYER_INVENTORY_ID);
+		enderFlower = new EnderFlower(ModIDs.ENDER_FLOWER_ID);
+		endstoneBrick = new EndstoneBrick(ModIDs.ENDSTONE_BRICK_ID);
+		enderpearlBlock = new EnderPearlBlock(ModIDs.ENDERPEARL_BLOCK_ID).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDERPEARL_BLOCK_NAME)).setTextureName(Utils.getBlockTexture(Strings.ENDERPEARL_BLOCK_NAME, false));
+		enderpearlBrick = new EnderPearlBlock(ModIDs.ENDERPEARL_BRICK_ID).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDERPEARL_BRICK_NAME)).setTextureName(Utils.getBlockTexture(Strings.ENDERPEARL_BRICK_NAME, false));
+		endstoneStairs = new EndStairs(ModIDs.ENDSTONE_STAIRS_ID, endstoneBrick).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDSTONE_STAIRS_NAME));
+		enderpearlStairs = new EndStairs(ModIDs.ENDERPEARL_BRICK_STAIRS_ID, enderpearlBrick).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDERPEARL_BRICK_STAIRS_NAME));
+		enderToggler = new EnderToggler(ModIDs.ENDER_TOGGLER_ID);
+		enderToggler_air = new EnderTogglerAir(ModIDs.ENDER_TOGGLER_AIR_ID, GanysEnd.togglerShouldMakeSound);
+		blockShifter = new BlockShifter(ModIDs.BLOCK_SHIFTER_ID);
+		rawEndium = new RawEndium(ModIDs.RAW_ENDIUM_ID);
+		endiumBlock = new EndiumBlock(ModIDs.ENDIUM_BLOCK_ID);
+		emulator = new Emulator(ModIDs.EMULATOR);
+		blockNewSkull = new BlockNewSkull(ModIDs.BLOCK_NEW_SKULL_ID);
+		basicFilteringHopper = new BasicFilteringHopper(ModIDs.BASIC_FILTERING_HOPPER_ID);
+		exclusiveFilteringHopper = new ExclusiveFilteringHopper(ModIDs.EXCLUSIVE_FILTERING_HOPPER_ID);
+		speedyBasicFilteringHopper = new SpeedyBasicFilteringHopper(ModIDs.SPEEDY_BASIC_FILTERING_HOPPER_ID);
+		speedyExclusiveFilteringHopper = new SpeedyExclusiveFilteringHopper(ModIDs.SPEEDY_EXCLUSIVE_FILTERING_HOPPER_ID);
+		speedyHopper = new SpeedyHopper(ModIDs.SPEEDY_HOPPER_ID);
+		advancedFilteringHopper = new AdvancedFilteringHopper(ModIDs.ADVANCED_FILTERING_HOPPER_ID);
+		advancedExclusiveFilteringHopper = new AdvancedExclusiveFilteringHopper(ModIDs.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_ID);
+		timeManipulator = new TimeManipulator(ModIDs.TIME_MANIPULATOR_ID);
+		entityShifter = new EntityShifter(ModIDs.ENTITY_SHIFTER_ID);
+		playerInventory = new PlayerInventory(ModIDs.PLAYER_INVENTORY_ID);
+		enderFurnace = new EnderFurnace(ModIDs.ENDER_FURNACE_OFF_ID, false);
+		enderFurnace_off = new EnderFurnace(ModIDs.ENDER_FURNACE_ID, true);
+		solidWaterSource = new SolidWaterSource(ModIDs.SOLID_WATER_SOURCE_ID);
 
 		registerNames();
 	}
@@ -92,5 +98,8 @@ public class ModBlocks {
 		GameRegistry.registerBlock(timeManipulator, Strings.TIME_MANIPULATOR_NAME);
 		GameRegistry.registerBlock(entityShifter, Strings.ENTITY_SHIFTER_NAME);
 		GameRegistry.registerBlock(playerInventory, Strings.PLAYER_INVENTORY_NAME);
+		GameRegistry.registerBlock(enderFurnace, Strings.ENDER_FURNACE_NAME);
+		GameRegistry.registerBlock(enderFurnace_off, Strings.ENDER_FURNACE_OFF_NAME);
+		GameRegistry.registerBlock(solidWaterSource, Strings.SOLID_WATER_SOURCE_NAME);
 	}
 }

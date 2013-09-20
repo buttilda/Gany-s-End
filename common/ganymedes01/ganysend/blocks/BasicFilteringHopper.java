@@ -8,7 +8,6 @@ import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
 
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.block.BlockHopper;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -37,7 +36,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BasicFilteringHopper extends BlockHopper {
 	@SideOnly(Side.CLIENT)
 	protected Icon blockOutside, blockTop;
-	private final Random rand = new Random();
 
 	public BasicFilteringHopper(int id) {
 		super(id);

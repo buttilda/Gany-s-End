@@ -117,13 +117,14 @@ public class BlockNewSkull extends BlockContainer {
 
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player) {
+		int metadata = meta;
 		if (player.capabilities.isCreativeMode) {
-			meta |= 8;
-			world.setBlockMetadataWithNotify(x, y, z, meta, 4);
+			metadata |= 8;
+			world.setBlockMetadataWithNotify(x, y, z, metadata, 4);
 		} else
-			dropBlockAsItem(world, x, y, z, meta, 0);
+			dropBlockAsItem(world, x, y, z, metadata, 0);
 
-		super.onBlockHarvested(world, x, y, z, meta, player);
+		super.onBlockHarvested(world, x, y, z, metadata, player);
 	}
 
 	@Override

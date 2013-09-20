@@ -1,6 +1,9 @@
 package ganymedes01.ganysend.core.utils;
 
 import ganymedes01.ganysend.lib.Reference;
+
+import java.awt.Color;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -63,7 +66,7 @@ public class Utils {
 	}
 
 	public static final int getColour(int R, int G, int B) {
-		return R * 65536 + G * 191 + B;
+		return new Color(R, G, B).getRGB() & 0x00ffffff;
 	}
 
 	// Head textures

@@ -6,9 +6,6 @@ import ganymedes01.ganysend.lib.GUIsID;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityAdvancedFilteringHopper;
-
-import java.util.Random;
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -26,8 +23,6 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 public class AdvancedFilteringHopper extends BasicFilteringHopper {
-
-	private final Random rand = new Random();
 
 	public AdvancedFilteringHopper(int id) {
 		super(id);

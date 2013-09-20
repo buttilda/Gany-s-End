@@ -61,6 +61,7 @@ container.ganysend:speedyBasicFilteringHopper=Speedy Basic Filtering Hopper
 container.ganysend:speedyExclusiveFilteringHopper=Speedy Excl. Filtering Hopper
 container.ganysend:advancedFilteringHopper=Advanced Filtering Hopper
 container.ganysend:advancedExclusiveFilteringHopper=Advanced Excl. Filtering Hopper
+container.ganysend:enderFurnace=Ender Furnace
 
 pullallbut=Pull all but:
 pullonly=Pull Only:
