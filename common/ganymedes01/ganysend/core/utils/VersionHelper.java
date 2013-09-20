@@ -1,13 +1,17 @@
 package ganymedes01.ganysend.core.utils;
 
+import ganymedes01.ganysend.lib.Reference;
+
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
+import cpw.mods.fml.common.Loader;
+
 public class VersionHelper implements Runnable {
 
 	private static VersionHelper instance = new VersionHelper();
-	private static final String REMOTE_VERSION_FILE = "https://raw.github.com/ganymedes01/Gany-s-End/master/Version.txt";
+	private static final String REMOTE_VERSION_FILE = "https://raw.github.com/ganymedes01/Gany-s-End/master/Version.xml";
 	public static Properties remoteVersionProperties = new Properties();
 
 	public static final byte UNINITIALIZED = 0;
@@ -28,20 +32,48 @@ public class VersionHelper implements Runnable {
 		try {
 			URL remoteVersionURL = new URL(REMOTE_VERSION_FILE);
 			remoteVersionRepoStream = remoteVersionURL.openStream();
-			byte[] bytes = new byte[50];
-			remoteVersionRepoStream.read(bytes);
-			System.out.println("version: " + bytes.toString());
+			remoteVersionProperties.loadFromXML(remoteVersionRepoStream);
 
+			String remoteVersionProperty = remoteVersionProperties.getProperty(Loader.instance().getMCVersionString());
+
+			if (remoteVersionProperty != null) {
+				String[] remoteVersionTokens = remoteVersionProperty.split("\\|");
+
+				if (remoteVersionTokens.length >= 2) {
+					remoteVersion = remoteVersionTokens[0];
+					remoteUpdateLocation = remoteVersionTokens[1];
+				} else
+					result = ERROR;
+
+				if (remoteVersion != null)
+					if (remoteVersion.equalsIgnoreCase(getVersionForCheck()))
+						result = CURRENT;
+					else
+						result = OUTDATED;
+				System.out.println("LAST VERSION: " + remoteVersion);
+
+			} else
+				result = MC_VERSION_NOT_FOUND;
 		} catch (Exception e) {
 		} finally {
 			if (result == UNINITIALIZED)
 				result = ERROR;
+
 			try {
 				if (remoteVersionRepoStream != null)
 					remoteVersionRepoStream.close();
 			} catch (Exception ex) {
 			}
 		}
+	}
+
+	private static String getVersionForCheck() {
+		String[] versionTokens = Reference.VERSION_NUMBER.split(" ");
+
+		if (versionTokens.length >= 1)
+			return versionTokens[0];
+		else
+			return Reference.VERSION_NUMBER;
 	}
 
 	@Override
