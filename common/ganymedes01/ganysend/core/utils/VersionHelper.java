@@ -90,16 +90,7 @@ public class VersionHelper implements Runnable {
 	}
 
 	public static String getResultMessageForClient() {
-		return Utils.CHAT_COLOUR_GREEN + "Gany's End" + Utils.CHAT_COLOUR_WHITE + " is outdated. New version available at: " + Utils.CHAT_COLOUR_DARKGREEN + remoteUpdateLocation;
-		// return
-		// StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE,
-		// Utils.getColour(0, 255, 255) + Reference.MOD_NAME +
-		// Utils.getColour(255, 255, 255), Utils.getColour(0, 255, 255) +
-		// VersionHelper.remoteVersion + Utils.getColour(255, 255, 255),
-		// Utils.getColour(0, 255, 255) +
-		// Loader.instance().getMCVersionString() + Utils.getColour(255, 255,
-		// 255), Utils.getColour(0, 255, 255) +
-		// VersionHelper.remoteUpdateLocation + Utils.getColour(255, 255, 255));
+		return Utils.CHAT_COLOUR_GREEN + "Gany's End" + Utils.CHAT_COLOUR_WHITE + " is outdated. New version available at: " + Utils.CHAT_COLOUR_GREEN + remoteUpdateLocation;
 	}
 
 	public static byte getResult() {
