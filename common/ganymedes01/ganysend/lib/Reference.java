@@ -15,6 +15,8 @@ public class Reference {
 	public static final String CHANNEL_NAME = "GanysEnd";
 	public static final String MASTER = "GanysMods";
 	public static final String VERSION_NUMBER = "1.3.0";
+	public static final int RAW_VERSION_NUMBER = 130;
+	public static String LATEST_VERSION;
 	public static final String ITEM_BLOCK_TEXTURE_PATH = MOD_ID + ":";
 	public static final String ARMOUR_TEXTURE_PATH = ITEM_BLOCK_TEXTURE_PATH + "textures/models/armor/";
 	public static final String ENTITY_TEXTURE_PATH = ITEM_BLOCK_TEXTURE_PATH + "textures/entities/";

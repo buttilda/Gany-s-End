@@ -5,7 +5,9 @@ import ganymedes01.ganysend.configuration.ConfigurationHandler;
 import ganymedes01.ganysend.core.handlers.ArmourRemoveHandler;
 import ganymedes01.ganysend.core.handlers.BonemealOnTheEndEvent;
 import ganymedes01.ganysend.core.handlers.EntityDeathEvent;
+import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
 import ganymedes01.ganysend.core.proxy.CommonProxy;
+import ganymedes01.ganysend.core.utils.LogHelper;
 import ganymedes01.ganysend.core.utils.VersionHelper;
 import ganymedes01.ganysend.creativetab.CreativeTabEnd;
 import ganymedes01.ganysend.items.ModItems;
@@ -29,6 +31,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 /**
  * Gany's End
@@ -52,8 +56,11 @@ public class GanysEnd {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		LogHelper.init();
+
 		ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MASTER + File.separator + Reference.MOD_ID + ".cfg"));
 		VersionHelper.execute();
+		TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
 
 		MinecraftForge.EVENT_BUS.register(new BonemealOnTheEndEvent());
 		MinecraftForge.EVENT_BUS.register(new EntityDeathEvent());

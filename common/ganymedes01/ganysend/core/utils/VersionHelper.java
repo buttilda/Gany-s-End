@@ -1,17 +1,15 @@
 package ganymedes01.ganysend.core.utils;
 
 import ganymedes01.ganysend.lib.Reference;
+import ganymedes01.ganysend.lib.Strings;
 
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
-import cpw.mods.fml.common.Loader;
-
 public class VersionHelper implements Runnable {
-
 	private static VersionHelper instance = new VersionHelper();
-	private static final String REMOTE_VERSION_FILE = "https://raw.github.com/ganymedes01/Gany-s-End/master/Version.xml";
+	private static final String REMOTE_VERSION_XML_FILE = "https://raw.github.com/ganymedes01/Gany-s-End/master/Version.xml";
 	public static Properties remoteVersionProperties = new Properties();
 
 	public static final byte UNINITIALIZED = 0;
@@ -19,7 +17,6 @@ public class VersionHelper implements Runnable {
 	public static final byte OUTDATED = 2;
 	public static final byte ERROR = 3;
 	public static final byte FINAL_ERROR = 4;
-	public static final byte MC_VERSION_NOT_FOUND = 5;
 
 	private static byte result = UNINITIALIZED;
 	public static String remoteVersion = null;
@@ -30,35 +27,34 @@ public class VersionHelper implements Runnable {
 		result = UNINITIALIZED;
 
 		try {
-			URL remoteVersionURL = new URL(REMOTE_VERSION_FILE);
+			URL remoteVersionURL = new URL(REMOTE_VERSION_XML_FILE);
 			remoteVersionRepoStream = remoteVersionURL.openStream();
 			remoteVersionProperties.loadFromXML(remoteVersionRepoStream);
-
-			String remoteVersionProperty = remoteVersionProperties.getProperty(Loader.instance().getMCVersionString());
+			String remoteVersionProperty = remoteVersionProperties.getProperty(Reference.CHANNEL_NAME);
 
 			if (remoteVersionProperty != null) {
 				String[] remoteVersionTokens = remoteVersionProperty.split("\\|");
-
-				if (remoteVersionTokens.length >= 2) {
+				if (remoteVersionTokens.length >= 3) {
 					remoteVersion = remoteVersionTokens[0];
-					remoteUpdateLocation = remoteVersionTokens[1];
+					Reference.LATEST_VERSION = remoteVersionTokens[1];
+					remoteUpdateLocation = remoteVersionTokens[2];
 				} else
 					result = ERROR;
 
-				if (remoteVersion != null)
-					if (remoteVersion.equalsIgnoreCase(getVersionForCheck()))
+				if (remoteVersion != null) {
+					int version = Integer.parseInt(remoteVersion);
+					if (version <= Reference.RAW_VERSION_NUMBER)
 						result = CURRENT;
 					else
 						result = OUTDATED;
-				System.out.println("LAST VERSION: " + remoteVersion);
-
+				}
 			} else
-				result = MC_VERSION_NOT_FOUND;
+				result = ERROR;
+
 		} catch (Exception e) {
 		} finally {
 			if (result == UNINITIALIZED)
 				result = ERROR;
-
 			try {
 				if (remoteVersionRepoStream != null)
 					remoteVersionRepoStream.close();
@@ -67,37 +63,74 @@ public class VersionHelper implements Runnable {
 		}
 	}
 
-	private static String getVersionForCheck() {
-		String[] versionTokens = Reference.VERSION_NUMBER.split(" ");
-
-		if (versionTokens.length >= 1)
-			return versionTokens[0];
+	public static void logResult() {
+		if (result == CURRENT || result == OUTDATED)
+			LogHelper.info(getResultMessage());
 		else
-			return Reference.VERSION_NUMBER;
+			LogHelper.warning(getResultMessage());
+	}
+
+	public static String getResultMessage() {
+		switch (result) {
+			case UNINITIALIZED:
+				return Strings.VERSION_CHECK_FAIL;
+			case CURRENT:
+				return Strings.CURRENT_MESSAGE;
+			case OUTDATED:
+				if (remoteVersion != null && remoteUpdateLocation != null)
+					return Strings.OUTDATED_MESSAGE;
+			case ERROR:
+				return Strings.VERSION_CHECK_FAIL_CONNECT;
+			case FINAL_ERROR:
+				return Strings.VERSION_CHECK_FAIL_CONNECT_FINAL;
+			default:
+				result = ERROR;
+				return Strings.VERSION_CHECK_FAIL_CONNECT;
+		}
+	}
+
+	public static String getResultMessageForClient() {
+		return Utils.CHAT_COLOUR_GREEN + "Gany's End" + Utils.CHAT_COLOUR_WHITE + " is outdated. New version available at: " + Utils.CHAT_COLOUR_DARKGREEN + remoteUpdateLocation;
+		// return
+		// StatCollector.translateToLocalFormatted(Strings.OUTDATED_MESSAGE,
+		// Utils.getColour(0, 255, 255) + Reference.MOD_NAME +
+		// Utils.getColour(255, 255, 255), Utils.getColour(0, 255, 255) +
+		// VersionHelper.remoteVersion + Utils.getColour(255, 255, 255),
+		// Utils.getColour(0, 255, 255) +
+		// Loader.instance().getMCVersionString() + Utils.getColour(255, 255,
+		// 255), Utils.getColour(0, 255, 255) +
+		// VersionHelper.remoteUpdateLocation + Utils.getColour(255, 255, 255));
+	}
+
+	public static byte getResult() {
+		return result;
 	}
 
 	@Override
 	public void run() {
 		int count = 0;
+		LogHelper.info(Strings.VERSION_CHECK_INIT);
 
 		try {
-			while (count < 10 - 1 && (result == UNINITIALIZED || result == ERROR)) {
-
+			while (count < 3 - 1 && (result == UNINITIALIZED || result == ERROR)) {
 				checkVersion();
 				count++;
+				logResult();
 
 				if (result == UNINITIALIZED || result == ERROR)
 					Thread.sleep(10000);
 			}
-
-			if (result == ERROR)
+			if (result == ERROR) {
 				result = FINAL_ERROR;
+				logResult();
+			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static void execute() {
+
 		new Thread(instance).start();
 	}
 }
