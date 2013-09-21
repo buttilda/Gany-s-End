@@ -40,31 +40,27 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	public final static int FILER_SLOT = 5;
 	private int MAX_COOL_DOWN;
 	private boolean EXCLUSIVE;
-	private String line1;
-	private String line2;
+	private String line;
 	private String name;
 
 	public void setBasic() {
 		MAX_COOL_DOWN = 8;
 		EXCLUSIVE = false;
-		line1 = StatCollector.translateToLocal("pull");
-		line2 = StatCollector.translateToLocal("only");
+		line = StatCollector.translateToLocal("pullonly");
 		name = Utils.getConainerName(Strings.BASIC_FILTERING_HOPPER_NAME);
 	}
 
 	public void setExclusive() {
 		MAX_COOL_DOWN = 8;
 		EXCLUSIVE = true;
-		line1 = StatCollector.translateToLocal("pullall");
-		line2 = StatCollector.translateToLocal("but");
+		line = StatCollector.translateToLocal("pullallbut");
 		name = Utils.getConainerName(Strings.EXCLUSIVE_FILTERING_HOPPER_NAME);
 	}
 
 	public void setSpeedyOnly() {
 		MAX_COOL_DOWN = 1;
 		EXCLUSIVE = false;
-		line1 = "";
-		line2 = "";
+		line = "";
 		name = Utils.getConainerName(Strings.SPEEDY_HOPPER_NAME);
 	}
 
@@ -76,12 +72,8 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 			name = Utils.getConainerName(Strings.SPEEDY_BASIC_FILTERING_HOPPER_NAME);
 	}
 
-	public String getLine1() {
-		return line1;
-	}
-
-	public String getLine2() {
-		return line2;
+	public String getLine() {
+		return line;
 	}
 
 	public boolean isExclusive() {
@@ -339,7 +331,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	}
 
 	protected static boolean areItemStacksEqualItem(ItemStack stack1, ItemStack stack2) {
-		return stack1.itemID != stack2.itemID ? false : (stack1.getItemDamage() != stack2.getItemDamage() ? false : (stack1.stackSize > stack1.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(stack1, stack2)));
+		return stack1.itemID != stack2.itemID ? false : stack1.getItemDamage() != stack2.getItemDamage() ? false : stack1.stackSize > stack1.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(stack1, stack2);
 	}
 
 	@Override

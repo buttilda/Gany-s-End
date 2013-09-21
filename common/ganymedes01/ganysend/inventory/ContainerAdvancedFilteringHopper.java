@@ -20,19 +20,17 @@ public class ContainerAdvancedFilteringHopper extends Container {
 
 	public ContainerAdvancedFilteringHopper(InventoryPlayer inventory, TileEntityAdvancedFilteringHopper tile) {
 		hopper = tile;
+
 		for (int i = 0; i < tile.getSizeInventory(); i++)
-			addSlotToContainer(new Slot(tile, i, 62 + i * 18, 20));
-
+			addSlotToContainer(new Slot(tile, i, 44 + i * 18, 26));
 		for (int i = TileEntityAdvancedFilteringHopper.FILER_SLOT; i < TileEntityAdvancedFilteringHopper.FILER_SLOT + tile.getFilterInventorySize(); i++)
-			addSlotToContainer(new Slot(tile, i, -28 + i * 18, 38));
+			addSlotToContainer(new Slot(tile, i, -28 + i * 18, 53));
 
-		byte b0 = 69;
 		for (int i = 0; i < 3; i++)
 			for (int j = 0; j < 9; j++)
-				addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, i * 18 + b0));
-
+				addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, i * 18 + 84));
 		for (int i = 0; i < 9; i++)
-			addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 58 + b0));
+			addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 142));
 	}
 
 	@Override

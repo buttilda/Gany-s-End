@@ -30,20 +30,22 @@ public class GuiBasicFilteringHopper extends GuiContainer {
 
 	public GuiBasicFilteringHopper(InventoryPlayer inventory, TileEntityFilteringHopper tile) {
 		super(new ContainerFilteringHopper(inventory, tile));
-		ySize = 133;
 		hopper = tile;
 		if (tile.isFilter())
 			backGround = new ResourceLocation(Utils.getGUITexture(Strings.BASIC_FILTERING_HOPPER_NAME));
-		else
+		else {
+			ySize = 133;
 			backGround = new ResourceLocation("textures/gui/container/hopper.png");
+		}
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		fontRenderer.drawString(StatCollector.translateToLocal(hopper.getInvName()), 8, 6, 4210752);
+		String invtName = StatCollector.translateToLocal(hopper.getInvName());
+		fontRenderer.drawString(invtName, xSize / 2 - fontRenderer.getStringWidth(invtName) / 2, 6, 4210752);
 		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
-		fontRenderer.drawString(hopper.getLine1(), 125 - hopper.getLine1().length(), 19, 4210752);
-		fontRenderer.drawString(hopper.getLine2(), 125, 28, 4210752);
+
+		fontRenderer.drawString(hopper.getLine(), 76 - fontRenderer.getStringWidth(hopper.getLine()), 57, 4210752);
 	}
 
 	@Override

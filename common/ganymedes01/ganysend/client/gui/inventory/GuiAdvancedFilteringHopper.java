@@ -28,15 +28,16 @@ public class GuiAdvancedFilteringHopper extends GuiContainer {
 
 	public GuiAdvancedFilteringHopper(InventoryPlayer inventory, TileEntityAdvancedFilteringHopper tile) {
 		super(new ContainerAdvancedFilteringHopper(inventory, tile));
-		ySize = 151;
 		hopper = tile;
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		fontRenderer.drawString(StatCollector.translateToLocal(hopper.getInvName()), 8, 6, 4210752);
+		String invtName = StatCollector.translateToLocal(hopper.getInvName());
+		fontRenderer.drawString(invtName, xSize / 2 - fontRenderer.getStringWidth(invtName) / 2, 6, 4210752);
 		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
-		fontRenderer.drawString(hopper.getLine(), 10 - hopper.getLine().length() / 2, 42, 4210752);
+
+		fontRenderer.drawString(hopper.getLine(), 59 - fontRenderer.getStringWidth(hopper.getLine()), 57, 4210752);
 	}
 
 	@Override

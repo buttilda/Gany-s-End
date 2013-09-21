@@ -22,22 +22,25 @@ public class ContainerFilteringHopper extends Container {
 		hopper = tile;
 
 		byte b0 = 44;
+		byte b1 = 26;
 		if (tile.isFilter())
-			b0 = 26;
+			b0 = 26 + 18;
+		else
+			b1 = 20;
 
 		for (int i = 0; i < tile.getSizeInventory(); i++)
-			addSlotToContainer(new Slot(tile, i, b0 + i * 18, 20));
-
+			addSlotToContainer(new Slot(tile, i, b0 + i * 18, b1));
 		if (tile.isFilter())
-			addSlotToContainer(new Slot(tile, TileEntityFilteringHopper.FILER_SLOT, 152, 20));
+			addSlotToContainer(new Slot(tile, TileEntityFilteringHopper.FILER_SLOT, 80, 53));
 
-		b0 = 51;
+		byte b2 = 84;
+		if (!tile.isFilter())
+			b2 = 51;
 		for (int i = 0; i < 3; i++)
 			for (int j = 0; j < 9; j++)
-				addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, i * 18 + b0));
-
+				addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, i * 18 + b2));
 		for (int i = 0; i < 9; i++)
-			addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 58 + b0));
+			addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 58 + b2));
 	}
 
 	@Override

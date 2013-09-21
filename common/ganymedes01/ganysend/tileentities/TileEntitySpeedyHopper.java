@@ -14,12 +14,7 @@ import net.minecraft.item.ItemStack;
 public class TileEntitySpeedyHopper extends TileEntityFilteringHopper {
 
 	@Override
-	public String getLine1() {
-		return "";
-	}
-
-	@Override
-	public String getLine2() {
+	public String getLine() {
 		return "";
 	}
 

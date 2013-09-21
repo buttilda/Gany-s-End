@@ -62,10 +62,6 @@ container.ganysend:advancedExclusiveFilteringHopper=Funil Filtrante Avançado Ex
 
 pullallbut=Não Puxe:
 pullonly=Puxe só:
-pull=Puxe
-only=Só:
-pullall=Não
-but=Puxe:
 
 # Others localizations
 itemGroup.ganysend=Gany's End

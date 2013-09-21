@@ -65,10 +65,6 @@ container.ganysend:enderFurnace=Ender Furnace
 
 pullallbut=Pull all but:
 pullonly=Pull Only:
-pull=Pull
-only=Only:
-pullall=Pull all
-but=but:
 
 # Others localizations
 itemGroup.ganysend=Gany's End
