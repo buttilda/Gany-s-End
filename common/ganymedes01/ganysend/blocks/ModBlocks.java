@@ -2,6 +2,7 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.items.ItemEnderPearlBlock;
 import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
@@ -19,7 +20,6 @@ public class ModBlocks {
 	public static Block enderFlower;
 	public static Block endstoneBrick;
 	public static Block enderpearlBlock;
-	public static Block enderpearlBrick;
 	public static Block endstoneStairs;
 	public static Block enderpearlStairs;
 	public static Block enderToggler;
@@ -41,15 +41,14 @@ public class ModBlocks {
 	public static Block playerInventory;
 	public static Block enderFurnace;
 	public static Block enderFurnace_off;
-	public static Block solidWaterSource;
+	public static Block infiniteWaterSource;
 
 	public static void init() {
 		enderFlower = new EnderFlower(ModIDs.ENDER_FLOWER_ID);
 		endstoneBrick = new EndstoneBrick(ModIDs.ENDSTONE_BRICK_ID);
-		enderpearlBlock = new EnderPearlBlock(ModIDs.ENDERPEARL_BLOCK_ID).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDERPEARL_BLOCK_NAME)).setTextureName(Utils.getBlockTexture(Strings.ENDERPEARL_BLOCK_NAME, false));
-		enderpearlBrick = new EnderPearlBlock(ModIDs.ENDERPEARL_BRICK_ID).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDERPEARL_BRICK_NAME)).setTextureName(Utils.getBlockTexture(Strings.ENDERPEARL_BRICK_NAME, false));
-		endstoneStairs = new EndStairs(ModIDs.ENDSTONE_STAIRS_ID, endstoneBrick).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDSTONE_STAIRS_NAME));
-		enderpearlStairs = new EndStairs(ModIDs.ENDERPEARL_BRICK_STAIRS_ID, enderpearlBrick).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDERPEARL_BRICK_STAIRS_NAME));
+		enderpearlBlock = new EnderPearlBlock(ModIDs.ENDERPEARL_BLOCK_ID);
+		endstoneStairs = new EndStairs(ModIDs.ENDSTONE_STAIRS_ID, endstoneBrick, 0).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDSTONE_STAIRS_NAME));
+		enderpearlStairs = new EndStairs(ModIDs.ENDERPEARL_BRICK_STAIRS_ID, enderpearlBlock, 1).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDERPEARL_BRICK_STAIRS_NAME));
 		enderToggler = new EnderToggler(ModIDs.ENDER_TOGGLER_ID);
 		enderToggler_air = new EnderTogglerAir(ModIDs.ENDER_TOGGLER_AIR_ID, GanysEnd.togglerShouldMakeSound);
 		blockShifter = new BlockShifter(ModIDs.BLOCK_SHIFTER_ID);
@@ -69,7 +68,7 @@ public class ModBlocks {
 		playerInventory = new PlayerInventory(ModIDs.PLAYER_INVENTORY_ID);
 		enderFurnace = new EnderFurnace(ModIDs.ENDER_FURNACE_OFF_ID, true);
 		enderFurnace_off = new EnderFurnace(ModIDs.ENDER_FURNACE_ID, false);
-		solidWaterSource = new SolidWaterSource(ModIDs.SOLID_WATER_SOURCE_ID);
+		infiniteWaterSource = new InfiniteWaterSource(ModIDs.INFINITE_WATER_SOURCE_ID);
 
 		registerNames();
 	}
@@ -77,8 +76,7 @@ public class ModBlocks {
 	private static void registerNames() {
 		GameRegistry.registerBlock(enderFlower, Strings.ENDER_FLOWER_NAME);
 		GameRegistry.registerBlock(endstoneBrick, Strings.ENDSTONE_BRICK_NAME);
-		GameRegistry.registerBlock(enderpearlBlock, Strings.ENDERPEARL_BLOCK_NAME);
-		GameRegistry.registerBlock(enderpearlBrick, Strings.ENDERPEARL_BRICK_NAME);
+		GameRegistry.registerBlock(enderpearlBlock, ItemEnderPearlBlock.class, Strings.ENDERPEARL_BLOCK_NAME);
 		GameRegistry.registerBlock(endstoneStairs, Strings.ENDSTONE_STAIRS_NAME);
 		GameRegistry.registerBlock(enderpearlStairs, Strings.ENDERPEARL_BRICK_STAIRS_NAME);
 		GameRegistry.registerBlock(enderToggler, Strings.ENDER_TOGGLER_NAME);
@@ -100,6 +98,6 @@ public class ModBlocks {
 		GameRegistry.registerBlock(playerInventory, Strings.PLAYER_INVENTORY_NAME);
 		GameRegistry.registerBlock(enderFurnace, Strings.ENDER_FURNACE_NAME);
 		GameRegistry.registerBlock(enderFurnace_off, Strings.ENDER_FURNACE_OFF_NAME);
-		GameRegistry.registerBlock(solidWaterSource, Strings.SOLID_WATER_SOURCE_NAME);
+		GameRegistry.registerBlock(infiniteWaterSource, Strings.INFINITE_WATER_SOURCE_NAME);
 	}
 }

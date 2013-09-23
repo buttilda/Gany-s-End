@@ -24,14 +24,14 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 
-public class SolidWaterSource extends BlockContainer {
+public class InfiniteWaterSource extends BlockContainer {
 
-	protected SolidWaterSource(int id) {
+	protected InfiniteWaterSource(int id) {
 		super(id, Material.water);
 		setHardness(3.5F);
 		setCreativeTab(GanysEnd.endTab);
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.SOLID_WATER_SOURCE_NAME));
-		setTextureName(Utils.getBlockTexture(Strings.SOLID_WATER_SOURCE_NAME, false));
+		setUnlocalizedName(Utils.getUnlocalizedName(Strings.INFINITE_WATER_SOURCE_NAME));
+		setTextureName(Utils.getBlockTexture(Strings.INFINITE_WATER_SOURCE_NAME, false));
 	}
 
 	@Override

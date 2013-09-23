@@ -14,8 +14,8 @@ import buildcraft.api.transport.FacadeManager;
 public class BuildCraftFacadeManager {
 
 	public static void init() {
-		FacadeManager.addFacade(new ItemStack(ModBlocks.enderpearlBlock));
-		FacadeManager.addFacade(new ItemStack(ModBlocks.enderpearlBrick));
+		FacadeManager.addFacade(new ItemStack(ModBlocks.enderpearlBlock, 1, 0));
+		FacadeManager.addFacade(new ItemStack(ModBlocks.enderpearlBlock, 1, 1));
 		FacadeManager.addFacade(new ItemStack(ModBlocks.endstoneBrick));
 		FacadeManager.addFacade(new ItemStack(ModBlocks.endiumBlock));
 		FacadeManager.addFacade(new ItemStack(ModBlocks.rawEndium));

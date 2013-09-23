@@ -64,7 +64,7 @@ public class ConfigurationHandler {
 			ModIDs.PLAYER_INVENTORY_ID = configBlock(Strings.PLAYER_INVENTORY_NAME);
 			ModIDs.ENDER_FURNACE_ID = configBlock(Strings.ENDER_FURNACE_NAME);
 			ModIDs.ENDER_FURNACE_OFF_ID = configBlock(Strings.ENDER_FURNACE_OFF_NAME);
-			ModIDs.SOLID_WATER_SOURCE_ID = configBlock(Strings.SOLID_WATER_SOURCE_NAME);
+			ModIDs.INFINITE_WATER_SOURCE_ID = configBlock(Strings.INFINITE_WATER_SOURCE_NAME);
 
 			// Armour
 			ModIDs.ENDIUM_HELMET_ID = configItem(Strings.ENDIUM_HELMET_NAME);

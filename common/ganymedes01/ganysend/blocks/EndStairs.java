@@ -13,8 +13,8 @@ import net.minecraft.block.BlockStairs;
 
 public class EndStairs extends BlockStairs {
 
-	protected EndStairs(int id, Block block) {
-		super(id, block, 0);
+	protected EndStairs(int id, Block block, int meta) {
+		super(id, block, meta);
 		setHardness(1.5F);
 		setLightOpacity(0);
 		setResistance(10.0F);

@@ -143,9 +143,6 @@ public class TileEntityEnderFurnace extends TileEntity implements ISidedInventor
 
 				if (block == ModBlocks.enderpearlBlock)
 					return 900;
-
-				if (block == ModBlocks.enderpearlBrick)
-					return 900;
 			}
 			if (i == Item.enderPearl.itemID)
 				return 100;
@@ -165,7 +162,7 @@ public class TileEntityEnderFurnace extends TileEntity implements ISidedInventor
 			if (!inventory[2].isItemEqual(itemstack))
 				return false;
 			int result = inventory[2].stackSize + itemstack.stackSize;
-			return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
+			return result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize();
 		}
 	}
 
@@ -261,19 +258,19 @@ public class TileEntityEnderFurnace extends TileEntity implements ISidedInventor
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return slot == 2 ? false : (slot == 1 ? isItemFuel(stack) : true);
+		return slot == 2 ? false : slot == 1 ? isItemFuel(stack) : true;
 	}
 
 	public static boolean isItemFuel(ItemStack stack) {
 		if (stack == null)
 			return false;
 		else
-			return stack.getItem() == Item.enderPearl || stack.getItem().itemID == ModBlocks.enderpearlBlock.blockID || stack.getItem().itemID == ModBlocks.enderpearlBrick.blockID;
+			return stack.getItem() == Item.enderPearl || stack.getItem().itemID == ModBlocks.enderpearlBlock.blockID;
 	}
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {
-		return side == 0 ? slots_bottom : (side == 1 ? slots_top : slots_sides);
+		return side == 0 ? slots_bottom : side == 1 ? slots_top : slots_sides;
 	}
 
 	@Override

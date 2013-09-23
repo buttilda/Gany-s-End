@@ -35,7 +35,7 @@ public class ModIDs {
 	public static int PLAYER_INVENTORY_ID;
 	public static int ENDER_FURNACE_ID;
 	public static int ENDER_FURNACE_OFF_ID;
-	public static int SOLID_WATER_SOURCE_ID;
+	public static int INFINITE_WATER_SOURCE_ID;
 
 	// Armour
 	public static int ENDIUM_HELMET_ID;

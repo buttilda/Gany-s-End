@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.core.proxy;
 
 import ganymedes01.ganysend.blocks.ModBlocks;
+import ganymedes01.ganysend.client.renderer.item.ItemEnderFurnaceRender;
 import ganymedes01.ganysend.client.renderer.item.ItemPlayerInventoryRender;
 import ganymedes01.ganysend.client.renderer.item.ItemTimeLordRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockNewSkullRender;
@@ -35,6 +36,7 @@ public class ClientProxy extends CommonProxy {
 	public void registerRenderers() {
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.timeManipulator.blockID, new ItemTimeLordRender());
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.playerInventory.blockID, new ItemPlayerInventoryRender());
+		MinecraftForgeClient.registerItemRenderer(ModBlocks.enderFurnace_off.blockID, new ItemEnderFurnaceRender());
 	}
 
 	@Override
