@@ -11,7 +11,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 /**
  * Gany's End
  * 
- * @author ganymedes02
+ * @author ganymedes01
  * 
  */
 
