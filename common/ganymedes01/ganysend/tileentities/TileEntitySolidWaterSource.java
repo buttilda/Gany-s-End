@@ -1,7 +1,5 @@
 package ganymedes01.ganysend.tileentities;
 
-import java.util.ArrayList;
-
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -22,45 +20,23 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class TileEntitySolidWaterSource extends TileEntity implements IFluidHandler {
 
 	private FluidTank tank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME);
-	private final ArrayList<ForgeDirection> directions;
 
 	public TileEntitySolidWaterSource() {
 		tank.setFluid(new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME));
-		directions = new ArrayList<ForgeDirection>();
-		directions.add(ForgeDirection.UP);
-		directions.add(ForgeDirection.DOWN);
-		directions.add(ForgeDirection.EAST);
-		directions.add(ForgeDirection.WEST);
-		directions.add(ForgeDirection.SOUTH);
-		directions.add(ForgeDirection.NORTH);
 	}
 
 	@Override
 	public void updateEntity() {
-		ArrayList<TileEntity> list = getSurroundingTiles();
-		for (int i = 0; i < 6; i++) {
-			TileEntity tile = list.get(i);
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (tile != null && tile instanceof IFluidHandler)
-				fillTank((IFluidHandler) tile, directions.get(i));
-			else
-				continue;
+				fillTank((IFluidHandler) tile, dir);
 		}
 	}
 
 	private void fillTank(IFluidHandler tank, ForgeDirection from) {
 		if (tank.canFill(from.getOpposite(), FluidRegistry.WATER))
 			tank.fill(from.getOpposite(), new FluidStack(FluidRegistry.WATER, 40), true);
-	}
-
-	private ArrayList<TileEntity> getSurroundingTiles() {
-		ArrayList<TileEntity> list = new ArrayList<TileEntity>();
-		list.add(worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord));
-		list.add(worldObj.getBlockTileEntity(xCoord, yCoord - 1, zCoord));
-		list.add(worldObj.getBlockTileEntity(xCoord + 1, yCoord, zCoord));
-		list.add(worldObj.getBlockTileEntity(xCoord - 1, yCoord, zCoord));
-		list.add(worldObj.getBlockTileEntity(xCoord, yCoord, zCoord + 1));
-		list.add(worldObj.getBlockTileEntity(xCoord, yCoord, zCoord - 1));
-		return list;
 	}
 
 	@Override
