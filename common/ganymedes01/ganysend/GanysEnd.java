@@ -78,10 +78,11 @@ public class GanysEnd {
 		proxy.registerTileEntities();
 		proxy.registerRenderers();
 		GameRegistry.registerWorldGenerator(new EnderFlowerGenerator());
+		BuildCraftFacadeManager.registerFacades();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		BuildCraftFacadeManager.init();
+
 	}
 }

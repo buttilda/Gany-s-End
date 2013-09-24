@@ -1,8 +1,7 @@
 package ganymedes01.ganysend.recipes;
 
 import ganymedes01.ganysend.blocks.ModBlocks;
-import net.minecraft.item.ItemStack;
-import buildcraft.api.transport.FacadeManager;
+import cpw.mods.fml.common.event.FMLInterModComms;
 
 /**
  * Gany's End
@@ -13,11 +12,19 @@ import buildcraft.api.transport.FacadeManager;
 
 public class BuildCraftFacadeManager {
 
-	public static void init() {
-		FacadeManager.addFacade(new ItemStack(ModBlocks.enderpearlBlock, 1, 0));
-		FacadeManager.addFacade(new ItemStack(ModBlocks.enderpearlBlock, 1, 1));
-		FacadeManager.addFacade(new ItemStack(ModBlocks.endstoneBrick));
-		FacadeManager.addFacade(new ItemStack(ModBlocks.endiumBlock));
-		FacadeManager.addFacade(new ItemStack(ModBlocks.rawEndium));
+	public static void registerFacades() {
+		registerBlock(ModBlocks.enderpearlBlock.blockID);
+		registerBlock(ModBlocks.enderpearlBlock.blockID, 1);
+		registerBlock(ModBlocks.endstoneBrick.blockID);
+		registerBlock(ModBlocks.endiumBlock.blockID);
+		registerBlock(ModBlocks.rawEndium.blockID);
+	}
+
+	private static void registerBlock(int blockID) {
+		registerBlock(blockID, 0);
+	}
+
+	private static void registerBlock(int blockID, int meta) {
+		FMLInterModComms.sendMessage("BuildCraft|Transport", "add-facade", String.format("%d@%d", blockID, meta));
 	}
 }
