@@ -3,6 +3,8 @@ package ganymedes01.ganysend.core.utils;
 import ganymedes01.ganysend.lib.Reference;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -45,10 +47,6 @@ public class Utils {
 		return Reference.ENTITY_TEXTURE_PATH + name + ".png";
 	}
 
-	public static final String getEntityItemTexture(String name) {
-		return Reference.ENTITY_ITEM_TEXTURE_PATH + name + ".png";
-	}
-
 	public static final String getConainerName(String name) {
 		return "container." + Reference.MOD_ID + ":" + name;
 	}
@@ -69,6 +67,18 @@ public class Utils {
 		return new Color(R, G, B).getRGB() & 0x00ffffff;
 	}
 
+	public static final ResourceLocation getResource(String path) {
+		return new ResourceLocation(path);
+	}
+
+	public static final ArrayList<Integer> getRandomizedList(int min, int max) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for (int i = min; i < max; i++)
+			list.add(i);
+		Collections.shuffle(list);
+		return list;
+	}
+
 	public static final String CHAT_COLOUR_BLACK = "¤0";
 	public static final String CHAT_COLOUR_DARKBLUE = "¤1";
 	public static final String CHAT_COLOUR_DARKGREEN = "¤2";
@@ -87,26 +97,25 @@ public class Utils {
 	public static final String CHAT_COLOUR_WHITE = "¤f";
 
 	// Head textures
-	private static final String ENDERMAN_HEAD = getEntityTexture("enderman");
-	private static final String ENDERMAN_EYES = "textures/entity/enderman/enderman_eyes.png";
-	private static final String BLAZE_HEAD = "textures/entity/blaze.png";
-	private static final String PIGMAN_HEAD = "textures/entity/zombie_pigman.png";
-	private static final String SPIDER_HEAD = "textures/entity/spider/spider.png";
-	private static final String CAVE_SPIDER_HEAD = "textures/entity/spider/cave_spider.png";
-	private static final String PIG_HEAD = "textures/entity/pig/pig.png";
-	private static final String COW_HEAD = "textures/entity/cow/cow.png";
-	private static final String MOOSHROOM_HEAD = "textures/entity/cow/mooshroom.png";
-	private static final String SHEEP_HEAD = "textures/entity/sheep/sheep.png";
+	public static final String ENDERMAN_HEAD = "textures/entity/enderman/enderman.png";
+	public static final String ENDERMAN_EYES = "textures/entity/enderman/enderman_eyes.png";
+	public static final String BLAZE_HEAD = "textures/entity/blaze.png";
+	public static final String PIGMAN_HEAD = "textures/entity/zombie_pigman.png";
+	public static final String SPIDER_HEAD = "textures/entity/spider/spider.png";
+	public static final String CAVE_SPIDER_HEAD = "textures/entity/spider/cave_spider.png";
+	public static final String PIG_HEAD = "textures/entity/pig/pig.png";
+	public static final String COW_HEAD = "textures/entity/cow/cow.png";
+	public static final String MOOSHROOM_HEAD = "textures/entity/cow/mooshroom.png";
+	public static final String SHEEP_HEAD = "textures/entity/sheep/sheep.png";
 	public static final String SHEEP_FUR_HEAD = "textures/entity/sheep/sheep_fur.png";
-	private static final String WOLF_HEAD = "textures/entity/wolf/wolf.png";
-	private static final String VILLAGER_HEAD = "textures/entity/villager/villager.png";
-	private static final String CHICKEN_HEAD = "textures/entity/chicken.png";
-	private static final String WITCH_HEAD = "textures/entity/witch.png";
-	private static final String ZOMBIE_VILLAGER_HEAD = "textures/entity/zombie/zombie_villager.png";
-	private static final String IRON_GOLEM_HEAD = "textures/entity/iron_golem.png";
+	public static final String WOLF_HEAD = "textures/entity/wolf/wolf.png";
+	public static final String VILLAGER_HEAD = "textures/entity/villager/villager.png";
+	public static final String CHICKEN_HEAD = "textures/entity/chicken.png";
+	public static final String WITCH_HEAD = "textures/entity/witch.png";
+	public static final String ZOMBIE_VILLAGER_HEAD = "textures/entity/zombie/zombie_villager.png";
+	public static final String IRON_GOLEM_HEAD = "textures/entity/iron_golem.png";
 
-	public static final ResourceLocation[] headTextures = new ResourceLocation[] { new ResourceLocation(BLAZE_HEAD), new ResourceLocation(ENDERMAN_HEAD), new ResourceLocation(PIGMAN_HEAD), new ResourceLocation(ENDERMAN_EYES), new ResourceLocation(SPIDER_HEAD),
-	new ResourceLocation(CAVE_SPIDER_HEAD), new ResourceLocation(PIG_HEAD), new ResourceLocation(COW_HEAD), new ResourceLocation(MOOSHROOM_HEAD), new ResourceLocation(SHEEP_HEAD), new ResourceLocation(WOLF_HEAD), new ResourceLocation(VILLAGER_HEAD), new ResourceLocation(CHICKEN_HEAD),
-	new ResourceLocation(WITCH_HEAD), new ResourceLocation(ZOMBIE_VILLAGER_HEAD), new ResourceLocation(IRON_GOLEM_HEAD) };
+	public static final ResourceLocation[] headTextures = new ResourceLocation[] { getResource(BLAZE_HEAD), getResource(ENDERMAN_HEAD), getResource(PIGMAN_HEAD), getResource("NOT USED: PLAYER HEAD"), getResource(SPIDER_HEAD), getResource(CAVE_SPIDER_HEAD), getResource(PIG_HEAD),
+	getResource(COW_HEAD), getResource(MOOSHROOM_HEAD), getResource(SHEEP_HEAD), getResource(WOLF_HEAD), getResource(VILLAGER_HEAD), getResource(CHICKEN_HEAD), getResource(WITCH_HEAD), getResource(ZOMBIE_VILLAGER_HEAD), getResource(IRON_GOLEM_HEAD) };
 
 }

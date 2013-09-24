@@ -8,7 +8,6 @@ import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
@@ -73,14 +72,14 @@ public class ItemPlayerInventoryRender implements IItemRenderer {
 	}
 
 	private void renderPlayerInventory(float x, float y, float z) {
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Utils.getEntityTexture(Strings.PLAYER_INVENTORY_NAME)));
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.PLAYER_INVENTORY_NAME)));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180, 1, 0, 0);
 		GL11.glRotatef(-90, 0, 1, 0);
 		GL11.glScaled(1.0D, 1.0D, 1.0D);
 		outside.render();
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Utils.getEntityTexture(Strings.PLAYER_INVENTORY_NAME + "1")));
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.PLAYER_INVENTORY_NAME + "1")));
 		inside.render();
 		GL11.glPopMatrix();
 

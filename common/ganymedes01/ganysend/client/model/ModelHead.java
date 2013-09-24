@@ -93,10 +93,10 @@ public class ModelHead extends ModelSkeletonHead {
 	}
 
 	public void setVillager(int textureSize) {
-		head = (new ModelRenderer(this)).setTextureSize(textureSize, textureSize);
+		head = new ModelRenderer(this).setTextureSize(textureSize, textureSize);
 		head.setRotationPoint(0.0F, 0.0F, 0.0F);
 		head.setTextureOffset(0, 0).addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, 0.0F);
-		overlay = (new ModelRenderer(this)).setTextureSize(textureSize, textureSize);
+		overlay = new ModelRenderer(this).setTextureSize(textureSize, textureSize);
 		overlay.setRotationPoint(0.0F, -2.0F, 0.0F);
 		overlay.setTextureOffset(24, 0).addBox(-1.0F, -1.0F, -6.0F, 2, 4, 2, 0.0F);
 	}
@@ -112,41 +112,41 @@ public class ModelHead extends ModelSkeletonHead {
 	}
 
 	public void setWitch() {
-		head = (new ModelRenderer(this)).setTextureSize(64, 128);
+		head = new ModelRenderer(this).setTextureSize(64, 128);
 		head.setRotationPoint(0.0F, 0.0F, 0.0F);
 		head.setTextureOffset(0, 0).addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, 0.0F);
 
-		overlay = (new ModelRenderer(this)).setTextureSize(64, 128);
+		overlay = new ModelRenderer(this).setTextureSize(64, 128);
 		overlay.setRotationPoint(0.0F, -2.0F, 0.0F);
 		overlay.setTextureOffset(24, 0).addBox(-1.0F, -1.0F, -6.0F, 2, 4, 2, 0.0F);
 
-		ModelRenderer wart = (new ModelRenderer(this)).setTextureSize(64, 128);
+		ModelRenderer wart = new ModelRenderer(this).setTextureSize(64, 128);
 		wart.setRotationPoint(0.0F, -2.0F, 0.0F);
 		wart.setTextureOffset(0, 0).addBox(0.0F, 3.0F, -6.75F, 1, 1, 1, -0.25F);
 		overlay.addChild(wart);
 
-		ModelRenderer hatBase = (new ModelRenderer(this)).setTextureSize(64, 128);
+		ModelRenderer hatBase = new ModelRenderer(this).setTextureSize(64, 128);
 		hatBase.setRotationPoint(-5.0F, -10.03125F, -5.0F);
 		hatBase.setTextureOffset(0, 64).addBox(0.0F, 0.0F, 0.0F, 10, 2, 10);
 		hatBase.rotateAngleX = head.rotateAngleX;
 		hatBase.rotateAngleY = head.rotateAngleY;
 		head.addChild(hatBase);
 
-		ModelRenderer hat1 = (new ModelRenderer(this)).setTextureSize(64, 128);
+		ModelRenderer hat1 = new ModelRenderer(this).setTextureSize(64, 128);
 		hat1.setRotationPoint(1.75F, -4.0F, 2.0F);
 		hat1.setTextureOffset(0, 76).addBox(0.0F, 0.0F, 0.0F, 7, 4, 7);
 		hat1.rotateAngleX = -0.05235988F;
 		hat1.rotateAngleZ = 0.02617994F;
 		hatBase.addChild(hat1);
 
-		ModelRenderer hat2 = (new ModelRenderer(this)).setTextureSize(64, 128);
+		ModelRenderer hat2 = new ModelRenderer(this).setTextureSize(64, 128);
 		hat2.setRotationPoint(1.75F, -4.0F, 2.0F);
 		hat2.setTextureOffset(0, 87).addBox(0.0F, 0.0F, 0.0F, 4, 4, 4);
 		hat2.rotateAngleX = -0.10471976F;
 		hat2.rotateAngleZ = 0.05235988F;
 		hat1.addChild(hat2);
 
-		ModelRenderer hat3 = (new ModelRenderer(this)).setTextureSize(64, 128);
+		ModelRenderer hat3 = new ModelRenderer(this).setTextureSize(64, 128);
 		hat3.setRotationPoint(1.75F, -2.0F, 2.0F);
 		hat3.setTextureOffset(0, 95).addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.25F);
 		hat3.rotateAngleX = -0.20943952F;
@@ -155,12 +155,59 @@ public class ModelHead extends ModelSkeletonHead {
 	}
 
 	public void setZombieVillager() {
-		head = (new ModelRenderer(this)).setTextureSize(64, 64);
+		head = new ModelRenderer(this).setTextureSize(64, 64);
 		head.setRotationPoint(0.0F, 0.0F, 0.0F);
 		head.setTextureOffset(0, 32).addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, 0.0F);
-		overlay = (new ModelRenderer(this)).setTextureSize(64, 64);
+		overlay = new ModelRenderer(this).setTextureSize(64, 64);
 		overlay.setRotationPoint(0.0F, -2.0F, 0.0F);
 		overlay.setTextureOffset(24, 32).addBox(-1.0F, -1.0F, -6.0F, 2, 4, 2, 0.0F);
+	}
+
+	public ModelHead setHeadType(int type) {
+		switch (type) {
+			case 1:
+				setEnderman();
+				break;
+			case 2:
+				return new ModelHead(64);
+			case 4:
+				setSpider();
+				break;
+			case 5:
+				setSpider();
+				break;
+			case 6:
+				setPig();
+				break;
+			case 7:
+				setCow();
+				break;
+			case 8:
+				setCow();
+				break;
+			case 9:
+				setSheep();
+				break;
+			case 10:
+				setWolf();
+				break;
+			case 11:
+				setVillager(64);
+				break;
+			case 12:
+				setChicken();
+				break;
+			case 13:
+				setWitch();
+				break;
+			case 14:
+				setZombieVillager();
+				break;
+			case 15:
+				setVillager(128);
+				break;
+		}
+		return this;
 	}
 
 	@Override

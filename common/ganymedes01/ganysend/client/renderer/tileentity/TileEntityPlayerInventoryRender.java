@@ -4,6 +4,7 @@ import ganymedes01.ganysend.client.model.ModelHead;
 import ganymedes01.ganysend.client.model.ModelPlayerInventory;
 import ganymedes01.ganysend.client.model.ModelPlayerInventoryInside;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityPlayerInventory;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -32,7 +33,7 @@ public class TileEntityPlayerInventoryRender extends TileEntitySpecialRenderer {
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float rotation) {
 		ModelPlayerInventory blockModel = new ModelPlayerInventory();
-		bindTexture(new ResourceLocation(Utils.getEntityTexture(Strings.PLAYER_INVENTORY_NAME)));
+		bindTexture(Utils.getResource(Reference.ITEM_BLOCK_TEXTURE_PATH + "textures/blocks/endstoneBrick.png"));
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glTranslatef((float) x, (float) y + 1.0F, (float) z + 1.0F);
@@ -54,15 +55,15 @@ public class TileEntityPlayerInventoryRender extends TileEntitySpecialRenderer {
 		ModelHead model = new ModelHead();
 		double headRotation = 0.0F, cX, cZ, eX, eZ, defaultYrot = 0.0F, transX = 0.0F, transY = 0.0F;
 
-		bindTexture(new ResourceLocation(Utils.getEntityTexture(Strings.PLAYER_INVENTORY_NAME + "2")));
+		bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.PLAYER_INVENTORY_NAME + "2")));
 		EntityPlayer player = tilePLayerInv.getWorldObj().getPlayerEntityByName(name);
 		if (player != null) {
 			cX = player.posX - 0.5F;
 			cZ = player.posZ - 0.5F;
 			eX = tilePLayerInv.xCoord;
 			eZ = tilePLayerInv.zCoord;
-			headRotation = ((Math.atan2(cZ - eZ, cX - eX)) * 180 / Math.PI);
-			bindTexture(new ResourceLocation(Utils.getEntityTexture(Strings.PLAYER_INVENTORY_NAME + "1")));
+			headRotation = Math.atan2(cZ - eZ, cX - eX) * 180 / Math.PI;
+			bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.PLAYER_INVENTORY_NAME + "1")));
 		} else {
 			defaultYrot = 90.0F;
 			transY = 0.25F;

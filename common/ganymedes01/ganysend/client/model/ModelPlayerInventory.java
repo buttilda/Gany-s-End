@@ -21,6 +21,7 @@ public class ModelPlayerInventory extends ModelBase {
 		model = new ModelRenderer(this, 0, 0).setTextureSize(16, 16);
 		model.addBox(0.0F, 0.0F, 0.0F, 2, 14, 2, 0.0F);
 		model.setRotationPoint(0.0F, 0.0F, 0.0F);
+
 		ModelRenderer model0 = new ModelRenderer(this, 0, 0).setTextureSize(16, 16);
 		model0.addBox(14.0F, 0.0F, 0.0F, 2, 14, 2, 0.0F);
 		model0.setRotationPoint(0.0F, 0.0F, 0.0F);

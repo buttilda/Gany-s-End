@@ -2,10 +2,8 @@ package ganymedes01.ganysend.client.renderer.item;
 
 import ganymedes01.ganysend.client.model.ModelTimeLord;
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
@@ -67,7 +65,7 @@ public class ItemTimeLordRender implements IItemRenderer {
 	}
 
 	private void renderTimeLord(float x, float y, float z) {
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Reference.MOD_ID, Utils.getEntityItemTexture(Strings.TIME_MANIPULATOR_NAME + "_top")));
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.TIME_MANIPULATOR_NAME + "_top")));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180, 1, 0, 0);
@@ -76,9 +74,9 @@ public class ItemTimeLordRender implements IItemRenderer {
 		top.renderAll();
 		GL11.glPopMatrix();
 
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Reference.MOD_ID, Utils.getEntityItemTexture(Strings.TIME_MANIPULATOR_NAME + "_bottom")));
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.TIME_MANIPULATOR_NAME + "_bottom")));
 		GL11.glPushMatrix();
-		GL11.glTranslatef(x, (y - 0.5F), z);
+		GL11.glTranslatef(x, y - 0.5F, z);
 		GL11.glRotatef(180, 1, 0, 0);
 		GL11.glRotatef(-90, 0, 1, 0);
 		GL11.glScaled(0.5D, 0.5D, 0.5D);

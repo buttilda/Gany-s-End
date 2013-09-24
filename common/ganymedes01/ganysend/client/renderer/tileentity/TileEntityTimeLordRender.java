@@ -5,7 +5,6 @@ import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -27,9 +26,9 @@ public class TileEntityTimeLordRender extends TileEntitySpecialRenderer {
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float angle) {
 		ModelTimeLord model = new ModelTimeLord(tile.getBlockMetadata());
 		if (tile.getBlockMetadata() > 3)
-			bindTexture(new ResourceLocation(Utils.getEntityTexture(Strings.TIME_MANIPULATOR_NAME + "_top")));
+			bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.TIME_MANIPULATOR_NAME + "_top")));
 		else
-			bindTexture(new ResourceLocation(Utils.getEntityTexture(Strings.TIME_MANIPULATOR_NAME + "_bottom")));
+			bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.TIME_MANIPULATOR_NAME + "_bottom")));
 
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
