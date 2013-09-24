@@ -58,6 +58,6 @@ public class Emulator extends Block {
 	}
 
 	private boolean checkBounds(Block block) {
-		return (block.getBlockBoundsMaxX() == maxX && block.getBlockBoundsMaxY() == maxY && block.getBlockBoundsMaxZ() == maxZ && block.getBlockBoundsMinX() == minX && block.getBlockBoundsMinY() == minY && block.getBlockBoundsMinZ() == minZ);
+		return block.getBlockBoundsMaxX() == maxX && block.getBlockBoundsMaxY() == maxY && block.getBlockBoundsMaxZ() == maxZ && block.getBlockBoundsMinX() == minX && block.getBlockBoundsMinY() == minY && block.getBlockBoundsMinZ() == minZ;
 	}
 }
