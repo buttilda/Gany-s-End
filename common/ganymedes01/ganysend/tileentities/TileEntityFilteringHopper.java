@@ -34,6 +34,11 @@ import net.minecraft.world.World;
 
 public class TileEntityFilteringHopper extends TileEntity implements IInventory {
 
+	/**
+	 * Code copied from vanilla hopper and tweaked
+	 * 
+	 */
+
 	private ItemStack[] inventory = new ItemStack[5];
 	private ItemStack filter;
 	private int transferCooldown = -1;

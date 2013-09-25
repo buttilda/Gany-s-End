@@ -34,6 +34,11 @@ import net.minecraft.world.World;
 
 public class TileEntityAdvancedFilteringHopper extends TileEntity implements IInventory {
 
+	/**
+	 * Code copied from vanilla hopper and tweaked
+	 * 
+	 */
+
 	private ItemStack[] inventory = new ItemStack[5];
 	private ItemStack[] filter = new ItemStack[5];
 	private int transferCooldown = -1;
@@ -315,7 +320,7 @@ public class TileEntityAdvancedFilteringHopper extends TileEntity implements IIn
 	}
 
 	protected static boolean areItemStacksEqualItem(ItemStack stack1, ItemStack stack2) {
-		return stack1.itemID != stack2.itemID ? false : (stack1.getItemDamage() != stack2.getItemDamage() ? false : (stack1.stackSize > stack1.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(stack1, stack2)));
+		return stack1.itemID != stack2.itemID ? false : stack1.getItemDamage() != stack2.getItemDamage() ? false : stack1.stackSize > stack1.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(stack1, stack2);
 	}
 
 	@Override
