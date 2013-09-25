@@ -4,6 +4,7 @@ import ganymedes01.ganysend.client.model.ModelHead;
 import ganymedes01.ganysend.client.model.ModelPlayerInventory;
 import ganymedes01.ganysend.client.model.ModelPlayerInventoryInside;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.entity.Entity;
@@ -72,7 +73,7 @@ public class ItemPlayerInventoryRender implements IItemRenderer {
 	}
 
 	private void renderPlayerInventory(float x, float y, float z) {
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.PLAYER_INVENTORY_NAME)));
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Utils.getResource(Reference.ITEM_BLOCK_TEXTURE_PATH + "textures/blocks/endstoneBrick.png"));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180, 1, 0, 0);
