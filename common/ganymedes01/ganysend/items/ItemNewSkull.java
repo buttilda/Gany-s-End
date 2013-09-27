@@ -17,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -50,19 +49,19 @@ public class ItemNewSkull extends ItemSkull {
 			return false;
 		else {
 			if (side == 1)
-				++y;
+				y++;
 
 			if (side == 2)
-				--z;
+				z--;
 
 			if (side == 3)
-				++z;
+				z++;
 
 			if (side == 4)
-				--x;
+				x--;
 
 			if (side == 5)
-				++x;
+				x++;
 
 			if (!player.canPlayerEdit(x, y, z, side, stack))
 				return false;
@@ -86,7 +85,7 @@ public class ItemNewSkull extends ItemSkull {
 					((TileEntityBlockNewSkull) tileentity).setSkullRotation(i1);
 				}
 
-				--stack.stackSize;
+				stack.stackSize--;
 				return true;
 			}
 		}
@@ -95,8 +94,8 @@ public class ItemNewSkull extends ItemSkull {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(int id, CreativeTabs tab, List list) {
-		for (int j = 0; j < skullTypes.length; ++j)
-			list.add(new ItemStack(id, 1, j));
+		for (int i = 0; i < skullTypes.length; i++)
+			list.add(new ItemStack(id, 1, i));
 	}
 
 	@Override
@@ -115,17 +114,12 @@ public class ItemNewSkull extends ItemSkull {
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		int i = stack.getItemDamage();
+		int meta = stack.getItemDamage();
 
-		if (i < 0 || i >= skullTypes.length)
-			i = 0;
+		if (meta < 0 || meta >= skullTypes.length)
+			meta = 0;
 
-		return "item." + Utils.getUnlocalizedName(Strings.ITEM_NEW_SKULL_NAME) + skullTypes[i] + "Head";
-	}
-
-	@Override
-	public String getItemDisplayName(ItemStack stack) {
-		return stack.getItemDamage() == 4 && stack.hasTagCompound() && stack.getTagCompound().hasKey("SkullOwner") ? StatCollector.translateToLocalFormatted("item.skull.player.name", new Object[] { stack.getTagCompound().getString("SkullOwner") }) : super.getItemDisplayName(stack);
+		return "item." + Utils.getUnlocalizedName(Strings.ITEM_NEW_SKULL_NAME) + skullTypes[meta] + "Head";
 	}
 
 	@Override
@@ -133,7 +127,7 @@ public class ItemNewSkull extends ItemSkull {
 	public void registerIcons(IconRegister reg) {
 		icons = new Icon[skullTypes.length];
 
-		for (int i = 0; i < skullTypes.length; ++i)
+		for (int i = 0; i < skullTypes.length; i++)
 			icons[i] = reg.registerIcon(Reference.ITEM_BLOCK_TEXTURE_PATH + skullTypes[i] + "Head");
 	}
 }
