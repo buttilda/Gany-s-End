@@ -287,7 +287,7 @@ public class TileEntityEnderFurnace extends TileEntity implements ISidedInventor
 	public void readFromNBT(NBTTagCompound data) {
 		super.readFromNBT(data);
 		NBTTagList nbttaglist = data.getTagList("Items");
-		inventory = new ItemStack[getSizeInventory()];
+		inventory = new ItemStack[3];
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);

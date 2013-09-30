@@ -31,7 +31,7 @@ public class ContainerFilteringHopper extends Container {
 		for (int i = 0; i < tile.getSizeInventory(); i++)
 			addSlotToContainer(new Slot(tile, i, b0 + i * 18, b1));
 		if (tile.isFilter())
-			addSlotToContainer(new Slot(tile, TileEntityFilteringHopper.FILER_SLOT, 80, 53));
+			addSlotToContainer(new FilterSlot(tile, TileEntityFilteringHopper.FILER_SLOT, 80, 53));
 
 		byte b2 = 84;
 		if (!tile.isFilter())

@@ -6,10 +6,7 @@ import ganymedes01.ganysend.lib.Strings;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
 import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -18,10 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Facing;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -34,19 +29,14 @@ import net.minecraft.world.World;
 
 public class TileEntityFilteringHopper extends TileEntity implements IInventory {
 
-	/**
-	 * Code copied from vanilla hopper and tweaked
-	 * 
-	 */
-
-	private ItemStack[] inventory = new ItemStack[5];
+	protected ItemStack[] inventory = new ItemStack[5];
 	private ItemStack filter;
-	private int transferCooldown = -1;
+	protected int transferCooldown = -1;
 	public final static int FILER_SLOT = 5;
-	private int MAX_COOL_DOWN;
-	private boolean EXCLUSIVE;
-	private String line;
-	private String name;
+	protected int MAX_COOL_DOWN;
+	protected boolean EXCLUSIVE;
+	protected String line;
+	protected String name;
 
 	public void setBasic() {
 		MAX_COOL_DOWN = 8;
@@ -100,41 +90,24 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 
 	@Override
 	public void updateEntity() {
-		if (worldObj != null && !worldObj.isRemote) {
-			--transferCooldown;
+		if (worldObj.isRemote)
+			return;
 
-			if (!(transferCooldown > 0)) {
-				transferCooldown = 0;
-				hop();
+		transferCooldown--;
+		if (transferCooldown <= 0)
+			if (BasicFilteringHopper.getIsBlockNotPoweredFromMetadata(getBlockMetadata())) {
+				boolean suckedItems = suckItemsIntoHopper();
+				boolean indertedItems = insertItemToInventory();
+				if (suckedItems || indertedItems)
+					onInventoryChanged();
+				transferCooldown = MAX_COOL_DOWN;
 			}
-		}
 	}
 
 	protected boolean shouldPull(ItemStack stack) {
 		if (getStackInSlot(FILER_SLOT) == null)
 			return false;
-		if (isExclusive()) {
-			if (areItemStacksEqualItem(stack, getStackInSlot(FILER_SLOT)))
-				return false;
-		} else if (!areItemStacksEqualItem(stack, getStackInSlot(FILER_SLOT)))
-			return false;
-		return true;
-	}
-
-	public boolean hop() {
-		if (worldObj != null && !worldObj.isRemote) {
-			if (!(transferCooldown > 0) && BasicFilteringHopper.getIsBlockNotPoweredFromMetadata(getBlockMetadata())) {
-				boolean flag = insertItemToInventory();
-				flag = TileEntityFilteringHopper.suckItemsIntoHopper(this) || flag;
-				if (flag) {
-					transferCooldown = MAX_COOL_DOWN;
-					onInventoryChanged();
-					return true;
-				}
-			}
-			return false;
-		} else
-			return false;
+		return isExclusive() ^ areItemStacksEqualItem(stack, getStackInSlot(FILER_SLOT));
 	}
 
 	private boolean insertItemToInventory() {
@@ -143,84 +116,56 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		if (iinventory == null)
 			return false;
 		else {
-			for (int i = 0; i < getSizeInventory(); ++i)
-				if (getStackInSlot(i) != null) {
-					ItemStack itemstack = getStackInSlot(i).copy();
+			for (int i = 0; i < getSizeInventory(); i++) {
+				ItemStack stack = getStackInSlot(i);
+				if (stack != null && shouldPull(stack)) {
 					ItemStack itemstack1 = insertStack(iinventory, decrStackSize(i, 1), Facing.oppositeSide[BasicFilteringHopper.getDirectionFromMetadata(getBlockMetadata())]);
 
 					if (itemstack1 == null || itemstack1.stackSize == 0) {
 						iinventory.onInventoryChanged();
 						return true;
 					}
-
-					setInventorySlotContents(i, itemstack);
+					setInventorySlotContents(i, stack.copy());
 				}
-
+			}
 			return false;
 		}
 	}
 
-	public static boolean suckItemsIntoHopper(TileEntityFilteringHopper hopper) {
-		IInventory iinventory = getInventoryAboveHopper(hopper);
+	private boolean suckItemsIntoHopper() {
+		IInventory iinventory = getInventoryAtLocation(worldObj, xCoord, yCoord + 1, zCoord);
 
 		if (iinventory != null) {
-			byte b0 = 0;
-
-			if (iinventory instanceof ISidedInventory && b0 > -1) {
+			if (iinventory instanceof ISidedInventory) {
 				ISidedInventory isidedinventory = (ISidedInventory) iinventory;
-				int[] aint = isidedinventory.getAccessibleSlotsFromSide(b0);
+				int[] slots = isidedinventory.getAccessibleSlotsFromSide(0);
 
-				for (int element : aint)
-					if (func_102012_a(hopper, iinventory, element, b0))
+				for (int element : slots)
+					if (func_102012_a(iinventory, element, 0))
 						return true;
-			} else {
-				int j = iinventory.getSizeInventory();
-
-				for (int k = 0; k < j; ++k)
-					if (func_102012_a(hopper, iinventory, k, b0))
+			} else
+				for (int i = 0; i < iinventory.getSizeInventory(); i++)
+					if (func_102012_a(iinventory, i, 0))
 						return true;
-			}
 		} else {
-			EntityItem entityitem = func_96119_a(hopper.getWorldObj(), hopper.xCoord, hopper.yCoord + 1.0D, hopper.zCoord);
+			EntityItem entityitem = getEntityAt(worldObj, xCoord, yCoord + 1, zCoord);
 
 			if (entityitem != null)
-				if (hopper.shouldPull(entityitem.getEntityItem()))
-					return func_96114_a(hopper, entityitem);
+				if (shouldPull(entityitem.getEntityItem()))
+					return suckEntityItem(entityitem);
 		}
 
 		return false;
 	}
 
-	private static boolean func_102012_a(TileEntityFilteringHopper hopper, IInventory inventory, int slot, int side) {
-		ItemStack itemstack = inventory.getStackInSlot(slot);
-
-		if (itemstack != null && canExtractItemFromInventory(inventory, itemstack, slot, side)) {
-
-			if (!hopper.shouldPull(itemstack))
-				return false;
-
-			ItemStack itemstack1 = itemstack.copy();
-			ItemStack itemstack2 = insertStack(hopper, inventory.decrStackSize(slot, 1), -1);
-
-			if (itemstack2 == null || itemstack2.stackSize == 0) {
-				inventory.onInventoryChanged();
-				return true;
-			}
-
-			inventory.setInventorySlotContents(slot, itemstack1);
-		}
-
-		return false;
-	}
-
-	public static boolean func_96114_a(IInventory inventory, EntityItem entityItem) {
+	private boolean suckEntityItem(EntityItem entityItem) {
 		boolean flag = false;
 
 		if (entityItem == null)
 			return false;
 		else {
 			ItemStack itemstack = entityItem.getEntityItem().copy();
-			ItemStack itemstack1 = insertStack(inventory, itemstack, -1);
+			ItemStack itemstack1 = insertStack(this, itemstack, 0);
 
 			if (itemstack1 != null && itemstack1.stackSize != 0)
 				entityItem.setEntityItemStack(itemstack1);
@@ -228,22 +173,39 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 				flag = true;
 				entityItem.setDead();
 			}
-
 			return flag;
 		}
 	}
 
-	public static ItemStack insertStack(IInventory inventory, ItemStack stack, int side) {
-		if (inventory instanceof ISidedInventory && side > -1) {
-			ISidedInventory isidedinventory = (ISidedInventory) inventory;
-			int[] aint = isidedinventory.getAccessibleSlotsFromSide(side);
+	private boolean func_102012_a(IInventory inventory, int slot, int side) {
+		ItemStack itemstack = inventory.getStackInSlot(slot);
 
-			for (int j = 0; j < aint.length && stack != null && stack.stackSize > 0; ++j)
-				stack = func_102014_c(inventory, stack, aint[j], side);
+		if (itemstack != null && canExtractItemFromInventory(inventory, itemstack, slot, side)) {
+			if (!shouldPull(itemstack))
+				return false;
+
+			ItemStack itemstack1 = itemstack.copy();
+			ItemStack itemstack2 = insertStack(this, inventory.decrStackSize(slot, 1), 0);
+
+			if (itemstack2 == null || itemstack2.stackSize == 0) {
+				inventory.onInventoryChanged();
+				return true;
+			}
+			inventory.setInventorySlotContents(slot, itemstack1);
+		}
+
+		return false;
+	}
+
+	private ItemStack insertStack(IInventory inventory, ItemStack stack, int side) {
+		if (inventory instanceof ISidedInventory) {
+			int[] slots = ((ISidedInventory) inventory).getAccessibleSlotsFromSide(side);
+			for (int j = 0; j < slots.length && stack != null && stack.stackSize > 0; j++)
+				stack = func_102014_c(inventory, stack, slots[j], side);
 		} else {
 			int k = inventory.getSizeInventory();
 
-			for (int l = 0; l < k && stack != null && stack.stackSize > 0; ++l)
+			for (int l = 0; l < k && stack != null && stack.stackSize > 0; l++)
 				stack = func_102014_c(inventory, stack, l, side);
 		}
 
@@ -253,22 +215,22 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		return stack;
 	}
 
-	private static boolean canInsertItemToInventory(IInventory inventory, ItemStack stack, int slot, int side) {
+	private boolean canInsertItemToInventory(IInventory inventory, ItemStack stack, int slot, int side) {
 		return !inventory.isItemValidForSlot(slot, stack) ? false : !(inventory instanceof ISidedInventory) || ((ISidedInventory) inventory).canInsertItem(slot, stack, side);
 	}
 
-	private static boolean canExtractItemFromInventory(IInventory inventory, ItemStack stack, int slot, int side) {
+	private boolean canExtractItemFromInventory(IInventory inventory, ItemStack stack, int slot, int side) {
 		return !(inventory instanceof ISidedInventory) || ((ISidedInventory) inventory).canExtractItem(slot, stack, side);
 	}
 
-	private static ItemStack func_102014_c(IInventory inventory, ItemStack stack, int par2, int par3) {
-		ItemStack itemstack1 = inventory.getStackInSlot(par2);
+	private ItemStack func_102014_c(IInventory inventory, ItemStack stack, int slot, int side) {
+		ItemStack itemstack1 = inventory.getStackInSlot(slot);
 
-		if (canInsertItemToInventory(inventory, stack, par2, par3)) {
+		if (canInsertItemToInventory(inventory, stack, slot, side)) {
 			boolean flag = false;
 
 			if (itemstack1 == null) {
-				inventory.setInventorySlotContents(par2, stack);
+				inventory.setInventorySlotContents(slot, stack);
 				stack = null;
 				flag = true;
 			} else if (areItemStacksEqualItem(itemstack1, stack)) {
@@ -293,49 +255,26 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	}
 
 	private IInventory getOutputInventory() {
-		int i = BasicFilteringHopper.getDirectionFromMetadata(getBlockMetadata());
-		return getInventoryAtLocation(getWorldObj(), xCoord + Facing.offsetsXForSide[i], yCoord + Facing.offsetsYForSide[i], zCoord + Facing.offsetsZForSide[i]);
+		int dir = BasicFilteringHopper.getDirectionFromMetadata(getBlockMetadata());
+		return getInventoryAtLocation(worldObj, xCoord + Facing.offsetsXForSide[dir], yCoord + Facing.offsetsYForSide[dir], zCoord + Facing.offsetsZForSide[dir]);
 	}
 
-	public static IInventory getInventoryAboveHopper(TileEntityFilteringHopper hopper) {
-		return getInventoryAtLocation(hopper.getWorldObj(), hopper.xCoord, hopper.yCoord + 1.0D, hopper.zCoord);
-	}
-
-	public static EntityItem func_96119_a(World world, double x, double y, double z) {
+	private EntityItem getEntityAt(World world, int x, int y, int z) {
 		List list = world.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getAABBPool().getAABB(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D), IEntitySelector.selectAnything);
 		return list.size() > 0 ? (EntityItem) list.get(0) : null;
 	}
 
-	public static IInventory getInventoryAtLocation(World world, double x, double y, double z) {
+	private IInventory getInventoryAtLocation(World world, int x, int y, int z) {
 		IInventory iinventory = null;
-		int i = MathHelper.floor_double(x);
-		int j = MathHelper.floor_double(y);
-		int k = MathHelper.floor_double(z);
-		TileEntity tileentity = world.getBlockTileEntity(i, j, k);
+		TileEntity tileentity = world.getBlockTileEntity(x, y, z);
 
-		if (tileentity != null && tileentity instanceof IInventory) {
+		if (tileentity != null && tileentity instanceof IInventory)
 			iinventory = (IInventory) tileentity;
-
-			if (iinventory instanceof TileEntityChest) {
-				int l = world.getBlockId(i, j, k);
-				Block block = Block.blocksList[l];
-
-				if (block instanceof BlockChest)
-					iinventory = ((BlockChest) block).getInventory(world, i, j, k);
-			}
-		}
-
-		if (iinventory == null) {
-			List list = world.getEntitiesWithinAABBExcludingEntity((Entity) null, AxisAlignedBB.getAABBPool().getAABB(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D), IEntitySelector.selectInventories);
-
-			if (list != null && list.size() > 0)
-				iinventory = (IInventory) list.get(world.rand.nextInt(list.size()));
-		}
 
 		return iinventory;
 	}
 
-	protected static boolean areItemStacksEqualItem(ItemStack stack1, ItemStack stack2) {
+	protected boolean areItemStacksEqualItem(ItemStack stack1, ItemStack stack2) {
 		return stack1.itemID != stack2.itemID ? false : stack1.getItemDamage() != stack2.getItemDamage() ? false : stack1.stackSize > stack1.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(stack1, stack2);
 	}
 
@@ -410,7 +349,6 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		}
 
 		inventory[slot] = stack;
-
 		if (stack != null && stack.stackSize > getInventoryStackLimit())
 			stack.stackSize = getInventoryStackLimit();
 	}
