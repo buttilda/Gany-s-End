@@ -7,7 +7,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 /**
  * Gany's End
@@ -20,6 +19,7 @@ public class ArmourHandler {
 
 	boolean isWearing = false;
 
+	// Helmet
 	@ForgeSubscribe
 	public void onLivingUpdate(LivingUpdateEvent event) {
 		if (event.entityLiving instanceof EntityPlayer) {
@@ -34,12 +34,13 @@ public class ArmourHandler {
 		}
 	}
 
+	// Chestplate
 	@ForgeSubscribe
 	public void onLivingDamage(LivingAttackEvent event) {
 		if (event.entityLiving instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
-			if (event.source == DamageSource.inFire || event.source == DamageSource.lava)
-				if (player.getCurrentArmor(2) != null && player.getCurrentArmor(2).itemID == ModItems.endiumChestplate.itemID)
+			if (player.getCurrentArmor(2) != null && player.getCurrentArmor(2).itemID == ModItems.endiumChestplate.itemID)
+				if (event.source == DamageSource.inFire || event.source == DamageSource.lava)
 					event.setCanceled(true);
 		}
 	}

@@ -4,8 +4,6 @@ import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -50,7 +48,6 @@ public class EndiumChestplate extends EndiumArmour {
 		if (player.isInWater()) {
 			itemStack.damageItem(1, player);
 			player.attackEntityFrom(DamageSource.generic, 1F);
-		} else
-			player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 4, -1));
+		}
 	}
 }
