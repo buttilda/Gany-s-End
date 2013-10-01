@@ -19,8 +19,7 @@ import net.minecraft.network.packet.Packet250CustomPayload;
  */
 
 public enum PacketTypeHandler {
-	TIME_MANIPULATOR(PacketTimeManipulator.class),
-	PLAYER_INVENTORY(PacketPlayerInventory.class);
+	TIME_MANIPULATOR(PacketTimeManipulator.class), PLAYER_INVENTORY(PacketPlayerInventory.class);
 
 	private Class<? extends CustomPacket> clazz;
 
