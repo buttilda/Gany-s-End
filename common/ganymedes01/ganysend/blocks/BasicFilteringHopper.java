@@ -4,6 +4,7 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.GUIsID;
 import ganymedes01.ganysend.lib.Reference;
+import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
 import net.minecraft.block.BlockHopper;
@@ -25,8 +26,9 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 public class BasicFilteringHopper extends BlockHopper {
+
 	@SideOnly(Side.CLIENT)
-	protected Icon blockOutside, blockTop;
+	protected Icon blockOutside, blockTop, blockBottom, blockInside;
 
 	public BasicFilteringHopper(int id) {
 		super(id);
@@ -35,6 +37,16 @@ public class BasicFilteringHopper extends BlockHopper {
 		setStepSound(soundWoodFootstep);
 		setCreativeTab(GanysEnd.endTab);
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.BASIC_FILTERING_HOPPER_NAME));
+	}
+
+	@Override
+	public int getRenderType() {
+		return RenderIDs.filteringHopper;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public Icon getIconFromString(String string) {
+		return string.equals("hopper_outside") ? blockBottom : string.equals("hopper_inside") ? blockInside : null;
 	}
 
 	@Override
@@ -88,6 +100,12 @@ public class BasicFilteringHopper extends BlockHopper {
 	public void registerIcons(IconRegister reg) {
 		blockOutside = reg.registerIcon(Utils.getBlockTexture(Strings.BASIC_FILTERING_HOPPER_NAME, true) + "outside");
 		blockTop = reg.registerIcon(Utils.getBlockTexture(Strings.BASIC_FILTERING_HOPPER_NAME, true) + "top");
+		registerExtraIcons(reg);
+	}
+
+	protected void registerExtraIcons(IconRegister reg) {
+		blockBottom = reg.registerIcon(Utils.getBlockTexture(Strings.BASIC_FILTERING_HOPPER_NAME, true) + "bottom");
+		blockInside = reg.registerIcon(Utils.getBlockTexture(Strings.BASIC_FILTERING_HOPPER_NAME, true) + "inside");
 	}
 
 	@Override
