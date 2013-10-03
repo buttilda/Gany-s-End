@@ -2,7 +2,7 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.items.ItemEnderPearlBlock;
+import ganymedes01.ganysend.items.blocks.ItemEnderPearlBlock;
 import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
@@ -39,8 +39,6 @@ public class ModBlocks {
 	public static Block timeManipulator;
 	public static Block entityShifter;
 	public static Block playerInventory;
-	public static Block enderFurnace;
-	public static Block enderFurnace_off;
 	public static Block infiniteWaterSource;
 
 	public static void init() {
@@ -66,8 +64,6 @@ public class ModBlocks {
 		timeManipulator = new TimeManipulator(ModIDs.TIME_MANIPULATOR_ID);
 		entityShifter = new EntityShifter(ModIDs.ENTITY_SHIFTER_ID);
 		playerInventory = new PlayerInventory(ModIDs.PLAYER_INVENTORY_ID);
-		enderFurnace = new EnderFurnace(ModIDs.ENDER_FURNACE_OFF_ID, true);
-		enderFurnace_off = new EnderFurnace(ModIDs.ENDER_FURNACE_ID, false);
 		infiniteWaterSource = new InfiniteWaterSource(ModIDs.INFINITE_WATER_SOURCE_ID);
 
 		registerNames();
@@ -96,8 +92,6 @@ public class ModBlocks {
 		GameRegistry.registerBlock(timeManipulator, Strings.TIME_MANIPULATOR_NAME);
 		GameRegistry.registerBlock(entityShifter, Strings.ENTITY_SHIFTER_NAME);
 		GameRegistry.registerBlock(playerInventory, Strings.PLAYER_INVENTORY_NAME);
-		GameRegistry.registerBlock(enderFurnace, Strings.ENDER_FURNACE_NAME);
-		GameRegistry.registerBlock(enderFurnace_off, Strings.ENDER_FURNACE_OFF_NAME);
 		GameRegistry.registerBlock(infiniteWaterSource, Strings.INFINITE_WATER_SOURCE_NAME);
 	}
 }

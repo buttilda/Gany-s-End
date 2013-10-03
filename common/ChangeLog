@@ -23,3 +23,5 @@ v1.4
 -Added: Infinite Water Source
 -Change: Condense Ender Pearls Brick and Block into one ID
 -Change: New recipes for Infused Gems
+-Change: New texture for filtering hoppers
+-Change: Most of the abilities granted by the endium armour won't show on the inventory screen anymore

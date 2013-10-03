@@ -62,8 +62,6 @@ public class ConfigurationHandler {
 			ModIDs.TIME_MANIPULATOR_ID = configBlock(Strings.TIME_MANIPULATOR_NAME);
 			ModIDs.ENTITY_SHIFTER_ID = configBlock(Strings.ENTITY_SHIFTER_NAME);
 			ModIDs.PLAYER_INVENTORY_ID = configBlock(Strings.PLAYER_INVENTORY_NAME);
-			ModIDs.ENDER_FURNACE_ID = configBlock(Strings.ENDER_FURNACE_NAME);
-			ModIDs.ENDER_FURNACE_OFF_ID = configBlock(Strings.ENDER_FURNACE_OFF_NAME);
 			ModIDs.INFINITE_WATER_SOURCE_ID = configBlock(Strings.INFINITE_WATER_SOURCE_NAME);
 
 			// Armour

@@ -53,7 +53,6 @@ tile.ganysend.timeManipulator.name=Time Manipulator
 tile.ganysend.entityShifter.name=Entity Shifter
 tile.ganysend.playerInventory.name=Inventory Binder
 tile.ganysend.infiniteWaterSource.name=Infinite Water Source
-tile.ganysend.enderFurnace_off.name=Ender Furnace
 
 # GUI localizations
 container.ganysend:basicFilteringHopper=Basic Filtering Hopper

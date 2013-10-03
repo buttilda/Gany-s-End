@@ -40,7 +40,7 @@ public class ArmourHandler {
 		if (event.entityLiving instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			if (player.getCurrentArmor(2) != null && player.getCurrentArmor(2).itemID == ModItems.endiumChestplate.itemID)
-				if (event.source == DamageSource.inFire || event.source == DamageSource.lava)
+				if (event.source == DamageSource.inFire || event.source == DamageSource.lava || event.source == DamageSource.onFire)
 					event.setCanceled(true);
 		}
 	}

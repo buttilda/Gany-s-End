@@ -33,8 +33,6 @@ public class Strings {
 	public static final String TIME_MANIPULATOR_NAME = "timeManipulator";
 	public static final String ENTITY_SHIFTER_NAME = "entityShifter";
 	public static final String PLAYER_INVENTORY_NAME = "playerInventory";
-	public static final String ENDER_FURNACE_NAME = "enderFurnace";
-	public static final String ENDER_FURNACE_OFF_NAME = "enderFurnaceOff";
 	public static final String INFINITE_WATER_SOURCE_NAME = "infiniteWaterSource";
 
 	// Item names

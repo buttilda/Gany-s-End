@@ -33,8 +33,6 @@ public class ModIDs {
 	public static int TIME_MANIPULATOR_ID;
 	public static int ENTITY_SHIFTER_ID;
 	public static int PLAYER_INVENTORY_ID;
-	public static int ENDER_FURNACE_ID;
-	public static int ENDER_FURNACE_OFF_ID;
 	public static int INFINITE_WATER_SOURCE_ID;
 
 	// Armour

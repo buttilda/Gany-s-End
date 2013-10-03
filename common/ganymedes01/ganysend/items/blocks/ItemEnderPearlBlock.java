@@ -1,4 +1,4 @@
-package ganymedes01.ganysend.items;
+package ganymedes01.ganysend.items.blocks;
 
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
