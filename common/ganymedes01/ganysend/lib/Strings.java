@@ -34,6 +34,7 @@ public class Strings {
 	public static final String ENTITY_SHIFTER_NAME = "entityShifter";
 	public static final String PLAYER_INVENTORY_NAME = "playerInventory";
 	public static final String INFINITE_WATER_SOURCE_NAME = "infiniteWaterSource";
+	public static final String END_WALLS_NAME = "endWalls";
 
 	// Item names
 	public static final String ENDER_TAG_NAME = "enderTag";

@@ -2,6 +2,7 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.items.blocks.ItemEndWalls;
 import ganymedes01.ganysend.items.blocks.ItemEnderPearlBlock;
 import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
@@ -40,6 +41,7 @@ public class ModBlocks {
 	public static Block entityShifter;
 	public static Block playerInventory;
 	public static Block infiniteWaterSource;
+	public static Block endWalls;
 
 	public static void init() {
 		enderFlower = new EnderFlower(ModIDs.ENDER_FLOWER_ID);
@@ -65,6 +67,7 @@ public class ModBlocks {
 		entityShifter = new EntityShifter(ModIDs.ENTITY_SHIFTER_ID);
 		playerInventory = new PlayerInventory(ModIDs.PLAYER_INVENTORY_ID);
 		infiniteWaterSource = new InfiniteWaterSource(ModIDs.INFINITE_WATER_SOURCE_ID);
+		endWalls = new EndWalls(ModIDs.END_WALLS_ID);
 
 		registerNames();
 	}
@@ -93,5 +96,6 @@ public class ModBlocks {
 		GameRegistry.registerBlock(entityShifter, Strings.ENTITY_SHIFTER_NAME);
 		GameRegistry.registerBlock(playerInventory, Strings.PLAYER_INVENTORY_NAME);
 		GameRegistry.registerBlock(infiniteWaterSource, Strings.INFINITE_WATER_SOURCE_NAME);
+		GameRegistry.registerBlock(endWalls, ItemEndWalls.class, Strings.END_WALLS_NAME);
 	}
 }

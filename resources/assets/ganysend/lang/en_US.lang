@@ -53,6 +53,8 @@ tile.ganysend.timeManipulator.name=Time Manipulator
 tile.ganysend.entityShifter.name=Entity Shifter
 tile.ganysend.playerInventory.name=Inventory Binder
 tile.ganysend.infiniteWaterSource.name=Infinite Water Source
+tile.ganysend.endWalls0.name=End Stone Brick Wall
+tile.ganysend.endWalls1.name=Ender Pearl Brick Wall
 
 # GUI localizations
 container.ganysend:basicFilteringHopper=Basic Filtering Hopper

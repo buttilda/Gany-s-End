@@ -39,7 +39,7 @@ public class CommonProxy implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileEntityTimeManipulator.class, Strings.TIME_MANIPULATOR_NAME);
 		GameRegistry.registerTileEntity(TileEntityEntityShifter.class, Strings.ENTITY_SHIFTER_NAME);
 		GameRegistry.registerTileEntity(TileEntityPlayerInventory.class, Strings.PLAYER_INVENTORY_NAME);
-		GameRegistry.registerTileEntity(TileEntitySolidWaterSource.class, Strings.INFINITE_WATER_SOURCE_NAME);
+		GameRegistry.registerTileEntity(TileEntitySolidWaterSource.class, Strings.END_WALLS_NAME);
 	}
 
 	public void registerRenderers() {
