@@ -51,7 +51,7 @@ public class ArmourHandler {
 	public void onFOVChange(FOVUpdateEvent event) {
 		EntityPlayer player = event.entity;
 		if (player.getCurrentArmor(1) != null && player.getCurrentArmor(1).itemID == ModItems.endiumLeggings.itemID)
-			if (player.isSprinting())
+			if (event.newfov > 1.0F)
 				event.newfov = 1.0F;
 	}
 }
