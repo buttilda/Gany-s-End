@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.client.renderer.tileentity;
 
 import ganymedes01.ganysend.client.model.ModelHead;
+import ganymedes01.ganysend.core.utils.HeadTextures;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -25,8 +26,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 
-	private static final ResourceLocation sheepFur = Utils.getResource(Utils.SHEEP_FUR_HEAD);
-	private static final ResourceLocation endermanEyes = Utils.getResource(Utils.ENDERMAN_EYES);
+	private static final ResourceLocation sheepFur = Utils.getResource(HeadTextures.SHEEP_FUR_HEAD);
+	private static final ResourceLocation endermanEyes = Utils.getResource(HeadTextures.ENDERMAN_EYES);
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float angle) {
@@ -43,7 +44,7 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 			}
 			bindTexture(resourcelocation);
 		} else
-			bindTexture(Utils.headTextures[skullType]);
+			bindTexture(HeadTextures.headTextures[skullType]);
 
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_CULL_FACE);

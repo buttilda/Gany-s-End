@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -79,43 +80,84 @@ public class Utils {
 		return list;
 	}
 
-	public static final String CHAT_COLOUR_BLACK = "¤0";
-	public static final String CHAT_COLOUR_DARKBLUE = "¤1";
-	public static final String CHAT_COLOUR_DARKGREEN = "¤2";
-	public static final String CHAT_COLOUR_DARKAQUA = "¤3";
-	public static final String CHAT_COLOUR_DARKRED = "¤4";
-	public static final String CHAT_COLOUR_DARKPURPLE = "¤5";
-	public static final String CHAT_COLOUR_GOLD = "¤6";
-	public static final String CHAT_COLOUR_GREY = "¤7";
-	public static final String CHAT_COLOUR_DARKGREY = "¤8";
-	public static final String CHAT_COLOUR_BLUE = "¤9";
-	public static final String CHAT_COLOUR_GREEN = "¤a";
-	public static final String CHAT_COLOUR_AQUA = "¤b";
-	public static final String CHAT_COLOUR_RED = "¤c";
-	public static final String CHAT_COLOUR_PUEPLE = "¤d";
-	public static final String CHAT_COLOUR_YELLOW = "¤e";
-	public static final String CHAT_COLOUR_WHITE = "¤f";
+	public static final boolean addEntitytoInventory(IInventory iinventory, EntityItem item) {
+		if (item.getEntityItem() == null || item.getEntityItem().stackSize <= 0)
+			return false;
+		ArrayList<Integer> slots = getStackSlots(iinventory, item.getEntityItem());
 
-	// Head textures
-	public static final String ENDERMAN_HEAD = "textures/entity/enderman/enderman.png";
-	public static final String ENDERMAN_EYES = "textures/entity/enderman/enderman_eyes.png";
-	public static final String BLAZE_HEAD = "textures/entity/blaze.png";
-	public static final String PIGMAN_HEAD = "textures/entity/zombie_pigman.png";
-	public static final String SPIDER_HEAD = "textures/entity/spider/spider.png";
-	public static final String CAVE_SPIDER_HEAD = "textures/entity/spider/cave_spider.png";
-	public static final String PIG_HEAD = "textures/entity/pig/pig.png";
-	public static final String COW_HEAD = "textures/entity/cow/cow.png";
-	public static final String MOOSHROOM_HEAD = "textures/entity/cow/mooshroom.png";
-	public static final String SHEEP_HEAD = "textures/entity/sheep/sheep.png";
-	public static final String SHEEP_FUR_HEAD = "textures/entity/sheep/sheep_fur.png";
-	public static final String WOLF_HEAD = "textures/entity/wolf/wolf.png";
-	public static final String VILLAGER_HEAD = "textures/entity/villager/villager.png";
-	public static final String CHICKEN_HEAD = "textures/entity/chicken.png";
-	public static final String WITCH_HEAD = "textures/entity/witch.png";
-	public static final String ZOMBIE_VILLAGER_HEAD = "textures/entity/zombie/zombie_villager.png";
-	public static final String IRON_GOLEM_HEAD = "textures/entity/iron_golem.png";
+		while (slots.size() > 0 && item.getEntityItem().stackSize > 0) {
+			for (Integer slot : slots)
+				while (iinventory.getStackInSlot(slot).stackSize < iinventory.getStackInSlot(slot).getMaxStackSize() && item.getEntityItem().stackSize > 0) {
+					iinventory.getStackInSlot(slot).stackSize++;
+					item.getEntityItem().stackSize--;
+				}
+			slots = getStackSlots(iinventory, item.getEntityItem());
+		}
+		if (item.getEntityItem().stackSize <= 0) {
+			item.setDead();
+			return true;
+		}
 
-	public static final ResourceLocation[] headTextures = new ResourceLocation[] { getResource(BLAZE_HEAD), getResource(ENDERMAN_HEAD), getResource(PIGMAN_HEAD), getResource("NOT USED: PLAYER HEAD"), getResource(SPIDER_HEAD), getResource(CAVE_SPIDER_HEAD), getResource(PIG_HEAD),
-	getResource(COW_HEAD), getResource(MOOSHROOM_HEAD), getResource(SHEEP_HEAD), getResource(WOLF_HEAD), getResource(VILLAGER_HEAD), getResource(CHICKEN_HEAD), getResource(WITCH_HEAD), getResource(ZOMBIE_VILLAGER_HEAD), getResource(IRON_GOLEM_HEAD) };
+		for (int i = 0; i < iinventory.getSizeInventory(); i++)
+			if (iinventory.getStackInSlot(i) == null) {
+				iinventory.setInventorySlotContents(i, item.getEntityItem());
+				item.setDead();
+				return true;
+			}
+		return false;
+	}
 
+	public static final boolean addStacktoInventory(IInventory iinventory, ItemStack stack) {
+		if (stack == null || stack.stackSize <= 0)
+			return false;
+		ArrayList<Integer> slots = getStackSlots(iinventory, stack);
+
+		while (slots.size() > 0 && stack.stackSize > 0) {
+			for (Integer slot : slots)
+				while (iinventory.getStackInSlot(slot).stackSize < iinventory.getStackInSlot(slot).getMaxStackSize() && stack.stackSize > 0) {
+					iinventory.getStackInSlot(slot).stackSize++;
+					stack.stackSize--;
+				}
+			slots = getStackSlots(iinventory, stack);
+		}
+		if (stack.stackSize <= 0)
+			return true;
+
+		for (int i = 0; i < iinventory.getSizeInventory(); i++)
+			if (iinventory.getStackInSlot(i) == null) {
+				iinventory.setInventorySlotContents(i, stack.copy());
+				stack.stackSize = 0;
+				return true;
+			}
+		return false;
+	}
+
+	private static final ArrayList<Integer> getStackSlots(IInventory iinventory, ItemStack stack) {
+		ArrayList<Integer> slots = new ArrayList<Integer>();
+		if (stack.stackSize > 0)
+			for (int i = 0; i < iinventory.getSizeInventory(); i++)
+				if (iinventory.getStackInSlot(i) != null && stack != null)
+					if (iinventory.getStackInSlot(i).getItem() == stack.getItem())
+						if (iinventory.getStackInSlot(i).isItemEqual(stack))
+							if (iinventory.getStackInSlot(i).stackSize < iinventory.getStackInSlot(i).getMaxStackSize())
+								slots.add(i);
+		return slots;
+	}
+
+	public static final String CHAT_COLOUR_BLACK = "\u00a70";
+	public static final String CHAT_COLOUR_DARKBLUE = "\u00a71";
+	public static final String CHAT_COLOUR_DARKGREEN = "\u00a72";
+	public static final String CHAT_COLOUR_DARKAQUA = "\u00a73";
+	public static final String CHAT_COLOUR_DARKRED = "\u00a74";
+	public static final String CHAT_COLOUR_DARKPURPLE = "\u00a75";
+	public static final String CHAT_COLOUR_GOLD = "\u00a76";
+	public static final String CHAT_COLOUR_GREY = "\u00a77";
+	public static final String CHAT_COLOUR_DARKGREY = "\u00a78";
+	public static final String CHAT_COLOUR_BLUE = "\u00a79";
+	public static final String CHAT_COLOUR_GREEN = "\u00a7a";
+	public static final String CHAT_COLOUR_AQUA = "\u00a7b";
+	public static final String CHAT_COLOUR_RED = "\u00a7c";
+	public static final String CHAT_COLOUR_PUEPLE = "\u00a7d";
+	public static final String CHAT_COLOUR_YELLOW = "\u00a7e";
+	public static final String CHAT_COLOUR_WHITE = "\u00a7f";
 }
