@@ -32,16 +32,6 @@ public class PlayerInventory extends BlockContainer {
 	}
 
 	@Override
-	public float getPlayerRelativeBlockHardness(EntityPlayer player, World world, int x, int y, int z) {
-		TileEntity tile = world.getBlockTileEntity(x, y, z);
-		String name = "";
-		if (tile instanceof TileEntityPlayerInventory)
-			name = ((TileEntityPlayerInventory) tile).getPlayerName();
-
-		return player.getCommandSenderName().equals(name) ? getBlockHardness(world, x, y, z) : -1;
-	}
-
-	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
 		if (player != null)
 			if (player instanceof EntityPlayer) {
