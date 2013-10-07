@@ -47,7 +47,7 @@ public class EnderTag extends Item {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack item, EntityPlayer player, World world, int x, int y, int z, int id, float hitX, float hitY, float hitZ) {
+	public boolean onItemUse(ItemStack item, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (item.getItem() == this) {
 			if (item.stackTagCompound == null)
 				item.setTagCompound(new NBTTagCompound());

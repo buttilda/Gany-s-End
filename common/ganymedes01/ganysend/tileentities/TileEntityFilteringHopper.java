@@ -1,9 +1,9 @@
 package ganymedes01.ganysend.tileentities;
 
-import ganymedes01.ganysend.blocks.BasicFilteringHopper;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 
+import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.command.IEntitySelector;
@@ -16,9 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Facing;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 
 /**
  * Gany's End
@@ -88,194 +86,146 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		return name;
 	}
 
-	@Override
-	public void updateEntity() {
-		if (worldObj.isRemote)
-			return;
-
-		transferCooldown--;
-		if (transferCooldown <= 0)
-			if (BasicFilteringHopper.getIsBlockNotPoweredFromMetadata(getBlockMetadata())) {
-				boolean suckedItems = suckItemsIntoHopper();
-				boolean indertedItems = insertItemToInventory();
-				if (suckedItems || indertedItems)
-					onInventoryChanged();
-				transferCooldown = MAX_COOL_DOWN;
-			}
-	}
-
 	protected boolean shouldPull(ItemStack stack) {
 		if (getStackInSlot(FILER_SLOT) == null)
 			return false;
 		return isExclusive() ^ areItemStacksEqualItem(stack, getStackInSlot(FILER_SLOT));
 	}
 
+	protected boolean areItemStacksEqualItem(ItemStack stack1, ItemStack stack2) {
+		return stack1.itemID != stack2.itemID ? false : stack1.getItemDamage() != stack2.getItemDamage() ? false : stack1.stackSize > stack1.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(stack1, stack2);
+	}
+
+	@Override
+	public void updateEntity() {
+		if (worldObj.isRemote)
+			return;
+
+		transferCooldown--;
+		if (transferCooldown <= 0) {
+			boolean suckedItems = suckItemsIntoHopper();
+			boolean indertedItems = insertItemToInventory();
+			if (suckedItems || indertedItems)
+				onInventoryChanged();
+			transferCooldown = MAX_COOL_DOWN;
+		}
+	}
+
 	private boolean insertItemToInventory() {
-		IInventory iinventory = getOutputInventory();
+		IInventory inventoryToInsert = getInventoryToInsert();
 
-		if (iinventory == null)
+		if (inventoryToInsert == null)
 			return false;
-		else {
-			for (int i = 0; i < getSizeInventory(); i++) {
-				ItemStack stack = getStackInSlot(i);
-				if (stack != null && shouldPull(stack)) {
-					ItemStack itemstack1 = insertStack(iinventory, decrStackSize(i, 1), Facing.oppositeSide[BasicFilteringHopper.getDirectionFromMetadata(getBlockMetadata())]);
+		for (int i = 0; i < inventory.length; i++)
+			if (inventory[i] == null)
+				continue;
+			else if (inventory[i].stackSize <= 0) {
+				inventory[i] = null;
+				continue;
+			} else if (shouldPull(inventory[i]))
+				return insertOneItemFromStack(inventoryToInsert, i);
+		return false;
+	}
 
-					if (itemstack1 == null || itemstack1.stackSize == 0) {
-						iinventory.onInventoryChanged();
-						return true;
-					}
-					setInventorySlotContents(i, stack.copy());
+	private boolean insertOneItemFromStack(IInventory inventoryToInsert, int stackSlot) {
+		if (inventoryToInsert instanceof ISidedInventory) {
+			for (int slot : getAccessibleSlots((ISidedInventory) inventoryToInsert)) {
+				ItemStack stack = inventoryToInsert.getStackInSlot(slot);
+				if (stack == null || stack.stackSize <= 0) {
+					inventoryToInsert.setInventorySlotContents(slot, inventory[stackSlot].splitStack(1));
+					return true;
+				} else if (areItemStacksEqualItem(stack, inventory[stackSlot])) {
+					stack.stackSize++;
+					inventory[stackSlot].stackSize--;
+					return true;
 				}
 			}
 			return false;
-		}
+		} else
+			return Utils.addStacktoInventory(inventoryToInsert, inventory[stackSlot].splitStack(1));
 	}
 
 	private boolean suckItemsIntoHopper() {
-		IInventory iinventory = getInventoryAtLocation(worldObj, xCoord, yCoord + 1, zCoord);
-
-		if (iinventory != null) {
-			if (iinventory instanceof ISidedInventory) {
-				ISidedInventory isidedinventory = (ISidedInventory) iinventory;
-				int[] slots = isidedinventory.getAccessibleSlotsFromSide(0);
-
-				for (int element : slots)
-					if (func_102012_a(iinventory, element, 0))
-						return true;
-			} else
-				for (int i = 0; i < iinventory.getSizeInventory(); i++)
-					if (func_102012_a(iinventory, i, 0))
-						return true;
-		} else {
-			EntityItem entityitem = getEntityAt(worldObj, xCoord, yCoord + 1, zCoord);
-
-			if (entityitem != null)
-				if (shouldPull(entityitem.getEntityItem()))
-					return suckEntityItem(entityitem);
-		}
-
-		return false;
+		return suckEntitiesAbove() || suckItemFromInventory();
 	}
 
-	private boolean suckEntityItem(EntityItem entityItem) {
-		boolean flag = false;
+	private boolean suckItemFromInventory() {
+		IInventory inventoryToPull = getInventoryAbove();
 
-		if (entityItem == null)
+		if (inventoryToPull == null)
 			return false;
-		else {
-			ItemStack itemstack = entityItem.getEntityItem().copy();
-			ItemStack itemstack1 = insertStack(this, itemstack, 0);
-
-			if (itemstack1 != null && itemstack1.stackSize != 0)
-				entityItem.setEntityItemStack(itemstack1);
-			else {
-				flag = true;
-				entityItem.setDead();
+		if (inventoryToPull instanceof ISidedInventory)
+			for (int slot : ((ISidedInventory) inventoryToPull).getAccessibleSlotsFromSide(0)) {
+				ItemStack stack = inventoryToPull.getStackInSlot(slot);
+				if (stack == null)
+					continue;
+				else if (stack.stackSize <= 0) {
+					inventoryToPull.setInventorySlotContents(slot, null);
+					continue;
+				} else if (shouldPull(stack))
+					return Utils.addStacktoInventory(this, stack.splitStack(1));
 			}
-			return flag;
-		}
-	}
-
-	private boolean func_102012_a(IInventory inventory, int slot, int side) {
-		ItemStack itemstack = inventory.getStackInSlot(slot);
-
-		if (itemstack != null && canExtractItemFromInventory(inventory, itemstack, slot, side)) {
-			if (!shouldPull(itemstack))
-				return false;
-
-			ItemStack itemstack1 = itemstack.copy();
-			ItemStack itemstack2 = insertStack(this, inventory.decrStackSize(slot, 1), 0);
-
-			if (itemstack2 == null || itemstack2.stackSize == 0) {
-				inventory.onInventoryChanged();
-				return true;
+		else
+			for (int i = 0; i < inventoryToPull.getSizeInventory(); i++) {
+				ItemStack stack = inventoryToPull.getStackInSlot(i);
+				if (stack == null)
+					continue;
+				else if (stack.stackSize <= 0) {
+					inventoryToPull.setInventorySlotContents(i, null);
+					continue;
+				} else if (shouldPull(stack))
+					return Utils.addStacktoInventory(this, stack.splitStack(1));
 			}
-			inventory.setInventorySlotContents(slot, itemstack1);
-		}
-
 		return false;
 	}
 
-	private ItemStack insertStack(IInventory inventory, ItemStack stack, int side) {
-		if (inventory instanceof ISidedInventory) {
-			int[] slots = ((ISidedInventory) inventory).getAccessibleSlotsFromSide(side);
-			for (int j = 0; j < slots.length && stack != null && stack.stackSize > 0; j++)
-				stack = func_102014_c(inventory, stack, slots[j], side);
-		} else {
-			int k = inventory.getSizeInventory();
-
-			for (int l = 0; l < k && stack != null && stack.stackSize > 0; l++)
-				stack = func_102014_c(inventory, stack, l, side);
-		}
-
-		if (stack != null && stack.stackSize == 0)
-			stack = null;
-
-		return stack;
-	}
-
-	private boolean canInsertItemToInventory(IInventory inventory, ItemStack stack, int slot, int side) {
-		return !inventory.isItemValidForSlot(slot, stack) ? false : !(inventory instanceof ISidedInventory) || ((ISidedInventory) inventory).canInsertItem(slot, stack, side);
-	}
-
-	private boolean canExtractItemFromInventory(IInventory inventory, ItemStack stack, int slot, int side) {
-		return !(inventory instanceof ISidedInventory) || ((ISidedInventory) inventory).canExtractItem(slot, stack, side);
-	}
-
-	private ItemStack func_102014_c(IInventory inventory, ItemStack stack, int slot, int side) {
-		ItemStack itemstack1 = inventory.getStackInSlot(slot);
-
-		if (canInsertItemToInventory(inventory, stack, slot, side)) {
-			boolean flag = false;
-
-			if (itemstack1 == null) {
-				inventory.setInventorySlotContents(slot, stack);
-				stack = null;
-				flag = true;
-			} else if (areItemStacksEqualItem(itemstack1, stack)) {
-				int k = stack.getMaxStackSize() - itemstack1.stackSize;
-				int l = Math.min(stack.stackSize, k);
-				stack.stackSize -= l;
-				itemstack1.stackSize += l;
-				flag = l > 0;
-			}
-
-			if (flag) {
-				if (inventory instanceof TileEntityFilteringHopper) {
-					((TileEntityFilteringHopper) inventory).transferCooldown = ((TileEntityFilteringHopper) inventory).getMaxCoolDown();
-					inventory.onInventoryChanged();
-				}
-
-				inventory.onInventoryChanged();
+	private boolean suckEntitiesAbove() {
+		List list = worldObj.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getAABBPool().getAABB(xCoord, yCoord + 1.0D, zCoord, xCoord + 1.0D, yCoord + 2.0D, zCoord + 1.0D), IEntitySelector.selectAnything);
+		if (!list.isEmpty()) {
+			Iterator iterator = list.iterator();
+			while (iterator.hasNext()) {
+				EntityItem entity = (EntityItem) iterator.next();
+				if (entity.worldObj == worldObj)
+					if (shouldPull(entity.getEntityItem()))
+						return Utils.addEntitytoInventory(this, entity);
 			}
 		}
-
-		return stack;
+		return false;
 	}
 
-	private IInventory getOutputInventory() {
-		int dir = BasicFilteringHopper.getDirectionFromMetadata(getBlockMetadata());
-		return getInventoryAtLocation(worldObj, xCoord + Facing.offsetsXForSide[dir], yCoord + Facing.offsetsYForSide[dir], zCoord + Facing.offsetsZForSide[dir]);
+	private IInventory getInventoryAbove() {
+		TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
+		return tile instanceof IInventory ? (IInventory) tile : null;
 	}
 
-	private EntityItem getEntityAt(World world, int x, int y, int z) {
-		List list = world.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getAABBPool().getAABB(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D), IEntitySelector.selectAnything);
-		return list.size() > 0 ? (EntityItem) list.get(0) : null;
+	private IInventory getInventoryToInsert() {
+		int x = xCoord, y = yCoord, z = zCoord;
+		switch (getBlockMetadata()) {
+			case 0:
+				y--;
+				break;
+			case 2:
+				z--;
+				break;
+			case 3:
+				z++;
+				break;
+			case 4:
+				x--;
+				break;
+			case 5:
+				x++;
+				break;
+			default:
+				return null;
+		}
+
+		TileEntity tile = worldObj.getBlockTileEntity(x, y, z);
+		return tile instanceof IInventory ? (IInventory) tile : null;
 	}
 
-	private IInventory getInventoryAtLocation(World world, int x, int y, int z) {
-		IInventory iinventory = null;
-		TileEntity tileentity = world.getBlockTileEntity(x, y, z);
-
-		if (tileentity != null && tileentity instanceof IInventory)
-			iinventory = (IInventory) tileentity;
-
-		return iinventory;
-	}
-
-	protected boolean areItemStacksEqualItem(ItemStack stack1, ItemStack stack2) {
-		return stack1.itemID != stack2.itemID ? false : stack1.getItemDamage() != stack2.getItemDamage() ? false : stack1.stackSize > stack1.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(stack1, stack2);
+	private int[] getAccessibleSlots(ISidedInventory inventory) {
+		return inventory.getAccessibleSlotsFromSide(getBlockMetadata() ^ 1);
 	}
 
 	@Override
