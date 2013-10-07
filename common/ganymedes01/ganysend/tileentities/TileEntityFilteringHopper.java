@@ -128,21 +128,13 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	}
 
 	private boolean insertOneItemFromStack(IInventory inventoryToInsert, int stackSlot) {
-		if (inventoryToInsert instanceof ISidedInventory) {
-			for (int slot : getAccessibleSlots((ISidedInventory) inventoryToInsert)) {
-				ItemStack stack = inventoryToInsert.getStackInSlot(slot);
-				if (stack == null || stack.stackSize <= 0) {
-					inventoryToInsert.setInventorySlotContents(slot, inventory[stackSlot].splitStack(1));
-					return true;
-				} else if (areItemStacksEqualItem(stack, inventory[stackSlot])) {
-					stack.stackSize++;
-					inventory[stackSlot].stackSize--;
-					return true;
-				}
-			}
-			return false;
-		} else
-			return Utils.addStacktoInventory(inventoryToInsert, inventory[stackSlot].splitStack(1));
+		boolean flag = Utils.addStackToInventory(inventoryToInsert, inventory[stackSlot].splitStack(1), getSideOfInventory());
+		try {
+			return flag;
+		} finally {
+			if (!flag)
+				inventory[stackSlot].stackSize++;
+		}
 	}
 
 	private boolean suckItemsIntoHopper() {
@@ -163,7 +155,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 					inventoryToPull.setInventorySlotContents(slot, null);
 					continue;
 				} else if (shouldPull(stack))
-					return Utils.addStacktoInventory(this, stack.splitStack(1));
+					return Utils.addStackToInventory(this, stack.splitStack(1));
 			}
 		else
 			for (int i = 0; i < inventoryToPull.getSizeInventory(); i++) {
@@ -174,7 +166,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 					inventoryToPull.setInventorySlotContents(i, null);
 					continue;
 				} else if (shouldPull(stack))
-					return Utils.addStacktoInventory(this, stack.splitStack(1));
+					return Utils.addStackToInventory(this, stack.splitStack(1));
 			}
 		return false;
 	}
@@ -224,8 +216,8 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		return tile instanceof IInventory ? (IInventory) tile : null;
 	}
 
-	private int[] getAccessibleSlots(ISidedInventory inventory) {
-		return inventory.getAccessibleSlotsFromSide(getBlockMetadata() ^ 1);
+	private int getSideOfInventory() {
+		return getBlockMetadata() ^ 1;
 	}
 
 	@Override

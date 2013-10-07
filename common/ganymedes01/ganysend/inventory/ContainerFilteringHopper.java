@@ -53,7 +53,7 @@ public class ContainerFilteringHopper extends Container {
 			itemstack = itemstack1.copy();
 
 			if (slotIndex < hopper.getSizeInventory()) {
-				if (!mergeItemStack(itemstack1, hopper.getSizeInventory(), inventorySlots.size(), true))
+				if (!mergeItemStack(itemstack1, hopper.getSizeInventory() + 1, inventorySlots.size(), true))
 					return null;
 			} else if (slotIndex < hopper.getSizeInventory() + 1) {
 				if (!mergeItemStack(itemstack1, hopper.getSizeInventory() + 1, inventorySlots.size(), true))
