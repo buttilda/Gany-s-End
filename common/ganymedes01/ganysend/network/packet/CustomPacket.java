@@ -58,8 +58,4 @@ public class CustomPacket {
 	public void execute(INetworkManager network, Player player) {
 
 	}
-
-	public void setKey(int key) {
-
-	}
 }
