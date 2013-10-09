@@ -1,12 +1,12 @@
 package ganymedes01.ganysend.client.renderer.tileentity;
 
 import ganymedes01.ganysend.client.model.ModelHead;
-import ganymedes01.ganysend.client.model.ModelPlayerInventory;
-import ganymedes01.ganysend.client.model.ModelPlayerInventoryInside;
+import ganymedes01.ganysend.client.model.ModelInventoryBinder;
+import ganymedes01.ganysend.client.model.ModelInventoryBinderInside;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
-import ganymedes01.ganysend.tileentities.TileEntityPlayerInventory;
+import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
@@ -28,11 +28,11 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 @SideOnly(Side.CLIENT)
-public class TileEntityPlayerInventoryRender extends TileEntitySpecialRenderer {
+public class TileEntityInventoryBinderRender extends TileEntitySpecialRenderer {
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float rotation) {
-		ModelPlayerInventory blockModel = new ModelPlayerInventory();
+		ModelInventoryBinder blockModel = new ModelInventoryBinder();
 		bindTexture(Utils.getResource(Reference.ITEM_BLOCK_TEXTURE_PATH + "textures/blocks/endstoneBrick.png"));
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -44,7 +44,7 @@ public class TileEntityPlayerInventoryRender extends TileEntitySpecialRenderer {
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 		GL11.glPopMatrix();
 
-		TileEntityPlayerInventory tilePLayerInv = (TileEntityPlayerInventory) tile;
+		TileEntityInventoryBinder tilePLayerInv = (TileEntityInventoryBinder) tile;
 		String name = tilePLayerInv.getPlayerName();
 
 		ResourceLocation resourcelocation = AbstractClientPlayer.locationStevePng;
@@ -55,7 +55,7 @@ public class TileEntityPlayerInventoryRender extends TileEntitySpecialRenderer {
 		ModelHead model = new ModelHead();
 		double headRotation = 0.0F, cX, cZ, eX, eZ, defaultYrot = 0.0F, transX = 0.0F, transY = 0.0F;
 
-		bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.PLAYER_INVENTORY_NAME + "2")));
+		bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.INVENTORY_BINDER_NAME + "2")));
 		EntityPlayer player = tilePLayerInv.getWorldObj().getPlayerEntityByName(name);
 		if (player != null) {
 			cX = player.posX - 0.5F;
@@ -63,14 +63,14 @@ public class TileEntityPlayerInventoryRender extends TileEntitySpecialRenderer {
 			eX = tilePLayerInv.xCoord;
 			eZ = tilePLayerInv.zCoord;
 			headRotation = Math.atan2(cZ - eZ, cX - eX) * 180 / Math.PI;
-			bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.PLAYER_INVENTORY_NAME + "1")));
+			bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.INVENTORY_BINDER_NAME + "1")));
 		} else {
 			defaultYrot = 90.0F;
 			transY = 0.25F;
 			transX = 0.25F;
 		}
 
-		ModelPlayerInventoryInside insideModel = new ModelPlayerInventoryInside();
+		ModelInventoryBinderInside insideModel = new ModelInventoryBinderInside();
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glDisable(GL11.GL_CULL_FACE);

@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityEntityShifter;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -18,8 +19,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityShifter extends BlockShifter {
 
-	public EntityShifter(int id) {
-		super(id);
+	public EntityShifter() {
+		super(ModIDs.ENTITY_SHIFTER_ID);
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENTITY_SHIFTER_NAME));
 	}
 

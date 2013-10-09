@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
@@ -23,8 +24,8 @@ public class SpeedyExclusiveFilteringHopper extends BasicFilteringHopper {
 	@SideOnly(Side.CLIENT)
 	private Icon blockOutside, blockTop;
 
-	public SpeedyExclusiveFilteringHopper(int id) {
-		super(id);
+	public SpeedyExclusiveFilteringHopper() {
+		super(ModIDs.SPEEDY_EXCLUSIVE_FILTERING_HOPPER_ID);
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.SPEEDY_EXCLUSIVE_FILTERING_HOPPER_NAME));
 	}
 

@@ -2,6 +2,7 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntitySolidWaterSource;
 import net.minecraft.block.Block;
@@ -28,8 +29,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class InfiniteWaterSource extends BlockContainer {
 
-	protected InfiniteWaterSource(int id) {
-		super(id, Material.rock);
+	protected InfiniteWaterSource() {
+		super(ModIDs.INFINITE_WATER_SOURCE_ID, Material.rock);
 		setHardness(3.5F);
 		setCreativeTab(GanysEnd.endTab);
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.INFINITE_WATER_SOURCE_NAME));

@@ -3,6 +3,7 @@ package ganymedes01.ganysend.blocks;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.GUIsID;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityAdvancedFilteringHopper;
@@ -24,8 +25,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class AdvancedFilteringHopper extends BasicFilteringHopper {
 
-	public AdvancedFilteringHopper(int id) {
-		super(id);
+	public AdvancedFilteringHopper() {
+		super(ModIDs.ADVANCED_FILTERING_HOPPER_ID);
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ADVANCED_FILTERING_HOPPER_NAME));
 	}
 

@@ -13,11 +13,11 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 @SideOnly(Side.CLIENT)
-public class ModelPlayerInventory extends ModelBase {
+public class ModelInventoryBinder extends ModelBase {
 
 	ModelRenderer model;
 
-	public ModelPlayerInventory() {
+	public ModelInventoryBinder() {
 		model = new ModelRenderer(this, 0, 0).setTextureSize(16, 16);
 		model.addBox(0.0F, 0.0F, 0.0F, 2, 14, 2, 0.0F);
 		model.setRotationPoint(0.0F, 0.0F, 0.0F);

@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.recipes;
 
 import ganymedes01.ganysend.blocks.ModBlocks;
+import ganymedes01.ganysend.items.ItemNewSkull;
 import ganymedes01.ganysend.items.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -78,7 +79,7 @@ public class ModRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(Block.dragonEgg), new ItemStack(ModBlocks.timeManipulator));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.timeManipulator), "zyz", "yxy", "zyz", 'x', Block.dragonEgg, 'y', new ItemStack(Block.planks, 1, 1), 'z', Block.blockGold);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.entityShifter), "yzy", "wxw", "ywy", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 1), 'y', Item.ingotGold, 'z', Item.redstone, 'w', Block.glass);
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.playerInventory), "xxx", "yzy", "xxx", 'x', Block.whiteStone, 'y', Item.enderPearl, 'z', new ItemStack(ModItems.itemNewSkull, 1, 3));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.inventoryBinder), "xxx", "yzy", "xxx", 'x', Block.whiteStone, 'y', Item.enderPearl, 'z', "ganysEndSkull"));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 0), "xxx", "xxx", 'x', ModBlocks.endstoneBrick);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 1), "xxx", "xxx", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 1));
 
@@ -108,5 +109,8 @@ public class ModRecipes {
 		OreDictionary.registerOre("ganysEndNightMaterial", Block.mushroomBrown);
 		OreDictionary.registerOre("ganysEndNightMaterial", Block.mushroomRed);
 		OreDictionary.registerOre("ganysEndNightMaterial", Item.rottenFlesh);
+
+		for (int i = 0; i < ItemNewSkull.getSkullCount(); i++)
+			OreDictionary.registerOre("ganysEndSkull", new ItemStack(ModItems.itemNewSkull, 1, i));
 	}
 }

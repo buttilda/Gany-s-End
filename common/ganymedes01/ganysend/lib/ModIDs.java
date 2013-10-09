@@ -32,7 +32,7 @@ public class ModIDs {
 	public static int ADVANCED_EXCLUSIVE_FILTERING_HOPPER_ID;
 	public static int TIME_MANIPULATOR_ID;
 	public static int ENTITY_SHIFTER_ID;
-	public static int PLAYER_INVENTORY_ID;
+	public static int INVENTORY_BINDER_ID;
 	public static int INFINITE_WATER_SOURCE_ID;
 	public static int END_WALLS_ID;
 

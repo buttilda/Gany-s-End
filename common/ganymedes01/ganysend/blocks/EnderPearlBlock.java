@@ -2,6 +2,7 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class EnderPearlBlock extends Block {
 	@SideOnly(Side.CLIENT)
 	private Icon[] blockIcon = new Icon[2];
 
-	public EnderPearlBlock(int id) {
-		super(id, Material.iron);
+	public EnderPearlBlock() {
+		super(ModIDs.ENDERPEARL_BLOCK_ID, Material.iron);
 		setHardness(1.5F);
 		setResistance(10.0F);
 		setCreativeTab(GanysEnd.endTab);

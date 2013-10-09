@@ -2,6 +2,7 @@ package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -24,8 +25,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class InfiniteBucket extends ItemSimpleFoiled {
 
-	public InfiniteBucket(int id) {
-		super(id);
+	public InfiniteBucket() {
+		super(ModIDs.INFINITE_BUCKET_ID);
 		setMaxStackSize(1);
 		setCreativeTab(GanysEnd.endTab);
 		setTextureName(Utils.getItemTexture(Strings.INFINITE_BUCKET_NAME));

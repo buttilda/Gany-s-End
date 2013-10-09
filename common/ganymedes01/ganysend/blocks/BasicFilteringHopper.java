@@ -3,6 +3,7 @@ package ganymedes01.ganysend.blocks;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.GUIsID;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
@@ -29,6 +30,10 @@ public class BasicFilteringHopper extends BlockHopper {
 
 	@SideOnly(Side.CLIENT)
 	protected Icon blockOutside, blockTop, blockBottom, blockInside;
+
+	public BasicFilteringHopper() {
+		this(ModIDs.BASIC_FILTERING_HOPPER_ID);
+	}
 
 	public BasicFilteringHopper(int id) {
 		super(id);

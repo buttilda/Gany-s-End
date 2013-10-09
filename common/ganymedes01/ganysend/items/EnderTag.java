@@ -2,6 +2,7 @@ package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 
 import java.util.List;
@@ -25,8 +26,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EnderTag extends Item {
 
-	public EnderTag(int id) {
-		super(id);
+	public EnderTag() {
+		super(ModIDs.ENDER_TAG_ID);
 		setMaxStackSize(1);
 		setTextureName("paper");
 		setCreativeTab(GanysEnd.endTab);

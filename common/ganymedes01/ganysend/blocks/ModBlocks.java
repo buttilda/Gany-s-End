@@ -1,6 +1,5 @@
 package ganymedes01.ganysend.blocks;
 
-import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.items.blocks.ItemEndWalls;
 import ganymedes01.ganysend.items.blocks.ItemEnderPearlBlock;
@@ -39,35 +38,35 @@ public class ModBlocks {
 	public static Block advancedExclusiveFilteringHopper;
 	public static Block timeManipulator;
 	public static Block entityShifter;
-	public static Block playerInventory;
+	public static Block inventoryBinder;
 	public static Block infiniteWaterSource;
 	public static Block endWalls;
 
 	public static void init() {
-		enderFlower = new EnderFlower(ModIDs.ENDER_FLOWER_ID);
-		endstoneBrick = new EndstoneBrick(ModIDs.ENDSTONE_BRICK_ID);
-		enderpearlBlock = new EnderPearlBlock(ModIDs.ENDERPEARL_BLOCK_ID);
+		enderFlower = new EnderFlower();
+		endstoneBrick = new EndstoneBrick();
+		enderpearlBlock = new EnderPearlBlock();
 		endstoneStairs = new EndStairs(ModIDs.ENDSTONE_STAIRS_ID, endstoneBrick, 0).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDSTONE_STAIRS_NAME));
 		enderpearlStairs = new EndStairs(ModIDs.ENDERPEARL_BRICK_STAIRS_ID, enderpearlBlock, 1).setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDERPEARL_BRICK_STAIRS_NAME));
-		enderToggler = new EnderToggler(ModIDs.ENDER_TOGGLER_ID);
-		enderToggler_air = new EnderTogglerAir(ModIDs.ENDER_TOGGLER_AIR_ID, GanysEnd.togglerShouldMakeSound);
-		blockShifter = new BlockShifter(ModIDs.BLOCK_SHIFTER_ID);
-		rawEndium = new RawEndium(ModIDs.RAW_ENDIUM_ID);
-		endiumBlock = new EndiumBlock(ModIDs.ENDIUM_BLOCK_ID);
-		emulator = new Emulator(ModIDs.EMULATOR);
-		blockNewSkull = new BlockNewSkull(ModIDs.BLOCK_NEW_SKULL_ID);
-		basicFilteringHopper = new BasicFilteringHopper(ModIDs.BASIC_FILTERING_HOPPER_ID);
-		exclusiveFilteringHopper = new ExclusiveFilteringHopper(ModIDs.EXCLUSIVE_FILTERING_HOPPER_ID);
-		speedyBasicFilteringHopper = new SpeedyBasicFilteringHopper(ModIDs.SPEEDY_BASIC_FILTERING_HOPPER_ID);
-		speedyExclusiveFilteringHopper = new SpeedyExclusiveFilteringHopper(ModIDs.SPEEDY_EXCLUSIVE_FILTERING_HOPPER_ID);
-		speedyHopper = new SpeedyHopper(ModIDs.SPEEDY_HOPPER_ID);
-		advancedFilteringHopper = new AdvancedFilteringHopper(ModIDs.ADVANCED_FILTERING_HOPPER_ID);
-		advancedExclusiveFilteringHopper = new AdvancedExclusiveFilteringHopper(ModIDs.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_ID);
-		timeManipulator = new TimeManipulator(ModIDs.TIME_MANIPULATOR_ID);
-		entityShifter = new EntityShifter(ModIDs.ENTITY_SHIFTER_ID);
-		playerInventory = new PlayerInventory(ModIDs.PLAYER_INVENTORY_ID);
-		infiniteWaterSource = new InfiniteWaterSource(ModIDs.INFINITE_WATER_SOURCE_ID);
-		endWalls = new EndWalls(ModIDs.END_WALLS_ID);
+		enderToggler = new EnderToggler();
+		enderToggler_air = new EnderTogglerAir();
+		blockShifter = new BlockShifter();
+		rawEndium = new RawEndium();
+		endiumBlock = new EndiumBlock();
+		emulator = new Emulator();
+		blockNewSkull = new BlockNewSkull();
+		basicFilteringHopper = new BasicFilteringHopper();
+		exclusiveFilteringHopper = new ExclusiveFilteringHopper();
+		speedyBasicFilteringHopper = new SpeedyBasicFilteringHopper();
+		speedyExclusiveFilteringHopper = new SpeedyExclusiveFilteringHopper();
+		speedyHopper = new SpeedyHopper();
+		advancedFilteringHopper = new AdvancedFilteringHopper();
+		advancedExclusiveFilteringHopper = new AdvancedExclusiveFilteringHopper();
+		timeManipulator = new TimeManipulator();
+		entityShifter = new EntityShifter();
+		inventoryBinder = new InventoryBinder();
+		infiniteWaterSource = new InfiniteWaterSource();
+		endWalls = new EndWalls();
 
 		registerNames();
 	}
@@ -94,7 +93,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(advancedExclusiveFilteringHopper, Strings.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_NAME);
 		GameRegistry.registerBlock(timeManipulator, Strings.TIME_MANIPULATOR_NAME);
 		GameRegistry.registerBlock(entityShifter, Strings.ENTITY_SHIFTER_NAME);
-		GameRegistry.registerBlock(playerInventory, Strings.PLAYER_INVENTORY_NAME);
+		GameRegistry.registerBlock(inventoryBinder, Strings.INVENTORY_BINDER_NAME);
 		GameRegistry.registerBlock(infiniteWaterSource, Strings.INFINITE_WATER_SOURCE_NAME);
 		GameRegistry.registerBlock(endWalls, ItemEndWalls.class, Strings.END_WALLS_NAME);
 	}

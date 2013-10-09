@@ -3,6 +3,7 @@ package ganymedes01.ganysend.items;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.blocks.ModBlocks;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
@@ -34,8 +35,8 @@ public class ItemNewSkull extends ItemSkull {
 	@SideOnly(Side.CLIENT)
 	private Icon[] icons;
 
-	public ItemNewSkull(int id) {
-		super(id);
+	public ItemNewSkull() {
+		super(ModIDs.ITEM_NEW_SKULL_ID);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setCreativeTab(GanysEnd.endTab);
@@ -89,6 +90,10 @@ public class ItemNewSkull extends ItemSkull {
 				return true;
 			}
 		}
+	}
+
+	public static final int getSkullCount() {
+		return skullTypes.length;
 	}
 
 	@Override

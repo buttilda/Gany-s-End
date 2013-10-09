@@ -2,14 +2,14 @@ package ganymedes01.ganysend.core.proxy;
 
 import ganymedes01.ganysend.blocks.ModBlocks;
 import ganymedes01.ganysend.client.renderer.block.BlockFilteringHopperRender;
-import ganymedes01.ganysend.client.renderer.item.ItemPlayerInventoryRender;
+import ganymedes01.ganysend.client.renderer.item.ItemInventoryBinderRender;
 import ganymedes01.ganysend.client.renderer.item.ItemTimeLordRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockNewSkullRender;
-import ganymedes01.ganysend.client.renderer.tileentity.TileEntityPlayerInventoryRender;
+import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInventoryBinderRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityTimeLordRender;
 import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
-import ganymedes01.ganysend.tileentities.TileEntityPlayerInventory;
+import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
 import ganymedes01.ganysend.tileentities.TileEntityTimeManipulator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -32,13 +32,13 @@ public class ClientProxy extends CommonProxy {
 		super.registerTileEntities();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockNewSkull.class, new TileEntityBlockNewSkullRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTimeManipulator.class, new TileEntityTimeLordRender());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlayerInventory.class, new TileEntityPlayerInventoryRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInventoryBinder.class, new TileEntityInventoryBinderRender());
 	}
 
 	@Override
 	public void registerRenderers() {
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.timeManipulator.blockID, new ItemTimeLordRender());
-		MinecraftForgeClient.registerItemRenderer(ModBlocks.playerInventory.blockID, new ItemPlayerInventoryRender());
+		MinecraftForgeClient.registerItemRenderer(ModBlocks.inventoryBinder.blockID, new ItemInventoryBinderRender());
 		RenderingRegistry.registerBlockHandler(RenderIDs.filteringHopper, new BlockFilteringHopperRender());
 	}
 
@@ -60,7 +60,7 @@ public class ClientProxy extends CommonProxy {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
 		if (tileEntity != null)
-			if (tileEntity instanceof TileEntityPlayerInventory)
-				((TileEntityPlayerInventory) tileEntity).setPlayerName(playerName);
+			if (tileEntity instanceof TileEntityInventoryBinder)
+				((TileEntityInventoryBinder) tileEntity).setPlayerName(playerName);
 	}
 }

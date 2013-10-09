@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,8 +20,8 @@ public class EndiumChestplate extends EndiumArmour {
 
 	private int coolDown;
 
-	public EndiumChestplate(int id) {
-		super(id, 1);
+	public EndiumChestplate() {
+		super(ModIDs.ENDIUM_CHESTPLATE_ID, 1);
 		coolDown = maxCoolDown;
 		setTextureName(Utils.getItemTexture(Strings.ENDIUM_CHESTPLATE_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_CHESTPLATE_NAME));

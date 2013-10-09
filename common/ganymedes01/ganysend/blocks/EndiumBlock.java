@@ -3,6 +3,7 @@ package ganymedes01.ganysend.blocks;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.items.ModItems;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 
 import java.util.ArrayList;
@@ -21,8 +22,8 @@ import net.minecraft.world.World;
 
 public class EndiumBlock extends Block {
 
-	public EndiumBlock(int id) {
-		super(id, Material.cloth);
+	public EndiumBlock() {
+		super(ModIDs.ENDIUM_BLOCK_ID, Material.cloth);
 		setHardness(0.2F);
 		setResistance(0.5F);
 		setCreativeTab(GanysEnd.endTab);

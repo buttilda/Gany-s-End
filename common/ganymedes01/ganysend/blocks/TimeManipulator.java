@@ -3,6 +3,7 @@ package ganymedes01.ganysend.blocks;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.items.ModItems;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityTimeManipulator;
 
@@ -29,8 +30,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TimeManipulator extends BlockContainer {
 
-	public TimeManipulator(int id) {
-		super(id, Material.rock);
+	public TimeManipulator() {
+		super(ModIDs.TIME_MANIPULATOR_ID, Material.rock);
 		setHardness(10.0F);
 		setResistance(25.0F);
 		setStepSound(soundWoodFootstep);

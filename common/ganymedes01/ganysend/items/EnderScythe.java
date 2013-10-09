@@ -3,6 +3,7 @@ package ganymedes01.ganysend.items;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.CustomDamageSources;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.ModMaterials;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.entity.Entity;
@@ -25,8 +26,8 @@ public class EnderScythe extends ItemSword {
 
 	public static final float DAMAGE = 8F;
 
-	public EnderScythe(int id) {
-		super(id, ModMaterials.ENDIUM);
+	public EnderScythe() {
+		super(ModIDs.ENDER_SCYTHE_ID, ModMaterials.ENDIUM);
 		setMaxStackSize(1);
 		setCreativeTab(GanysEnd.endTab);
 		setTextureName(Utils.getItemTexture(Strings.ENDER_SCYTHE_NAME));

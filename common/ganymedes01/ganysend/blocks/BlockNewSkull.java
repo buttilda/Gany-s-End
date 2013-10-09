@@ -2,6 +2,7 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.items.ModItems;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 
@@ -36,8 +37,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockNewSkull extends BlockContainer {
 
-	public BlockNewSkull(int id) {
-		super(id, Material.circuits);
+	public BlockNewSkull() {
+		super(ModIDs.BLOCK_NEW_SKULL_ID, Material.circuits);
 		setHardness(1.0F);
 		setTextureName("skull");
 		setStepSound(soundStoneFootstep);

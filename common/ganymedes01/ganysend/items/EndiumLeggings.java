@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,8 +22,8 @@ public class EndiumLeggings extends EndiumArmour {
 
 	private int coolDown;
 
-	public EndiumLeggings(int id) {
-		super(id, 2);
+	public EndiumLeggings() {
+		super(ModIDs.ENDIUM_LEGGINGS_ID, 2);
 		coolDown = maxCoolDown;
 		setTextureName(Utils.getItemTexture(Strings.ENDIUM_LEGGINGS_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_LEGGINGS_NAME));

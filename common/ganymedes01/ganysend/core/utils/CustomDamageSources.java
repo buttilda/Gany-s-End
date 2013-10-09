@@ -11,9 +11,9 @@ import net.minecraft.util.DamageSource;
 
 public class CustomDamageSources extends DamageSource {
 
-	public static final DamageSource beheading = new CustomDamageSources().setDamageBypassesArmor();
+	public static final DamageSource beheading = new CustomDamageSources("ganysEndBehead").setDamageBypassesArmor();
 
-	protected CustomDamageSources() {
-		super("ganysEndBehead");
+	protected CustomDamageSources(String dmgType) {
+		super(dmgType);
 	}
 }

@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
@@ -20,8 +21,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ExclusiveFilteringHopper extends BasicFilteringHopper {
 
-	public ExclusiveFilteringHopper(int id) {
-		super(id);
+	public ExclusiveFilteringHopper() {
+		super(ModIDs.EXCLUSIVE_FILTERING_HOPPER_ID);
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.EXCLUSIVE_FILTERING_HOPPER_NAME));
 	}
 

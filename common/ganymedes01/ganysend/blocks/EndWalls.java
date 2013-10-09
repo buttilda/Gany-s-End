@@ -1,5 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
+import ganymedes01.ganysend.lib.ModIDs;
+
 import java.util.List;
 
 import net.minecraft.block.BlockWall;
@@ -11,8 +13,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EndWalls extends BlockWall {
 
-	public EndWalls(int id) {
-		super(id, ModBlocks.endstoneBrick);
+	public EndWalls() {
+		super(ModIDs.END_WALLS_ID, ModBlocks.endstoneBrick);
 	}
 
 	@Override

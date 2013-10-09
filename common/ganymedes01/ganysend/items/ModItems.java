@@ -1,6 +1,5 @@
 package ganymedes01.ganysend.items;
 
-import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -34,20 +33,20 @@ public class ModItems {
 
 	public static void init() {
 		// Armour
-		endiumHelmet = new EndiumHelmet(ModIDs.ENDIUM_HELMET_ID);
-		endiumChestplate = new EndiumChestplate(ModIDs.ENDIUM_CHESTPLATE_ID);
-		endiumLeggings = new EndiumLeggings(ModIDs.ENDIUM_LEGGINGS_ID);
-		endiumBoots = new EndiumBoots(ModIDs.ENDIUM_BOOTS_ID);
+		endiumHelmet = new EndiumHelmet();
+		endiumChestplate = new EndiumChestplate();
+		endiumLeggings = new EndiumLeggings();
+		endiumBoots = new EndiumBoots();
 
 		// Items
-		enderTag = new EnderTag(ModIDs.ENDER_TAG_ID);
-		endiumIngot = new EndiumIngot(ModIDs.ENDIUM_INGOT_ID);
-		endstoneRod = new EndstoneRod(ModIDs.ENDSTONE_ROD_ID);
-		enderScythe = new EnderScythe(ModIDs.ENDER_SCYTHE_ID);
-		infiniteBucket = new InfiniteBucket(ModIDs.INFINITE_BUCKET_ID);
+		enderTag = new EnderTag();
+		endiumIngot = new EndiumIngot();
+		endstoneRod = new EndstoneRod();
+		enderScythe = new EnderScythe();
+		infiniteBucket = new InfiniteBucket();
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(infiniteBucket), new ItemStack(infiniteBucket));
-		itemNewSkull = new ItemNewSkull(ModIDs.ITEM_NEW_SKULL_ID);
-		infusedGem = new InfusedGem(ModIDs.INFUSED_GEM_ID);
+		itemNewSkull = new ItemNewSkull();
+		infusedGem = new InfusedGem();
 
 		registerNames();
 	}

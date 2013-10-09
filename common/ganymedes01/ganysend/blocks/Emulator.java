@@ -2,6 +2,7 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -21,8 +22,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class Emulator extends Block {
 
-	public Emulator(int id) {
-		super(id, Material.portal);
+	public Emulator() {
+		super(ModIDs.EMULATOR, Material.portal);
 		setHardness(0.3F);
 		setCreativeTab(GanysEnd.endTab);
 		setTextureName(Utils.getBlockTexture(Strings.EMULATOR_NAME, false));

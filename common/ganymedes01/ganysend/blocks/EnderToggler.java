@@ -2,6 +2,7 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -23,8 +24,8 @@ public class EnderToggler extends Block {
 	@SideOnly(Side.CLIENT)
 	private Icon blockSide, blockBottom, blockTop;
 
-	public EnderToggler(int id) {
-		super(id, Material.iron);
+	public EnderToggler() {
+		super(ModIDs.ENDER_TOGGLER_ID, Material.iron);
 		setHardness(1.5F);
 		setResistance(10.0F);
 		setCreativeTab(GanysEnd.endTab);
@@ -58,7 +59,7 @@ public class EnderToggler extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int meta) {
-		return side == 0 ? blockBottom : (side == 1 ? blockTop : blockSide);
+		return side == 0 ? blockBottom : side == 1 ? blockTop : blockSide;
 	}
 
 	@Override

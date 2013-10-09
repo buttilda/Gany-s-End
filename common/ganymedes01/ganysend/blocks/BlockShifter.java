@@ -3,6 +3,7 @@ package ganymedes01.ganysend.blocks;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.items.ModItems;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityBlockShifter;
 import net.minecraft.block.BlockContainer;
@@ -26,6 +27,10 @@ public class BlockShifter extends BlockContainer {
 
 	@SideOnly(Side.CLIENT)
 	protected Icon blockSide, blockBottom, blockTop;
+
+	public BlockShifter() {
+		this(ModIDs.BLOCK_SHIFTER_ID);
+	}
 
 	public BlockShifter(int id) {
 		super(id, Material.iron);
@@ -71,7 +76,7 @@ public class BlockShifter extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int meta) {
-		return side == 0 ? blockBottom : (side == 1 ? blockTop : blockSide);
+		return side == 0 ? blockBottom : side == 1 ? blockTop : blockSide;
 	}
 
 	@Override

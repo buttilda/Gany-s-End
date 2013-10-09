@@ -1,8 +1,8 @@
 package ganymedes01.ganysend.client.renderer.item;
 
 import ganymedes01.ganysend.client.model.ModelHead;
-import ganymedes01.ganysend.client.model.ModelPlayerInventory;
-import ganymedes01.ganysend.client.model.ModelPlayerInventoryInside;
+import ganymedes01.ganysend.client.model.ModelInventoryBinder;
+import ganymedes01.ganysend.client.model.ModelInventoryBinderInside;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
@@ -26,15 +26,15 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 @SideOnly(Side.CLIENT)
-public class ItemPlayerInventoryRender implements IItemRenderer {
+public class ItemInventoryBinderRender implements IItemRenderer {
 
-	private ModelPlayerInventory outside;
-	private ModelPlayerInventoryInside inside;
+	private ModelInventoryBinder outside;
+	private ModelInventoryBinderInside inside;
 	private ModelHead head;
 
-	public ItemPlayerInventoryRender() {
-		outside = new ModelPlayerInventory();
-		inside = new ModelPlayerInventoryInside();
+	public ItemInventoryBinderRender() {
+		outside = new ModelInventoryBinder();
+		inside = new ModelInventoryBinderInside();
 		head = new ModelHead();
 	}
 
@@ -80,7 +80,7 @@ public class ItemPlayerInventoryRender implements IItemRenderer {
 		GL11.glRotatef(-90, 0, 1, 0);
 		GL11.glScaled(1.0D, 1.0D, 1.0D);
 		outside.render();
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.PLAYER_INVENTORY_NAME + "1")));
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.INVENTORY_BINDER_NAME + "1")));
 		inside.render();
 		GL11.glPopMatrix();
 

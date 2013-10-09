@@ -17,15 +17,15 @@ import net.minecraft.tileentity.TileEntity;
  * 
  */
 
-public class TileEntityPlayerInventory extends TileEntity implements IInventory {
+public class TileEntityInventoryBinder extends TileEntity implements IInventory {
 
 	private String playerName;
 
-	public TileEntityPlayerInventory() {
+	public TileEntityInventoryBinder() {
 		this(null);
 	}
 
-	public TileEntityPlayerInventory(String name) {
+	public TileEntityInventoryBinder(String name) {
 		playerName = name;
 	}
 

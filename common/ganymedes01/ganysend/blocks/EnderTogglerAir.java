@@ -1,6 +1,8 @@
 package ganymedes01.ganysend.blocks;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 
 import java.util.Random;
@@ -24,9 +26,9 @@ public class EnderTogglerAir extends Block {
 
 	private final boolean shouldMakeSound;
 
-	public EnderTogglerAir(int id, boolean shouldMakeSound) {
-		super(id, Material.iron);
-		this.shouldMakeSound = shouldMakeSound;
+	public EnderTogglerAir() {
+		super(ModIDs.ENDER_TOGGLER_AIR_ID, Material.iron);
+		shouldMakeSound = GanysEnd.togglerShouldMakeSound;
 		setHardness(-1.0F);
 		setResistance(6000000.0F);
 		setTextureName(Utils.getBlockTexture(Strings.ENDER_TOGGLER_AIR_NAME, false));
