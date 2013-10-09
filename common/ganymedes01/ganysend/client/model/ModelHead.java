@@ -3,7 +3,6 @@ package ganymedes01.ganysend.client.model;
 import net.minecraft.client.model.ModelEnderman;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelSkeletonHead;
-import net.minecraft.entity.Entity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -19,6 +18,7 @@ public class ModelHead extends ModelSkeletonHead {
 
 	private ModelRenderer head;
 	private ModelRenderer overlay;
+	private boolean renderOverlay;
 
 	public ModelHead() {
 		this(32);
@@ -27,6 +27,7 @@ public class ModelHead extends ModelSkeletonHead {
 	public ModelHead(int height) {
 		textureWidth = 64;
 		textureHeight = height;
+		renderOverlay = true;
 		head = new ModelRenderer(this, 0, 0);
 		overlay = new ModelRenderer(this, 32, 0);
 		head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
@@ -36,9 +37,7 @@ public class ModelHead extends ModelSkeletonHead {
 	}
 
 	private void hideOverlay() {
-		overlay = new ModelRenderer(this, 0, 0);
-		overlay.addBox(0.0F, 0.0F, 0.0F, 0, 0, 0, 0F);
-		overlay.setRotationPoint(0.0F, 0.0F, 0.0F);
+		renderOverlay = false;
 	}
 
 	public void setPig() {
@@ -62,15 +61,11 @@ public class ModelHead extends ModelSkeletonHead {
 		hideOverlay();
 	}
 
-	public void setSheepFur() {
-		head = new ModelRenderer(this, 0, 0);
-		head.addBox(-3.0F, -7.0F, -2.5F, 6, 6, 6, 0.6F);
-		hideOverlay();
-	}
-
 	public void setSheep() {
 		head = new ModelRenderer(this, 0, 0);
 		head.addBox(-3.0F, -7.0F, -4.5F, 6, 6, 8, 0.0F);
+		overlay = new ModelRenderer(this, 0, 0);
+		overlay.addBox(-3.0F, -7.0F, -2.5F, 6, 6, 6, 0.6F);
 		hideOverlay();
 	}
 
@@ -210,19 +205,25 @@ public class ModelHead extends ModelSkeletonHead {
 		return this;
 	}
 
-	@Override
-	public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
-		setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
-		head.render(par7);
-		overlay.render(par7);
+	public void render(float rotationX) {
+		render(rotationX, 0.0F);
 	}
 
-	@Override
-	public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity entity) {
-		super.setRotationAngles(par1, par2, par3, par4, par5, par6, entity);
-		head.rotateAngleY = par4 / (180F / (float) Math.PI);
-		head.rotateAngleX = par5 / (180F / (float) Math.PI);
-		overlay.rotateAngleY = par4 / (180F / (float) Math.PI);
-		overlay.rotateAngleX = par5 / (180F / (float) Math.PI);
+	public void render(float rotationX, float rotationY) {
+		head.rotateAngleY = rotationX / (180F / (float) Math.PI);
+		head.rotateAngleX = rotationY / (180F / (float) Math.PI);
+		head.render(0.0625F);
+		if (renderOverlay)
+			renderOverlay(rotationX, rotationY);
+	}
+
+	public void renderOverlay(float rotationX) {
+		renderOverlay(rotationX, 0.0F);
+	}
+
+	public void renderOverlay(float rotationX, float rotationY) {
+		overlay.rotateAngleY = rotationX / (180F / (float) Math.PI);
+		overlay.rotateAngleX = rotationY / (180F / (float) Math.PI);
+		overlay.render(0.0625F);
 	}
 }

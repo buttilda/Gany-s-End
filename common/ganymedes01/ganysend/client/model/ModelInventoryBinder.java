@@ -15,48 +15,57 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ModelInventoryBinder extends ModelBase {
 
-	ModelRenderer model;
+	ModelRenderer frame;
+	ModelRenderer inside;
 
 	public ModelInventoryBinder() {
-		model = new ModelRenderer(this, 0, 0).setTextureSize(16, 16);
-		model.addBox(0.0F, 0.0F, 0.0F, 2, 14, 2, 0.0F);
-		model.setRotationPoint(0.0F, 0.0F, 0.0F);
+		frame = new ModelRenderer(this, 0, 0).setTextureSize(16, 16);
+		frame.addBox(0.0F, 0.0F, 0.0F, 2, 14, 2, 0.0F);
+		frame.setRotationPoint(0.0F, 0.0F, 0.0F);
+
+		inside = new ModelRenderer(this, 0, 0).setTextureSize(48, 24);
+		inside.addBox(2.0F, 2.0F, 2.0F, 12, 12, 12, 0.0F);
+		inside.setRotationPoint(0.0F, 0.0F, 0.0F);
 
 		ModelRenderer model0 = new ModelRenderer(this, 0, 0).setTextureSize(16, 16);
 		model0.addBox(14.0F, 0.0F, 0.0F, 2, 14, 2, 0.0F);
 		model0.setRotationPoint(0.0F, 0.0F, 0.0F);
-		model.addChild(model0);
+		frame.addChild(model0);
 		ModelRenderer model1 = new ModelRenderer(this, 0, 0).setTextureSize(16, 16);
 		model1.addBox(0.0F, 0.0F, 14.0F, 2, 14, 2, 0.0F);
 		model1.setRotationPoint(0.0F, 0.0F, 0.0F);
-		model.addChild(model1);
+		frame.addChild(model1);
 		ModelRenderer model2 = new ModelRenderer(this, 0, 0).setTextureSize(16, 16);
 		model2.addBox(14.0F, 0.0F, 14.0F, 2, 14, 2, 0.0F);
 		model2.setRotationPoint(0.0F, 0.0F, 0.0F);
-		model.addChild(model2);
+		frame.addChild(model2);
 		ModelRenderer model3 = new ModelRenderer(this, 0, 0).setTextureSize(16, 16);
 		model3.addBox(2.0F, 0.0F, 0.0F, 12, 2, 2, 0.0F);
 		model3.setRotationPoint(0.0F, 0.0F, 0.0F);
-		model.addChild(model3);
+		frame.addChild(model3);
 		ModelRenderer model4 = new ModelRenderer(this, 0, 0).setTextureSize(16, 16);
 		model4.addBox(2.0F, 0.0F, 14.0F, 12, 2, 2, 0.0F);
 		model4.setRotationPoint(0.0F, 0.0F, 0.0F);
-		model.addChild(model4);
+		frame.addChild(model4);
 		ModelRenderer model7 = new ModelRenderer(this, 0, 0).setTextureSize(16, 16);
 		model7.addBox(0.0F, 0.0F, 2.0F, 2, 2, 12, 0.0F);
 		model7.setRotationPoint(0.0F, 0.0F, 0.0F);
-		model.addChild(model7);
+		frame.addChild(model7);
 		ModelRenderer model8 = new ModelRenderer(this, 0, 0).setTextureSize(16, 16);
 		model8.addBox(14.0F, 0.0F, 2.0F, 2, 2, 12, 0.0F);
 		model8.setRotationPoint(0.0F, 0.0F, 0.0F);
-		model.addChild(model8);
+		frame.addChild(model8);
 		ModelRenderer model9 = new ModelRenderer(this, 0, 0).setTextureSize(16, 16);
 		model9.addBox(0.0F, 14.0F, 0.0F, 16, 2, 16, 0.0F);
 		model9.setRotationPoint(0.0F, 0.0F, 0.0F);
-		model.addChild(model9);
+		frame.addChild(model9);
 	}
 
-	public void render() {
-		model.render(0.0625F);
+	public void renderFrame() {
+		frame.render(0.0625F);
+	}
+
+	public void renderInside() {
+		inside.render(0.0625F);
 	}
 }

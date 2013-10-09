@@ -4,10 +4,11 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
-import ganymedes01.ganysend.tileentities.TileEntitySolidWaterSource;
+import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -34,14 +35,12 @@ public class InfiniteWaterSource extends BlockContainer {
 		setHardness(3.5F);
 		setCreativeTab(GanysEnd.endTab);
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.INFINITE_WATER_SOURCE_NAME));
-		setTextureName(Utils.getBlockTexture(Strings.INFINITE_WATER_SOURCE_NAME, false));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess access, int x, int y, int z, int side) {
-		int i1 = access.getBlockId(x, y, z);
-		return i1 == blockID ? false : super.shouldSideBeRendered(access, x, y, z, side);
+		return true;
 	}
 
 	@Override
@@ -53,6 +52,17 @@ public class InfiniteWaterSource extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public int getRenderBlockPass() {
 		return 1;
+	}
+
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister reg) {
+		blockIcon = reg.registerIcon("water_still");
 	}
 
 	@Override
@@ -72,7 +82,7 @@ public class InfiniteWaterSource extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntitySolidWaterSource();
+		return new TileEntityInfiniteWaterSource();
 	}
 
 	@Override

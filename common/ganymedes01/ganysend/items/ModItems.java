@@ -44,11 +44,11 @@ public class ModItems {
 		endstoneRod = new EndstoneRod();
 		enderScythe = new EnderScythe();
 		infiniteBucket = new InfiniteBucket();
-		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(infiniteBucket), new ItemStack(infiniteBucket));
 		itemNewSkull = new ItemNewSkull();
 		infusedGem = new InfusedGem();
 
 		registerNames();
+		registerForge();
 	}
 
 	private static void registerNames() {
@@ -66,5 +66,9 @@ public class ModItems {
 		GameRegistry.registerItem(infiniteBucket, Strings.INFINITE_BUCKET_NAME);
 		GameRegistry.registerItem(itemNewSkull, Strings.ITEM_NEW_SKULL_NAME);
 		GameRegistry.registerItem(infusedGem, Strings.INFUSED_GEM_NAME);
+	}
+
+	private static void registerForge() {
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(infiniteBucket), new ItemStack(infiniteBucket));
 	}
 }

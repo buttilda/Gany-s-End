@@ -17,11 +17,11 @@ import net.minecraftforge.fluids.IFluidHandler;
  * 
  */
 
-public class TileEntitySolidWaterSource extends TileEntity implements IFluidHandler {
+public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidHandler {
 
 	private FluidTank tank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME);
 
-	public TileEntitySolidWaterSource() {
+	public TileEntityInfiniteWaterSource() {
 		tank.setFluid(new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME));
 	}
 

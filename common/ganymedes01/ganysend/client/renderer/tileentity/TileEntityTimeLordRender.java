@@ -22,9 +22,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class TileEntityTimeLordRender extends TileEntitySpecialRenderer {
 
+	private ModelTimeLord model;
+
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float angle) {
-		ModelTimeLord model = new ModelTimeLord(tile.getBlockMetadata());
+		model = new ModelTimeLord(tile.getBlockMetadata());
 		if (tile.getBlockMetadata() > 3)
 			bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.TIME_MANIPULATOR_NAME + "_top")));
 		else
@@ -32,15 +34,10 @@ public class TileEntityTimeLordRender extends TileEntitySpecialRenderer {
 
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glTranslatef((float) x, (float) y + 1.0F, (float) z + 1.0F);
 		GL11.glScalef(1.0F, -1.0F, -1.0F);
-		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-
 		model.renderAll();
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 		GL11.glPopMatrix();
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 }

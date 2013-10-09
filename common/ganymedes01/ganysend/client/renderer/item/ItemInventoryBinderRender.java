@@ -2,12 +2,10 @@ package ganymedes01.ganysend.client.renderer.item;
 
 import ganymedes01.ganysend.client.model.ModelHead;
 import ganymedes01.ganysend.client.model.ModelInventoryBinder;
-import ganymedes01.ganysend.client.model.ModelInventoryBinderInside;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -28,13 +26,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ItemInventoryBinderRender implements IItemRenderer {
 
-	private ModelInventoryBinder outside;
-	private ModelInventoryBinderInside inside;
+	private ModelInventoryBinder model;
 	private ModelHead head;
 
 	public ItemInventoryBinderRender() {
-		outside = new ModelInventoryBinder();
-		inside = new ModelInventoryBinderInside();
+		model = new ModelInventoryBinder();
 		head = new ModelHead();
 	}
 
@@ -73,15 +69,15 @@ public class ItemInventoryBinderRender implements IItemRenderer {
 	}
 
 	private void renderPlayerInventory(float x, float y, float z) {
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Utils.getResource(Reference.ITEM_BLOCK_TEXTURE_PATH + "textures/blocks/endstoneBrick.png"));
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		GL11.glRotatef(180, 1, 0, 0);
 		GL11.glRotatef(-90, 0, 1, 0);
 		GL11.glScaled(1.0D, 1.0D, 1.0D);
-		outside.render();
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Utils.getResource(Reference.ITEM_BLOCK_TEXTURE_PATH + "textures/blocks/endstoneBrick.png"));
+		model.renderFrame();
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.INVENTORY_BINDER_NAME + "1")));
-		inside.render();
+		model.renderInside();
 		GL11.glPopMatrix();
 
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(AbstractClientPlayer.locationStevePng);
@@ -92,7 +88,7 @@ public class ItemInventoryBinderRender implements IItemRenderer {
 		GL11.glScalef(-1.0F, -1.0F, 1.0F);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glRotatef(360.0F, 0, 1, 0);
-		head.render((Entity) null, 0.0F, 0.0F, 0.0F, -90.0F, 0.0F, 0.0625F);
+		head.render(-90.0F);
 		GL11.glPopMatrix();
 	}
 }

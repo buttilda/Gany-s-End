@@ -80,6 +80,7 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.timeManipulator), "zyz", "yxy", "zyz", 'x', Block.dragonEgg, 'y', new ItemStack(Block.planks, 1, 1), 'z', Block.blockGold);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.entityShifter), "yzy", "wxw", "ywy", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 1), 'y', Item.ingotGold, 'z', Item.redstone, 'w', Block.glass);
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.inventoryBinder), "xxx", "yzy", "xxx", 'x', Block.whiteStone, 'y', Item.enderPearl, 'z', "ganysEndSkull"));
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.infiniteWaterSource), "yzy", "zxz", "yzy", 'x', ModItems.infiniteBucket, 'y', Item.ingotIron, 'z', Item.enderPearl);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 0), "xxx", "xxx", 'x', ModBlocks.endstoneBrick);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 1), "xxx", "xxx", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 1));
 
@@ -112,5 +113,9 @@ public class ModRecipes {
 
 		for (int i = 0; i < ItemNewSkull.getSkullCount(); i++)
 			OreDictionary.registerOre("ganysEndSkull", new ItemStack(ModItems.itemNewSkull, 1, i));
+		OreDictionary.registerOre("ganysEndSkull", new ItemStack(Item.skull, 1, 0));
+		OreDictionary.registerOre("ganysEndSkull", new ItemStack(Item.skull, 1, 1));
+		OreDictionary.registerOre("ganysEndSkull", new ItemStack(Item.skull, 1, 2));
+		OreDictionary.registerOre("ganysEndSkull", new ItemStack(Item.skull, 1, 4));
 	}
 }
