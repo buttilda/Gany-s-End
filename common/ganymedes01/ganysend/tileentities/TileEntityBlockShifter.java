@@ -59,7 +59,7 @@ public class TileEntityBlockShifter extends TileEntity {
 					return;
 				if (!worldObj.isAirBlock(telX, telY, telZ)) {
 					Block teleported = Block.blocksList[worldObj.getBlockId(telX, telY, telZ)];
-					if (worldObj.isAirBlock(recX, recY, recZ) && !(teleported.getBlockHardness(worldObj, telX, telY, telZ) <= 0.0F) && (teleported.blockMaterial != Material.water) && (teleported.blockMaterial != Material.lava))
+					if (worldObj.isAirBlock(recX, recY, recZ) && !(teleported.getBlockHardness(worldObj, telX, telY, telZ) <= 0.0F) && teleported.blockMaterial != Material.water && teleported.blockMaterial != Material.lava)
 						if (worldObj.blockHasTileEntity(telX, telY, telZ)) {
 							worldObj.setBlock(recX, recY, recZ, teleported.blockID, worldObj.getBlockMetadata(telX, telY, telZ), 2);
 							worldObj.notifyBlockOfNeighborChange(recX, recY, recZ, teleported.blockID);

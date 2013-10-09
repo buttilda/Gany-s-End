@@ -3,6 +3,7 @@ package ganymedes01.ganysend.client.renderer.block;
 import ganymedes01.ganysend.blocks.BasicFilteringHopper;
 import ganymedes01.ganysend.lib.RenderIDs;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockHopper;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -102,7 +103,7 @@ public class BlockFilteringHopperRender implements ISimpleBlockRenderingHandler 
 		double d4 = 0.25D;
 		renderer.setOverrideBlockTexture(outside);
 
-		int dir = BasicFilteringHopper.getDirectionFromMetadata(meta);
+		int dir = BlockHopper.getDirectionFromMetadata(meta);
 		if (dir == 0) {
 			renderer.setRenderBounds(d3, 0.0D, d3, 1.0D - d3, 0.25D, 1.0D - d3);
 			renderer.renderStandardBlock(hopper, x, y, z);

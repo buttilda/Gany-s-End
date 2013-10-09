@@ -19,8 +19,8 @@ public class ModelTimeLord extends ModelBase {
 	private ModelRenderer top;
 
 	public ModelTimeLord(int meta) {
-		top = (new ModelRenderer(this, 0, 16)).setTextureSize(64, 64);
-		middle = (new ModelRenderer(this, 0, -12)).setTextureSize(64, 64);
+		top = new ModelRenderer(this, 0, 16).setTextureSize(64, 64);
+		middle = new ModelRenderer(this, 0, -12).setTextureSize(64, 64);
 
 		if (meta < 4) {
 			top.addBox(0F, 14F, 0F, 16, 2, 16, 0.0F);
