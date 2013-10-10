@@ -44,7 +44,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.timeManipulator.blockID, new ItemTimeLordRender());
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.inventoryBinder.blockID, new ItemInventoryBinderRender());
 		MinecraftForgeClient.registerItemRenderer(ModBlocks.infiniteWaterSource.blockID, new ItemInfiniteWaterSourceRender());
-		RenderingRegistry.registerBlockHandler(RenderIDs.filteringHopper, new BlockFilteringHopperRender());
+		RenderingRegistry.registerBlockHandler(RenderIDs.FILTERING_HOPPER, new BlockFilteringHopperRender());
 	}
 
 	@Override

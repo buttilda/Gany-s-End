@@ -33,18 +33,18 @@ public class BlockFilteringHopperRender implements ISimpleBlockRenderingHandler 
 
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setBrightness(hopper.getMixedBrightnessForBlock(blockAccess, x, y, z));
-		int colour = hopper.colorMultiplier(blockAccess, x, y, z);
-		float f1 = (colour >> 16 & 255) / 255.0F;
-		float f2 = (colour >> 8 & 255) / 255.0F;
-		float f3 = (colour & 255) / 255.0F;
+		int colorMult = hopper.colorMultiplier(blockAccess, x, y, z);
+		float R = (colorMult >> 16 & 255) / 255.0F;
+		float G = (colorMult >> 8 & 255) / 255.0F;
+		float B = (colorMult & 255) / 255.0F;
 
 		if (EntityRenderer.anaglyphEnable) {
-			f1 = (f1 * 30.0F + f2 * 59.0F + f3 * 11.0F) / 100.0F;
-			f2 = (f1 * 30.0F + f2 * 70.0F) / 100.0F;
-			f3 = (f1 * 30.0F + f3 * 70.0F) / 100.0F;
+			R = (R * 30.0F + G * 59.0F + B * 11.0F) / 100.0F;
+			G = (R * 30.0F + G * 70.0F) / 100.0F;
+			B = (R * 30.0F + B * 70.0F) / 100.0F;
 		}
 
-		tessellator.setColorOpaque_F(1.0F * f1, 1.0F * f2, 1.0F * f3);
+		tessellator.setColorOpaque_F(R, G, B);
 		return renderBlockHopperMetadata(renderer, hopper, x, y, z, blockAccess.getBlockMetadata(x, y, z));
 	}
 
@@ -55,7 +55,7 @@ public class BlockFilteringHopperRender implements ISimpleBlockRenderingHandler 
 
 	@Override
 	public int getRenderId() {
-		return RenderIDs.filteringHopper;
+		return RenderIDs.FILTERING_HOPPER;
 	}
 
 	public boolean renderBlockHopperMetadata(RenderBlocks renderer, BasicFilteringHopper hopper, int x, int y, int z, int meta) {

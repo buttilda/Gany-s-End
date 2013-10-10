@@ -46,7 +46,7 @@ public class BasicFilteringHopper extends BlockHopper {
 
 	@Override
 	public int getRenderType() {
-		return RenderIDs.filteringHopper;
+		return RenderIDs.FILTERING_HOPPER;
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -51,16 +51,12 @@ public class ItemNewSkull extends ItemSkull {
 		else {
 			if (side == 1)
 				y++;
-
 			if (side == 2)
 				z--;
-
 			if (side == 3)
 				z++;
-
 			if (side == 4)
 				x--;
-
 			if (side == 5)
 				x++;
 
@@ -84,8 +80,8 @@ public class ItemNewSkull extends ItemSkull {
 						playerName = stack.getTagCompound().getString("SkullOwner");
 					((TileEntityBlockNewSkull) tileentity).setSkullType(stack.getItemDamage(), playerName);
 					((TileEntityBlockNewSkull) tileentity).setSkullRotation(i1);
+					world.notifyBlockChange(x, y, z, ModBlocks.blockNewSkull.blockID);
 				}
-
 				stack.stackSize--;
 				return true;
 			}

@@ -17,7 +17,7 @@ public class BonemealOnTheEndEvent {
 
 	@ForgeSubscribe
 	public void endBonemealEvent(BonemealEvent event) {
-		if (event.world.provider.dimensionId == 1 && event.world.getBlockId(event.X, event.Y, event.Z) == Block.whiteStone.blockID)
+		if (event.world.provider.dimensionId == 1 && event.ID == Block.whiteStone.blockID)
 			if (event.world.isAirBlock(event.X, event.Y + 1, event.Z)) {
 				event.world.setBlock(event.X, event.Y + 1, event.Z, ModBlocks.enderFlower.blockID);
 				event.setResult(Result.ALLOW);
