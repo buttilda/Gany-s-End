@@ -48,6 +48,9 @@ public class Strings {
 	public static final String INFINITE_BUCKET_NAME = "infiniteBucket";
 	public static final String ITEM_NEW_SKULL_NAME = "itemNewSkull";
 	public static final String INFUSED_GEM_NAME = "infusedGem";
+	public static final String ENDIUM_PICKAXE_NAME = "endiumPickaxe";
+	public static final String ENDIUM_AXE_NAME = "endiumAxe";
+	public static final String ENDIUM_SHOVEL_NAME = "endiumShovel";
 
 	// Others
 	public static final String TOGGLERS_SHOULD_MAKE_SOUND = "togglersShouldMakeSound";

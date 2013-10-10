@@ -50,4 +50,7 @@ public class ModIDs {
 	public static int INFINITE_BUCKET_ID;
 	public static int ITEM_NEW_SKULL_ID;
 	public static int INFUSED_GEM_ID;
+	public static int ENDIUM_PICKAXE_ID;
+	public static int ENDIUM_AXE_ID;
+	public static int ENDIUM_SHOVEL_ID;
 }

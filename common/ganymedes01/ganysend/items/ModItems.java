@@ -24,6 +24,9 @@ public class ModItems {
 	public static Item infiniteBucket;
 	public static Item itemNewSkull;
 	public static Item infusedGem;
+	public static Item endiumPickaxe;
+	public static Item endiumAxe;
+	public static Item endiumShovel;
 
 	// Armour
 	public static Item endiumHelmet;
@@ -46,6 +49,9 @@ public class ModItems {
 		infiniteBucket = new InfiniteBucket();
 		itemNewSkull = new ItemNewSkull();
 		infusedGem = new InfusedGem();
+		endiumPickaxe = new EndiumPickaxe();
+		endiumAxe = new EndiumAxe();
+		endiumShovel = new EndiumShovel();
 
 		registerNames();
 		registerForge();
@@ -66,6 +72,9 @@ public class ModItems {
 		GameRegistry.registerItem(infiniteBucket, Strings.INFINITE_BUCKET_NAME);
 		GameRegistry.registerItem(itemNewSkull, Strings.ITEM_NEW_SKULL_NAME);
 		GameRegistry.registerItem(infusedGem, Strings.INFUSED_GEM_NAME);
+		GameRegistry.registerItem(endiumPickaxe, Strings.ENDIUM_PICKAXE_NAME);
+		GameRegistry.registerItem(endiumAxe, Strings.ENDIUM_AXE_NAME);
+		GameRegistry.registerItem(endiumShovel, Strings.ENDIUM_SHOVEL_NAME);
 	}
 
 	private static void registerForge() {

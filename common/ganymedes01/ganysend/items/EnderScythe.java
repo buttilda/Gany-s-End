@@ -27,7 +27,7 @@ public class EnderScythe extends ItemSword {
 	public static final float DAMAGE = 8F;
 
 	public EnderScythe() {
-		super(ModIDs.ENDER_SCYTHE_ID, ModMaterials.ENDIUM);
+		super(ModIDs.ENDER_SCYTHE_ID, ModMaterials.ENDIUM_SCYTHE);
 		setMaxStackSize(1);
 		setCreativeTab(GanysEnd.endTab);
 		setTextureName(Utils.getItemTexture(Strings.ENDER_SCYTHE_NAME));
