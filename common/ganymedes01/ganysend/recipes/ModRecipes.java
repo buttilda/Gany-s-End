@@ -83,6 +83,9 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.infiniteWaterSource), "yzy", "zxz", "yzy", 'x', ModItems.infiniteBucket, 'y', Item.ingotIron, 'z', Item.enderPearl);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 0), "xxx", "xxx", 'x', ModBlocks.endstoneBrick);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 1), "xxx", "xxx", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 1));
+		GameRegistry.addRecipe(new ItemStack(ModItems.endiumPickaxe), "xxx", " y ", " y ", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
+		GameRegistry.addRecipe(new ItemStack(ModItems.endiumAxe), "xx", "xy", " y", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
+		GameRegistry.addRecipe(new ItemStack(ModItems.endiumShovel), "x", "y", "y", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
 
 		// Ender Flower Recipes
 		GameRegistry.addRecipe(new ItemStack(Item.dyePowder, 2, 0), "xxx", " x ", "   ", 'x', ModBlocks.enderFlower); // Black
