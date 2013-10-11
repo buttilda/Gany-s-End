@@ -48,7 +48,7 @@ public class ItemInfiniteWaterSourceRender implements IItemRenderer {
 				break;
 			}
 			case EQUIPPED: {
-				renderPlayerInventory(0.0F, 0.0F, 0.0F);
+				renderPlayerInventory(0.5F, 0.5F, 0.5F);
 				break;
 			}
 			case EQUIPPED_FIRST_PERSON: {
@@ -66,7 +66,7 @@ public class ItemInfiniteWaterSourceRender implements IItemRenderer {
 
 	private void renderPlayerInventory(float x, float y, float z) {
 		GL11.glPushMatrix();
-		GL11.glTranslatef(x, y + 1.0F, z + 1.0F);
+		GL11.glTranslatef(x - 0.5F, y + 0.5F, z + 0.5F);
 		GL11.glScalef(1.0F, -1.0F, -1.0F);
 
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.INFINITE_WATER_SOURCE_NAME)));

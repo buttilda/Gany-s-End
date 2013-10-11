@@ -88,7 +88,7 @@ public class ItemInventoryBinderRender implements IItemRenderer {
 		GL11.glScalef(-1.0F, -1.0F, 1.0F);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glRotatef(360.0F, 0, 1, 0);
-		head.render(-90.0F);
+		head.render(-270.0F);
 		GL11.glPopMatrix();
 	}
 }
