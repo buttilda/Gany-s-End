@@ -51,10 +51,8 @@ public class EndiumShovel extends ItemSpade {
 			if (stack.getItem() == this) {
 				if (stack.stackTagCompound == null)
 					stack.setTagCompound(new NBTTagCompound());
-				int[] coords = { x, y, z };
-				int dimension = world.provider.dimensionId;
-				stack.stackTagCompound.setIntArray("Position", coords);
-				stack.stackTagCompound.setInteger("Dimension", dimension);
+				stack.stackTagCompound.setIntArray("Position", new int[] { x, y, z });
+				stack.stackTagCompound.setInteger("Dimension", world.provider.dimensionId);
 				stack.stackTagCompound.setBoolean("Tagged", true);
 				stack.setTagInfo("ench", new NBTTagList());
 				player.swingItem();
@@ -66,7 +64,7 @@ public class EndiumShovel extends ItemSpade {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
 		if (stack.stackTagCompound == null)
-			stack.setTagCompound(new NBTTagCompound());
+			return;
 		if (stack.stackTagCompound.hasKey("Position") && stack.stackTagCompound.hasKey("Dimension"))
 			list.add(Integer.toString(stack.stackTagCompound.getInteger("Dimension")) + " : " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[0]) + ", " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[1]) + ", " +
 			Integer.toString(stack.stackTagCompound.getIntArray("Position")[2]));

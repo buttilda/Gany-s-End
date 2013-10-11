@@ -3,6 +3,9 @@ package ganymedes01.ganysend.client.model;
 import net.minecraft.client.model.ModelEnderman;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelSkeletonHead;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -40,14 +43,14 @@ public class ModelHead extends ModelSkeletonHead {
 		renderOverlay = false;
 	}
 
-	public void setPig() {
+	private void setPig() {
 		head = new ModelRenderer(this, 0, 0);
 		head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
 		head.setTextureOffset(16, 16).addBox(-2.0F, -4.0F, -5.0F, 4, 3, 1, 0.0F);
 		hideOverlay();
 	}
 
-	public void setCow() {
+	private void setCow() {
 		head = new ModelRenderer(this, 0, 0);
 		head.addBox(-4.0F, -8.0F, -2.0F, 8, 8, 6, 0.0F);
 		head.setTextureOffset(22, 0).addBox(-5.0F, -9.0F, 0.0F, 1, 3, 1, 0.0F);
@@ -55,13 +58,13 @@ public class ModelHead extends ModelSkeletonHead {
 		hideOverlay();
 	}
 
-	public void setSpider() {
+	private void setSpider() {
 		head = new ModelRenderer(this, 32, 4);
 		head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
 		hideOverlay();
 	}
 
-	public void setSheep() {
+	private void setSheep() {
 		head = new ModelRenderer(this, 0, 0);
 		head.addBox(-3.0F, -7.0F, -4.5F, 6, 6, 8, 0.0F);
 		overlay = new ModelRenderer(this, 0, 0);
@@ -69,7 +72,7 @@ public class ModelHead extends ModelSkeletonHead {
 		hideOverlay();
 	}
 
-	public void setWolf() {
+	private void setWolf() {
 		head = new ModelRenderer(this, 0, 0);
 		head.addBox(-3.0F, -6.0F, 0.0F, 6, 6, 4, 0.0F);
 
@@ -79,7 +82,7 @@ public class ModelHead extends ModelSkeletonHead {
 		hideOverlay();
 	}
 
-	public void setEnderman() {
+	private void setEnderman() {
 		ModelEnderman model = new ModelEnderman();
 		head = model.bipedHead;
 		overlay = model.bipedHeadwear;
@@ -87,7 +90,7 @@ public class ModelHead extends ModelSkeletonHead {
 		overlay.setRotationPoint(0F, 0F, 0F);
 	}
 
-	public void setVillager(int textureSize) {
+	private void setVillager(int textureSize) {
 		head = new ModelRenderer(this).setTextureSize(textureSize, textureSize);
 		head.setRotationPoint(0.0F, 0.0F, 0.0F);
 		head.setTextureOffset(0, 0).addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, 0.0F);
@@ -96,7 +99,7 @@ public class ModelHead extends ModelSkeletonHead {
 		overlay.setTextureOffset(24, 0).addBox(-1.0F, -1.0F, -6.0F, 2, 4, 2, 0.0F);
 	}
 
-	public void setChicken() {
+	private void setChicken() {
 		head = new ModelRenderer(this, 0, 0);
 		head.addBox(-2.0F, -6.0F, 1.0F, 4, 6, 3, 0.0F);
 		overlay = new ModelRenderer(this, 14, 0);
@@ -106,7 +109,7 @@ public class ModelHead extends ModelSkeletonHead {
 		overlay.addChild(overlay2);
 	}
 
-	public void setWitch() {
+	private void setWitch() {
 		head = new ModelRenderer(this).setTextureSize(64, 128);
 		head.setRotationPoint(0.0F, 0.0F, 0.0F);
 		head.setTextureOffset(0, 0).addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, 0.0F);
@@ -149,13 +152,23 @@ public class ModelHead extends ModelSkeletonHead {
 		hat2.addChild(hat3);
 	}
 
-	public void setZombieVillager() {
+	private void setZombieVillager() {
 		head = new ModelRenderer(this).setTextureSize(64, 64);
 		head.setRotationPoint(0.0F, 0.0F, 0.0F);
 		head.setTextureOffset(0, 32).addBox(-4.0F, -10.0F, -4.0F, 8, 10, 8, 0.0F);
 		overlay = new ModelRenderer(this).setTextureSize(64, 64);
 		overlay.setRotationPoint(0.0F, -2.0F, 0.0F);
 		overlay.setTextureOffset(24, 32).addBox(-1.0F, -1.0F, -6.0F, 2, 4, 2, 0.0F);
+	}
+
+	private void setSquid() {
+		head = new ModelRenderer(this).setTextureSize(64, 32);
+		head.setRotationPoint(0.0F, 0.0F, 0.0F);
+		head.addBox(-6.0F, -16F, -6.0F + 0.25F, 12, 16, 12);
+		hideOverlay();
+
+		// Hacky
+		GL11.glScaled(2F / 3F, 2F / 3F, 2F / 3F);
 	}
 
 	public ModelHead setHeadType(int type) {
@@ -200,6 +213,9 @@ public class ModelHead extends ModelSkeletonHead {
 				break;
 			case 15:
 				setVillager(128);
+				break;
+			case 16:
+				setSquid();
 				break;
 		}
 		return this;

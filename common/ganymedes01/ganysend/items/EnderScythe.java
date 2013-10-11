@@ -24,10 +24,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EnderScythe extends ItemSword {
 
-	public static final float DAMAGE = 8F;
-
 	public EnderScythe() {
-		super(ModIDs.ENDER_SCYTHE_ID, ModMaterials.ENDIUM_SCYTHE);
+		super(ModIDs.ENDER_SCYTHE_ID, ModMaterials.ENDIUM_TOOLS);
 		setMaxStackSize(1);
 		setCreativeTab(GanysEnd.endTab);
 		setTextureName(Utils.getItemTexture(Strings.ENDER_SCYTHE_NAME));
@@ -44,14 +42,14 @@ public class EnderScythe extends ItemSword {
 		if (player instanceof EntityPlayer)
 			if (((EntityPlayer) player).capabilities.isCreativeMode)
 				return;
-		item.damageItem(5, player);
+		item.damageItem(1, player);
 	}
 
 	@Override
 	public boolean onLeftClickEntity(ItemStack item, EntityPlayer player, Entity target) {
 		if (target instanceof EntityLivingBase)
 			if (!player.worldObj.isRemote) {
-				((EntityLivingBase) target).attackEntityFrom(CustomDamageSources.beheading, DAMAGE);
+				((EntityLivingBase) target).attackEntityFrom(CustomDamageSources.beheading, 4.0F + ModMaterials.ENDIUM_TOOLS.getDamageVsEntity());
 				damageItem(item, player);
 			}
 		return false;

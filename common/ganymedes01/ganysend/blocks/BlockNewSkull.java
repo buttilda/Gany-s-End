@@ -12,7 +12,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSkull;
@@ -24,6 +23,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -106,37 +106,24 @@ public class BlockNewSkull extends BlockContainer {
 	}
 
 	@Override
-	public int getDamageValue(World world, int x, int y, int z) {
-		TileEntity tileentity = world.getBlockTileEntity(x, y, z);
-		return tileentity != null && tileentity instanceof TileEntityBlockNewSkull ? ((TileEntityBlockNewSkull) tileentity).getSkullType() : super.getDamageValue(world, x, y, z);
-	}
-
-	@Override
-	public int damageDropped(int metadata) {
-		return metadata;
-	}
-
-	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player) {
-		int metadata = meta;
-		if (player.capabilities.isCreativeMode) {
-			metadata |= 8;
-			world.setBlockMetadataWithNotify(x, y, z, metadata, 4);
-		} else
-			dropBlockAsItem(world, x, y, z, metadata, 0);
-
-		super.onBlockHarvested(world, x, y, z, metadata, player);
+		if (!player.capabilities.isCreativeMode) {
+			ArrayList<ItemStack> drops = getBlockDropped(world, x, y, z, meta, 0);
+			if (ForgeEventFactory.fireBlockHarvesting(drops, world, this, x, y, z, meta, 0, 1.0F, false, player) > 0.0F)
+				for (ItemStack stack : drops)
+					Utils.dropStack(world, x, y, z, stack);
+		}
 	}
 
 	@Override
-	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
+	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int meta, int fortune) {
 		ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
 
-		ItemStack itemstack = new ItemStack(ModItems.itemNewSkull.itemID, 1, getDamageValue(world, x, y, z));
 		TileEntityBlockNewSkull tile = (TileEntityBlockNewSkull) world.getBlockTileEntity(x, y, z);
-
 		if (tile == null)
 			return drops;
+		ItemStack itemstack = new ItemStack(ModItems.itemNewSkull, 1, tile.getSkullType());
+
 		if (tile.getSkullType() == 3 && tile.getExtraType() != null && tile.getExtraType().length() > 0) {
 			itemstack.setTagCompound(new NBTTagCompound());
 			itemstack.getTagCompound().setString("SkullOwner", tile.getExtraType());
@@ -147,13 +134,8 @@ public class BlockNewSkull extends BlockContainer {
 	}
 
 	@Override
-	public int idDropped(int id, Random rand, int par3) {
-		return ModItems.itemNewSkull.itemID;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
+	public int quantityDropped(Random rand) {
+		return 0;
 	}
 
 	@Override

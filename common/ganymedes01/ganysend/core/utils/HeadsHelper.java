@@ -19,6 +19,7 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityMooshroom;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -89,6 +90,8 @@ public class HeadsHelper {
 			return new ItemStack(ModItems.itemNewSkull, 1, 11);
 		else if (target instanceof EntityIronGolem)
 			return new ItemStack(ModItems.itemNewSkull, 1, 15);
+		else if (target instanceof EntitySquid)
+			return new ItemStack(ModItems.itemNewSkull, 1, 16);
 		return null;
 	}
 }

@@ -22,8 +22,10 @@ public class HeadTextures {
 	public static final ResourceLocation WITCH_HEAD = Utils.getResource("textures/entity/witch.png");
 	public static final ResourceLocation ZOMBIE_VILLAGER_HEAD = Utils.getResource("textures/entity/zombie/zombie_villager.png");
 	public static final ResourceLocation IRON_GOLEM_HEAD = Utils.getResource("textures/entity/iron_golem.png");
+	public static final ResourceLocation SQUID_HEAD = Utils.getResource("textures/entity/squid.png");
 
-	public static final ResourceLocation[] headTextures = new ResourceLocation[] { BLAZE_HEAD, ENDERMAN_HEAD, PIGMAN_HEAD, null, SPIDER_HEAD, CAVE_SPIDER_HEAD, PIG_HEAD, COW_HEAD, MOOSHROOM_HEAD, SHEEP_HEAD, WOLF_HEAD, VILLAGER_HEAD, CHICKEN_HEAD, WITCH_HEAD, ZOMBIE_VILLAGER_HEAD, IRON_GOLEM_HEAD };
+	public static final ResourceLocation[] headTextures = new ResourceLocation[] { BLAZE_HEAD, ENDERMAN_HEAD, PIGMAN_HEAD, null, SPIDER_HEAD, CAVE_SPIDER_HEAD, PIG_HEAD, COW_HEAD, MOOSHROOM_HEAD, SHEEP_HEAD, WOLF_HEAD, VILLAGER_HEAD, CHICKEN_HEAD, WITCH_HEAD, ZOMBIE_VILLAGER_HEAD, IRON_GOLEM_HEAD,
+	SQUID_HEAD };
 
 	public static final ResourceLocation getPlayerSkin(String playerName) {
 		if (playerName != null && playerName.length() > 0) {
