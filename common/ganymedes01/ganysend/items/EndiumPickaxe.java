@@ -45,6 +45,11 @@ public class EndiumPickaxe extends ItemPickaxe {
 	}
 
 	@Override
+	public boolean getIsRepairable(ItemStack item, ItemStack material) {
+		return material.getItem() == ModItems.endiumIngot;
+	}
+
+	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		TileEntity tile = world.getBlockTileEntity(x, y, z);
 		if (tile != null && tile instanceof IInventory)

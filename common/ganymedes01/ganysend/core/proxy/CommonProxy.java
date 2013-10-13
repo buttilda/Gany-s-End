@@ -2,6 +2,7 @@ package ganymedes01.ganysend.core.proxy;
 
 import ganymedes01.ganysend.client.gui.inventory.GuiAdvancedFilteringHopper;
 import ganymedes01.ganysend.client.gui.inventory.GuiBasicFilteringHopper;
+import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.inventory.ContainerAdvancedFilteringHopper;
 import ganymedes01.ganysend.inventory.ContainerFilteringHopper;
 import ganymedes01.ganysend.lib.GUIsID;
@@ -31,15 +32,15 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class CommonProxy implements IGuiHandler {
 
 	public void registerTileEntities() {
-		GameRegistry.registerTileEntity(TileEntityBlockShifter.class, Strings.BLOCK_SHIFTER_NAME);
-		GameRegistry.registerTileEntity(TileEntityBlockNewSkull.class, Strings.BLOCK_NEW_SKULL_NAME);
-		GameRegistry.registerTileEntity(TileEntityFilteringHopper.class, Strings.BASIC_FILTERING_HOPPER_NAME);
-		GameRegistry.registerTileEntity(TileEntityAdvancedFilteringHopper.class, Strings.ADVANCED_FILTERING_HOPPER_NAME);
-		GameRegistry.registerTileEntity(TileEntitySpeedyHopper.class, Strings.SPEEDY_HOPPER_NAME);
-		GameRegistry.registerTileEntity(TileEntityTimeManipulator.class, Strings.TIME_MANIPULATOR_NAME);
-		GameRegistry.registerTileEntity(TileEntityEntityShifter.class, Strings.ENTITY_SHIFTER_NAME);
-		GameRegistry.registerTileEntity(TileEntityInventoryBinder.class, Strings.INVENTORY_BINDER_NAME);
-		GameRegistry.registerTileEntity(TileEntityInfiniteWaterSource.class, Strings.INFINITE_WATER_SOURCE_NAME);
+		GameRegistry.registerTileEntity(TileEntityBlockShifter.class, Utils.getUnlocalizedName(Strings.BLOCK_SHIFTER_NAME));
+		GameRegistry.registerTileEntity(TileEntityBlockNewSkull.class, Utils.getUnlocalizedName(Strings.BLOCK_NEW_SKULL_NAME));
+		GameRegistry.registerTileEntity(TileEntityFilteringHopper.class, Utils.getUnlocalizedName(Strings.BASIC_FILTERING_HOPPER_NAME));
+		GameRegistry.registerTileEntity(TileEntityAdvancedFilteringHopper.class, Utils.getUnlocalizedName(Strings.ADVANCED_FILTERING_HOPPER_NAME));
+		GameRegistry.registerTileEntity(TileEntitySpeedyHopper.class, Utils.getUnlocalizedName(Strings.SPEEDY_HOPPER_NAME));
+		GameRegistry.registerTileEntity(TileEntityTimeManipulator.class, Utils.getUnlocalizedName(Strings.TIME_MANIPULATOR_NAME));
+		GameRegistry.registerTileEntity(TileEntityEntityShifter.class, Utils.getUnlocalizedName(Strings.ENTITY_SHIFTER_NAME));
+		GameRegistry.registerTileEntity(TileEntityInventoryBinder.class, Utils.getUnlocalizedName(Strings.INVENTORY_BINDER_NAME));
+		GameRegistry.registerTileEntity(TileEntityInfiniteWaterSource.class, Utils.getUnlocalizedName(Strings.INFINITE_WATER_SOURCE_NAME));
 	}
 
 	public void registerRenderers() {
