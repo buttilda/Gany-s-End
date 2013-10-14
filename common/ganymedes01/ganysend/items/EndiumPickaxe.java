@@ -69,7 +69,7 @@ public class EndiumPickaxe extends ItemPickaxe {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
 		if (stack.stackTagCompound == null)
-			return;
+			stack.setTagCompound(new NBTTagCompound());
 		if (stack.stackTagCompound.hasKey("Position") && stack.stackTagCompound.hasKey("Dimension"))
 			list.add(Integer.toString(stack.stackTagCompound.getInteger("Dimension")) + " : " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[0]) + ", " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[1]) + ", " +
 			Integer.toString(stack.stackTagCompound.getIntArray("Position")[2]));

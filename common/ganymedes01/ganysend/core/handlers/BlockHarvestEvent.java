@@ -26,23 +26,24 @@ public class BlockHarvestEvent {
 					if (event.harvester.getCurrentEquippedItem() != null) {
 						int itemID = event.harvester.getCurrentEquippedItem().itemID;
 						if (itemID == ModItems.endiumPickaxe.itemID || itemID == ModItems.endiumAxe.itemID || itemID == ModItems.endiumShovel.itemID)
-							if (event.harvester.inventory.getCurrentItem().getTagCompound().getBoolean("Tagged")) {
-								NBTTagCompound data = event.harvester.inventory.getCurrentItem().getTagCompound();
-								int x = data.getIntArray("Position")[0];
-								int y = data.getIntArray("Position")[1];
-								int z = data.getIntArray("Position")[2];
-								int dim = data.getInteger("Dimension");
+							if (event.harvester.inventory.getCurrentItem().stackTagCompound != null)
+								if (event.harvester.inventory.getCurrentItem().getTagCompound().getBoolean("Tagged")) {
+									NBTTagCompound data = event.harvester.inventory.getCurrentItem().getTagCompound();
+									int x = data.getIntArray("Position")[0];
+									int y = data.getIntArray("Position")[1];
+									int z = data.getIntArray("Position")[2];
+									int dim = data.getInteger("Dimension");
 
-								if (event.world.provider.dimensionId != dim)
-									return;
-								TileEntity tile = event.world.getBlockTileEntity(x, y, z);
-								if (tile != null && tile instanceof IInventory) {
-									event.dropChance = -1.0F;
-									for (ItemStack stack : event.drops)
-										if (!Utils.addStackToInventory((IInventory) tile, stack))
-											Utils.dropStack(event.world, event.x, event.y, event.z, stack);
+									if (event.world.provider.dimensionId != dim)
+										return;
+									TileEntity tile = event.world.getBlockTileEntity(x, y, z);
+									if (tile != null && tile instanceof IInventory) {
+										event.dropChance = -1.0F;
+										for (ItemStack stack : event.drops)
+											if (!Utils.addStackToInventory((IInventory) tile, stack))
+												Utils.dropStack(event.world, event.x, event.y, event.z, stack);
+									}
 								}
-							}
 					}
 	}
 }

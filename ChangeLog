@@ -28,3 +28,6 @@ v1.4
 -Added: End Stone Brick walls and ender pearl brick walls
 -Added: Endium Tools
 -Added: Squid Head
+
+v1.4.1
+-Fix: Crash with Endium Tools
