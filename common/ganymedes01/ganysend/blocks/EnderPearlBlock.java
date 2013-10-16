@@ -26,7 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EnderPearlBlock extends Block {
 
 	@SideOnly(Side.CLIENT)
-	private Icon[] blockIcon = new Icon[2];
+	private Icon[] blockIcon;
 
 	public EnderPearlBlock() {
 		super(ModIDs.ENDERPEARL_BLOCK_ID, Material.iron);
@@ -57,6 +57,7 @@ public class EnderPearlBlock extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister reg) {
+		blockIcon = new Icon[2];
 		blockIcon[0] = reg.registerIcon(Utils.getBlockTexture(Strings.ENDERPEARL_BLOCK_NAME, false));
 		blockIcon[1] = reg.registerIcon(Utils.getBlockTexture(Strings.ENDERPEARL_BRICK_NAME, false));
 	}
