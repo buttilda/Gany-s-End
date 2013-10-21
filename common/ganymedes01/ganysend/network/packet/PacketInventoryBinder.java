@@ -14,17 +14,17 @@ import java.io.IOException;
  * 
  */
 
-public class PacketPlayerInventory extends CustomPacket {
+public class PacketInventoryBinder extends CustomPacket {
 
 	public int x, y, z;
 	public String playerName;
 
-	public PacketPlayerInventory() {
-		super(PacketTypeHandler.PLAYER_INVENTORY);
+	public PacketInventoryBinder() {
+		super(PacketTypeHandler.INVENTORY_BINDER);
 	}
 
-	public PacketPlayerInventory(int x, int y, int z, String playerName) {
-		super(PacketTypeHandler.PLAYER_INVENTORY);
+	public PacketInventoryBinder(int x, int y, int z, String playerName) {
+		super(PacketTypeHandler.INVENTORY_BINDER);
 		this.x = x;
 		this.y = y;
 		this.z = z;

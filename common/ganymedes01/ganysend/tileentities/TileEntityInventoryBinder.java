@@ -1,7 +1,7 @@
 package ganymedes01.ganysend.tileentities;
 
 import ganymedes01.ganysend.network.PacketTypeHandler;
-import ganymedes01.ganysend.network.packet.PacketPlayerInventory;
+import ganymedes01.ganysend.network.packet.PacketInventoryBinder;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
@@ -31,7 +31,7 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory 
 
 	@Override
 	public Packet getDescriptionPacket() {
-		return PacketTypeHandler.populatePacket(new PacketPlayerInventory(xCoord, yCoord, zCoord, playerName));
+		return PacketTypeHandler.populatePacket(new PacketInventoryBinder(xCoord, yCoord, zCoord, playerName));
 	}
 
 	public String getPlayerName() {
