@@ -7,9 +7,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import net.minecraft.network.INetworkManager;
-import cpw.mods.fml.common.network.Player;
-
 /**
  * Gany's End
  * 
@@ -51,7 +48,7 @@ public class PacketPlayerInventory extends CustomPacket {
 	}
 
 	@Override
-	public void execute(INetworkManager manager, Player player) {
+	public void execute() {
 		GanysEnd.proxy.handlePlayerInventoryPacket(x, y, z, playerName);
 	}
 }
