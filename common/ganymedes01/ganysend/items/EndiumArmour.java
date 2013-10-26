@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagList;
+import thaumcraft.api.IRepairable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -18,7 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 
-public class EndiumArmour extends ItemArmor {
+public class EndiumArmour extends ItemArmor implements IRepairable {
 
 	private final int type;
 	protected final int maxCoolDown;
@@ -38,11 +38,6 @@ public class EndiumArmour extends ItemArmor {
 	}
 
 	@Override
-	public boolean hasEffect(ItemStack stack) {
-		return true;
-	}
-
-	@Override
 	public boolean getIsRepairable(ItemStack item, ItemStack material) {
 		return material.getItem() == ModItems.endiumIngot;
 	}
@@ -50,7 +45,6 @@ public class EndiumArmour extends ItemArmor {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
-		stack.setTagInfo("ench", new NBTTagList());
 		switch (type) {
 			case 0:
 				return Utils.getArmourTexture(ModMaterials.ENDIUM_ARMOUR.name(), 1);

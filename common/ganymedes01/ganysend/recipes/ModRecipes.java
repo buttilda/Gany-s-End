@@ -35,6 +35,7 @@ public class ModRecipes {
 
 	private static void registerItemRecipes() {
 		// Items
+		GameRegistry.addSmelting(ModBlocks.rawEndium.blockID, new ItemStack(ModItems.endiumIngot), 1F);
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.enderTag), new ItemStack(Item.paper), new ItemStack(Item.enderPearl));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.endiumIngot, 9), new ItemStack(ModBlocks.endiumBlock));
 		GameRegistry.addRecipe(new ItemStack(ModItems.endstoneRod, 4), "x", "x", 'x', Block.whiteStone);
@@ -42,6 +43,8 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ItemStack(ModItems.infiniteBucket), "xxx", "zxz", "yzy", 'x', Item.bucketWater, 'y', Item.enderPearl, 'z', Item.ingotGold);
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.infusedGem, 4, 0), "yyy", "yxy", "yyy", 'x', Item.pocketSundial, 'y', "ganysEndNightMaterial"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.infusedGem, 4, 1), "yyy", "yxy", "yyy", 'x', Item.pocketSundial, 'y', "ganysEndDayMaterial"));
+		GameRegistry.addRecipe(new ItemStack(ModItems.endiumIngot), "xxx", "xxx", "xxx", 'x', ModItems.endiumNugget);
+		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.endiumNugget, 9), ModItems.endiumIngot);
 
 		// Vanilla
 		GameRegistry.addRecipe(new ItemStack(Item.expBottle, 8), "yyy", "yxy", "yyy", 'x', ModItems.endiumIngot, 'y', new ItemStack(Item.potion, 1, 0));
@@ -59,7 +62,6 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.enderToggler), "wwz", "zyz", "zww", 'y', Item.enderPearl, 'z', Block.glass, 'w', Item.redstone);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.blockShifter), "yzy", "wxw", "ywy", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 0), 'y', Item.ingotGold, 'z', Item.redstone, 'w', Block.glass);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.rawEndium), "zyz", "yxy", "zyz", 'x', Item.eyeOfEnder, 'y', Block.whiteStone, 'z', Block.obsidian);
-		GameRegistry.addSmelting(ModBlocks.rawEndium.blockID, new ItemStack(ModBlocks.endiumBlock), 1F);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.emulator), "xyx", "yyy", "xyx", 'x', Item.enderPearl, 'y', Block.hardenedClay);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.emulator), "xyx", "yyy", "xyx", 'x', Item.enderPearl, 'y', Block.stainedClay);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.emulator, 8), "xyx", "yyy", "xyx", 'x', ModBlocks.enderFlower, 'y', Block.hardenedClay);

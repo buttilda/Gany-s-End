@@ -106,6 +106,12 @@ public class BlockNewSkull extends BlockContainer {
 	}
 
 	@Override
+	public int getDamageValue(World world, int x, int y, int z) {
+		TileEntity tileentity = world.getBlockTileEntity(x, y, z);
+		return tileentity != null && tileentity instanceof TileEntityBlockNewSkull ? ((TileEntityBlockNewSkull) tileentity).getSkullType() : super.getDamageValue(world, x, y, z);
+	}
+
+	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int meta, EntityPlayer player) {
 		if (!player.capabilities.isCreativeMode) {
 			ArrayList<ItemStack> drops = getBlockDropped(world, x, y, z, meta, 0);

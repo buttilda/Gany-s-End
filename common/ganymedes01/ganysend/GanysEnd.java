@@ -15,6 +15,7 @@ import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.network.PacketHandler;
 import ganymedes01.ganysend.recipes.BuildCraftFacadeManager;
 import ganymedes01.ganysend.recipes.ModRecipes;
+import ganymedes01.ganysend.recipes.ThaumCraftManager;
 import ganymedes01.ganysend.world.EnderFlowerGenerator;
 
 import java.io.File;
@@ -81,10 +82,10 @@ public class GanysEnd {
 		proxy.registerRenderers();
 		GameRegistry.registerWorldGenerator(new EnderFlowerGenerator());
 		BuildCraftFacadeManager.registerFacades();
+		ThaumCraftManager.init();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-
 	}
 }

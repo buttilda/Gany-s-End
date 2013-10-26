@@ -14,7 +14,7 @@ import net.minecraftforge.common.EnumHelper;
 public class ModMaterials {
 
 	// Armour
-	public static final EnumArmorMaterial ENDIUM_ARMOUR = EnumHelper.addArmorMaterial("ENDIUM", 10, new int[] { 2, 4, 2, 2 }, 0);
+	public static final EnumArmorMaterial ENDIUM_ARMOUR = EnumHelper.addArmorMaterial("ENDIUM", 10, new int[] { 2, 4, 2, 2 }, 12);
 
 	// Item
 	public final static EnumToolMaterial ENDIUM_TOOLS = EnumHelper.addToolMaterial("ENDIUM", 3, 131, 12.0F, 1.5F, 0);
