@@ -17,7 +17,7 @@ import thaumcraft.api.aspects.AspectList;
 public class ThaumCraftManager {
 
 	public static void init() {
-		ThaumcraftApi.addSmeltingBonus(new ItemStack(ModItems.endiumIngot), new ItemStack(ModItems.endiumNugget));
+		ThaumcraftApi.addSmeltingBonus(new ItemStack(ModItems.endiumIngot), new ItemStack(ModItems.endiumIngot, 0, 1));
 		ThaumcraftApi.portableHoleBlackList.add(ModBlocks.enderToggler_air.blockID);
 
 		addAspectsToItem(ModItems.endiumIngot.itemID, new Aspect[] { Aspect.ELDRITCH, Aspect.TRAVEL, Aspect.MAGIC, Aspect.SENSES, Aspect.DARKNESS }, new int[] { 4, 4, 7, 2, 2 });
