@@ -6,6 +6,7 @@ import ganymedes01.ganysend.core.utils.HeadsHelper;
 import java.util.Random;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
@@ -25,10 +26,16 @@ public class EntityDeathEvent {
 		Random rand = new Random();
 		ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
 		if (stack != null)
-			if (event.source == CustomDamageSources.beheading || rand.nextInt(100) == 50) {
-				event.entityLiving.entityDropItem(stack, rand.nextFloat());
-				if (event.isCancelable())
-					event.setCanceled(true);
-			}
+			if (checkDamSource(event.source))
+				if (event.source == CustomDamageSources.beheading || rand.nextInt(150) == 75) {
+					event.entityLiving.entityDropItem(stack, rand.nextFloat());
+					if (event.isCancelable())
+						event.setCanceled(true);
+				}
+	}
+
+	private boolean checkDamSource(DamageSource source) {
+		return source != DamageSource.fall && source != DamageSource.inFire && source != DamageSource.onFire && source != DamageSource.cactus && source != DamageSource.lava && source != DamageSource.inWall && source != DamageSource.drown && source != DamageSource.starve &&
+		source != DamageSource.wither && source != DamageSource.anvil && source != DamageSource.fallingBlock;
 	}
 }
