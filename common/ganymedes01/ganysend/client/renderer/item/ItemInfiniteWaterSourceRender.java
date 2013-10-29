@@ -22,7 +22,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ItemInfiniteWaterSourceRender implements IItemRenderer {
 
-	private int textureOffsetX = 0;
 	private int textureOffsetY = 0;
 	private int coolDown = 10;
 	private final ModelInfiniteWaterSource model = new ModelInfiniteWaterSource();
@@ -52,7 +51,7 @@ public class ItemInfiniteWaterSourceRender implements IItemRenderer {
 				break;
 			}
 			case EQUIPPED_FIRST_PERSON: {
-				renderPlayerInventory(1.0F, 0.0F, 0.0F);
+				renderPlayerInventory(0.5F, 0.5F, 0.5F);
 				break;
 			}
 			case INVENTORY: {
@@ -66,6 +65,8 @@ public class ItemInfiniteWaterSourceRender implements IItemRenderer {
 
 	private void renderPlayerInventory(float x, float y, float z) {
 		GL11.glPushMatrix();
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glTranslatef(x - 0.5F, y + 0.5F, z + 0.5F);
 		GL11.glScalef(1.0F, -1.0F, -1.0F);
 
@@ -79,7 +80,8 @@ public class ItemInfiniteWaterSourceRender implements IItemRenderer {
 				textureOffsetY = 0;
 			coolDown = 10;
 		}
-		model.renderCore(textureOffsetX, textureOffsetY, (float) (2 * 720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL));
+		model.renderCore(textureOffsetY);
+		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
 	}
 }

@@ -23,13 +23,14 @@ public class TileEntityInfiniteWaterSourceRender extends TileEntitySpecialRender
 
 	private final ModelInfiniteWaterSource model = new ModelInfiniteWaterSource();
 
-	private int textureOffsetX = 0;
 	private int textureOffsetY = 0;
 	private int coolDown = 10;
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float angle) {
 		GL11.glPushMatrix();
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glTranslatef((float) x, (float) y + 1.0F, (float) z + 1.0F);
 		GL11.glScalef(1.0F, -1.0F, -1.0F);
 
@@ -43,7 +44,8 @@ public class TileEntityInfiniteWaterSourceRender extends TileEntitySpecialRender
 				textureOffsetY = 0;
 			coolDown = 10;
 		}
-		model.renderCore(textureOffsetX, textureOffsetY, (float) (2 * 720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL));
+		model.renderCore(textureOffsetY);
+		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
 	}
 }

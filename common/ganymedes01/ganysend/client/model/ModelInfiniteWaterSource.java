@@ -15,9 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ModelInfiniteWaterSource extends ModelBase {
 
-	private ModelRenderer tubeX;
-	private ModelRenderer tubeY;
-	private ModelRenderer tubeZ;
+	private ModelRenderer tubeX, tubeY, tubeZ;
 	private ModelRenderer[] heads = new ModelRenderer[6];
 	private ModelRenderer core;
 
@@ -53,7 +51,6 @@ public class ModelInfiniteWaterSource extends ModelBase {
 		tubeX.rotateAngleX = (float) (Math.PI / 2);
 		tubeZ.rotationPointX = 16F;
 		tubeZ.rotateAngleZ = (float) (Math.PI / 2);
-		core.addBox(3.0F, 3.0F, 3.0F, 16, 16, 16, 0.5F);
 	}
 
 	public void renderAxis() {
@@ -65,8 +62,10 @@ public class ModelInfiniteWaterSource extends ModelBase {
 			head.render(0.0625F);
 	}
 
-	public void renderCore(int textureOffsetX, int textureOffsetY, float rotation) {
-		core = new ModelRenderer(this, textureOffsetX, textureOffsetY).setTextureSize(8, 256);
+	public void renderCore(int textureOffsetY) {
+		float rotation = (float) (2 * 720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
+
+		core = new ModelRenderer(this, 0, textureOffsetY).setTextureSize(8, 256);
 		core.addBox(-4F, -4F, -4F, 8, 8, 8);
 		core.setRotationPoint(8.0F, 8.0F, 8.0F);
 		core.rotateAngleZ = rotation / (180F / (float) Math.PI);
