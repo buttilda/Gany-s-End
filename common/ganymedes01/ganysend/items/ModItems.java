@@ -1,6 +1,9 @@
 package ganymedes01.ganysend.items;
 
+import ganymedes01.ganysend.dispenser.DispenserBehaviorInfiniteBucket;
+import ganymedes01.ganysend.dispenser.DispenserBehaviorInfusedGem;
 import ganymedes01.ganysend.lib.Strings;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -55,6 +58,7 @@ public class ModItems {
 
 		registerNames();
 		registerForge();
+		registerDispenserActions();
 	}
 
 	private static void registerNames() {
@@ -79,5 +83,10 @@ public class ModItems {
 
 	private static void registerForge() {
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(infiniteBucket), new ItemStack(infiniteBucket));
+	}
+
+	private static void registerDispenserActions() {
+		BlockDispenser.dispenseBehaviorRegistry.putObject(infiniteBucket, new DispenserBehaviorInfiniteBucket());
+		BlockDispenser.dispenseBehaviorRegistry.putObject(infusedGem, new DispenserBehaviorInfusedGem());
 	}
 }

@@ -55,38 +55,47 @@ public class InfiniteBucket extends ItemSimpleFoiled {
 		if (movingobjectposition == null)
 			return stack;
 		else if (movingobjectposition.typeOfHit == EnumMovingObjectType.TILE) {
-			int i = movingobjectposition.blockX;
-			int j = movingobjectposition.blockY;
-			int k = movingobjectposition.blockZ;
-			if (!world.canMineBlock(player, i, j, k))
+			int x = movingobjectposition.blockX;
+			int y = movingobjectposition.blockY;
+			int z = movingobjectposition.blockZ;
+			if (!world.canMineBlock(player, x, y, z))
 				return stack;
 			else {
-				if (movingobjectposition.sideHit == 0)
-					--j;
-				if (movingobjectposition.sideHit == 1)
-					++j;
-				if (movingobjectposition.sideHit == 2)
-					--k;
-				if (movingobjectposition.sideHit == 3)
-					++k;
-				if (movingobjectposition.sideHit == 4)
-					--i;
-				if (movingobjectposition.sideHit == 5)
-					++i;
-				tryPlaceWater(world, i, j, k);
+				switch (movingobjectposition.sideHit) {
+					case 0:
+						y--;
+						break;
+					case 1:
+						y++;
+						break;
+					case 2:
+						z--;
+						break;
+					case 3:
+						z++;
+						break;
+					case 4:
+						x--;
+						break;
+					case 5:
+						x++;
+						break;
+				}
+
+				tryPlaceWater(world, x, y, z);
 			}
 		}
 		return stack;
 	}
 
-	private void tryPlaceWater(World world, int x, int y, int z) {
+	public static void tryPlaceWater(World world, int x, int y, int z) {
 		Material material = world.getBlockMaterial(x, y, z);
 
 		if (!world.isAirBlock(x, y, z) && material.isSolid())
 			return;
 		else if (world.provider.dimensionId == -1) {
 			world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
-			for (int l = 0; l < 8; ++l)
+			for (int i = 0; i < 8; i++)
 				world.spawnParticle("largesmoke", x + Math.random(), y + Math.random(), z + Math.random(), 0.0D, 0.0D, 0.0D);
 		} else {
 			if (!world.isRemote && !material.isSolid() && !material.isLiquid())
