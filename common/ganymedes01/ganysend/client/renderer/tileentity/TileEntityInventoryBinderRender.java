@@ -31,8 +31,8 @@ public class TileEntityInventoryBinderRender extends TileEntitySpecialRenderer {
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float rotation) {
-		TileEntityInventoryBinder tilePLayerInv = (TileEntityInventoryBinder) tile;
-		String name = tilePLayerInv.getPlayerName();
+		TileEntityInventoryBinder tilePlayerInv = (TileEntityInventoryBinder) tile;
+		String name = tilePlayerInv.getPlayerName();
 		double headRotation = 0.0F, cX, cZ, eX, eZ, defaultYrot = 0.0F, transX = 0.0F, transY = 0.0F;
 
 		GL11.glPushMatrix();
@@ -46,12 +46,12 @@ public class TileEntityInventoryBinderRender extends TileEntitySpecialRenderer {
 		blockModel.renderFrame();
 
 		bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.INVENTORY_BINDER_NAME + "2")));
-		EntityPlayer player = tilePLayerInv.getWorldObj().getPlayerEntityByName(name);
+		EntityPlayer player = tilePlayerInv.getWorldObj().getPlayerEntityByName(name);
 		if (player != null) {
 			cX = player.posX - 0.5F;
 			cZ = player.posZ - 0.5F;
-			eX = tilePLayerInv.xCoord;
-			eZ = tilePLayerInv.zCoord;
+			eX = tilePlayerInv.xCoord;
+			eZ = tilePlayerInv.zCoord;
 			headRotation = Math.atan2(cZ - eZ, cX - eX) * 180 / Math.PI;
 			bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.INVENTORY_BINDER_NAME + "1")));
 		} else {
