@@ -1,4 +1,4 @@
-package ganymedes01.ganysend.recipes;
+package ganymedes01.ganysend.modsupport;
 
 import ganymedes01.ganysend.blocks.ModBlocks;
 import cpw.mods.fml.common.event.FMLInterModComms;

@@ -12,10 +12,11 @@ import ganymedes01.ganysend.core.utils.VersionHelper;
 import ganymedes01.ganysend.creativetab.CreativeTabEnd;
 import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.Reference;
+import ganymedes01.ganysend.modsupport.BuildCraftFacadeManager;
+import ganymedes01.ganysend.modsupport.EE3Manager;
+import ganymedes01.ganysend.modsupport.ThaumCraftManager;
 import ganymedes01.ganysend.network.PacketHandler;
-import ganymedes01.ganysend.recipes.BuildCraftFacadeManager;
 import ganymedes01.ganysend.recipes.ModRecipes;
-import ganymedes01.ganysend.recipes.ThaumCraftManager;
 import ganymedes01.ganysend.world.EnderFlowerGenerator;
 
 import java.io.File;
@@ -81,8 +82,10 @@ public class GanysEnd {
 		proxy.registerTileEntities();
 		proxy.registerRenderers();
 		GameRegistry.registerWorldGenerator(new EnderFlowerGenerator());
+
 		BuildCraftFacadeManager.registerFacades();
 		ThaumCraftManager.init();
+		EE3Manager.init();
 	}
 
 	@EventHandler
