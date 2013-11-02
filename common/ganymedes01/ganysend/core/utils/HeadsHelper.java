@@ -2,6 +2,7 @@ package ganymedes01.ganysend.core.utils;
 
 import ganymedes01.ganysend.items.ModItems;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -67,6 +68,8 @@ public class HeadsHelper {
 					return new ItemStack(ModItems.itemNewSkull, 1, 4);
 			} else if (target instanceof EntityWitch)
 				return new ItemStack(ModItems.itemNewSkull, 1, 13);
+			else if (target instanceof EntityWither)
+				return new ItemStack(ModItems.itemNewSkull, 1, 17);
 		} else if (target instanceof EntityPlayer) {
 			ItemStack stack = new ItemStack(ModItems.itemNewSkull, 1, 3);
 			stack.setTagCompound(new NBTTagCompound());

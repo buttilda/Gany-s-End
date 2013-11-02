@@ -39,8 +39,9 @@ public class ModelHead extends ModelSkeletonHead {
 		overlay.setRotationPoint(0.0F, 0.0F, 0.0F);
 	}
 
-	private void hideOverlay() {
+	private ModelHead hideOverlay() {
 		renderOverlay = false;
+		return this;
 	}
 
 	private void setPig() {
@@ -217,6 +218,8 @@ public class ModelHead extends ModelSkeletonHead {
 			case 16:
 				setSquid();
 				break;
+			case 17:
+				return new ModelHead(64).hideOverlay();
 		}
 		return this;
 	}
