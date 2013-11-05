@@ -23,6 +23,7 @@ import java.io.File;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -83,9 +84,12 @@ public class GanysEnd {
 		proxy.registerRenderers();
 		GameRegistry.registerWorldGenerator(new EnderFlowerGenerator());
 
-		BuildCraftFacadeManager.registerFacades();
-		ThaumCraftManager.init();
-		EE3Manager.init();
+		if (Loader.isModLoaded("BuildCraft|Transport"))
+			BuildCraftFacadeManager.registerFacades();
+		if (Loader.isModLoaded("Thaumcraft"))
+			ThaumCraftManager.init();
+		if (Loader.isModLoaded("EE3"))
+			EE3Manager.init();
 	}
 
 	@EventHandler
