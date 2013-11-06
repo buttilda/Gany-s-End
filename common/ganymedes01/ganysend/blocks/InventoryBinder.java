@@ -4,6 +4,8 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
+import ganymedes01.ganysend.network.PacketTypeHandler;
+import ganymedes01.ganysend.network.packet.PacketInventoryBinder;
 import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -13,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -37,7 +40,7 @@ public class InventoryBinder extends BlockContainer {
 		if (player != null)
 			if (player instanceof EntityPlayer) {
 				world.setBlockTileEntity(x, y, z, new TileEntityInventoryBinder(((EntityPlayer) player).getCommandSenderName()));
-				GanysEnd.proxy.handlePlayerInventoryPacket(x, y, z, ((EntityPlayer) player).getCommandSenderName());
+				PacketDispatcher.sendPacketToAllPlayers(PacketTypeHandler.populatePacket(new PacketInventoryBinder(x, y, z, ((EntityPlayer) player).getCommandSenderName())));
 			}
 	}
 

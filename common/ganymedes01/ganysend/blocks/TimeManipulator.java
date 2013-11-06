@@ -5,6 +5,8 @@ import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
+import ganymedes01.ganysend.network.PacketTypeHandler;
+import ganymedes01.ganysend.network.packet.PacketTimeManipulator;
 import ganymedes01.ganysend.tileentities.TileEntityTimeManipulator;
 
 import java.util.Random;
@@ -18,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -53,14 +56,14 @@ public class TimeManipulator extends BlockContainer {
 					if (player.getCurrentEquippedItem().getItemDamage() == 1) {
 						tile.revertTime = true;
 						tile.advanceTime = false;
-						GanysEnd.proxy.handleTimeManipulatorPacket(x, y, z, true, false);
+						PacketDispatcher.sendPacketToAllPlayers(PacketTypeHandler.populatePacket(new PacketTimeManipulator(x, y, z, true, false)));
 						if (!player.capabilities.isCreativeMode)
 							player.inventory.getCurrentItem().stackSize--;
 						return true;
 					} else if (player.getCurrentEquippedItem().getItemDamage() == 0) {
 						tile.revertTime = false;
 						tile.advanceTime = true;
-						GanysEnd.proxy.handleTimeManipulatorPacket(x, y, z, false, true);
+						PacketDispatcher.sendPacketToAllPlayers(PacketTypeHandler.populatePacket(new PacketTimeManipulator(x, y, z, false, true)));
 						if (!player.capabilities.isCreativeMode)
 							player.inventory.getCurrentItem().stackSize--;
 						return true;

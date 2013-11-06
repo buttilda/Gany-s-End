@@ -60,7 +60,7 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public void handlePlayerInventoryPacket(int x, int y, int z, String playerName) {
+	public void handleInventoryBinderPacket(int x, int y, int z, String playerName) {
 		World world = FMLClientHandler.instance().getClient().theWorld;
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 

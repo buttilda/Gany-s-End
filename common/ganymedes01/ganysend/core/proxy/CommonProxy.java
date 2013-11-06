@@ -51,7 +51,7 @@ public class CommonProxy implements IGuiHandler {
 
 	}
 
-	public void handlePlayerInventoryPacket(int x, int y, int z, String playerName) {
+	public void handleInventoryBinderPacket(int x, int y, int z, String playerName) {
 
 	}
 

@@ -49,6 +49,6 @@ public class PacketInventoryBinder extends CustomPacket {
 
 	@Override
 	public void execute() {
-		GanysEnd.proxy.handlePlayerInventoryPacket(x, y, z, playerName);
+		GanysEnd.proxy.handleInventoryBinderPacket(x, y, z, playerName);
 	}
 }
