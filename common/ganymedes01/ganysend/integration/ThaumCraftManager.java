@@ -1,4 +1,4 @@
-package ganymedes01.ganysend.modsupport;
+package ganymedes01.ganysend.integration;
 
 import ganymedes01.ganysend.blocks.ModBlocks;
 import ganymedes01.ganysend.items.ModItems;

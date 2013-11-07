@@ -1,4 +1,4 @@
-package ganymedes01.ganysend.modsupport;
+package ganymedes01.ganysend.integration;
 
 /**
  * Gany's End
