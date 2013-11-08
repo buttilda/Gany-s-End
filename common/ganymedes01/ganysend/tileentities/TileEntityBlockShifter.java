@@ -61,8 +61,7 @@ public class TileEntityBlockShifter extends TileEntity {
 					Block teleported = Block.blocksList[worldObj.getBlockId(telX, telY, telZ)];
 					if (worldObj.isAirBlock(recX, recY, recZ) && !(teleported.getBlockHardness(worldObj, telX, telY, telZ) <= 0.0F) && teleported.blockMaterial != Material.water && teleported.blockMaterial != Material.lava)
 						if (worldObj.blockHasTileEntity(telX, telY, telZ)) {
-							worldObj.setBlock(recX, recY, recZ, teleported.blockID, worldObj.getBlockMetadata(telX, telY, telZ), 2);
-							worldObj.notifyBlockOfNeighborChange(recX, recY, recZ, teleported.blockID);
+							worldObj.setBlock(recX, recY, recZ, teleported.blockID, worldObj.getBlockMetadata(telX, telY, telZ), 3);
 							NBTTagCompound data = new NBTTagCompound();
 							worldObj.getBlockTileEntity(telX, telY, telZ).writeToNBT(data);
 							worldObj.setBlockTileEntity(recX, recY, recZ, TileEntity.createAndLoadEntity(data));
@@ -73,11 +72,12 @@ public class TileEntityBlockShifter extends TileEntity {
 							}
 							worldObj.setBlockToAir(telX, telY, telZ);
 							worldObj.notifyBlockOfNeighborChange(telX, telY - 1, telZ, -1);
-						} else {
-							worldObj.setBlock(recX, recY, recZ, teleported.blockID, worldObj.getBlockMetadata(telX, telY, telZ), 2);
 							worldObj.notifyBlockOfNeighborChange(recX, recY, recZ, teleported.blockID);
+						} else {
+							worldObj.setBlock(recX, recY, recZ, teleported.blockID, worldObj.getBlockMetadata(telX, telY, telZ), 3);
 							worldObj.setBlockToAir(telX, telY, telZ);
 							worldObj.notifyBlockOfNeighborChange(telX, telY - 1, telZ, -1);
+							worldObj.notifyBlockOfNeighborChange(recX, recY, recZ, teleported.blockID);
 						}
 				}
 			}
