@@ -40,6 +40,7 @@ public class ItemNewSkull extends ItemSkull {
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setCreativeTab(GanysEnd.endTab);
+		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ITEM_NEW_SKULL_NAME));
 	}
 
 	@Override
