@@ -54,6 +54,7 @@ public class GanysEnd {
 	public static CreativeTabs endTab = new CreativeTabEnd();
 	public static boolean togglerShouldMakeSound = true;
 	public static boolean shouldDoVersionCheck = true;
+	public static boolean activateShifters = true;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

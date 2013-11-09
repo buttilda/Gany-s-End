@@ -86,6 +86,7 @@ public class ConfigurationHandler {
 			// Others
 			GanysEnd.togglerShouldMakeSound = configuration.get("Others", Strings.TOGGLERS_SHOULD_MAKE_SOUND, true).getBoolean(true);
 			GanysEnd.shouldDoVersionCheck = configuration.get("Others", Strings.SHOULD_DO_VERSION_CHECK, true).getBoolean(true);
+			GanysEnd.activateShifters = configuration.get("Others", Strings.ACTIVATE_SHIFTERS, true).getBoolean(true);
 
 		} catch (Exception e) {
 			FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME + " has had a problem loading its configuration");

@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.blocks;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.items.blocks.ItemEndWalls;
 import ganymedes01.ganysend.items.blocks.ItemEnderPearlBlock;
@@ -79,7 +80,10 @@ public class ModBlocks {
 		GameRegistry.registerBlock(enderpearlStairs, Strings.ENDERPEARL_BRICK_STAIRS_NAME);
 		GameRegistry.registerBlock(enderToggler, Strings.ENDER_TOGGLER_NAME);
 		GameRegistry.registerBlock(enderToggler_air, Strings.ENDER_TOGGLER_AIR_NAME);
-		GameRegistry.registerBlock(blockShifter, Strings.BLOCK_SHIFTER_NAME);
+		if (GanysEnd.activateShifters) {
+			GameRegistry.registerBlock(blockShifter, Strings.BLOCK_SHIFTER_NAME);
+			GameRegistry.registerBlock(entityShifter, Strings.ENTITY_SHIFTER_NAME);
+		}
 		GameRegistry.registerBlock(rawEndium, Strings.RAW_ENDIUM_NAME);
 		GameRegistry.registerBlock(endiumBlock, Strings.ENDIUM_BLOCK_NAME);
 		GameRegistry.registerBlock(emulator, Strings.EMULATOR_NAME);
@@ -92,7 +96,6 @@ public class ModBlocks {
 		GameRegistry.registerBlock(advancedFilteringHopper, Strings.ADVANCED_FILTERING_HOPPER_NAME);
 		GameRegistry.registerBlock(advancedExclusiveFilteringHopper, Strings.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_NAME);
 		GameRegistry.registerBlock(timeManipulator, Strings.TIME_MANIPULATOR_NAME);
-		GameRegistry.registerBlock(entityShifter, Strings.ENTITY_SHIFTER_NAME);
 		GameRegistry.registerBlock(inventoryBinder, Strings.INVENTORY_BINDER_NAME);
 		GameRegistry.registerBlock(infiniteWaterSource, Strings.INFINITE_WATER_SOURCE_NAME);
 		GameRegistry.registerBlock(endWalls, ItemEndWalls.class, Strings.END_WALLS_NAME);
