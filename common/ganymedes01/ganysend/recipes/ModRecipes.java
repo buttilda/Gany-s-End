@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.recipes;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.blocks.ModBlocks;
 import ganymedes01.ganysend.items.ItemNewSkull;
 import ganymedes01.ganysend.items.ModItems;
@@ -61,7 +62,10 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endstoneStairs, 4), "x  ", "xx ", "xxx", 'x', ModBlocks.endstoneBrick);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.enderpearlStairs, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 1));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.enderToggler), "wwz", "zyz", "zww", 'y', Item.enderPearl, 'z', Block.glass, 'w', Item.redstone);
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.blockShifter), "yzy", "wxw", "ywy", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 0), 'y', Item.ingotGold, 'z', Item.redstone, 'w', Block.glass);
+		if (GanysEnd.activateShifters) {
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.blockShifter), "yzy", "wxw", "ywy", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 0), 'y', Item.ingotGold, 'z', Item.redstone, 'w', Block.glass);
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.entityShifter), "yzy", "wxw", "ywy", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 1), 'y', Item.ingotGold, 'z', Item.redstone, 'w', Block.glass);
+		}
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.rawEndium), "zyz", "yxy", "zyz", 'x', Item.eyeOfEnder, 'y', Block.whiteStone, 'z', Block.obsidian);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.emulator), "xyx", "yyy", "xyx", 'x', Item.enderPearl, 'y', Block.hardenedClay);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.emulator), "xyx", "yyy", "xyx", 'x', Item.enderPearl, 'y', Block.stainedClay);
@@ -81,7 +85,6 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.advancedExclusiveFilteringHopper), " z ", "yxy", " z ", 'x', ModBlocks.speedyExclusiveFilteringHopper, 'y', Item.diamond, 'z', Block.glass);
 		GameRegistry.addShapelessRecipe(new ItemStack(Block.dragonEgg), new ItemStack(ModBlocks.timeManipulator));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.timeManipulator), "zyz", "yxy", "zyz", 'x', Block.dragonEgg, 'y', new ItemStack(Block.planks, 1, 1), 'z', Block.blockGold);
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.entityShifter), "yzy", "wxw", "ywy", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 1), 'y', Item.ingotGold, 'z', Item.redstone, 'w', Block.glass);
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.inventoryBinder), "xxx", "yzy", "xxx", 'x', Block.whiteStone, 'y', Item.enderPearl, 'z', "ganysEndSkull"));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.infiniteWaterSource), "yzy", "zxz", "yzy", 'x', ModItems.infiniteBucket, 'y', Item.ingotIron, 'z', Item.enderPearl);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 0), "xxx", "xxx", 'x', ModBlocks.endstoneBrick);
