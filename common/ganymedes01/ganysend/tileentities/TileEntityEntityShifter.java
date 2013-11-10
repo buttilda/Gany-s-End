@@ -89,8 +89,12 @@ public class TileEntityEntityShifter extends TileEntityBlockShifter {
 						} else if (entity instanceof EntityMinecart) {
 							teleportEntityMinecart((EntityMinecart) entity, recX, recY, recZ);
 							worldObj.playSoundEffect(telX, telY, telZ, "mob.endermen.portal", 1.0F, 1.0F);
-						} else if (!blackListedEntities.contains(entity.getClass()))
+						} else
 							try {
+								for (Class<? extends Entity> clazz : blackListedEntities)
+									if (clazz.isAssignableFrom(entity.getClass()))
+										return;
+
 								Entity newEntity = entity.getClass().getConstructor(World.class).newInstance(worldObj);
 
 								NBTTagCompound data = new NBTTagCompound();
