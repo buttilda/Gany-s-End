@@ -26,7 +26,7 @@ public class RenderPlayerHandler {
 
 	@ForgeSubscribe
 	@SideOnly(Side.CLIENT)
-	public void renderHelmetEvent(RenderPlayerEvent.Specials.Pre event) {
+	public void renderHelmetEvent(RenderPlayerEvent.Specials.Post event) {
 		try {
 			if (event.entityPlayer != null) {
 				Field f = event.renderer.getClass().getDeclaredField("modelBipedMain");
@@ -37,19 +37,25 @@ public class RenderPlayerHandler {
 				if (helmet != null && helmet.getItem() == ModItems.itemNewSkull) {
 					GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
-					if (model.bipedHead.isHidden)
+					if (model.bipedHead.isHidden) {
+						model.bipedHeadwear.isHidden = false;
 						model.bipedHead.isHidden = false;
+					}
 					model.bipedHead.postRender(0.0625F);
 
 					GL11.glPushMatrix();
 					GL11.glScalef(1.0F, -1.0F, -1.0F);
 					TileEntityBlockNewSkullRender.instance.renderHead(-0.5F, 0.0F, -0.5F, 1, 180.0F, helmet.getItemDamage(), helmet.hasTagCompound() ? helmet.getTagCompound().getString("SkullOwner") : null);
 					GL11.glPopMatrix();
-					event.renderHelmet = false;
-					if (!model.bipedHead.isHidden)
+
+					if (!model.bipedHead.isHidden) {
+						model.bipedHeadwear.isHidden = true;
 						model.bipedHead.isHidden = true;
-				} else if (model.bipedHead.isHidden)
+					}
+				} else if (model.bipedHead.isHidden) {
+					model.bipedHeadwear.isHidden = false;
 					model.bipedHead.isHidden = false;
+				}
 			}
 		} catch (Exception e) {
 		}
