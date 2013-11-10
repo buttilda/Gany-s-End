@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.inventory;
 
+import ganymedes01.ganysend.inventory.slots.FilterSlot;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
