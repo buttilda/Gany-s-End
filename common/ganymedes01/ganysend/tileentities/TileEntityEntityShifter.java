@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.tileentities;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -7,15 +8,20 @@ import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityMinecartMobSpawner;
+import net.minecraft.entity.effect.EntityWeatherEffect;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.item.EntityMinecartChest;
 import net.minecraft.entity.item.EntityMinecartContainer;
 import net.minecraft.entity.item.EntityMinecartFurnace;
 import net.minecraft.entity.item.EntityMinecartHopper;
 import net.minecraft.entity.item.EntityMinecartTNT;
+import net.minecraft.entity.projectile.EntityFireball;
+import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
 
 /**
  * Gany's End
@@ -25,6 +31,15 @@ import net.minecraft.util.AxisAlignedBB;
  */
 
 public class TileEntityEntityShifter extends TileEntityBlockShifter {
+
+	private static ArrayList<Class<? extends Entity>> blackListedEntities = new ArrayList<Class<? extends Entity>>();
+
+	static {
+		blackListedEntities.add(EntityItemFrame.class);
+		blackListedEntities.add(EntityFishHook.class);
+		blackListedEntities.add(EntityFireball.class);
+		blackListedEntities.add(EntityWeatherEffect.class);
+	}
 
 	public TileEntityEntityShifter() {
 		super();
@@ -74,7 +89,23 @@ public class TileEntityEntityShifter extends TileEntityBlockShifter {
 						} else if (entity instanceof EntityMinecart) {
 							teleportEntityMinecart((EntityMinecart) entity, recX, recY, recZ);
 							worldObj.playSoundEffect(telX, telY, telZ, "mob.endermen.portal", 1.0F, 1.0F);
-						}
+						} else if (!blackListedEntities.contains(entity.getClass()))
+							try {
+								Entity newEntity = entity.getClass().getConstructor(World.class).newInstance(worldObj);
+
+								NBTTagCompound data = new NBTTagCompound();
+								entity.writeToNBT(data);
+								newEntity.readFromNBT(data);
+
+								newEntity.setPosition(recX, recY + 1.0F, recZ);
+
+								worldObj.spawnEntityInWorld(newEntity);
+								entity.setDead();
+
+								worldObj.playSoundEffect(telX, telY, telZ, "mob.endermen.portal", 1.0F, 1.0F);
+							} catch (Exception e) {
+								blackListedEntities.add(entity.getClass());
+							}
 				}
 			}
 		}
