@@ -33,8 +33,8 @@ public class RenderPlayerHandler {
 				f.setAccessible(true);
 				ModelBiped model = (ModelBiped) f.get(event.renderer);
 
-				ItemStack helmet = event.entityPlayer.inventory.armorItemInSlot(3);
-				if (helmet != null && helmet.getItem() == ModItems.itemNewSkull) {
+				ItemStack head = event.entityPlayer.inventory.armorItemInSlot(3);
+				if (head != null && head.getItem() == ModItems.itemNewSkull) {
 					GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
 					if (model.bipedHead.isHidden) {
@@ -45,7 +45,19 @@ public class RenderPlayerHandler {
 
 					GL11.glPushMatrix();
 					GL11.glScalef(1.0F, -1.0F, -1.0F);
-					TileEntityBlockNewSkullRender.instance.renderHead(-0.5F, 0.0F, -0.5F, 1, 180.0F, helmet.getItemDamage(), helmet.hasTagCompound() ? helmet.getTagCompound().getString("SkullOwner") : null);
+
+					float offset = 0.0F;
+					switch (head.getItemDamage()) {
+						case 7:
+							offset = 1.0F;
+							break;
+						case 10:
+						case 12:
+							offset = 2.0F;
+							break;
+					}
+
+					TileEntityBlockNewSkullRender.instance.renderHead(-0.5F, 0.0F, -0.5F + offset * 0.0625F, 1, 180.0F, head.getItemDamage(), head.hasTagCompound() ? head.getTagCompound().getString("SkullOwner") : null);
 					GL11.glPopMatrix();
 
 					if (!model.bipedHead.isHidden) {
