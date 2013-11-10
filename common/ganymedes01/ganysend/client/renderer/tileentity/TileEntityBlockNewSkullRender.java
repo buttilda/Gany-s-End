@@ -3,6 +3,7 @@ package ganymedes01.ganysend.client.renderer.tileentity;
 import ganymedes01.ganysend.client.model.ModelHead;
 import ganymedes01.ganysend.core.utils.HeadTextures;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
@@ -23,11 +24,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 
 	private ModelHead model;
+	public static TileEntityBlockNewSkullRender instance;
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float angle) {
 		TileEntityBlockNewSkull tileSkull = (TileEntityBlockNewSkull) tile;
 		renderHead((float) x, (float) y, (float) z, tileSkull.getBlockMetadata() & 7, tileSkull.func_82119_b() * 360 / 16.0F, tileSkull.getSkullType(), tileSkull.getExtraType());
+	}
+
+	@Override
+	public void setTileEntityRenderer(TileEntityRenderer renderer) {
+		super.setTileEntityRenderer(renderer);
+		instance = this;
 	}
 
 	public void renderHead(float x, float y, float z, int meta, float skullRotation, int skullType, String playerName) {

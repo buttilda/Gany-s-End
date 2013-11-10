@@ -12,6 +12,7 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
@@ -131,5 +132,10 @@ public class ItemNewSkull extends ItemSkull {
 
 		for (int i = 0; i < skullTypes.length; i++)
 			icons[i] = reg.registerIcon(Reference.ITEM_BLOCK_TEXTURE_PATH + skullTypes[i] + "Head");
+	}
+
+	@Override
+	public boolean isValidArmor(ItemStack stack, int armorType, Entity entity) {
+		return armorType == 0;
 	}
 }
