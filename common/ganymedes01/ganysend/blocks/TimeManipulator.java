@@ -83,18 +83,18 @@ public class TimeManipulator extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
 		if (world.isAirBlock(x, y + 1, z)) {
-			byte b0 = 0;
-			int l = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-			if (l == 0)
-				b0 = 2;
-			if (l == 1)
-				b0 = 3;
-			if (l == 2)
-				b0 = 0;
-			if (l == 3)
-				b0 = 1;
-			world.setBlockMetadataWithNotify(x, y, z, b0, 2);
-			world.setBlock(x, y + 1, z, blockID, b0 + 4, 2);
+			byte meta = 0;
+			int rotation = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+			if (rotation == 0)
+				meta = 2;
+			if (rotation == 1)
+				meta = 3;
+			if (rotation == 2)
+				meta = 0;
+			if (rotation == 3)
+				meta = 1;
+			world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+			world.setBlock(x, y + 1, z, blockID, meta + 4, 2);
 		} else {
 			dropBlockAsItem(world, x, y, z, 0, 0);
 			world.setBlockToAir(x, y, z);
