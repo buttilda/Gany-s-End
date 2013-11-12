@@ -80,6 +80,5 @@ public class RenderPlayerHandler {
 				model.bipedHead.isHidden = false;
 			}
 		}
-
 	}
 }

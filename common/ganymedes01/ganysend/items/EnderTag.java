@@ -36,7 +36,7 @@ public class EnderTag extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int meta) {
+	public int getColorFromItemStack(ItemStack stack, int pass) {
 		return Utils.getColour(26, 75, 75);
 	}
 
