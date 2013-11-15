@@ -47,6 +47,7 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ItemStack(ModItems.endiumIngot), "xxx", "xxx", "xxx", 'x', new ItemStack(ModItems.endiumIngot, 1, 1));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.endiumIngot, 9, 1), ModItems.endiumIngot);
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.netherStar), new ItemStack(ModItems.itemNewSkull, 1, 17));
+		GameRegistry.addRecipe(new ItemStack(ModItems.spawnerCapturer), "zyz", "yxy", "zyz", 'x', new ItemStack(ModItems.endiumPickaxe), 'y', Block.whiteStone, 'z', Item.emerald);
 
 		// Vanilla
 		GameRegistry.addRecipe(new ItemStack(Item.expBottle, 8), "yyy", "yxy", "yyy", 'x', ModItems.endiumIngot, 'y', new ItemStack(Item.potion, 1, 0));

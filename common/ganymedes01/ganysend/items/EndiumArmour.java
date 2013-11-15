@@ -4,9 +4,12 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModMaterials;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 import thaumcraft.api.IRepairable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,7 +24,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EndiumArmour extends ItemArmor implements IRepairable {
 
 	private final int type;
-	protected final int maxCoolDown;
+	private int coolDown;
+	private final int maxCoolDown;
 
 	public EndiumArmour(int id, int type) {
 		super(id, ModMaterials.ENDIUM_ARMOUR, 0, type);
@@ -57,5 +61,45 @@ public class EndiumArmour extends ItemArmor implements IRepairable {
 			default:
 				return null;
 		}
+	}
+
+	@Override
+	public void onArmorTickUpdate(World world, EntityPlayer player, ItemStack stack) {
+		if (stack == null)
+			return;
+
+		if (getDamage(stack) >= this.getMaxDamage()) {
+			stack.stackSize = 0;
+			player.renderBrokenItemStack(stack);
+			int armourIndex = 0;
+			if (stack.getItem() == ModItems.endiumHelmet)
+				armourIndex = 4;
+			else if (stack.getItem() == ModItems.endiumChestplate)
+				armourIndex = 3;
+			else if (stack.getItem() == ModItems.endiumLeggings)
+				armourIndex = 2;
+			else if (stack.getItem() == ModItems.endiumBoots)
+				armourIndex = 1;
+
+			player.setCurrentItemOrArmor(armourIndex, null);
+			return;
+		}
+		if (world.isRaining()) {
+			int xCoord = MathHelper.floor_double(player.posX);
+			int yCoord = MathHelper.floor_double(player.posY) + 1;
+			int zCoord = MathHelper.floor_double(player.posZ);
+			if (world.canBlockSeeTheSky(xCoord, yCoord, zCoord))
+				coolDown--;
+			if (coolDown == 0) {
+				stack.damageItem(1, player);
+				coolDown = maxCoolDown;
+			}
+		}
+
+		handleInWater(player, stack);
+	}
+
+	protected void handleInWater(EntityPlayer player, ItemStack stack) {
+
 	}
 }

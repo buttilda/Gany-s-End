@@ -52,6 +52,7 @@ public class Strings {
 	public static final String ENDIUM_AXE_NAME = "endiumAxe";
 	public static final String ENDIUM_SHOVEL_NAME = "endiumShovel";
 	public static final String ENDIUM_NUGGET_NAME = "endiumNugget";
+	public static final String SPAWNER_CAPTURER_NAME = "spawnerCapturer";
 
 	// Others
 	public static final String TOGGLERS_SHOULD_MAKE_SOUND = "togglersShouldMakeSound";
