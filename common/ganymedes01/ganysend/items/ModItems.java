@@ -8,7 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -86,7 +85,7 @@ public class ModItems {
 	}
 
 	private static void registerForge() {
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(infiniteBucket));
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(infiniteBucket), new ItemStack(infiniteBucket));
 	}
 
 	private static void registerDispenserActions() {

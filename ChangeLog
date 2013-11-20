@@ -44,3 +44,6 @@ v1.5.0
 
 v1.5.1
 -Added: Spawner Capturer
+-Fix: Filtering Hoppers deleting items that it couldn't fit anywhere
+-Fix: Infinite bucket being lost after bring used on certain blocks
+-Added: Craft Ender Pearls using heads

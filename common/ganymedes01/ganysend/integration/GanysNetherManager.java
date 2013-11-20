@@ -22,7 +22,7 @@ public class GanysNetherManager {
 		ItemStack head = new ItemStack(ModItems.itemNewSkull, 1, 3);
 		head.setTagCompound(new NBTTagCompound());
 		head.getTagCompound().setString("SkullOwner", "ganymedes01");
-		addStackToUndertakers(head, 4);
+		addStackToUndertakers(head, 50);
 	}
 
 	private static final void addMagmaticCentrifugeRecipe(ItemStack material1, ItemStack material2, ItemStack... result) {

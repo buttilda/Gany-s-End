@@ -154,8 +154,15 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 				else if (stack.stackSize <= 0) {
 					inventoryToPull.setInventorySlotContents(slot, null);
 					continue;
-				} else if (shouldPull(stack))
-					return Utils.addStackToInventory(this, stack.splitStack(1));
+				} else if (shouldPull(stack)) {
+					ItemStack singleItemItemStack = stack.copy();
+					singleItemItemStack.stackSize = 1;
+					if (Utils.addStackToInventory(this, singleItemItemStack)) {
+						stack.splitStack(1);
+						return true;
+					}
+					return false;
+				}
 			}
 		else
 			for (int i = 0; i < inventoryToPull.getSizeInventory(); i++) {
@@ -165,8 +172,15 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 				else if (stack.stackSize <= 0) {
 					inventoryToPull.setInventorySlotContents(i, null);
 					continue;
-				} else if (shouldPull(stack))
-					return Utils.addStackToInventory(this, stack.splitStack(1));
+				} else if (shouldPull(stack)) {
+					ItemStack singleItemItemStack = stack.copy();
+					singleItemItemStack.stackSize = 1;
+					if (Utils.addStackToInventory(this, singleItemItemStack)) {
+						stack.splitStack(1);
+						return true;
+					}
+					return false;
+				}
 			}
 		return false;
 	}

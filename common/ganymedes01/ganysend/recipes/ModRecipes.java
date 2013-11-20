@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -46,14 +47,18 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.infusedGem, 4, 1), "yyy", "yxy", "yyy", 'x', Item.pocketSundial, 'y', "ganysEndDayMaterial"));
 		GameRegistry.addRecipe(new ItemStack(ModItems.endiumIngot), "xxx", "xxx", "xxx", 'x', new ItemStack(ModItems.endiumIngot, 1, 1));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.endiumIngot, 9, 1), ModItems.endiumIngot);
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.netherStar), new ItemStack(ModItems.itemNewSkull, 1, 17));
 		GameRegistry.addRecipe(new ItemStack(ModItems.spawnerCapturer), "zyz", "yxy", "zyz", 'x', new ItemStack(ModItems.endiumPickaxe), 'y', Block.whiteStone, 'z', Item.emerald);
+		GameRegistry.addRecipe(new ItemStack(ModItems.endiumPickaxe), "xxx", " y ", " y ", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
+		GameRegistry.addRecipe(new ItemStack(ModItems.endiumAxe), "xx", "xy", " y", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
+		GameRegistry.addRecipe(new ItemStack(ModItems.endiumShovel), "x", "y", "y", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
 
 		// Vanilla
 		GameRegistry.addRecipe(new ItemStack(Item.expBottle, 8), "yyy", "yxy", "yyy", 'x', ModItems.endiumIngot, 'y', new ItemStack(Item.potion, 1, 0));
 		GameRegistry.addRecipe(new ItemStack(Item.enderPearl), "xxx", "xxx", "x x", 'x', ModBlocks.enderFlower);
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.enderPearl, 9), new ItemStack(ModBlocks.enderpearlBlock, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.enderPearl, 9), new ItemStack(ModBlocks.enderpearlBlock, 1, 1));
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.netherStar, 2), new ItemStack(ModItems.itemNewSkull, 1, 17));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Item.enderPearl, 8), "ganysEndSkull", "ganysEndSkull"));
 	}
 
 	private static void registerBlockRecipes() {
@@ -90,9 +95,6 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.infiniteWaterSource), "yzy", "zxz", "yzy", 'x', ModItems.infiniteBucket, 'y', Item.ingotIron, 'z', Item.enderPearl);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 0), "xxx", "xxx", 'x', ModBlocks.endstoneBrick);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 1), "xxx", "xxx", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 1));
-		GameRegistry.addRecipe(new ItemStack(ModItems.endiumPickaxe), "xxx", " y ", " y ", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
-		GameRegistry.addRecipe(new ItemStack(ModItems.endiumAxe), "xx", "xy", " y", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
-		GameRegistry.addRecipe(new ItemStack(ModItems.endiumShovel), "x", "y", "y", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
 
 		// Ender Flower Recipes
 		GameRegistry.addRecipe(new ItemStack(Item.dyePowder, 2, 0), "xxx", " x ", "   ", 'x', ModBlocks.enderFlower); // Black
