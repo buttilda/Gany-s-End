@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.items;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.dispenser.DispenserBehaviorInfiniteBucket;
 import ganymedes01.ganysend.dispenser.DispenserBehaviorInfusedGem;
 import ganymedes01.ganysend.lib.Strings;
@@ -56,7 +57,8 @@ public class ModItems {
 		endiumPickaxe = new EndiumPickaxe();
 		endiumAxe = new EndiumAxe();
 		endiumShovel = new EndiumShovel();
-		spawnerCapturer = new SpawnerCapturer();
+		if (GanysEnd.activateSpawnerCapturer)
+			spawnerCapturer = new SpawnerCapturer();
 
 		registerNames();
 		registerForge();
@@ -81,7 +83,8 @@ public class ModItems {
 		GameRegistry.registerItem(endiumPickaxe, Strings.ENDIUM_PICKAXE_NAME);
 		GameRegistry.registerItem(endiumAxe, Strings.ENDIUM_AXE_NAME);
 		GameRegistry.registerItem(endiumShovel, Strings.ENDIUM_SHOVEL_NAME);
-		GameRegistry.registerItem(spawnerCapturer, Strings.SPAWNER_CAPTURER_NAME);
+		if (GanysEnd.activateSpawnerCapturer)
+			GameRegistry.registerItem(spawnerCapturer, Strings.SPAWNER_CAPTURER_NAME);
 	}
 
 	private static void registerForge() {

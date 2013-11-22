@@ -56,6 +56,8 @@ public class GanysEnd {
 	public static boolean togglerShouldMakeSound = true;
 	public static boolean shouldDoVersionCheck = true;
 	public static boolean activateShifters = true;
+	public static boolean activateSpawnerCapturer = true;
+	public static boolean activateEnergyPortal = true;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

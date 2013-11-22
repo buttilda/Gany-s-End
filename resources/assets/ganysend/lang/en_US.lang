@@ -62,6 +62,7 @@ tile.ganysend.inventoryBinder.name=Inventory Binder
 tile.ganysend.infiniteWaterSource.name=Infinite Water Source
 tile.ganysend.endWalls0.name=End Stone Brick Wall
 tile.ganysend.endWalls1.name=Ender Pearl Brick Wall
+tile.ganysend.energyPortal.name=Energy Portal
 
 # GUI localizations
 container.ganysend:basicFilteringHopper=Basic Filtering Hopper

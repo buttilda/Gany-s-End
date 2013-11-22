@@ -62,12 +62,7 @@ public class EnergyPortal extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-		TileEntity tile = world.getBlockTileEntity(x, y, z);
-		if (tile != null && tile instanceof TileEntityEnergyPortal) {
-			TileEntityEnergyPortal portal = (TileEntityEnergyPortal) tile;
-			if (portal.isTagged())
-				Block.enderChest.randomDisplayTick(world, x, y, z, rand);
-		}
+		Block.enderChest.randomDisplayTick(world, x, y, z, rand);
 	}
 
 	@Override
