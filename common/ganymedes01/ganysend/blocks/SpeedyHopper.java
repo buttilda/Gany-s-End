@@ -41,7 +41,7 @@ public class SpeedyHopper extends BasicFilteringHopper {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister reg) {
-		blockOutside = reg.registerIcon(Utils.getBlockTexture(Strings.SPEEDY_HOPPER_NAME, false));
+		blockOutside = reg.registerIcon(Utils.getBlockTexture(Strings.SPEEDY_HOPPER_NAME));
 		blockTop = reg.registerIcon("hopper_top");
 		registerExtraIcons(reg);
 	}

@@ -35,6 +35,7 @@ public class Strings {
 	public static final String INVENTORY_BINDER_NAME = "inventoryBinder";
 	public static final String INFINITE_WATER_SOURCE_NAME = "infiniteWaterSource";
 	public static final String END_WALLS_NAME = "endWalls";
+	public static final String ENERGY_PORTAL_NAME = "energyPortal";
 
 	// Item names
 	public static final String ENDER_TAG_NAME = "enderTag";

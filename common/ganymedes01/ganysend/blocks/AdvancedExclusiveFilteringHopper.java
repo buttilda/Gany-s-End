@@ -74,8 +74,8 @@ public class AdvancedExclusiveFilteringHopper extends BasicFilteringHopper {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister reg) {
-		blockOutside = reg.registerIcon(Utils.getBlockTexture(Strings.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_NAME, false));
-		blockTop = reg.registerIcon(Utils.getBlockTexture(Strings.EXCLUSIVE_FILTERING_HOPPER_NAME, true) + "top");
+		blockOutside = reg.registerIcon(Utils.getBlockTexture(Strings.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_NAME));
+		blockTop = reg.registerIcon(Utils.getBlockTexture(Strings.EXCLUSIVE_FILTERING_HOPPER_NAME) + "_top");
 		registerExtraIcons(reg);
 	}
 

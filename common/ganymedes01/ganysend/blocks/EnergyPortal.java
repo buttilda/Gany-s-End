@@ -5,13 +5,15 @@ import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
-import ganymedes01.ganysend.tileentities.TileEntityBlockShifter;
+import ganymedes01.ganysend.tileentities.TileEntityEnergyPortal;
+
+import java.util.Random;
+
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,26 +25,13 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 
-public class BlockShifter extends BlockContainer {
+public class EnergyPortal extends BlockContainer {
 
-	@SideOnly(Side.CLIENT)
-	protected Icon blockSide, blockBottom, blockTop;
-
-	public BlockShifter() {
-		this(ModIDs.BLOCK_SHIFTER_ID);
-	}
-
-	public BlockShifter(int id) {
-		super(id, Material.iron);
-		setHardness(1.5F);
-		setResistance(10.0F);
+	protected EnergyPortal() {
+		super(ModIDs.ENERGY_PORTAL_ID, Material.rock);
 		setCreativeTab(GanysEnd.endTab);
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.BLOCK_SHIFTER_NAME));
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityBlockShifter();
+		setTextureName(Utils.getBlockTexture(Strings.ENDERPEARL_BLOCK_NAME));
+		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENERGY_PORTAL_NAME));
 	}
 
 	@Override
@@ -51,8 +40,8 @@ public class BlockShifter extends BlockContainer {
 			return false;
 		if (player.inventory.getCurrentItem().getItem() == ModItems.enderTag)
 			if (player.inventory.getCurrentItem().getTagCompound().getBoolean("Tagged"))
-				if (world.getBlockTileEntity(x, y, z) instanceof TileEntityBlockShifter) {
-					TileEntityBlockShifter tile = (TileEntityBlockShifter) world.getBlockTileEntity(x, y, z);
+				if (world.getBlockTileEntity(x, y, z) instanceof TileEntityEnergyPortal) {
+					TileEntityEnergyPortal tile = (TileEntityEnergyPortal) world.getBlockTileEntity(x, y, z);
 
 					int telX = player.inventory.getCurrentItem().getTagCompound().getIntArray("Position")[0];
 					int telY = player.inventory.getCurrentItem().getTagCompound().getIntArray("Position")[1];
@@ -62,12 +51,9 @@ public class BlockShifter extends BlockContainer {
 					if (telX == x && telY == y && telZ == z)
 						return false;
 
-					tile.receiverX = telX;
-					tile.receiverY = telY;
-					tile.receiverZ = telZ;
-					tile.receiverDim = telDim;
-					tile.tagged = true;
+					tile.setReceiverCoord(telX, telY, telZ, telDim);
 					world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, "random.click", 0.3F, 0.6F);
+					world.notifyBlocksOfNeighborChange(x, y, z, id);
 					return true;
 				}
 		return false;
@@ -75,15 +61,33 @@ public class BlockShifter extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
-		return side == 0 ? blockBottom : side == 1 ? blockTop : blockSide;
+	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
+		TileEntity tile = world.getBlockTileEntity(x, y, z);
+		if (tile != null && tile instanceof TileEntityEnergyPortal) {
+			TileEntityEnergyPortal portal = (TileEntityEnergyPortal) tile;
+			if (portal.isTagged())
+				Block.enderChest.randomDisplayTick(world, x, y, z, rand);
+		}
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
-		blockSide = reg.registerIcon(Utils.getBlockTexture(Strings.BLOCK_SHIFTER_NAME) + "_side");
-		blockBottom = reg.registerIcon(Utils.getBlockTexture(Strings.BLOCK_SHIFTER_NAME) + "_bottom");
-		blockTop = reg.registerIcon(Utils.getBlockTexture(Strings.BLOCK_SHIFTER_NAME) + "_top");
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new TileEntityEnergyPortal();
 	}
 }

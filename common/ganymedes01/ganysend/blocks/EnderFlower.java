@@ -21,7 +21,7 @@ public class EnderFlower extends BlockFlower {
 		super(ModIDs.ENDER_FLOWER_ID);
 		setLightValue(0.3F);
 		setCreativeTab(GanysEnd.endTab);
-		setTextureName(Utils.getBlockTexture(Strings.ENDER_FLOWER_NAME, false));
+		setTextureName(Utils.getBlockTexture(Strings.ENDER_FLOWER_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDER_FLOWER_NAME));
 	}
 

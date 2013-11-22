@@ -58,7 +58,7 @@ public class EnderPearlBlock extends Block {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister reg) {
 		blockIcon = new Icon[2];
-		blockIcon[0] = reg.registerIcon(Utils.getBlockTexture(Strings.ENDERPEARL_BLOCK_NAME, false));
-		blockIcon[1] = reg.registerIcon(Utils.getBlockTexture(Strings.ENDERPEARL_BRICK_NAME, false));
+		blockIcon[0] = reg.registerIcon(Utils.getBlockTexture(Strings.ENDERPEARL_BLOCK_NAME));
+		blockIcon[1] = reg.registerIcon(Utils.getBlockTexture(Strings.ENDERPEARL_BRICK_NAME));
 	}
 }

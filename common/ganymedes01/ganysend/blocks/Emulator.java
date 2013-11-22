@@ -26,7 +26,7 @@ public class Emulator extends Block {
 		super(ModIDs.EMULATOR, Material.portal);
 		setHardness(0.3F);
 		setCreativeTab(GanysEnd.endTab);
-		setTextureName(Utils.getBlockTexture(Strings.EMULATOR_NAME, false));
+		setTextureName(Utils.getBlockTexture(Strings.EMULATOR_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.EMULATOR_NAME));
 	}
 

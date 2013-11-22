@@ -21,7 +21,7 @@ public class RawEndium extends Block {
 		setHardness(51F);
 		setResistance(2001.0F);
 		setCreativeTab(GanysEnd.endTab);
-		setTextureName(Utils.getBlockTexture(Strings.RAW_ENDIUM_NAME, false));
+		setTextureName(Utils.getBlockTexture(Strings.RAW_ENDIUM_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.RAW_ENDIUM_NAME));
 	}
 }

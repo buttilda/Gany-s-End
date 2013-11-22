@@ -26,8 +26,8 @@ public class Utils {
 		return Reference.MOD_ID + "." + name;
 	}
 
-	public static final String getBlockTexture(String name, boolean hasSubBlocks) {
-		return Reference.ITEM_BLOCK_TEXTURE_PATH + name + (hasSubBlocks ? "_" : "");
+	public static final String getBlockTexture(String name) {
+		return Reference.ITEM_BLOCK_TEXTURE_PATH + name;
 	}
 
 	public static final String getItemTexture(String name) {

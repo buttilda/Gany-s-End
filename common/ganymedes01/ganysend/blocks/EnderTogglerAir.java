@@ -31,7 +31,7 @@ public class EnderTogglerAir extends Block {
 		shouldMakeSound = GanysEnd.togglerShouldMakeSound;
 		setHardness(-1.0F);
 		setResistance(6000000.0F);
-		setTextureName(Utils.getBlockTexture(Strings.ENDER_TOGGLER_AIR_NAME, false));
+		setTextureName(Utils.getBlockTexture(Strings.ENDER_TOGGLER_AIR_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDER_TOGGLER_AIR_NAME));
 	}
 

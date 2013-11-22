@@ -27,9 +27,9 @@ public class EntityShifter extends BlockShifter {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister reg) {
-		blockSide = reg.registerIcon(Utils.getBlockTexture(Strings.ENTITY_SHIFTER_NAME, true) + "side");
-		blockBottom = reg.registerIcon(Utils.getBlockTexture(Strings.ENTITY_SHIFTER_NAME, true) + "bottom");
-		blockTop = reg.registerIcon(Utils.getBlockTexture(Strings.ENTITY_SHIFTER_NAME, true) + "top");
+		blockSide = reg.registerIcon(Utils.getBlockTexture(Strings.ENTITY_SHIFTER_NAME) + "_side");
+		blockBottom = reg.registerIcon(Utils.getBlockTexture(Strings.ENTITY_SHIFTER_NAME) + "_bottom");
+		blockTop = reg.registerIcon(Utils.getBlockTexture(Strings.ENTITY_SHIFTER_NAME) + "_top");
 	}
 
 	@Override

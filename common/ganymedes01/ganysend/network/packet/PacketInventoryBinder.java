@@ -16,8 +16,8 @@ import java.io.IOException;
 
 public class PacketInventoryBinder extends CustomPacket {
 
-	public int x, y, z;
-	public String playerName;
+	private int x, y, z;
+	private String playerName;
 
 	public PacketInventoryBinder() {
 		super(PacketTypeHandler.INVENTORY_BINDER);

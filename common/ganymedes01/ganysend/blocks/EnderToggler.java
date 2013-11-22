@@ -65,8 +65,8 @@ public class EnderToggler extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister reg) {
-		blockSide = reg.registerIcon(Utils.getBlockTexture(Strings.ENDER_TOGGLER_NAME, true) + "side");
-		blockBottom = reg.registerIcon(Utils.getBlockTexture(Strings.ENDER_TOGGLER_NAME, true) + "bottom");
-		blockTop = reg.registerIcon(Utils.getBlockTexture(Strings.ENDER_TOGGLER_NAME, true) + "top");
+		blockSide = reg.registerIcon(Utils.getBlockTexture(Strings.ENDER_TOGGLER_NAME) + "_side");
+		blockBottom = reg.registerIcon(Utils.getBlockTexture(Strings.ENDER_TOGGLER_NAME) + "_bottom");
+		blockTop = reg.registerIcon(Utils.getBlockTexture(Strings.ENDER_TOGGLER_NAME) + "_top");
 	}
 }

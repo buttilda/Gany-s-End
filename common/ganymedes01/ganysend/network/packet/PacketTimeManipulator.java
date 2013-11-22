@@ -16,8 +16,8 @@ import java.io.IOException;
 
 public class PacketTimeManipulator extends CustomPacket {
 
-	public int x, y, z;
-	public boolean revertTime, advanceTime;
+	private int x, y, z;
+	private boolean revertTime, advanceTime;
 
 	public PacketTimeManipulator() {
 		super(PacketTypeHandler.TIME_MANIPULATOR);
