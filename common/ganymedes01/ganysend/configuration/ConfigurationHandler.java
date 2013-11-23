@@ -83,13 +83,11 @@ public class ConfigurationHandler {
 			ModIDs.ENDIUM_PICKAXE_ID = configItem(Strings.ENDIUM_PICKAXE_NAME);
 			ModIDs.ENDIUM_AXE_ID = configItem(Strings.ENDIUM_AXE_NAME);
 			ModIDs.ENDIUM_SHOVEL_ID = configItem(Strings.ENDIUM_SHOVEL_NAME);
-			ModIDs.SPAWNER_CAPTURER_ID = configItem(Strings.SPAWNER_CAPTURER_NAME);
 
 			// Others
 			GanysEnd.togglerShouldMakeSound = configuration.get("Others", Strings.TOGGLERS_SHOULD_MAKE_SOUND, true).getBoolean(true);
 			GanysEnd.shouldDoVersionCheck = configuration.get("Others", Strings.SHOULD_DO_VERSION_CHECK, true).getBoolean(true);
 			GanysEnd.activateShifters = configuration.get("Others", Strings.ACTIVATE_SHIFTERS, true).getBoolean(true);
-			GanysEnd.activateSpawnerCapturer = configuration.get("Others", Strings.ACTIVATE_SPAWNER_CAPTURER, true).getBoolean(true);
 			GanysEnd.activateEnergyPortal = configuration.get("Others", Strings.ACTIVATE_ENERGY_PORTAL, true).getBoolean(true);
 
 		} catch (Exception e) {

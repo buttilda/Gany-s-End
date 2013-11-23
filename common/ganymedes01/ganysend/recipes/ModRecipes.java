@@ -47,8 +47,6 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.infusedGem, 4, 1), "yyy", "yxy", "yyy", 'x', Item.pocketSundial, 'y', "ganysEndDayMaterial"));
 		GameRegistry.addRecipe(new ItemStack(ModItems.endiumIngot), "xxx", "xxx", "xxx", 'x', new ItemStack(ModItems.endiumIngot, 1, 1));
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.endiumIngot, 9, 1), ModItems.endiumIngot);
-		if (GanysEnd.activateSpawnerCapturer)
-			GameRegistry.addRecipe(new ItemStack(ModItems.spawnerCapturer), "zyz", "yxy", "zyz", 'x', new ItemStack(ModItems.endiumPickaxe), 'y', Block.whiteStone, 'z', Item.emerald);
 		GameRegistry.addRecipe(new ItemStack(ModItems.endiumPickaxe), "xxx", " y ", " y ", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
 		GameRegistry.addRecipe(new ItemStack(ModItems.endiumAxe), "xx", "xy", " y", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
 		GameRegistry.addRecipe(new ItemStack(ModItems.endiumShovel), "x", "y", "y", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);

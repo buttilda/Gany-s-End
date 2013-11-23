@@ -54,5 +54,4 @@ public class ModIDs {
 	public static int ENDIUM_PICKAXE_ID;
 	public static int ENDIUM_AXE_ID;
 	public static int ENDIUM_SHOVEL_ID;
-	public static int SPAWNER_CAPTURER_ID;
 }
