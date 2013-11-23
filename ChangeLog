@@ -47,3 +47,7 @@ v1.5.1
 -Fix: Filtering Hoppers deleting items that it couldn't fit anywhere
 -Fix: Infinite bucket being lost after bring used on certain blocks
 -Added: Craft Ender Pearls using heads
+
+v1.5.2
+-Fix: Entity Shifters with minecarts. The code is a lot simpler now. But it's further away from shifting between dimensions (considering not implementing it at all because it might be too OP)
+-Added: Energy Portal
