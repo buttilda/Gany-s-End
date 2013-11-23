@@ -84,10 +84,11 @@ public class TileEntityEntityShifter extends TileEntityBlockShifter {
 						entity.prevPosY = recY;
 						entity.prevPosZ = recZ;
 						if (entity.isRiding()) {
-							entity.ridingEntity.setLocationAndAngles(recX, recY, recZ, entity.ridingEntity.rotationYaw, entity.ridingEntity.rotationPitch);
-							entity.ridingEntity.prevPosX = recX;
-							entity.ridingEntity.prevPosY = recY;
-							entity.ridingEntity.prevPosZ = recZ;
+							Entity ridden = entity.ridingEntity;
+							ridden.setLocationAndAngles(recX, recY, recZ, entity.ridingEntity.rotationYaw, entity.ridingEntity.rotationPitch);
+							ridden.prevPosX = recX;
+							ridden.prevPosY = recY;
+							ridden.prevPosZ = recZ;
 						}
 					}
 					worldObj.playSoundEffect(telX, telY, telZ, "mob.endermen.portal", 1.0F, 1.0F);

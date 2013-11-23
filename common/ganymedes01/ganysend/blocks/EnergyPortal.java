@@ -30,7 +30,7 @@ public class EnergyPortal extends BlockContainer {
 	protected EnergyPortal() {
 		super(ModIDs.ENERGY_PORTAL_ID, Material.rock);
 		setCreativeTab(GanysEnd.endTab);
-		setTextureName(Utils.getBlockTexture(Strings.ENDERPEARL_BLOCK_NAME));
+		setTextureName(Utils.getBlockTexture(Strings.ENERGY_PORTAL_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENERGY_PORTAL_NAME));
 	}
 
@@ -63,22 +63,6 @@ public class EnergyPortal extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
 		Block.enderChest.randomDisplayTick(world, x, y, z, rand);
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-
-	@Override
-	public int getRenderType() {
-		return -1;
 	}
 
 	@Override
