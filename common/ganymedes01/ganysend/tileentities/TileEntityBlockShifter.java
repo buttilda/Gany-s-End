@@ -16,6 +16,7 @@ public class TileEntityBlockShifter extends TileEntity {
 
 	public int receiverX, receiverY, receiverZ, receiverDim;
 	public boolean tagged;
+	public boolean direction;
 
 	public TileEntityBlockShifter() {
 		receiverX = 0;
@@ -30,10 +31,10 @@ public class TileEntityBlockShifter extends TileEntity {
 		if (!worldObj.isRemote)
 			if (receiverDim == worldObj.provider.dimensionId)
 				if (tagged)
-					//if (worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord))
-					teleportFromTo(xCoord, yCoord + 1, zCoord, receiverX, receiverY + 1, receiverZ);
-		//else
-		//teleportBlockFromTo(receiverX, receiverY + 1, receiverZ, xCoord, yCoord + 1, zCoord);
+					if (direction)
+						teleportFromTo(xCoord, yCoord + 1, zCoord, receiverX, receiverY + 1, receiverZ);
+					else
+						teleportFromTo(receiverX, receiverY + 1, receiverZ, xCoord, yCoord + 1, zCoord);
 	}
 
 	protected void teleportFromTo(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {

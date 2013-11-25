@@ -46,6 +46,15 @@ public class BlockShifter extends BlockContainer {
 	}
 
 	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, int neighbourID) {
+		if (world.isRemote)
+			return;
+		TileEntity tile = world.getBlockTileEntity(x, y, z);
+		if (tile != null && tile instanceof TileEntityBlockShifter)
+			((TileEntityBlockShifter) tile).direction = world.isBlockIndirectlyGettingPowered(x, y, z);
+	}
+
+	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int id, float hitX, float hitY, float hitZ) {
 		if (player.inventory.getCurrentItem() == null)
 			return false;
