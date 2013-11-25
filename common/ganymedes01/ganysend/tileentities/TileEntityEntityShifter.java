@@ -32,67 +32,35 @@ public class TileEntityEntityShifter extends TileEntityBlockShifter {
 		blackListedEntities.add(EntityWeatherEffect.class);
 	}
 
-	public TileEntityEntityShifter() {
-		super();
-	}
-
 	@Override
-	public void updateEntity() {
-		if (worldObj.isRemote)
-			return;
-		if (tagged) {
-			int telX, telY, telZ, telDim, recX, recY, recZ, recDim;
-			if (worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
-				telX = xCoord;
-				telY = yCoord + 1;
-				telZ = zCoord;
-				telDim = worldObj.provider.dimensionId;
-
-				recX = receiverX;
-				recY = receiverY + 1;
-				recZ = receiverZ;
-				recDim = receiverDim;
-			} else {
-				telX = receiverX;
-				telY = receiverY + 1;
-				telZ = receiverZ;
-				telDim = receiverDim;
-
-				recX = xCoord;
-				recY = yCoord + 1;
-				recZ = zCoord;
-				recDim = worldObj.provider.dimensionId;
-			}
-			if (recDim != telDim)
-				return;
-			List list = worldObj.selectEntitiesWithinAABB(Entity.class, AxisAlignedBB.getAABBPool().getAABB(telX, telY, telZ, telX + 1.0D, telY + 1.0D, telZ + 1.0D), IEntitySelector.selectAnything);
-			if (!list.isEmpty()) {
-				Iterator iterator = list.iterator();
-				while (iterator.hasNext()) {
-					Entity entity = (Entity) iterator.next();
-					if (entity.worldObj == worldObj)
-						for (Class<? extends Entity> clazz : blackListedEntities)
-							if (clazz.isAssignableFrom(entity.getClass()))
-								return;
-					if (entity instanceof EntityLivingBase)
-						teleportEntityLiving((EntityLivingBase) entity, recX, recY, recZ);
-					else if (entity instanceof EntityItem)
-						teleportEntityItem((EntityItem) entity, recX, recY, recZ);
-					else {
-						entity.setLocationAndAngles(recX, recY, recZ, entity.rotationYaw, entity.rotationPitch);
-						entity.prevPosX = recX;
-						entity.prevPosY = recY;
-						entity.prevPosZ = recZ;
-						if (entity.isRiding()) {
-							Entity ridden = entity.ridingEntity;
-							ridden.setLocationAndAngles(recX, recY, recZ, entity.ridingEntity.rotationYaw, entity.ridingEntity.rotationPitch);
-							ridden.prevPosX = recX;
-							ridden.prevPosY = recY;
-							ridden.prevPosZ = recZ;
-						}
+	protected void teleportFromTo(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {
+		List list = worldObj.selectEntitiesWithinAABB(Entity.class, AxisAlignedBB.getAABBPool().getAABB(fromX, fromY, fromZ, fromX + 1.0D, fromY + 1.0D, fromZ + 1.0D), IEntitySelector.selectAnything);
+		if (!list.isEmpty()) {
+			Iterator iterator = list.iterator();
+			while (iterator.hasNext()) {
+				Entity entity = (Entity) iterator.next();
+				if (entity.worldObj == worldObj)
+					for (Class<? extends Entity> clazz : blackListedEntities)
+						if (clazz.isAssignableFrom(entity.getClass()))
+							return;
+				if (entity instanceof EntityLivingBase)
+					teleportEntityLiving((EntityLivingBase) entity, toX, toY, toZ);
+				else if (entity instanceof EntityItem)
+					teleportEntityItem((EntityItem) entity, toX, toY, toZ);
+				else {
+					entity.setLocationAndAngles(toX, toY, toZ, entity.rotationYaw, entity.rotationPitch);
+					entity.prevPosX = toX;
+					entity.prevPosY = toY;
+					entity.prevPosZ = toZ;
+					if (entity.isRiding()) {
+						Entity ridden = entity.ridingEntity;
+						ridden.setLocationAndAngles(toX, toY, toZ, entity.ridingEntity.rotationYaw, entity.ridingEntity.rotationPitch);
+						ridden.prevPosX = toX;
+						ridden.prevPosY = toY;
+						ridden.prevPosZ = toZ;
 					}
-					worldObj.playSoundEffect(telX, telY, telZ, "mob.endermen.portal", 1.0F, 1.0F);
 				}
+				worldObj.playSoundEffect(fromX, fromY, fromZ, "mob.endermen.portal", 1.0F, 1.0F);
 			}
 		}
 	}

@@ -1,7 +1,6 @@
 package ganymedes01.ganysend.tileentities;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -15,10 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBlockShifter extends TileEntity {
 
-	public int receiverX;
-	public int receiverY;
-	public int receiverZ;
-	public int receiverDim;
+	public int receiverX, receiverY, receiverZ, receiverDim;
 	public boolean tagged;
 
 	public TileEntityBlockShifter() {
@@ -32,54 +28,38 @@ public class TileEntityBlockShifter extends TileEntity {
 	@Override
 	public void updateEntity() {
 		if (!worldObj.isRemote)
-			if (tagged) {
-				int telX, telY, telZ, telDim, recX, recY, recZ, recDim;
-				if (worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
-					telX = xCoord;
-					telY = yCoord + 1;
-					telZ = zCoord;
-					telDim = worldObj.provider.dimensionId;
+			if (receiverDim == worldObj.provider.dimensionId)
+				if (tagged)
+					//if (worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord))
+					teleportFromTo(xCoord, yCoord + 1, zCoord, receiverX, receiverY + 1, receiverZ);
+		//else
+		//teleportBlockFromTo(receiverX, receiverY + 1, receiverZ, xCoord, yCoord + 1, zCoord);
+	}
 
-					recX = receiverX;
-					recY = receiverY + 1;
-					recZ = receiverZ;
-					recDim = receiverDim;
-				} else {
-					telX = receiverX;
-					telY = receiverY + 1;
-					telZ = receiverZ;
-					telDim = receiverDim;
-
-					recX = xCoord;
-					recY = yCoord + 1;
-					recZ = zCoord;
-					recDim = worldObj.provider.dimensionId;
-				}
-				if (recDim != telDim)
-					return;
-				if (!worldObj.isAirBlock(telX, telY, telZ)) {
-					Block teleported = Block.blocksList[worldObj.getBlockId(telX, telY, telZ)];
-					if (worldObj.isAirBlock(recX, recY, recZ) && !(teleported.getBlockHardness(worldObj, telX, telY, telZ) <= 0.0F) && teleported.blockMaterial != Material.water && teleported.blockMaterial != Material.lava)
-						if (worldObj.blockHasTileEntity(telX, telY, telZ)) {
-							worldObj.setBlock(recX, recY, recZ, teleported.blockID, worldObj.getBlockMetadata(telX, telY, telZ), 3);
-							NBTTagCompound data = new NBTTagCompound();
-							worldObj.getBlockTileEntity(telX, telY, telZ).writeToNBT(data);
-							worldObj.setBlockTileEntity(recX, recY, recZ, TileEntity.createAndLoadEntity(data));
-							if (worldObj.getBlockTileEntity(telX, telY, telZ) instanceof IInventory) {
-								IInventory invt = (IInventory) worldObj.getBlockTileEntity(telX, telY, telZ);
-								for (int i = 0; i < invt.getSizeInventory(); i++)
-									invt.setInventorySlotContents(i, null);
-							}
-							worldObj.setBlockToAir(telX, telY, telZ);
-							worldObj.notifyBlockOfNeighborChange(telX, telY - 1, telZ, -1);
-							worldObj.notifyBlockOfNeighborChange(recX, recY, recZ, teleported.blockID);
-						} else {
-							worldObj.setBlock(recX, recY, recZ, teleported.blockID, worldObj.getBlockMetadata(telX, telY, telZ), 3);
-							worldObj.setBlockToAir(telX, telY, telZ);
-							worldObj.notifyBlockOfNeighborChange(telX, telY - 1, telZ, -1);
-							worldObj.notifyBlockOfNeighborChange(recX, recY, recZ, teleported.blockID);
+	protected void teleportFromTo(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {
+		if (!worldObj.isAirBlock(fromX, fromY, fromZ))
+			if (worldObj.isAirBlock(toX, toY, toZ)) {
+				Block teleported = Block.blocksList[worldObj.getBlockId(fromX, fromY, fromZ)];
+				if (teleported.blockHardness > 0.0F)
+					if (worldObj.blockHasTileEntity(fromX, fromY, fromZ)) {
+						worldObj.setBlock(toX, toY, toZ, teleported.blockID, worldObj.getBlockMetadata(fromX, fromY, fromZ), 3);
+						NBTTagCompound data = new NBTTagCompound();
+						worldObj.getBlockTileEntity(fromX, fromY, fromZ).writeToNBT(data);
+						worldObj.setBlockTileEntity(toX, toY, toZ, TileEntity.createAndLoadEntity(data));
+						if (worldObj.getBlockTileEntity(fromX, fromY, fromZ) instanceof IInventory) {
+							IInventory invt = (IInventory) worldObj.getBlockTileEntity(fromX, fromY, fromZ);
+							for (int i = 0; i < invt.getSizeInventory(); i++)
+								invt.setInventorySlotContents(i, null);
 						}
-				}
+						worldObj.setBlockToAir(fromX, fromY, fromZ);
+						worldObj.notifyBlockOfNeighborChange(fromX, fromY - 1, fromZ, -1);
+						worldObj.notifyBlockOfNeighborChange(toX, toY, toZ, teleported.blockID);
+					} else {
+						worldObj.setBlock(toX, toY, toZ, teleported.blockID, worldObj.getBlockMetadata(fromX, fromY, fromZ), 3);
+						worldObj.setBlockToAir(fromX, fromY, fromZ);
+						worldObj.notifyBlocksOfNeighborChange(toX, toY, toZ, teleported.blockID);
+						worldObj.notifyBlocksOfNeighborChange(fromX, fromY, fromZ, teleported.blockID);
+					}
 			}
 	}
 

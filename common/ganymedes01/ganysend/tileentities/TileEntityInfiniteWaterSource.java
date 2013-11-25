@@ -6,7 +6,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
@@ -19,24 +18,34 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidHandler {
 
-	private FluidTank tank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME);
-
-	public TileEntityInfiniteWaterSource() {
-		tank.setFluid(new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME));
-	}
+	private FluidStack water = new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME);
+	private boolean skip = false;
 
 	@Override
 	public void updateEntity() {
-		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-			if (tile != null && tile instanceof IFluidHandler)
-				fillTank((IFluidHandler) tile, dir);
+		if (worldObj.isRemote)
+			return;
+
+		// Skips every-other tick
+		if (!skip) {
+			ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[worldObj.rand.nextInt(ForgeDirection.VALID_DIRECTIONS.length)];
+			if (worldObj.blockHasTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)) {
+				TileEntity neighbourTile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+				if (neighbourTile instanceof IFluidHandler)
+					fillTank((IFluidHandler) neighbourTile, dir);
+			}
+			skip = true;
+			return;
 		}
+
+		if (skip)
+			skip = false;
 	}
 
 	private void fillTank(IFluidHandler tank, ForgeDirection from) {
-		if (tank.canFill(from.getOpposite(), FluidRegistry.WATER))
-			tank.fill(from.getOpposite(), new FluidStack(FluidRegistry.WATER, 40), true);
+		if (tank != null)
+			if (tank.canFill(from.getOpposite(), FluidRegistry.WATER))
+				tank.fill(from.getOpposite(), water.copy(), true);
 	}
 
 	@Override
@@ -46,14 +55,12 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-		if (resource != null && !resource.isFluidEqual(tank.getFluid()))
-			return null;
 		return drain(from, resource.amount, doDrain);
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		return tank.drain(maxDrain, false);
+		return water;
 	}
 
 	@Override
@@ -68,6 +75,6 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		return new FluidTankInfo[] { tank.getInfo() };
+		return new FluidTankInfo[] { new FluidTankInfo(water, water.amount) };
 	}
 }
