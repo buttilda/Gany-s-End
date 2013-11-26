@@ -32,6 +32,10 @@ public class ConfigurationHandler {
 		return configuration.getItem(name, idGen.getNextItemID()).getInt(idGen.getLastItemID());
 	}
 
+	private static boolean configBoolean(String name, boolean def) {
+		return configuration.get("Others", name, def).getBoolean(def);
+	}
+
 	public static void init(File configFile) {
 		configuration = new Configuration(configFile);
 
@@ -84,9 +88,9 @@ public class ConfigurationHandler {
 			ModIDs.ENDIUM_SHOVEL_ID = configItem(Strings.ENDIUM_SHOVEL_NAME);
 
 			// Others
-			GanysEnd.togglerShouldMakeSound = configuration.get("Others", Strings.TOGGLERS_SHOULD_MAKE_SOUND, true).getBoolean(true);
-			GanysEnd.shouldDoVersionCheck = configuration.get("Others", Strings.SHOULD_DO_VERSION_CHECK, true).getBoolean(true);
-			GanysEnd.activateShifters = configuration.get("Others", Strings.ACTIVATE_SHIFTERS, true).getBoolean(true);
+			GanysEnd.togglerShouldMakeSound = configBoolean(Strings.TOGGLERS_SHOULD_MAKE_SOUND, true);
+			GanysEnd.shouldDoVersionCheck = configBoolean(Strings.SHOULD_DO_VERSION_CHECK, true);
+			GanysEnd.activateShifters = configBoolean(Strings.ACTIVATE_SHIFTERS, true);
 
 		} catch (Exception e) {
 			FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME + " has had a problem loading its configuration");
