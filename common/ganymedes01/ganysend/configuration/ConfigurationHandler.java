@@ -64,7 +64,6 @@ public class ConfigurationHandler {
 			ModIDs.INVENTORY_BINDER_ID = configBlock(Strings.INVENTORY_BINDER_NAME);
 			ModIDs.INFINITE_WATER_SOURCE_ID = configBlock(Strings.INFINITE_WATER_SOURCE_NAME);
 			ModIDs.END_WALLS_ID = configBlock(Strings.END_WALLS_NAME);
-			ModIDs.ENERGY_PORTAL_ID = configBlock(Strings.ENERGY_PORTAL_NAME);
 
 			// Armour
 			ModIDs.ENDIUM_HELMET_ID = configItem(Strings.ENDIUM_HELMET_NAME);
@@ -88,7 +87,6 @@ public class ConfigurationHandler {
 			GanysEnd.togglerShouldMakeSound = configuration.get("Others", Strings.TOGGLERS_SHOULD_MAKE_SOUND, true).getBoolean(true);
 			GanysEnd.shouldDoVersionCheck = configuration.get("Others", Strings.SHOULD_DO_VERSION_CHECK, true).getBoolean(true);
 			GanysEnd.activateShifters = configuration.get("Others", Strings.ACTIVATE_SHIFTERS, true).getBoolean(true);
-			GanysEnd.activateEnergyPortal = configuration.get("Others", Strings.ACTIVATE_ENERGY_PORTAL, true).getBoolean(true);
 
 		} catch (Exception e) {
 			FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME + " has had a problem loading its configuration");

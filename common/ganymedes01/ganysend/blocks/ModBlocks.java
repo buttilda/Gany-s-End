@@ -42,7 +42,6 @@ public class ModBlocks {
 	public static Block inventoryBinder;
 	public static Block infiniteWaterSource;
 	public static Block endWalls;
-	public static Block energyPortal;
 
 	public static void init() {
 		enderFlower = new EnderFlower();
@@ -69,8 +68,6 @@ public class ModBlocks {
 		inventoryBinder = new InventoryBinder();
 		infiniteWaterSource = new InfiniteWaterSource();
 		endWalls = new EndWalls();
-		if (GanysEnd.activateEnergyPortal)
-			energyPortal = new EnergyPortal();
 
 		registerNames();
 	}
@@ -102,7 +99,5 @@ public class ModBlocks {
 		GameRegistry.registerBlock(inventoryBinder, Strings.INVENTORY_BINDER_NAME);
 		GameRegistry.registerBlock(infiniteWaterSource, Strings.INFINITE_WATER_SOURCE_NAME);
 		GameRegistry.registerBlock(endWalls, ItemEndWalls.class, Strings.END_WALLS_NAME);
-		if (GanysEnd.activateEnergyPortal)
-			GameRegistry.registerBlock(energyPortal, Strings.ENERGY_PORTAL_NAME);
 	}
 }

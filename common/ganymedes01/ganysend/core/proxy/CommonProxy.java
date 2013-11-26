@@ -10,7 +10,6 @@ import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityAdvancedFilteringHopper;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 import ganymedes01.ganysend.tileentities.TileEntityBlockShifter;
-import ganymedes01.ganysend.tileentities.TileEntityEnergyPortal;
 import ganymedes01.ganysend.tileentities.TileEntityEntityShifter;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
 import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
@@ -42,7 +41,6 @@ public class CommonProxy implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileEntityEntityShifter.class, Utils.getUnlocalizedName(Strings.ENTITY_SHIFTER_NAME));
 		GameRegistry.registerTileEntity(TileEntityInventoryBinder.class, Utils.getUnlocalizedName(Strings.INVENTORY_BINDER_NAME));
 		GameRegistry.registerTileEntity(TileEntityInfiniteWaterSource.class, Utils.getUnlocalizedName(Strings.INFINITE_WATER_SOURCE_NAME));
-		GameRegistry.registerTileEntity(TileEntityEnergyPortal.class, Utils.getUnlocalizedName(Strings.ENERGY_PORTAL_NAME));
 	}
 
 	public void registerRenderers() {
