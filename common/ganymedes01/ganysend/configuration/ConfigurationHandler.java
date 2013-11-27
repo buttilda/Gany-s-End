@@ -46,7 +46,6 @@ public class ConfigurationHandler {
 			ModIDs.ENDER_FLOWER_ID = configBlock(Strings.ENDER_FLOWER_NAME);
 			ModIDs.ENDSTONE_BRICK_ID = configBlock(Strings.ENDSTONE_BRICK_NAME);
 			ModIDs.ENDERPEARL_BLOCK_ID = configBlock(Strings.ENDERPEARL_BLOCK_NAME);
-			ModIDs.ENDERPEARL_BRICK_ID = configBlock(Strings.ENDERPEARL_BRICK_NAME);
 			ModIDs.ENDSTONE_STAIRS_ID = configBlock(Strings.ENDSTONE_STAIRS_NAME);
 			ModIDs.ENDERPEARL_BRICK_STAIRS_ID = configBlock(Strings.ENDERPEARL_BRICK_STAIRS_NAME);
 			ModIDs.ENDER_TOGGLER_ID = configBlock(Strings.ENDER_TOGGLER_NAME);

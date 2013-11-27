@@ -13,7 +13,6 @@ public class ModIDs {
 	public static int ENDER_FLOWER_ID;
 	public static int ENDSTONE_BRICK_ID;
 	public static int ENDERPEARL_BLOCK_ID;
-	public static int ENDERPEARL_BRICK_ID;
 	public static int ENDSTONE_STAIRS_ID;
 	public static int ENDERPEARL_BRICK_STAIRS_ID;
 	public static int ENDER_TOGGLER_ID;
