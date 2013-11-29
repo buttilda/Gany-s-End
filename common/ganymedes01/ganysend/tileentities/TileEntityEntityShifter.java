@@ -47,34 +47,37 @@ public class TileEntityEntityShifter extends TileEntityBlockShifter {
 					teleportEntityLiving((EntityLivingBase) entity, toX, toY, toZ);
 				else if (entity instanceof EntityItem)
 					teleportEntityItem((EntityItem) entity, toX, toY, toZ);
-				else {
-					entity.setLocationAndAngles(toX, toY, toZ, entity.rotationYaw, entity.rotationPitch);
-					entity.prevPosX = toX;
-					entity.prevPosY = toY;
-					entity.prevPosZ = toZ;
-					if (entity.isRiding()) {
-						Entity ridden = entity.ridingEntity;
-						ridden.setLocationAndAngles(toX, toY, toZ, entity.ridingEntity.rotationYaw, entity.ridingEntity.rotationPitch);
-						ridden.prevPosX = toX;
-						ridden.prevPosY = toY;
-						ridden.prevPosZ = toZ;
-					}
-				}
+				else
+					teleportEntityGeneral(entity, toX, toY, toZ);
 				worldObj.playSoundEffect(fromX, fromY, fromZ, "mob.endermen.portal", 1.0F, 1.0F);
 			}
 		}
 	}
 
-	private void teleportEntityLiving(EntityLivingBase living, int recX, int recY, int recZ) {
-		living.setPositionAndUpdate(recX + 0.5D, recY, recZ + 0.5D);
+	private void teleportEntityLiving(EntityLivingBase living, int toX, int toY, int toZ) {
+		living.setPositionAndUpdate(toX + 0.5D, toY, toZ + 0.5D);
 		living.fallDistance = 0.0F;
 	}
 
-	private void teleportEntityItem(EntityItem item, int recX, int recY, int recZ) {
-		EntityItem newEntity = new EntityItem(worldObj, recX + 0.5D, recY, recZ + 0.5D, item.getEntityItem());
+	private void teleportEntityItem(EntityItem item, int toX, int toY, int toZ) {
+		EntityItem newEntity = new EntityItem(worldObj, toX + 0.5D, toY, toZ + 0.5D, item.getEntityItem());
 		newEntity.copyDataFrom(item, true);
-		newEntity.setLocationAndAngles(recX, recY, recZ, item.rotationYaw, item.rotationPitch);
+		newEntity.setLocationAndAngles(toX, toY, toZ, item.rotationYaw, item.rotationPitch);
 		worldObj.spawnEntityInWorld(newEntity);
 		item.setDead();
+	}
+
+	private void teleportEntityGeneral(Entity entity, int toX, int toY, int toZ) {
+		entity.setLocationAndAngles(toX, toY, toZ, entity.rotationYaw, entity.rotationPitch);
+		entity.prevPosX = toX;
+		entity.prevPosY = toY;
+		entity.prevPosZ = toZ;
+		if (entity.isRiding()) {
+			Entity ridden = entity.ridingEntity;
+			ridden.setLocationAndAngles(toX, toY, toZ, entity.ridingEntity.rotationYaw, entity.ridingEntity.rotationPitch);
+			ridden.prevPosX = toX;
+			ridden.prevPosY = toY;
+			ridden.prevPosZ = toZ;
+		}
 	}
 }

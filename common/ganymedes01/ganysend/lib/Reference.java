@@ -28,5 +28,4 @@ public class Reference {
 
 	public static final int ITEM_ID_BASE = 6500;
 	public static final int BLOCK_ID_BASE = 2000;
-
 }
