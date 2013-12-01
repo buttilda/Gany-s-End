@@ -50,5 +50,4 @@ v1.5.1
 
 v1.5.2
 -Fix: Entity Shifters with minecarts. The code is a lot simpler now. But it's further away from shifting between dimensions (considering not implementing it at all because it might be too OP)
--Added: Energy Portal
 -Removed: Spawner Capturer. Too OP. Soul Shards did it better.
