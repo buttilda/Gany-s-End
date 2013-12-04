@@ -8,6 +8,7 @@ import ganymedes01.ganysend.lib.Strings;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -25,6 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class InfusedGem extends Item {
 
+	private static ItemStack[] dayMaterials, nightMaterials;
 	private static final String[] types = new String[] { "night", "day" };
 	@SideOnly(Side.CLIENT)
 	private Icon[] icons;
@@ -76,5 +78,17 @@ public class InfusedGem extends Item {
 
 		for (int i = 0; i < types.length; i++)
 			icons[i] = reg.registerIcon(Reference.ITEM_BLOCK_TEXTURE_PATH + Strings.INFUSED_GEM_NAME + "_" + types[i]);
+	}
+
+	public static ItemStack[] getDayGemMaterialsForRecipe() {
+		if (dayMaterials == null)
+			dayMaterials = new ItemStack[] { new ItemStack(Block.plantRed), new ItemStack(Block.plantYellow) };
+		return dayMaterials;
+	}
+
+	public static ItemStack[] getNightGemMaterialsForRecipe() {
+		if (nightMaterials == null)
+			nightMaterials = new ItemStack[] { new ItemStack(Block.mushroomBrown), new ItemStack(Block.mushroomRed), new ItemStack(Item.rottenFlesh) };
+		return nightMaterials;
 	}
 }

@@ -59,6 +59,7 @@ public class Strings {
 	public static final String ACTIVATE_SHIFTERS = "activateShifters";
 	public static final String ACTIVATE_SPAWNER_CAPTURER = "activateSpawnerCapturer";
 	public static final String ACTIVATE_ENERGY_PORTAL = "activateEnergyPortal";
+	public static final String ENABLE_RANDOM_HEAD_DROP = "enableRandomHeadDrop";
 
 	// Version check
 	public static final String VERSION_CHECK_INIT = "Starting version check.";
