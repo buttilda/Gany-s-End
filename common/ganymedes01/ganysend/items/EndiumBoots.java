@@ -23,8 +23,8 @@ public class EndiumBoots extends EndiumArmour {
 	}
 
 	@Override
-	protected void handleInWater(EntityPlayer player, ItemStack stack) {
-		if (player.isInWater()) {
+	protected void handleInWater(EntityPlayer player, ItemStack stack, boolean isWaterproof) {
+		if (!isWaterproof && player.isInWater()) {
 			stack.damageItem(1, player);
 			player.attackEntityFrom(DamageSource.generic, 1F);
 		} else

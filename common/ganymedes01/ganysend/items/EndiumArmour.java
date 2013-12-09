@@ -90,11 +90,12 @@ public class EndiumArmour extends ItemArmor implements IRepairable {
 			return;
 		}
 
+		boolean isWaterproof = false;
 		Map enchs = EnchantmentHelper.getEnchantments(stack);
 		if (!enchs.isEmpty() && enchs.get(ModEnchants.imperviousness.effectId) != null)
-			return;
+			isWaterproof = true;
 
-		if (world.isRaining()) {
+		if (!isWaterproof && world.isRaining()) {
 			int xCoord = MathHelper.floor_double(player.posX);
 			int yCoord = MathHelper.floor_double(player.posY) + 1;
 			int zCoord = MathHelper.floor_double(player.posZ);
@@ -106,10 +107,10 @@ public class EndiumArmour extends ItemArmor implements IRepairable {
 			}
 		}
 
-		handleInWater(player, stack);
+		handleInWater(player, stack, isWaterproof);
 	}
 
-	protected void handleInWater(EntityPlayer player, ItemStack stack) {
+	protected void handleInWater(EntityPlayer player, ItemStack stack, boolean isWaterproof) {
 
 	}
 }

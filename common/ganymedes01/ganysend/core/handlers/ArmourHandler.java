@@ -3,6 +3,7 @@ package ganymedes01.ganysend.core.handlers;
 import ganymedes01.ganysend.items.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -30,7 +31,9 @@ public class ArmourHandler {
 				if (isWearing = player.getCurrentArmor(3) == null || player.getCurrentArmor(3).itemID != ModItems.endiumHelmet.itemID) {
 					if (isWearing) {
 						isWearing = false;
-						player.removePotionEffect(Potion.nightVision.id);
+						PotionEffect NVEffect = player.getActivePotionEffect(Potion.nightVision);
+						if (NVEffect != null && NVEffect.getAmplifier() == -3)
+							player.removePotionEffect(Potion.nightVision.id);
 					}
 				} else if (player.getCurrentArmor(3).itemID == ModItems.endiumHelmet.itemID && !isWearing)
 					isWearing = true;
