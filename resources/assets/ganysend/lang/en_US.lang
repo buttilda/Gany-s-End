@@ -77,6 +77,9 @@ container.ganysend:enderFurnace=Ender Furnace
 pullallbut=Pull all but:
 pullonly=Pull Only:
 
+# Enchantments
+enchantment.imperviousness=Imperviousness
+
 # Others localizations
 itemGroup.ganysend=Gany's End
 death.attack.ganysEndBehead=%1$s was beheaded

@@ -11,6 +11,7 @@ import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
 import ganymedes01.ganysend.core.proxy.CommonProxy;
 import ganymedes01.ganysend.core.utils.VersionHelper;
 import ganymedes01.ganysend.creativetab.CreativeTabEnd;
+import ganymedes01.ganysend.enchantment.ModEnchants;
 import ganymedes01.ganysend.integration.ModIntegrator;
 import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.Reference;
@@ -29,6 +30,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerAboutToStartEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -76,6 +78,7 @@ public class GanysEnd {
 		ModBlocks.init();
 		ModItems.init();
 		ModRecipes.init();
+		ModEnchants.init();
 	}
 
 	@EventHandler
@@ -90,5 +93,10 @@ public class GanysEnd {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+	}
+
+	@EventHandler
+	public void postPostInit(FMLServerAboutToStartEvent event) {
+		ModIntegrator.postIntegrateMods();
 	}
 }

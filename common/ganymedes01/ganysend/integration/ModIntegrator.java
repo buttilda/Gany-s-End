@@ -28,4 +28,10 @@ public class ModIntegrator {
 		if (Loader.isModLoaded("ganysnether"))
 			GanysNetherManager.init();
 	}
+
+	public static void postIntegrateMods() {
+		// ThaumCraft
+		if (Loader.isModLoaded("Thaumcraft"))
+			ThaumCraftManager.postInit();
+	}
 }

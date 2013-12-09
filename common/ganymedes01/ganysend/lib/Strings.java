@@ -53,6 +53,9 @@ public class Strings {
 	public static final String ENDIUM_SHOVEL_NAME = "endiumShovel";
 	public static final String ENDIUM_NUGGET_NAME = "endiumNugget";
 
+	// Enchantments
+	public static final String IMPERVIOUSNESS_NAME = "enchantment.imperviousness";
+
 	// Others
 	public static final String TOGGLERS_SHOULD_MAKE_SOUND = "togglersShouldMakeSound";
 	public static final String SHOULD_DO_VERSION_CHECK = "shouldDoVersionCheck";

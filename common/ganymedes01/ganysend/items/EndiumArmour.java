@@ -2,7 +2,12 @@ package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.enchantment.ModEnchants;
 import ganymedes01.ganysend.lib.ModMaterials;
+
+import java.util.Map;
+
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -25,12 +30,12 @@ public class EndiumArmour extends ItemArmor implements IRepairable {
 
 	private final int type;
 	private int coolDown;
-	private final int maxCoolDown;
+	private final int MAX_COOL_DOWN;
 
 	public EndiumArmour(int id, int type) {
 		super(id, ModMaterials.ENDIUM_ARMOUR, 0, type);
 		this.type = type;
-		maxCoolDown = 10;
+		MAX_COOL_DOWN = 10;
 		setMaxStackSize(1);
 		setCreativeTab(GanysEnd.endTab);
 	}
@@ -84,15 +89,20 @@ public class EndiumArmour extends ItemArmor implements IRepairable {
 			player.setCurrentItemOrArmor(armourIndex, null);
 			return;
 		}
+
+		Map enchs = EnchantmentHelper.getEnchantments(stack);
+		if (!enchs.isEmpty() && enchs.get(ModEnchants.imperviousness.effectId) != null)
+			return;
+
 		if (world.isRaining()) {
 			int xCoord = MathHelper.floor_double(player.posX);
 			int yCoord = MathHelper.floor_double(player.posY) + 1;
 			int zCoord = MathHelper.floor_double(player.posZ);
 			if (world.canBlockSeeTheSky(xCoord, yCoord, zCoord))
 				coolDown--;
-			if (coolDown == 0) {
+			if (coolDown <= 0) {
 				stack.damageItem(1, player);
-				coolDown = maxCoolDown;
+				coolDown = MAX_COOL_DOWN;
 			}
 		}
 

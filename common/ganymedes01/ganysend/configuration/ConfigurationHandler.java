@@ -36,6 +36,11 @@ public class ConfigurationHandler {
 		return configuration.get("Others", name, def).getBoolean(def);
 	}
 
+	private static int configEnch(String ench, int def) {
+		int config = configuration.get("Enchantments", ench, def).getInt(def);
+		return config > 0 ? config : def;
+	}
+
 	public static void init(File configFile) {
 		configuration = new Configuration(configFile);
 
@@ -85,6 +90,9 @@ public class ConfigurationHandler {
 			ModIDs.ENDIUM_PICKAXE_ID = configItem(Strings.ENDIUM_PICKAXE_NAME);
 			ModIDs.ENDIUM_AXE_ID = configItem(Strings.ENDIUM_AXE_NAME);
 			ModIDs.ENDIUM_SHOVEL_ID = configItem(Strings.ENDIUM_SHOVEL_NAME);
+
+			// Enchantments
+			ModIDs.IMPERVIOUSNESS_ID = configEnch(Strings.IMPERVIOUSNESS_NAME, 100);
 
 			// Others
 			GanysEnd.togglerShouldMakeSound = configBoolean(Strings.TOGGLERS_SHOULD_MAKE_SOUND, true);
