@@ -1,5 +1,7 @@
 package ganymedes01.ganysend.integration;
 
+import ganymedes01.ganysend.lib.Reference;
+
 import java.util.ArrayList;
 
 import com.google.common.reflect.ClassPath;
@@ -20,7 +22,7 @@ public class ModIntegrator {
 		modIntegrations = new ArrayList<Integration>();
 
 		try {
-			for (ClassInfo clazzInfo : ClassPath.from(ModIntegrator.class.getClassLoader()).getTopLevelClasses(ModIntegrator.class.getPackage().getName())) {
+			for (ClassInfo clazzInfo : ClassPath.from(ModIntegrator.class.getClassLoader()).getTopLevelClasses("ganymedes01." + Reference.MOD_ID + ".integration")) {
 				Class clazz = clazzInfo.load();
 				if (clazz != Integration.class && Integration.class.isAssignableFrom(clazz))
 					modIntegrations.add((Integration) clazz.newInstance());
