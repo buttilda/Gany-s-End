@@ -2,6 +2,8 @@ package ganymedes01.ganysend.configuration;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.IdGenerator;
+import ganymedes01.ganysend.integration.Integration;
+import ganymedes01.ganysend.integration.ModIntegrator;
 import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
@@ -39,6 +41,10 @@ public class ConfigurationHandler {
 	private static int configEnch(String ench, int def) {
 		int config = configuration.get("Enchantments", ench, def).getInt(def);
 		return config > 0 ? config : def;
+	}
+
+	private static boolean configIntegrationBoolean(String modID) {
+		return configuration.get("Mod Integration", "Integrate " + modID, true).getBoolean(true);
 	}
 
 	public static void init(File configFile) {
@@ -93,6 +99,10 @@ public class ConfigurationHandler {
 
 			// Enchantments
 			ModIDs.IMPERVIOUSNESS_ID = configEnch(Strings.IMPERVIOUSNESS_NAME, 100);
+
+			// Mod Integration
+			for (Integration integration : ModIntegrator.modIntegrations)
+				integration.setShouldIntegrate(configIntegrationBoolean(integration.getModID()));
 
 			// Others
 			GanysEnd.togglerShouldMakeSound = configBoolean(Strings.TOGGLERS_SHOULD_MAKE_SOUND, true);

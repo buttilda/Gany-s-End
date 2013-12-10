@@ -22,9 +22,10 @@ import thaumcraft.api.research.ResearchPage;
  * 
  */
 
-public class ThaumCraftManager {
+public class ThaumCraftManager extends Integration {
 
-	public static void init() {
+	@Override
+	public void init() {
 		ThaumcraftApi.addSmeltingBonus(new ItemStack(ModItems.endiumIngot), new ItemStack(ModItems.endiumIngot, 0, 1));
 		ThaumcraftApi.portableHoleBlackList.add(ModBlocks.enderToggler_air.blockID);
 
@@ -34,11 +35,20 @@ public class ThaumCraftManager {
 		addAspectsToItem(ModBlocks.enderFlower.blockID, new Aspect[] { Aspect.PLANT, Aspect.SENSES, Aspect.LIFE, Aspect.ELDRITCH, Aspect.MAGIC, Aspect.TRAVEL }, new int[] { 1, 1, 1, 1, 1, 1 });
 	}
 
-	public static void postInit() {
+	@Override
+	public void postInit() {
+	}
+
+	public void postPostInit() {
 		addInfusionEnchantmentRecipe(Enchantment.enchantmentsList[ModEnchants.imperviousness.effectId], 4, new AspectList().add(Aspect.SLIME, 6).add(Aspect.WATER, 4).add(Aspect.MAGIC, 10), ItemApi.getItem("itemResource", 14), new ItemStack(Item.dyePowder, 1, 2), new ItemStack(Item.slimeBall));
 	}
 
-	private static void addInfusionEnchantmentRecipe(Enchantment ench, int instability, AspectList aspects, ItemStack... ingredients) {
+	@Override
+	public String getModID() {
+		return "Thaumcraft";
+	}
+
+	private void addInfusionEnchantmentRecipe(Enchantment ench, int instability, AspectList aspects, ItemStack... ingredients) {
 		InfusionEnchantmentRecipe recipe = ThaumcraftApi.addInfusionEnchantmentRecipe("INFUSIONENCHANTMENT", ench, instability, aspects, ingredients);
 		ResearchItem research = ResearchCategories.getResearch("INFUSIONENCHANTMENT");
 
@@ -50,11 +60,11 @@ public class ThaumCraftManager {
 		research.setPages(pages);
 	}
 
-	private static void addAspectsToItem(int id, Aspect[] aspects, int[] amounts) {
+	private void addAspectsToItem(int id, Aspect[] aspects, int[] amounts) {
 		addAspectsToItem(id, -1, aspects, amounts);
 	}
 
-	private static void addAspectsToItem(int id, int meta, Aspect[] aspects, int[] amounts) {
+	private void addAspectsToItem(int id, int meta, Aspect[] aspects, int[] amounts) {
 		AspectList list = new AspectList();
 		for (int i = 0; i < aspects.length; i++)
 			list.add(aspects[i], amounts[i]);

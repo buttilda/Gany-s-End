@@ -1,6 +1,9 @@
 package ganymedes01.ganysend.integration;
 
-import cpw.mods.fml.common.Loader;
+import java.util.ArrayList;
+
+import com.google.common.reflect.ClassPath;
+import com.google.common.reflect.ClassPath.ClassInfo;
 
 /**
  * Gany's End
@@ -11,27 +14,30 @@ import cpw.mods.fml.common.Loader;
 
 public class ModIntegrator {
 
-	public static void integrateMods() {
-		// BuildCraft
-		if (Loader.isModLoaded("BuildCraft|Transport"))
-			BuildCraftFacadeManager.registerFacades();
+	public static ArrayList<Integration> modIntegrations;
 
-		// ThaumCraft
-		if (Loader.isModLoaded("Thaumcraft"))
-			ThaumCraftManager.init();
+	public static void preInit() {
+		modIntegrations = new ArrayList<Integration>();
 
-		// Equivalent Exchange 3
-		if (Loader.isModLoaded("EE3"))
-			EE3Manager.init();
-
-		// Gany's Nether
-		if (Loader.isModLoaded("ganysnether"))
-			GanysNetherManager.init();
+		try {
+			for (ClassInfo clazzInfo : ClassPath.from(ModIntegrator.class.getClassLoader()).getTopLevelClasses(ModIntegrator.class.getPackage().getName())) {
+				Class clazz = clazzInfo.load();
+				if (clazz != Integration.class && Integration.class.isAssignableFrom(clazz))
+					modIntegrations.add((Integration) clazz.newInstance());
+			}
+		} catch (Exception e) {
+		}
 	}
 
-	public static void postIntegrateMods() {
-		// ThaumCraft
-		if (Loader.isModLoaded("Thaumcraft"))
-			ThaumCraftManager.postInit();
+	public static void init() {
+		for (Integration integration : modIntegrations)
+			if (integration.shouldIntegrate())
+				integration.init();
+	}
+
+	public static void postInit() {
+		for (Integration integration : modIntegrations)
+			if (integration.shouldIntegrate())
+				integration.postInit();
 	}
 }

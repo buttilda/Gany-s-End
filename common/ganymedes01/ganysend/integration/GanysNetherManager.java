@@ -14,9 +14,10 @@ import cpw.mods.fml.common.event.FMLInterModComms;
  * 
  */
 
-public class GanysNetherManager {
+public class GanysNetherManager extends Integration {
 
-	public static void init() {
+	@Override
+	public void init() {
 		addMagmaticCentrifugeRecipe(new ItemStack(ModBlocks.rawEndium), new ItemStack(ModBlocks.rawEndium), new ItemStack(ModItems.endiumIngot, 2), new ItemStack(ModItems.endiumIngot, 1, 1));
 
 		ItemStack head = new ItemStack(ModItems.itemNewSkull, 1, 3);
@@ -25,7 +26,16 @@ public class GanysNetherManager {
 		addStackToUndertakers(head, 50);
 	}
 
-	private static final void addMagmaticCentrifugeRecipe(ItemStack material1, ItemStack material2, ItemStack... result) {
+	@Override
+	public void postInit() {
+	}
+
+	@Override
+	public String getModID() {
+		return "ganysnether";
+	}
+
+	private void addMagmaticCentrifugeRecipe(ItemStack material1, ItemStack material2, ItemStack... result) {
 		if (result.length > 4 || material1 == null || material2 == null)
 			return;
 		else
@@ -59,7 +69,7 @@ public class GanysNetherManager {
 		FMLInterModComms.sendMessage("ganysnether", "addCentrifugeRecipe", data);
 	}
 
-	private static final void addStackToUndertakers(ItemStack stack, int weight) {
+	private void addStackToUndertakers(ItemStack stack, int weight) {
 		if (stack != null && stack.stackSize > 0 && weight > 0) {
 			NBTTagCompound data = new NBTTagCompound();
 

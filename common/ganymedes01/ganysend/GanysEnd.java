@@ -12,7 +12,9 @@ import ganymedes01.ganysend.core.proxy.CommonProxy;
 import ganymedes01.ganysend.core.utils.VersionHelper;
 import ganymedes01.ganysend.creativetab.CreativeTabEnd;
 import ganymedes01.ganysend.enchantment.ModEnchants;
+import ganymedes01.ganysend.integration.Integration;
 import ganymedes01.ganysend.integration.ModIntegrator;
+import ganymedes01.ganysend.integration.ThaumCraftManager;
 import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.network.PacketHandler;
@@ -62,6 +64,8 @@ public class GanysEnd {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		ModIntegrator.preInit();
+
 		ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MASTER + File.separator + Reference.MOD_ID + ".cfg"));
 
 		if (shouldDoVersionCheck) {
@@ -88,15 +92,20 @@ public class GanysEnd {
 		proxy.registerRenderers();
 		GameRegistry.registerWorldGenerator(new EnderFlowerGenerator());
 
-		ModIntegrator.integrateMods();
+		ModIntegrator.init();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		ModIntegrator.postInit();
 	}
 
 	@EventHandler
 	public void postPostInit(FMLServerAboutToStartEvent event) {
-		ModIntegrator.postIntegrateMods();
+		for (Integration integration : ModIntegrator.modIntegrations)
+			if (integration.shouldIntegrate() && integration instanceof ThaumCraftManager) {
+				((ThaumCraftManager) integration).postPostInit();
+				return;
+			}
 	}
 }
