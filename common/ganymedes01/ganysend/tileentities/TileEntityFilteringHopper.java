@@ -204,14 +204,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 
 	private IInventory getInventoryAbove() {
 		TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
-		if (tile instanceof IInventory)
-			if (tile instanceof TileEntityChest) {
-				Block block = Block.blocksList[worldObj.getBlockId(tile.xCoord, tile.yCoord, tile.zCoord)];
-				if (block instanceof BlockChest)
-					return ((BlockChest) block).getInventory(worldObj, tile.xCoord, tile.yCoord, tile.zCoord);
-			} else
-				return (IInventory) tile;
-		return null;
+		return tile instanceof TileEntityChest ? getInventoryFromChest((TileEntityChest) tile) : tile instanceof IInventory ? (IInventory) tile : null;
 	}
 
 	private IInventory getInventoryToInsert() {
@@ -237,7 +230,14 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		}
 
 		TileEntity tile = worldObj.getBlockTileEntity(x, y, z);
-		return tile instanceof IInventory ? (IInventory) tile : null;
+		return tile instanceof TileEntityChest ? getInventoryFromChest((TileEntityChest) tile) : tile instanceof IInventory ? (IInventory) tile : null;
+	}
+
+	private IInventory getInventoryFromChest(TileEntityChest chest) {
+		Block block = Block.blocksList[worldObj.getBlockId(chest.xCoord, chest.yCoord, chest.zCoord)];
+		if (block instanceof BlockChest)
+			return ((BlockChest) block).getInventory(worldObj, chest.xCoord, chest.yCoord, chest.zCoord);
+		return null;
 	}
 
 	private int getSideOfInventory() {
