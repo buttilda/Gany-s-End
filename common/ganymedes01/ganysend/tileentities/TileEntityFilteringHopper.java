@@ -6,6 +6,8 @@ import ganymedes01.ganysend.lib.Strings;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockChest;
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.StatCollector;
 
@@ -201,7 +204,14 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 
 	private IInventory getInventoryAbove() {
 		TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
-		return tile instanceof IInventory ? (IInventory) tile : null;
+		if (tile instanceof IInventory)
+			if (tile instanceof TileEntityChest) {
+				Block block = Block.blocksList[worldObj.getBlockId(tile.xCoord, tile.yCoord, tile.zCoord)];
+				if (block instanceof BlockChest)
+					return ((BlockChest) block).getInventory(worldObj, tile.xCoord, tile.yCoord, tile.zCoord);
+			} else
+				return (IInventory) tile;
+		return null;
 	}
 
 	private IInventory getInventoryToInsert() {
