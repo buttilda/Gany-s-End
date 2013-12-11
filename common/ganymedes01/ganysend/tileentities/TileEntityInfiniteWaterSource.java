@@ -26,26 +26,12 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 		if (worldObj.isRemote)
 			return;
 
-		// Skips every-other tick
-		if (!skip) {
-			ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[worldObj.rand.nextInt(ForgeDirection.VALID_DIRECTIONS.length)];
-			if (worldObj.blockHasTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ)) {
-				TileEntity neighbourTile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-				if (neighbourTile instanceof IFluidHandler)
-					fillTank((IFluidHandler) neighbourTile, dir);
-			}
-			skip = true;
-			return;
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			TileEntity tile = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if (!(tile instanceof IFluidHandler))
+				continue;
+			((IFluidHandler) tile).fill(dir.getOpposite(), water.copy(), true);
 		}
-
-		if (skip)
-			skip = false;
-	}
-
-	private void fillTank(IFluidHandler tank, ForgeDirection from) {
-		if (tank != null)
-			if (tank.canFill(from.getOpposite(), FluidRegistry.WATER))
-				tank.fill(from.getOpposite(), water.copy(), true);
 	}
 
 	@Override
