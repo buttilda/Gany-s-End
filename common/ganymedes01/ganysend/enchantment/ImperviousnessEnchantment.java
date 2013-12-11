@@ -17,14 +17,14 @@ import net.minecraft.item.ItemStack;
 public class ImperviousnessEnchantment extends Enchantment {
 
 	public ImperviousnessEnchantment() {
-		super(ModIDs.IMPERVIOUSNESS_ID, 10, EnumEnchantmentType.armor);
+		super(ModIDs.IMPERVIOUSNESS_ID, 5, EnumEnchantmentType.armor);
 		addToBookList(this);
 		setName("imperviousness");
 	}
 
 	@Override
 	public int getMinEnchantability(int lvl) {
-		return 20;
+		return 25;
 	}
 
 	@Override
@@ -33,9 +33,17 @@ public class ImperviousnessEnchantment extends Enchantment {
 	}
 
 	@Override
+	public boolean isAllowedOnBooks() {
+		return false;
+	}
+
+	@Override
 	public boolean canApply(ItemStack stack) {
-		if (stack != null && stack.getItem() instanceof ItemArmor)
-			return ((ItemArmor) stack.getItem()).getArmorMaterial() == ModMaterials.ENDIUM_ARMOUR;
+		if (stack != null && stack.getItem() instanceof ItemArmor) {
+			String materialName = ((ItemArmor) stack.getItem()).getArmorMaterial().name();
+			System.out.println(materialName);
+			return materialName.equals(ModMaterials.ENDIUM_ARMOUR.name()) || materialName.compareToIgnoreCase("BLAZE") == 0;
+		}
 		return false;
 	}
 }
