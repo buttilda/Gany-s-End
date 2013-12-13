@@ -95,11 +95,11 @@ public class EndiumArmour extends ItemArmor implements IRepairable {
 		if (!enchs.isEmpty() && enchs.get(ModEnchants.imperviousness.effectId) != null)
 			isWaterproof = true;
 
-		if (!isWaterproof && world.isRaining()) {
+		if (!isWaterproof) {
 			int xCoord = MathHelper.floor_double(player.posX);
 			int yCoord = MathHelper.floor_double(player.posY) + 1;
 			int zCoord = MathHelper.floor_double(player.posZ);
-			if (world.canBlockSeeTheSky(xCoord, yCoord, zCoord))
+			if (world.canLightningStrikeAt(xCoord, yCoord, zCoord))
 				coolDown--;
 			if (coolDown <= 0) {
 				stack.damageItem(1, player);
