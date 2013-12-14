@@ -51,3 +51,9 @@ v1.5.1
 v1.5.2
 -Fix: Entity Shifters with minecarts. The code is a lot simpler now. But it's further away from shifting between dimensions (considering not implementing it at all because it might be too OP)
 -Removed: Spawner Capturer. Too OP. Soul Shards did it better.
+
+v1.5.3
+-Added: Imperviousness enchant - When enchanted with it Endium Armour won't take damage when touching water
+-Fix: Night Vision potions now work when this mod is installed
+-Added: Imperviousness can be enchanted on Gany's Nether Blaze Armour (same effects)
+-Fix: Hoppers work with double chests as they should
