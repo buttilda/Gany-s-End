@@ -57,3 +57,6 @@ v1.5.3
 -Fix: Night Vision potions now work when this mod is installed
 -Added: Imperviousness can be enchanted on Gany's Nether Blaze Armour (same effects)
 -Fix: Hoppers work with double chests as they should
+
+v1.5.4
+-Fix: Hoppers now work as they should with ISidedInventories (thanks to KingLemming for the tips)
