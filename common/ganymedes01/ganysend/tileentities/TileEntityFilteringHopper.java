@@ -157,7 +157,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 				else if (stack.stackSize <= 0) {
 					inventoryToPull.setInventorySlotContents(slot, null);
 					continue;
-				} else if (shouldPull(stack)) {
+				} else if (shouldPull(stack) && ((ISidedInventory) inventoryToPull).canExtractItem(slot, stack, 0)) {
 					ItemStack singleItemItemStack = stack.copy();
 					singleItemItemStack.stackSize = 1;
 					if (Utils.addStackToInventory(this, singleItemItemStack)) {
