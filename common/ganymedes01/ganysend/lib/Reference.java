@@ -11,7 +11,7 @@ public class Reference {
 
 	public static final String MOD_ID = "ganysend";
 	public static final String MOD_NAME = "Gany's End";
-	public static final String DEPENDENCIES = "required-after:Forge@[9.10.1.849,)";
+	public static final String DEPENDENCIES = "required-after:Forge@[9.10.1.849,);after:ThermalExpansion";
 	public static final String CHANNEL_NAME = "GanysEnd";
 	public static final String MASTER = "GanysMods";
 	public static final String VERSION_NUMBER = "1.5.4";
