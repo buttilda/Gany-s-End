@@ -12,6 +12,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -30,16 +31,10 @@ public class RenderPlayerHandler {
 		if (event.entityPlayer != null) {
 			ModelBiped model = null;
 			try {
-				Field f = event.renderer.getClass().getDeclaredField("field_77109_a");
+				Field f = ReflectionHelper.findField(event.renderer.getClass(), "field_77109_a", "modelBipedMain");
 				f.setAccessible(true);
 				model = (ModelBiped) f.get(event.renderer);
 			} catch (Exception e) {
-				try {
-					Field f = event.renderer.getClass().getDeclaredField("modelBipedMain");
-					f.setAccessible(true);
-					model = (ModelBiped) f.get(event.renderer);
-				} catch (Exception e2) {
-				}
 			}
 			if (model == null)
 				return;
