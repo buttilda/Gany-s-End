@@ -41,7 +41,6 @@ public class ImperviousnessEnchantment extends Enchantment {
 	public boolean canApply(ItemStack stack) {
 		if (stack != null && stack.getItem() instanceof ItemArmor) {
 			String materialName = ((ItemArmor) stack.getItem()).getArmorMaterial().name();
-			System.out.println(materialName);
 			return materialName.equals(ModMaterials.ENDIUM_ARMOUR.name()) || materialName.compareToIgnoreCase("BLAZE") == 0;
 		}
 		return false;
