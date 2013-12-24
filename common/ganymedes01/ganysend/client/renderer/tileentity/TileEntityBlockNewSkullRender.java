@@ -5,6 +5,7 @@ import ganymedes01.ganysend.core.utils.HeadTextures;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
@@ -58,9 +59,12 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 	private void renderSpecial(int skullType, float skullRotation) {
 		if (HeadTextures.getSecondTexture(skullType) != null) {
 			bindTexture(HeadTextures.getSecondTexture(skullType));
-			if (skullType == 9)
+			if (skullType == 9 || skullType == 20) {
+				int c = 12;
+				if (skullType == 20)
+					GL11.glColor3f(EntitySheep.fleeceColorTable[c][0], EntitySheep.fleeceColorTable[c][1], EntitySheep.fleeceColorTable[c][2]);
 				model.renderOverlay(skullRotation);
-			else
+			} else
 				model.render(skullRotation);
 		}
 	}

@@ -47,8 +47,8 @@ public class EnderScythe extends ItemSword {
 
 	@Override
 	public boolean onLeftClickEntity(ItemStack item, EntityPlayer player, Entity target) {
-		if (target instanceof EntityLivingBase)
-			if (!player.worldObj.isRemote) {
+		if (!player.worldObj.isRemote)
+			if (target instanceof EntityLivingBase) {
 				((EntityLivingBase) target).attackEntityFrom(CustomDamageSources.beheading, 4.0F + ModMaterials.ENDIUM_TOOLS.getDamageVsEntity());
 				damageItem(item, player);
 			}

@@ -1,12 +1,14 @@
 package ganymedes01.ganysend.core.utils;
 
 import ganymedes01.ganysend.items.ModItems;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityPigZombie;
@@ -37,9 +39,19 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class HeadsHelper {
 
+	public static boolean useTwilightForrestMobs = false;
+	public static String[] skullTypes = new String[] { "blaze", "enderman", "pigman", "player", "spider", "caveSpider", "pig", "cow", "mooshroom", "sheep", "wolf", "villager", "chicken", "witch", "zombieVillager", "ironGolem", "squid", "wither", "bunny", "penguin", "bighorn", "wildDeer",
+	"wildBoar", "redcap", "druid", "hedgeSpider", "ghast" };
+
 	public static final ItemStack getHeadfromEntity(EntityLivingBase target) {
 		if (target.isChild())
 			return null;
+
+		if (useTwilightForrestMobs) {
+			ItemStack head = getTFMobHead(EntityList.getEntityString(target));
+			if (head != null)
+				return head;
+		}
 
 		if (target instanceof EntityMob) {
 			if (target instanceof EntityCreeper)
@@ -95,6 +107,30 @@ public class HeadsHelper {
 			return new ItemStack(ModItems.itemNewSkull, 1, 15);
 		else if (target instanceof EntitySquid)
 			return new ItemStack(ModItems.itemNewSkull, 1, 16);
+		else if (target instanceof EntityGhast)
+			return new ItemStack(ModItems.itemNewSkull, 1, 26);
+
+		return null;
+	}
+
+	private static ItemStack getTFMobHead(String mobName) {
+		if (mobName.equals("TwilightForest.Forest Bunny"))
+			return new ItemStack(ModItems.itemNewSkull, 1, 18);
+		else if (mobName.equals("TwilightForest.Penguin"))
+			return new ItemStack(ModItems.itemNewSkull, 1, 19);
+		else if (mobName.equals("TwilightForest.Bighorn Sheep"))
+			return new ItemStack(ModItems.itemNewSkull, 1, 20);
+		else if (mobName.equals("TwilightForest.Wild Deer"))
+			return new ItemStack(ModItems.itemNewSkull, 1, 21);
+		else if (mobName.equals("TwilightForest.Wild Boar"))
+			return new ItemStack(ModItems.itemNewSkull, 1, 22);
+		else if (mobName.equals("TwilightForest.Redcap") || mobName.equals("TwilightForest.Redcap Sapper"))
+			return new ItemStack(ModItems.itemNewSkull, 1, 23);
+		else if (mobName.equals("TwilightForest.Skeleton Druid"))
+			return new ItemStack(ModItems.itemNewSkull, 1, 24);
+		else if (mobName.equals("TwilightForest.Hedge Spider"))
+			return new ItemStack(ModItems.itemNewSkull, 1, 25);
+
 		return null;
 	}
 }

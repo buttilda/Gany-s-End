@@ -172,6 +172,141 @@ public class ModelHead extends ModelSkeletonHead {
 		GL11.glScaled(2F / 3F, 2F / 3F, 2F / 3F);
 	}
 
+	private void setBunny() {
+		hideOverlay();
+
+		setTextureOffset("head.head", 0, 0);
+		setTextureOffset("head.ear2", 16, 0);
+		setTextureOffset("head.ear1", 16, 0);
+
+		head = new ModelRenderer(this, "head").setTextureSize(32, 32);
+		head.setRotationPoint(0.0F, 0.0F, 0.0F);
+		setRotation(head, 0.0F, 0.0F, 0.0F);
+		head.mirror = true;
+		head.addBox("head", -2.0F, -4.0F, 0.0F, 4, 4, 4);
+		head.addBox("ear2", -2.5F, -8.0F, 2.5F, 2, 4, 1);
+		head.addBox("ear1", 0.5F, -8.0F, 2.5F, 2, 4, 1);
+	}
+
+	private void setPenguin() {
+		head = new ModelRenderer(this, 0, 0).setTextureSize(64, 32);
+		head.addBox(-3.5F, -5.0F, -3.5F, 7, 5, 7);
+		head.setRotationPoint(0.0F, 0.0F, 0.0F);
+
+		overlay = new ModelRenderer(this, 0, 13);
+		overlay.addBox(-1.0F, -2.0F, -5.0F, 2, 1, 2);
+		overlay.setRotationPoint(0.0F, 0.0F, 0.0F);
+	}
+
+	private void setBighorn() {
+		setSheep();
+		head = new ModelRenderer(this, 0, 0);
+		head.addBox(-3.0F, -7.0F, -4.5F, 6, 6, 7, 0.0F);
+		head.setRotationPoint(0.0F, 0.0F, 0.0F);
+
+		head.setTextureOffset(28, 16).addBox(-5.0F, -7.0F, -1.0F, 2, 2, 2, 0.0F);
+		head.setTextureOffset(16, 13).addBox(-6.0F, -8.0F, 0.0F, 2, 2, 4, 0.0F);
+		head.setTextureOffset(16, 19).addBox(-7.0F, -7.0F, 3.0F, 2, 5, 2, 0.0F);
+		head.setTextureOffset(18, 27).addBox(-8.0F, -3.0F, 1.0F, 2, 2, 3, 0.0F);
+		head.setTextureOffset(28, 27).addBox(-9.0F, -4.0F, 0.0F, 2, 2, 1, 0.0F);
+
+		head.setTextureOffset(28, 16).addBox(3.0F, -7.0F, -1.0F, 2, 2, 2, 0.0F);
+		head.setTextureOffset(16, 13).addBox(4.0F, -8.0F, 0.0F, 2, 2, 4, 0.0F);
+		head.setTextureOffset(16, 19).addBox(5.0F, -7.0F, 3.0F, 2, 5, 2, 0.0F);
+		head.setTextureOffset(18, 27).addBox(6.0F, -3.0F, 1.0F, 2, 2, 3, 0.0F);
+		head.setTextureOffset(28, 27).addBox(7.0F, -4.0F, 0.0F, 2, 2, 1, 0.0F);
+
+		overlay = new ModelRenderer(this, 0, 0);
+		overlay.addBox(-3.0F, -7.0F, -2.5F, 6, 6, 6, 0.6F);
+		hideOverlay();
+	}
+
+	private void setDeer() {
+		hideOverlay();
+
+		head = new ModelRenderer(this, 0, 5);
+		head.addBox(-2.0F, -8.0F, -2.0F, 4, 6, 6, 0.0F);
+		head.setRotationPoint(0.0F, 2.0F, 0.0F);
+
+		head.setTextureOffset(52, 0).addBox(-1.5F, -5.0F, -5.0F, 3, 3, 3, 0.0F);
+
+		head.setTextureOffset(20, 0);
+		head.addBox(-3.0F, -10.0F, 2.0F, 2, 2, 2, 0.0F);
+		head.addBox(-3.0F, -10.0F, 2.0F, 2, 2, 2, 0.0F);
+		head.addBox(-4.0F, -10.0F, 3.0F, 1, 1, 3, 0.0F);
+		head.addBox(-5.0F, -11.0F, 5.0F, 1, 1, 5, 0.0F);
+		head.addBox(-5.0F, -14.0F, 7.0F, 1, 4, 1, 0.0F);
+		head.addBox(-6.0F, -17.0F, 6.0F, 1, 4, 1, 0.0F);
+		head.addBox(-6.0F, -13.0F, 4.0F, 1, 1, 3, 0.0F);
+		head.addBox(-6.0F, -14.0F, 1.0F, 1, 1, 4, 0.0F);
+		head.addBox(-7.0F, -15.0F, -2.0F, 1, 1, 4, 0.0F);
+		head.addBox(-6.0F, -16.0F, -5.0F, 1, 1, 4, 0.0F);
+		head.addBox(-7.0F, -18.0F, 3.0F, 1, 5, 1, 0.0F);
+		head.addBox(-6.0F, -19.0F, -2.0F, 1, 5, 1, 0.0F);
+
+		head.addBox(1.0F, -10.0F, 2.0F, 2, 2, 2, 0.0F);
+		head.addBox(3.0F, -10.0F, 3.0F, 1, 1, 3, 0.0F);
+		head.addBox(4.0F, -11.0F, 5.0F, 1, 1, 5, 0.0F);
+		head.addBox(4.0F, -14.0F, 6.0F, 1, 4, 1, 0.0F);
+		head.addBox(5.0F, -17.0F, 7.0F, 1, 4, 1, 0.0F);
+		head.addBox(5.0F, -13.0F, 4.0F, 1, 1, 3, 0.0F);
+		head.addBox(5.0F, -14.0F, 1.0F, 1, 1, 4, 0.0F);
+		head.addBox(6.0F, -15.0F, -2.0F, 1, 1, 4, 0.0F);
+		head.addBox(5.0F, -16.0F, -5.0F, 1, 1, 4, 0.0F);
+		head.addBox(6.0F, -18.0F, 3.0F, 1, 5, 1, 0.0F);
+		head.addBox(5.0F, -19.0F, -2.0F, 1, 5, 1, 0.0F);
+	}
+
+	private void setBoar() {
+		hideOverlay();
+
+		head = new ModelRenderer(this, 0, 0);
+		head.addBox(-4.0F, -2.0F, -2.0F, 8, 7, 6, 0.0F);
+		head.setRotationPoint(0.0F, -5.0F, 0.0F);
+
+		head.setTextureOffset(28, 0).addBox(-3.0F, 1.0F, -5.0F, 6, 4, 3, 0.0F);
+
+		head.setTextureOffset(17, 17).addBox(3.0F, 2.0F, -5.0F, 1, 2, 1, 0.0F);
+		head.setTextureOffset(17, 17).addBox(-4.0F, 2.0F, -5.0F, 1, 2, 1, 0.0F);
+	}
+
+	private void setRedcap() {
+		head = new ModelRenderer(this, 0, 0);
+		head = new ModelRenderer(this, 0, 0);
+		head.addBox(-3.4F, -7.0F, -4.0F, 7, 7, 7, 0.0F);
+		head.setRotationPoint(0.0F, 0.0F, 0.0F);
+
+		overlay = new ModelRenderer(this, 32, 0);
+		overlay.addBox(-2.0F, -8.0F, -3.0F, 4, 5, 7, 0.0F);
+		overlay.setRotationPoint(0.0F, 0.0F, 0.0F);
+
+		ModelRenderer goblinRightEar = new ModelRenderer(this, 48, 20);
+		goblinRightEar.addBox(3.0F, -7.0F, -1.0F, 2, 3, 1, 0.0F);
+		goblinRightEar.setRotationPoint(0.0F, 0.0F, 0.0F);
+
+		ModelRenderer goblinLeftEar = new ModelRenderer(this, 48, 24);
+		goblinLeftEar.addBox(-5.0F, -7.0F, -1.0F, 2, 3, 1, 0.0F);
+		goblinLeftEar.setRotationPoint(0.0F, 0.0F, 0.0F);
+
+		head.addChild(goblinLeftEar);
+		head.addChild(goblinRightEar);
+	}
+
+	private void setGhast() {
+		hideOverlay();
+		textureWidth = 32;
+		textureHeight = 16;
+
+		head = new ModelRenderer(this, 0, 0);
+		head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
+	}
+
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+
 	public ModelHead setHeadType(int type) {
 		switch (type) {
 			case 1:
@@ -183,6 +318,7 @@ public class ModelHead extends ModelSkeletonHead {
 				setSpider();
 				break;
 			case 5:
+			case 25:
 				setSpider();
 				break;
 			case 6:
@@ -220,6 +356,27 @@ public class ModelHead extends ModelSkeletonHead {
 				break;
 			case 17:
 				return new ModelHead(64).hideOverlay();
+			case 18:
+				setBunny();
+				break;
+			case 19:
+				setPenguin();
+				break;
+			case 20:
+				setBighorn();
+				break;
+			case 21:
+				setDeer();
+				break;
+			case 22:
+				setBoar();
+				break;
+			case 23:
+				setRedcap();
+				break;
+			case 26:
+				setGhast();
+				break;
 		}
 		return this;
 	}

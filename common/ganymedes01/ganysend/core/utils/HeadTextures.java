@@ -24,9 +24,20 @@ public class HeadTextures {
 	public static final ResourceLocation IRON_GOLEM_HEAD = Utils.getResource("textures/entity/iron_golem.png");
 	public static final ResourceLocation SQUID_HEAD = Utils.getResource("textures/entity/squid.png");
 	public static final ResourceLocation WITHER_HEAD = Utils.getResource("textures/entity/wither/wither.png");
+	public static final ResourceLocation GHAST_HEAD = Utils.getResource("textures/entity/ghast/ghast.png");
+
+	private static final String TF_PREFIX = "twilightforest:textures/model/";
+	public static final ResourceLocation BUNNY = Utils.getResource(TF_PREFIX + "bunnydutch.png");
+	public static final ResourceLocation PENGUIN = Utils.getResource(TF_PREFIX + "penguin.png");
+	public static final ResourceLocation BIGHORN = Utils.getResource(TF_PREFIX + "bighorn.png");
+	public static final ResourceLocation WILD_DEER = Utils.getResource(TF_PREFIX + "wilddeer.png");
+	public static final ResourceLocation WILD_BOAR = Utils.getResource(TF_PREFIX + "wildboar.png");
+	public static final ResourceLocation REDCAP = Utils.getResource(TF_PREFIX + "redcap.png");
+	public static final ResourceLocation SKELETON_DRUID = Utils.getResource(TF_PREFIX + "skeletondruid.png");
+	public static final ResourceLocation HEDGE_SPIDER = Utils.getResource(TF_PREFIX + "hedgespider.png");
 
 	public static final ResourceLocation[] headTextures = new ResourceLocation[] { BLAZE_HEAD, ENDERMAN_HEAD, PIGMAN_HEAD, null, SPIDER_HEAD, CAVE_SPIDER_HEAD, PIG_HEAD, COW_HEAD, MOOSHROOM_HEAD, SHEEP_HEAD, WOLF_HEAD, VILLAGER_HEAD, CHICKEN_HEAD, WITCH_HEAD, ZOMBIE_VILLAGER_HEAD, IRON_GOLEM_HEAD,
-	SQUID_HEAD, WITHER_HEAD };
+	SQUID_HEAD, WITHER_HEAD, BUNNY, PENGUIN, BIGHORN, WILD_DEER, WILD_BOAR, REDCAP, SKELETON_DRUID, HEDGE_SPIDER, GHAST_HEAD };
 
 	public static final ResourceLocation getPlayerSkin(String playerName) {
 		if (playerName != null && playerName.length() > 0) {
@@ -49,6 +60,7 @@ public class HeadTextures {
 			case 1:
 				return ENDERMAN_EYES;
 			case 9:
+			case 20:
 				return SHEEP_FUR_HEAD;
 			default:
 				return null;

@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerAdvancedFilteringHopper extends Container {
 
-	TileEntityAdvancedFilteringHopper hopper;
+	private TileEntityAdvancedFilteringHopper hopper;
 
 	public ContainerAdvancedFilteringHopper(InventoryPlayer inventory, TileEntityAdvancedFilteringHopper tile) {
 		hopper = tile;

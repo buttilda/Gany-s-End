@@ -2,6 +2,7 @@ package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.blocks.ModBlocks;
+import ganymedes01.ganysend.core.utils.HeadsHelper;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Reference;
@@ -35,7 +36,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemNewSkull extends ItemSkull {
 
 	private static ItemStack[] skulls;
-	private static final String[] skullTypes = new String[] { "blaze", "enderman", "pigman", "player", "spider", "caveSpider", "pig", "cow", "mooshroom", "sheep", "wolf", "villager", "chicken", "witch", "zombieVillager", "ironGolem", "squid", "wither" };
 	@SideOnly(Side.CLIENT)
 	private Icon[] icons;
 
@@ -94,13 +94,13 @@ public class ItemNewSkull extends ItemSkull {
 	}
 
 	public static final int getSkullCount() {
-		return skullTypes.length;
+		return HeadsHelper.skullTypes.length;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(int id, CreativeTabs tab, List list) {
-		for (int i = 0; i < skullTypes.length; i++)
+		for (int i = 0; i < HeadsHelper.skullTypes.length; i++)
 			list.add(new ItemStack(id, 1, i));
 	}
 
@@ -112,7 +112,7 @@ public class ItemNewSkull extends ItemSkull {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIconFromDamage(int meta) {
-		if (meta < 0 || meta >= skullTypes.length)
+		if (meta < 0 || meta >= HeadsHelper.skullTypes.length)
 			meta = 0;
 
 		return icons[meta];
@@ -122,19 +122,19 @@ public class ItemNewSkull extends ItemSkull {
 	public String getUnlocalizedName(ItemStack stack) {
 		int meta = stack.getItemDamage();
 
-		if (meta < 0 || meta >= skullTypes.length)
+		if (meta < 0 || meta >= HeadsHelper.skullTypes.length)
 			meta = 0;
 
-		return "item." + Utils.getUnlocalizedName(Strings.ITEM_NEW_SKULL_NAME) + skullTypes[meta] + "Head";
+		return "item." + Utils.getUnlocalizedName(Strings.ITEM_NEW_SKULL_NAME) + HeadsHelper.skullTypes[meta] + "Head";
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister reg) {
-		icons = new Icon[skullTypes.length];
+		icons = new Icon[HeadsHelper.skullTypes.length];
 
-		for (int i = 0; i < skullTypes.length; i++)
-			icons[i] = reg.registerIcon(Reference.ITEM_BLOCK_TEXTURE_PATH + skullTypes[i] + "Head");
+		for (int i = 0; i < HeadsHelper.skullTypes.length; i++)
+			icons[i] = reg.registerIcon(Reference.ITEM_BLOCK_TEXTURE_PATH + HeadsHelper.skullTypes[i] + "Head");
 	}
 
 	@Override

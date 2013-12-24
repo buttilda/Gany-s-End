@@ -61,6 +61,12 @@ public class RenderPlayerHandler {
 					case 12:
 						offset = 2.0F;
 						break;
+					case 18:
+						offset = 3.0F;
+						break;
+					case 21:
+						offset = 2.0f;
+						break;
 				}
 
 				TileEntityBlockNewSkullRender.instance.renderHead(-0.5F, 0.0F, -0.5F + offset * 0.0625F, 1, 180.0F, head.getItemDamage(), head.hasTagCompound() ? head.getTagCompound().getString("SkullOwner") : null);
