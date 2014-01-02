@@ -6,6 +6,7 @@ import ganymedes01.ganysend.core.utils.HeadsHelper;
 
 import java.util.Random;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -30,8 +31,9 @@ public class EntityDeathEvent {
 			if (checkDamSource(event.source))
 				if (event.source == CustomDamageSources.beheading || shouldDoRandomDrop(rand)) {
 					event.entityLiving.entityDropItem(stack, rand.nextFloat());
-					if (event.isCancelable())
-						event.setCanceled(true);
+					if (!(event.entityLiving instanceof EntityPlayer))
+						if (event.isCancelable())
+							event.setCanceled(true);
 				}
 	}
 

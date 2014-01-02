@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.server.MinecraftServer;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -48,11 +49,15 @@ public class EnderScythe extends ItemSword {
 	@Override
 	public boolean onLeftClickEntity(ItemStack item, EntityPlayer player, Entity target) {
 		if (!player.worldObj.isRemote)
-			if (target instanceof EntityLivingBase) {
+			if (target instanceof EntityLivingBase && shouldDamage(target)) {
 				((EntityLivingBase) target).attackEntityFrom(CustomDamageSources.beheading, 4.0F + ModMaterials.ENDIUM_TOOLS.getDamageVsEntity());
 				damageItem(item, player);
 			}
 		return false;
+	}
+
+	private boolean shouldDamage(Entity target) {
+		return target instanceof EntityPlayer ? !MinecraftServer.getServer().isPVPEnabled() : true;
 	}
 
 	@Override
