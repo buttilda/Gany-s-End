@@ -114,22 +114,23 @@ public class HeadsHelper {
 	}
 
 	private static ItemStack getTFMobHead(String mobName) {
-		if (mobName.equals("TwilightForest.Forest Bunny"))
-			return new ItemStack(ModItems.itemNewSkull, 1, 18);
-		else if (mobName.equals("TwilightForest.Penguin"))
-			return new ItemStack(ModItems.itemNewSkull, 1, 19);
-		else if (mobName.equals("TwilightForest.Bighorn Sheep"))
-			return new ItemStack(ModItems.itemNewSkull, 1, 20);
-		else if (mobName.equals("TwilightForest.Wild Deer"))
-			return new ItemStack(ModItems.itemNewSkull, 1, 21);
-		else if (mobName.equals("TwilightForest.Wild Boar"))
-			return new ItemStack(ModItems.itemNewSkull, 1, 22);
-		else if (mobName.equals("TwilightForest.Redcap") || mobName.equals("TwilightForest.Redcap Sapper"))
-			return new ItemStack(ModItems.itemNewSkull, 1, 23);
-		else if (mobName.equals("TwilightForest.Skeleton Druid"))
-			return new ItemStack(ModItems.itemNewSkull, 1, 24);
-		else if (mobName.equals("TwilightForest.Hedge Spider"))
-			return new ItemStack(ModItems.itemNewSkull, 1, 25);
+		if (mobName != null)
+			if (mobName.equals("TwilightForest.Forest Bunny"))
+				return new ItemStack(ModItems.itemNewSkull, 1, 18);
+			else if (mobName.equals("TwilightForest.Penguin"))
+				return new ItemStack(ModItems.itemNewSkull, 1, 19);
+			else if (mobName.equals("TwilightForest.Bighorn Sheep"))
+				return new ItemStack(ModItems.itemNewSkull, 1, 20);
+			else if (mobName.equals("TwilightForest.Wild Deer"))
+				return new ItemStack(ModItems.itemNewSkull, 1, 21);
+			else if (mobName.equals("TwilightForest.Wild Boar"))
+				return new ItemStack(ModItems.itemNewSkull, 1, 22);
+			else if (mobName.equals("TwilightForest.Redcap") || mobName.equals("TwilightForest.Redcap Sapper"))
+				return new ItemStack(ModItems.itemNewSkull, 1, 23);
+			else if (mobName.equals("TwilightForest.Skeleton Druid"))
+				return new ItemStack(ModItems.itemNewSkull, 1, 24);
+			else if (mobName.equals("TwilightForest.Hedge Spider"))
+				return new ItemStack(ModItems.itemNewSkull, 1, 25);
 
 		return null;
 	}

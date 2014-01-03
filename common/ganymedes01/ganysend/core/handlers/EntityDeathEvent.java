@@ -26,15 +26,16 @@ public class EntityDeathEvent {
 		if (event.entityLiving.worldObj.isRemote)
 			return;
 		Random rand = new Random();
-		ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
-		if (stack != null)
-			if (checkDamSource(event.source))
-				if (event.source == CustomDamageSources.beheading || shouldDoRandomDrop(rand)) {
+		if (checkDamSource(event.source))
+			if (event.source == CustomDamageSources.beheading || shouldDoRandomDrop(rand)) {
+				ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
+				if (stack != null) {
 					event.entityLiving.entityDropItem(stack, rand.nextFloat());
 					if (!(event.entityLiving instanceof EntityPlayer))
 						if (event.isCancelable())
 							event.setCanceled(true);
 				}
+			}
 	}
 
 	private boolean shouldDoRandomDrop(Random rand) {
