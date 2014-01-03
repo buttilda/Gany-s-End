@@ -13,6 +13,8 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.stats.StatList;
+import net.minecraft.util.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -39,25 +41,32 @@ public class EnderScythe extends ItemSword {
 		return EnumRarity.epic;
 	}
 
-	private void damageItem(ItemStack item, EntityLivingBase player) {
-		if (player instanceof EntityPlayer)
-			if (((EntityPlayer) player).capabilities.isCreativeMode)
-				return;
-		item.damageItem(1, player);
-	}
-
 	@Override
-	public boolean onLeftClickEntity(ItemStack item, EntityPlayer player, Entity target) {
-		if (!player.worldObj.isRemote)
-			if (target instanceof EntityLivingBase && shouldDamage(target)) {
-				((EntityLivingBase) target).attackEntityFrom(CustomDamageSources.beheading, 4.0F + ModMaterials.ENDIUM_TOOLS.getDamageVsEntity());
-				damageItem(item, player);
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity target) {
+		if (!player.worldObj.isRemote && stack != null)
+			if (target instanceof EntityLivingBase) {
+				float dmg = 4.0F + ModMaterials.ENDIUM_TOOLS.getDamageVsEntity();
+				if (shouldDamage(target) && target.canAttackWithItem() && !target.hitByEntity(player)) {
+					if (target.attackEntityFrom(CustomDamageSources.beheading, 4.0F + ModMaterials.ENDIUM_TOOLS.getDamageVsEntity())) {
+						target.addVelocity(-MathHelper.sin(player.rotationYaw * (float) Math.PI / 180.0F) * 0.5F, 0.5D, MathHelper.cos(player.rotationYaw * (float) Math.PI / 180.0F) * 0.5F);
+						player.motionX *= 0.6D;
+						player.motionZ *= 0.6D;
+						player.setSprinting(false);
+						player.setLastAttacker(target);
+					}
+
+					stack.damageItem(1, player);
+					player.addStat(StatList.damageDealtStat, Math.round(dmg * 10.0F));
+					player.addExhaustion(0.3F);
+					if (stack.stackSize <= 0)
+						player.destroyCurrentEquippedItem();
+				}
 			}
-		return false;
+		return true;
 	}
 
 	private boolean shouldDamage(Entity target) {
-		return target instanceof EntityPlayer ? !MinecraftServer.getServer().isPVPEnabled() : true;
+		return target instanceof EntityPlayer ? MinecraftServer.getServer().isPVPEnabled() : true;
 	}
 
 	@Override
