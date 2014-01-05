@@ -6,6 +6,7 @@ import ganymedes01.ganysend.core.handlers.ArmourHandler;
 import ganymedes01.ganysend.core.handlers.BlockHarvestEvent;
 import ganymedes01.ganysend.core.handlers.BonemealOnTheEndEvent;
 import ganymedes01.ganysend.core.handlers.EntityDeathEvent;
+import ganymedes01.ganysend.core.handlers.RenderCapeHandler;
 import ganymedes01.ganysend.core.handlers.RenderPlayerHandler;
 import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
 import ganymedes01.ganysend.core.proxy.CommonProxy;
@@ -25,6 +26,7 @@ import java.io.File;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -91,6 +93,12 @@ public class GanysEnd {
 		proxy.registerTileEntities();
 		proxy.registerRenderers();
 		GameRegistry.registerWorldGenerator(new EnderFlowerGenerator());
+
+		if (!Loader.isModLoaded("mobsplice"))
+			if (event.getSide() == Side.CLIENT) {
+				RenderCapeHandler.getUsernames();
+				MinecraftForge.EVENT_BUS.register(new RenderCapeHandler());
+			}
 
 		ModIntegrator.init();
 	}
