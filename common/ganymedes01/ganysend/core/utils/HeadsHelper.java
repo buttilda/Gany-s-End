@@ -1,6 +1,9 @@
 package ganymedes01.ganysend.core.utils;
 
 import ganymedes01.ganysend.items.ModItems;
+
+import java.util.ArrayList;
+
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityWither;
@@ -42,6 +45,12 @@ public class HeadsHelper {
 	public static boolean useTwilightForrestMobs = false;
 	public static String[] skullTypes = new String[] { "blaze", "enderman", "pigman", "player", "spider", "caveSpider", "pig", "cow", "mooshroom", "sheep", "wolf", "villager", "chicken", "witch", "zombieVillager", "ironGolem", "squid", "wither", "bunny", "penguin", "bighorn", "wildDeer",
 	"wildBoar", "redcap", "druid", "hedgeSpider", "ghast" };
+
+	public static ArrayList<Integer> TFskullsIndexes = new ArrayList<Integer>();
+	static {
+		for (int i = 18; i <= 25; i++)
+			TFskullsIndexes.add(i);
+	}
 
 	public static final ItemStack getHeadfromEntity(EntityLivingBase target) {
 		if (target.isChild())

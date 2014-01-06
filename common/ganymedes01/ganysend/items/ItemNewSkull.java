@@ -23,6 +23,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -100,8 +101,13 @@ public class ItemNewSkull extends ItemSkull {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(int id, CreativeTabs tab, List list) {
-		for (int i = 0; i < HeadsHelper.skullTypes.length; i++)
+		boolean TFPresent = Loader.isModLoaded("TwilightForest");
+		for (int i = 0; i < HeadsHelper.skullTypes.length; i++) {
+			if (!TFPresent && HeadsHelper.TFskullsIndexes.contains(i))
+				continue;
 			list.add(new ItemStack(id, 1, i));
+		}
+
 	}
 
 	@Override
