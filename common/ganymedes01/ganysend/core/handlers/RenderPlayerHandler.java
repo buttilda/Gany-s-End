@@ -6,6 +6,7 @@ import ganymedes01.ganysend.items.ModItems;
 import java.lang.reflect.Field;
 
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -31,7 +32,11 @@ public class RenderPlayerHandler {
 		if (event.entityPlayer != null) {
 			ModelBiped model = null;
 			try {
-				Field f = ReflectionHelper.findField(event.renderer.getClass(), "field_77109_a", "modelBipedMain");
+				Class<? extends RenderPlayer> rendererClass = event.renderer.getClass();
+				if (rendererClass != RenderPlayer.class && RenderPlayer.class.isAssignableFrom(rendererClass))
+					rendererClass = (Class<? extends RenderPlayer>) rendererClass.getSuperclass();
+
+				Field f = ReflectionHelper.findField(rendererClass, "field_77109_a", "modelBipedMain");
 				f.setAccessible(true);
 				model = (ModelBiped) f.get(event.renderer);
 			} catch (Exception e) {
