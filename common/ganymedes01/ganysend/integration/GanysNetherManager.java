@@ -18,7 +18,7 @@ public class GanysNetherManager extends Integration {
 
 	@Override
 	public void init() {
-		addMagmaticCentrifugeRecipe(new ItemStack(ModBlocks.rawEndium), new ItemStack(ModBlocks.rawEndium), new ItemStack(ModItems.endiumIngot, 2), new ItemStack(ModItems.endiumIngot, 1, 1));
+		addMagmaticCentrifugeRecipe(new ItemStack(ModBlocks.rawEndium), new ItemStack(ModBlocks.rawEndium), new ItemStack(ModItems.endiumIngot, 3), new ItemStack(ModItems.endiumIngot, 1, 1));
 
 		ItemStack head = new ItemStack(ModItems.itemNewSkull, 1, 3);
 		head.setTagCompound(new NBTTagCompound());

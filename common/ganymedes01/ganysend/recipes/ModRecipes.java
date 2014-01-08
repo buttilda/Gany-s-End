@@ -55,7 +55,7 @@ public class ModRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.enderPearl, 9), new ItemStack(ModBlocks.enderpearlBlock, 1, 0));
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.enderPearl, 9), new ItemStack(ModBlocks.enderpearlBlock, 1, 1));
 		GameRegistry.addShapelessRecipe(new ItemStack(Item.netherStar, 2), new ItemStack(ModItems.itemNewSkull, 1, 17));
-		GameRegistry.addRecipe(MultipleItemsRecipe.createNewRecipe(new ItemStack(Item.enderPearl, 8), "xx", 'x', ItemNewSkull.getSkullsForRecipe()));
+		GameRegistry.addRecipe(MultipleItemsRecipe.createNewRecipe(new ItemStack(Item.enderPearl, 4), "xx", 'x', ItemNewSkull.getSkullsForRecipe()));
 	}
 
 	private static void registerBlockRecipes() {
