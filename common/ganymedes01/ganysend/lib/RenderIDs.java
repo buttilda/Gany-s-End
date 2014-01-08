@@ -12,5 +12,6 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 public class RenderIDs {
 
 	public static final int FILTERING_HOPPER = RenderingRegistry.getNextAvailableRenderId();
+	public static final int TIME_MANIPULATOR = RenderingRegistry.getNextAvailableRenderId();
 
 }

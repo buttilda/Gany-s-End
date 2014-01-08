@@ -86,8 +86,10 @@ public class ModRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.speedyBasicFilteringHopper), new ItemStack(ModBlocks.speedyExclusiveFilteringHopper), new ItemStack(Item.ingotGold));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.advancedFilteringHopper), " z ", "yxy", " z ", 'x', ModBlocks.speedyBasicFilteringHopper, 'y', Item.diamond, 'z', Block.glass);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.advancedExclusiveFilteringHopper), " z ", "yxy", " z ", 'x', ModBlocks.speedyExclusiveFilteringHopper, 'y', Item.diamond, 'z', Block.glass);
-		GameRegistry.addShapelessRecipe(new ItemStack(Block.dragonEgg), new ItemStack(ModBlocks.timeManipulator));
-		GameRegistry.addRecipe(new ItemStack(ModBlocks.timeManipulator), "zyz", "yxy", "zyz", 'x', Block.dragonEgg, 'y', new ItemStack(Block.planks, 1, 1), 'z', Block.blockGold);
+		if (GanysEnd.enableTimeManipulator) {
+			GameRegistry.addShapelessRecipe(new ItemStack(Block.dragonEgg), new ItemStack(ModBlocks.timeManipulator));
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.timeManipulator), "zyz", "yxy", "zyz", 'x', Block.dragonEgg, 'y', new ItemStack(Block.planks, 1, 1), 'z', Block.blockGold);
+		}
 		GameRegistry.addRecipe(MultipleItemsRecipe.createNewRecipe(new ItemStack(ModBlocks.inventoryBinder), "xxx", "yzy", "xxx", 'x', Block.whiteStone, 'y', Item.enderPearl, 'z', ItemNewSkull.getSkullsForRecipe()));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.infiniteWaterSource), "yzy", "zxz", "yzy", 'x', ModItems.infiniteBucket, 'y', Item.ingotIron, 'z', Item.enderPearl);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 0), "xxx", "xxx", 'x', ModBlocks.endstoneBrick);

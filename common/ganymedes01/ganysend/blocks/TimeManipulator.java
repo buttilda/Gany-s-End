@@ -4,6 +4,7 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.ModIDs;
+import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.network.PacketTypeHandler;
 import ganymedes01.ganysend.network.packet.PacketTimeManipulator;
@@ -18,6 +19,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -32,6 +34,11 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 public class TimeManipulator extends BlockContainer {
+
+	@SideOnly(Side.CLIENT)
+	private Icon[] bottomIcons, topIcons;
+	@SideOnly(Side.CLIENT)
+	private Icon surface;
 
 	public TimeManipulator() {
 		super(ModIDs.TIME_MANIPULATOR_ID, Material.rock);
@@ -131,12 +138,35 @@ public class TimeManipulator extends BlockContainer {
 
 	@Override
 	public int getRenderType() {
-		return -1;
+		return RenderIDs.TIME_MANIPULATOR;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getIcon(int side, int meta) {
+		if (meta > 0)
+			return surface;
+		if (side < 4)
+			return bottomIcons[side];
+		else
+			return topIcons[side - 4];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister reg) {
+		bottomIcons = new Icon[4];
+		bottomIcons[0] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_bottom_front"));
+		bottomIcons[1] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_bottom_right"));
+		bottomIcons[2] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_bottom_left"));
+		bottomIcons[3] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_bottom_back"));
+		topIcons = new Icon[4];
+		topIcons[0] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_top_front"));
+		topIcons[1] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_top_right"));
+		topIcons[2] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_top_left"));
+		topIcons[3] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_top_back"));
+
+		surface = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_surface"));
 		blockIcon = reg.registerIcon("planks_spruce");
 	}
 }

@@ -62,6 +62,7 @@ public class GanysEnd {
 	public static boolean togglerShouldMakeSound = true;
 	public static boolean shouldDoVersionCheck = true;
 	public static boolean activateShifters = true;
+	public static boolean enableTimeManipulator = true;
 	public static boolean enableRandomHeadDrop = true;
 
 	@EventHandler

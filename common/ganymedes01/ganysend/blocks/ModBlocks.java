@@ -63,7 +63,8 @@ public class ModBlocks {
 		speedyHopper = new SpeedyHopper();
 		advancedFilteringHopper = new AdvancedFilteringHopper();
 		advancedExclusiveFilteringHopper = new AdvancedExclusiveFilteringHopper();
-		timeManipulator = new TimeManipulator();
+		if (GanysEnd.enableTimeManipulator)
+			timeManipulator = new TimeManipulator();
 		entityShifter = new EntityShifter();
 		inventoryBinder = new InventoryBinder();
 		infiniteWaterSource = new InfiniteWaterSource();
@@ -95,7 +96,8 @@ public class ModBlocks {
 		GameRegistry.registerBlock(speedyHopper, Strings.SPEEDY_HOPPER_NAME);
 		GameRegistry.registerBlock(advancedFilteringHopper, Strings.ADVANCED_FILTERING_HOPPER_NAME);
 		GameRegistry.registerBlock(advancedExclusiveFilteringHopper, Strings.ADVANCED_EXCLUSIVE_FILTERING_HOPPER_NAME);
-		GameRegistry.registerBlock(timeManipulator, Strings.TIME_MANIPULATOR_NAME);
+		if (GanysEnd.enableTimeManipulator)
+			GameRegistry.registerBlock(timeManipulator, Strings.TIME_MANIPULATOR_NAME);
 		GameRegistry.registerBlock(inventoryBinder, Strings.INVENTORY_BINDER_NAME);
 		GameRegistry.registerBlock(infiniteWaterSource, Strings.INFINITE_WATER_SOURCE_NAME);
 		GameRegistry.registerBlock(endWalls, ItemEndWalls.class, Strings.END_WALLS_NAME);
