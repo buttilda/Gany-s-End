@@ -43,19 +43,19 @@ public class ItemInfiniteWaterSourceRender implements IItemRenderer {
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		switch (type) {
 			case ENTITY: {
-				renderPlayerInventory(0.0F, 0.0F, 0.0F);
+				renderInfiniteWaterSource(0.0F, 0.0F, 0.0F);
 				break;
 			}
 			case EQUIPPED: {
-				renderPlayerInventory(0.5F, 0.5F, 0.5F);
+				renderInfiniteWaterSource(0.5F, 0.5F, 0.5F);
 				break;
 			}
 			case EQUIPPED_FIRST_PERSON: {
-				renderPlayerInventory(0.5F, 0.5F, 0.5F);
+				renderInfiniteWaterSource(0.5F, 0.5F, 0.5F);
 				break;
 			}
 			case INVENTORY: {
-				renderPlayerInventory(0.5F, 0.5F, 0.5F);
+				renderInfiniteWaterSource(0.5F, 0.5F, 0.5F);
 				break;
 			}
 			default:
@@ -63,7 +63,7 @@ public class ItemInfiniteWaterSourceRender implements IItemRenderer {
 		}
 	}
 
-	private void renderPlayerInventory(float x, float y, float z) {
+	private void renderInfiniteWaterSource(float x, float y, float z) {
 		GL11.glPushMatrix();
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glEnable(GL11.GL_BLEND);
