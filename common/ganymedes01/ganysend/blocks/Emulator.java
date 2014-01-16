@@ -7,6 +7,7 @@ import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Facing;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -47,13 +48,23 @@ public class Emulator extends Block {
 	}
 
 	@Override
+	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
+		return Facing.oppositeSide[side];
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTexture(IBlockAccess access, int x, int y, int z, int side) {
-		if (!access.isAirBlock(x, y - 1, z)) {
-			Block block = Block.blocksList[access.getBlockId(x, y - 1, z)];
+		int meta = access.getBlockMetadata(x, y, z);
+		x += Facing.offsetsXForSide[meta];
+		y += Facing.offsetsYForSide[meta];
+		z += Facing.offsetsZForSide[meta];
+
+		if (!access.isAirBlock(x, y, z)) {
+			Block block = Block.blocksList[access.getBlockId(x, y, z)];
 			if (checkBounds(block))
 				if (block.getRenderType() == 0 || block.getRenderType() == 31 || block.getRenderType() == 39)
-					return block.getBlockTexture(access, x, y - 1, z, side);
+					return block.getBlockTexture(access, x, y, z, side);
 		}
 		return super.getBlockTexture(access, x, y, z, side);
 	}
