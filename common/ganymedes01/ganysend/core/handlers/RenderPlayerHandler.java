@@ -28,19 +28,26 @@ public class RenderPlayerHandler {
 
 	@ForgeSubscribe
 	@SideOnly(Side.CLIENT)
+	public void renderPlayerEvent(RenderPlayerEvent.Pre event) {
+		if (event.entityPlayer != null) {
+			ModelBiped model = getBipedModel(event.renderer);
+			if (model == null)
+				return;
+
+			ItemStack head = event.entityPlayer.inventory.armorItemInSlot(3);
+			if (head != null && head.getItem() == ModItems.itemNewSkull)
+				setHiddenState(model, true);
+			else
+				setHiddenState(model, false);
+		}
+	}
+
+	@ForgeSubscribe
+	@SideOnly(Side.CLIENT)
 	public void renderHelmetEvent(RenderPlayerEvent.Specials.Post event) {
 		if (event.entityPlayer != null) {
-			ModelBiped model = null;
-			try {
-				Class<? extends RenderPlayer> rendererClass = event.renderer.getClass();
-				if (rendererClass != RenderPlayer.class && RenderPlayer.class.isAssignableFrom(rendererClass))
-					rendererClass = (Class<? extends RenderPlayer>) rendererClass.getSuperclass();
+			ModelBiped model = getBipedModel(event.renderer);
 
-				Field f = ReflectionHelper.findField(rendererClass, "field_77109_a", "modelBipedMain");
-				f.setAccessible(true);
-				model = (ModelBiped) f.get(event.renderer);
-			} catch (Exception e) {
-			}
 			if (model == null)
 				return;
 
@@ -48,11 +55,9 @@ public class RenderPlayerHandler {
 			if (head != null && head.getItem() == ModItems.itemNewSkull) {
 				GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
-				if (model.bipedHead.isHidden) {
-					model.bipedHeadwear.isHidden = false;
-					model.bipedHead.isHidden = false;
-				}
+				setHiddenState(model, false);
 				model.bipedHead.postRender(0.0625F);
+				setHiddenState(model, true);
 
 				GL11.glPushMatrix();
 				GL11.glScalef(1.0F, -1.0F, -1.0F);
@@ -76,15 +81,26 @@ public class RenderPlayerHandler {
 
 				TileEntityBlockNewSkullRender.instance.renderHead(-0.5F, 0.0F, -0.5F + offset * 0.0625F, 1, 180.0F, head.getItemDamage(), head.hasTagCompound() ? head.getTagCompound().getString("SkullOwner") : null);
 				GL11.glPopMatrix();
-
-				if (!model.bipedHead.isHidden) {
-					model.bipedHeadwear.isHidden = true;
-					model.bipedHead.isHidden = true;
-				}
-			} else if (model.bipedHead.isHidden) {
-				model.bipedHeadwear.isHidden = false;
-				model.bipedHead.isHidden = false;
 			}
+		}
+	}
+
+	private void setHiddenState(ModelBiped model, boolean isHidden) {
+		model.bipedHead.isHidden = isHidden;
+		model.bipedHeadwear.isHidden = isHidden;
+	}
+
+	private ModelBiped getBipedModel(RenderPlayer renderer) {
+		try {
+			Class<? extends RenderPlayer> rendererClass = renderer.getClass();
+			if (rendererClass != RenderPlayer.class && RenderPlayer.class.isAssignableFrom(rendererClass))
+				rendererClass = (Class<? extends RenderPlayer>) rendererClass.getSuperclass();
+
+			Field f = ReflectionHelper.findField(rendererClass, "field_77109_a", "modelBipedMain");
+			f.setAccessible(true);
+			return (ModelBiped) f.get(renderer);
+		} catch (Exception e) {
+			return null;
 		}
 	}
 }
