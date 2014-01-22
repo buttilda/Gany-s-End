@@ -8,6 +8,7 @@ import ganymedes01.ganysend.items.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -24,6 +25,14 @@ public class ModRecipes {
 		registerBlockRecipes();
 		registerItemRecipes();
 		registerArmourRecipes();
+
+		registerOreDictionary();
+	}
+
+	private static void registerOreDictionary() {
+		OreDictionary.registerOre("oreEndium", ModBlocks.rawEndium);
+		OreDictionary.registerOre("ingotEndium", ModItems.endiumIngot);
+		OreDictionary.registerOre("nuggetEndium", new ItemStack(ModItems.endiumIngot, 1, 1));
 	}
 
 	private static void registerArmourRecipes() {
