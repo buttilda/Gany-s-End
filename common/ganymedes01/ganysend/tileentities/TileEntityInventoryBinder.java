@@ -151,4 +151,9 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory 
 		super.writeToNBT(data);
 		data.setString("playerName", playerName);
 	}
+
+	@Override
+	public boolean canUpdate() {
+		return false;
+	}
 }
