@@ -24,10 +24,10 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 
+@SideOnly(Side.CLIENT)
 public class RenderPlayerHandler {
 
 	@ForgeSubscribe
-	@SideOnly(Side.CLIENT)
 	public void renderPlayerEvent(RenderPlayerEvent.Pre event) {
 		if (event.entityPlayer != null) {
 			ModelBiped model = getBipedModel(event.renderer);
@@ -43,7 +43,6 @@ public class RenderPlayerHandler {
 	}
 
 	@ForgeSubscribe
-	@SideOnly(Side.CLIENT)
 	public void renderHelmetEvent(RenderPlayerEvent.Specials.Post event) {
 		if (event.entityPlayer != null) {
 			ModelBiped model = getBipedModel(event.renderer);

@@ -2,12 +2,7 @@ package ganymedes01.ganysend;
 
 import ganymedes01.ganysend.blocks.ModBlocks;
 import ganymedes01.ganysend.configuration.ConfigurationHandler;
-import ganymedes01.ganysend.core.handlers.ArmourHandler;
-import ganymedes01.ganysend.core.handlers.BlockHarvestEvent;
-import ganymedes01.ganysend.core.handlers.BonemealOnTheEndEvent;
-import ganymedes01.ganysend.core.handlers.EntityDeathEvent;
 import ganymedes01.ganysend.core.handlers.RenderCapeHandler;
-import ganymedes01.ganysend.core.handlers.RenderPlayerHandler;
 import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
 import ganymedes01.ganysend.core.proxy.CommonProxy;
 import ganymedes01.ganysend.core.utils.VersionHelper;
@@ -76,11 +71,7 @@ public class GanysEnd {
 			TickRegistry.registerTickHandler(new VersionCheckTickHandler(), Side.CLIENT);
 		}
 
-		MinecraftForge.EVENT_BUS.register(new BonemealOnTheEndEvent());
-		MinecraftForge.EVENT_BUS.register(new BlockHarvestEvent());
-		MinecraftForge.EVENT_BUS.register(new EntityDeathEvent());
-		MinecraftForge.EVENT_BUS.register(new ArmourHandler());
-		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
+		proxy.registerEventHandlers();
 
 		ModBlocks.init();
 		ModItems.init();

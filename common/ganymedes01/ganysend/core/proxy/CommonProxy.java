@@ -2,6 +2,10 @@ package ganymedes01.ganysend.core.proxy;
 
 import ganymedes01.ganysend.client.gui.inventory.GuiAdvancedFilteringHopper;
 import ganymedes01.ganysend.client.gui.inventory.GuiBasicFilteringHopper;
+import ganymedes01.ganysend.core.handlers.ArmourHandler;
+import ganymedes01.ganysend.core.handlers.BlockHarvestEvent;
+import ganymedes01.ganysend.core.handlers.BonemealOnTheEndEvent;
+import ganymedes01.ganysend.core.handlers.EntityDeathEvent;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.inventory.ContainerAdvancedFilteringHopper;
 import ganymedes01.ganysend.inventory.ContainerFilteringHopper;
@@ -19,6 +23,7 @@ import ganymedes01.ganysend.tileentities.TileEntityTimeManipulator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -43,16 +48,20 @@ public class CommonProxy implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileEntityInfiniteWaterSource.class, Utils.getUnlocalizedName(Strings.INFINITE_WATER_SOURCE_NAME));
 	}
 
-	public void registerRenderers() {
+	public void registerEventHandlers() {
+		MinecraftForge.EVENT_BUS.register(new BonemealOnTheEndEvent());
+		MinecraftForge.EVENT_BUS.register(new BlockHarvestEvent());
+		MinecraftForge.EVENT_BUS.register(new EntityDeathEvent());
+		MinecraftForge.EVENT_BUS.register(new ArmourHandler());
+	}
 
+	public void registerRenderers() {
 	}
 
 	public void handleTimeManipulatorPacket(int x, int y, int z, boolean revertTime, boolean advanceTime) {
-
 	}
 
 	public void handleInventoryBinderPacket(int x, int y, int z, String playerName) {
-
 	}
 
 	@Override
