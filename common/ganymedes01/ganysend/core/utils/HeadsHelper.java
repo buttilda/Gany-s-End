@@ -43,8 +43,8 @@ import net.minecraft.nbt.NBTTagCompound;
 public class HeadsHelper {
 
 	public static boolean useTwilightForrestMobs = false;
-	public static String[] skullTypes = new String[] { "blaze", "enderman", "pigman", "player", "spider", "caveSpider", "pig", "cow", "mooshroom", "sheep", "wolf", "villager", "chicken", "witch", "zombieVillager", "ironGolem", "squid", "wither", "bunny", "penguin", "bighorn", "wildDeer",
-	"wildBoar", "redcap", "druid", "hedgeSpider", "ghast" };
+	public static boolean useThermalExpansionMobs = false;
+	public static String[] skullTypes = new String[] { "blaze", "enderman", "pigman", "player", "spider", "caveSpider", "pig", "cow", "mooshroom", "sheep", "wolf", "villager", "chicken", "witch", "zombieVillager", "ironGolem", "squid", "wither", "bunny", "penguin", "bighorn", "wildDeer", "wildBoar", "redcap", "druid", "hedgeSpider", "ghast", "blizz" };
 
 	public static ArrayList<Integer> TFskullsIndexes = new ArrayList<Integer>();
 	static {
@@ -58,6 +58,12 @@ public class HeadsHelper {
 
 		if (useTwilightForrestMobs) {
 			ItemStack head = getTFMobHead(EntityList.getEntityString(target));
+			if (head != null)
+				return head;
+		}
+		useThermalExpansionMobs = true;
+		if (useThermalExpansionMobs) {
+			ItemStack head = getTEMobHead(EntityList.getEntityString(target));
 			if (head != null)
 				return head;
 		}
@@ -141,6 +147,13 @@ public class HeadsHelper {
 			else if (mobName.equals("TwilightForest.Hedge Spider"))
 				return new ItemStack(ModItems.itemNewSkull, 1, 25);
 
+		return null;
+	}
+
+	private static ItemStack getTEMobHead(String mobName) {
+		if (mobName != null)
+			if (mobName.equals("Blizz"))
+				return new ItemStack(ModItems.itemNewSkull, 1, 27);
 		return null;
 	}
 }

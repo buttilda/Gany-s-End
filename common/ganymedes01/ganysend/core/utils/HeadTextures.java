@@ -36,8 +36,10 @@ public class HeadTextures {
 	public static final ResourceLocation SKELETON_DRUID = Utils.getResource(TF_PREFIX + "skeletondruid.png");
 	public static final ResourceLocation HEDGE_SPIDER = Utils.getResource(TF_PREFIX + "hedgespider.png");
 
-	public static final ResourceLocation[] headTextures = new ResourceLocation[] { BLAZE_HEAD, ENDERMAN_HEAD, PIGMAN_HEAD, null, SPIDER_HEAD, CAVE_SPIDER_HEAD, PIG_HEAD, COW_HEAD, MOOSHROOM_HEAD, SHEEP_HEAD, WOLF_HEAD, VILLAGER_HEAD, CHICKEN_HEAD, WITCH_HEAD, ZOMBIE_VILLAGER_HEAD, IRON_GOLEM_HEAD,
-	SQUID_HEAD, WITHER_HEAD, BUNNY, PENGUIN, BIGHORN, WILD_DEER, WILD_BOAR, REDCAP, SKELETON_DRUID, HEDGE_SPIDER, GHAST_HEAD };
+	private static final String TE_PREFIX = "thermalexpansion:textures/entity/";
+	public static final ResourceLocation BLIZZ = Utils.getResource(TE_PREFIX + "Blizz.png");
+
+	public static final ResourceLocation[] headTextures = new ResourceLocation[] { BLAZE_HEAD, ENDERMAN_HEAD, PIGMAN_HEAD, null, SPIDER_HEAD, CAVE_SPIDER_HEAD, PIG_HEAD, COW_HEAD, MOOSHROOM_HEAD, SHEEP_HEAD, WOLF_HEAD, VILLAGER_HEAD, CHICKEN_HEAD, WITCH_HEAD, ZOMBIE_VILLAGER_HEAD, IRON_GOLEM_HEAD, SQUID_HEAD, WITHER_HEAD, BUNNY, PENGUIN, BIGHORN, WILD_DEER, WILD_BOAR, REDCAP, SKELETON_DRUID, HEDGE_SPIDER, GHAST_HEAD, BLIZZ };
 
 	public static final ResourceLocation getPlayerSkin(String playerName) {
 		if (playerName != null && playerName.length() > 0) {

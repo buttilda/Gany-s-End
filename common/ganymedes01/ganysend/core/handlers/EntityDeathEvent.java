@@ -26,8 +26,8 @@ public class EntityDeathEvent {
 		if (event.entityLiving.worldObj.isRemote)
 			return;
 		Random rand = new Random();
-		if (checkDamSource(event.source))
-			if (event.source == CustomDamageSources.beheading || shouldDoRandomDrop(rand)) {
+		if (event.source == CustomDamageSources.beheading || shouldDoRandomDrop(rand))
+			if (checkDamSource(event.source)) {
 				ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
 				if (stack != null) {
 					event.entityLiving.entityDropItem(stack, rand.nextFloat());
@@ -43,7 +43,6 @@ public class EntityDeathEvent {
 	}
 
 	private boolean checkDamSource(DamageSource source) {
-		return source != DamageSource.fall && source != DamageSource.inFire && source != DamageSource.onFire && source != DamageSource.cactus && source != DamageSource.lava && source != DamageSource.inWall && source != DamageSource.drown && source != DamageSource.starve &&
-		source != DamageSource.wither && source != DamageSource.anvil && source != DamageSource.fallingBlock;
+		return source != DamageSource.fall && source != DamageSource.inFire && source != DamageSource.onFire && source != DamageSource.cactus && source != DamageSource.lava && source != DamageSource.inWall && source != DamageSource.drown && source != DamageSource.starve && source != DamageSource.wither && source != DamageSource.anvil && source != DamageSource.fallingBlock;
 	}
 }

@@ -102,8 +102,11 @@ public class ItemNewSkull extends ItemSkull {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(int id, CreativeTabs tab, List list) {
 		boolean TFPresent = Loader.isModLoaded("TwilightForest");
+		boolean TEPresent = Loader.isModLoaded("ThermalExpansion");
 		for (int i = 0; i < HeadsHelper.skullTypes.length; i++) {
 			if (!TFPresent && HeadsHelper.TFskullsIndexes.contains(i))
+				continue;
+			if (!TEPresent && i == 27)
 				continue;
 			list.add(new ItemStack(id, 1, i));
 		}
