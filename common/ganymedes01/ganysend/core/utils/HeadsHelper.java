@@ -61,7 +61,7 @@ public class HeadsHelper {
 			if (head != null)
 				return head;
 		}
-		useThermalExpansionMobs = true;
+
 		if (useThermalExpansionMobs) {
 			ItemStack head = getTEMobHead(EntityList.getEntityString(target));
 			if (head != null)
