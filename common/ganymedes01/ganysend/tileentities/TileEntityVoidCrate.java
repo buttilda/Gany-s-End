@@ -29,7 +29,7 @@ public class TileEntityVoidCrate extends TileEntity implements IInventory {
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		return inventory[slot];
+		return slot == 64 ? null : inventory[slot];
 	}
 
 	@Override
@@ -66,6 +66,9 @@ public class TileEntityVoidCrate extends TileEntity implements IInventory {
 
 		if (stack != null && stack.stackSize > getInventoryStackLimit())
 			stack.stackSize = getInventoryStackLimit();
+
+		if (slot == 64)
+			inventory[slot] = null;
 	}
 
 	@Override
