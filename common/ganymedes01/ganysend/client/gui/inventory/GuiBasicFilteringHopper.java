@@ -24,9 +24,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiBasicFilteringHopper extends GuiContainer {
 
-	ResourceLocation backGround;
-
-	private TileEntityFilteringHopper hopper;
+	private final ResourceLocation backGround;
+	private final TileEntityFilteringHopper hopper;
 
 	public GuiBasicFilteringHopper(InventoryPlayer inventory, TileEntityFilteringHopper tile) {
 		super(new ContainerFilteringHopper(inventory, tile));

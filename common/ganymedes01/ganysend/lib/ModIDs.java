@@ -34,6 +34,7 @@ public class ModIDs {
 	public static int INVENTORY_BINDER_ID;
 	public static int INFINITE_WATER_SOURCE_ID;
 	public static int END_WALLS_ID;
+	public static int VOID_CRATE_ID;
 
 	// Armour
 	public static int ENDIUM_HELMET_ID;
