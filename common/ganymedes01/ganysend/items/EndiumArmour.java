@@ -26,16 +26,15 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 
-public class EndiumArmour extends ItemArmor implements IRepairable {
+public abstract class EndiumArmour extends ItemArmor implements IRepairable {
 
 	private final int type;
 	private int coolDown;
-	private final int MAX_COOL_DOWN;
+	private final int MAX_COOL_DOWN = 10;
 
 	public EndiumArmour(int id, int type) {
 		super(id, ModMaterials.ENDIUM_ARMOUR, 0, type);
 		this.type = type;
-		MAX_COOL_DOWN = 10;
 		setMaxStackSize(1);
 		setCreativeTab(GanysEnd.endTab);
 	}
@@ -48,7 +47,7 @@ public class EndiumArmour extends ItemArmor implements IRepairable {
 
 	@Override
 	public boolean getIsRepairable(ItemStack item, ItemStack material) {
-		return material.getItem() == ModItems.endiumIngot;
+		return material.itemID == ModItems.endiumIngot.itemID && material.getItemDamage() == 0;
 	}
 
 	@Override
@@ -110,7 +109,5 @@ public class EndiumArmour extends ItemArmor implements IRepairable {
 		handleInWater(player, stack, isWaterproof);
 	}
 
-	protected void handleInWater(EntityPlayer player, ItemStack stack, boolean isWaterproof) {
-
-	}
+	abstract void handleInWater(EntityPlayer player, ItemStack stack, boolean isWaterproof);
 }

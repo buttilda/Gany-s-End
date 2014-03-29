@@ -15,7 +15,7 @@ import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.network.PacketHandler;
 import ganymedes01.ganysend.recipes.ModRecipes;
-import ganymedes01.ganysend.world.EnderFlowerGenerator;
+import ganymedes01.ganysend.world.EndWorldGenerator;
 
 import java.io.File;
 
@@ -84,7 +84,7 @@ public class GanysEnd {
 		NetworkRegistry.instance().registerGuiHandler(instance, proxy);
 		proxy.registerTileEntities();
 		proxy.registerRenderers();
-		GameRegistry.registerWorldGenerator(new EnderFlowerGenerator());
+		GameRegistry.registerWorldGenerator(new EndWorldGenerator());
 
 		if (!Loader.isModLoaded("mobsplice"))
 			if (event.getSide() == Side.CLIENT) {

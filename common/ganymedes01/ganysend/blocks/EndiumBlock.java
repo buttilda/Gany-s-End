@@ -38,4 +38,9 @@ public class EndiumBlock extends Block {
 		list.add(new ItemStack(ModItems.endiumIngot, 9));
 		return list;
 	}
+
+	@Override
+	public boolean isBeaconBase(World worldObj, int x, int y, int z, int beaconX, int beaconY, int beaconZ) {
+		return true;
+	}
 }

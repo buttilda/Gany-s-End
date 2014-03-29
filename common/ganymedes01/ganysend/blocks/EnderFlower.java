@@ -6,6 +6,8 @@ import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.world.World;
 
 /**
@@ -23,6 +25,11 @@ public class EnderFlower extends BlockFlower {
 		setCreativeTab(GanysEnd.endTab);
 		setTextureName(Utils.getBlockTexture(Strings.ENDER_FLOWER_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDER_FLOWER_NAME));
+	}
+
+	@Override
+	public boolean canEntityDestroy(World world, int x, int y, int z, Entity entity) {
+		return !(entity instanceof EntityDragon);
 	}
 
 	@Override

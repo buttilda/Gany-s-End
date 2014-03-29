@@ -7,6 +7,7 @@ import ganymedes01.ganysend.items.blocks.ItemEnderPearlBlock;
 import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -104,5 +105,6 @@ public class ModBlocks {
 		GameRegistry.registerBlock(infiniteWaterSource, Strings.INFINITE_WATER_SOURCE_NAME);
 		GameRegistry.registerBlock(endWalls, ItemEndWalls.class, Strings.END_WALLS_NAME);
 		GameRegistry.registerBlock(voidCrate, Strings.VOID_CRATE_NAME);
+		MinecraftForge.setBlockHarvestLevel(rawEndium, 0, "pickaxe", 3);
 	}
 }

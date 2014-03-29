@@ -54,7 +54,7 @@ public class EndiumShovel extends ItemSpade implements IEndiumTool {
 
 	@Override
 	public boolean getIsRepairable(ItemStack item, ItemStack material) {
-		return material.getItem() == ModItems.endiumIngot;
+		return material.itemID == ModItems.endiumIngot.itemID && material.getItemDamage() == 0;
 	}
 
 	@Override

@@ -6,6 +6,9 @@ import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.world.World;
 
 /**
  * Gany's End
@@ -23,5 +26,10 @@ public class RawEndium extends Block {
 		setCreativeTab(GanysEnd.endTab);
 		setTextureName(Utils.getBlockTexture(Strings.RAW_ENDIUM_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.RAW_ENDIUM_NAME));
+	}
+
+	@Override
+	public boolean canEntityDestroy(World world, int x, int y, int z, Entity entity) {
+		return !(entity instanceof EntityDragon);
 	}
 }
