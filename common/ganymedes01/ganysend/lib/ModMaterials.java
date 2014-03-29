@@ -18,4 +18,5 @@ public class ModMaterials {
 
 	// Item
 	public final static EnumToolMaterial ENDIUM_TOOLS = EnumHelper.addToolMaterial("ENDIUM", 3, 131, 12.0F, 1.5F, 0);
+	public final static EnumToolMaterial REIN_ENDIUM_TOOLS = EnumHelper.addToolMaterial("REIN_ENDIUM", 3, 1561, 12.0F, 1.5F, 0);
 }

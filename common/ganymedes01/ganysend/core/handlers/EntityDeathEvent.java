@@ -6,9 +6,15 @@ import ganymedes01.ganysend.core.utils.HeadsHelper;
 
 import java.util.Random;
 
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
@@ -25,10 +31,13 @@ public class EntityDeathEvent {
 	public void modDeathEvent(LivingDeathEvent event) {
 		if (event.entityLiving.worldObj.isRemote)
 			return;
-		Random rand = new Random();
-		if (event.source == CustomDamageSources.beheading || shouldDoRandomDrop(rand))
+		Random rand = event.entityLiving.worldObj.rand;
+		boolean isScythe = event.source == CustomDamageSources.beheading;
+		if (isScythe || shouldDoRandomDrop(rand, lootingLevel(event.source)))
 			if (checkDamSource(event.source)) {
 				ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
+				if (stack.itemID == Item.skull.itemID && stack.getItemDamage() == 1 && !isScythe)
+					return;
 				if (stack != null) {
 					event.entityLiving.entityDropItem(stack, rand.nextFloat());
 					if (!(event.entityLiving instanceof EntityPlayer))
@@ -38,8 +47,25 @@ public class EntityDeathEvent {
 			}
 	}
 
-	private boolean shouldDoRandomDrop(Random rand) {
-		return GanysEnd.enableRandomHeadDrop && rand.nextInt(150) == 75;
+	private int lootingLevel(DamageSource source) {
+		if (source instanceof EntityDamageSource) {
+			Entity entity = ((EntityDamageSource) source).getEntity();
+			if (entity instanceof EntityPlayer) {
+				ItemStack stack = ((EntityPlayer) entity).getCurrentEquippedItem();
+				if (stack != null) {
+					NBTTagList list = stack.getEnchantmentTagList();
+					if (list != null)
+						for (int i = 0; i < list.tagCount(); i++)
+							if (((NBTTagCompound) list.tagAt(i)).getShort("id") == Enchantment.looting.effectId)
+								return ((NBTTagCompound) list.tagAt(i)).getShort("lvl");
+				}
+			}
+		}
+		return 0;
+	}
+
+	private boolean shouldDoRandomDrop(Random rand, int looting) {
+		return GanysEnd.enableRandomHeadDrop && rand.nextInt(200 - 50 * looting) == 0;
 	}
 
 	private boolean checkDamSource(DamageSource source) {

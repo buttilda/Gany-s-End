@@ -28,14 +28,15 @@ item.ganysend.itemNewSkullironGolemHead.name=Iron Golem Head
 item.ganysend.itemNewSkullsquidHead.name=Squid Head
 item.ganysend.itemNewSkullwitherHead.name=Wither Head
 item.ganysend.itemNewSkullghastHead.name=Ghast Head
-item.ganysend.itemNewSkullblizzHead.name=Blizz Head
 item.ganysend.infusedGem_night.name=Night Infused Gem
 item.ganysend.infusedGem_day.name=Day Infused Gem
 item.ganysend.endiumPickaxe.name=Endium Pickaxe
 item.ganysend.endiumAxe.name=Endium Axe
 item.ganysend.endiumShovel.name=Endium Shovel
 item.ganysend.endiumNugget.name=Endium Nugget
-item.ganysend.spawnerCapturer.name=Spawner Capturer
+item.ganysend.reinforcedEndiumPickaxe.name=Reinforced Endium Pickaxe
+item.ganysend.reinforcedEndiumAxe.name=Reinforced Endium Axe
+item.ganysend.reinforcedEndiumShovel.name=Reinforced Endium Shovel
 
 item.ganysend.itemNewSkullbunnyHead.name=Bunny Head
 item.ganysend.itemNewSkullpenguinHead.name=Penguin Head
@@ -45,6 +46,8 @@ item.ganysend.itemNewSkullwildBoarHead.name=Wild Boar Head
 item.ganysend.itemNewSkullredcapHead.name=Redcap Head
 item.ganysend.itemNewSkulldruidHead.name=Skeleton Druid Head
 item.ganysend.itemNewSkullhedgeSpiderHead.name=Hedge Spider Head
+
+item.ganysend.itemNewSkullblizzHead.name=Blizz Head
 
 nottagged=Not Tagged
 

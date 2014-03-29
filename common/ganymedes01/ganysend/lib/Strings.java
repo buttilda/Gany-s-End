@@ -53,6 +53,9 @@ public class Strings {
 	public static final String ENDIUM_AXE_NAME = "endiumAxe";
 	public static final String ENDIUM_SHOVEL_NAME = "endiumShovel";
 	public static final String ENDIUM_NUGGET_NAME = "endiumNugget";
+	public static final String REINFORCED_ENDIUM_PICKAXE_NAME = "reinforcedEndiumPickaxe";
+	public static final String REINFORCED_ENDIUM_AXE_NAME = "reinforcedEndiumAxe";
+	public static final String REINFORCED_ENDIUM_SHOVEL_NAME = "reinforcedEndiumShovel";
 
 	// Enchantments
 	public static final String IMPERVIOUSNESS_NAME = "enchantment.imperviousness";

@@ -1,7 +1,7 @@
 package ganymedes01.ganysend.core.handlers;
 
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.items.ModItems;
+import ganymedes01.ganysend.lib.IEndiumTool;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,9 +23,8 @@ public class BlockHarvestEvent {
 		if (event.harvester != null)
 			if (event.dropChance > 0.0F)
 				if (!event.drops.isEmpty())
-					if (event.harvester.getCurrentEquippedItem() != null) {
-						int itemID = event.harvester.getCurrentEquippedItem().itemID;
-						if (itemID == ModItems.endiumPickaxe.itemID || itemID == ModItems.endiumAxe.itemID || itemID == ModItems.endiumShovel.itemID)
+					if (event.harvester.getCurrentEquippedItem() != null)
+						if (event.harvester.getCurrentEquippedItem().getItem() instanceof IEndiumTool)
 							if (event.harvester.inventory.getCurrentItem().stackTagCompound != null)
 								if (event.harvester.inventory.getCurrentItem().getTagCompound().getBoolean("Tagged")) {
 									NBTTagCompound data = event.harvester.inventory.getCurrentItem().getTagCompound();
@@ -44,6 +43,5 @@ public class BlockHarvestEvent {
 												Utils.dropStack(event.world, event.x, event.y, event.z, stack);
 									}
 								}
-					}
 	}
 }

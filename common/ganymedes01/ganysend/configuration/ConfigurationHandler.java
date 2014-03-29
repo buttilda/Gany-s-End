@@ -97,6 +97,9 @@ public class ConfigurationHandler {
 			ModIDs.ENDIUM_PICKAXE_ID = configItem(Strings.ENDIUM_PICKAXE_NAME);
 			ModIDs.ENDIUM_AXE_ID = configItem(Strings.ENDIUM_AXE_NAME);
 			ModIDs.ENDIUM_SHOVEL_ID = configItem(Strings.ENDIUM_SHOVEL_NAME);
+			ModIDs.REINFORCED_ENDIUM_PICKAXE_ID = configItem(Strings.REINFORCED_ENDIUM_PICKAXE_NAME);
+			ModIDs.REINFORCED_ENDIUM_AXE_ID = configItem(Strings.REINFORCED_ENDIUM_AXE_NAME);
+			ModIDs.REINFORCED_ENDIUM_SHOVEL_ID = configItem(Strings.REINFORCED_ENDIUM_SHOVEL_NAME);
 
 			// Enchantments
 			ModIDs.IMPERVIOUSNESS_ID = configEnch(Strings.IMPERVIOUSNESS_NAME, 100);

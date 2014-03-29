@@ -30,6 +30,9 @@ public class ModItems {
 	public static Item endiumPickaxe;
 	public static Item endiumAxe;
 	public static Item endiumShovel;
+	public static Item reinforcedEndiumPickaxe;
+	public static Item reinforcedEndiumAxe;
+	public static Item reinforcedEndiumShovel;
 
 	// Armour
 	public static Item endiumHelmet;
@@ -55,6 +58,9 @@ public class ModItems {
 		endiumPickaxe = new EndiumPickaxe();
 		endiumAxe = new EndiumAxe();
 		endiumShovel = new EndiumShovel();
+		reinforcedEndiumPickaxe = new ReinforcedEndiumPickaxe();
+		reinforcedEndiumAxe = new ReinforcedEndiumAxe();
+		reinforcedEndiumShovel = new ReinforcedEndiumShovel();
 
 		registerNames();
 		registerForge();
@@ -79,6 +85,9 @@ public class ModItems {
 		GameRegistry.registerItem(endiumPickaxe, Strings.ENDIUM_PICKAXE_NAME);
 		GameRegistry.registerItem(endiumAxe, Strings.ENDIUM_AXE_NAME);
 		GameRegistry.registerItem(endiumShovel, Strings.ENDIUM_SHOVEL_NAME);
+		GameRegistry.registerItem(reinforcedEndiumPickaxe, Strings.REINFORCED_ENDIUM_PICKAXE_NAME);
+		GameRegistry.registerItem(reinforcedEndiumAxe, Strings.REINFORCED_ENDIUM_AXE_NAME);
+		GameRegistry.registerItem(reinforcedEndiumShovel, Strings.REINFORCED_ENDIUM_SHOVEL_NAME);
 	}
 
 	private static void registerForge() {

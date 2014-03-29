@@ -53,6 +53,9 @@ public class ModIDs {
 	public static int ENDIUM_PICKAXE_ID;
 	public static int ENDIUM_AXE_ID;
 	public static int ENDIUM_SHOVEL_ID;
+	public static int REINFORCED_ENDIUM_PICKAXE_ID;
+	public static int REINFORCED_ENDIUM_AXE_ID;
+	public static int REINFORCED_ENDIUM_SHOVEL_ID;
 
 	// Enchantments
 	public static int IMPERVIOUSNESS_ID;

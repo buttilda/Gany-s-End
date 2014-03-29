@@ -57,6 +57,9 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ItemStack(ModItems.endiumPickaxe), "xxx", " y ", " y ", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
 		GameRegistry.addRecipe(new ItemStack(ModItems.endiumAxe), "xx", "xy", " y", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
 		GameRegistry.addRecipe(new ItemStack(ModItems.endiumShovel), "x", "y", "y", 'x', ModItems.endiumIngot, 'y', ModItems.endstoneRod);
+		GameRegistry.addRecipe(new ItemStack(ModItems.reinforcedEndiumAxe), " x ", "xyx", 'x', Item.diamond, 'y', ModItems.endiumAxe);
+		GameRegistry.addRecipe(new ItemStack(ModItems.reinforcedEndiumPickaxe), " x ", "xyx", 'x', Item.diamond, 'y', ModItems.endiumPickaxe);
+		GameRegistry.addRecipe(new ItemStack(ModItems.reinforcedEndiumShovel), " x ", "xyx", 'x', Item.diamond, 'y', ModItems.endiumShovel);
 
 		// Vanilla
 		GameRegistry.addRecipe(new ItemStack(Item.expBottle, 8), "yyy", "yxy", "yyy", 'x', ModItems.endiumIngot, 'y', new ItemStack(Item.potion, 1, 0));
