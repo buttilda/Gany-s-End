@@ -20,7 +20,7 @@ public class TE3Manager extends Integration {
 	@Override
 	public void init() {
 		HeadsHelper.useThermalExpansionMobs = true;
-		addMagmaCruicibleRecipe(2000, new ItemStack(ModBlocks.enderFlower), new FluidStack(FluidRegistry.getFluid("ender"), 64));
+		addMagmaCruicibleRecipe(2000, new ItemStack(ModBlocks.enderFlower), new FluidStack(FluidRegistry.getFluid("ender"), 30));
 	}
 
 	@Override

@@ -32,6 +32,7 @@ public class ThaumCraftManager extends Integration {
 		addAspectsToItem(ModItems.endiumIngot.itemID, new Aspect[] { Aspect.ELDRITCH, Aspect.TRAVEL, Aspect.MAGIC, Aspect.SENSES, Aspect.DARKNESS }, new int[] { 4, 4, 7, 2, 2 });
 		addAspectsToItem(ModItems.endstoneRod.itemID, new Aspect[] { Aspect.DARKNESS, Aspect.EARTH }, new int[] { 1, 1 });
 		addAspectsToItem(ModItems.itemNewSkull.itemID, new Aspect[] { Aspect.FLESH, Aspect.DEATH, Aspect.SOUL }, new int[] { 4, 4, 4 });
+		addAspectsToItem(ModItems.itemNewSkull.itemID, 3, new Aspect[] { Aspect.DEATH, Aspect.SOUL, Aspect.MAN }, new int[] { 4, 4, 4 });
 		addAspectsToItem(ModBlocks.enderFlower.blockID, new Aspect[] { Aspect.PLANT, Aspect.SENSES, Aspect.LIFE, Aspect.ELDRITCH, Aspect.MAGIC, Aspect.TRAVEL }, new int[] { 1, 1, 1, 1, 1, 1 });
 	}
 
