@@ -15,14 +15,12 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -36,7 +34,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemNewSkull extends ItemSkull {
 
-	private static ItemStack[] skulls;
 	@SideOnly(Side.CLIENT)
 	private Icon[] icons;
 
@@ -149,14 +146,5 @@ public class ItemNewSkull extends ItemSkull {
 	@Override
 	public boolean isValidArmor(ItemStack stack, int armorType, Entity entity) {
 		return armorType == 0;
-	}
-
-	public static ItemStack[] getSkullsForRecipe() {
-		if (skulls == null) {
-			skulls = new ItemStack[2];
-			skulls[0] = new ItemStack(ModItems.itemNewSkull, 1, OreDictionary.WILDCARD_VALUE);
-			skulls[1] = new ItemStack(Item.skull, 1, OreDictionary.WILDCARD_VALUE);
-		}
-		return skulls;
 	}
 }

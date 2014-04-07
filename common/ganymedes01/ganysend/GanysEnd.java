@@ -18,9 +18,14 @@ import ganymedes01.ganysend.recipes.ModRecipes;
 import ganymedes01.ganysend.world.EndWorldGenerator;
 
 import java.io.File;
+import java.lang.reflect.Field;
+import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -98,6 +103,18 @@ public class GanysEnd {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		ModIntegrator.postInit();
+
+		try {
+			Field f = ForgeHooks.class.getDeclaredField("grassList");
+			f.setAccessible(true);
+			for (Object obj : (List) f.get(null)) {
+				Field f2 = obj.getClass().getField("block");
+				f2.setAccessible(true);
+				OreDictionary.registerOre("dayGemMaterial", (Block) f2.get(obj));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@EventHandler
