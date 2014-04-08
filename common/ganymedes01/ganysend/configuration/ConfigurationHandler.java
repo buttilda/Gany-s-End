@@ -115,6 +115,7 @@ public class ConfigurationHandler {
 			GanysEnd.activateShifters = configBoolean(Strings.ACTIVATE_SHIFTERS, true);
 			GanysEnd.enableRandomHeadDrop = configBoolean(Strings.ENABLE_RANDOM_HEAD_DROP, true);
 			GanysEnd.enableTimeManipulator = configBoolean(Strings.ENABLE_TIME_MANIPULATOR, true);
+			GanysEnd.enableEnderBag = configBoolean(Strings.ENABLE_ENDER_BAG, true);
 
 		} catch (Exception e) {
 			FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME + " has had a problem loading its configuration");

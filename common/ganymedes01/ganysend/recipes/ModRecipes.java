@@ -67,7 +67,8 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumAxe), " x ", "xyx", 'x', Item.diamond, 'y', ModItems.endiumAxe));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumPickaxe), " x ", "xyx", 'x', Item.diamond, 'y', ModItems.endiumPickaxe));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumShovel), " x ", "xyx", 'x', Item.diamond, 'y', ModItems.endiumShovel));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderBag), "zwz", "wyw", "xxx", 'x', Item.enderPearl, 'y', Block.enderChest, 'z', new ItemStack(Block.cloth, 1, 15), 'w', new ItemStack(Block.cloth, 1, 13)));
+		if (GanysEnd.enableEnderBag)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderBag), "zwz", "wyw", "xxx", 'x', Item.enderPearl, 'y', Block.enderChest, 'z', new ItemStack(Block.cloth, 1, 15), 'w', new ItemStack(Block.cloth, 1, 13)));
 
 		// Vanilla
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.expBottle, 8), "yyy", "yxy", "yyy", 'x', "ingotEndium", 'y', new ItemStack(Item.potion, 1, 0)));

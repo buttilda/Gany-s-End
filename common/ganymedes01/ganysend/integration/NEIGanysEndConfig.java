@@ -1,6 +1,8 @@
 package ganymedes01.ganysend.integration;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.blocks.ModBlocks;
+import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.Reference;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
@@ -18,6 +20,8 @@ public class NEIGanysEndConfig implements IConfigureNEI {
 	public void loadConfig() {
 		API.hideItem(ModBlocks.enderToggler_air.blockID);
 		API.hideItem(ModBlocks.blockNewSkull.blockID);
+		if (!GanysEnd.enableEnderBag)
+			API.hideItem(ModItems.enderBag.itemID);
 	}
 
 	@Override

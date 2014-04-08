@@ -64,6 +64,7 @@ public class GanysEnd {
 	public static boolean activateShifters = true;
 	public static boolean enableTimeManipulator = true;
 	public static boolean enableRandomHeadDrop = true;
+	public static boolean enableEnderBag = true;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
