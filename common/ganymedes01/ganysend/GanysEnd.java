@@ -23,6 +23,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -96,6 +97,14 @@ public class GanysEnd {
 			if (event.getSide() == Side.CLIENT) {
 				RenderCapeHandler.getUsernames();
 				MinecraftForge.EVENT_BUS.register(new RenderCapeHandler());
+			}
+
+		if (GanysEnd.enableEnderBag)
+			try {
+				Block blockEnderChest = (Block) Class.forName("codechicken.enderstorage.EnderStorage").getDeclaredField("blockEnderChest").get(null);
+				for (int i = 0; i < 0x1000; i++)
+					OreDictionary.registerOre("enderChest", new ItemStack(blockEnderChest, 1, i));
+			} catch (Exception e) {
 			}
 
 		ModIntegrator.init();
