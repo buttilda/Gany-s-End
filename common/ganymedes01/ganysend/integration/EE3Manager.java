@@ -20,6 +20,7 @@ public class EE3Manager extends Integration {
 	@Override
 	public void init() {
 		addEMCValueToBlock(ModBlocks.enderFlower, 128);
+		addEMCValueToBlock(ModBlocks.rawEndium, 2052);
 		addEMCValueToItem(ModItems.endiumIngot, 2052);
 		addEMCValueToItem(ModItems.infiniteBucket, 8196);
 		addEMCValue(new ItemStack(ModItems.itemNewSkull, 1, OreDictionary.WILDCARD_VALUE), 2048);
