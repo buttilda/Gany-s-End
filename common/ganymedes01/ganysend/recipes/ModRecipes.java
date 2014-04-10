@@ -116,6 +116,8 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 0), "xxx", "xxx", 'x', ModBlocks.endstoneBrick);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 1), "xxx", "xxx", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 1));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.voidCrate), "xyx", "xzx", "xwx", 'x', "logWood", 'y', Block.chest, 'z', Item.enderPearl, 'w', Block.obsidian));
+		if (GanysEnd.enableRawEndiumRecipe)
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.rawEndium), "zyz", "yxy", "zyz", 'x', Item.eyeOfEnder, 'y', Block.whiteStone, 'z', Block.obsidian);
 
 		// Ender Flower Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 0), "xxx", " x ", "   ", 'x', "enderFlower")); // Black

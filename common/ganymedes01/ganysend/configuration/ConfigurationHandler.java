@@ -110,12 +110,13 @@ public class ConfigurationHandler {
 				integration.setShouldIntegrate(configIntegrationBoolean(integration.getModID()));
 
 			// Others
-			GanysEnd.togglerShouldMakeSound = configBoolean(Strings.TOGGLERS_SHOULD_MAKE_SOUND, true);
-			GanysEnd.shouldDoVersionCheck = configBoolean(Strings.SHOULD_DO_VERSION_CHECK, true);
-			GanysEnd.activateShifters = configBoolean(Strings.ACTIVATE_SHIFTERS, true);
-			GanysEnd.enableRandomHeadDrop = configBoolean(Strings.ENABLE_RANDOM_HEAD_DROP, true);
-			GanysEnd.enableTimeManipulator = configBoolean(Strings.ENABLE_TIME_MANIPULATOR, true);
-			GanysEnd.enableEnderBag = configBoolean(Strings.ENABLE_ENDER_BAG, true);
+			GanysEnd.togglerShouldMakeSound = configBoolean(Strings.TOGGLERS_SHOULD_MAKE_SOUND, GanysEnd.togglerShouldMakeSound);
+			GanysEnd.shouldDoVersionCheck = configBoolean(Strings.SHOULD_DO_VERSION_CHECK, GanysEnd.shouldDoVersionCheck);
+			GanysEnd.activateShifters = configBoolean(Strings.ACTIVATE_SHIFTERS, GanysEnd.activateShifters);
+			GanysEnd.enableRandomHeadDrop = configBoolean(Strings.ENABLE_RANDOM_HEAD_DROP, GanysEnd.enableRandomHeadDrop);
+			GanysEnd.enableTimeManipulator = configBoolean(Strings.ENABLE_TIME_MANIPULATOR, GanysEnd.enableTimeManipulator);
+			GanysEnd.enableEnderBag = configBoolean(Strings.ENABLE_ENDER_BAG, GanysEnd.enableEnderBag);
+			GanysEnd.enableRawEndiumRecipe = configBoolean(Strings.ENABLE_RAW_ENDIUM_RECIPE, GanysEnd.enableRawEndiumRecipe);
 
 		} catch (Exception e) {
 			FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME + " has had a problem loading its configuration");

@@ -70,6 +70,7 @@ public class Strings {
 	public static final String ENABLE_RANDOM_HEAD_DROP = "enableRandomHeadDrop";
 	public static final String ENABLE_TIME_MANIPULATOR = "enableTimeManipulator";
 	public static final String ENABLE_ENDER_BAG = "enableEnderBag";
+	public static final String ENABLE_RAW_ENDIUM_RECIPE = "enableRawEndiumRecipe";
 
 	// Version check
 	public static final String VERSION_CHECK_INIT = "Starting version check.";

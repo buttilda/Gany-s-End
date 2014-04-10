@@ -4,6 +4,7 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.blocks.ModBlocks;
 import ganymedes01.ganysend.client.renderer.block.BlockFilteringHopperRender;
 import ganymedes01.ganysend.client.renderer.block.BlockInventoryBinderRender;
+import ganymedes01.ganysend.client.renderer.block.BlockRawEndiumRender;
 import ganymedes01.ganysend.client.renderer.block.BlockTimeManipulatorRender;
 import ganymedes01.ganysend.client.renderer.item.ItemInfiniteWaterSourceRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockNewSkullRender;
@@ -47,6 +48,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(RenderIDs.INVENTORY_BINDER, new BlockInventoryBinderRender());
 		if (GanysEnd.enableTimeManipulator)
 			RenderingRegistry.registerBlockHandler(RenderIDs.TIME_MANIPULATOR, new BlockTimeManipulatorRender());
+		RenderingRegistry.registerBlockHandler(RenderIDs.RAW_ENDIUM, new BlockRawEndiumRender());
 	}
 
 	@Override

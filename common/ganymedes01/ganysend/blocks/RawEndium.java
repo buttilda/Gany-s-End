@@ -3,6 +3,7 @@ package ganymedes01.ganysend.blocks;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModIDs;
+import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -31,5 +32,10 @@ public class RawEndium extends Block {
 	@Override
 	public boolean canEntityDestroy(World world, int x, int y, int z, Entity entity) {
 		return !(entity instanceof EntityDragon);
+	}
+
+	@Override
+	public int getRenderType() {
+		return RenderIDs.RAW_ENDIUM;
 	}
 }
