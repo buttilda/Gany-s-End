@@ -47,7 +47,7 @@ public class ItemSkullRender implements IItemRenderer {
 				break;
 			}
 			case EQUIPPED: {
-				renderSkull(0.5F, 0.5F, 0.5F, skullType, name, isVanilla);
+				renderSkull(0.5F, 0.0F, 0.5F, skullType, name, isVanilla);
 				break;
 			}
 			case EQUIPPED_FIRST_PERSON: {
