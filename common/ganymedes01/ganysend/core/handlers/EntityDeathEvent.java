@@ -36,9 +36,9 @@ public class EntityDeathEvent {
 		if (isScythe || shouldDoRandomDrop(rand, lootingLevel(event.source)))
 			if (checkDamSource(event.source)) {
 				ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
-				if (stack.itemID == Item.skull.itemID && stack.getItemDamage() == 1 && !isScythe)
-					return;
 				if (stack != null) {
+					if (!isScythe && stack.itemID == Item.skull.itemID && stack.getItemDamage() == 1)
+						return;
 					event.entityLiving.entityDropItem(stack, rand.nextFloat());
 					if (!(event.entityLiving instanceof EntityPlayer))
 						if (event.isCancelable())

@@ -2,11 +2,8 @@ package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.blocks.ModBlocks;
-import ganymedes01.ganysend.core.utils.HeadsHelper;
-import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModIDs;
-import ganymedes01.ganysend.lib.Reference;
-import ganymedes01.ganysend.lib.Strings;
+import ganymedes01.ganysend.lib.SkullTypes;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 
 import java.util.List;
@@ -21,7 +18,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -34,15 +30,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemNewSkull extends ItemSkull {
 
-	@SideOnly(Side.CLIENT)
-	private Icon[] icons;
-
 	public ItemNewSkull() {
 		super(ModIDs.ITEM_NEW_SKULL_ID);
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setCreativeTab(GanysEnd.endTab);
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ITEM_NEW_SKULL_NAME));
 	}
 
 	@Override
@@ -69,10 +61,10 @@ public class ItemNewSkull extends ItemSkull {
 				return false;
 			else {
 				world.setBlock(x, y, z, ModBlocks.blockNewSkull.blockID, side, 2);
-				int i1 = 0;
+				int angle = 0;
 
 				if (side == 1)
-					i1 = MathHelper.floor_double(player.rotationYaw * 16.0F / 360.0F + 0.5D) & 15;
+					angle = MathHelper.floor_double(player.rotationYaw * 16.0F / 360.0F + 0.5D) & 15;
 
 				TileEntity tileentity = world.getBlockTileEntity(x, y, z);
 
@@ -82,7 +74,7 @@ public class ItemNewSkull extends ItemSkull {
 					if (stack.hasTagCompound() && stack.getTagCompound().hasKey("SkullOwner"))
 						playerName = stack.getTagCompound().getString("SkullOwner");
 					((TileEntityBlockNewSkull) tileentity).setSkullType(stack.getItemDamage(), playerName);
-					((TileEntityBlockNewSkull) tileentity).setSkullRotation(i1);
+					((TileEntityBlockNewSkull) tileentity).setSkullRotation(angle);
 					world.notifyBlockChange(x, y, z, ModBlocks.blockNewSkull.blockID);
 				}
 				stack.stackSize--;
@@ -91,60 +83,33 @@ public class ItemNewSkull extends ItemSkull {
 		}
 	}
 
-	public static final int getSkullCount() {
-		return HeadsHelper.skullTypes.length;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(int id, CreativeTabs tab, List list) {
-		boolean TFPresent = Loader.isModLoaded("TwilightForest");
-		boolean TEPresent = Loader.isModLoaded("ThermalExpansion");
-		for (int i = 0; i < HeadsHelper.skullTypes.length; i++) {
-			if (!TFPresent && HeadsHelper.TFskullsIndexes.contains(i))
-				continue;
-			if (!TEPresent && i == 27)
-				continue;
-			list.add(new ItemStack(id, 1, i));
-		}
-
-	}
-
-	@Override
-	public int getMetadata(int meta) {
-		return meta;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getIconFromDamage(int meta) {
-		if (meta < 0 || meta >= HeadsHelper.skullTypes.length)
-			meta = 0;
-
-		return icons[meta];
-	}
-
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		int meta = stack.getItemDamage();
-
-		if (meta < 0 || meta >= HeadsHelper.skullTypes.length)
-			meta = 0;
-
-		return "item." + Utils.getUnlocalizedName(Strings.ITEM_NEW_SKULL_NAME) + HeadsHelper.skullTypes[meta] + "Head";
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister reg) {
-		icons = new Icon[HeadsHelper.skullTypes.length];
-
-		for (int i = 0; i < HeadsHelper.skullTypes.length; i++)
-			icons[i] = reg.registerIcon(Reference.ITEM_BLOCK_TEXTURE_PATH + HeadsHelper.skullTypes[i] + "Head");
+		return SkullTypes.values()[meta >= SkullTypes.values().length ? 0 : meta].getUnlocalisedName();
 	}
 
 	@Override
 	public boolean isValidArmor(ItemStack stack, int armorType, Entity entity) {
 		return armorType == 0;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(int id, CreativeTabs tab, List list) {
+		for (SkullTypes skull : SkullTypes.values())
+			if (skull.canShow())
+				list.add(new ItemStack(id, 1, skull.ordinal()));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getIconFromDamage(int meta) {
+		return itemIcon;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister reg) {
 	}
 }

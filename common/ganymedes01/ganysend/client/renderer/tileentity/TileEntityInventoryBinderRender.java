@@ -1,7 +1,7 @@
 package ganymedes01.ganysend.client.renderer.tileentity;
 
 import ganymedes01.ganysend.client.model.ModelHead;
-import ganymedes01.ganysend.core.utils.HeadTextures;
+import ganymedes01.ganysend.lib.SkullTypes;
 import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,7 +42,7 @@ public class TileEntityInventoryBinderRender extends TileEntitySpecialRenderer {
 		}
 
 		ModelHead model = new ModelHead();
-		bindTexture(HeadTextures.getPlayerSkin(name));
+		bindTexture(SkullTypes.player.getTexture(name));
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glTranslatef((float) x + 0.5F - (float) transX, (float) y + 0.25F + (float) transY, (float) z + 0.5F);

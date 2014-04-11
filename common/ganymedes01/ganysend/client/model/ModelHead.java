@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.client.model;
 
+import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.client.model.ModelEnderman;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelSkeletonHead;
@@ -301,6 +302,19 @@ public class ModelHead extends ModelSkeletonHead {
 		head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
 	}
 
+	private void setLich() {
+		textureWidth = 64;
+		textureHeight = 64;
+
+		head = new ModelRenderer(this, 0, 0);
+		head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
+		head.setRotationPoint(0.0F, 0.0F, 0.0F);
+
+		overlay = new ModelRenderer(this, 32, 0);
+		overlay.addBox(-4.0F, -12.0F, -4.0F, 8, 8, 8, 0.5F);
+		overlay.setRotationPoint(0.0F, 0.0F, 0.0F);
+	}
+
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
@@ -308,74 +322,84 @@ public class ModelHead extends ModelSkeletonHead {
 	}
 
 	public ModelHead setHeadType(int type) {
-		switch (type) {
-			case 1:
+		switch (SkullTypes.values()[type]) {
+			case enderman:
 				setEnderman();
 				break;
-			case 2:
+			case pigman:
 				return new ModelHead(64);
-			case 4:
+			case spider:
+			case caveSpider:
+			case hedgeSpider:
+			case kingSpider:
 				setSpider();
 				break;
-			case 5:
-			case 25:
-				setSpider();
-				break;
-			case 6:
+			case pig:
 				setPig();
 				break;
-			case 7:
+			case mooshroom:
+			case cow:
 				setCow();
 				break;
-			case 8:
-				setCow();
-				break;
-			case 9:
+			case sheep:
 				setSheep();
 				break;
-			case 10:
+			case wolf:
+			case mistWolf:
 				setWolf();
 				break;
-			case 11:
+			case villager:
 				setVillager(64);
 				break;
-			case 12:
+			case chicken:
 				setChicken();
 				break;
-			case 13:
+			case witch:
 				setWitch();
 				break;
-			case 14:
+			case zombieVillager:
 				setZombieVillager();
 				break;
-			case 15:
+			case ironGolem:
 				setVillager(128);
 				break;
-			case 16:
+			case squid:
 				setSquid();
 				break;
-			case 17:
+			case wither:
 				return new ModelHead(64).hideOverlay();
-			case 18:
+			case bunny:
 				setBunny();
 				break;
-			case 19:
+			case penguin:
 				setPenguin();
 				break;
-			case 20:
+			case bighorn:
 				setBighorn();
 				break;
-			case 21:
+			case wildDeer:
 				setDeer();
 				break;
-			case 22:
+			case wildBoar:
 				setBoar();
 				break;
-			case 23:
+			case redcap:
 				setRedcap();
 				break;
-			case 26:
+			case ghast:
+			case miniGhast:
+			case guardGhast:
 				setGhast();
+				break;
+			case lich:
+				setLich();
+				break;
+			case kobold:
+			case slimeBeetle:
+			case fireBeetle:
+			case pinchBeetle:
+			case towerGolem:
+			default:
 				break;
 		}
 		return this;

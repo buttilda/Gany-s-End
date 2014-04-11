@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.lib;
 
+
 /**
  * Gany's End
  * 
@@ -71,6 +72,10 @@ public class Strings {
 	public static final String ENABLE_TIME_MANIPULATOR = "enableTimeManipulator";
 	public static final String ENABLE_ENDER_BAG = "enableEnderBag";
 	public static final String ENABLE_RAW_ENDIUM_RECIPE = "enableRawEndiumRecipe";
+
+	public static final String MC_PREFIX = "textures/entity/";
+	public static final String TF_PREFIX = "twilightforest:textures/model/";
+	public static final String TE_PREFIX = "thermalexpansion:textures/entity/";
 
 	// Version check
 	public static final String VERSION_CHECK_INIT = "Starting version check.";

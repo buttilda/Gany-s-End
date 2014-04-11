@@ -1,12 +1,13 @@
 package ganymedes01.ganysend.client.renderer.tileentity;
 
 import ganymedes01.ganysend.client.model.ModelHead;
-import ganymedes01.ganysend.core.utils.HeadTextures;
+import ganymedes01.ganysend.lib.SkullTypes;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -40,7 +41,7 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 	}
 
 	public void renderHead(float x, float y, float z, int meta, float skullRotation, int skullType, String playerName) {
-		bindTexture(HeadTextures.getHeadTexture(skullType, playerName));
+		bindTexture(SkullTypes.values()[skullType].getTexture(playerName));
 
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_CULL_FACE);
@@ -57,8 +58,9 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 	}
 
 	private void renderSpecial(int skullType, float skullRotation) {
-		if (HeadTextures.getSecondTexture(skullType) != null) {
-			bindTexture(HeadTextures.getSecondTexture(skullType));
+		ResourceLocation secondTex = SkullTypes.values()[skullType].getSecondTexture();
+		if (secondTex != null) {
+			bindTexture(secondTex);
 			if (skullType == 9 || skullType == 20) {
 				int c = 12;
 				if (skullType == 20)

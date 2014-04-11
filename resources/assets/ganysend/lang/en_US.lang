@@ -9,6 +9,18 @@ item.ganysend.endiumIngot.name=Endium Ingot
 item.ganysend.endstoneRod.name=End Stone Rod
 item.ganysend.enderScythe.name=Ender Scythe
 item.ganysend.infiniteBucket.name=Infinite Bucket
+item.ganysend.infusedGem_night.name=Night Infused Gem
+item.ganysend.infusedGem_day.name=Day Infused Gem
+item.ganysend.endiumPickaxe.name=Endium Pickaxe
+item.ganysend.endiumAxe.name=Endium Axe
+item.ganysend.endiumShovel.name=Endium Shovel
+item.ganysend.endiumNugget.name=Endium Nugget
+item.ganysend.reinforcedEndiumPickaxe.name=Reinforced Endium Pickaxe
+item.ganysend.reinforcedEndiumAxe.name=Reinforced Endium Axe
+item.ganysend.reinforcedEndiumShovel.name=Reinforced Endium Shovel
+item.ganysend.enderBag.name=Ender Bag
+
+# Heads
 item.ganysend.itemNewSkullpigmanHead.name=Pigman Head
 item.ganysend.itemNewSkullblazeHead.name=Blaze Head
 item.ganysend.itemNewSkullendermanHead.name=Enderman Head
@@ -28,17 +40,16 @@ item.ganysend.itemNewSkullironGolemHead.name=Iron Golem Head
 item.ganysend.itemNewSkullsquidHead.name=Squid Head
 item.ganysend.itemNewSkullwitherHead.name=Wither Head
 item.ganysend.itemNewSkullghastHead.name=Ghast Head
-item.ganysend.infusedGem_night.name=Night Infused Gem
-item.ganysend.infusedGem_day.name=Day Infused Gem
-item.ganysend.endiumPickaxe.name=Endium Pickaxe
-item.ganysend.endiumAxe.name=Endium Axe
-item.ganysend.endiumShovel.name=Endium Shovel
-item.ganysend.endiumNugget.name=Endium Nugget
-item.ganysend.reinforcedEndiumPickaxe.name=Reinforced Endium Pickaxe
-item.ganysend.reinforcedEndiumAxe.name=Reinforced Endium Axe
-item.ganysend.reinforcedEndiumShovel.name=Reinforced Endium Shovel
-item.ganysend.enderBag.name=Ender Bag
-
+item.ganysend.itemNewSkulllichHead.name=Twilight Lich Head
+item.ganysend.itemNewSkullmistWolfHead.name=Mist Wolf Head
+item.ganysend.itemNewSkullminiGhastHead.name=Carminite Ghastling Head
+item.ganysend.itemNewSkullguardGhastHead.name=Carminite Ghastguard Head
+item.ganysend.itemNewSkullkingSpiderHead.name=King Spider Head
+item.ganysend.itemNewSkullkoboldHead.name=Kobold Head
+item.ganysend.itemNewSkullslimeBeetleHead.name=Slime Beetle Head
+item.ganysend.itemNewSkullfireBeetleHead.name=Fire Beetle Head
+item.ganysend.itemNewSkullpinchBeetleHead.name=Pinch Beetle Head
+item.ganysend.itemNewSkulltowerGolemHead.name=Carminite Golem Head
 item.ganysend.itemNewSkullbunnyHead.name=Bunny Head
 item.ganysend.itemNewSkullpenguinHead.name=Penguin Head
 item.ganysend.itemNewSkullbighornHead.name=Bighorn Sheep Head
@@ -47,10 +58,7 @@ item.ganysend.itemNewSkullwildBoarHead.name=Wild Boar Head
 item.ganysend.itemNewSkullredcapHead.name=Redcap Head
 item.ganysend.itemNewSkulldruidHead.name=Skeleton Druid Head
 item.ganysend.itemNewSkullhedgeSpiderHead.name=Hedge Spider Head
-
 item.ganysend.itemNewSkullblizzHead.name=Blizz Head
-
-nottagged=Not Tagged
 
 # Block localizations
 tile.ganysend.enderFlower.name=Ender Flower
@@ -89,9 +97,6 @@ container.ganysend:advancedFilteringHopper=Advanced Filtering Hopper
 container.ganysend:advancedExclusiveFilteringHopper=Advanced Excl. Filtering Hopper
 container.ganysend:voidCrate=Void Crate
 
-pullallbut=Pull all but:
-pullonly=Pull Only:
-
 # Enchantments
 enchantment.imperviousness=Imperviousness
 
@@ -99,3 +104,6 @@ enchantment.imperviousness=Imperviousness
 itemGroup.ganysend=Gany's End
 death.attack.ganysEndBehead=%1$s was beheaded
 death.attack.ganysEndBehead.player=%1$s was beheaded by %2$s
+nottagged=Not Tagged
+pullallbut=Pull all but:
+pullonly=Pull Only:
