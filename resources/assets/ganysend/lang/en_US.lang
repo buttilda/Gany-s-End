@@ -59,6 +59,7 @@ item.ganysend.itemNewSkullredcapHead.name=Redcap Head
 item.ganysend.itemNewSkulldruidHead.name=Skeleton Druid Head
 item.ganysend.itemNewSkullhedgeSpiderHead.name=Hedge Spider Head
 item.ganysend.itemNewSkullblizzHead.name=Blizz Head
+item.ganysend.itemNewSkullenderDragonHead.name=Ender Dragon Head
 
 # Block localizations
 tile.ganysend.enderFlower.name=Ender Flower

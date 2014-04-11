@@ -61,9 +61,9 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 		ResourceLocation secondTex = SkullTypes.values()[skullType].getSecondTexture();
 		if (secondTex != null) {
 			bindTexture(secondTex);
-			if (skullType == 9 || skullType == 20) {
+			if (skullType == SkullTypes.sheep.ordinal() || skullType == SkullTypes.bighorn.ordinal()) {
 				int c = 12;
-				if (skullType == 20)
+				if (skullType == SkullTypes.bighorn.ordinal())
 					GL11.glColor3f(EntitySheep.fleeceColorTable[c][0], EntitySheep.fleeceColorTable[c][1], EntitySheep.fleeceColorTable[c][2]);
 				model.renderOverlay(skullRotation);
 			} else

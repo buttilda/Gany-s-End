@@ -1,7 +1,7 @@
 package ganymedes01.ganysend.core.handlers;
 
 import ganymedes01.ganysend.GanysEnd;
-import ganymedes01.ganysend.core.utils.CustomDamageSources;
+import ganymedes01.ganysend.core.utils.BeheadingDamage;
 import ganymedes01.ganysend.core.utils.HeadsHelper;
 
 import java.util.Random;
@@ -32,7 +32,7 @@ public class EntityDeathEvent {
 		if (event.entityLiving.worldObj.isRemote)
 			return;
 		Random rand = event.entityLiving.worldObj.rand;
-		boolean isScythe = event.source == CustomDamageSources.beheading;
+		boolean isScythe = event.source instanceof BeheadingDamage;
 		if (isScythe || shouldDoRandomDrop(rand, lootingLevel(event.source)))
 			if (checkDamSource(event.source)) {
 				ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);

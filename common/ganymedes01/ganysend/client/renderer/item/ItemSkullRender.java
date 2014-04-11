@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.client.renderer.item;
 
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockNewSkullRender;
+import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -38,6 +39,12 @@ public class ItemSkullRender implements IItemRenderer {
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("SkullOwner"))
 			name = stack.getTagCompound().getString("SkullOwner");
 		boolean isVanilla = stack.itemID == Item.skull.itemID;
+		if (!isVanilla)
+			if (skullType == SkullTypes.witch.ordinal() || skullType == SkullTypes.wildDeer.ordinal() || skullType == SkullTypes.witch.ordinal()) {
+				GL11.glScaled(0.75, 0.75, 0.75);
+				GL11.glTranslated(0, -0.45, 0);
+			} else if (skullType == SkullTypes.enderDragon.ordinal())
+				GL11.glScaled(0.75, 0.75, 0.75);
 
 		switch (type) {
 			case ENTITY: {

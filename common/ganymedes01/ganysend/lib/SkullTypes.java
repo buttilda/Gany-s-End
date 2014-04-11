@@ -48,7 +48,8 @@ public enum SkullTypes {
 	slimeBeetle(Strings.TF_PREFIX + "slimebeetle", "TwilightForest"),
 	fireBeetle(Strings.TF_PREFIX + "firebeetle", "TwilightForest"),
 	pinchBeetle(Strings.TF_PREFIX + "pinchbeetle", "TwilightForest"),
-	towerGolem(Strings.TF_PREFIX + "carminitegolem", "TwilightForest");
+	towerGolem(Strings.TF_PREFIX + "carminitegolem", "TwilightForest"),
+	enderDragon(Strings.MC_PREFIX + "enderdragon/dragon");
 	// @formatter:on
 
 	private final String mod;
@@ -87,6 +88,8 @@ public enum SkullTypes {
 			case sheep:
 			case bighorn:
 				return SHEEP_FUR_HEAD;
+			case enderDragon:
+				return Utils.getResource(Strings.MC_PREFIX + "enderdragon/dragon_eyes.png");
 			default:
 				return null;
 		}
@@ -94,9 +97,9 @@ public enum SkullTypes {
 
 	private ResourceLocation getPlayerSkin(String name) {
 		if (name != null && name.length() > 0) {
-			ResourceLocation resourcelocation = AbstractClientPlayer.getLocationSkull(name);
-			AbstractClientPlayer.getDownloadImageSkin(resourcelocation, name);
-			return resourcelocation;
+			ResourceLocation texture = AbstractClientPlayer.getLocationSkull(name);
+			AbstractClientPlayer.getDownloadImageSkin(texture, name);
+			return texture;
 		} else
 			return AbstractClientPlayer.locationStevePng;
 	}

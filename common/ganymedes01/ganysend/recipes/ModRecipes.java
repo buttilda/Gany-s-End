@@ -3,6 +3,7 @@ package ganymedes01.ganysend.recipes;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.blocks.ModBlocks;
 import ganymedes01.ganysend.items.ModItems;
+import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,7 +37,9 @@ public class ModRecipes {
 		OreDictionary.registerOre("blockEnderPearl", new ItemStack(ModBlocks.enderpearlBlock, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("enderFlower", ModBlocks.enderFlower);
 		OreDictionary.registerOre("mobHead", new ItemStack(Item.skull, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("mobHead", new ItemStack(ModItems.itemNewSkull, 1, OreDictionary.WILDCARD_VALUE));
+		for (SkullTypes skull : SkullTypes.values())
+			if (skull.canShow())
+				OreDictionary.registerOre("mobHead", new ItemStack(ModItems.itemNewSkull, 1, skull.ordinal()));
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Block.mushroomBrown));
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Block.mushroomRed));
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Item.rottenFlesh));

@@ -4,6 +4,7 @@ import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -115,6 +116,8 @@ public class HeadsHelper {
 			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.squid.ordinal());
 		else if (target instanceof EntityGhast)
 			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.ghast.ordinal());
+		else if (target instanceof EntityDragon)
+			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.enderDragon.ordinal());
 
 		return null;
 	}

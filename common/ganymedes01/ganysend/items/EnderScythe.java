@@ -1,13 +1,14 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
-import ganymedes01.ganysend.core.utils.CustomDamageSources;
+import ganymedes01.ganysend.core.utils.BeheadingDamage;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.ModMaterials;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -43,25 +44,32 @@ public class EnderScythe extends ItemSword {
 
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity target) {
-		if (!player.worldObj.isRemote && stack != null)
+		if (!player.worldObj.isRemote && stack != null) {
+			boolean damageTool = false;
+			float dmg = 4.0F + ModMaterials.ENDIUM_TOOLS.getDamageVsEntity();
+
 			if (target instanceof EntityLivingBase) {
-				float dmg = 4.0F + ModMaterials.ENDIUM_TOOLS.getDamageVsEntity();
-				if (shouldDamage(target) && target.canAttackWithItem() && !target.hitByEntity(player)) {
-					if (target.attackEntityFrom(CustomDamageSources.beheading, 4.0F + ModMaterials.ENDIUM_TOOLS.getDamageVsEntity())) {
+				if (shouldDamage(target) && target.canAttackWithItem() && !target.hitByEntity(player))
+					if (target.attackEntityFrom(BeheadingDamage.create(player), dmg)) {
 						target.addVelocity(-MathHelper.sin(player.rotationYaw * (float) Math.PI / 180.0F) * 0.5F, 0.5D, MathHelper.cos(player.rotationYaw * (float) Math.PI / 180.0F) * 0.5F);
 						player.motionX *= 0.6D;
 						player.motionZ *= 0.6D;
 						player.setSprinting(false);
 						player.setLastAttacker(target);
+						damageTool = true;
 					}
-
-					stack.damageItem(1, player);
-					player.addStat(StatList.damageDealtStat, Math.round(dmg * 10.0F));
-					player.addExhaustion(0.3F);
-					if (stack.stackSize <= 0)
-						player.destroyCurrentEquippedItem();
-				}
+			} else if (target instanceof EntityDragonPart) {
+				((EntityDragonPart) target).entityDragonObj.attackEntityFromPart((EntityDragonPart) target, BeheadingDamage.create(player), dmg);
+				damageTool = true;
 			}
+			if (damageTool) {
+				stack.damageItem(1, player);
+				player.addStat(StatList.damageDealtStat, Math.round(dmg * 10.0F));
+				player.addExhaustion(0.3F);
+				if (stack.stackSize <= 0)
+					player.destroyCurrentEquippedItem();
+			}
+		}
 		return true;
 	}
 
