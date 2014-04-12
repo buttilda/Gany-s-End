@@ -32,8 +32,8 @@ public class GuiEnderFurnace extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		String name = StatCollector.translateToLocal(Utils.getConainerName(Strings.ENDER_FURNACE_NAME));
-		fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 2, 4210752);
+		fontRenderer.drawString(StatCollector.translateToLocal(furnace.getInvName()), xSize / 2 - fontRenderer.getStringWidth(StatCollector.translateToLocal(furnace.getInvName())) / 2, 6, 4210752);
+		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	}
 
 	@Override

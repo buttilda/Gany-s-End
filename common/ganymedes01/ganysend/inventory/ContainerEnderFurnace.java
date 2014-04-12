@@ -54,7 +54,34 @@ public class ContainerEnderFurnace extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
-		return null;
+		ItemStack itemstack = null;
+		Slot slot = (Slot) inventorySlots.get(slotIndex);
+
+		if (slot != null && slot.getHasStack()) {
+			ItemStack itemstack1 = slot.getStack();
+			itemstack = itemstack1.copy();
+
+			if (slotIndex <= 5) {
+				if (!mergeItemStack(itemstack1, 5, 42, true))
+					return null;
+			} else if (furnace.isFuel(itemstack1)) {
+				if (!mergeItemStack(itemstack1, 0, 1, false))
+					return null;
+			} else if (!mergeItemStack(itemstack1, 1, 5, false))
+				return null;
+
+			if (itemstack1.stackSize == 0)
+				slot.putStack((ItemStack) null);
+			else
+				slot.onSlotChanged();
+
+			if (itemstack1.stackSize == itemstack.stackSize)
+				return null;
+
+			slot.onPickupFromSlot(player, itemstack1);
+		}
+
+		return itemstack;
 	}
 
 	@Override
