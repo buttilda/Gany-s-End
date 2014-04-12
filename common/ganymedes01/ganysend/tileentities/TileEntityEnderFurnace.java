@@ -5,10 +5,8 @@ import ganymedes01.ganysend.recipes.EnderFurnaceRecipe;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Gany's End
@@ -50,7 +48,7 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 			burnTime--;
 
 		if (burnTime <= 0 && canSmelt()) {
-			currentBurnTime = burnTime = getBurnTime(inventory[0]);
+			currentBurnTime = burnTime = EnderFurnaceRecipe.getBurnTime(inventory[0]);
 
 			if (burnTime > 0)
 				if (inventory[0] != null) {
@@ -123,18 +121,6 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 		return new ItemStack[] { inventory[1], inventory[2], inventory[3], inventory[4] };
 	}
 
-	private int getBurnTime(ItemStack stack) {
-		if (stack == null)
-			return 0;
-		else if (stack.itemID == Item.enderPearl.itemID)
-			return 1600;
-		else if (stack.itemID == Item.eyeOfEnder.itemID)
-			return 2000;
-		else if (OreDictionary.getOreID(stack) == OreDictionary.getOreID("blockEnderPearl"))
-			return 1600 * 9;
-		return 0;
-	}
-
 	@Override
 	public void onInventoryChanged() {
 		super.onInventoryChanged();
@@ -174,7 +160,7 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 	}
 
 	public boolean isFuel(ItemStack stack) {
-		return getBurnTime(stack) > 0;
+		return EnderFurnaceRecipe.getBurnTime(stack) > 0;
 	}
 
 	@Override

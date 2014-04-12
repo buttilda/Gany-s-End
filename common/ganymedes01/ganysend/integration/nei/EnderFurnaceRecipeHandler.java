@@ -7,10 +7,12 @@ import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.recipes.EnderFurnaceRecipe;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
+import java.util.Map.Entry;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -32,7 +34,22 @@ import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 
-	private static final Random rand = new Random();
+	private static ArrayList<PositionedStack> fuels;
+
+	public EnderFurnaceRecipeHandler() {
+		if (fuels == null) {
+			fuels = new ArrayList<PositionedStack>();
+
+			for (Entry<Object, Integer> entry : EnderFurnaceRecipe.fuelMap.entrySet()) {
+				Object obj = getStack(entry.getKey());
+				if (obj instanceof ItemStack)
+					fuels.add(new PositionedStack(obj, 8, 34));
+				else
+					for (Object stack : (Object[]) obj)
+						fuels.add(new PositionedStack(stack, 8, 34));
+			}
+		}
+	}
 
 	@Override
 	public Class<? extends GuiContainer> getGuiClass() {
@@ -102,6 +119,16 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 				}
 	}
 
+	private static Object getStack(Object obj) {
+		if (obj instanceof String)
+			return OreDictionary.getOres((String) obj).toArray();
+		else if (obj instanceof Item)
+			return new ItemStack((Item) obj);
+		else if (obj instanceof Block)
+			return new ItemStack((Block) obj);
+		return obj;
+	}
+
 	class CachedEnderFurnaceRecipe extends CachedRecipe {
 
 		private final PositionedStack[] input;
@@ -121,12 +148,6 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 				}
 		}
 
-		private Object getStack(Object obj) {
-			if (obj instanceof String)
-				return OreDictionary.getOres((String) obj);
-			return obj;
-		}
-
 		@Override
 		public List<PositionedStack> getIngredients() {
 			return getCycledIngredients(cycleticks / 20, Arrays.asList(input));
@@ -139,7 +160,7 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 
 		@Override
 		public PositionedStack getOtherStack() {
-			return new PositionedStack(new ItemStack(Item.enderPearl), 8, 34);
+			return fuels.get(cycleticks / 48 % fuels.size());
 		}
 	}
 }

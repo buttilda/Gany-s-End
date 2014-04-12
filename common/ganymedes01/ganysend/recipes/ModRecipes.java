@@ -118,23 +118,5 @@ public class ModRecipes {
 		if (GanysEnd.enableRawEndiumRecipe)
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.rawEndium), "zyz", "yxy", "zyz", 'x', Item.eyeOfEnder, 'y', Block.whiteStone, 'z', Block.obsidian);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.enderFurnace), "xxx", "xyx", "xxx", 'x', new ItemStack(Block.whiteStone), 'y', Item.eyeOfEnder);
-
-		// Ender Flower Recipes
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 0), "xxx", " x ", "   ", 'x', "enderFlower")); // Black
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 1), "x x", "   ", "   ", 'x', "enderFlower")); // Red
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 2), "   ", "xx ", "   ", 'x', "enderFlower")); // Green
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 1, 3), "   ", "x x", " x ", 'x', "enderFlower")); // Brown
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 1, 4), "xxx", "x x", "xxx", 'x', "enderFlower")); // Blue
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 5), "   ", "   ", "x x", 'x', "enderFlower")); // Purple
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 6), "x  ", "x  ", "   ", 'x', "enderFlower")); // Cyan
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 7), " x ", " x ", "   ", 'x', "enderFlower")); // Silver
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 8), "  x", "   ", "  x", 'x', "enderFlower")); // Gray
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 9), "   ", "x  ", "x  ", 'x', "enderFlower")); // Pink
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 10), "   ", " x ", " x ", 'x', "enderFlower")); // Lime
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 11), " x ", "   ", " x ", 'x', "enderFlower")); // Yellow
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 12), "x  ", " x ", "   ", 'x', "enderFlower")); // L.Blue
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 13), "   ", " x ", "  x", 'x', "enderFlower")); // Magenta
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 14), " x ", "x  ", "   ", 'x', "enderFlower")); // Orange
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 15), "   ", "  x", " x ", 'x', "enderFlower")); // White
 	}
 }

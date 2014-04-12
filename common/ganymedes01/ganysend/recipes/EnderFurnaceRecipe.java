@@ -6,7 +6,9 @@ import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.SkullTypes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -22,8 +24,15 @@ import net.minecraftforge.oredict.OreDictionary;
 public class EnderFurnaceRecipe {
 
 	public static final ArrayList<EnderFurnaceRecipe> recipes = new ArrayList<EnderFurnaceRecipe>();
+	public static final HashMap<Object, Integer> fuelMap = new HashMap();
 
 	static {
+		addFuel(Item.enderPearl, 1600);
+		addFuel(Item.eyeOfEnder, 2000);
+		addFuel(Block.whiteStone, 10);
+		addFuel("enderFlower", 100);
+		addFuel("blockEnderPearl", 1600);
+
 		addRecipe(new ItemStack(Item.enderPearl, 4), "mobHead", "mobHead");
 		addRecipe(new ItemStack(Block.whiteStone), Block.stone);
 		addRecipe(new ItemStack(ModBlocks.endstoneBrick), Block.stoneBrick);
@@ -36,7 +45,8 @@ public class EnderFurnaceRecipe {
 		addRecipe(new ItemStack(ModItems.enderTag), Item.paper);
 		addRecipe(new ItemStack(Block.mycelium), Block.grass);
 		addRecipe(new ItemStack(Item.emerald), Item.diamond, Item.ingotGold, "mobHead", new ItemStack(Item.potion, 1, 8196));
-		addRecipe(new ItemStack(Item.expBottle), new ItemStack(Item.potion, 1, 8197), Block.whiteStone);
+		addRecipe(new ItemStack(Item.diamond), Item.emerald, Item.ingotGold, "mobHead", new ItemStack(Item.potion, 1, 8194));
+		addRecipe(new ItemStack(Item.expBottle), new ItemStack(Item.potion, 1, 8197), ModItems.endstoneRod);
 		addRecipe(new ItemStack(Item.enderPearl), Item.ghastTear, Item.sugar, Item.glowstone, Item.expBottle);
 		if (GanysEnd.enableTimeManipulator)
 			addRecipe(new ItemStack(Block.dragonEgg), ModBlocks.timeManipulator);
@@ -63,6 +73,15 @@ public class EnderFurnaceRecipe {
 				addRecipe(new ItemStack(Item.dyePowder, 2, i), new ItemStack(Item.dyePowder, 1, i), ModBlocks.enderFlower, ModBlocks.enderFlower);
 			else
 				addRecipe(new ItemStack(Item.dyePowder, 2, i), new ItemStack(Item.dyePowder, 1, i), ModBlocks.enderFlower);
+	}
+
+	public static int getBurnTime(ItemStack stack) {
+		if (stack == null)
+			return 0;
+		for (Entry<Object, Integer> entry : EnderFurnaceRecipe.fuelMap.entrySet())
+			if (stacksMatch(entry.getKey(), stack))
+				return entry.getValue();
+		return 0;
 	}
 
 	public static ItemStack getOuput(ItemStack... stacks) {
@@ -102,10 +121,15 @@ public class EnderFurnaceRecipe {
 							return stack2.hasTagCompound() ? stack1.getTagCompound().equals(stack2.getTagCompound()) : false;
 						else
 							return true;
-		} else if (obj instanceof String)
+		} else if (obj instanceof String) {
 			for (ItemStack stack : OreDictionary.getOres((String) obj))
 				if (stacksMatch(stack, stack2))
 					return true;
+		} else if (obj instanceof Item)
+			return stacksMatch(new ItemStack((Item) obj), stack2);
+		else if (obj instanceof Block)
+			return stacksMatch(new ItemStack((Block) obj), stack2);
+
 		return false;
 	}
 
@@ -137,5 +161,9 @@ public class EnderFurnaceRecipe {
 
 	private static void addRecipe(ItemStack output, Object... input) {
 		recipes.add(new EnderFurnaceRecipe(output, input));
+	}
+
+	private static void addFuel(Object fuel, int burnTime) {
+		fuelMap.put(fuel, burnTime);
 	}
 }
