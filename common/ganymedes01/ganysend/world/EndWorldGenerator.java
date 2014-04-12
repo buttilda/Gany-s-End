@@ -36,8 +36,8 @@ public class EndWorldGenerator implements IWorldGenerator {
 										world.setBlock(blockX, blockY, blockZ, ModBlocks.enderFlower.blockID);
 					}
 
-			for (int i = 0; i < 2; i++)
-				new WorldGenMinable(ModBlocks.rawEndium.blockID, 0, 7, Block.whiteStone.blockID).generate(world, rand, chunkX * 16 + rand.nextInt(16), rand.nextInt(120), chunkZ * 16 + rand.nextInt(16));
+			for (int i = 0; i < 15; i++)
+				new WorldGenMinable(ModBlocks.rawEndium.blockID, 0, 7, Block.whiteStone.blockID).generate(world, rand, chunkX * 16 + rand.nextInt(16), 20 + rand.nextInt(100), chunkZ * 16 + rand.nextInt(16));
 		}
 	}
 

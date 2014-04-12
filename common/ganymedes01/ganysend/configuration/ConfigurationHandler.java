@@ -79,6 +79,7 @@ public class ConfigurationHandler {
 			ModIDs.INFINITE_WATER_SOURCE_ID = configBlock(Strings.INFINITE_WATER_SOURCE_NAME);
 			ModIDs.END_WALLS_ID = configBlock(Strings.END_WALLS_NAME);
 			ModIDs.VOID_CRATE_ID = configBlock(Strings.VOID_CRATE_NAME);
+			ModIDs.ENDER_FURNACE_ID = configBlock(Strings.ENDER_FURNACE_NAME);
 
 			// Armour
 			ModIDs.ENDIUM_HELMET_ID = configItem(Strings.ENDIUM_HELMET_NAME);

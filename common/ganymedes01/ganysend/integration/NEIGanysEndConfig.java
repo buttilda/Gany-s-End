@@ -2,6 +2,7 @@ package ganymedes01.ganysend.integration;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.blocks.ModBlocks;
+import ganymedes01.ganysend.integration.nei.EnderFurnaceRecipeHandler;
 import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.Reference;
 import codechicken.nei.api.API;
@@ -18,6 +19,9 @@ public class NEIGanysEndConfig implements IConfigureNEI {
 
 	@Override
 	public void loadConfig() {
+		API.registerRecipeHandler(new EnderFurnaceRecipeHandler());
+		API.registerUsageHandler(new EnderFurnaceRecipeHandler());
+
 		API.hideItem(ModBlocks.enderToggler_air.blockID);
 		API.hideItem(ModBlocks.blockNewSkull.blockID);
 		if (!GanysEnd.enableEnderBag)

@@ -79,8 +79,6 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.expBottle, 8), "yyy", "yxy", "yyy", 'x', "ingotEndium", 'y', new ItemStack(Item.potion, 1, 0)));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.enderPearl), "xxx", "xxx", "x x", 'x', "enderFlower"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Item.enderPearl, 9), "blockEnderPearl"));
-		GameRegistry.addShapelessRecipe(new ItemStack(Item.netherStar, 2), new ItemStack(ModItems.itemNewSkull, 1, 17));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Item.enderPearl, 4), "mobHead", "mobHead"));
 	}
 
 	private static void registerBlockRecipes() {
@@ -110,10 +108,8 @@ public class ModRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.speedyBasicFilteringHopper), new ItemStack(ModBlocks.speedyExclusiveFilteringHopper), new ItemStack(Item.ingotGold));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.advancedFilteringHopper), " z ", "yxy", " z ", 'x', ModBlocks.speedyBasicFilteringHopper, 'y', Item.diamond, 'z', Block.glass);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.advancedExclusiveFilteringHopper), " z ", "yxy", " z ", 'x', ModBlocks.speedyExclusiveFilteringHopper, 'y', Item.diamond, 'z', Block.glass);
-		if (GanysEnd.enableTimeManipulator) {
-			GameRegistry.addShapelessRecipe(new ItemStack(Block.dragonEgg), new ItemStack(ModBlocks.timeManipulator));
+		if (GanysEnd.enableTimeManipulator)
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.timeManipulator), "zyz", "yxy", "zyz", 'x', Block.dragonEgg, 'y', new ItemStack(Block.planks, 1, 1), 'z', Block.blockGold);
-		}
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.inventoryBinder), "xxx", "yzy", "xxx", 'x', Block.whiteStone, 'y', Item.enderPearl, 'z', "mobHead"));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.infiniteWaterSource), "yzy", "zxz", "yzy", 'x', ModItems.infiniteBucket, 'y', Item.ingotIron, 'z', Item.enderPearl);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 0), "xxx", "xxx", 'x', ModBlocks.endstoneBrick);
@@ -121,6 +117,7 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.voidCrate), "xyx", "xzx", "xwx", 'x', "logWood", 'y', Block.chest, 'z', Item.enderPearl, 'w', Block.obsidian));
 		if (GanysEnd.enableRawEndiumRecipe)
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.rawEndium), "zyz", "yxy", "zyz", 'x', Item.eyeOfEnder, 'y', Block.whiteStone, 'z', Block.obsidian);
+		GameRegistry.addRecipe(new ItemStack(ModBlocks.enderFurnace), "xxx", "xyx", "xxx", 'x', new ItemStack(Block.whiteStone), 'y', Item.eyeOfEnder);
 
 		// Ender Flower Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.dyePowder, 2, 0), "xxx", " x ", "   ", 'x', "enderFlower")); // Black

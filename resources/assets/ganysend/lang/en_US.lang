@@ -87,6 +87,7 @@ tile.ganysend.infiniteWaterSource.name=Infinite Water Source
 tile.ganysend.endWalls0.name=End Stone Brick Wall
 tile.ganysend.endWalls1.name=Ender Pearl Brick Wall
 tile.ganysend.voidCrate.name=Void Crate
+tile.ganysend.enderFurnace.name=Ender Furnace
 
 # GUI localizations
 container.ganysend:basicFilteringHopper=Basic Filtering Hopper
@@ -97,6 +98,7 @@ container.ganysend:speedyExclusiveFilteringHopper=Speedy Excl. Filtering Hopper
 container.ganysend:advancedFilteringHopper=Advanced Filtering Hopper
 container.ganysend:advancedExclusiveFilteringHopper=Advanced Excl. Filtering Hopper
 container.ganysend:voidCrate=Void Crate
+container.ganysend:enderFurnace=Ender Furnace
 
 # Enchantments
 enchantment.imperviousness=Imperviousness

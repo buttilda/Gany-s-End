@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -51,9 +50,6 @@ public class EnderScythe extends ItemSword {
 			if (target instanceof EntityLivingBase) {
 				if (shouldDamage(target) && target.canAttackWithItem() && !target.hitByEntity(player))
 					if (target.attackEntityFrom(BeheadingDamage.create(player), dmg)) {
-						target.addVelocity(-MathHelper.sin(player.rotationYaw * (float) Math.PI / 180.0F) * 0.5F, 0.5D, MathHelper.cos(player.rotationYaw * (float) Math.PI / 180.0F) * 0.5F);
-						player.motionX *= 0.6D;
-						player.motionZ *= 0.6D;
 						player.setSprinting(false);
 						player.setLastAttacker(target);
 						damageTool = true;

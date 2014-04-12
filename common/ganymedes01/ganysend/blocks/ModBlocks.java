@@ -44,6 +44,7 @@ public class ModBlocks {
 	public static Block infiniteWaterSource;
 	public static Block endWalls;
 	public static Block voidCrate;
+	public static Block enderFurnace;
 
 	public static void init() {
 		enderFlower = new EnderFlower();
@@ -72,6 +73,7 @@ public class ModBlocks {
 		infiniteWaterSource = new InfiniteWaterSource();
 		endWalls = new EndWalls();
 		voidCrate = new VoidCrate();
+		enderFurnace = new EnderFurnace();
 
 		registerNames();
 	}
@@ -105,6 +107,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(infiniteWaterSource, Strings.INFINITE_WATER_SOURCE_NAME);
 		GameRegistry.registerBlock(endWalls, ItemEndWalls.class, Strings.END_WALLS_NAME);
 		GameRegistry.registerBlock(voidCrate, Strings.VOID_CRATE_NAME);
+		GameRegistry.registerBlock(enderFurnace, Strings.ENDER_FURNACE_NAME);
 		MinecraftForge.setBlockHarvestLevel(rawEndium, 0, "pickaxe", 3);
 	}
 }

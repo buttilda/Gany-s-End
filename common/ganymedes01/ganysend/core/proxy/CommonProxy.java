@@ -2,6 +2,7 @@ package ganymedes01.ganysend.core.proxy;
 
 import ganymedes01.ganysend.client.gui.inventory.GuiAdvancedFilteringHopper;
 import ganymedes01.ganysend.client.gui.inventory.GuiBasicFilteringHopper;
+import ganymedes01.ganysend.client.gui.inventory.GuiEnderFurnace;
 import ganymedes01.ganysend.client.gui.inventory.GuiVoidCrate;
 import ganymedes01.ganysend.core.handlers.ArmourHandler;
 import ganymedes01.ganysend.core.handlers.BlockHarvestEvent;
@@ -9,6 +10,7 @@ import ganymedes01.ganysend.core.handlers.BonemealOnTheEndEvent;
 import ganymedes01.ganysend.core.handlers.EntityDeathEvent;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.inventory.ContainerAdvancedFilteringHopper;
+import ganymedes01.ganysend.inventory.ContainerEnderFurnace;
 import ganymedes01.ganysend.inventory.ContainerFilteringHopper;
 import ganymedes01.ganysend.inventory.ContainerVoidCrate;
 import ganymedes01.ganysend.lib.GUIsID;
@@ -16,6 +18,7 @@ import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityAdvancedFilteringHopper;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 import ganymedes01.ganysend.tileentities.TileEntityBlockShifter;
+import ganymedes01.ganysend.tileentities.TileEntityEnderFurnace;
 import ganymedes01.ganysend.tileentities.TileEntityEntityShifter;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
 import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
@@ -50,6 +53,7 @@ public class CommonProxy implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileEntityInventoryBinder.class, Utils.getUnlocalizedName(Strings.INVENTORY_BINDER_NAME));
 		GameRegistry.registerTileEntity(TileEntityInfiniteWaterSource.class, Utils.getUnlocalizedName(Strings.INFINITE_WATER_SOURCE_NAME));
 		GameRegistry.registerTileEntity(TileEntityVoidCrate.class, Utils.getUnlocalizedName(Strings.VOID_CRATE_NAME));
+		GameRegistry.registerTileEntity(TileEntityEnderFurnace.class, Utils.getUnlocalizedName(Strings.ENDER_FURNACE_NAME));
 	}
 
 	public void registerEventHandlers() {
@@ -78,6 +82,8 @@ public class CommonProxy implements IGuiHandler {
 				return new ContainerAdvancedFilteringHopper(player.inventory, (TileEntityAdvancedFilteringHopper) tile);
 			case GUIsID.VOID_CRATE:
 				return new ContainerVoidCrate(player.inventory, (TileEntityVoidCrate) tile);
+			case GUIsID.ENDER_FURNACE:
+				return new ContainerEnderFurnace(player.inventory, (TileEntityEnderFurnace) tile);
 		}
 		return null;
 	}
@@ -92,6 +98,8 @@ public class CommonProxy implements IGuiHandler {
 				return new GuiAdvancedFilteringHopper(player.inventory, (TileEntityAdvancedFilteringHopper) tile);
 			case GUIsID.VOID_CRATE:
 				return new GuiVoidCrate(player.inventory, (TileEntityVoidCrate) tile);
+			case GUIsID.ENDER_FURNACE:
+				return new GuiEnderFurnace(player.inventory, (TileEntityEnderFurnace) tile);
 		}
 		return null;
 	}

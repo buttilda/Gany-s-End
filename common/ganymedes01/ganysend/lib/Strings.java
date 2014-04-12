@@ -1,6 +1,5 @@
 package ganymedes01.ganysend.lib;
 
-
 /**
  * Gany's End
  * 
@@ -37,6 +36,7 @@ public class Strings {
 	public static final String INFINITE_WATER_SOURCE_NAME = "infiniteWaterSource";
 	public static final String END_WALLS_NAME = "endWalls";
 	public static final String VOID_CRATE_NAME = "voidCrate";
+	public static final String ENDER_FURNACE_NAME = "enderFurnace";
 
 	// Item names
 	public static final String ENDER_TAG_NAME = "enderTag";
