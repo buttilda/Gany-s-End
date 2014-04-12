@@ -6,14 +6,11 @@ import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.SkullTypes;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
@@ -25,7 +22,6 @@ import net.minecraftforge.oredict.OreDictionary;
 public class EnderFurnaceRecipe {
 
 	public static final ArrayList<EnderFurnaceRecipe> recipes = new ArrayList<EnderFurnaceRecipe>();
-	private static final ArrayList<Integer> usedOres = new ArrayList<Integer>();
 
 	static {
 		addRecipe(new ItemStack(Item.enderPearl, 4), "mobHead", "mobHead");
@@ -36,7 +32,7 @@ public class EnderFurnaceRecipe {
 		addRecipe(new ItemStack(Block.stoneBrick), Block.netherBrick);
 		addRecipe(new ItemStack(Block.dragonEgg), new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.enderDragon.ordinal()));
 		addRecipe(new ItemStack(Item.netherStar, 2), new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.wither.ordinal()));
-		addRecipe(new ItemStack(ModItems.endiumIngot, 2), ModBlocks.rawEndium);
+		addRecipe(new ItemStack(ModItems.endiumIngot, 2), "oreEndium");
 		addRecipe(new ItemStack(ModItems.enderTag), Item.paper);
 		addRecipe(new ItemStack(Block.mycelium), Block.grass);
 		addRecipe(new ItemStack(Item.emerald), Item.diamond, Item.ingotGold, "mobHead", new ItemStack(Item.potion, 1, 8196));
@@ -45,7 +41,28 @@ public class EnderFurnaceRecipe {
 		if (GanysEnd.enableTimeManipulator)
 			addRecipe(new ItemStack(Block.dragonEgg), ModBlocks.timeManipulator);
 		addRecipe(new ItemStack(Item.fishCooked), Item.fishRaw);
+		addRecipe(new ItemStack(Item.potato), Item.poisonousPotato);
+		addRecipe(new ItemStack(Item.beefRaw), Item.rottenFlesh);
+		addRecipe(new ItemStack(Block.tallGrass, 1, 2), Block.deadBush);
 		addRecipe(new ItemStack(Item.skull, 1, 1), Item.skull, new ItemStack(Item.potion, 1, 8265), Item.skull, new ItemStack(Item.potion, 1, 8259));
+		addRecipe(new ItemStack(Item.ghastTear), Item.goldNugget, new ItemStack(Item.potion, 1, 8270), Item.fireballCharge, Item.ingotGold);
+		addRecipe(new ItemStack(Item.record13), new ItemStack(Item.skull), Item.redstone, new ItemStack(Item.dyePowder, 1, 11), new ItemStack(Item.dyePowder, 1, 15));
+		addRecipe(new ItemStack(Item.recordCat), new ItemStack(Item.skull), Item.redstone, new ItemStack(Item.dyePowder, 1, 10), new ItemStack(Item.dyePowder, 1, 10));
+		addRecipe(new ItemStack(Item.recordBlocks), new ItemStack(Item.skull), Item.redstone, new ItemStack(Item.dyePowder, 1, 14), new ItemStack(Item.dyePowder, 1, 3));
+		addRecipe(new ItemStack(Item.recordChirp), new ItemStack(Item.skull), Item.redstone, new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 1));
+		addRecipe(new ItemStack(Item.recordFar), new ItemStack(Item.skull), Item.redstone, new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Item.dyePowder, 1, 2));
+		addRecipe(new ItemStack(Item.recordMall), new ItemStack(Item.skull), Item.redstone, new ItemStack(Item.dyePowder, 1, 5), new ItemStack(Item.dyePowder, 1, 5));
+		addRecipe(new ItemStack(Item.recordMellohi), new ItemStack(Item.skull), Item.redstone, new ItemStack(Item.dyePowder, 1, 13), new ItemStack(Item.dyePowder, 1, 15));
+		addRecipe(new ItemStack(Item.recordStal), new ItemStack(Item.skull), Item.redstone, new ItemStack(Item.dyePowder, 1, 0), new ItemStack(Item.dyePowder, 1, 0));
+		addRecipe(new ItemStack(Item.recordStrad), new ItemStack(Item.skull), Item.redstone, new ItemStack(Item.dyePowder, 1, 15), new ItemStack(Item.dyePowder, 1, 15));
+		addRecipe(new ItemStack(Item.recordWard), new ItemStack(Item.skull), Item.redstone, new ItemStack(Item.dyePowder, 1, 2), new ItemStack(Item.dyePowder, 1, 10));
+		addRecipe(new ItemStack(Item.record11), Item.recordStal, Item.gunpowder, Item.gunpowder, Item.gunpowder);
+		addRecipe(new ItemStack(Item.recordWait), new ItemStack(Item.skull), Item.redstone, new ItemStack(Item.dyePowder, 1, 6), new ItemStack(Item.dyePowder, 1, 6));
+		for (int i = 0; i < 16; i++)
+			if (i == 4)
+				addRecipe(new ItemStack(Item.dyePowder, 2, i), new ItemStack(Item.dyePowder, 1, i), ModBlocks.enderFlower, ModBlocks.enderFlower);
+			else
+				addRecipe(new ItemStack(Item.dyePowder, 2, i), new ItemStack(Item.dyePowder, 1, i), ModBlocks.enderFlower);
 	}
 
 	public static ItemStack getOuput(ItemStack... stacks) {
@@ -54,20 +71,25 @@ public class EnderFurnaceRecipe {
 			if (stacks[i] != null)
 				list.add(stacks[i]);
 
-		Collections.sort(list, new StackComparator());
-		System.out.println(list);
 		label: for (EnderFurnaceRecipe recipe : recipes) {
 			if (recipe.input.length != list.size())
-				continue;
-			for (int i = 0; i < list.size(); i++)
-				if (!doStacksMatch(recipe.input[i], list.get(i)))
+				continue label;
+			for (ItemStack stack : list)
+				if (!arrayContainsStack(recipe.input, stack))
 					continue label;
 			return recipe.output.copy();
 		}
 		return null;
 	}
 
-	public static boolean doStacksMatch(Object obj, ItemStack stack2) {
+	private static boolean arrayContainsStack(Object[] array, ItemStack stack) {
+		for (Object obj : array)
+			if (stacksMatch(obj, stack))
+				return true;
+		return false;
+	}
+
+	public static boolean stacksMatch(Object obj, ItemStack stack2) {
 		if (obj == null && stack2 == null)
 			return true;
 
@@ -82,7 +104,7 @@ public class EnderFurnaceRecipe {
 							return true;
 		} else if (obj instanceof String)
 			for (ItemStack stack : OreDictionary.getOres((String) obj))
-				if (doStacksMatch(stack, stack2))
+				if (stacksMatch(stack, stack2))
 					return true;
 		return false;
 	}
@@ -102,8 +124,6 @@ public class EnderFurnaceRecipe {
 			else if (obj instanceof Block)
 				list.add(new ItemStack((Block) obj));
 
-		Collections.sort(list, new StackComparator());
-
 		this.input = list.toArray();
 	}
 
@@ -117,68 +137,5 @@ public class EnderFurnaceRecipe {
 
 	private static void addRecipe(ItemStack output, Object... input) {
 		recipes.add(new EnderFurnaceRecipe(output, input));
-	}
-
-	static class StackComparator implements Comparator {
-
-		@Override
-		public int compare(Object obj1, Object obj2) {
-			if (obj1 == null && obj2 != null)
-				return -1;
-			if (obj2 == null && obj1 != null)
-				return 1;
-			if (obj1 == null && obj2 == null)
-				return 0;
-
-			if (obj1 instanceof ItemStack && obj2 instanceof ItemStack)
-				return compareStacks((ItemStack) obj1, (ItemStack) obj2);
-			else if (obj1 instanceof String && obj2 instanceof String)
-				return ((String) obj1).compareTo((String) obj2);
-			else if (obj1 instanceof String && obj2 instanceof ItemStack)
-				return compareStringWithStack((String) obj1, (ItemStack) obj2);
-			else if (obj1 instanceof ItemStack && obj2 instanceof String)
-				return -compareStringWithStack((String) obj2, (ItemStack) obj1);
-			return -1;
-		}
-
-		private int compareStringWithStack(String string, ItemStack stack) {
-			int ore1 = OreDictionary.getOreID(string);
-			int ore2 = OreDictionary.getOreID(stack);
-			if (ore1 < 0 && ore2 < 0)
-				return -1;
-			else if (ore1 == ore2)
-				return 0;
-			else
-				return ore1 - ore2;
-		}
-
-		private int compareStacks(ItemStack stack1, ItemStack stack2) {
-			String name1 = stack1.getUnlocalizedName();
-			String name2 = stack2.getUnlocalizedName();
-
-			if (name1.equals(name2)) {
-				int meta1 = stack1.getItemDamage();
-				int meta2 = stack2.getItemDamage();
-				if (meta1 == meta2) {
-					int size1 = stack1.stackSize;
-					int size2 = stack2.stackSize;
-					if (size1 == size2) {
-						NBTTagCompound nbt1 = stack1.stackTagCompound;
-						NBTTagCompound nbt2 = stack2.stackTagCompound;
-						if (nbt1 == null && nbt2 != null)
-							return -1;
-						if (nbt2 == null && nbt1 != null)
-							return 1;
-						if (nbt1 != null && nbt2 != null)
-							return nbt1.hashCode() - nbt2.hashCode();
-						else
-							return 0;
-					} else
-						return size1 - size2;
-				} else
-					return meta1 - meta2;
-			} else
-				return name1.compareTo(name2);
-		}
 	}
 }

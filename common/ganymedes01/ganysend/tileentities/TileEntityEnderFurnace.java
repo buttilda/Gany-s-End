@@ -88,6 +88,10 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 	}
 
 	private void smelt() {
+		if (inventory[5] == null)
+			inventory[5] = EnderFurnaceRecipe.getOuput(getRecipeInput());
+		else
+			inventory[5].stackSize += EnderFurnaceRecipe.getOuput(getRecipeInput()).stackSize;
 		for (int i = 1; i <= 4; i++) {
 			if (inventory[i] == null)
 				continue;
@@ -95,10 +99,6 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 			if (inventory[i].stackSize <= 0)
 				inventory[i] = null;
 		}
-		if (inventory[5] == null)
-			inventory[5] = EnderFurnaceRecipe.getOuput(getRecipeInput());
-		else
-			inventory[5].stackSize += EnderFurnaceRecipe.getOuput(getRecipeInput()).stackSize;
 
 		onInventoryChanged();
 	}

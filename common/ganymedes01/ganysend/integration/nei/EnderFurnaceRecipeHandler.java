@@ -88,7 +88,7 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 	@Override
 	public void loadCraftingRecipes(ItemStack result) {
 		for (EnderFurnaceRecipe recipe : EnderFurnaceRecipe.recipes)
-			if (EnderFurnaceRecipe.doStacksMatch(recipe.getOutput(), result))
+			if (EnderFurnaceRecipe.stacksMatch(recipe.getOutput(), result))
 				arecipes.add(new CachedEnderFurnaceRecipe(recipe));
 	}
 
@@ -96,7 +96,7 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 	public void loadUsageRecipes(ItemStack ingredient) {
 		label: for (EnderFurnaceRecipe recipe : EnderFurnaceRecipe.recipes)
 			for (Object stack : recipe.getInput())
-				if (EnderFurnaceRecipe.doStacksMatch(stack, ingredient)) {
+				if (EnderFurnaceRecipe.stacksMatch(stack, ingredient)) {
 					arecipes.add(new CachedEnderFurnaceRecipe(recipe));
 					continue label;
 				}
