@@ -4,7 +4,10 @@ import java.lang.reflect.Field;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.event.FMLInterModComms;
 
 /**
  * Gany's End
@@ -15,36 +18,63 @@ import cpw.mods.fml.common.FMLLog;
 
 public class GanysEndAPI {
 
-	// BLOCKS
-	/*
-	 * Here's a list of the blocks that can/should be retrieved by this method
+	/**
+	 * Adds a recipe to the Ender Furnace input parameter must have between 1
+	 * and 4 items
 	 * 
-	 * enderFlower
-	 * endstoneBrick
-	 * enderpearlBlock
-	 * endstoneStairs
-	 * enderpearlStairs
-	 * enderToggler
-	 * enderToggler_air
-	 * blockShifter
-	 * rawEndium
-	 * endiumBlock
-	 * emulator
-	 * blockNewSkull
-	 * basicFilteringHopper
-	 * exclusiveFilteringHopper
-	 * speedyBasicFilteringHopper
-	 * speedyExclusiveFilteringHopper
-	 * speedyHopper
-	 * advancedFilteringHopper
-	 * advancedExclusiveFilteringHopper
-	 * timeManipulator
-	 * entityShifter
-	 * inventoryBinder
-	 * infiniteWaterSource
-	 * endWalls
-	 * 
+	 * @param output
+	 * @param input
+	 *            (Can contain ItemStacks and/or Strings)
 	 */
+	private static void addEnderFurnaceRecipe(ItemStack output, Object... input) {
+		NBTTagCompound nbt = new NBTTagCompound();
+
+		NBTTagCompound out = new NBTTagCompound();
+		output.writeToNBT(out);
+		nbt.setCompoundTag("output", out);
+
+		for (int i = 0; i < input.length; i++)
+			if (input[i] != null)
+				if (input[i] instanceof ItemStack) {
+					NBTTagCompound in = new NBTTagCompound();
+					((ItemStack) input[i]).writeToNBT(in);
+					nbt.setCompoundTag("input" + i, in);
+				} else
+					nbt.setString("input" + i, (String) input[i]);
+
+		FMLInterModComms.sendMessage("ganysend", "enderFurnaceRecipe", nbt);
+	}
+
+	/**
+	 * Adds an item that can be burned in the Ender Furnace
+	 * 
+	 * @param fuel
+	 *            (Can be an ItemStack or a String)
+	 * @param burnTime
+	 *            (200 is the time it takes to smelt 1 item in the furnace)
+	 */
+	private static void addEnderFurnaceFuel(Object fuel, int burnTime) {
+		Object toAdd;
+		if (fuel instanceof Item)
+			toAdd = new ItemStack((Item) fuel);
+		else if (fuel instanceof Block)
+			toAdd = new ItemStack((Block) fuel);
+		else
+			toAdd = fuel;
+
+		NBTTagCompound nbt = new NBTTagCompound();
+		if (toAdd instanceof ItemStack) {
+			NBTTagCompound f = new NBTTagCompound();
+			((ItemStack) toAdd).writeToNBT(f);
+			nbt.setCompoundTag("fuel", f);
+		} else
+			nbt.setString("fuel", (String) toAdd);
+
+		nbt.setInteger("burnTime", burnTime);
+
+		FMLInterModComms.sendMessage("ganysend", "enderFurnaceFuel", nbt);
+	}
+
 	public static final Block getBlock(String blockName) {
 		try {
 			Class<?> modBlocks = Class.forName("ganymedes01.ganysend.blocks.ModBlocks");
@@ -56,27 +86,6 @@ public class GanysEndAPI {
 		}
 	}
 
-	// ITEMS
-	/*
-	 * Here's a list of the items that can/should be retrieved by this method
-	 * 
-	 * enderTag
-	 * endiumIngot
-	 * endstoneRod
-	 * enderScythe
-	 * infiniteBucket
-	 * itemNewSkull
-	 * infusedGem
-	 * endiumPickaxe
-	 * endiumAxe
-	 * endiumShovel
-	 * 
-	 * endiumHelmet
-	 * endiumChestplate
-	 * endiumLeggings
-	 * endiumBoots
-	 * 
-	 */
 	public static final Item getItem(String itemName) {
 		try {
 			Class<?> modBlocks = Class.forName("ganymedes01.ganysend.items.ModItems");

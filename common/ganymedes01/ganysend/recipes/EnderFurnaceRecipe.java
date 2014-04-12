@@ -159,11 +159,11 @@ public class EnderFurnaceRecipe {
 		return input.clone();
 	}
 
-	private static void addRecipe(ItemStack output, Object... input) {
+	public static void addRecipe(ItemStack output, Object... input) {
 		recipes.add(new EnderFurnaceRecipe(output, input));
 	}
 
-	private static void addFuel(Object fuel, int burnTime) {
+	public static void addFuel(Object fuel, int burnTime) {
 		fuelMap.put(fuel, burnTime);
 	}
 }

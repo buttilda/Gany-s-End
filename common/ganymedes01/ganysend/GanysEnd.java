@@ -2,6 +2,7 @@ package ganymedes01.ganysend;
 
 import ganymedes01.ganysend.blocks.ModBlocks;
 import ganymedes01.ganysend.configuration.ConfigurationHandler;
+import ganymedes01.ganysend.core.handlers.InterModComms;
 import ganymedes01.ganysend.core.handlers.RenderCapeHandler;
 import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
 import ganymedes01.ganysend.core.proxy.CommonProxy;
@@ -33,6 +34,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerAboutToStartEvent;
@@ -135,5 +137,10 @@ public class GanysEnd {
 				((ThaumCraftManager) integration).postPostInit();
 				return;
 			}
+	}
+
+	@EventHandler
+	public void processIMCRequests(IMCEvent event) {
+		InterModComms.processIMC(event);
 	}
 }

@@ -45,7 +45,7 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 				if (obj instanceof ItemStack)
 					fuels.add(new PositionedStack(obj, 8, 34));
 				else
-					for (Object stack : (Object[]) obj)
+					for (ItemStack stack : (ItemStack[]) obj)
 						fuels.add(new PositionedStack(stack, 8, 34));
 			}
 		}
@@ -121,7 +121,7 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 
 	private static Object getStack(Object obj) {
 		if (obj instanceof String)
-			return OreDictionary.getOres((String) obj).toArray();
+			return OreDictionary.getOres((String) obj).toArray(new ItemStack[0]);
 		else if (obj instanceof Item)
 			return new ItemStack((Item) obj);
 		else if (obj instanceof Block)
