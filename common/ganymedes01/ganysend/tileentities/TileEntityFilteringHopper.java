@@ -10,13 +10,10 @@ import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.StatCollector;
 
@@ -116,27 +113,18 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	private boolean insertItemToInventory() {
 		IInventory inventoryToInsert = getInventoryToInsert();
 
-		if (inventoryToInsert == null)
-			return false;
 		for (int i = 0; i < inventory.length; i++)
 			if (inventory[i] == null)
 				continue;
-			else if (inventory[i].stackSize <= 0) {
-				inventory[i] = null;
-				continue;
-			} else if (shouldPull(inventory[i]))
-				return insertOneItemFromStack(inventoryToInsert, i);
+			else if (shouldPull(inventory[i])) {
+				ItemStack copy = inventory[i].copy();
+				copy.stackSize = 1;
+				if (Utils.addStackToInventory(inventoryToInsert, copy)) {
+					inventory[i].stackSize--;
+					return true;
+				}
+			}
 		return false;
-	}
-
-	private boolean insertOneItemFromStack(IInventory inventoryToInsert, int stackSlot) {
-		boolean flag = Utils.addStackToInventory(inventoryToInsert, inventory[stackSlot].splitStack(1), getSideOfInventory());
-		try {
-			return flag;
-		} finally {
-			if (!flag)
-				inventory[stackSlot].stackSize++;
-		}
 	}
 
 	private boolean suckItemsIntoHopper() {
@@ -148,42 +136,21 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 
 		if (inventoryToPull == null)
 			return false;
-		if (inventoryToPull instanceof ISidedInventory)
-			for (int slot : ((ISidedInventory) inventoryToPull).getAccessibleSlotsFromSide(0)) {
-				ItemStack stack = inventoryToPull.getStackInSlot(slot);
-				if (stack == null)
-					continue;
-				else if (stack.stackSize <= 0) {
-					inventoryToPull.setInventorySlotContents(slot, null);
-					continue;
-				} else if (shouldPull(stack) && ((ISidedInventory) inventoryToPull).canExtractItem(slot, stack, 0)) {
-					ItemStack singleItemItemStack = stack.copy();
-					singleItemItemStack.stackSize = 1;
-					if (Utils.addStackToInventory(this, singleItemItemStack)) {
-						stack.splitStack(1);
-						return true;
-					}
-					return false;
+
+		for (int slot : Utils.getSlotsFromSide(inventoryToPull, 0)) {
+			ItemStack stack = inventoryToPull.getStackInSlot(slot);
+			if (stack != null && shouldPull(stack)) {
+				ItemStack copy = stack.copy();
+				copy.stackSize = 1;
+				if (Utils.addStackToInventory(this, copy)) {
+					stack.stackSize--;
+					if (stack.stackSize <= 0)
+						inventoryToPull.setInventorySlotContents(slot, null);
+					return true;
 				}
 			}
-		else
-			for (int i = 0; i < inventoryToPull.getSizeInventory(); i++) {
-				ItemStack stack = inventoryToPull.getStackInSlot(i);
-				if (stack == null)
-					continue;
-				else if (stack.stackSize <= 0) {
-					inventoryToPull.setInventorySlotContents(i, null);
-					continue;
-				} else if (shouldPull(stack)) {
-					ItemStack singleItemItemStack = stack.copy();
-					singleItemItemStack.stackSize = 1;
-					if (Utils.addStackToInventory(this, singleItemItemStack)) {
-						stack.splitStack(1);
-						return true;
-					}
-					return false;
-				}
-			}
+		}
+
 		return false;
 	}
 
@@ -203,7 +170,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 
 	private IInventory getInventoryAbove() {
 		TileEntity tile = worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
-		return tile instanceof TileEntityChest ? getInventoryFromChest((TileEntityChest) tile) : tile instanceof IInventory ? (IInventory) tile : null;
+		return tile instanceof IInventory ? (IInventory) tile : null;
 	}
 
 	private IInventory getInventoryToInsert() {
@@ -229,25 +196,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		}
 
 		TileEntity tile = worldObj.getBlockTileEntity(x, y, z);
-		return tile instanceof TileEntityChest ? getInventoryFromChest((TileEntityChest) tile) : tile instanceof IInventory ? (IInventory) tile : null;
-	}
-
-	private IInventory getInventoryFromChest(TileEntityChest chest) {
-		TileEntityChest adjacent = null;
-		if (chest.adjacentChestXNeg != null)
-			adjacent = chest.adjacentChestXNeg;
-		if (chest.adjacentChestXNeg != null)
-			adjacent = chest.adjacentChestXNeg;
-		if (chest.adjacentChestXPos != null)
-			adjacent = chest.adjacentChestXPos;
-		if (chest.adjacentChestZNeg != null)
-			adjacent = chest.adjacentChestZNeg;
-		if (chest.adjacentChestZPosition != null)
-			adjacent = chest.adjacentChestZPosition;
-		if (adjacent != null)
-			return new InventoryLargeChest("", chest, adjacent);
-
-		return chest;
+		return tile instanceof IInventory ? (IInventory) tile : null;
 	}
 
 	private int getSideOfInventory() {
