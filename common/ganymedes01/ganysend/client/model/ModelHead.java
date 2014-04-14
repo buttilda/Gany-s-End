@@ -177,9 +177,6 @@ public class ModelHead extends ModelSkeletonHead {
 			case guardGhast:
 				setGhast();
 				break;
-			case lich:
-				setLich();
-				break;
 			case kobold:
 				setKobold();
 				break;
@@ -650,19 +647,6 @@ public class ModelHead extends ModelSkeletonHead {
 
 		head = new ModelRenderer(this, 0, 0);
 		head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
-	}
-
-	private void setLich() {
-		textureWidth = 64;
-		textureHeight = 64;
-
-		head = new ModelRenderer(this, 0, 0);
-		head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
-		head.setRotationPoint(0.0F, 0.0F, 0.0F);
-
-		overlay = new ModelRenderer(this, 32, 0);
-		overlay.addBox(-4.0F, -12.0F, -4.0F, 8, 8, 8, 0.5F);
-		overlay.setRotationPoint(0.0F, 0.0F, 0.0F);
 	}
 
 	private void setEnderDragon() {

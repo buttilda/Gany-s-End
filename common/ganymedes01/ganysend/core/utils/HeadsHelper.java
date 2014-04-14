@@ -163,8 +163,6 @@ public class HeadsHelper {
 			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.druid.ordinal());
 		else if (mobName.equals("TwilightForest.Hedge Spider"))
 			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.hedgeSpider.ordinal());
-		else if (mobName.equals("TwilightForest.Twilight Lich"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.lich.ordinal());
 		else if (mobName.equals("TwilightForest.Mist Wolf"))
 			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.mistWolf.ordinal());
 		else if (mobName.equals("TwilightForest.Mini Ghast"))
