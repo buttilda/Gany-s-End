@@ -20,6 +20,7 @@ public class EnderBag extends Item {
 
 	public EnderBag() {
 		super(ModIDs.ENDER_BAG_ID);
+		setMaxStackSize(1);
 		setCreativeTab(GanysEnd.endTab);
 		setTextureName(Utils.getItemTexture(Strings.ENDER_BAG_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDER_BAG_NAME));
@@ -29,6 +30,7 @@ public class EnderBag extends Item {
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (world.isRemote)
 			return stack;
+
 		player.displayGUIChest(player.getInventoryEnderChest());
 		return stack;
 	}
