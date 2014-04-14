@@ -41,7 +41,7 @@ public class TileEntityInventoryBinderRender extends TileEntitySpecialRenderer {
 			transX = 0.25F;
 		}
 
-		ModelHead model = new ModelHead();
+		ModelHead model = ModelHead.getHead(SkullTypes.player.ordinal());
 		bindTexture(SkullTypes.player.getTexture(name));
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_CULL_FACE);

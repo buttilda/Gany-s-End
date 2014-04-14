@@ -43,7 +43,7 @@ public class ItemSkullRender implements IItemRenderer {
 			if (skullType == SkullTypes.witch.ordinal() || skullType == SkullTypes.wildDeer.ordinal() || skullType == SkullTypes.witch.ordinal()) {
 				GL11.glScaled(0.75, 0.75, 0.75);
 				GL11.glTranslated(0, -0.45, 0);
-			} else if (skullType == SkullTypes.enderDragon.ordinal())
+			} else if (skullType == SkullTypes.enderDragon.ordinal() || skullType == SkullTypes.pinchBeetle.ordinal())
 				GL11.glScaled(0.75, 0.75, 0.75);
 
 		switch (type) {
@@ -54,7 +54,7 @@ public class ItemSkullRender implements IItemRenderer {
 				break;
 			}
 			case EQUIPPED: {
-				renderSkull(0.5F, 0.0F, 0.5F, skullType, name, isVanilla);
+				renderSkull(0.5F, 0.0F, 0.0F, skullType, name, isVanilla);
 				break;
 			}
 			case EQUIPPED_FIRST_PERSON: {

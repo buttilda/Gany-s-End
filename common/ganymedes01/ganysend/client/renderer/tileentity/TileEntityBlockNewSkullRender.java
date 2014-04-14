@@ -3,6 +3,8 @@ package ganymedes01.ganysend.client.renderer.tileentity;
 import ganymedes01.ganysend.client.model.ModelHead;
 import ganymedes01.ganysend.lib.SkullTypes;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.passive.EntitySheep;
@@ -50,7 +52,7 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 
 		skullRotation = translateHead(x, y, z, meta, skullRotation);
 		GL11.glScalef(-1.0F, -1.0F, 1.0F);
-		model = new ModelHead().setHeadType(skullType);
+		model = ModelHead.getHead(skullType);
 		model.render(skullRotation);
 		renderSpecial(skullType, skullRotation);
 
@@ -66,6 +68,13 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 				if (skullType == SkullTypes.bighorn.ordinal())
 					GL11.glColor3f(EntitySheep.fleeceColorTable[c][0], EntitySheep.fleeceColorTable[c][1], EntitySheep.fleeceColorTable[c][2]);
 				model.renderOverlay(skullRotation);
+			} else if (skullType == SkullTypes.mooshroom.ordinal()) {
+				GL11.glScaled(1, -1, 1);
+				GL11.glTranslated(0, 1, 0);
+				GL11.glEnable(GL11.GL_CULL_FACE);
+				RenderBlocks renderer = new RenderBlocks();
+				renderer.renderBlockAsItem(Block.mushroomRed, 0, 1.0F);
+				GL11.glDisable(GL11.GL_CULL_FACE);
 			} else
 				model.render(skullRotation);
 		}

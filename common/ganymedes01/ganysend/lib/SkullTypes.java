@@ -2,6 +2,7 @@ package ganymedes01.ganysend.lib;
 
 import ganymedes01.ganysend.core.utils.Utils;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.common.Loader;
 
@@ -29,7 +30,7 @@ public enum SkullTypes {
 	ironGolem(Strings.MC_PREFIX + "iron_golem"),
 	squid(Strings.MC_PREFIX + "squid"),
 	wither(Strings.MC_PREFIX + "wither/wither"),
-	bunny(Strings.TF_PREFIX + "bunnydutch", "TwilightForest"),
+	bunnyDutch(Strings.TF_PREFIX + "bunnydutch", "TwilightForest"),
 	penguin(Strings.TF_PREFIX + "penguin", "TwilightForest"),
 	bighorn(Strings.TF_PREFIX + "bighorn", "TwilightForest"),
 	wildDeer(Strings.TF_PREFIX + "wilddeer", "TwilightForest"),
@@ -49,7 +50,11 @@ public enum SkullTypes {
 	fireBeetle(Strings.TF_PREFIX + "firebeetle", "TwilightForest"),
 	pinchBeetle(Strings.TF_PREFIX + "pinchbeetle", "TwilightForest"),
 	towerGolem(Strings.TF_PREFIX + "carminitegolem", "TwilightForest"),
-	enderDragon(Strings.MC_PREFIX + "enderdragon/dragon");
+	enderDragon(Strings.MC_PREFIX + "enderdragon/dragon"),
+	hostileWolf(Strings.MC_PREFIX + "wolf/wolf_angry", "TwilightForest"),
+	bunnyBrown(Strings.TF_PREFIX + "bunnybrown", "TwilightForest"),
+	bunnyWhite(Strings.TF_PREFIX + "bunnywhite", "TwilightForest"),
+	squirrel(Strings.TF_PREFIX + "squirrel2", "TwilightForest");
 	// @formatter:on
 
 	private final String mod;
@@ -90,6 +95,8 @@ public enum SkullTypes {
 				return SHEEP_FUR_HEAD;
 			case enderDragon:
 				return Utils.getResource(Strings.MC_PREFIX + "enderdragon/dragon_eyes.png");
+			case mooshroom:
+				return TextureMap.locationBlocksTexture;
 			default:
 				return null;
 		}

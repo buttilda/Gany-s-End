@@ -2,6 +2,7 @@ package ganymedes01.ganysend.core.utils;
 
 import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.SkullTypes;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
@@ -49,7 +50,7 @@ public class HeadsHelper {
 			return null;
 
 		if (useTwilightForrestMobs) {
-			ItemStack head = getTFMobHead(EntityList.getEntityString(target));
+			ItemStack head = getTFMobHead(target);
 			if (head != null)
 				return head;
 		}
@@ -122,12 +123,33 @@ public class HeadsHelper {
 		return null;
 	}
 
-	private static ItemStack getTFMobHead(String mobName) {
+	private static ItemStack getTFMobHead(Entity entity) {
+		String mobName = EntityList.getEntityString(entity);
+		System.out.println(mobName);
 		if (mobName == null)
 			return null;
-		if (mobName.equals("TwilightForest.Forest Bunny"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.bunny.ordinal());
-		else if (mobName.equals("TwilightForest.Penguin"))
+		if (mobName.equals("TwilightForest.Forest Bunny")) {
+			Integer type;
+			try {
+				type = (Integer) entity.getClass().getMethod("getBunnyType").invoke(entity);
+			} catch (Exception e) {
+				type = 0;
+			}
+			int meta = 0;
+			switch (type) {
+				case 0:
+				case 1:
+					meta = SkullTypes.bunnyDutch.ordinal();
+					break;
+				case 3:
+					meta = SkullTypes.bunnyBrown.ordinal();
+					break;
+				case 2:
+					meta = SkullTypes.bunnyWhite.ordinal();
+					break;
+			}
+			return new ItemStack(ModItems.itemNewSkull, 1, meta);
+		} else if (mobName.equals("TwilightForest.Penguin"))
 			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.penguin.ordinal());
 		else if (mobName.equals("TwilightForest.Bighorn Sheep"))
 			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.bighorn.ordinal());
@@ -161,6 +183,10 @@ public class HeadsHelper {
 			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.pinchBeetle.ordinal());
 		else if (mobName.equals("TwilightForest.Tower Golem"))
 			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.towerGolem.ordinal());
+		else if (mobName.equals("TwilightForest.Hostile Wolf"))
+			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.hostileWolf.ordinal());
+		else if (mobName.equals("TwilightForest.Forest Squirrel"))
+			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.hostileWolf.ordinal());
 		else
 			return null;
 	}

@@ -50,7 +50,9 @@ item.ganysend.itemNewSkullslimeBeetleHead.name=Slime Beetle Head
 item.ganysend.itemNewSkullfireBeetleHead.name=Fire Beetle Head
 item.ganysend.itemNewSkullpinchBeetleHead.name=Pinch Beetle Head
 item.ganysend.itemNewSkulltowerGolemHead.name=Carminite Golem Head
-item.ganysend.itemNewSkullbunnyHead.name=Bunny Head
+item.ganysend.itemNewSkullbunnyDutchHead.name=Dutch Bunny Head
+item.ganysend.itemNewSkullbunnyBrownHead.name=Brown Bunny Head
+item.ganysend.itemNewSkullbunnyWhiteHead.name=White Bunny Head
 item.ganysend.itemNewSkullpenguinHead.name=Penguin Head
 item.ganysend.itemNewSkullbighornHead.name=Bighorn Sheep Head
 item.ganysend.itemNewSkullwildDeerHead.name=Wild Deer Head
@@ -60,6 +62,8 @@ item.ganysend.itemNewSkulldruidHead.name=Skeleton Druid Head
 item.ganysend.itemNewSkullhedgeSpiderHead.name=Hedge Spider Head
 item.ganysend.itemNewSkullblizzHead.name=Blizz Head
 item.ganysend.itemNewSkullenderDragonHead.name=Ender Dragon Head
+item.ganysend.itemNewSkullhostileWolfHead.name=Hostile Wolf Head
+item.ganysend.itemNewSkullsquirrelHead.name=Forest Squirrel Head
 
 # Block localizations
 tile.ganysend.enderFlower.name=Ender Flower
