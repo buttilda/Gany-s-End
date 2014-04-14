@@ -147,9 +147,12 @@ public class Utils {
 
 	private static final boolean addToSlots(IInventory iinventory, ItemStack stack, int side, int[] slots) {
 		for (int slot : slots) {
-			if (iinventory instanceof ISidedInventory)
+			if (iinventory instanceof ISidedInventory) {
 				if (!((ISidedInventory) iinventory).canInsertItem(slot, stack, side))
 					continue;
+			} else if (!iinventory.isItemValidForSlot(slot, stack))
+				continue;
+
 			if (iinventory.getStackInSlot(slot) == null) {
 				iinventory.setInventorySlotContents(slot, stack.copy());
 				return true;
