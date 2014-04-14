@@ -173,6 +173,9 @@ public class Utils {
 	}
 
 	private static final boolean areStacksTheSame(ItemStack stack1, ItemStack stack2, boolean matchSize) {
+		if (stack1 == null || stack2 == null)
+			return false;
+
 		if (stack1.itemID == stack2.itemID)
 			if (stack1.getItemDamage() == stack2.getItemDamage())
 				if (!matchSize || stack1.stackSize == stack2.stackSize) {
