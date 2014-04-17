@@ -13,7 +13,6 @@ import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInfiniteWaterSo
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInventoryBinderRender;
 import ganymedes01.ganysend.core.handlers.RenderPlayerHandler;
 import ganymedes01.ganysend.items.ModItems;
-import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
 import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
@@ -50,11 +49,11 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(ModItems.itemNewSkull.itemID, new ItemSkullRender());
 		MinecraftForgeClient.registerItemRenderer(Item.skull.itemID, new ItemSkullRender());
 
-		RenderingRegistry.registerBlockHandler(RenderIDs.FILTERING_HOPPER, new BlockFilteringHopperRender());
-		RenderingRegistry.registerBlockHandler(RenderIDs.INVENTORY_BINDER, new BlockInventoryBinderRender());
+		RenderingRegistry.registerBlockHandler(new BlockFilteringHopperRender());
+		RenderingRegistry.registerBlockHandler(new BlockInventoryBinderRender());
 		if (GanysEnd.enableTimeManipulator)
-			RenderingRegistry.registerBlockHandler(RenderIDs.TIME_MANIPULATOR, new BlockTimeManipulatorRender());
-		RenderingRegistry.registerBlockHandler(RenderIDs.RAW_ENDIUM, new BlockRawEndiumRender());
+			RenderingRegistry.registerBlockHandler(new BlockTimeManipulatorRender());
+		RenderingRegistry.registerBlockHandler(new BlockRawEndiumRender());
 	}
 
 	@Override
