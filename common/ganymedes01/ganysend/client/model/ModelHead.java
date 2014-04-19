@@ -194,6 +194,7 @@ public class ModelHead extends ModelSkeletonHead {
 				break;
 			case enderDragon:
 				setEnderDragon();
+				break;
 			case squirrel:
 				setSquirrel();
 				break;
