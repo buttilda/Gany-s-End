@@ -65,7 +65,7 @@ public class EntityDeathEvent {
 	}
 
 	private boolean shouldDoRandomDrop(Random rand, int looting) {
-		return GanysEnd.enableRandomHeadDrop && rand.nextInt(200 - 50 * looting) == 0;
+		return GanysEnd.enableRandomHeadDrop && rand.nextInt(Math.max(200 - 50 * looting, 50)) == 0;
 	}
 
 	private boolean checkDamSource(DamageSource source) {
