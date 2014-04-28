@@ -1,6 +1,8 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.Strings;
 
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class EndWalls extends BlockWall {
 	public EndWalls() {
 		super(ModBlocks.endstoneBrick);
 		setCreativeTab(GanysEnd.endTab);
+		setBlockName(Utils.getUnlocalizedName(Strings.END_WALLS_NAME));
 	}
 
 	@Override

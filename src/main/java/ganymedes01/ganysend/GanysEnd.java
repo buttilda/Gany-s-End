@@ -25,7 +25,8 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeHooks;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenBase.FlowerEntry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -112,21 +113,19 @@ public class GanysEnd {
 		ModIntegrator.init();
 	}
 
+	@SuppressWarnings("unchecked")
 	@EventHandler
-	@SuppressWarnings("rawtypes")
 	public void postInit(FMLPostInitializationEvent event) {
 		ModIntegrator.postInit();
 
 		try {
-			Field f = ForgeHooks.class.getDeclaredField("grassList");
-			f.setAccessible(true);
-			for (Object obj : (List) f.get(null)) {
-				Field f2 = obj.getClass().getField("block");
-				f2.setAccessible(true);
-				OreDictionary.registerOre("dayGemMaterial", (Block) f2.get(obj));
+			for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray()) {
+				Field f = BiomeGenBase.class.getDeclaredField("flowers");
+				f.setAccessible(true);
+				for (FlowerEntry entry : (List<FlowerEntry>) f.get(biome))
+					OreDictionary.registerOre("dayGemMaterial", new ItemStack(entry.block, 1, entry.metadata));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
