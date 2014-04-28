@@ -1,6 +1,5 @@
 package ganymedes01.ganysend.integration;
 
-
 /**
  * Gany's End
  * 
