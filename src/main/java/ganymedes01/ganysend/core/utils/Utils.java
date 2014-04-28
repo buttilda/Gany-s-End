@@ -235,11 +235,11 @@ public class Utils {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> T getTileEntity(IBlockAccess iba, int x, int y, int z, Class<T> cls) {
-		TileEntity tr = iba.getTileEntity(x, y, z);
-		if (!cls.isInstance(tr))
+	public static <T> T getTileEntity(IBlockAccess world, int x, int y, int z, Class<T> cls) {
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if (!cls.isInstance(tile))
 			return null;
-		return (T) tr;
+		return (T) tile;
 	}
 
 	public static void dropInventoryContents(TileEntity tile) {

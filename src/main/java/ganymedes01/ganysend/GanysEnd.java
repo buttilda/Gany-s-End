@@ -11,7 +11,7 @@ import ganymedes01.ganysend.creativetab.CreativeTabEnd;
 import ganymedes01.ganysend.enchantment.ModEnchants;
 import ganymedes01.ganysend.integration.Integration;
 import ganymedes01.ganysend.integration.ModIntegrator;
-import ganymedes01.ganysend.integration.ThaumCraftManager;
+import ganymedes01.ganysend.integration.ThaumcraftManager;
 import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.network.PacketHandler;
@@ -133,8 +133,8 @@ public class GanysEnd {
 	@EventHandler
 	public void postPostInit(FMLServerAboutToStartEvent event) {
 		for (Integration integration : ModIntegrator.modIntegrations)
-			if (integration.shouldIntegrate() && integration instanceof ThaumCraftManager) {
-				((ThaumCraftManager) integration).postPostInit();
+			if (integration.shouldIntegrate() && integration instanceof ThaumcraftManager) {
+				((ThaumcraftManager) integration).postPostInit();
 				return;
 			}
 	}

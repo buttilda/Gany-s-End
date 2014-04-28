@@ -24,7 +24,7 @@ import thaumcraft.api.research.ResearchPage;
  * 
  */
 
-public class ThaumCraftManager extends Integration {
+public class ThaumcraftManager extends Integration {
 
 	@Override
 	public void init() {

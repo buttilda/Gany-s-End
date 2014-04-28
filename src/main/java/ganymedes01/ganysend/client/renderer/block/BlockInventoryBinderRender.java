@@ -31,7 +31,7 @@ public class BlockInventoryBinderRender implements ISimpleBlockRenderingHandler 
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		Tessellator tessellator = Tessellator.instance;
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-
+		
 		IIcon icon = block.getIcon(0, 0);
 
 		tessellator.startDrawingQuads();
@@ -87,7 +87,7 @@ public class BlockInventoryBinderRender implements ISimpleBlockRenderingHandler 
 		tessellator.setNormal(-1.0F, 0.0F, 0.0F);
 		renderer.renderFaceZNeg(block, 0.0F, 0.0F, 14.0F / 16.0F, icon);
 		tessellator.draw();
-
+		
 		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 		String name = player != null ? player.getCommandSenderName() : null;
 		TileEntityBlockNewSkullRender.instance.renderHead(0.25F, 0, 0, 6, 1, 3, name);

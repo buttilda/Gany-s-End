@@ -6,8 +6,6 @@ import ganymedes01.ganysend.lib.Strings;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import net.minecraft.util.EnumChatFormatting;
 
@@ -19,7 +17,7 @@ import net.minecraft.util.EnumChatFormatting;
  */
 
 public class VersionHelper implements Runnable {
-	private static Logger logger = Logger.getLogger(Reference.MOD_ID.toUpperCase());
+
 	private static VersionHelper instance = new VersionHelper();
 	public static Properties remoteVersionProperties = new Properties();
 
@@ -74,13 +72,6 @@ public class VersionHelper implements Runnable {
 		}
 	}
 
-	public static void logResult() {
-		if (result == CURRENT || result == OUTDATED)
-			logger.log(Level.INFO, getResultMessage());
-		else
-			logger.log(Level.WARNING, getResultMessage());
-	}
-
 	public static String getResultMessage() {
 		switch (result) {
 			case UNINITIALIZED:
@@ -111,21 +102,17 @@ public class VersionHelper implements Runnable {
 	@Override
 	public void run() {
 		int count = 0;
-		logger.log(Level.INFO, Strings.VERSION_CHECK_INIT);
 
 		try {
 			while (count < 3 - 1 && (result == UNINITIALIZED || result == ERROR)) {
 				checkVersion();
 				count++;
-				logResult();
 
 				if (result == UNINITIALIZED || result == ERROR)
 					Thread.sleep(10000);
 			}
-			if (result == ERROR) {
+			if (result == ERROR)
 				result = FINAL_ERROR;
-				logResult();
-			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
