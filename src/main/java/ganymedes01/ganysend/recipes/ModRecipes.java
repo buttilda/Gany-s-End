@@ -34,7 +34,7 @@ public class ModRecipes {
 		OreDictionary.registerOre("ingotEndium", new ItemStack(ModItems.endiumIngot));
 		OreDictionary.registerOre("nuggetEndium", new ItemStack(ModItems.endiumIngot, 1, 1));
 		OreDictionary.registerOre("blockEndium", ModBlocks.endiumBlock);
-		OreDictionary.registerOre("blockender_pearl", new ItemStack(ModBlocks.enderpearlBlock, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("blockEnderPearl", new ItemStack(ModBlocks.enderpearlBlock, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("enderFlower", ModBlocks.enderFlower);
 		OreDictionary.registerOre("mobHead", new ItemStack(Items.skull, 1, OreDictionary.WILDCARD_VALUE));
 		for (SkullTypes skull : SkullTypes.values())
@@ -78,7 +78,7 @@ public class ModRecipes {
 		// Vanilla
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.experience_bottle, 8), "yyy", "yxy", "yyy", 'x', "ingotEndium", 'y', new ItemStack(Items.potionitem, 1, 0)));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.ender_pearl), "xxx", "xxx", "x x", 'x', "enderFlower"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.ender_pearl, 9), "blockender_pearl"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.ender_pearl, 9), "blockEnderPearl"));
 	}
 
 	private static void registerBlockRecipes() {
