@@ -181,7 +181,7 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack stack, int side) {
-		return slot >= 1 && slot <= 4;
+		return slot == 5;
 	}
 
 	@Override
