@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Gany's End
@@ -108,6 +109,8 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 
 	private boolean insertItemToInventory() {
 		IInventory inventoryToInsert = getInventoryToInsert();
+		if (inventoryToInsert == null)
+			return false;
 
 		for (int i = 0; i < inventory.length; i++)
 			if (inventory[i] == null)
@@ -115,7 +118,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 			else if (shouldPull(inventory[i])) {
 				ItemStack copy = inventory[i].copy();
 				copy.stackSize = 1;
-				if (Utils.addStackToInventory(inventoryToInsert, copy, 1)) {
+				if (Utils.addStackToInventory(inventoryToInsert, copy, getSideToInsert())) {
 					inventory[i].stackSize--;
 					if (inventory[i].stackSize <= 0)
 						inventory[i] = null;
@@ -195,6 +198,10 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 
 		IInventory tile = Utils.getTileEntity(worldObj, x, y, z, IInventory.class);
 		return tile;
+	}
+
+	public int getSideToInsert() {
+		return ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()].ordinal();
 	}
 
 	@Override

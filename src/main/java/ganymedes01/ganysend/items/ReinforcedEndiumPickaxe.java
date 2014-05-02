@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 
-public class ReinforcedEndiumPickaxe extends EndiumAxe {
+public class ReinforcedEndiumPickaxe extends EndiumPickaxe {
 
 	public ReinforcedEndiumPickaxe() {
 		super(ModMaterials.REIN_ENDIUM_TOOLS);

@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 
-public class ReinforcedEndiumShovel extends EndiumAxe {
+public class ReinforcedEndiumShovel extends EndiumShovel {
 
 	public ReinforcedEndiumShovel() {
 		super(ModMaterials.REIN_ENDIUM_TOOLS);

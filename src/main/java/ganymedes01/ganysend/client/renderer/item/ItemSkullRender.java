@@ -48,8 +48,6 @@ public class ItemSkullRender implements IItemRenderer {
 
 		switch (type) {
 			case ENTITY: {
-				if (isVanilla)
-					GL11.glScaled(2, 2, 2);
 				renderSkull(-0.25F, -0.5F, -0.5F, skullType, name, isVanilla);
 				break;
 			}

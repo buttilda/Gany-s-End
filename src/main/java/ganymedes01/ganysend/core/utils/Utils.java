@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -58,7 +59,7 @@ public class Utils {
 	}
 
 	public static String getConainerName(String name) {
-		return "container." + Reference.MOD_ID + ":" + name;
+		return "container." + Reference.MOD_ID + "." + name;
 	}
 
 	public static void dropStack(World world, int x, int y, int z, ItemStack stack) {
@@ -67,9 +68,17 @@ public class Utils {
 			double d0 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 			double d1 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 			double d2 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-			EntityItem entityitem = new EntityItem(world, x + d0, y + d1, z + d2, stack);
-			entityitem.delayBeforeCanPickup = 10;
-			world.spawnEntityInWorld(entityitem);
+			EntityItem entityItem = new EntityItem(world, x + d0, y + d1, z + d2, stack);
+			entityItem.delayBeforeCanPickup = 10;
+
+			if (stack.getItem().hasCustomEntity(stack)) {
+				Entity customEntity = stack.getItem().createEntity(world, entityItem, stack);
+				if (customEntity != null) {
+					world.spawnEntityInWorld(customEntity);
+					return;
+				}
+			}
+			world.spawnEntityInWorld(entityItem);
 		}
 	}
 
@@ -104,9 +113,8 @@ public class Utils {
 	}
 
 	public static ItemStack extractFromInventory(IInventory iinventory, int side) {
-		if (iinventory instanceof TileEntityChest)
-			return extractFromInventory(getInventoryFromChest((TileEntityChest) iinventory), side);
-		return extractFromSlots(iinventory, side, getSlotsFromSide(iinventory, side));
+		IInventory invt = getInventory(iinventory);
+		return extractFromSlots(invt, side, getSlotsFromSide(invt, side));
 	}
 
 	private static ItemStack extractFromSlots(IInventory iinventory, int side, int[] slots) {
@@ -145,10 +153,9 @@ public class Utils {
 
 		if (stack == null || stack.stackSize <= 0)
 			return false;
-		if (iinventory instanceof TileEntityChest)
-			return addStackToInventory(getInventoryFromChest((TileEntityChest) iinventory), stack, side);
 
-		return addToSlots(iinventory, stack, side, getSlotsFromSide(iinventory, side));
+		IInventory invt = getInventory(iinventory);
+		return addToSlots(invt, stack, side, getSlotsFromSide(invt, side));
 	}
 
 	private static boolean addToSlots(IInventory iinventory, ItemStack stack, int side, int[] slots) {
@@ -193,22 +200,25 @@ public class Utils {
 		return false;
 	}
 
-	public static IInventory getInventoryFromChest(TileEntityChest chest) {
-		TileEntityChest adjacent = null;
-		if (chest.adjacentChestXNeg != null)
-			adjacent = chest.adjacentChestXNeg;
-		if (chest.adjacentChestXNeg != null)
-			adjacent = chest.adjacentChestXNeg;
-		if (chest.adjacentChestXPos != null)
-			adjacent = chest.adjacentChestXPos;
-		if (chest.adjacentChestZNeg != null)
-			adjacent = chest.adjacentChestZNeg;
-		if (chest.adjacentChestZPos != null)
-			adjacent = chest.adjacentChestZPos;
-		if (adjacent != null)
-			return new InventoryLargeChest("", chest, adjacent);
+	public static IInventory getInventory(IInventory inventory) {
+		if (inventory instanceof TileEntityChest) {
+			TileEntityChest chest = (TileEntityChest) inventory;
+			TileEntityChest adjacent = null;
+			if (chest.adjacentChestXNeg != null)
+				adjacent = chest.adjacentChestXNeg;
+			if (chest.adjacentChestXNeg != null)
+				adjacent = chest.adjacentChestXNeg;
+			if (chest.adjacentChestXPos != null)
+				adjacent = chest.adjacentChestXPos;
+			if (chest.adjacentChestZNeg != null)
+				adjacent = chest.adjacentChestZNeg;
+			if (chest.adjacentChestZPos != null)
+				adjacent = chest.adjacentChestZPos;
 
-		return chest;
+			if (adjacent != null)
+				return new InventoryLargeChest("", inventory, adjacent);
+		}
+		return inventory;
 	}
 
 	public static EntityPlayer getPlayer(World world) {
