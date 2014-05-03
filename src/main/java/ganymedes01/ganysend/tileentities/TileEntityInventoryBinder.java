@@ -1,6 +1,6 @@
 package ganymedes01.ganysend.tileentities;
 
-import ganymedes01.ganysend.lib.IPacketHandlingTile;
+import ganymedes01.ganysend.network.IPacketHandlingTile;
 import ganymedes01.ganysend.network.PacketHandler;
 import ganymedes01.ganysend.network.packet.PacketTileEntity;
 import ganymedes01.ganysend.network.packet.PacketTileEntity.TileData;

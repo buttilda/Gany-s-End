@@ -4,6 +4,13 @@ import ganymedes01.ganysend.network.PacketHandler.PacketType;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
+
 public abstract class CustomPacket {
 
 	final PacketType type;

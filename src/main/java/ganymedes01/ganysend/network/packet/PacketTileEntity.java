@@ -1,11 +1,18 @@
 package ganymedes01.ganysend.network.packet;
 
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.lib.IPacketHandlingTile;
+import ganymedes01.ganysend.network.IPacketHandlingTile;
 import ganymedes01.ganysend.network.PacketHandler.PacketType;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+
+/**
+ * Gany's End
+ * 
+ * @author ganymedes01
+ * 
+ */
 
 public class PacketTileEntity extends CustomPacket {
 
