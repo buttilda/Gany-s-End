@@ -1,6 +1,5 @@
 package ganymedes01.ganysend.blocks;
 
-import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.items.blocks.ItemEndWalls;
 import ganymedes01.ganysend.items.blocks.ItemEnderPearlBlock;
@@ -53,10 +52,8 @@ public class ModBlocks {
 		registerBlock(enderpearlStairs);
 		registerBlock(enderToggler);
 		registerBlock(enderToggler_air);
-		if (GanysEnd.activateShifters) {
-			registerBlock(blockShifter);
-			registerBlock(entityShifter);
-		}
+		registerBlock(blockShifter);
+		registerBlock(entityShifter);
 		registerBlock(rawEndium);
 		registerBlock(endiumBlock);
 		registerBlock(emulator);
@@ -68,8 +65,7 @@ public class ModBlocks {
 		registerBlock(speedyHopper);
 		registerBlock(advancedFilteringHopper);
 		registerBlock(advancedExclusiveFilteringHopper);
-		if (GanysEnd.enableTimeManipulator)
-			registerBlock(timeManipulator);
+		registerBlock(timeManipulator);
 		registerBlock(inventoryBinder);
 		registerBlock(infiniteWaterSource);
 		registerBlock(endWalls, ItemEndWalls.class);

@@ -27,6 +27,12 @@ public class NEIGanysEndConfig implements IConfigureNEI {
 		API.hideItem(new ItemStack(ModBlocks.blockNewSkull));
 		if (!GanysEnd.enableEnderBag)
 			API.hideItem(new ItemStack(ModItems.enderBag));
+		if (!GanysEnd.enableTimeManipulator)
+			API.hideItem(new ItemStack(ModBlocks.timeManipulator));
+		if (!GanysEnd.activateShifters) {
+			API.hideItem(new ItemStack(ModBlocks.blockShifter));
+			API.hideItem(new ItemStack(ModBlocks.entityShifter));
+		}
 	}
 
 	@Override
