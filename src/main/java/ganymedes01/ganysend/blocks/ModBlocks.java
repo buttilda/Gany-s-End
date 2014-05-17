@@ -43,6 +43,7 @@ public class ModBlocks {
 	public static final Block endWalls = new EndWalls();
 	public static final Block voidCrate = new VoidCrate();
 	public static final Block enderFurnace = new EnderFurnace();
+	public static final Block creativeSpeedyHopper = new CreativeSpeedyHopper();
 
 	public static void init() {
 		registerBlock(enderFlower);
@@ -71,6 +72,7 @@ public class ModBlocks {
 		registerBlock(endWalls, ItemEndWalls.class);
 		registerBlock(voidCrate);
 		registerBlock(enderFurnace);
+		registerBlock(creativeSpeedyHopper);
 	}
 
 	private static void registerBlock(Block block) {

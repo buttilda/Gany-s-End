@@ -36,6 +36,7 @@ public class ThaumcraftManager extends Integration {
 		addAspectsToItem(ModItems.itemNewSkull, new Aspect[] { Aspect.FLESH, Aspect.DEATH, Aspect.SOUL }, new int[] { 4, 4, 4 });
 		addAspectsToItem(new ItemStack(ModItems.itemNewSkull, 1, 3), new Aspect[] { Aspect.DEATH, Aspect.SOUL, Aspect.MAN }, new int[] { 4, 4, 4 });
 		addAspectsToItem(ModBlocks.enderFlower, new Aspect[] { Aspect.PLANT, Aspect.SENSES, Aspect.LIFE, Aspect.ELDRITCH, Aspect.MAGIC, Aspect.TRAVEL }, new int[] { 1, 1, 1, 1, 1, 1 });
+		addAspectsToItem(ModBlocks.rawEndium, new Aspect[] { Aspect.ELDRITCH, Aspect.TRAVEL, Aspect.MAGIC, Aspect.SENSES, Aspect.DARKNESS }, new int[] { 4, 4, 7, 2, 2 });
 	}
 
 	@Override

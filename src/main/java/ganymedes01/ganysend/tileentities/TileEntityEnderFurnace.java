@@ -1,6 +1,6 @@
 package ganymedes01.ganysend.tileentities;
 
-import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.recipes.EnderFurnaceRecipe;
 import net.minecraft.inventory.Container;
@@ -108,7 +108,7 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 				canSmelt = false;
 			else if (inventory[5] == null)
 				canSmelt = true;
-			else if (Utils.areStacksTheSame(inventory[5], result, false))
+			else if (InventoryUtils.areStacksTheSame(inventory[5], result, false))
 				canSmelt = inventory[5].getMaxStackSize() >= inventory[5].stackSize + result.stackSize;
 			else
 				canSmelt = false;

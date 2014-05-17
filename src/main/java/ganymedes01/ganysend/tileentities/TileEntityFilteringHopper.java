@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.tileentities;
 
+import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 
@@ -89,7 +90,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	protected boolean shouldPull(ItemStack stack) {
 		if (getStackInSlot(FILER_SLOT) == null)
 			return false;
-		return isExclusive() ^ Utils.areStacksTheSame(stack, getStackInSlot(FILER_SLOT), false);
+		return isExclusive() ^ InventoryUtils.areStacksTheSame(stack, getStackInSlot(FILER_SLOT), false);
 	}
 
 	@Override
@@ -107,7 +108,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		}
 	}
 
-	private boolean insertItemToInventory() {
+	protected boolean insertItemToInventory() {
 		IInventory inventoryToInsert = getInventoryToInsert();
 		if (inventoryToInsert == null)
 			return false;
@@ -118,7 +119,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 			else if (shouldPull(inventory[i])) {
 				ItemStack copy = inventory[i].copy();
 				copy.stackSize = 1;
-				if (Utils.addStackToInventory(inventoryToInsert, copy, getSideToInsert())) {
+				if (InventoryUtils.addStackToInventory(inventoryToInsert, copy, getSideToInsert())) {
 					inventory[i].stackSize--;
 					if (inventory[i].stackSize <= 0)
 						inventory[i] = null;
@@ -132,18 +133,18 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		return suckEntitiesAbove() || suckItemFromInventory();
 	}
 
-	private boolean suckItemFromInventory() {
+	protected boolean suckItemFromInventory() {
 		IInventory inventoryToPull = getInventoryAbove();
 
 		if (inventoryToPull == null)
 			return false;
 
-		for (int slot : Utils.getSlotsFromSide(inventoryToPull, 0)) {
+		for (int slot : InventoryUtils.getSlotsFromSide(inventoryToPull, 0)) {
 			ItemStack stack = inventoryToPull.getStackInSlot(slot);
 			if (stack != null && shouldPull(stack)) {
 				ItemStack copy = stack.copy();
 				copy.stackSize = 1;
-				if (Utils.addStackToInventory(this, copy)) {
+				if (InventoryUtils.addStackToInventory(this, copy)) {
 					stack.stackSize--;
 					if (stack.stackSize <= 0)
 						inventoryToPull.setInventorySlotContents(slot, null);
@@ -155,26 +156,26 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		return false;
 	}
 
-	@SuppressWarnings("rawtypes")
-	private boolean suckEntitiesAbove() {
-		List list = worldObj.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getAABBPool().getAABB(xCoord, yCoord + 1.0D, zCoord, xCoord + 1.0D, yCoord + 2.0D, zCoord + 1.0D), IEntitySelector.selectAnything);
+	@SuppressWarnings("unchecked")
+	protected boolean suckEntitiesAbove() {
+		List<EntityItem> list = worldObj.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getAABBPool().getAABB(xCoord, yCoord + 1.0D, zCoord, xCoord + 1.0D, yCoord + 2.0D, zCoord + 1.0D), IEntitySelector.selectAnything);
 		if (!list.isEmpty()) {
-			Iterator iterator = list.iterator();
+			Iterator<EntityItem> iterator = list.iterator();
 			while (iterator.hasNext()) {
-				EntityItem entity = (EntityItem) iterator.next();
+				EntityItem entity = iterator.next();
 				if (entity.worldObj == worldObj)
 					if (shouldPull(entity.getEntityItem()))
-						return Utils.addEntitytoInventory(this, entity);
+						return InventoryUtils.addEntitytoInventory(this, entity);
 			}
 		}
 		return false;
 	}
 
-	private IInventory getInventoryAbove() {
+	protected IInventory getInventoryAbove() {
 		return Utils.getTileEntity(worldObj, xCoord, yCoord + 1, zCoord, IInventory.class);
 	}
 
-	private IInventory getInventoryToInsert() {
+	protected IInventory getInventoryToInsert() {
 		int x = xCoord, y = yCoord, z = zCoord;
 		switch (getBlockMetadata()) {
 			case 0:

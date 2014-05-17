@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.blocks;
 
+import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.Strings;
@@ -117,7 +118,7 @@ public class BlockNewSkull extends BlockContainer {
 			ArrayList<ItemStack> drops = getDrops(world, x, y, z, meta, 0);
 			if (ForgeEventFactory.fireBlockHarvesting(drops, world, this, x, y, z, meta, 0, 1.0F, false, player) > 0.0F)
 				for (ItemStack stack : drops)
-					Utils.dropStack(world, x, y, z, stack);
+					InventoryUtils.dropStack(world, x, y, z, stack);
 		}
 	}
 

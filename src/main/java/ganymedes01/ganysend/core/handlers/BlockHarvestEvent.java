@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.core.handlers;
 
+import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.IEndiumTool;
 import net.minecraft.inventory.IInventory;
@@ -38,8 +39,8 @@ public class BlockHarvestEvent {
 									if (tile != null) {
 										event.dropChance = -1.0F;
 										for (ItemStack stack : event.drops)
-											if (!Utils.addStackToInventory(tile, stack))
-												Utils.dropStack(event.world, event.x, event.y, event.z, stack);
+											if (!InventoryUtils.addStackToInventory(tile, stack))
+												InventoryUtils.dropStack(event.world, event.x, event.y, event.z, stack);
 									}
 								}
 	}

@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.tileentities;
 
+import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.item.ItemStack;
@@ -40,7 +41,7 @@ public class TileEntityAdvancedFilteringHopper extends TileEntityFilteringHopper
 		for (int i = FILER_SLOT; i < FILER_SLOT + filter.length; i++) {
 			if (getStackInSlot(i) == null)
 				continue;
-			if (Utils.areStacksTheSame(stack, getStackInSlot(i), false))
+			if (InventoryUtils.areStacksTheSame(stack, getStackInSlot(i), false))
 				return !isExclusive();
 		}
 		return isExclusive();

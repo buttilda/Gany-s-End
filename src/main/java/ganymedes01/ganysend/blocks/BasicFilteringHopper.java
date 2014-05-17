@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.GUIsID;
 import ganymedes01.ganysend.lib.Reference;
@@ -77,7 +78,7 @@ public class BasicFilteringHopper extends BlockHopper {
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		Utils.dropInventoryContents(world.getTileEntity(x, y, z));
+		InventoryUtils.dropInventoryContents(world.getTileEntity(x, y, z));
 		world.func_147453_f(x, y, z, block);
 		world.removeTileEntity(x, y, z);
 	}
