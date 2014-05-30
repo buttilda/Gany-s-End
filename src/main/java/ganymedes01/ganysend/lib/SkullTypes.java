@@ -74,10 +74,6 @@ public enum SkullTypes {
 		return mod == null || Loader.isModLoaded(mod);
 	}
 
-	public String getUnlocalisedName() {
-		return "item." + Utils.getUnlocalizedName(Strings.ITEM_NEW_SKULL_NAME) + name() + "Head";
-	}
-
 	public ResourceLocation getTexture(String name) {
 		if (this == player)
 			return getPlayerSkin(name);

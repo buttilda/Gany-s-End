@@ -4,6 +4,7 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.blocks.ModBlocks;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.SkullTypes;
+import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class ItemNewSkull extends ItemSkull {
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setCreativeTab(GanysEnd.endTab);
+		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ITEM_NEW_SKULL_NAME));
 	}
 
 	@Override
@@ -84,8 +86,8 @@ public class ItemNewSkull extends ItemSkull {
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		int meta = stack.getItemDamage();
-		return SkullTypes.values()[meta >= SkullTypes.values().length ? 0 : meta].getUnlocalisedName();
+		SkullTypes type = SkullTypes.values()[stack.getItemDamage() >= SkullTypes.values().length ? 0 : stack.getItemDamage()];
+		return super.getUnlocalizedName() + type.name() + "Head";
 	}
 
 	@Override

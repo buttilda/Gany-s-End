@@ -2,18 +2,13 @@ package ganymedes01.ganysend.core.handlers;
 
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockNewSkullRender;
 import ganymedes01.ganysend.items.ModItems;
-
-import java.lang.reflect.Field;
-
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -30,7 +25,7 @@ public class RenderPlayerHandler {
 	@SubscribeEvent
 	public void renderPlayerEvent(RenderPlayerEvent.Pre event) {
 		if (event.entityPlayer != null) {
-			ModelBiped model = getBipedModel(event.renderer);
+			ModelBiped model = event.renderer.modelBipedMain;
 			if (model == null)
 				return;
 
@@ -45,10 +40,7 @@ public class RenderPlayerHandler {
 	@SubscribeEvent
 	public void renderHelmetEvent(RenderPlayerEvent.Specials.Post event) {
 		if (event.entityPlayer != null) {
-			ModelBiped model = getBipedModel(event.renderer);
-
-			if (model == null)
-				return;
+			ModelBiped model = event.renderer.modelBipedMain;
 
 			ItemStack head = event.entityPlayer.inventory.armorItemInSlot(3);
 			if (head != null && head.getItem() == ModItems.itemNewSkull) {
@@ -87,20 +79,5 @@ public class RenderPlayerHandler {
 	private void setHiddenState(ModelBiped model, boolean isHidden) {
 		model.bipedHead.isHidden = isHidden;
 		model.bipedHeadwear.isHidden = isHidden;
-	}
-
-	@SuppressWarnings("unchecked")
-	private ModelBiped getBipedModel(RenderPlayer renderer) {
-		try {
-			Class<? extends RenderPlayer> rendererClass = renderer.getClass();
-			if (rendererClass != RenderPlayer.class && RenderPlayer.class.isAssignableFrom(rendererClass))
-				rendererClass = (Class<? extends RenderPlayer>) rendererClass.getSuperclass();
-
-			Field f = ReflectionHelper.findField(rendererClass, "field_77109_a", "modelBipedMain");
-			f.setAccessible(true);
-			return (ModelBiped) f.get(renderer);
-		} catch (Exception e) {
-			return null;
-		}
 	}
 }

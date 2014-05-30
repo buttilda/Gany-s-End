@@ -54,18 +54,22 @@ public class Emulator extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-		int meta = world.getBlockMetadata(x, y, z);
-		x += Facing.offsetsXForSide[meta];
-		y += Facing.offsetsYForSide[meta];
-		z += Facing.offsetsZForSide[meta];
+		try {
+			int meta = world.getBlockMetadata(x, y, z);
+			x += Facing.offsetsXForSide[meta];
+			y += Facing.offsetsYForSide[meta];
+			z += Facing.offsetsZForSide[meta];
 
-		if (!world.isAirBlock(x, y, z)) {
-			Block block = world.getBlock(x, y, z);
-			if (checkBounds(block))
-				if (block.getRenderType() == 0 || block.getRenderType() == 31 || block.getRenderType() == 39)
-					return block.getIcon(world, x, y, z, side);
+			if (!world.isAirBlock(x, y, z)) {
+				Block block = world.getBlock(x, y, z);
+				if (checkBounds(block))
+					if (block.getRenderType() == 0 || block.getRenderType() == 31 || block.getRenderType() == 39)
+						return block.getIcon(world, x, y, z, side);
+			}
+			return super.getIcon(world, x, y, z, side);
+		} catch (StackOverflowError e) {
+			return super.getIcon(world, x, y, z, side);
 		}
-		return super.getIcon(world, x, y, z, side);
 	}
 
 	private boolean checkBounds(Block block) {
