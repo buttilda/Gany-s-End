@@ -1,13 +1,14 @@
 package ganymedes01.ganysend.tileentities;
 
 import ganymedes01.ganysend.network.IPacketHandlingTile;
-import ganymedes01.ganysend.network.PacketHandler;
 import ganymedes01.ganysend.network.packet.CustomPacket;
 import ganymedes01.ganysend.network.packet.PacketTileEntity;
 import ganymedes01.ganysend.network.packet.PacketTileEntity.TileData;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -44,7 +45,15 @@ public class TileEntityTimeManipulator extends TileEntity implements IPacketHand
 
 	@Override
 	public Packet getDescriptionPacket() {
-		return PacketHandler.toPacket(getPacket());
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+		if (pkt.func_148853_f() == 0)
+			readFromNBT(pkt.func_148857_g());
 	}
 
 	public CustomPacket getPacket() {
@@ -55,7 +64,6 @@ public class TileEntityTimeManipulator extends TileEntity implements IPacketHand
 				buffer.writeBoolean(revertTime);
 				buffer.writeBoolean(advanceTime);
 			}
-
 		});
 	}
 

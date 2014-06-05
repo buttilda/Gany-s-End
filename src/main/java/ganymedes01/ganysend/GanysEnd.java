@@ -123,7 +123,8 @@ public class GanysEnd {
 				Field f = BiomeGenBase.class.getDeclaredField("flowers");
 				f.setAccessible(true);
 				for (FlowerEntry entry : (List<FlowerEntry>) f.get(biome))
-					OreDictionary.registerOre("dayGemMaterial", new ItemStack(entry.block, 1, entry.metadata));
+					if (entry.block != null)
+						OreDictionary.registerOre("dayGemMaterial", new ItemStack(entry.block, 1, entry.metadata));
 			}
 		} catch (Exception e) {
 		}
