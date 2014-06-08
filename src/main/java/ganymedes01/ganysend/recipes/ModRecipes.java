@@ -57,7 +57,6 @@ public class ModRecipes {
 	private static void registerItemRecipes() {
 		// Items
 		GameRegistry.addSmelting(ModBlocks.rawEndium, new ItemStack(ModItems.endiumIngot), 1F);
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.enderTag), new ItemStack(Items.paper), new ItemStack(Items.ender_pearl));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.endiumIngot, 9), "blockEndium"));
 		GameRegistry.addRecipe(new ItemStack(ModItems.endstoneRod, 4), "x", "x", 'x', Blocks.end_stone);
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderScythe), "xxy", " y ", "y  ", 'x', "ingotEndium", 'y', ModItems.endstoneRod));
