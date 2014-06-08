@@ -90,7 +90,7 @@ public class GanysEnd {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		PacketHandler.INSTANCE.init();
+		PacketHandler.init();
 		proxy.registerTileEntities();
 		proxy.registerRenderers();
 		GameRegistry.registerWorldGenerator(new EndWorldGenerator(), 0);

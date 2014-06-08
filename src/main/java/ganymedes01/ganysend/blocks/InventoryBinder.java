@@ -48,7 +48,7 @@ public class InventoryBinder extends BlockContainer {
 			if (player instanceof EntityPlayer) {
 				final String name = ((EntityPlayer) player).getCommandSenderName();
 				world.setTileEntity(x, y, z, new TileEntityInventoryBinder(name));
-				PacketHandler.INSTANCE.sendToAll(new PacketTileEntity(x, y, z, new TileData() {
+				PacketHandler.sendToAll(new PacketTileEntity(x, y, z, new TileData() {
 
 					@Override
 					public void writeData(ByteBuf buffer) {

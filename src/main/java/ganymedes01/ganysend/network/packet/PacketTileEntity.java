@@ -6,6 +6,7 @@ import ganymedes01.ganysend.network.PacketHandler.PacketType;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 /**
  * Gany's End
@@ -58,15 +59,15 @@ public class PacketTileEntity extends CustomPacket {
 	}
 
 	@Override
-	public void handleClientSide(EntityPlayer player) {
-		IPacketHandlingTile tile = Utils.getTileEntity(player.worldObj, x, y, z, IPacketHandlingTile.class);
+	public void handleClientSide(World world, EntityPlayer player) {
+		IPacketHandlingTile tile = Utils.getTileEntity(world, x, y, z, IPacketHandlingTile.class);
 		if (tile != null)
 			tile.readPacketData(buffer);
 	}
 
 	@Override
-	public void handleServerSide(EntityPlayer player) {
-		IPacketHandlingTile tile = Utils.getTileEntity(player.worldObj, x, y, z, IPacketHandlingTile.class);
+	public void handleServerSide(World world, EntityPlayer player) {
+		IPacketHandlingTile tile = Utils.getTileEntity(world, x, y, z, IPacketHandlingTile.class);
 		if (tile != null)
 			tile.readPacketData(buffer);
 	}

@@ -3,6 +3,7 @@ package ganymedes01.ganysend.network.packet;
 import ganymedes01.ganysend.network.PacketHandler.PacketType;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 
 /**
  * Gany's End
@@ -27,7 +28,7 @@ public abstract class CustomPacket {
 
 	public abstract void readData(ByteBuf buffer);
 
-	public abstract void handleClientSide(EntityPlayer player);
+	public abstract void handleClientSide(World world, EntityPlayer player);
 
-	public abstract void handleServerSide(EntityPlayer player);
+	public abstract void handleServerSide(World world, EntityPlayer player);
 }

@@ -1,9 +1,6 @@
 package ganymedes01.ganysend.tileentities;
 
 import ganymedes01.ganysend.network.IPacketHandlingTile;
-import ganymedes01.ganysend.network.packet.CustomPacket;
-import ganymedes01.ganysend.network.packet.PacketTileEntity;
-import ganymedes01.ganysend.network.packet.PacketTileEntity.TileData;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -46,25 +43,37 @@ public class TileEntityTimeManipulator extends TileEntity implements IPacketHand
 	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
-		writeToNBT(nbt);
+		nbt.setBoolean("revertTime", revertTime);
+		nbt.setBoolean("advanceTime", advanceTime);
 		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-		if (pkt.func_148853_f() == 0)
-			readFromNBT(pkt.func_148857_g());
+		NBTTagCompound nbt = pkt.func_148857_g();
+		if (pkt.func_148853_f() == 0) {
+			revertTime = nbt.getBoolean("revertTime");
+			advanceTime = nbt.getBoolean("advanceTime");
+		}
 	}
 
-	public CustomPacket getPacket() {
-		return new PacketTileEntity(this, new TileData() {
+	@Override
+	public boolean receiveClientEvent(int eventId, int eventData) {
+		switch (eventId) {
+			case 0:
+				revertTime = eventData == 1;
+				return true;
+			case 1:
+				advanceTime = eventData == 1;
+				return true;
+			default:
+				return false;
+		}
+	}
 
-			@Override
-			public void writeData(ByteBuf buffer) {
-				buffer.writeBoolean(revertTime);
-				buffer.writeBoolean(advanceTime);
-			}
-		});
+	public void sendUpdates() {
+		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 0, revertTime ? 1 : 0);
+		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 1, advanceTime ? 1 : 0);
 	}
 
 	@Override

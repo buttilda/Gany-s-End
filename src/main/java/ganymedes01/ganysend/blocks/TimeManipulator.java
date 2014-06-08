@@ -5,7 +5,6 @@ import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
-import ganymedes01.ganysend.network.PacketHandler;
 import ganymedes01.ganysend.tileentities.TileEntityTimeManipulator;
 
 import java.util.Random;
@@ -62,14 +61,14 @@ public class TimeManipulator extends BlockContainer {
 					if (player.getCurrentEquippedItem().getItemDamage() == 1) {
 						tile.revertTime = true;
 						tile.advanceTime = false;
-						PacketHandler.INSTANCE.sendToAll(tile.getPacket());
+						tile.sendUpdates();
 						if (!player.capabilities.isCreativeMode)
 							player.inventory.getCurrentItem().stackSize--;
 						return true;
 					} else if (player.getCurrentEquippedItem().getItemDamage() == 0) {
 						tile.revertTime = false;
 						tile.advanceTime = true;
-						PacketHandler.INSTANCE.sendToAll(tile.getPacket());
+						tile.sendUpdates();
 						if (!player.capabilities.isCreativeMode)
 							player.inventory.getCurrentItem().stackSize--;
 						return true;

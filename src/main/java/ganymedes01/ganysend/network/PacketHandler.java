@@ -4,26 +4,27 @@ import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.network.packet.CustomPacket;
 import ganymedes01.ganysend.network.packet.PacketTileEntity;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.MessageToMessageCodec;
+import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.util.EnumMap;
-import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.network.Packet;
+
+import com.google.common.collect.Maps;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
+import cpw.mods.fml.common.network.FMLIndexedMessageToMessageCodec;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
-import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -32,11 +33,11 @@ import cpw.mods.fml.relauncher.Side;
  * 
  */
 
-@ChannelHandler.Sharable
-public class PacketHandler extends MessageToMessageCodec<FMLProxyPacket, CustomPacket> {
+@Sharable
+public final class PacketHandler {
 
-	public static final PacketHandler INSTANCE = new PacketHandler();
-	private EnumMap<Side, FMLEmbeddedChannel> channels;
+	private static Codec CODEC;
+	private static final EnumMap<Side, FMLEmbeddedChannel> CHANNELS = Maps.newEnumMap(Side.class);
 
 	public enum PacketType {
 		TILE_ENTITY(PacketTileEntity.class);
@@ -48,135 +49,102 @@ public class PacketHandler extends MessageToMessageCodec<FMLProxyPacket, CustomP
 		}
 	}
 
-	@Override
-	protected void encode(ChannelHandlerContext ctx, CustomPacket msg, List<Object> out) throws Exception {
-		ByteBuf buffer = Unpooled.buffer();
+	public static void init() {
+		if (!CHANNELS.isEmpty())
+			return;
 
-		buffer.writeByte((byte) msg.getType());
-		msg.writeData(buffer);
-		FMLProxyPacket proxyPacket = new FMLProxyPacket(buffer.copy(), ctx.channel().attr(NetworkRegistry.FML_CHANNEL).get());
-		out.add(proxyPacket);
+		CODEC = new Codec();
+
+		for (PacketType packet : PacketType.values())
+			CODEC.addDiscriminator(packet.ordinal(), packet.cls);
+
+		CHANNELS.putAll(NetworkRegistry.INSTANCE.newChannel(Reference.MOD_ID, CODEC, new HandlerServer()));
+
+		if (FMLCommonHandler.instance().getSide().isClient()) {
+			FMLEmbeddedChannel channel = CHANNELS.get(Side.CLIENT);
+			String codecName = channel.findChannelHandlerNameForType(Codec.class);
+			channel.pipeline().addAfter(codecName, "ClientHandler", new HandlerClient());
+		}
 	}
 
-	@Override
-	protected void decode(ChannelHandlerContext ctx, FMLProxyPacket msg, List<Object> out) throws Exception {
-		ByteBuf payload = msg.payload();
-		byte discriminator = payload.readByte();
+	public static void register(int id, Class<? extends CustomPacket> packetType) {
+		CODEC.addDiscriminator(id, packetType);
+	}
 
-		CustomPacket pkt = PacketType.values()[discriminator].cls.newInstance();
-		pkt.readData(payload.slice());
+	public static FMLEmbeddedChannel getClientChannel() {
+		return CHANNELS.get(Side.CLIENT);
+	}
 
-		EntityPlayer player;
-		switch (FMLCommonHandler.instance().getEffectiveSide()) {
-			case CLIENT:
-				player = Minecraft.getMinecraft().thePlayer;
-				pkt.handleClientSide(player);
-				break;
-			case SERVER:
-				INetHandler netHandler = ctx.channel().attr(NetworkRegistry.NET_HANDLER).get();
-				player = ((NetHandlerPlayServer) netHandler).playerEntity;
-				pkt.handleServerSide(player);
-				break;
+	public static FMLEmbeddedChannel getServerChannel() {
+		return CHANNELS.get(Side.SERVER);
+	}
+
+	public static void sendToServer(CustomPacket packet) {
+		getClientChannel().attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);
+		getClientChannel().writeAndFlush(packet);
+	}
+
+	public static void sendToPlayer(CustomPacket packet, EntityPlayer player) {
+		getServerChannel().attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
+		getServerChannel().attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
+		getServerChannel().writeAndFlush(packet);
+	}
+
+	public static void sendToAllAround(CustomPacket packet, NetworkRegistry.TargetPoint point) {
+		getServerChannel().attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
+		getServerChannel().attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(point);
+		getServerChannel().writeAndFlush(packet);
+	}
+
+	public static void sendToDimension(CustomPacket packet, int dimension) {
+		getServerChannel().attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.DIMENSION);
+		getServerChannel().attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(dimension);
+		getServerChannel().writeAndFlush(packet);
+	}
+
+	public static void sendToAll(CustomPacket packet) {
+		getServerChannel().attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
+		getServerChannel().writeAndFlush(packet);
+	}
+
+	public static Packet toMcPacket(CustomPacket packet) {
+		return CHANNELS.get(FMLCommonHandler.instance().getEffectiveSide()).generatePacketFrom(packet);
+	}
+
+	private static final class Codec extends FMLIndexedMessageToMessageCodec<CustomPacket> {
+
+		@Override
+		public void encodeInto(ChannelHandlerContext ctx, CustomPacket packet, ByteBuf target) throws Exception {
+			packet.writeData(target);
 		}
 
-		out.add(pkt);
+		@Override
+		public void decodeInto(ChannelHandlerContext ctx, ByteBuf source, CustomPacket packet) {
+			packet.readData(source);
+		}
 	}
 
-	public void init() {
-		channels = NetworkRegistry.INSTANCE.newChannel(Reference.CHANNEL, INSTANCE);
+	@Sharable
+	@SideOnly(Side.CLIENT)
+	private static final class HandlerClient extends SimpleChannelInboundHandler<CustomPacket> {
+
+		@Override
+		protected void channelRead0(ChannelHandlerContext ctx, CustomPacket packet) throws Exception {
+			Minecraft mc = Minecraft.getMinecraft();
+			packet.handleClientSide(mc.theWorld, mc.thePlayer);
+		}
 	}
 
-	public static FMLProxyPacket toPacket(CustomPacket packet) {
-		return INSTANCE.toFMLPacket(packet);
-	}
+	@Sharable
+	private static final class HandlerServer extends SimpleChannelInboundHandler<CustomPacket> {
 
-	private FMLProxyPacket toFMLPacket(CustomPacket packet) {
-		ByteBuf buf = Unpooled.buffer();
+		@Override
+		protected void channelRead0(ChannelHandlerContext ctx, CustomPacket packet) throws Exception {
+			if (FMLCommonHandler.instance().getEffectiveSide().isClient())
+				return;
 
-		buf.writeByte((byte) packet.getType());
-		packet.writeData(buf);
-
-		return new FMLProxyPacket(buf, Reference.CHANNEL);
-	}
-
-	/**
-	 * Send this message to everyone.
-	 * <p/>
-	 * Adapted from CPW's code in
-	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
-	 */
-	public void sendToAll(CustomPacket message) {
-		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
-		channels.get(Side.SERVER).writeAndFlush(message);
-	}
-
-	/**
-	 * Send this message to the specified player.
-	 * <p/>
-	 * Adapted from CPW's code in
-	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
-	 * @param player
-	 *            The player to send it to
-	 */
-	public void sendTo(CustomPacket message, EntityPlayerMP player) {
-		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
-		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
-		channels.get(Side.SERVER).writeAndFlush(message);
-	}
-
-	/**
-	 * Send this message to everyone within a certain range of a point.
-	 * <p/>
-	 * Adapted from CPW's code in
-	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
-	 * @param point
-	 *            The
-	 *            {@link cpw.mods.fml.common.network.NetworkRegistry.TargetPoint}
-	 *            around which to send
-	 */
-	public void sendToAllAround(CustomPacket message, TargetPoint point) {
-		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
-		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(point);
-		channels.get(Side.SERVER).writeAndFlush(message);
-	}
-
-	/**
-	 * Send this message to everyone within the supplied dimension.
-	 * <p/>
-	 * Adapted from CPW's code in
-	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
-	 * @param dimensionId
-	 *            The dimension id to target
-	 */
-	public void sendToDimension(CustomPacket message, int dimensionId) {
-		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.DIMENSION);
-		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(dimensionId);
-		channels.get(Side.SERVER).writeAndFlush(message);
-	}
-
-	/**
-	 * Send this message to the server.
-	 * <p/>
-	 * Adapted from CPW's code in
-	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
-	 */
-	public void sendToServer(CustomPacket message) {
-		channels.get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);
-		channels.get(Side.CLIENT).writeAndFlush(message);
+			EntityPlayerMP player = ((NetHandlerPlayServer) ctx.channel().attr(NetworkRegistry.NET_HANDLER).get()).playerEntity;
+			packet.handleServerSide(player.worldObj, player);
+		}
 	}
 }

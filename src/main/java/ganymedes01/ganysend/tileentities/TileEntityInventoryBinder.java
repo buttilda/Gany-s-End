@@ -1,16 +1,15 @@
 package ganymedes01.ganysend.tileentities;
 
 import ganymedes01.ganysend.network.IPacketHandlingTile;
-import ganymedes01.ganysend.network.PacketHandler;
-import ganymedes01.ganysend.network.packet.PacketTileEntity;
-import ganymedes01.ganysend.network.packet.PacketTileEntity.TileData;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.network.ByteBufUtils;
 
@@ -35,14 +34,17 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory,
 
 	@Override
 	public Packet getDescriptionPacket() {
-		return PacketHandler.toPacket(new PacketTileEntity(this, new TileData() {
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setString("playerName", playerName);
 
-			@Override
-			public void writeData(ByteBuf buffer) {
-				ByteBufUtils.writeUTF8String(buffer, playerName);
-			}
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+	}
 
-		}));
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+		NBTTagCompound nbt = packet.func_148857_g();
+		if (packet.func_148853_f() == 0)
+			playerName = nbt.getString("playerName");
 	}
 
 	@Override
