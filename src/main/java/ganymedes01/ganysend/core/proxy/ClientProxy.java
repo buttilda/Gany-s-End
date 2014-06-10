@@ -42,7 +42,8 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenderers() {
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.infiniteWaterSource), new ItemInfiniteWaterSourceRender());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.infiniteWaterSource), ItemInfiniteWaterSourceRender.INSTANCE);
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.creativeInfiniteFluidSource), ItemInfiniteWaterSourceRender.INSTANCE);
 		MinecraftForgeClient.registerItemRenderer(ModItems.itemNewSkull, new ItemSkullRender());
 		MinecraftForgeClient.registerItemRenderer(Items.skull, new ItemSkullRender());
 

@@ -5,9 +5,8 @@ import ganymedes01.ganysend.client.gui.inventory.GuiBasicFilteringHopper;
 import ganymedes01.ganysend.client.gui.inventory.GuiEnderFurnace;
 import ganymedes01.ganysend.client.gui.inventory.GuiVoidCrate;
 import ganymedes01.ganysend.core.handlers.ArmourHandler;
-import ganymedes01.ganysend.core.handlers.BlockHarvestEvent;
-import ganymedes01.ganysend.core.handlers.BonemealOnTheEndEvent;
 import ganymedes01.ganysend.core.handlers.EntityDeathEvent;
+import ganymedes01.ganysend.core.handlers.HandlerEvents;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.inventory.ContainerAdvancedFilteringHopper;
 import ganymedes01.ganysend.inventory.ContainerEnderFurnace;
@@ -59,8 +58,7 @@ public class CommonProxy implements IGuiHandler {
 	}
 
 	public void registerEventHandlers() {
-		MinecraftForge.EVENT_BUS.register(new BonemealOnTheEndEvent());
-		MinecraftForge.EVENT_BUS.register(new BlockHarvestEvent());
+		MinecraftForge.EVENT_BUS.register(new HandlerEvents());
 		MinecraftForge.EVENT_BUS.register(new EntityDeathEvent());
 		MinecraftForge.EVENT_BUS.register(new ArmourHandler());
 	}

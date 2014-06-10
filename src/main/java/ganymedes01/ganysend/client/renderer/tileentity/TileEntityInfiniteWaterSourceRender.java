@@ -3,6 +3,8 @@ package ganymedes01.ganysend.client.renderer.tileentity;
 import ganymedes01.ganysend.client.model.ModelInfiniteWaterSource;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
+import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
@@ -23,11 +25,12 @@ public class TileEntityInfiniteWaterSourceRender extends TileEntitySpecialRender
 
 	private final ModelInfiniteWaterSource model = new ModelInfiniteWaterSource();
 
-	private int textureOffsetY = 0;
-	private int coolDown = 10;
-
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float angle) {
+		if (!(tile instanceof TileEntityInfiniteWaterSource))
+			return;
+		TileEntityInfiniteWaterSource source = (TileEntityInfiniteWaterSource) tile;
+
 		GL11.glPushMatrix();
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -36,15 +39,8 @@ public class TileEntityInfiniteWaterSourceRender extends TileEntitySpecialRender
 
 		bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.INFINITE_WATER_SOURCE_NAME)));
 		model.renderAxis();
-		bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.INFINITE_WATER_SOURCE_NAME + "_core")));
-		coolDown--;
-		if (coolDown <= 0) {
-			textureOffsetY += 16;
-			if (textureOffsetY >= 512)
-				textureOffsetY = 0;
-			coolDown = 10;
-		}
-		model.renderCore(textureOffsetY);
+		bindTexture(TextureMap.locationBlocksTexture);
+		model.renderCore(source.getFluid().getFluid().getStillIcon(), source.getBlockType().getIcon(0, 0), source.getFluid().getFluid().getColor(source.getFluid()));
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
 	}

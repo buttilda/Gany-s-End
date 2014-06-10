@@ -92,6 +92,7 @@ tile.ganysend.endWalls0.name=End Stone Brick Wall
 tile.ganysend.endWalls1.name=Ender Pearl Brick Wall
 tile.ganysend.voidCrate.name=Void Crate
 tile.ganysend.enderFurnace.name=Ender Furnace
+tile.ganysend.creativeInfiniteFluidSource.name=Creative Infinite Fluid Source
 
 # GUI localizations
 container.ganysend.basicFilteringHopper=Basic Filtering Hopper
@@ -115,3 +116,5 @@ death.attack.ganysEndBehead.player=%1$s was beheaded by %2$s
 nottagged=Not Tagged
 pullallbut=Pull all but:
 pullonly=Pull Only:
+string.ganysend.creativeOnly=Creative Only
+string.ganysend.rightClickContainer=Right click with container to set fluid

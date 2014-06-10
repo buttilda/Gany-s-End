@@ -38,6 +38,7 @@ public class Strings {
 	public static final String VOID_CRATE_NAME = "voidCrate";
 	public static final String ENDER_FURNACE_NAME = "enderFurnace";
 	public static final String CREATIVE_SPEEDY_HOPPER_NAME = "creativeSpeedyHopper";
+	public static final String CREATIVE_INFINITE_FLUID_SOURCE_NAME = "creativeInfiniteFluidSource";
 
 	// Item names
 	public static final String ENDER_TAG_NAME = "enderTag";

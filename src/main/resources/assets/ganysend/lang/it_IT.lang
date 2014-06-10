@@ -1,0 +1,86 @@
+# Item localizations
+item.ganysend.endiumHelmet.name=Elmetto d'Endio
+item.ganysend.endiumChestplate.name=Corazza d'Endium
+item.ganysend.endiumLeggings.name=Pantaloni d'Endio
+item.ganysend.endiumBoots.name=Stivali d'endio
+
+item.ganysend.enderTag.name=Etichetta dell'end
+item.ganysend.endiumIngot.name=Lingotto d'endio
+item.ganysend.endstoneRod.name=Bastone di pietra dell'End
+item.ganysend.enderScythe.name=Falce dell'End
+item.ganysend.infiniteBucket.name=Secchiello Infinito
+item.ganysend.itemNewSkullpigmanHead.name=Testa di Pigman
+item.ganysend.itemNewSkullblazeHead.name=Testa di Blaze
+item.ganysend.itemNewSkullendermanHead.name=Testa di Enderman
+item.ganysend.itemNewSkullplayerHead.name=Testa
+item.ganysend.itemNewSkullspiderHead.name=Testa di Ragno
+item.ganysend.itemNewSkullcaveSpiderHead.name=Testa di Ragno delle caverne
+item.ganysend.itemNewSkullpigHead.name=Testa di Maiale
+item.ganysend.itemNewSkullcowHead.name=Testa di Mucca
+item.ganysend.itemNewSkullmooshroomHead.name=Testa di Mucca Mooshroom
+item.ganysend.itemNewSkullsheepHead.name=Testa di Pecora
+item.ganysend.itemNewSkullwolfHead.name=Testa di Lupo
+item.ganysend.itemNewSkullvillagerHead.name=Testa di Villagero
+item.ganysend.itemNewSkullchickenHead.name=Testa di Pollo
+item.ganysend.itemNewSkullwitchHead.name=Testa di Strega
+item.ganysend.itemNewSkullzombieVillagerHead.name=Testa di Zombie Villagiero
+item.ganysend.itemNewSkullironGolemHead.name=Testa di Golem di ferro
+item.ganysend.itemNewSkullsquidHead.name=Testa di Calamaro
+item.ganysend.itemNewSkullwitherHead.name=Testa di Wither
+item.ganysend.infusedGem_night.name=Gemma infusa notturna
+item.ganysend.infusedGem_day.name=Gemma infusa diurna
+item.ganysend.endiumPickaxe.name=Piccone di Endio
+item.ganysend.endiumAxe.name=Ascia di Endio
+item.ganysend.endiumShovel.name=Pala di Endio
+item.ganysend.endiumNugget.name=Pepita di Endio
+item.ganysend.spawnerCapturer.name=Catturatore di Spawner
+
+nottagged=Non etichettato
+
+# Block localizations
+tile.ganysend.enderFlower.name=Fiore dell' End
+tile.ganysend.endstoneBrick.name=Mattoni di pietra dell'End
+tile.ganysend.enderpearlBlock.name=Blocco di perla dell' End
+tile.ganysend.enderpearlBrick.name=Mattoni di perla dell' End
+tile.ganysend.endstoneStairs.name=Scale di pietra dell'End
+tile.ganysend.enderpearlBrickStairs.name=Scale di mattoni di perle dell'End
+tile.ganysend.enderToggler.name=Interruttore dell'End
+tile.ganysend.blockShifter.name=Shifter di blocchi
+tile.ganysend.rawEndium.name=Endio grezzo
+tile.ganysend.endiumBlock.name=Blocco d'Endio
+tile.ganysend.emulator.name=Emulatore
+tile.ganysend.basicFilteringHopper.name=Tramoggia filtrante di base
+tile.ganysend.exclusiveFilteringHopper.name=Tramoggia filtrante ad esclusione
+tile.ganysend.speedyBasicFilteringHopper.name=Tramoggia filtrante velocizzata di base
+tile.ganysend.speedyExclusiveFilteringHopper.name=Tramoggia filtrante velocizzata ad esclusione
+tile.ganysend.speedyHopper.name=Tramoggia velocizzata
+tile.ganysend.advancedFilteringHopper.name=Tramoggia filtrante avanzata
+tile.ganysend.advancedExclusiveFilteringHopper.name=Tramoggia filtrante ad esclusione avanzata
+tile.ganysend.timeManipulator.name=Manipolatore temporale
+tile.ganysend.entityShifter.name=Shifter d'entità
+tile.ganysend.inventoryBinder.name=Agganciatore dell'inventario (I'd rather keep this one in english thought… 'cause it's not very appropriate, but yeah, you're the creator :D)
+tile.ganysend.infiniteWaterSource.name=Fonte d'acqua infinita
+tile.ganysend.endWalls0.name=Muretto di mattoni di pietra dell'End
+tile.ganysend.endWalls1.name=Muretto di mattoni di perle dell'End
+tile.ganysend.energyPortal.name=Portale energetico
+
+# GUI localizations
+container.ganysend:basicFilteringHopper=Tramoggia filtrante di base
+container.ganysend:exclusiveFilteringHopper=Tramoggia filtrante ad esclusione
+container.ganysend:speedyHopper=Tramoggia velocizzata
+container.ganysend:speedyBasicFilteringHopper=Tramoggia filtrante velocizzata di base
+container.ganysend:speedyExclusiveFilteringHopper=Tramoggia filtrante ad esclusione di base
+container.ganysend:advancedFilteringHopper=Tramoggia filtrante avanzata
+container.ganysend:advancedExclusiveFilteringHopper=Tramoggia filtrante ad esclusione avanzata
+container.ganysend:enderFurnace=Fornace dell'End
+
+pullallbut=Lascia passare tutto eccetto:
+pullonly=Lascia passare solo:
+
+# Enchantments
+enchantment.imperviousness=Imperviousness
+
+# Others localizations
+itemGroup.ganysend=L'End di Gany
+death.attack.ganysEndBehead=%1$s è stato decapitato
+death.attack.ganysEndBehead.player=%1$s è stato decapitato da %2$s

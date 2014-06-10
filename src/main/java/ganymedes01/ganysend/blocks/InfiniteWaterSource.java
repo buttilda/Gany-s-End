@@ -7,7 +7,6 @@ import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -16,8 +15,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -31,10 +28,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class InfiniteWaterSource extends BlockContainer {
 
 	protected InfiniteWaterSource() {
-		super(Material.rock);
+		this(Material.rock);
+		setBlockName(Utils.getUnlocalizedName(Strings.INFINITE_WATER_SOURCE_NAME));
+	}
+
+	protected InfiniteWaterSource(Material material) {
+		super(material);
 		setHardness(3.5F);
 		setCreativeTab(GanysEnd.endTab);
-		setBlockName(Utils.getUnlocalizedName(Strings.INFINITE_WATER_SOURCE_NAME));
+		setBlockTextureName(Utils.getBlockTexture(Strings.INFINITE_WATER_SOURCE_NAME));
 	}
 
 	@Override
@@ -60,18 +62,17 @@ public class InfiniteWaterSource extends BlockContainer {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = reg.registerIcon("water_still");
-	}
-
-	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (player.getCurrentEquippedItem() == null)
 			return false;
+
+		TileEntityInfiniteWaterSource tile = Utils.getTileEntity(world, x, y, z, TileEntityInfiniteWaterSource.class);
+		if (tile == null)
+			return false;
+
 		ItemStack stack = player.getCurrentEquippedItem();
 		if (FluidContainerRegistry.isEmptyContainer(stack)) {
-			player.inventory.addItemStackToInventory(FluidContainerRegistry.fillFluidContainer(new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME), stack));
+			player.inventory.addItemStackToInventory(FluidContainerRegistry.fillFluidContainer(tile.getFluid(), stack));
 			stack.stackSize--;
 			if (stack.stackSize == 0)
 				stack = null;
@@ -111,7 +112,7 @@ public class InfiniteWaterSource extends BlockContainer {
 		}
 	}
 
-	protected void triggerLavaMixEffects(World world, int x, int y, int z) {
+	private void triggerLavaMixEffects(World world, int x, int y, int z) {
 		world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 		for (int i = 0; i < 8; i++)
 			world.spawnParticle("largesmoke", x + Math.random(), y + 1.2D, z + Math.random(), 0.0D, 0.0D, 0.0D);

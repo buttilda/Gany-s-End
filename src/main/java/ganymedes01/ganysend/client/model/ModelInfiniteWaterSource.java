@@ -1,7 +1,15 @@
 package ganymedes01.ganysend.client.model;
 
+import java.awt.Color;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.IIcon;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -15,15 +23,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ModelInfiniteWaterSource extends ModelBase {
 
-	private ModelRenderer tubeX, tubeY, tubeZ;
-	private ModelRenderer[] heads = new ModelRenderer[6];
-	private ModelRenderer core;
+	private final RenderBlocks renderer = new RenderBlocks();
+	private final Tessellator tess = Tessellator.instance;
+	private final ModelRenderer tubeX, tubeY, tubeZ;
+	private final ModelRenderer[] heads = new ModelRenderer[6];
 
 	public ModelInfiniteWaterSource() {
 		tubeX = new ModelRenderer(this, 0, 0).setTextureSize(32, 27);
 		tubeY = new ModelRenderer(this, 0, 0).setTextureSize(32, 27);
 		tubeZ = new ModelRenderer(this, 0, 0).setTextureSize(32, 27);
-		core = new ModelRenderer(this, 0, 0).setTextureSize(16, 512);
 
 		for (int i = 0; i < heads.length; i++) {
 			heads[i] = new ModelRenderer(this, 0, 18).setTextureSize(32, 27);
@@ -62,15 +70,43 @@ public class ModelInfiniteWaterSource extends ModelBase {
 			head.render(0.0625F);
 	}
 
-	public void renderCore(int textureOffsetY) {
+	public void renderCore(IIcon fluidIcon, IIcon coreIcon, int colour) {
 		float rotation = (float) (2 * 720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
 
-		core = new ModelRenderer(this, 0, textureOffsetY).setTextureSize(8, 256);
-		core.addBox(-4F, -4F, -4F, 8, 8, 8);
-		core.setRotationPoint(8.0F, 8.0F, 8.0F);
-		core.rotateAngleZ = rotation / (180F / (float) Math.PI);
-		core.rotateAngleY = rotation / (180F / (float) Math.PI);
-		core.rotateAngleX = rotation / (180F / (float) Math.PI);
-		core.render(0.0625F);
+		GL11.glTranslated(0.5, 0.5, 0.5);
+		GL11.glScaled(0.5, 0.5, 0.5);
+
+		GL11.glRotated(rotation, 1, 0, 0);
+		GL11.glRotated(rotation, 0, 1, 0);
+		GL11.glRotated(rotation, 0, 0, 1);
+
+		GL11.glTranslated(-0.5, -0.5, -0.5);
+
+		renderer.setRenderBounds(0, 0, 0, 1, 1, 1);
+
+		drawCube(coreIcon);
+
+		double num = 0.002;
+		renderer.setRenderBounds(num, num, num, 1 - num, 1 - num, 1 - num);
+		Color c = new Color(colour);
+		GL11.glColor3f(c.getRed() / 255F, c.getGreen() / 255F, c.getBlue() / 255F);
+		drawCube(fluidIcon);
+	}
+
+	private void drawCube(IIcon icon) {
+		tess.startDrawingQuads();
+		tess.setNormal(0.0F, -1.0F, 0.0F);
+		renderer.renderFaceYNeg(null, 0.0D, 0.0D, 0.0D, icon);
+		tess.setNormal(0.0F, 1.0F, 0.0F);
+		renderer.renderFaceYPos(null, 0.0D, 0.0D, 0.0D, icon);
+		tess.setNormal(0.0F, 0.0F, -1.0F);
+		renderer.renderFaceZNeg(null, 0.0D, 0.0D, 0.0D, icon);
+		tess.setNormal(0.0F, 0.0F, 1.0F);
+		renderer.renderFaceZPos(null, 0.0D, 0.0D, 0.0D, icon);
+		tess.setNormal(-1.0F, 0.0F, 0.0F);
+		renderer.renderFaceXNeg(null, 0.0D, 0.0D, 0.0D, icon);
+		tess.setNormal(1.0F, 0.0F, 0.0F);
+		renderer.renderFaceXPos(null, 0.0D, 0.0D, 0.0D, icon);
+		tess.draw();
 	}
 }
