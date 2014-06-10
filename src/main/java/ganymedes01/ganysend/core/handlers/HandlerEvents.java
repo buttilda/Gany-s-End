@@ -34,7 +34,8 @@ public class HandlerEvents {
 		if (block == ModBlocks.creativeInfiniteFluidSource) {
 			event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".creativeOnly"));
 			event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".rightClickContainer"));
-		}
+		} else if (block == ModBlocks.creativeSpeedyHopper)
+			event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".creativeOnly"));
 	}
 
 	@SubscribeEvent
