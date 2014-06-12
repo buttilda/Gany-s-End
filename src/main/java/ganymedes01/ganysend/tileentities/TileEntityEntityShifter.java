@@ -35,7 +35,7 @@ public class TileEntityEntityShifter extends TileEntityBlockShifter {
 	@Override
 	@SuppressWarnings("rawtypes")
 	protected void teleportFromTo(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {
-		List list = worldObj.selectEntitiesWithinAABB(Entity.class, AxisAlignedBB.getAABBPool().getAABB(fromX, fromY, fromZ, fromX + 1.0D, fromY + 1.0D, fromZ + 1.0D), IEntitySelector.selectAnything);
+		List list = worldObj.selectEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(fromX, fromY, fromZ, fromX + 1.0D, fromY + 1.0D, fromZ + 1.0D), IEntitySelector.selectAnything);
 		if (!list.isEmpty()) {
 			Iterator iterator = list.iterator();
 			while (iterator.hasNext()) {

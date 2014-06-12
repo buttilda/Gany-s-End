@@ -46,7 +46,7 @@ public class TileEntityCreativeSpeedyHopper extends TileEntitySpeedyHopper {
 	@Override
 	@SuppressWarnings("unchecked")
 	protected boolean suckEntitiesAbove() {
-		List<EntityItem> list = worldObj.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getAABBPool().getAABB(xCoord, yCoord + 1.0D, zCoord, xCoord + 1.0D, yCoord + 2.0D, zCoord + 1.0D), IEntitySelector.selectAnything);
+		List<EntityItem> list = worldObj.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord + 1.0D, zCoord, xCoord + 1.0D, yCoord + 2.0D, zCoord + 1.0D), IEntitySelector.selectAnything);
 		if (!list.isEmpty()) {
 			Iterator<EntityItem> iterator = list.iterator();
 			while (iterator.hasNext()) {
