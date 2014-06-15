@@ -22,9 +22,9 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidHandler, IPacketHandlingTile {
@@ -33,6 +33,7 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 
 	public void setFluid(FluidStack fluid) {
 		this.fluid = fluid.copy();
+		this.fluid.amount = FluidContainerRegistry.BUCKET_VOLUME;
 		if (!worldObj.isRemote)
 			sendPacket();
 	}

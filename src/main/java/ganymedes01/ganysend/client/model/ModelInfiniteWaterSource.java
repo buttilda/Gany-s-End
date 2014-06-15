@@ -15,9 +15,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 @SideOnly(Side.CLIENT)
@@ -90,7 +90,9 @@ public class ModelInfiniteWaterSource extends ModelBase {
 		renderer.setRenderBounds(num, num, num, 1 - num, 1 - num, 1 - num);
 		Color c = new Color(colour);
 		GL11.glColor3f(c.getRed() / 255F, c.getGreen() / 255F, c.getBlue() / 255F);
+		GL11.glDisable(GL11.GL_LIGHTING);
 		drawCube(fluidIcon);
+		GL11.glEnable(GL11.GL_LIGHTING);
 	}
 
 	private void drawCube(IIcon icon) {
