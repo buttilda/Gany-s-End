@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import org.lwjgl.opengl.GL11;
@@ -19,9 +18,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 @SideOnly(Side.CLIENT)
@@ -77,8 +76,8 @@ public class ItemInfiniteWaterSourceRender implements IItemRenderer {
 		model.renderAxis();
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
 
-		Fluid fluid = isCreative ? FluidRegistry.LAVA : FluidRegistry.WATER;
-		model.renderCore(fluid.getStillIcon(), ModBlocks.infiniteWaterSource.getIcon(0, 0), 0xFFFFFF);
+		if (!isCreative)
+			model.renderCore(FluidRegistry.WATER.getStillIcon(), ModBlocks.infiniteWaterSource.getIcon(0, 0), 0xFFFFFF);
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
 	}

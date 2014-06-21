@@ -7,6 +7,7 @@ import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.FluidStack;
 
 import org.lwjgl.opengl.GL11;
 
@@ -15,9 +16,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 @SideOnly(Side.CLIENT)
@@ -39,8 +40,11 @@ public class TileEntityInfiniteWaterSourceRender extends TileEntitySpecialRender
 
 		bindTexture(Utils.getResource(Utils.getEntityTexture(Strings.INFINITE_WATER_SOURCE_NAME)));
 		model.renderAxis();
-		bindTexture(TextureMap.locationBlocksTexture);
-		model.renderCore(source.getFluid().getFluid().getStillIcon(), source.getBlockType().getIcon(0, 0), source.getFluid().getFluid().getColor(source.getFluid()));
+		FluidStack fluid = source.getFluid();
+		if (fluid != null) {
+			bindTexture(TextureMap.locationBlocksTexture);
+			model.renderCore(fluid.getFluid().getStillIcon(), source.getBlockType().getIcon(0, 0), source.getFluid().getFluid().getColor(source.getFluid()));
+		}
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
 	}

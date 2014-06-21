@@ -32,19 +32,27 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 	private FluidStack fluid = new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME);
 
 	public void setFluid(FluidStack fluid) {
-		this.fluid = fluid.copy();
-		this.fluid.amount = FluidContainerRegistry.BUCKET_VOLUME;
+		if (fluid == null)
+			this.fluid = null;
+		else {
+			this.fluid = fluid.copy();
+			this.fluid.amount = FluidContainerRegistry.BUCKET_VOLUME;
+		}
 		if (!worldObj.isRemote)
 			sendPacket();
 	}
 
 	public FluidStack getFluid() {
+		if (fluid == null)
+			return null;
 		return fluid.copy();
 	}
 
 	@Override
 	public void updateEntity() {
 		if (worldObj.isRemote)
+			return;
+		if (fluid == null)
 			return;
 
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
@@ -87,13 +95,18 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		fluid = FluidStack.loadFluidStackFromNBT(nbt);
+		if (nbt.getBoolean("hasFluid"))
+			fluid = FluidStack.loadFluidStackFromNBT(nbt);
+		else
+			fluid = null;
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		fluid.writeToNBT(nbt);
+		nbt.setBoolean("hasFluid", fluid != null);
+		if (fluid != null)
+			fluid.writeToNBT(nbt);
 	}
 
 	@Override

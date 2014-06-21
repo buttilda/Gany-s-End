@@ -6,7 +6,9 @@ import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -14,9 +16,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class CreativeInfiniteFluidSource extends InfiniteWaterSource {
@@ -42,13 +44,21 @@ public class CreativeInfiniteFluidSource extends InfiniteWaterSource {
 			if (stack.stackSize == 0)
 				stack = null;
 			return true;
-		} else if (FluidContainerRegistry.isFilledContainer(stack)) {
+		} else {
 			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(stack);
-			if (fluid != null)
+			if (fluid == null) {
+				fluid = FluidRegistry.getFluidStack("potion", FluidContainerRegistry.getFluidForFilledItem(new ItemStack(Items.potionitem)).amount);
+				if (fluid != null) {
+					fluid.tag = new NBTTagCompound();
+					fluid.tag.setInteger("potionMeta", stack.getItemDamage());
+				}
+			}
+			if (fluid != null) {
 				tile.setFluid(fluid);
-			return true;
-		} else
-			return false;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -57,7 +67,7 @@ public class CreativeInfiniteFluidSource extends InfiniteWaterSource {
 		if (tile == null)
 			return;
 
-		tile.setFluid(new FluidStack(FluidRegistry.LAVA, FluidContainerRegistry.BUCKET_VOLUME));
+		tile.setFluid(null);
 	}
 
 	@Override

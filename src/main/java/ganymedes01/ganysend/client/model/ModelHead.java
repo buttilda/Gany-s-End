@@ -15,9 +15,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 @SideOnly(Side.CLIENT)
@@ -54,12 +54,8 @@ public class ModelHead extends ModelSkeletonHead {
 		}
 
 		SkullTypes skull = SkullTypes.values()[type];
-		try {
-			// return heads.get(skull);
-			return new ModelHead().setHeadType(skull);
-		} finally {
-			transform(skull);
-		}
+		transform(skull);
+		return heads.get(skull);
 	}
 
 	private static void transform(SkullTypes skull) {
