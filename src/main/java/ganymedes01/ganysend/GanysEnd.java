@@ -46,9 +46,9 @@ import cpw.mods.fml.relauncher.Side;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION_NUMBER, dependencies = Reference.DEPENDENCIES)
@@ -96,11 +96,9 @@ public class GanysEnd {
 		GameRegistry.registerWorldGenerator(new EndWorldGenerator(), 0);
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 
-		if (!Loader.isModLoaded("mobsplice") && !Loader.isModLoaded("ganysnether"))
-			if (event.getSide() == Side.CLIENT) {
-				RenderCapeHandler.getUsernames();
+		if (event.getSide() == Side.CLIENT)
+			if (!Loader.isModLoaded("ganysnether"))
 				MinecraftForge.EVENT_BUS.register(new RenderCapeHandler());
-			}
 
 		if (GanysEnd.enableEnderBag)
 			try {
