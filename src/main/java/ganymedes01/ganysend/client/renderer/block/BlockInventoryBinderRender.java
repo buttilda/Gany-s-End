@@ -13,15 +13,17 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
+import com.mojang.authlib.GameProfile;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 @SideOnly(Side.CLIENT)
@@ -89,8 +91,8 @@ public class BlockInventoryBinderRender implements ISimpleBlockRenderingHandler 
 		tessellator.draw();
 
 		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-		String name = player != null ? player.getCommandSenderName() : null;
-		TileEntityBlockNewSkullRender.instance.renderHead(0.25F, 0, 0, 6, 1, 3, name);
+		GameProfile profile = player != null ? player.getGameProfile() : null;
+		TileEntityBlockNewSkullRender.instance.renderHead(0.25F, 0, 0, 6, 1, 3, profile);
 	}
 
 	@Override

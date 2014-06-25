@@ -18,6 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -31,9 +32,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class BlockNewSkull extends BlockContainer {
@@ -129,13 +130,15 @@ public class BlockNewSkull extends BlockContainer {
 		TileEntityBlockNewSkull tile = Utils.getTileEntity(world, x, y, z, TileEntityBlockNewSkull.class);
 		if (tile == null)
 			return drops;
-		ItemStack itemstack = new ItemStack(ModItems.itemNewSkull, 1, tile.func_145904_a());
+		ItemStack stack = new ItemStack(ModItems.itemNewSkull, 1, tile.func_145904_a());
 
-		if (tile.func_145904_a() == 3 && tile.func_145907_c() != null && tile.func_145907_c().length() > 0) {
-			itemstack.setTagCompound(new NBTTagCompound());
-			itemstack.getTagCompound().setString("SkullOwner", tile.func_145907_c());
+		if (tile.func_145904_a() == 3 && tile.func_152108_a() != null) {
+			stack.setTagCompound(new NBTTagCompound());
+			NBTTagCompound nbt2 = new NBTTagCompound();
+			NBTUtil.func_152460_a(nbt2, tile.func_152108_a());
+			stack.getTagCompound().setTag("Owner", nbt2);
 		}
-		drops.add(itemstack);
+		drops.add(stack);
 
 		return drops;
 	}

@@ -15,9 +15,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 @SideOnly(Side.CLIENT)
@@ -42,7 +42,7 @@ public class TileEntityInventoryBinderRender extends TileEntitySpecialRenderer {
 		}
 
 		ModelHead model = ModelHead.getHead(SkullTypes.player.ordinal());
-		bindTexture(SkullTypes.player.getTexture(name));
+		bindTexture(SkullTypes.player.getTexture(tilePlayerInv.getProfile()));
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glTranslatef((float) x + 0.5F - (float) transX, (float) y + 0.25F + (float) transY, (float) z + 0.5F);

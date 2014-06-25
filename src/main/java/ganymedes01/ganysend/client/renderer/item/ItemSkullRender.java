@@ -5,18 +5,21 @@ import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
+
+import com.mojang.authlib.GameProfile;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 @SideOnly(Side.CLIENT)
@@ -35,9 +38,10 @@ public class ItemSkullRender implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack stack, Object... data) {
 		int skullType = stack.getItemDamage();
-		String name = null;
+		GameProfile name = null;
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("SkullOwner"))
-			name = stack.getTagCompound().getString("SkullOwner");
+			name = NBTUtil.func_152459_a(stack.getTagCompound().getCompoundTag("Owner"));
+
 		boolean isVanilla = stack.getItem() == Items.skull;
 		if (!isVanilla)
 			if (skullType == SkullTypes.witch.ordinal() || skullType == SkullTypes.wildDeer.ordinal() || skullType == SkullTypes.witch.ordinal()) {
@@ -69,11 +73,11 @@ public class ItemSkullRender implements IItemRenderer {
 		}
 	}
 
-	private void renderSkull(float x, float y, float z, int type, String name, boolean isVanilla) {
+	private void renderSkull(float x, float y, float z, int type, GameProfile name, boolean isVanilla) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
 		if (isVanilla)
-			TileEntitySkullRenderer.field_147536_b.func_147530_a(0, 0, 0, 0, 0, type, name);
+			TileEntitySkullRenderer.field_147536_b.func_152674_a(0, 0, 0, 0, 0, type, name);
 		else
 			TileEntityBlockNewSkullRender.instance.renderHead(0, 0, 0, 0, 0, type, name);
 		GL11.glPopMatrix();

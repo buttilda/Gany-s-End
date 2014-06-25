@@ -4,6 +4,9 @@ import ganymedes01.ganysend.core.utils.Utils;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
+
+import com.mojang.authlib.GameProfile;
+
 import cpw.mods.fml.common.Loader;
 
 class Lib {
@@ -74,7 +77,7 @@ public enum SkullTypes {
 		return mod == null || Loader.isModLoaded(mod);
 	}
 
-	public ResourceLocation getTexture(String name) {
+	public ResourceLocation getTexture(GameProfile name) {
 		if (this == player)
 			return getPlayerSkin(name);
 		else
@@ -97,10 +100,10 @@ public enum SkullTypes {
 		}
 	}
 
-	private ResourceLocation getPlayerSkin(String name) {
-		if (name != null && name.length() > 0) {
-			ResourceLocation texture = AbstractClientPlayer.getLocationSkull(name);
-			AbstractClientPlayer.getDownloadImageSkin(texture, name);
+	private ResourceLocation getPlayerSkin(GameProfile name) {
+		if (name != null) {
+			ResourceLocation texture = AbstractClientPlayer.getLocationSkin(name.getName());
+			AbstractClientPlayer.getDownloadImageSkin(texture, name.getName());
 			return texture;
 		} else
 			return AbstractClientPlayer.locationStevePng;

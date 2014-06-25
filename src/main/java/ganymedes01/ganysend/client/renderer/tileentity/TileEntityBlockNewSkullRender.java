@@ -14,6 +14,8 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import com.mojang.authlib.GameProfile;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -33,7 +35,7 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float angle) {
 		TileEntityBlockNewSkull tileSkull = (TileEntityBlockNewSkull) tile;
-		renderHead((float) x, (float) y, (float) z, tileSkull.getBlockMetadata() & 7, tileSkull.func_145906_b() * 360 / 16.0F, tileSkull.func_145904_a(), tileSkull.func_145907_c());
+		renderHead((float) x, (float) y, (float) z, tileSkull.getBlockMetadata() & 7, tileSkull.func_145906_b() * 360 / 16.0F, tileSkull.func_145904_a(), tileSkull.func_152108_a());
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 		instance = this;
 	}
 
-	public void renderHead(float x, float y, float z, int meta, float skullRotation, int skullType, String playerName) {
+	public void renderHead(float x, float y, float z, int meta, float skullRotation, int skullType, GameProfile playerName) {
 		bindTexture(SkullTypes.values()[skullType].getTexture(playerName));
 
 		GL11.glPushMatrix();

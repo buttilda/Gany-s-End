@@ -4,6 +4,7 @@ import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockNewSkullRe
 import ganymedes01.ganysend.items.ModItems;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 
 import org.lwjgl.opengl.GL11;
@@ -14,9 +15,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 @SideOnly(Side.CLIENT)
@@ -70,7 +71,7 @@ public class RenderPlayerHandler {
 						break;
 				}
 
-				TileEntityBlockNewSkullRender.instance.renderHead(-0.5F, 0.0F, -0.5F + offset * 0.0625F, 1, 180.0F, head.getItemDamage(), head.hasTagCompound() ? head.getTagCompound().getString("SkullOwner") : null);
+				TileEntityBlockNewSkullRender.instance.renderHead(-0.5F, 0.0F, -0.5F + offset * 0.0625F, 1, 180.0F, head.getItemDamage(), head.hasTagCompound() ? NBTUtil.func_152459_a(head.getTagCompound().getCompoundTag("Owner")) : null);
 				GL11.glPopMatrix();
 			}
 		}

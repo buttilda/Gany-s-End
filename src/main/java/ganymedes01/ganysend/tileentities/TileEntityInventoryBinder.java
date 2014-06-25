@@ -11,18 +11,22 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+
+import com.mojang.authlib.GameProfile;
+
 import cpw.mods.fml.common.network.ByteBufUtils;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class TileEntityInventoryBinder extends TileEntity implements IInventory, IPacketHandlingTile {
 
 	private String playerName;
+	private GameProfile profile;
 
 	public TileEntityInventoryBinder() {
 		this(null);
@@ -50,6 +54,12 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory,
 	@Override
 	public void readPacketData(ByteBuf buffer) {
 		playerName = ByteBufUtils.readUTF8String(buffer);
+	}
+
+	public GameProfile getProfile() {
+		if (profile == null)
+			profile = new GameProfile(null, playerName);
+		return profile;
 	}
 
 	public String getPlayerName() {

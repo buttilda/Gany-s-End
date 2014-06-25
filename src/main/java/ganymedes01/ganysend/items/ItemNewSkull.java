@@ -16,17 +16,21 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.mojang.authlib.GameProfile;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ItemNewSkull extends ItemSkull {
@@ -70,11 +74,11 @@ public class ItemNewSkull extends ItemSkull {
 				TileEntityBlockNewSkull tile = Utils.getTileEntity(world, x, y, z, TileEntityBlockNewSkull.class);
 
 				if (tile != null) {
-					String playerName = "";
+					GameProfile playerName = null;
 
 					if (stack.hasTagCompound() && stack.getTagCompound().hasKey("SkullOwner"))
-						playerName = stack.getTagCompound().getString("SkullOwner");
-					tile.func_145905_a(stack.getItemDamage(), playerName);
+						playerName = NBTUtil.func_152459_a(stack.getTagCompound().getCompoundTag("Owner"));
+					tile.setType(stack.getItemDamage(), playerName);
 					tile.func_145903_a(angle);
 					world.notifyBlockChange(x, y, z, ModBlocks.blockNewSkull);
 				}
