@@ -10,59 +10,65 @@ import ganymedes01.ganysend.lib.Strings;
 import java.io.File;
 
 import net.minecraftforge.common.config.Configuration;
-import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ConfigurationHandler {
 
-	public static Configuration configuration;
+	public static ConfigurationHandler INSTANCE = new ConfigurationHandler();
+	public Configuration configFile;
+	public String[] usedCategories = { Configuration.CATEGORY_GENERAL, "enchantments", "mod integration" };
 
-	private static boolean configBoolean(String name, boolean def) {
-		return configuration.get("Others", name, def).getBoolean(def);
+	private boolean configBoolean(String name, boolean requiresRestart, boolean def) {
+		return configFile.get(Configuration.CATEGORY_GENERAL, name, def).setRequiresMcRestart(requiresRestart).getBoolean(def);
 	}
 
-	private static int configEnch(String ench, int def) {
-		int config = configuration.get("Enchantments", ench, def).getInt(def);
+	private int configEnch(String ench, int def) {
+		int config = configFile.get("Enchantments", ench, def).setRequiresMcRestart(true).getInt(def);
 		return config > 0 ? config : def;
 	}
 
-	private static boolean configIntegrationBoolean(String modID) {
-		return configuration.get("Mod Integration", "Integrate " + modID, true).getBoolean(true);
+	private boolean configIntegrationBoolean(String modID) {
+		return configFile.get("Mod Integration", "Integrate " + modID, true).setRequiresMcRestart(true).getBoolean(true);
 	}
 
-	public static void init(File configFile) {
-		configuration = new Configuration(configFile);
+	public void init(File file) {
+		configFile = new Configuration(file);
 
-		try {
-			configuration.load();
+		syncConfigs();
+	}
 
-			// Enchantments
-			ModIDs.IMPERVIOUSNESS_ID = configEnch(Strings.IMPERVIOUSNESS_NAME, 100);
+	private void syncConfigs() {
+		// Enchantments
+		ModIDs.IMPERVIOUSNESS_ID = configEnch(Strings.IMPERVIOUSNESS_NAME, 100);
 
-			// Mod Integration
-			for (Integration integration : ModIntegrator.modIntegrations)
-				integration.setShouldIntegrate(configIntegrationBoolean(integration.getModID()));
+		// Mod Integration
+		for (Integration integration : ModIntegrator.modIntegrations)
+			integration.setShouldIntegrate(configIntegrationBoolean(integration.getModID()));
 
-			// Others
-			GanysEnd.togglerShouldMakeSound = configBoolean(Strings.TOGGLERS_SHOULD_MAKE_SOUND, GanysEnd.togglerShouldMakeSound);
-			GanysEnd.shouldDoVersionCheck = configBoolean(Strings.SHOULD_DO_VERSION_CHECK, GanysEnd.shouldDoVersionCheck);
-			GanysEnd.activateShifters = configBoolean(Strings.ACTIVATE_SHIFTERS, GanysEnd.activateShifters);
-			GanysEnd.enableRandomHeadDrop = configBoolean(Strings.ENABLE_RANDOM_HEAD_DROP, GanysEnd.enableRandomHeadDrop);
-			GanysEnd.enableTimeManipulator = configBoolean(Strings.ENABLE_TIME_MANIPULATOR, GanysEnd.enableTimeManipulator);
-			GanysEnd.enableEnderBag = configBoolean(Strings.ENABLE_ENDER_BAG, GanysEnd.enableEnderBag);
-			GanysEnd.enableRawEndiumRecipe = configBoolean(Strings.ENABLE_RAW_ENDIUM_RECIPE, GanysEnd.enableRawEndiumRecipe);
+		// Others
+		GanysEnd.togglerShouldMakeSound = configBoolean(Strings.TOGGLERS_SHOULD_MAKE_SOUND, false, GanysEnd.togglerShouldMakeSound);
+		GanysEnd.shouldDoVersionCheck = configBoolean(Strings.SHOULD_DO_VERSION_CHECK, true, GanysEnd.shouldDoVersionCheck);
+		GanysEnd.activateShifters = configBoolean(Strings.ACTIVATE_SHIFTERS, true, GanysEnd.activateShifters);
+		GanysEnd.enableRandomHeadDrop = configBoolean(Strings.ENABLE_RANDOM_HEAD_DROP, false, GanysEnd.enableRandomHeadDrop);
+		GanysEnd.enableTimeManipulator = configBoolean(Strings.ENABLE_TIME_MANIPULATOR, true, GanysEnd.enableTimeManipulator);
+		GanysEnd.enableEnderBag = configBoolean(Strings.ENABLE_ENDER_BAG, true, GanysEnd.enableEnderBag);
+		GanysEnd.enableRawEndiumRecipe = configBoolean(Strings.ENABLE_RAW_ENDIUM_RECIPE, true, GanysEnd.enableRawEndiumRecipe);
 
-		} catch (Exception e) {
-			FMLLog.severe(Reference.MOD_NAME + " has had a problem loading its configuration");
-			throw new RuntimeException(e);
-		} finally {
-			configuration.save();
-		}
+		if (configFile.hasChanged())
+			configFile.save();
+	}
+
+	@SubscribeEvent
+	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
+		if (Reference.MOD_ID.equals(eventArgs.modID))
+			syncConfigs();
 	}
 }
