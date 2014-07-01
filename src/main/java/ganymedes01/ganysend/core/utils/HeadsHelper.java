@@ -35,9 +35,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class HeadsHelper {
@@ -125,7 +125,7 @@ public class HeadsHelper {
 
 	private static ItemStack getTFMobHead(Entity entity) {
 		String mobName = EntityList.getEntityString(entity);
-		System.out.println(mobName);
+
 		if (mobName == null)
 			return null;
 		if (mobName.equals("TwilightForest.Forest Bunny")) {

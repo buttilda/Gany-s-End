@@ -30,6 +30,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 
 	private ModelHead model;
+	private final RenderBlocks renderer = new RenderBlocks();
 	public static TileEntityBlockNewSkullRender instance;
 
 	@Override
@@ -74,7 +75,6 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 				GL11.glScaled(1, -1, 1);
 				GL11.glTranslated(0, 1, 0);
 				GL11.glEnable(GL11.GL_CULL_FACE);
-				RenderBlocks renderer = new RenderBlocks();
 				renderer.renderBlockAsItem(Blocks.red_mushroom, 0, 1.0F);
 				GL11.glDisable(GL11.GL_CULL_FACE);
 			} else

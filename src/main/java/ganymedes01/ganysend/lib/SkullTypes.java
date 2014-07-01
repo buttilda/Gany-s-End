@@ -14,7 +14,7 @@ class Lib {
 }
 
 public enum SkullTypes {
-	// @formatter:off
+
 	blaze(Strings.MC_PREFIX + "blaze"),
 	enderman(Strings.MC_PREFIX + "enderman/enderman"),
 	pigman(Strings.MC_PREFIX + "zombie_pigman"),
@@ -57,7 +57,6 @@ public enum SkullTypes {
 	bunnyBrown(Strings.TF_PREFIX + "bunnybrown", "TwilightForest"),
 	bunnyWhite(Strings.TF_PREFIX + "bunnywhite", "TwilightForest"),
 	squirrel(Strings.TF_PREFIX + "squirrel2", "TwilightForest");
-	// @formatter:on
 
 	private final String mod;
 	private final ResourceLocation texture;
