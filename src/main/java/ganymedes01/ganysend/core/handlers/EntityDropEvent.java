@@ -4,32 +4,38 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.BeheadingDamage;
 import ganymedes01.ganysend.core.utils.HeadsHelper;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
-public class EntityDeathEvent {
+public class EntityDropEvent {
 
 	@SubscribeEvent
-	public void modDeathEvent(LivingDeathEvent event) {
+	public void dropEvent(LivingDropsEvent event) {
 		if (event.entityLiving.worldObj.isRemote)
 			return;
+		if (event.entityLiving.getHealth() > 0.0F)
+			return;
+
 		Random rand = event.entityLiving.worldObj.rand;
 		boolean isScythe = event.source instanceof BeheadingDamage;
 		if (isScythe || shouldDoRandomDrop(rand, lootingLevel(event.source)))
@@ -38,10 +44,7 @@ public class EntityDeathEvent {
 				if (stack != null) {
 					if (!isScythe && stack.getItem() == Items.skull && stack.getItemDamage() == 1)
 						return;
-					event.entityLiving.entityDropItem(stack, rand.nextFloat());
-					if (!(event.entityLiving instanceof EntityPlayer))
-						if (event.isCancelable())
-							event.setCanceled(true);
+					addDrop(stack, event.entityLiving, event.drops);
 				}
 			}
 	}
@@ -56,7 +59,7 @@ public class EntityDeathEvent {
 					if (list != null)
 						for (int i = 0; i < list.tagCount(); i++)
 							if (list.getCompoundTagAt(i).getShort("id") == Enchantment.looting.effectId)
-								return list.getCompoundTagAt(i).getShort("lvl");
+								return Math.min(list.getCompoundTagAt(i).getShort("lvl"), 3);
 				}
 			}
 		}
@@ -69,5 +72,14 @@ public class EntityDeathEvent {
 
 	private boolean checkDamSource(DamageSource source) {
 		return source != DamageSource.fall && source != DamageSource.inFire && source != DamageSource.onFire && source != DamageSource.cactus && source != DamageSource.lava && source != DamageSource.inWall && source != DamageSource.drown && source != DamageSource.starve && source != DamageSource.wither && source != DamageSource.anvil && source != DamageSource.fallingBlock;
+	}
+
+	private void addDrop(ItemStack stack, EntityLivingBase entity, List<EntityItem> list) {
+		if (stack.stackSize <= 0)
+			return;
+
+		EntityItem entityItem = new EntityItem(entity.worldObj, entity.posX, entity.posY, entity.posZ, stack);
+		entityItem.delayBeforeCanPickup = 10;
+		list.add(entityItem);
 	}
 }

@@ -5,7 +5,7 @@ import ganymedes01.ganysend.client.gui.inventory.GuiBasicFilteringHopper;
 import ganymedes01.ganysend.client.gui.inventory.GuiEnderFurnace;
 import ganymedes01.ganysend.client.gui.inventory.GuiVoidCrate;
 import ganymedes01.ganysend.core.handlers.ArmourHandler;
-import ganymedes01.ganysend.core.handlers.EntityDeathEvent;
+import ganymedes01.ganysend.core.handlers.EntityDropEvent;
 import ganymedes01.ganysend.core.handlers.HandlerEvents;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.inventory.ContainerAdvancedFilteringHopper;
@@ -59,7 +59,7 @@ public class CommonProxy implements IGuiHandler {
 
 	public void registerEventHandlers() {
 		MinecraftForge.EVENT_BUS.register(new HandlerEvents());
-		MinecraftForge.EVENT_BUS.register(new EntityDeathEvent());
+		MinecraftForge.EVENT_BUS.register(new EntityDropEvent());
 		MinecraftForge.EVENT_BUS.register(new ArmourHandler());
 	}
 
