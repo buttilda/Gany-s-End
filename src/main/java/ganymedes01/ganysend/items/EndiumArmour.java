@@ -15,18 +15,17 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import thaumcraft.api.IRepairable;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
-public abstract class EndiumArmour extends ItemArmor implements IRepairable {
+public abstract class EndiumArmour extends ItemArmor {
 
 	private final int type;
 	private int coolDown;
