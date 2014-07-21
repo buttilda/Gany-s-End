@@ -12,8 +12,8 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.StatCollector;
@@ -23,22 +23,22 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
-public class EndiumPickaxe extends ItemPickaxe implements IEndiumTool {
+public class EndiumSword extends ItemSword implements IEndiumTool {
 
-	public EndiumPickaxe() {
+	public EndiumSword() {
 		this(ModMaterials.ENDIUM_TOOLS);
-		setTextureName(Utils.getItemTexture(Strings.ENDIUM_PICKAXE_NAME));
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_PICKAXE_NAME));
+		setTextureName(Utils.getItemTexture(Strings.ENDIUM_SWORD_NAME));
+		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_SWORD_NAME));
 	}
 
-	protected EndiumPickaxe(ToolMaterial material) {
+	protected EndiumSword(ToolMaterial material) {
 		super(material);
-		setHarvestLevel("pickaxe", 3);
+		setHarvestLevel("sword", 3);
 		setCreativeTab(GanysEnd.endTab);
 	}
 

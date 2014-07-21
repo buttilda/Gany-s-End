@@ -6,14 +6,14 @@ import net.minecraft.block.BlockStairs;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EndStairs extends BlockStairs {
 
-	protected EndStairs(Block block, int meta) {
+	public EndStairs(Block block, int meta) {
 		super(block, meta);
 		setHardness(1.5F);
 		setLightOpacity(0);

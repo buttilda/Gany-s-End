@@ -1,6 +1,6 @@
 package ganymedes01.ganysend.core.handlers;
 
-import ganymedes01.ganysend.items.ModItems;
+import ganymedes01.ganysend.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;

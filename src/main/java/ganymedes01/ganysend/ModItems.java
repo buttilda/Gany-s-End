@@ -1,7 +1,30 @@
-package ganymedes01.ganysend.items;
+package ganymedes01.ganysend;
 
 import ganymedes01.ganysend.dispenser.DispenserBehaviorInfiniteBucket;
 import ganymedes01.ganysend.dispenser.DispenserBehaviorInfusedGem;
+import ganymedes01.ganysend.items.EnderBag;
+import ganymedes01.ganysend.items.EnderScythe;
+import ganymedes01.ganysend.items.EnderTag;
+import ganymedes01.ganysend.items.EndiumAxe;
+import ganymedes01.ganysend.items.EndiumBoots;
+import ganymedes01.ganysend.items.EndiumChestplate;
+import ganymedes01.ganysend.items.EndiumHelmet;
+import ganymedes01.ganysend.items.EndiumIngot;
+import ganymedes01.ganysend.items.EndiumLeggings;
+import ganymedes01.ganysend.items.EndiumPickaxe;
+import ganymedes01.ganysend.items.EndiumShovel;
+import ganymedes01.ganysend.items.EndiumSword;
+import ganymedes01.ganysend.items.EndstoneRod;
+import ganymedes01.ganysend.items.InfiniteBucket;
+import ganymedes01.ganysend.items.InfusedGem;
+import ganymedes01.ganysend.items.ItemNewSkull;
+import ganymedes01.ganysend.items.ReinforcedEndiumAxe;
+import ganymedes01.ganysend.items.ReinforcedEndiumPickaxe;
+import ganymedes01.ganysend.items.ReinforcedEndiumShovel;
+import ganymedes01.ganysend.items.ReinforcedEndiumSword;
+
+import java.lang.reflect.Field;
+
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,9 +34,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ModItems {
@@ -29,9 +52,11 @@ public class ModItems {
 	public static final Item endiumPickaxe = new EndiumPickaxe();
 	public static final Item endiumAxe = new EndiumAxe();
 	public static final Item endiumShovel = new EndiumShovel();
+	public static final Item endiumSword = new EndiumSword();
 	public static final Item reinforcedEndiumPickaxe = new ReinforcedEndiumPickaxe();
 	public static final Item reinforcedEndiumAxe = new ReinforcedEndiumAxe();
 	public static final Item reinforcedEndiumShovel = new ReinforcedEndiumShovel();
+	public static final Item reinforcedEndiumSword = new ReinforcedEndiumSword();
 	public static final Item enderBag = new EnderBag();
 
 	// Armour
@@ -41,27 +66,18 @@ public class ModItems {
 	public static final Item endiumBoots = new EndiumBoots();
 
 	public static void init() {
-		// Armour
-		registerItem(endiumHelmet);
-		registerItem(endiumChestplate);
-		registerItem(endiumLeggings);
-		registerItem(endiumBoots);
-
-		// Items
-		registerItem(enderTag);
-		registerItem(endiumIngot);
-		registerItem(endstoneRod);
-		registerItem(enderScythe);
-		registerItem(infiniteBucket);
-		registerItem(itemNewSkull);
-		registerItem(infusedGem);
-		registerItem(endiumPickaxe);
-		registerItem(endiumAxe);
-		registerItem(endiumShovel);
-		registerItem(reinforcedEndiumPickaxe);
-		registerItem(reinforcedEndiumAxe);
-		registerItem(reinforcedEndiumShovel);
-		registerItem(enderBag);
+		try {
+			for (Field f : ModItems.class.getDeclaredFields()) {
+				Object obj = f.get(null);
+				if (obj instanceof Item)
+					registerItem((Item) obj);
+				else if (obj instanceof Item[])
+					for (Item item : (Item[]) obj)
+						registerItem(item);
+			}
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
 
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(infiniteBucket), new ItemStack(infiniteBucket));
 

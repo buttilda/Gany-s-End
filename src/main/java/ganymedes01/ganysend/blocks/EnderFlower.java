@@ -23,14 +23,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EnderFlower extends BlockFlower {
 
-	protected EnderFlower() {
+	public EnderFlower() {
 		super(0);
 		setLightLevel(0.3F);
 		setCreativeTab(GanysEnd.endTab);

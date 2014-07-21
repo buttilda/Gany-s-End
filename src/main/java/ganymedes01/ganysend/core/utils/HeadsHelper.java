@@ -1,6 +1,6 @@
 package ganymedes01.ganysend.core.utils;
 
-import ganymedes01.ganysend.items.ModItems;
+import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;

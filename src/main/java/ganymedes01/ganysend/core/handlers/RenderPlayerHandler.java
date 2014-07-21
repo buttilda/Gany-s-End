@@ -1,7 +1,7 @@
 package ganymedes01.ganysend.core.handlers;
 
+import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockNewSkullRender;
-import ganymedes01.ganysend.items.ModItems;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTUtil;

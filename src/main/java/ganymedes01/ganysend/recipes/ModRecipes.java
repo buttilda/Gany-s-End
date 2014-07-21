@@ -1,8 +1,8 @@
 package ganymedes01.ganysend.recipes;
 
 import ganymedes01.ganysend.GanysEnd;
-import ganymedes01.ganysend.blocks.ModBlocks;
-import ganymedes01.ganysend.items.ModItems;
+import ganymedes01.ganysend.ModBlocks;
+import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -14,9 +14,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ModRecipes {
@@ -68,9 +68,11 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.endiumPickaxe), "xxx", " y ", " y ", 'x', "ingotEndium", 'y', ModItems.endstoneRod));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.endiumAxe), "xx", "xy", " y", 'x', "ingotEndium", 'y', ModItems.endstoneRod));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.endiumShovel), "x", "y", "y", 'x', "ingotEndium", 'y', ModItems.endstoneRod));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.endiumSword), "x", "x", "y", 'x', "ingotEndium", 'y', ModItems.endstoneRod));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumAxe), " x ", "xyx", 'x', Items.diamond, 'y', ModItems.endiumAxe));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumPickaxe), " x ", "xyx", 'x', Items.diamond, 'y', ModItems.endiumPickaxe));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumShovel), " x ", "xyx", 'x', Items.diamond, 'y', ModItems.endiumShovel));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumSword), " x ", "xyx", 'x', Items.diamond, 'y', ModItems.endiumSword));
 		if (GanysEnd.enableEnderBag)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderBag), "zwz", "wyw", "xxx", 'x', Items.ender_pearl, 'y', "enderChest", 'z', new ItemStack(Blocks.wool, 1, 15), 'w', new ItemStack(Blocks.wool, 1, 13)));
 

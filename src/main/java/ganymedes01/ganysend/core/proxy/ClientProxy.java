@@ -1,7 +1,8 @@
 package ganymedes01.ganysend.core.proxy;
 
 import ganymedes01.ganysend.GanysEnd;
-import ganymedes01.ganysend.blocks.ModBlocks;
+import ganymedes01.ganysend.ModBlocks;
+import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.client.renderer.block.BlockFilteringHopperRender;
 import ganymedes01.ganysend.client.renderer.block.BlockInventoryBinderRender;
 import ganymedes01.ganysend.client.renderer.block.BlockRawEndiumRender;
@@ -15,7 +16,6 @@ import ganymedes01.ganysend.core.handlers.RenderCapeHandler;
 import ganymedes01.ganysend.core.handlers.RenderPlayerHandler;
 import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
 import ganymedes01.ganysend.core.utils.VersionHelper;
-import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
 import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;

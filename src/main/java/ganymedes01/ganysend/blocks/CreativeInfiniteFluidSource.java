@@ -23,7 +23,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class CreativeInfiniteFluidSource extends InfiniteWaterSource {
 
-	protected CreativeInfiniteFluidSource() {
+	public CreativeInfiniteFluidSource() {
 		super(Material.rock);
 		setBlockName(Utils.getUnlocalizedName(Strings.CREATIVE_INFINITE_FLUID_SOURCE_NAME));
 	}

@@ -1,6 +1,6 @@
 package ganymedes01.ganysend.client.renderer.item;
 
-import ganymedes01.ganysend.blocks.ModBlocks;
+import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.client.model.ModelInfiniteWaterSource;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;

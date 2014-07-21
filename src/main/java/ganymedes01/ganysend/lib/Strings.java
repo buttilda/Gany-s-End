@@ -2,9 +2,9 @@ package ganymedes01.ganysend.lib;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class Strings {
@@ -55,10 +55,12 @@ public class Strings {
 	public static final String ENDIUM_PICKAXE_NAME = "endiumPickaxe";
 	public static final String ENDIUM_AXE_NAME = "endiumAxe";
 	public static final String ENDIUM_SHOVEL_NAME = "endiumShovel";
+	public static final String ENDIUM_SWORD_NAME = "endiumSword";
 	public static final String ENDIUM_NUGGET_NAME = "endiumNugget";
 	public static final String REINFORCED_ENDIUM_PICKAXE_NAME = "reinforcedEndiumPickaxe";
 	public static final String REINFORCED_ENDIUM_AXE_NAME = "reinforcedEndiumAxe";
 	public static final String REINFORCED_ENDIUM_SHOVEL_NAME = "reinforcedEndiumShovel";
+	public static final String REINFORCED_ENDIUM_SWORD_NAME = "reinforcedEndiumSword";
 	public static final String ENDER_BAG_NAME = "enderBag";
 
 	// Enchantments

@@ -1,7 +1,7 @@
 package ganymedes01.ganysend.integration;
 
-import ganymedes01.ganysend.blocks.ModBlocks;
-import ganymedes01.ganysend.items.ModItems;
+import ganymedes01.ganysend.ModBlocks;
+import ganymedes01.ganysend.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

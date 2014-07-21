@@ -1,6 +1,6 @@
 package ganymedes01.ganysend.integration;
 
-import ganymedes01.ganysend.blocks.ModBlocks;
+import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.core.utils.HeadsHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

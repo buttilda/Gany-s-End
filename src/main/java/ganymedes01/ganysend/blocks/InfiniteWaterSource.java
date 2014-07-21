@@ -20,14 +20,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class InfiniteWaterSource extends BlockContainer {
 
-	protected InfiniteWaterSource() {
+	public InfiniteWaterSource() {
 		this(Material.rock);
 		setBlockName(Utils.getUnlocalizedName(Strings.INFINITE_WATER_SOURCE_NAME));
 	}

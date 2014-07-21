@@ -1,8 +1,8 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityBlockShifter;
 import net.minecraft.block.Block;

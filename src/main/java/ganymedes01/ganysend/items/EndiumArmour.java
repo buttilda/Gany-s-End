@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.enchantment.ModEnchants;
 import ganymedes01.ganysend.lib.ModMaterials;

@@ -14,10 +14,12 @@ item.ganysend.infusedGem_day.name=Day Infused Gem
 item.ganysend.endiumPickaxe.name=Endium Pickaxe
 item.ganysend.endiumAxe.name=Endium Axe
 item.ganysend.endiumShovel.name=Endium Shovel
+item.ganysend.endiumSword.name=Endium Sword
 item.ganysend.endiumNugget.name=Endium Nugget
 item.ganysend.reinforcedEndiumPickaxe.name=Reinforced Endium Pickaxe
 item.ganysend.reinforcedEndiumAxe.name=Reinforced Endium Axe
 item.ganysend.reinforcedEndiumShovel.name=Reinforced Endium Shovel
+item.ganysend.reinforcedEndiumSword.name=Reinforced Endium Sword
 item.ganysend.enderBag.name=Ender Bag
 
 # Heads

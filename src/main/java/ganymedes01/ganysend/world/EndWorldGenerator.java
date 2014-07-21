@@ -1,6 +1,6 @@
 package ganymedes01.ganysend.world;
 
-import ganymedes01.ganysend.blocks.ModBlocks;
+import ganymedes01.ganysend.ModBlocks;
 
 import java.util.Random;
 

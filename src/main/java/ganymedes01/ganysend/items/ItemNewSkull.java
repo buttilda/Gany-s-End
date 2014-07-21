@@ -1,7 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
-import ganymedes01.ganysend.blocks.ModBlocks;
+import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.SkullTypes;
 import ganymedes01.ganysend.lib.Strings;

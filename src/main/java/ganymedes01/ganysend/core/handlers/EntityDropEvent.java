@@ -3,21 +3,26 @@ package ganymedes01.ganysend.core.handlers;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.BeheadingDamage;
 import ganymedes01.ganysend.core.utils.HeadsHelper;
+import ganymedes01.ganysend.core.utils.InventoryUtils;
+import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.IEndiumTool;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
@@ -29,41 +34,63 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityDropEvent {
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void dropEvent(LivingDropsEvent event) {
 		if (event.entityLiving.worldObj.isRemote)
 			return;
 		if (event.entityLiving.getHealth() > 0.0F)
 			return;
-
 		Random rand = event.entityLiving.worldObj.rand;
+
+		// Drop heads
 		boolean isScythe = event.source instanceof BeheadingDamage;
-		if (isScythe || shouldDoRandomDrop(rand, lootingLevel(event.source)))
+		if (isScythe || shouldDoRandomDrop(rand, event.lootingLevel))
 			if (checkDamSource(event.source)) {
 				ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
-				if (stack != null) {
-					if (!isScythe && stack.getItem() == Items.skull && stack.getItemDamage() == 1)
-						return;
-					addDrop(stack, event.entityLiving, event.drops);
-				}
+				if (stack != null)
+					if (isScythe || !isWitherSkull(stack))
+						addDrop(stack, event.entityLiving, event.drops);
 			}
+
+		// Collect drops
+		ItemStack weapon = getWeapon(event.source);
+		if (weapon != null)
+			if (weapon.getItem() instanceof IEndiumTool)
+				if (weapon.stackTagCompound != null)
+					if (weapon.getTagCompound().getBoolean("Tagged")) {
+						NBTTagCompound data = weapon.getTagCompound();
+						int x = data.getIntArray("Position")[0];
+						int y = data.getIntArray("Position")[1];
+						int z = data.getIntArray("Position")[2];
+						int dim = data.getInteger("Dimension");
+
+						if (event.entityLiving.worldObj.provider.dimensionId == dim) {
+							IInventory tile = Utils.getTileEntity(event.entityLiving.worldObj, x, y, z, IInventory.class);
+							if (tile != null) {
+								List<EntityItem> deads = new LinkedList<EntityItem>();
+								for (EntityItem entityitem : event.drops) {
+									InventoryUtils.addEntitytoInventory(tile, entityitem);
+									if (entityitem.isDead)
+										deads.add(entityitem);
+								}
+								for (EntityItem entityitem : deads)
+									event.drops.remove(entityitem);
+							}
+						}
+					}
 	}
 
-	private int lootingLevel(DamageSource source) {
+	private ItemStack getWeapon(DamageSource source) {
 		if (source instanceof EntityDamageSource) {
 			Entity entity = ((EntityDamageSource) source).getEntity();
-			if (entity instanceof EntityPlayer) {
-				ItemStack stack = ((EntityPlayer) entity).getCurrentEquippedItem();
-				if (stack != null) {
-					NBTTagList list = stack.getEnchantmentTagList();
-					if (list != null)
-						for (int i = 0; i < list.tagCount(); i++)
-							if (list.getCompoundTagAt(i).getShort("id") == Enchantment.looting.effectId)
-								return Math.min(list.getCompoundTagAt(i).getShort("lvl"), 3);
-				}
-			}
+			if (entity instanceof EntityPlayer)
+				return ((EntityPlayer) entity).getCurrentEquippedItem();
 		}
-		return 0;
+		return null;
+	}
+
+	private boolean isWitherSkull(ItemStack stack) {
+		return stack.getItem() == Items.skull && stack.getItemDamage() == 1;
 	}
 
 	private boolean shouldDoRandomDrop(Random rand, int looting) {

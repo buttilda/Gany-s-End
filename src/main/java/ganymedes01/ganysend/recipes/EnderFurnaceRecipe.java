@@ -1,8 +1,8 @@
 package ganymedes01.ganysend.recipes;
 
 import ganymedes01.ganysend.GanysEnd;
-import ganymedes01.ganysend.blocks.ModBlocks;
-import ganymedes01.ganysend.items.ModItems;
+import ganymedes01.ganysend.ModBlocks;
+import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.lib.SkullTypes;
 
 import java.util.ArrayList;

@@ -1,6 +1,5 @@
 package ganymedes01.ganysend;
 
-import ganymedes01.ganysend.blocks.ModBlocks;
 import ganymedes01.ganysend.configuration.ConfigurationHandler;
 import ganymedes01.ganysend.core.handlers.InterModComms;
 import ganymedes01.ganysend.core.proxy.CommonProxy;
@@ -9,7 +8,6 @@ import ganymedes01.ganysend.enchantment.ModEnchants;
 import ganymedes01.ganysend.integration.Integration;
 import ganymedes01.ganysend.integration.ModIntegrator;
 import ganymedes01.ganysend.integration.ThaumcraftManager;
-import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.network.PacketHandler;
 import ganymedes01.ganysend.recipes.ModRecipes;
