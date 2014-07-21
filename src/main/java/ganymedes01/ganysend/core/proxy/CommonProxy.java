@@ -4,6 +4,7 @@ import ganymedes01.ganysend.client.gui.inventory.GuiAdvancedFilteringHopper;
 import ganymedes01.ganysend.client.gui.inventory.GuiBasicFilteringHopper;
 import ganymedes01.ganysend.client.gui.inventory.GuiEnderFurnace;
 import ganymedes01.ganysend.client.gui.inventory.GuiVoidCrate;
+import ganymedes01.ganysend.configuration.ConfigurationHandler;
 import ganymedes01.ganysend.core.handlers.ArmourHandler;
 import ganymedes01.ganysend.core.handlers.EntityDropEvent;
 import ganymedes01.ganysend.core.handlers.HandlerEvents;
@@ -30,17 +31,26 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class CommonProxy implements IGuiHandler {
+
+	public void registerEvents() {
+		FMLCommonHandler.instance().bus().register(ConfigurationHandler.INSTANCE);
+
+		MinecraftForge.EVENT_BUS.register(new HandlerEvents());
+		MinecraftForge.EVENT_BUS.register(new EntityDropEvent());
+		MinecraftForge.EVENT_BUS.register(new ArmourHandler());
+	}
 
 	public void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntityBlockShifter.class, Utils.getUnlocalizedName(Strings.BLOCK_SHIFTER_NAME));
@@ -55,12 +65,6 @@ public class CommonProxy implements IGuiHandler {
 		GameRegistry.registerTileEntity(TileEntityVoidCrate.class, Utils.getUnlocalizedName(Strings.VOID_CRATE_NAME));
 		GameRegistry.registerTileEntity(TileEntityEnderFurnace.class, Utils.getUnlocalizedName(Strings.ENDER_FURNACE_NAME));
 		GameRegistry.registerTileEntity(TileEntityCreativeSpeedyHopper.class, Utils.getUnlocalizedName(Strings.CREATIVE_SPEEDY_HOPPER_NAME));
-	}
-
-	public void registerEventHandlers() {
-		MinecraftForge.EVENT_BUS.register(new HandlerEvents());
-		MinecraftForge.EVENT_BUS.register(new EntityDropEvent());
-		MinecraftForge.EVENT_BUS.register(new ArmourHandler());
 	}
 
 	public void registerRenderers() {

@@ -11,7 +11,10 @@ import ganymedes01.ganysend.client.renderer.item.ItemSkullRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockNewSkullRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInfiniteWaterSourceRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInventoryBinderRender;
+import ganymedes01.ganysend.core.handlers.RenderCapeHandler;
 import ganymedes01.ganysend.core.handlers.RenderPlayerHandler;
+import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
+import ganymedes01.ganysend.core.utils.VersionHelper;
 import ganymedes01.ganysend.items.ModItems;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
@@ -22,15 +25,31 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ClientProxy extends CommonProxy {
+
+	@Override
+	public void registerEvents() {
+		super.registerEvents();
+		if (GanysEnd.shouldDoVersionCheck) {
+			VersionHelper.execute();
+			FMLCommonHandler.instance().bus().register(new VersionCheckTickHandler());
+		}
+
+		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
+
+		if (!Loader.isModLoaded("ganysnether"))
+			MinecraftForge.EVENT_BUS.register(new RenderCapeHandler());
+	}
 
 	@Override
 	public void registerTileEntities() {
@@ -52,11 +71,5 @@ public class ClientProxy extends CommonProxy {
 		if (GanysEnd.enableTimeManipulator)
 			RenderingRegistry.registerBlockHandler(new BlockTimeManipulatorRender());
 		RenderingRegistry.registerBlockHandler(new BlockRawEndiumRender());
-	}
-
-	@Override
-	public void registerEventHandlers() {
-		super.registerEventHandlers();
-		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
 	}
 }

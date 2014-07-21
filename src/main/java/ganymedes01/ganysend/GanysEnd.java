@@ -3,10 +3,7 @@ package ganymedes01.ganysend;
 import ganymedes01.ganysend.blocks.ModBlocks;
 import ganymedes01.ganysend.configuration.ConfigurationHandler;
 import ganymedes01.ganysend.core.handlers.InterModComms;
-import ganymedes01.ganysend.core.handlers.RenderCapeHandler;
-import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
 import ganymedes01.ganysend.core.proxy.CommonProxy;
-import ganymedes01.ganysend.core.utils.VersionHelper;
 import ganymedes01.ganysend.creativetab.CreativeTabEnd;
 import ganymedes01.ganysend.enchantment.ModEnchants;
 import ganymedes01.ganysend.integration.Integration;
@@ -27,10 +24,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.FlowerEntry;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -42,7 +36,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerAboutToStartEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 /**
  * Gany's End
@@ -61,6 +54,7 @@ public class GanysEnd {
 	public static CommonProxy proxy;
 
 	public static CreativeTabs endTab = new CreativeTabEnd();
+
 	public static boolean togglerShouldMakeSound = true;
 	public static boolean shouldDoVersionCheck = true;
 	public static boolean activateShifters = true;
@@ -74,14 +68,8 @@ public class GanysEnd {
 		ModIntegrator.preInit();
 
 		ConfigurationHandler.INSTANCE.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MASTER + File.separator + Reference.MOD_ID + ".cfg"));
-		FMLCommonHandler.instance().bus().register(ConfigurationHandler.INSTANCE);
 
-		if (shouldDoVersionCheck) {
-			VersionHelper.execute();
-			FMLCommonHandler.instance().bus().register(new VersionCheckTickHandler());
-		}
-
-		proxy.registerEventHandlers();
+		GameRegistry.registerWorldGenerator(new EndWorldGenerator(), 0);
 
 		ModBlocks.init();
 		ModItems.init();
@@ -92,14 +80,14 @@ public class GanysEnd {
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		PacketHandler.init();
-		proxy.registerTileEntities();
-		proxy.registerRenderers();
-		GameRegistry.registerWorldGenerator(new EndWorldGenerator(), 0);
+
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
 
-		if (event.getSide() == Side.CLIENT)
-			if (!Loader.isModLoaded("ganysnether"))
-				MinecraftForge.EVENT_BUS.register(new RenderCapeHandler());
+		proxy.registerEvents();
+		proxy.registerTileEntities();
+		proxy.registerRenderers();
+
+		ModIntegrator.init();
 
 		if (GanysEnd.enableEnderBag)
 			try {
@@ -108,8 +96,6 @@ public class GanysEnd {
 					OreDictionary.registerOre("enderChest", new ItemStack(blockEnderChest, 1, i));
 			} catch (Exception e) {
 			}
-
-		ModIntegrator.init();
 	}
 
 	@SuppressWarnings("unchecked")
