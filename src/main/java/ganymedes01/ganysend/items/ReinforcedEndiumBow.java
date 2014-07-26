@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.items;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModMaterials;
 import ganymedes01.ganysend.lib.Strings;
@@ -18,6 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ReinforcedEndiumBow extends EndiumBow {
 
 	public ReinforcedEndiumBow() {
+		setCreativeTab(GanysEnd.endTab);
 		setMaxDamage(ModMaterials.REIN_ENDIUM_TOOLS.getMaxUses());
 		setTextureName(Utils.getItemTexture(Strings.REINFORCED_ENDIUM_BOW_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.REINFORCED_ENDIUM_BOW_NAME));
