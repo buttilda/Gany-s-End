@@ -43,6 +43,7 @@ public class Strings {
 	// Item names
 	public static final String ENDER_TAG_NAME = "enderTag";
 	public static final String ENDIUM_INGOT_NAME = "endiumIngot";
+	public static final String ENDIUM_NUGGET_NAME = "endiumNugget";
 	public static final String ENDSTONE_ROD_NAME = "endstoneRod";
 	public static final String ENDER_SCYTHE_NAME = "enderScythe";
 	public static final String ENDIUM_HELMET_NAME = "endiumHelmet";
@@ -56,11 +57,12 @@ public class Strings {
 	public static final String ENDIUM_AXE_NAME = "endiumAxe";
 	public static final String ENDIUM_SHOVEL_NAME = "endiumShovel";
 	public static final String ENDIUM_SWORD_NAME = "endiumSword";
-	public static final String ENDIUM_NUGGET_NAME = "endiumNugget";
+	public static final String ENDIUM_BOW_NAME = "endiumBow";
 	public static final String REINFORCED_ENDIUM_PICKAXE_NAME = "reinforcedEndiumPickaxe";
 	public static final String REINFORCED_ENDIUM_AXE_NAME = "reinforcedEndiumAxe";
 	public static final String REINFORCED_ENDIUM_SHOVEL_NAME = "reinforcedEndiumShovel";
 	public static final String REINFORCED_ENDIUM_SWORD_NAME = "reinforcedEndiumSword";
+	public static final String REINFORCED_ENDIUM_BOW_NAME = "reinforcedEndiumBow";
 	public static final String ENDER_BAG_NAME = "enderBag";
 
 	// Enchantments

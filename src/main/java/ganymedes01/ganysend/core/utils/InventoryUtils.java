@@ -11,9 +11,9 @@ import net.minecraft.world.World;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class InventoryUtils {
@@ -46,7 +46,7 @@ public class InventoryUtils {
 
 	/**
 	 * Extracts 1 item from the first found stack
-	 * 
+	 *
 	 * @param iinventory
 	 * @param side
 	 * @param maxStackSize
@@ -58,7 +58,7 @@ public class InventoryUtils {
 
 	/**
 	 * Extracts a stack with size the same or smaller of @param maxStackSize
-	 * 
+	 *
 	 * @param iinventory
 	 * @param side
 	 * @param maxStackSize
@@ -192,5 +192,19 @@ public class InventoryUtils {
 			}
 		}
 		tile.markDirty();
+	}
+
+	public static boolean inventoryContainsStack(IInventory iinventory, ItemStack stack) {
+		IInventory invt = getInventory(iinventory);
+
+		for (int i = 0; i < invt.getSizeInventory(); i++) {
+			ItemStack invtStack = invt.getStackInSlot(i);
+			if (stack == null && invtStack == null)
+				return true;
+			else if (InventoryUtils.areStacksTheSame(stack, invtStack, false))
+				return true;
+		}
+
+		return false;
 	}
 }

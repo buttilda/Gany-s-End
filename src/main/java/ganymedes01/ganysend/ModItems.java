@@ -7,6 +7,7 @@ import ganymedes01.ganysend.items.EnderScythe;
 import ganymedes01.ganysend.items.EnderTag;
 import ganymedes01.ganysend.items.EndiumAxe;
 import ganymedes01.ganysend.items.EndiumBoots;
+import ganymedes01.ganysend.items.EndiumBow;
 import ganymedes01.ganysend.items.EndiumChestplate;
 import ganymedes01.ganysend.items.EndiumHelmet;
 import ganymedes01.ganysend.items.EndiumIngot;
@@ -19,6 +20,7 @@ import ganymedes01.ganysend.items.InfiniteBucket;
 import ganymedes01.ganysend.items.InfusedGem;
 import ganymedes01.ganysend.items.ItemNewSkull;
 import ganymedes01.ganysend.items.ReinforcedEndiumAxe;
+import ganymedes01.ganysend.items.ReinforcedEndiumBow;
 import ganymedes01.ganysend.items.ReinforcedEndiumPickaxe;
 import ganymedes01.ganysend.items.ReinforcedEndiumShovel;
 import ganymedes01.ganysend.items.ReinforcedEndiumSword;
@@ -53,10 +55,12 @@ public class ModItems {
 	public static final Item endiumAxe = new EndiumAxe();
 	public static final Item endiumShovel = new EndiumShovel();
 	public static final Item endiumSword = new EndiumSword();
+	public static final Item endiumBow = new EndiumBow();
 	public static final Item reinforcedEndiumPickaxe = new ReinforcedEndiumPickaxe();
 	public static final Item reinforcedEndiumAxe = new ReinforcedEndiumAxe();
 	public static final Item reinforcedEndiumShovel = new ReinforcedEndiumShovel();
 	public static final Item reinforcedEndiumSword = new ReinforcedEndiumSword();
+	public static final Item reinforcedEndiumBow = new ReinforcedEndiumBow();
 	public static final Item enderBag = new EnderBag();
 
 	// Armour

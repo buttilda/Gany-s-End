@@ -69,10 +69,12 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.endiumAxe), "xx", "xy", " y", 'x', "ingotEndium", 'y', ModItems.endstoneRod));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.endiumShovel), "x", "y", "y", 'x', "ingotEndium", 'y', ModItems.endstoneRod));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.endiumSword), "x", "x", "y", 'x', "ingotEndium", 'y', ModItems.endstoneRod));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.endiumBow), " xy", "x y", " xy", 'x', "ingotEndium", 'y', ModItems.endstoneRod));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumAxe), " x ", "xyx", 'x', Items.diamond, 'y', ModItems.endiumAxe));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumPickaxe), " x ", "xyx", 'x', Items.diamond, 'y', ModItems.endiumPickaxe));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumShovel), " x ", "xyx", 'x', Items.diamond, 'y', ModItems.endiumShovel));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumSword), " x ", "xyx", 'x', Items.diamond, 'y', ModItems.endiumSword));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumBow), " x ", "xyx", 'x', Items.diamond, 'y', ModItems.endiumBow));
 		if (GanysEnd.enableEnderBag)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderBag), "zwz", "wyw", "xxx", 'x', Items.ender_pearl, 'y', "enderChest", 'z', new ItemStack(Blocks.wool, 1, 15), 'w', new ItemStack(Blocks.wool, 1, 13)));
 

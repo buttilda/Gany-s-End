@@ -5,6 +5,7 @@ item.ganysend.endiumLeggings.name=Endium Leggings
 item.ganysend.endiumBoots.name=Endium Boots
 
 item.ganysend.enderTag.name=Ender Tag
+item.ganysend.endiumNugget.name=Endium Nugget
 item.ganysend.endiumIngot.name=Endium Ingot
 item.ganysend.endstoneRod.name=End Stone Rod
 item.ganysend.enderScythe.name=Ender Scythe
@@ -15,11 +16,12 @@ item.ganysend.endiumPickaxe.name=Endium Pickaxe
 item.ganysend.endiumAxe.name=Endium Axe
 item.ganysend.endiumShovel.name=Endium Shovel
 item.ganysend.endiumSword.name=Endium Sword
-item.ganysend.endiumNugget.name=Endium Nugget
+item.ganysend.endiumBow.name=Endium Bow
 item.ganysend.reinforcedEndiumPickaxe.name=Reinforced Endium Pickaxe
 item.ganysend.reinforcedEndiumAxe.name=Reinforced Endium Axe
 item.ganysend.reinforcedEndiumShovel.name=Reinforced Endium Shovel
 item.ganysend.reinforcedEndiumSword.name=Reinforced Endium Sword
+item.ganysend.reinforcedEndiumBow.name= Reinforced Endium Bow
 item.ganysend.enderBag.name=Ender Bag
 
 # Heads

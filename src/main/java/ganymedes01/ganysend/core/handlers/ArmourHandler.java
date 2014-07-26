@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.core.handlers;
 
 import ganymedes01.ganysend.ModItems;
+import ganymedes01.ganysend.items.EndiumBow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -14,9 +15,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ArmourHandler {
@@ -61,5 +62,18 @@ public class ArmourHandler {
 		if (player.getCurrentArmor(1) != null && player.getCurrentArmor(1).getItem() == ModItems.endiumLeggings)
 			if (event.newfov > 1.0F)
 				event.newfov = 1.0F;
+
+		// Endium Bow
+		if (player.isUsingItem() && player.getItemInUse().getItem() instanceof EndiumBow) {
+			int i = player.getItemInUseDuration();
+			float f1 = i / 20.0F;
+
+			if (f1 > 1.0F)
+				f1 = 1.0F;
+			else
+				f1 *= f1;
+
+			event.newfov = event.fov * (1.0F - f1 * 0.15F);
+		}
 	}
 }
