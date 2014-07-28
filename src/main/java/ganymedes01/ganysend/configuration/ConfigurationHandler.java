@@ -54,13 +54,14 @@ public class ConfigurationHandler {
 			integration.setShouldIntegrate(configIntegrationBoolean(integration.getModID()));
 
 		// Others
-		GanysEnd.togglerShouldMakeSound = configBoolean(Strings.TOGGLERS_SHOULD_MAKE_SOUND, false, GanysEnd.togglerShouldMakeSound);
-		GanysEnd.shouldDoVersionCheck = configBoolean(Strings.SHOULD_DO_VERSION_CHECK, true, GanysEnd.shouldDoVersionCheck);
-		GanysEnd.activateShifters = configBoolean(Strings.ACTIVATE_SHIFTERS, true, GanysEnd.activateShifters);
-		GanysEnd.enableRandomHeadDrop = configBoolean(Strings.ENABLE_RANDOM_HEAD_DROP, false, GanysEnd.enableRandomHeadDrop);
-		GanysEnd.enableTimeManipulator = configBoolean(Strings.ENABLE_TIME_MANIPULATOR, true, GanysEnd.enableTimeManipulator);
-		GanysEnd.enableEnderBag = configBoolean(Strings.ENABLE_ENDER_BAG, true, GanysEnd.enableEnderBag);
-		GanysEnd.enableRawEndiumRecipe = configBoolean(Strings.ENABLE_RAW_ENDIUM_RECIPE, true, GanysEnd.enableRawEndiumRecipe);
+		GanysEnd.togglerShouldMakeSound = configBoolean("togglersShouldMakeSound", false, GanysEnd.togglerShouldMakeSound);
+		GanysEnd.shouldDoVersionCheck = configBoolean("shouldDoVersionCheck", true, GanysEnd.shouldDoVersionCheck);
+		GanysEnd.activateShifters = configBoolean("activateShifters", true, GanysEnd.activateShifters);
+		GanysEnd.enableRandomHeadDrop = configBoolean("enableRandomHeadDrop", false, GanysEnd.enableRandomHeadDrop);
+		GanysEnd.enableTimeManipulator = configBoolean("enableTimeManipulator", true, GanysEnd.enableTimeManipulator);
+		GanysEnd.enableEnderBag = configBoolean("enableEnderBag", true, GanysEnd.enableEnderBag);
+		GanysEnd.enableRawEndiumRecipe = configBoolean("enableRawEndiumRecipe", true, GanysEnd.enableRawEndiumRecipe);
+		GanysEnd.enableVanillaHeadsDrop = configBoolean("enableVanillaHeadsDrop", false, GanysEnd.enableVanillaHeadsDrop);
 
 		if (configFile.hasChanged())
 			configFile.save();

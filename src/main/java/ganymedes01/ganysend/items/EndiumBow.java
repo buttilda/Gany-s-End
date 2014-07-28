@@ -1,7 +1,6 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
-import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.IEndiumTool;
@@ -168,7 +167,7 @@ public class EndiumBow extends ItemBow implements IEndiumTool {
 
 	@Override
 	public boolean getIsRepairable(ItemStack item, ItemStack material) {
-		return material.getItem() == ModItems.endiumIngot && material.getItemDamage() == 0;
+		return Utils.isStackOre(material, "ingotEndium");
 	}
 
 	@Override

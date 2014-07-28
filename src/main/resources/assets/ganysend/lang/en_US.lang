@@ -119,8 +119,6 @@ enchantment.imperviousness=Imperviousness
 
 # Others localizations
 itemGroup.ganysend=Gany's End
-death.attack.ganysEndBehead=%1$s was beheaded
-death.attack.ganysEndBehead.player=%1$s was beheaded by %2$s
 nottagged=Not Tagged
 pullallbut=Pull all but:
 pullonly=Pull Only:

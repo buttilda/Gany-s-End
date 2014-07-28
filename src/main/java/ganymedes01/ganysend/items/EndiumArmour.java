@@ -46,8 +46,8 @@ public abstract class EndiumArmour extends ItemArmor {
 	}
 
 	@Override
-	public boolean getIsRepairable(ItemStack item, ItemStack material) {
-		return material.getItem() == ModItems.endiumIngot && material.getItemDamage() == 0;
+	public boolean getIsRepairable(ItemStack stack, ItemStack material) {
+		return Utils.isStackOre(material, "ingotEndium");
 	}
 
 	@Override

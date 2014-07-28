@@ -1,7 +1,6 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
-import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.IEndiumTool;
 import ganymedes01.ganysend.lib.ModMaterials;
@@ -23,9 +22,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EndiumPickaxe extends ItemPickaxe implements IEndiumTool {
@@ -50,8 +49,8 @@ public class EndiumPickaxe extends ItemPickaxe implements IEndiumTool {
 	}
 
 	@Override
-	public boolean getIsRepairable(ItemStack item, ItemStack material) {
-		return material.getItem() == ModItems.endiumIngot && material.getItemDamage() == 0;
+	public boolean getIsRepairable(ItemStack stack, ItemStack material) {
+		return Utils.isStackOre(material, "ingotEndium");
 	}
 
 	@Override

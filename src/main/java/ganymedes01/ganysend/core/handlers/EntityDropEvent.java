@@ -1,7 +1,7 @@
 package ganymedes01.ganysend.core.handlers;
 
 import ganymedes01.ganysend.GanysEnd;
-import ganymedes01.ganysend.core.utils.BeheadingDamage;
+import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.HeadsHelper;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
@@ -41,42 +41,43 @@ public class EntityDropEvent {
 		if (event.entityLiving.getHealth() > 0.0F)
 			return;
 
+		ItemStack weapon = getWeapon(event.source);
+		if (weapon == null)
+			return;
+
 		// Drop heads
-		boolean isScythe = event.source instanceof BeheadingDamage;
-		if (isScythe || shouldDoRandomDrop(event.entityLiving.worldObj.rand, event.lootingLevel))
-			if (checkDamSource(event.source)) {
-				ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
-				if (stack != null)
-					if (isScythe || !isWitherSkull(stack))
-						addDrop(stack, event.entityLiving, event.drops);
-			}
+		boolean isScythe = weapon.getItem() == ModItems.enderScythe;
+		if (isScythe || shouldDoRandomDrop(event.entityLiving.worldObj.rand, event.lootingLevel)) {
+			ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
+			if (stack != null)
+				if (isScythe || canDropThisHead(stack))
+					addDrop(stack, event.entityLiving, event.drops);
+		}
 
 		// Collect drops
-		ItemStack weapon = getWeapon(event.source);
-		if (weapon != null)
-			if (weapon.getItem() instanceof IEndiumTool)
-				if (weapon.stackTagCompound != null)
-					if (weapon.getTagCompound().getBoolean("Tagged")) {
-						NBTTagCompound data = weapon.getTagCompound();
-						int x = data.getIntArray("Position")[0];
-						int y = data.getIntArray("Position")[1];
-						int z = data.getIntArray("Position")[2];
-						int dim = data.getInteger("Dimension");
+		if (weapon.getItem() instanceof IEndiumTool)
+			if (weapon.stackTagCompound != null)
+				if (weapon.getTagCompound().getBoolean("Tagged")) {
+					NBTTagCompound data = weapon.getTagCompound();
+					int x = data.getIntArray("Position")[0];
+					int y = data.getIntArray("Position")[1];
+					int z = data.getIntArray("Position")[2];
+					int dim = data.getInteger("Dimension");
 
-						if (event.entityLiving.worldObj.provider.dimensionId == dim) {
-							IInventory tile = Utils.getTileEntity(event.entityLiving.worldObj, x, y, z, IInventory.class);
-							if (tile != null) {
-								List<EntityItem> deads = new LinkedList<EntityItem>();
-								for (EntityItem entityitem : event.drops) {
-									InventoryUtils.addEntitytoInventory(tile, entityitem);
-									if (entityitem.isDead)
-										deads.add(entityitem);
-								}
-								for (EntityItem entityitem : deads)
-									event.drops.remove(entityitem);
+					if (event.entityLiving.worldObj.provider.dimensionId == dim) {
+						IInventory tile = Utils.getTileEntity(event.entityLiving.worldObj, x, y, z, IInventory.class);
+						if (tile != null) {
+							List<EntityItem> deads = new LinkedList<EntityItem>();
+							for (EntityItem entityitem : event.drops) {
+								InventoryUtils.addEntitytoInventory(tile, entityitem);
+								if (entityitem.isDead)
+									deads.add(entityitem);
 							}
+							for (EntityItem entityitem : deads)
+								event.drops.remove(entityitem);
 						}
 					}
+				}
 	}
 
 	private ItemStack getWeapon(DamageSource source) {
@@ -88,16 +89,12 @@ public class EntityDropEvent {
 		return null;
 	}
 
-	private boolean isWitherSkull(ItemStack stack) {
-		return stack.getItem() == Items.skull && stack.getItemDamage() == 1;
+	private boolean canDropThisHead(ItemStack stack) {
+		return stack.getItem() == Items.skull ? stack.getItemDamage() != 1 && GanysEnd.enableVanillaHeadsDrop : true;
 	}
 
 	private boolean shouldDoRandomDrop(Random rand, int looting) {
 		return GanysEnd.enableRandomHeadDrop && rand.nextInt(Math.max(200 - 50 * looting, 50)) == 0;
-	}
-
-	private boolean checkDamSource(DamageSource source) {
-		return source != DamageSource.fall && source != DamageSource.inFire && source != DamageSource.onFire && source != DamageSource.cactus && source != DamageSource.lava && source != DamageSource.inWall && source != DamageSource.drown && source != DamageSource.starve && source != DamageSource.wither && source != DamageSource.anvil && source != DamageSource.fallingBlock;
 	}
 
 	private void addDrop(ItemStack stack, EntityLivingBase entity, List<EntityItem> list) {

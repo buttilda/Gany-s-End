@@ -58,6 +58,7 @@ public class GanysEnd {
 	public static boolean activateShifters = true;
 	public static boolean enableTimeManipulator = true;
 	public static boolean enableRandomHeadDrop = true;
+	public static boolean enableVanillaHeadsDrop = true;
 	public static boolean enableEnderBag = true;
 	public static boolean enableRawEndiumRecipe = false;
 

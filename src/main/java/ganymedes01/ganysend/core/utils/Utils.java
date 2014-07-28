@@ -8,12 +8,14 @@ import java.util.Collections;
 import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.mojang.authlib.GameProfile;
 
@@ -82,5 +84,13 @@ public class Utils {
 		if (!cls.isInstance(tile))
 			return null;
 		return (T) tile;
+	}
+
+	public static boolean isStackOre(ItemStack stack, String oreName) {
+		int ore = OreDictionary.getOreID(oreName);
+		for (int id : OreDictionary.getOreIDs(stack))
+			if (id == ore)
+				return true;
+		return false;
 	}
 }

@@ -69,16 +69,6 @@ public class Strings {
 	public static final String IMPERVIOUSNESS_NAME = "enchantment.imperviousness";
 
 	// Others
-	public static final String TOGGLERS_SHOULD_MAKE_SOUND = "togglersShouldMakeSound";
-	public static final String SHOULD_DO_VERSION_CHECK = "shouldDoVersionCheck";
-	public static final String ACTIVATE_SHIFTERS = "activateShifters";
-	public static final String ACTIVATE_SPAWNER_CAPTURER = "activateSpawnerCapturer";
-	public static final String ACTIVATE_ENERGY_PORTAL = "activateEnergyPortal";
-	public static final String ENABLE_RANDOM_HEAD_DROP = "enableRandomHeadDrop";
-	public static final String ENABLE_TIME_MANIPULATOR = "enableTimeManipulator";
-	public static final String ENABLE_ENDER_BAG = "enableEnderBag";
-	public static final String ENABLE_RAW_ENDIUM_RECIPE = "enableRawEndiumRecipe";
-
 	public static final String MC_PREFIX = "textures/entity/";
 	public static final String TF_PREFIX = "twilightforest:textures/model/";
 	public static final String TE_PREFIX = "thermalexpansion:textures/entity/";
