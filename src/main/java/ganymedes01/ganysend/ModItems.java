@@ -49,7 +49,7 @@ public class ModItems {
 	public static final Item endstoneRod = new EndstoneRod();
 	public static final Item enderScythe = new EnderScythe();
 	public static final Item infiniteBucket = new InfiniteBucket();
-	public static final Item itemNewSkull = new ItemNewSkull();
+	public static final Item skull = new ItemNewSkull();
 	public static final Item infusedGem = new InfusedGem();
 	public static final Item endiumPickaxe = new EndiumPickaxe();
 	public static final Item endiumAxe = new EndiumAxe();
@@ -87,6 +87,8 @@ public class ModItems {
 
 		BlockDispenser.dispenseBehaviorRegistry.putObject(infiniteBucket, new DispenserBehaviorInfiniteBucket());
 		BlockDispenser.dispenseBehaviorRegistry.putObject(infusedGem, new DispenserBehaviorInfusedGem());
+
+		ItemNewSkull.loadPlayerHeads();
 	}
 
 	private static void registerItem(Item item) {

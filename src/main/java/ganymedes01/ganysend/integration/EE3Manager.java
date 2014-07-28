@@ -23,8 +23,8 @@ public class EE3Manager extends Integration {
 		addEMCValueToBlock(ModBlocks.rawEndium, 2052);
 		addEMCValueToItem(ModItems.endiumIngot, 2052);
 		addEMCValueToItem(ModItems.infiniteBucket, 8196);
-		addEMCValue(new ItemStack(ModItems.itemNewSkull, 1, OreDictionary.WILDCARD_VALUE), 2048);
-		addEMCValue(new ItemStack(ModItems.itemNewSkull, 1, 17), 49152);
+		addEMCValue(new ItemStack(ModItems.skull, 1, OreDictionary.WILDCARD_VALUE), 2048);
+		addEMCValue(new ItemStack(ModItems.skull, 1, 17), 49152);
 	}
 
 	private void addEMCValueToBlock(Block block, float value) {

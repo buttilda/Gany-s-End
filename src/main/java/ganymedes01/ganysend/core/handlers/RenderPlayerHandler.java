@@ -31,7 +31,7 @@ public class RenderPlayerHandler {
 				return;
 
 			ItemStack head = event.entityPlayer.inventory.armorItemInSlot(3);
-			if (head != null && head.getItem() == ModItems.itemNewSkull)
+			if (head != null && head.getItem() == ModItems.skull)
 				setHiddenState(model, true);
 			else
 				setHiddenState(model, false);
@@ -44,7 +44,7 @@ public class RenderPlayerHandler {
 			ModelBiped model = event.renderer.modelBipedMain;
 
 			ItemStack head = event.entityPlayer.inventory.armorItemInSlot(3);
-			if (head != null && head.getItem() == ModItems.itemNewSkull) {
+			if (head != null && head.getItem() == ModItems.skull) {
 				GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
 				setHiddenState(model, false);

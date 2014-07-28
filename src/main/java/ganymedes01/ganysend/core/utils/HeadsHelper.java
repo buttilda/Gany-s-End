@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.core.utils;
 
 import ganymedes01.ganysend.ModItems;
+import ganymedes01.ganysend.items.ItemNewSkull;
 import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -32,8 +33,6 @@ import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTUtil;
 
 /**
  * Gany's End
@@ -74,66 +73,61 @@ public class HeadsHelper {
 					return new ItemStack(Items.skull, 1, 0);
 			} else if (target instanceof EntityZombie) {
 				if (target instanceof EntityPigZombie)
-					return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.pigman.ordinal());
+					return new ItemStack(ModItems.skull, 1, SkullTypes.pigman.ordinal());
 				else if (((EntityZombie) target).isVillager())
-					return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.zombieVillager.ordinal());
+					return new ItemStack(ModItems.skull, 1, SkullTypes.zombieVillager.ordinal());
 				else
 					return new ItemStack(Items.skull, 1, 2);
 			} else if (target instanceof EntityEnderman)
-				return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.enderman.ordinal());
+				return new ItemStack(ModItems.skull, 1, SkullTypes.enderman.ordinal());
 			else if (target instanceof EntityBlaze)
-				return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.blaze.ordinal());
+				return new ItemStack(ModItems.skull, 1, SkullTypes.blaze.ordinal());
 			else if (target instanceof EntitySpider) {
 				if (target instanceof EntityCaveSpider)
-					return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.caveSpider.ordinal());
+					return new ItemStack(ModItems.skull, 1, SkullTypes.caveSpider.ordinal());
 				else
-					return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.spider.ordinal());
+					return new ItemStack(ModItems.skull, 1, SkullTypes.spider.ordinal());
 			} else if (target instanceof EntityWitch)
-				return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.witch.ordinal());
+				return new ItemStack(ModItems.skull, 1, SkullTypes.witch.ordinal());
 			else if (target instanceof EntityWither)
-				return new ItemStack(ModItems.itemNewSkull, 1 + (target.worldObj.rand.nextInt(100) == 0 ? 1 + target.worldObj.rand.nextInt(2) : 0), SkullTypes.wither.ordinal());
-		} else if (target instanceof EntityPlayer) {
-			ItemStack stack = new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.player.ordinal());
-			stack.setTagCompound(new NBTTagCompound());
-			NBTTagCompound profileData = new NBTTagCompound();
-			NBTUtil.func_152460_a(profileData, ((EntityPlayer) target).getGameProfile());
-			stack.getTagCompound().setTag("SkullOwner", profileData);
-			return stack;
-		} else if (target instanceof EntityAnimal) {
+				return new ItemStack(ModItems.skull, 1 + (target.worldObj.rand.nextInt(100) == 0 ? 1 + target.worldObj.rand.nextInt(2) : 0), SkullTypes.wither.ordinal());
+		} else if (target instanceof EntityPlayer)
+			return ItemNewSkull.createHeadFor((EntityPlayer) target);
+		else if (target instanceof EntityAnimal) {
 			if (target instanceof EntityPig)
-				return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.pig.ordinal());
+				return new ItemStack(ModItems.skull, 1, SkullTypes.pig.ordinal());
 			else if (target instanceof EntityCow) {
 				if (target instanceof EntityMooshroom)
-					return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.mooshroom.ordinal());
+					return new ItemStack(ModItems.skull, 1, SkullTypes.mooshroom.ordinal());
 				else
-					return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.cow.ordinal());
+					return new ItemStack(ModItems.skull, 1, SkullTypes.cow.ordinal());
 			} else if (target instanceof EntitySheep)
-				return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.sheep.ordinal());
+				return new ItemStack(ModItems.skull, 1, SkullTypes.sheep.ordinal());
 			else if (target instanceof EntityWolf)
-				return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.wolf.ordinal());
+				return new ItemStack(ModItems.skull, 1, SkullTypes.wolf.ordinal());
 			else if (target instanceof EntityChicken)
-				return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.chicken.ordinal());
+				return new ItemStack(ModItems.skull, 1, SkullTypes.chicken.ordinal());
 			else if (target instanceof EntityOcelot)
 				switch (((EntityOcelot) target).getTameSkin()) {
 					case 0:
-						return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.ocelot.ordinal());
+						return new ItemStack(ModItems.skull, 1, SkullTypes.ocelot.ordinal());
 					case 1:
-						return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.ocelotBlack.ordinal());
+						return new ItemStack(ModItems.skull, 1, SkullTypes.ocelotBlack.ordinal());
 					case 2:
-						return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.ocelotRed.ordinal());
+						return new ItemStack(ModItems.skull, 1, SkullTypes.ocelotRed.ordinal());
 					case 3:
-						return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.ocelotSiamese.ordinal());
+						return new ItemStack(ModItems.skull, 1, SkullTypes.ocelotSiamese.ordinal());
 				}
 		} else if (target instanceof EntityVillager)
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.villager.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.villager.ordinal());
 		else if (target instanceof EntityIronGolem)
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.ironGolem.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.ironGolem.ordinal());
 		else if (target instanceof EntitySquid)
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.squid.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.squid.ordinal());
 		else if (target instanceof EntityGhast)
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.ghast.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.ghast.ordinal());
 		else if (target instanceof EntityDragon)
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.enderDragon.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.enderDragon.ordinal());
 
 		return null;
 	}
@@ -163,43 +157,43 @@ public class HeadsHelper {
 					meta = SkullTypes.bunnyWhite.ordinal();
 					break;
 			}
-			return new ItemStack(ModItems.itemNewSkull, 1, meta);
+			return new ItemStack(ModItems.skull, 1, meta);
 		} else if (mobName.equals("TwilightForest.Penguin"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.penguin.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.penguin.ordinal());
 		else if (mobName.equals("TwilightForest.Bighorn Sheep"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.bighorn.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.bighorn.ordinal());
 		else if (mobName.equals("TwilightForest.Wild Deer"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.wildDeer.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.wildDeer.ordinal());
 		else if (mobName.equals("TwilightForest.Wild Boar"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.wildBoar.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.wildBoar.ordinal());
 		else if (mobName.equals("TwilightForest.Redcap") || mobName.equals("TwilightForest.Redcap Sapper"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.redcap.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.redcap.ordinal());
 		else if (mobName.equals("TwilightForest.Skeleton Druid"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.druid.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.druid.ordinal());
 		else if (mobName.equals("TwilightForest.Hedge Spider"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.hedgeSpider.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.hedgeSpider.ordinal());
 		else if (mobName.equals("TwilightForest.Mist Wolf"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.mistWolf.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.mistWolf.ordinal());
 		else if (mobName.equals("TwilightForest.Mini Ghast"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.miniGhast.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.miniGhast.ordinal());
 		else if (mobName.equals("TwilightForest.Tower Ghast"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.guardGhast.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.guardGhast.ordinal());
 		else if (mobName.equals("TwilightForest.King Spider"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.kingSpider.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.kingSpider.ordinal());
 		else if (mobName.equals("TwilightForest.Kobold"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.kobold.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.kobold.ordinal());
 		else if (mobName.equals("TwilightForest.Fire Beetle"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.fireBeetle.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.fireBeetle.ordinal());
 		else if (mobName.equals("TwilightForest.Slime Beetle"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.slimeBeetle.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.slimeBeetle.ordinal());
 		else if (mobName.equals("TwilightForest.Pinch Beetle"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.pinchBeetle.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.pinchBeetle.ordinal());
 		else if (mobName.equals("TwilightForest.Tower Golem"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.towerGolem.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.towerGolem.ordinal());
 		else if (mobName.equals("TwilightForest.Hostile Wolf"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.hostileWolf.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.hostileWolf.ordinal());
 		else if (mobName.equals("TwilightForest.Forest Squirrel"))
-			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.hostileWolf.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.hostileWolf.ordinal());
 		else
 			return null;
 	}
@@ -207,7 +201,7 @@ public class HeadsHelper {
 	private static ItemStack getTEMobHead(String mobName) {
 		if (mobName != null)
 			if (mobName.equals("Blizz"))
-				return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.blizz.ordinal());
+				return new ItemStack(ModItems.skull, 1, SkullTypes.blizz.ordinal());
 		return null;
 	}
 }

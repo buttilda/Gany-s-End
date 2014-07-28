@@ -41,8 +41,8 @@ public class EnderFurnaceRecipe {
 		addRecipe(new ItemStack(ModBlocks.enderpearlBlock, 1, 1), ModBlocks.enderpearlBlock);
 		addRecipe(new ItemStack(Blocks.stone), Blocks.netherrack);
 		addRecipe(new ItemStack(Blocks.stonebrick), Blocks.nether_brick);
-		addRecipe(new ItemStack(Blocks.dragon_egg), new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.enderDragon.ordinal()));
-		addRecipe(new ItemStack(Items.nether_star, 2), new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.wither.ordinal()));
+		addRecipe(new ItemStack(Blocks.dragon_egg), new ItemStack(ModItems.skull, 1, SkullTypes.enderDragon.ordinal()));
+		addRecipe(new ItemStack(Items.nether_star, 2), new ItemStack(ModItems.skull, 1, SkullTypes.wither.ordinal()));
 		addRecipe(new ItemStack(ModItems.endiumIngot, 2), "oreEndium");
 		addRecipe(new ItemStack(ModItems.enderTag), Items.paper);
 		addRecipe(new ItemStack(Blocks.mycelium), Blocks.grass);

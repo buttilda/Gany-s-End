@@ -2,12 +2,17 @@ package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
+import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.SkullTypes;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -35,6 +40,8 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 public class ItemNewSkull extends ItemSkull {
+
+	public static final List<ItemStack> players = new LinkedList<ItemStack>();
 
 	public ItemNewSkull() {
 		setMaxDamage(0);
@@ -108,10 +115,52 @@ public class ItemNewSkull extends ItemSkull {
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getSubItems(Item id, CreativeTabs tab, List list) {
+	public void getSubItems(Item item, CreativeTabs tab, List list) {
 		for (SkullTypes skull : SkullTypes.values())
-			if (skull.canShow())
-				list.add(new ItemStack(id, 1, skull.ordinal()));
+			if (skull.canShow()) {
+				list.add(new ItemStack(item, 1, skull.ordinal()));
+
+				if (skull == SkullTypes.player)
+					list.addAll(players);
+			}
+	}
+
+	public static void loadPlayerHeads() {
+		Random rand = new Random();
+
+		List<String> allNames = new LinkedList<String>();
+		allNames.addAll(Arrays.asList(GanysEnd.others));
+		allNames.addAll(Arrays.asList(GanysEnd.mojang));
+		allNames.addAll(Arrays.asList(GanysEnd.mindCrack));
+		allNames.addAll(Arrays.asList(GanysEnd.forgeCraft));
+
+		for (String name : allNames) {
+			ItemStack head = createHeadFor(name.trim());
+
+			players.add(head);
+
+			rand.setSeed(name.trim().hashCode());
+			Utils.addDungeonLoot(head.copy(), 1, 1, 2 + rand.nextInt(5));
+			Utils.addStrongholdLoot(head.copy(), 1, 1, 2 + rand.nextInt(5));
+		}
+	}
+
+	public static ItemStack createHeadFor(String username) {
+		return createHeadFor(new GameProfile(UUID.nameUUIDFromBytes(username.getBytes()), username));
+	}
+
+	public static ItemStack createHeadFor(EntityPlayer player) {
+		return createHeadFor(player.getGameProfile());
+	}
+
+	public static ItemStack createHeadFor(GameProfile profile) {
+		ItemStack stack = new ItemStack(ModItems.skull, 1, SkullTypes.player.ordinal());
+		stack.setTagCompound(new NBTTagCompound());
+		NBTTagCompound profileData = new NBTTagCompound();
+		NBTUtil.func_152460_a(profileData, profile);
+		stack.getTagCompound().setTag("SkullOwner", profileData);
+
+		return stack;
 	}
 
 	@Override

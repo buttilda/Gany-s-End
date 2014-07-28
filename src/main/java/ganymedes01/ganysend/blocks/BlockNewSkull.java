@@ -106,7 +106,7 @@ public class BlockNewSkull extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z) {
-		return ModItems.itemNewSkull;
+		return ModItems.skull;
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public class BlockNewSkull extends BlockContainer {
 		TileEntityBlockNewSkull tile = Utils.getTileEntity(world, x, y, z, TileEntityBlockNewSkull.class);
 		if (tile == null)
 			return drops;
-		ItemStack stack = new ItemStack(ModItems.itemNewSkull, 1, tile.func_145904_a());
+		ItemStack stack = new ItemStack(ModItems.skull, 1, tile.func_145904_a());
 
 		if (tile.func_145904_a() == SkullTypes.player.ordinal() && tile.func_152108_a() != null) {
 			stack.setTagCompound(new NBTTagCompound());

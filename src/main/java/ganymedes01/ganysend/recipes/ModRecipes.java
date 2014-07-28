@@ -39,7 +39,7 @@ public class ModRecipes {
 		OreDictionary.registerOre("mobHead", new ItemStack(Items.skull, 1, OreDictionary.WILDCARD_VALUE));
 		for (SkullTypes skull : SkullTypes.values())
 			if (skull.canShow())
-				OreDictionary.registerOre("mobHead", new ItemStack(ModItems.itemNewSkull, 1, skull.ordinal()));
+				OreDictionary.registerOre("mobHead", new ItemStack(ModItems.skull, 1, skull.ordinal()));
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Blocks.brown_mushroom));
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Blocks.red_mushroom));
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Items.rotten_flesh));

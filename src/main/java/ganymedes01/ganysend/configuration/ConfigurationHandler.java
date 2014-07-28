@@ -24,7 +24,7 @@ public class ConfigurationHandler {
 
 	public static ConfigurationHandler INSTANCE = new ConfigurationHandler();
 	public Configuration configFile;
-	public String[] usedCategories = { Configuration.CATEGORY_GENERAL, "enchantments", "mod integration" };
+	public String[] usedCategories = { Configuration.CATEGORY_GENERAL, "enchantments", "mod integration", "heads" };
 
 	private boolean configBoolean(String name, boolean requiresRestart, boolean def) {
 		return configFile.get(Configuration.CATEGORY_GENERAL, name, def).setRequiresMcRestart(requiresRestart).getBoolean(def);
@@ -62,6 +62,10 @@ public class ConfigurationHandler {
 		GanysEnd.enableEnderBag = configBoolean("enableEnderBag", true, GanysEnd.enableEnderBag);
 		GanysEnd.enableRawEndiumRecipe = configBoolean("enableRawEndiumRecipe", true, GanysEnd.enableRawEndiumRecipe);
 		GanysEnd.enableVanillaHeadsDrop = configBoolean("enableVanillaHeadsDrop", false, GanysEnd.enableVanillaHeadsDrop);
+		GanysEnd.others = configFile.get("heads", "others", GanysEnd.others).setRequiresMcRestart(true).getStringList();
+		GanysEnd.mojang = configFile.get("heads", "mojang", GanysEnd.mojang).setRequiresMcRestart(true).getStringList();
+		GanysEnd.mindCrack = configFile.get("heads", "mindCrack", GanysEnd.mindCrack).setRequiresMcRestart(true).getStringList();
+		GanysEnd.forgeCraft = configFile.get("heads", "forgeCraft", GanysEnd.forgeCraft).setRequiresMcRestart(true).getStringList();
 
 		if (configFile.hasChanged())
 			configFile.save();
