@@ -194,10 +194,33 @@ public class ModelHead extends ModelSkeletonHead {
 			case squirrel:
 				setSquirrel();
 				break;
-			default:
+			case ocelot:
+			case ocelotBlack:
+			case ocelotRed:
+			case ocelotSiamese:
+				setOcelot();
+				break;
+			case blaze:
+			case blizz:
+			case druid:
+			case player:
 				break;
 		}
 		return this;
+	}
+
+	private void setOcelot() {
+		setTextureOffset("head.main", 0, 0);
+		setTextureOffset("head.nose", 0, 24);
+		setTextureOffset("head.ear1", 0, 10);
+		setTextureOffset("head.ear2", 6, 10);
+		hideOverlay();
+		head = new ModelRenderer(this, "head");
+		head.addBox("main", -2.5F, -2.0F, -3.0F, 5, 4, 5);
+		head.addBox("nose", -1.5F, 0.0F, -4.0F, 3, 2, 2);
+		head.addBox("ear1", -2.0F, -3.0F, 0.0F, 1, 1, 2);
+		head.addBox("ear2", 1.0F, -3.0F, 0.0F, 1, 1, 2);
+		head.setRotationPoint(2.0F, -2.0F, 0.0F);
 	}
 
 	private void setSquirrel() {

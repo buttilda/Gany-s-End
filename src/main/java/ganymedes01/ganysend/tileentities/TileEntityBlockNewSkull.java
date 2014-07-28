@@ -1,17 +1,11 @@
 package ganymedes01.ganysend.tileentities;
 
-import java.util.UUID;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.StringUtils;
 
-import com.google.common.collect.Iterables;
 import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -24,9 +18,9 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 public class TileEntityBlockNewSkull extends TileEntitySkull {
-	private int skullType;
-	private int skullRotation;
-	private GameProfile extraType = null;
+
+	private int skullType, skullRotation;
+	private GameProfile profile = null;
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
@@ -34,10 +28,10 @@ public class TileEntityBlockNewSkull extends TileEntitySkull {
 		nbt.setInteger("skullType", skullType);
 		nbt.setInteger("skullRotation", skullRotation);
 
-		if (extraType != null) {
-			NBTTagCompound nbt2 = new NBTTagCompound();
-			NBTUtil.func_152460_a(nbt2, extraType);
-			nbt.setTag("Owner", nbt2);
+		if (profile != null) {
+			NBTTagCompound profileData = new NBTTagCompound();
+			NBTUtil.func_152460_a(profileData, profile);
+			nbt.setTag("Owner", profileData);
 		}
 	}
 
@@ -48,35 +42,12 @@ public class TileEntityBlockNewSkull extends TileEntitySkull {
 		skullRotation = data.getInteger("skullRotation");
 
 		if (data.hasKey("Owner", 10))
-			extraType = NBTUtil.func_152459_a(data.getCompoundTag("Owner"));
-		else if (data.hasKey("ExtraType", 8) && !StringUtils.isNullOrEmpty(data.getString("ExtraType"))) {
-			extraType = new GameProfile((UUID) null, data.getString("ExtraType"));
-			loadTexture();
-		}
+			profile = NBTUtil.func_152459_a(data.getCompoundTag("Owner"));
 	}
 
-	private void loadTexture() {
-		if (extraType != null && !StringUtils.isNullOrEmpty(extraType.getName()))
-			if (!extraType.isComplete() || !extraType.getProperties().containsKey("textures")) {
-				GameProfile gameprofile = MinecraftServer.getServer().func_152358_ax().func_152655_a(extraType.getName());
-
-				if (gameprofile != null) {
-					Property property = (Property) Iterables.getFirst(gameprofile.getProperties().get("textures"), (Object) null);
-
-					if (property == null)
-						gameprofile = MinecraftServer.getServer().func_147130_as().fillProfileProperties(gameprofile, true);
-
-					extraType = gameprofile;
-					markDirty();
-				}
-			}
-	}
-
-	public void setType(int type, GameProfile extra) {
+	public void setType(int type, GameProfile profile) {
 		skullType = type;
-		extraType = extra;
-		if (extraType != null)
-			loadTexture();
+		this.profile = profile;
 	}
 
 	@Override
@@ -97,7 +68,7 @@ public class TileEntityBlockNewSkull extends TileEntitySkull {
 
 	@Override
 	public GameProfile func_152108_a() {
-		return extraType;
+		return profile;
 	}
 
 	@Override

@@ -56,7 +56,11 @@ public enum SkullTypes {
 	hostileWolf(Strings.MC_PREFIX + "wolf/wolf_angry", "TwilightForest"),
 	bunnyBrown(Strings.TF_PREFIX + "bunnybrown", "TwilightForest"),
 	bunnyWhite(Strings.TF_PREFIX + "bunnywhite", "TwilightForest"),
-	squirrel(Strings.TF_PREFIX + "squirrel2", "TwilightForest");
+	squirrel(Strings.TF_PREFIX + "squirrel2", "TwilightForest"),
+	ocelot(Strings.MC_PREFIX + "cat/ocelot"),
+	ocelotBlack(Strings.MC_PREFIX + "cat/black"),
+	ocelotRed(Strings.MC_PREFIX + "cat/red"),
+	ocelotSiamese(Strings.MC_PREFIX + "cat/siamese");
 
 	private final String mod;
 	private final ResourceLocation texture;

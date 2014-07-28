@@ -3,6 +3,7 @@ package ganymedes01.ganysend.blocks;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.SkullTypes;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 
@@ -23,6 +24,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -108,6 +110,26 @@ public class BlockNewSkull extends BlockContainer {
 	}
 
 	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+		Item item = getItem(world, x, y, z);
+
+		if (item == null)
+			return null;
+
+		ItemStack stack = new ItemStack(item, 1, getDamageValue(world, x, y, z));
+		TileEntityBlockNewSkull tile = Utils.getTileEntity(world, x, y, z, TileEntityBlockNewSkull.class);
+		if (tile != null)
+			if (tile.func_145904_a() == SkullTypes.player.ordinal() && tile.func_152108_a() != null) {
+				stack.setTagCompound(new NBTTagCompound());
+				NBTTagCompound profileData = new NBTTagCompound();
+				NBTUtil.func_152460_a(profileData, tile.func_152108_a());
+				stack.getTagCompound().setTag("SkullOwner", profileData);
+			}
+
+		return stack;
+	}
+
+	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
 		TileEntity tileentity = world.getTileEntity(x, y, z);
 		return tileentity != null && tileentity instanceof TileEntityBlockNewSkull ? ((TileEntityBlockNewSkull) tileentity).func_145904_a() : super.getDamageValue(world, x, y, z);
@@ -132,11 +154,11 @@ public class BlockNewSkull extends BlockContainer {
 			return drops;
 		ItemStack stack = new ItemStack(ModItems.itemNewSkull, 1, tile.func_145904_a());
 
-		if (tile.func_145904_a() == 3 && tile.func_152108_a() != null) {
+		if (tile.func_145904_a() == SkullTypes.player.ordinal() && tile.func_152108_a() != null) {
 			stack.setTagCompound(new NBTTagCompound());
-			NBTTagCompound nbt2 = new NBTTagCompound();
-			NBTUtil.func_152460_a(nbt2, tile.func_152108_a());
-			stack.getTagCompound().setTag("Owner", nbt2);
+			NBTTagCompound profileData = new NBTTagCompound();
+			NBTUtil.func_152460_a(profileData, tile.func_152108_a());
+			stack.getTagCompound().setTag("SkullOwner", profileData);
 		}
 		drops.add(stack);
 

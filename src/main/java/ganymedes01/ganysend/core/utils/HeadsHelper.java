@@ -23,6 +23,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityMooshroom;
+import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntitySquid;
@@ -32,6 +33,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 
 /**
  * Gany's End
@@ -89,11 +91,13 @@ public class HeadsHelper {
 			} else if (target instanceof EntityWitch)
 				return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.witch.ordinal());
 			else if (target instanceof EntityWither)
-				return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.wither.ordinal());
+				return new ItemStack(ModItems.itemNewSkull, 1 + (target.worldObj.rand.nextInt(100) == 0 ? 1 + target.worldObj.rand.nextInt(2) : 0), SkullTypes.wither.ordinal());
 		} else if (target instanceof EntityPlayer) {
 			ItemStack stack = new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.player.ordinal());
 			stack.setTagCompound(new NBTTagCompound());
-			stack.getTagCompound().setString("SkullOwner", ((EntityPlayer) target).getCommandSenderName());
+			NBTTagCompound profileData = new NBTTagCompound();
+			NBTUtil.func_152460_a(profileData, ((EntityPlayer) target).getGameProfile());
+			stack.getTagCompound().setTag("SkullOwner", profileData);
 			return stack;
 		} else if (target instanceof EntityAnimal) {
 			if (target instanceof EntityPig)
@@ -109,6 +113,17 @@ public class HeadsHelper {
 				return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.wolf.ordinal());
 			else if (target instanceof EntityChicken)
 				return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.chicken.ordinal());
+			else if (target instanceof EntityOcelot)
+				switch (((EntityOcelot) target).getTameSkin()) {
+					case 0:
+						return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.ocelot.ordinal());
+					case 1:
+						return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.ocelotBlack.ordinal());
+					case 2:
+						return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.ocelotRed.ordinal());
+					case 3:
+						return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.ocelotSiamese.ordinal());
+				}
 		} else if (target instanceof EntityVillager)
 			return new ItemStack(ModItems.itemNewSkull, 1, SkullTypes.villager.ordinal());
 		else if (target instanceof EntityIronGolem)

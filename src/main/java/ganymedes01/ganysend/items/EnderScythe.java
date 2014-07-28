@@ -6,23 +6,28 @@ import ganymedes01.ganysend.core.utils.BeheadingDamage;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModMaterials;
 import ganymedes01.ganysend.lib.Strings;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityMultiPart;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.potion.Potion;
+import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatList;
+import net.minecraft.util.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EnderScythe extends ItemSword {
@@ -43,34 +48,94 @@ public class EnderScythe extends ItemSword {
 
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity target) {
-		if (!player.worldObj.isRemote && stack != null) {
-			boolean damageTool = false;
-			float dmg = 4.0F + ModMaterials.ENDIUM_TOOLS.getDamageVsEntity();
+		if (!target.canAttackWithItem())
+			return true;
 
-			if (target instanceof EntityLivingBase) {
-				if (shouldDamage(target) && target.canAttackWithItem() && !target.hitByEntity(player))
-					if (target.attackEntityFrom(BeheadingDamage.create(player), dmg)) {
-						player.setSprinting(false);
-						player.setLastAttacker(target);
-						damageTool = true;
-					}
-			} else if (target instanceof EntityDragonPart) {
-				((EntityDragonPart) target).entityDragonObj.attackEntityFromPart((EntityDragonPart) target, BeheadingDamage.create(player), dmg);
-				damageTool = true;
-			}
-			if (damageTool) {
-				stack.damageItem(1, player);
-				player.addStat(StatList.damageDealtStat, Math.round(dmg * 10.0F));
-				player.addExhaustion(0.3F);
-				if (stack.stackSize <= 0)
-					player.destroyCurrentEquippedItem();
-			}
+		if (target.hitByEntity(player))
+			return true;
+
+		float damage = (float) player.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+		int knockback = 0;
+		float magic = 0.0F;
+
+		if (target instanceof EntityLivingBase) {
+			magic = EnchantmentHelper.getEnchantmentModifierLiving(player, (EntityLivingBase) target);
+			knockback += EnchantmentHelper.getKnockbackModifier(player, (EntityLivingBase) target);
 		}
-		return true;
-	}
 
-	private boolean shouldDamage(Entity target) {
-		return target instanceof EntityPlayer ? MinecraftServer.getServer().isPVPEnabled() : true;
+		if (player.isSprinting())
+			knockback++;
+
+		if (damage > 0.0F || magic > 0.0F) {
+			boolean canCrit = player.fallDistance > 0.0F && !player.onGround && !player.isOnLadder() && !player.isInWater() && !player.isPotionActive(Potion.blindness) && player.ridingEntity == null && target instanceof EntityLivingBase;
+
+			if (canCrit && damage > 0.0F)
+				damage *= 1.5F;
+
+			damage += magic;
+			boolean fireAspect = false;
+			int fire = EnchantmentHelper.getFireAspectModifier(player);
+
+			if (target instanceof EntityLivingBase && fire > 0 && !target.isBurning()) {
+				fireAspect = true;
+				target.setFire(1);
+			}
+
+			boolean damaged = target.attackEntityFrom(BeheadingDamage.create(player), damage);
+
+			if (damaged) {
+				if (knockback > 0) {
+					target.addVelocity(-MathHelper.sin(player.rotationYaw * (float) Math.PI / 180.0F) * knockback * 0.5F, 0.1D, MathHelper.cos(player.rotationYaw * (float) Math.PI / 180.0F) * knockback * 0.5F);
+					player.motionX *= 0.6D;
+					player.motionZ *= 0.6D;
+					player.setSprinting(false);
+				}
+
+				if (canCrit)
+					player.onCriticalHit(target);
+
+				if (magic > 0.0F)
+					player.onEnchantmentCritical(target);
+
+				if (damage >= 18.0F)
+					player.triggerAchievement(AchievementList.overkill);
+
+				player.setLastAttacker(target);
+
+				if (target instanceof EntityLivingBase)
+					EnchantmentHelper.func_151384_a((EntityLivingBase) target, player);
+
+				EnchantmentHelper.func_151385_b(player, target);
+				ItemStack itemstack = player.getCurrentEquippedItem();
+				Object object = target;
+
+				if (target instanceof EntityDragonPart) {
+					IEntityMultiPart ientitymultipart = ((EntityDragonPart) target).entityDragonObj;
+
+					if (ientitymultipart != null && ientitymultipart instanceof EntityLivingBase)
+						object = ientitymultipart;
+				}
+
+				if (itemstack != null && object instanceof EntityLivingBase) {
+					itemstack.hitEntity((EntityLivingBase) object, player);
+
+					if (itemstack.stackSize <= 0)
+						player.destroyCurrentEquippedItem();
+				}
+
+				if (target instanceof EntityLivingBase) {
+					player.addStat(StatList.damageDealtStat, Math.round(damage * 10.0F));
+
+					if (fire > 0)
+						target.setFire(fire * 4);
+				}
+
+				player.addExhaustion(0.3F);
+			} else if (fireAspect)
+				target.extinguish();
+		}
+
+		return true;
 	}
 
 	@Override

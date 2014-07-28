@@ -40,7 +40,7 @@ public class ItemSkullRender implements IItemRenderer {
 		int skullType = stack.getItemDamage();
 		GameProfile name = null;
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("SkullOwner"))
-			name = NBTUtil.func_152459_a(stack.getTagCompound().getCompoundTag("Owner"));
+			name = NBTUtil.func_152459_a(stack.getTagCompound().getCompoundTag("SkullOwner"));
 
 		boolean isVanilla = stack.getItem() == Items.skull;
 		if (!isVanilla)

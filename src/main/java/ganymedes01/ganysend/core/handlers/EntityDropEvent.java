@@ -40,11 +40,10 @@ public class EntityDropEvent {
 			return;
 		if (event.entityLiving.getHealth() > 0.0F)
 			return;
-		Random rand = event.entityLiving.worldObj.rand;
 
 		// Drop heads
 		boolean isScythe = event.source instanceof BeheadingDamage;
-		if (isScythe || shouldDoRandomDrop(rand, event.lootingLevel))
+		if (isScythe || shouldDoRandomDrop(event.entityLiving.worldObj.rand, event.lootingLevel))
 			if (checkDamSource(event.source)) {
 				ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
 				if (stack != null)

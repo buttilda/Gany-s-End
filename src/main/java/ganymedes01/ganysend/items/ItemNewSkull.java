@@ -16,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
@@ -64,27 +65,32 @@ public class ItemNewSkull extends ItemSkull {
 				return false;
 			else if (!ModBlocks.blockNewSkull.canPlaceBlockAt(world, x, y, z))
 				return false;
-			else {
+			else if (!world.isRemote) {
 				world.setBlock(x, y, z, ModBlocks.blockNewSkull, side, 2);
-				int angle = 0;
 
+				int angle = 0;
 				if (side == 1)
 					angle = MathHelper.floor_double(player.rotationYaw * 16.0F / 360.0F + 0.5D) & 15;
 
 				TileEntityBlockNewSkull tile = Utils.getTileEntity(world, x, y, z, TileEntityBlockNewSkull.class);
 
 				if (tile != null) {
-					GameProfile playerName = null;
+					GameProfile profile = null;
 
-					if (stack.hasTagCompound() && stack.getTagCompound().hasKey("SkullOwner"))
-						playerName = NBTUtil.func_152459_a(stack.getTagCompound().getCompoundTag("Owner"));
-					tile.setType(stack.getItemDamage(), playerName);
+					if (stack.hasTagCompound()) {
+						NBTTagCompound nbt = stack.getTagCompound();
+						if (nbt.hasKey("SkullOwner", 10))
+							profile = NBTUtil.func_152459_a(nbt.getCompoundTag("SkullOwner"));
+					}
+
+					tile.setType(stack.getItemDamage(), profile);
 					tile.func_145903_a(angle);
 					world.notifyBlockChange(x, y, z, ModBlocks.blockNewSkull);
 				}
+
 				stack.stackSize--;
-				return true;
 			}
+			return true;
 		}
 	}
 
