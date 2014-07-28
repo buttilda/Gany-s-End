@@ -42,11 +42,9 @@ public class EntityDropEvent {
 			return;
 
 		ItemStack weapon = getWeapon(event.source);
-		if (weapon == null)
-			return;
 
 		// Drop heads
-		boolean isScythe = weapon.getItem() == ModItems.enderScythe;
+		boolean isScythe = weapon != null && weapon.getItem() == ModItems.enderScythe;
 		if (isScythe || shouldDoRandomDrop(event.entityLiving.worldObj.rand, event.lootingLevel)) {
 			ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
 			if (stack != null)
@@ -55,7 +53,7 @@ public class EntityDropEvent {
 		}
 
 		// Collect drops
-		if (weapon.getItem() instanceof IEndiumTool)
+		if (weapon != null && weapon.getItem() instanceof IEndiumTool)
 			if (weapon.stackTagCompound != null)
 				if (weapon.getTagCompound().getBoolean("Tagged")) {
 					NBTTagCompound data = weapon.getTagCompound();
