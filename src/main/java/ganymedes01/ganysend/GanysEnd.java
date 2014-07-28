@@ -61,10 +61,13 @@ public class GanysEnd {
 	public static boolean enableVanillaHeadsDrop = true;
 	public static boolean enableEnderBag = true;
 	public static boolean enableRawEndiumRecipe = false;
-	public static String[] others = { "ganymedes01", "Jeb_Jeb", "KingPurpleRaptor" };
-	public static String[] mojang = { "Notch", "jeb_", "C418", "Dinnerbone", "Grumm", "Searge_DP", "EvilSeph" };
+	public static String[] others = { "Jeb_Jeb", "KingPurpleRaptor", "DylanGK" };
+	public static String[] modders = { "ganymedes01", "Pokefenn", "chylex", "vadis365", "CrazyPants", "Kihira", "Country_Gamer" };
+	public static String[] youtubers = { "Sjin", "Xephos", "LividCoffee", "Rythian", "Zoeya", "TheStrippin", "inthelittlewood", "Quetzz", "Blorph", "xbony2", "CaptainSparklez", "AntVenom", "CavemanFilms", "Fosler", "BevoLJ", "Sips_", "Honeydew", "TobyTurner", "corjaantje" };
+	public static String[] mojang = { "Notch", "jeb_", "C418", "Dinnerbone", "Grumm", "Searge_DP", "EvilSeph", "TheMogMiner" };
 	public static String[] mindCrack = { "adlingtont", "AnderZEL", "Arkas", "Aureylian", "AvidyaZEN", "BdoubleO100", "BlameTC", "Coestar", "Docm77", "Etho", "generikb", "Guude", "jsano19", "kurtmac", "mcgamer", "Mhykol", "Millbee", "Nebris", "Pakratt0013", "paulsoaresjr", "PauseUnpause", "Pyro_0", "SethBling", "sevadus", "Vechs_", "VintageBeef", "W92Baj", "Zisteau" };
-	public static String[] forgeCraft = { "bspkrs", "futureamnet", "azanor", "chicken_bones", "Cloudhunter", "CovertJaguar", "cpw11", "dan200", "direwolf20", "Eloraam", "florastar", "ohaiiChun", "jadedcat", "KingLemmingCoFH", "Krapht", "LexManos", "TheMattaBase", "mDiyo", "Myrathi", "Morvelaira", "Pahimar", "sfPlayer1", "ProfMobius", "Rorax", "Sacheverell", "sirsengir", "slowpoke101", "Soaryn", "x3n0ph0b3", "XCompWiz", "Vswe", "Vazkii", "ZeldoKavira", "neptunepink", "EddieRuckus" };
+	public static String[] forgeCraft = { "Mithion", "RWTema", "WayofFlowingTime", "TTFTCUTS", "bspkrs", "futureamnet", "azanor", "chicken_bones", "Cloudhunter", "CovertJaguar", "cpw11", "dan200", "direwolf20", "Eloraam", "florastar", "ohaiiChun", "jadedcat", "KingLemmingCoFH", "Krapht", "LexManos", "TheMattaBase", "mDiyo", "Myrathi", "Morvelaira", "Pahimar", "sfPlayer1", "ProfMobius", "Rorax", "Sacheverell", "sirsengir", "slowpoke101", "Soaryn", "x3n0ph0b3", "XCompWiz", "Vswe", "Vazkii",
+		"ZeldoKavira", "neptunepink", "EddieRuckus" };
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

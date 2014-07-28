@@ -63,6 +63,8 @@ public class ConfigurationHandler {
 		GanysEnd.enableRawEndiumRecipe = configBoolean("enableRawEndiumRecipe", true, GanysEnd.enableRawEndiumRecipe);
 		GanysEnd.enableVanillaHeadsDrop = configBoolean("enableVanillaHeadsDrop", false, GanysEnd.enableVanillaHeadsDrop);
 		GanysEnd.others = configFile.get("heads", "others", GanysEnd.others).setRequiresMcRestart(true).getStringList();
+		GanysEnd.modders = configFile.get("heads", "modders", GanysEnd.modders).setRequiresMcRestart(true).getStringList();
+		GanysEnd.youtubers = configFile.get("heads", "youtubers", GanysEnd.youtubers).setRequiresMcRestart(true).getStringList();
 		GanysEnd.mojang = configFile.get("heads", "mojang", GanysEnd.mojang).setRequiresMcRestart(true).getStringList();
 		GanysEnd.mindCrack = configFile.get("heads", "mindCrack", GanysEnd.mindCrack).setRequiresMcRestart(true).getStringList();
 		GanysEnd.forgeCraft = configFile.get("heads", "forgeCraft", GanysEnd.forgeCraft).setRequiresMcRestart(true).getStringList();

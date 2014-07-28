@@ -9,6 +9,8 @@ import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -130,9 +132,19 @@ public class Skull extends ItemSkull {
 
 		List<String> allNames = new LinkedList<String>();
 		allNames.addAll(Arrays.asList(GanysEnd.others));
+		allNames.addAll(Arrays.asList(GanysEnd.modders));
+		allNames.addAll(Arrays.asList(GanysEnd.youtubers));
 		allNames.addAll(Arrays.asList(GanysEnd.mojang));
 		allNames.addAll(Arrays.asList(GanysEnd.mindCrack));
 		allNames.addAll(Arrays.asList(GanysEnd.forgeCraft));
+
+		Collections.sort(allNames, new Comparator<String>() {
+
+			@Override
+			public int compare(String s1, String s2) {
+				return s1.toLowerCase().compareTo(s2.toLowerCase());
+			}
+		});
 
 		for (String name : allNames) {
 			ItemStack head = createHeadFor(name.trim());
