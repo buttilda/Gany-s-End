@@ -9,7 +9,7 @@ import ganymedes01.ganysend.client.renderer.block.BlockRawEndiumRender;
 import ganymedes01.ganysend.client.renderer.block.BlockTimeManipulatorRender;
 import ganymedes01.ganysend.client.renderer.item.ItemInfiniteWaterSourceRender;
 import ganymedes01.ganysend.client.renderer.item.ItemSkullRender;
-import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockNewSkullRender;
+import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockSkullRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInfiniteWaterSourceRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInventoryBinderRender;
 import ganymedes01.ganysend.core.handlers.RenderCapeHandler;
@@ -54,7 +54,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerTileEntities() {
 		super.registerTileEntities();
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockNewSkull.class, new TileEntityBlockNewSkullRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockNewSkull.class, new TileEntityBlockSkullRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInventoryBinder.class, new TileEntityInventoryBinderRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfiniteWaterSource.class, new TileEntityInfiniteWaterSourceRender());
 	}

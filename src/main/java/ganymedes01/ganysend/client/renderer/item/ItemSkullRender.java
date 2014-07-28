@@ -1,6 +1,6 @@
 package ganymedes01.ganysend.client.renderer.item;
 
-import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockNewSkullRender;
+import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockSkullRender;
 import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.client.renderer.tileentity.TileEntitySkullRenderer;
 import net.minecraft.init.Items;
@@ -79,7 +79,7 @@ public class ItemSkullRender implements IItemRenderer {
 		if (isVanilla)
 			TileEntitySkullRenderer.field_147536_b.func_152674_a(0, 0, 0, 0, 0, type, name);
 		else
-			TileEntityBlockNewSkullRender.instance.renderHead(0, 0, 0, 0, 0, type, name);
+			TileEntityBlockSkullRender.instance.renderHead(0, 0, 0, 0, 0, type, name);
 		GL11.glPopMatrix();
 	}
 }

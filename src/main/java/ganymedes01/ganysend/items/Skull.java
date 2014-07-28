@@ -39,11 +39,11 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class ItemNewSkull extends ItemSkull {
+public class Skull extends ItemSkull {
 
 	public static final List<ItemStack> players = new LinkedList<ItemStack>();
 
-	public ItemNewSkull() {
+	public Skull() {
 		setMaxDamage(0);
 		setHasSubtypes(true);
 		setCreativeTab(GanysEnd.endTab);

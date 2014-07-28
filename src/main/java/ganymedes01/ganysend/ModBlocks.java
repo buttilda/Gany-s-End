@@ -3,7 +3,7 @@ package ganymedes01.ganysend;
 import ganymedes01.ganysend.blocks.AdvancedExclusiveFilteringHopper;
 import ganymedes01.ganysend.blocks.AdvancedFilteringHopper;
 import ganymedes01.ganysend.blocks.BasicFilteringHopper;
-import ganymedes01.ganysend.blocks.BlockNewSkull;
+import ganymedes01.ganysend.blocks.BlockSkull;
 import ganymedes01.ganysend.blocks.BlockShifter;
 import ganymedes01.ganysend.blocks.CreativeInfiniteFluidSource;
 import ganymedes01.ganysend.blocks.CreativeSpeedyHopper;
@@ -55,7 +55,7 @@ public class ModBlocks {
 	public static final Block rawEndium = new RawEndium();
 	public static final Block endiumBlock = new EndiumBlock();
 	public static final Block emulator = new Emulator();
-	public static final Block blockNewSkull = new BlockNewSkull();
+	public static final Block blockNewSkull = new BlockSkull();
 	public static final Block basicFilteringHopper = new BasicFilteringHopper();
 	public static final Block exclusiveFilteringHopper = new ExclusiveFilteringHopper();
 	public static final Block speedyBasicFilteringHopper = new SpeedyBasicFilteringHopper();

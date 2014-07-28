@@ -68,6 +68,15 @@ public class ModelHead extends ModelSkeletonHead {
 				break;
 			case mistWolf:
 				GL11.glScaled(1.5, 1.5, 1.5);
+				break;
+			case bat:
+				GL11.glScaled(0.5, 0.5, 0.5);
+				break;
+			case slime:
+				GL11.glEnable(GL11.GL_NORMALIZE);
+				GL11.glEnable(GL11.GL_BLEND);
+				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+				break;
 			default:
 				break;
 		}
@@ -200,6 +209,15 @@ public class ModelHead extends ModelSkeletonHead {
 			case ocelotSiamese:
 				setOcelot();
 				break;
+			case bat:
+				setBat();
+				break;
+			case slime:
+				setSlime();
+				break;
+			case magmaCube:
+				setMagmaCube();
+				break;
 			case blaze:
 			case blizz:
 			case druid:
@@ -209,6 +227,66 @@ public class ModelHead extends ModelSkeletonHead {
 		return this;
 	}
 
+	private void setMagmaCube() {
+		hideOverlay();
+
+		head = new ModelRenderer(this, 0, 16);
+		head.addBox(-2.0F, 18.0F - 24, -2.0F, 4, 4, 4);
+
+		for (int i = 0; i < 8; i++) {
+			byte x = 0;
+			int y = i;
+
+			if (i == 2) {
+				x = 24;
+				y = 10;
+			} else if (i == 3) {
+				x = 24;
+				y = 19;
+			}
+
+			ModelRenderer segment = new ModelRenderer(this, x, y);
+			segment.addBox(-4.0F, 16 + i - 24, -4.0F, 8, 1, 8);
+			head.addChild(segment);
+		}
+	}
+
+	private void setSlime() {
+		float f1 = -24;
+		head = new ModelRenderer(this, 0, 16);
+		head.addBox(-3.0F, 17.0F + f1, -3.0F, 6, 6, 6);
+		ModelRenderer slimeRightEye = new ModelRenderer(this, 32, 0);
+		slimeRightEye.addBox(-3.25F, 18.0F + f1, -3.5F, 2, 2, 2);
+		ModelRenderer slimeLeftEye = new ModelRenderer(this, 32, 4);
+		slimeLeftEye.addBox(1.25F, 18.0F + f1, -3.5F, 2, 2, 2);
+		ModelRenderer slimeMouth = new ModelRenderer(this, 32, 8);
+		slimeMouth.addBox(0.0F, 21.0F + f1, -3.5F, 1, 1, 1);
+
+		head.addChild(slimeMouth);
+		head.addChild(slimeRightEye);
+		head.addChild(slimeLeftEye);
+
+		overlay = new ModelRenderer(this, 0, 0);
+		overlay.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
+	}
+
+	private void setBat() {
+		textureWidth = 64;
+		textureHeight = 64;
+		hideOverlay();
+		float f1 = -3;
+		float f2 = 5;
+		head = new ModelRenderer(this, 0, 0);
+		head.addBox(-3.0F, -3.0F + f1, -3.0F + f2, 6, 6, 6);
+		ModelRenderer ear1 = new ModelRenderer(this, 24, 0);
+		ear1.addBox(-4.0F, -6.0F + f1, -2.0F + f2, 3, 4, 1);
+		head.addChild(ear1);
+		ModelRenderer ear2 = new ModelRenderer(this, 24, 0);
+		ear2.mirror = true;
+		ear2.addBox(1.0F, -6.0F + f1, -2.0F + f2, 3, 4, 1);
+		head.addChild(ear2);
+	}
+
 	private void setOcelot() {
 		setTextureOffset("head.main", 0, 0);
 		setTextureOffset("head.nose", 0, 24);
@@ -216,11 +294,12 @@ public class ModelHead extends ModelSkeletonHead {
 		setTextureOffset("head.ear2", 6, 10);
 		hideOverlay();
 		head = new ModelRenderer(this, "head");
-		head.addBox("main", -2.5F, -2.0F, -3.0F, 5, 4, 5);
-		head.addBox("nose", -1.5F, 0.0F, -4.0F, 3, 2, 2);
-		head.addBox("ear1", -2.0F, -3.0F, 0.0F, 1, 1, 2);
-		head.addBox("ear2", 1.0F, -3.0F, 0.0F, 1, 1, 2);
-		head.setRotationPoint(2.0F, -2.0F, 0.0F);
+		float f1 = -2;
+		float f2 = 2;
+		head.addBox("main", -2.5F, -2.0F + f1, -3.0F + f2, 5, 4, 5);
+		head.addBox("nose", -1.5F, 0.0F + f1, -4.0F + f2, 3, 2, 2);
+		head.addBox("ear1", -2.0F, -3.0F + f1, 0.0F + f2, 1, 1, 2);
+		head.addBox("ear2", 1.0F, -3.0F + f1, 0.0F + f2, 1, 1, 2);
 	}
 
 	private void setSquirrel() {

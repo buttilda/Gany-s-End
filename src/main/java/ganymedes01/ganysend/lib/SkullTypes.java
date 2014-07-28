@@ -60,7 +60,10 @@ public enum SkullTypes {
 	ocelot(Strings.MC_PREFIX + "cat/ocelot"),
 	ocelotBlack(Strings.MC_PREFIX + "cat/black"),
 	ocelotRed(Strings.MC_PREFIX + "cat/red"),
-	ocelotSiamese(Strings.MC_PREFIX + "cat/siamese");
+	ocelotSiamese(Strings.MC_PREFIX + "cat/siamese"),
+	bat(Strings.MC_PREFIX + "bat"),
+	slime(Strings.MC_PREFIX + "slime/slime"),
+	magmaCube(Strings.MC_PREFIX + "slime/magmacube");
 
 	private final String mod;
 	private final ResourceLocation texture;

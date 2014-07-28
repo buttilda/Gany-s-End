@@ -1,7 +1,7 @@
 package ganymedes01.ganysend.core.handlers;
 
 import ganymedes01.ganysend.ModItems;
-import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockNewSkullRender;
+import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockSkullRender;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTUtil;
@@ -71,7 +71,7 @@ public class RenderPlayerHandler {
 						break;
 				}
 
-				TileEntityBlockNewSkullRender.instance.renderHead(-0.5F, 0.0F, -0.5F + offset * 0.0625F, 1, 180.0F, head.getItemDamage(), head.hasTagCompound() ? NBTUtil.func_152459_a(head.getTagCompound().getCompoundTag("Owner")) : null);
+				TileEntityBlockSkullRender.instance.renderHead(-0.5F, 0.0F, -0.5F + offset * 0.0625F, 1, 180.0F, head.getItemDamage(), head.hasTagCompound() ? NBTUtil.func_152459_a(head.getTagCompound().getCompoundTag("Owner")) : null);
 				GL11.glPopMatrix();
 			}
 		}

@@ -1,7 +1,7 @@
 package ganymedes01.ganysend.core.utils;
 
 import ganymedes01.ganysend.ModItems;
-import ganymedes01.ganysend.items.ItemNewSkull;
+import ganymedes01.ganysend.items.Skull;
 import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -14,13 +14,16 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityMooshroom;
@@ -85,14 +88,13 @@ public class HeadsHelper {
 			else if (target instanceof EntitySpider) {
 				if (target instanceof EntityCaveSpider)
 					return new ItemStack(ModItems.skull, 1, SkullTypes.caveSpider.ordinal());
-				else
-					return new ItemStack(ModItems.skull, 1, SkullTypes.spider.ordinal());
+				return new ItemStack(ModItems.skull, 1, SkullTypes.spider.ordinal());
 			} else if (target instanceof EntityWitch)
 				return new ItemStack(ModItems.skull, 1, SkullTypes.witch.ordinal());
 			else if (target instanceof EntityWither)
 				return new ItemStack(ModItems.skull, 1 + (target.worldObj.rand.nextInt(100) == 0 ? 1 + target.worldObj.rand.nextInt(2) : 0), SkullTypes.wither.ordinal());
 		} else if (target instanceof EntityPlayer)
-			return ItemNewSkull.createHeadFor((EntityPlayer) target);
+			return Skull.createHeadFor((EntityPlayer) target);
 		else if (target instanceof EntityAnimal) {
 			if (target instanceof EntityPig)
 				return new ItemStack(ModItems.skull, 1, SkullTypes.pig.ordinal());
@@ -128,6 +130,13 @@ public class HeadsHelper {
 			return new ItemStack(ModItems.skull, 1, SkullTypes.ghast.ordinal());
 		else if (target instanceof EntityDragon)
 			return new ItemStack(ModItems.skull, 1, SkullTypes.enderDragon.ordinal());
+		else if (target instanceof EntityBat)
+			return new ItemStack(ModItems.skull, 1, SkullTypes.bat.ordinal());
+		else if (target instanceof EntitySlime) {
+			if (target instanceof EntityMagmaCube)
+				return new ItemStack(ModItems.skull, 1, SkullTypes.magmaCube.ordinal());
+			return new ItemStack(ModItems.skull, 1, SkullTypes.slime.ordinal());
+		}
 
 		return null;
 	}

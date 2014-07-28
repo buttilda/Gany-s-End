@@ -39,9 +39,9 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class BlockNewSkull extends BlockContainer {
+public class BlockSkull extends BlockContainer {
 
-	public BlockNewSkull() {
+	public BlockSkull() {
 		super(Material.circuits);
 		setHardness(1.0F);
 		setBlockTextureName("skull");

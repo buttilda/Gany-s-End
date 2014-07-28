@@ -27,11 +27,11 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 @SideOnly(Side.CLIENT)
-public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
+public class TileEntityBlockSkullRender extends TileEntitySpecialRenderer {
 
 	private ModelHead model;
 	private final RenderBlocks renderer = new RenderBlocks();
-	public static TileEntityBlockNewSkullRender instance;
+	public static TileEntityBlockSkullRender instance;
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float angle) {
@@ -59,6 +59,8 @@ public class TileEntityBlockNewSkullRender extends TileEntitySpecialRenderer {
 		model.render(skullRotation);
 		renderSpecial(skullType, skullRotation);
 
+		if (GL11.glIsEnabled(GL11.GL_BLEND))
+			GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
 	}
 

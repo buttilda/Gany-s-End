@@ -1,6 +1,6 @@
 package ganymedes01.ganysend.client.renderer.block;
 
-import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockNewSkullRender;
+import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockSkullRender;
 import ganymedes01.ganysend.lib.RenderIDs;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -92,7 +92,7 @@ public class BlockInventoryBinderRender implements ISimpleBlockRenderingHandler 
 
 		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 		GameProfile profile = player != null ? player.getGameProfile() : null;
-		TileEntityBlockNewSkullRender.instance.renderHead(0.25F, 0, 0, 6, 1, 3, profile);
+		TileEntityBlockSkullRender.instance.renderHead(0.25F, 0, 0, 6, 1, 3, profile);
 	}
 
 	@Override
