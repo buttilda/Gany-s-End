@@ -18,12 +18,12 @@ import ganymedes01.ganysend.items.EndiumSword;
 import ganymedes01.ganysend.items.EndstoneRod;
 import ganymedes01.ganysend.items.InfiniteBucket;
 import ganymedes01.ganysend.items.InfusedGem;
-import ganymedes01.ganysend.items.Skull;
 import ganymedes01.ganysend.items.ReinforcedEndiumAxe;
 import ganymedes01.ganysend.items.ReinforcedEndiumBow;
 import ganymedes01.ganysend.items.ReinforcedEndiumPickaxe;
 import ganymedes01.ganysend.items.ReinforcedEndiumShovel;
 import ganymedes01.ganysend.items.ReinforcedEndiumSword;
+import ganymedes01.ganysend.items.Skull;
 
 import java.lang.reflect.Field;
 
@@ -87,8 +87,6 @@ public class ModItems {
 
 		BlockDispenser.dispenseBehaviorRegistry.putObject(infiniteBucket, new DispenserBehaviorInfiniteBucket());
 		BlockDispenser.dispenseBehaviorRegistry.putObject(infusedGem, new DispenserBehaviorInfusedGem());
-
-		Skull.loadPlayerHeads();
 	}
 
 	private static void registerItem(Item item) {

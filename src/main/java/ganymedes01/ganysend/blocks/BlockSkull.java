@@ -28,7 +28,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -51,7 +50,7 @@ public class BlockSkull extends BlockContainer {
 
 	@Override
 	public int getRenderType() {
-		return RenderingRegistry.getNextAvailableRenderId();
+		return -1;
 	}
 
 	@Override

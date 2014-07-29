@@ -8,12 +8,7 @@ import ganymedes01.ganysend.lib.SkullTypes;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -42,8 +37,6 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 public class Skull extends ItemSkull {
-
-	public static final List<ItemStack> players = new LinkedList<ItemStack>();
 
 	public Skull() {
 		setMaxDamage(0);
@@ -119,42 +112,8 @@ public class Skull extends ItemSkull {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
 		for (SkullTypes skull : SkullTypes.values())
-			if (skull.canShow()) {
+			if (skull.canShow())
 				list.add(new ItemStack(item, 1, skull.ordinal()));
-
-				if (skull == SkullTypes.player)
-					list.addAll(players);
-			}
-	}
-
-	public static void loadPlayerHeads() {
-		Random rand = new Random();
-
-		List<String> allNames = new LinkedList<String>();
-		allNames.addAll(Arrays.asList(GanysEnd.others));
-		allNames.addAll(Arrays.asList(GanysEnd.modders));
-		allNames.addAll(Arrays.asList(GanysEnd.youtubers));
-		allNames.addAll(Arrays.asList(GanysEnd.mojang));
-		allNames.addAll(Arrays.asList(GanysEnd.mindCrack));
-		allNames.addAll(Arrays.asList(GanysEnd.forgeCraft));
-
-		Collections.sort(allNames, new Comparator<String>() {
-
-			@Override
-			public int compare(String s1, String s2) {
-				return s1.toLowerCase().compareTo(s2.toLowerCase());
-			}
-		});
-
-		for (String name : allNames) {
-			ItemStack head = createHeadFor(name.trim());
-
-			players.add(head);
-
-			rand.setSeed(name.trim().hashCode());
-			Utils.addDungeonLoot(head.copy(), 1, 1, 2 + rand.nextInt(5));
-			Utils.addStrongholdLoot(head.copy(), 1, 1, 2 + rand.nextInt(5));
-		}
 	}
 
 	public static ItemStack createHeadFor(String username) {

@@ -19,9 +19,9 @@ import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 public class EnderFurnaceRecipe {
 
@@ -35,7 +35,7 @@ public class EnderFurnaceRecipe {
 		addFuel("enderFlower", 100);
 		addFuel("blockEnderPearl", 1600);
 
-		addRecipe(new ItemStack(Items.ender_pearl, 4), "mobHead", "mobHead");
+		addRecipe(new ItemStack(Items.ender_pearl, 4), "itemSkull", "itemSkull");
 		addRecipe(new ItemStack(Blocks.end_stone), Blocks.stone);
 		addRecipe(new ItemStack(ModBlocks.endstoneBrick), Blocks.stonebrick);
 		addRecipe(new ItemStack(ModBlocks.enderpearlBlock, 1, 1), ModBlocks.enderpearlBlock);
@@ -46,8 +46,8 @@ public class EnderFurnaceRecipe {
 		addRecipe(new ItemStack(ModItems.endiumIngot, 2), "oreEndium");
 		addRecipe(new ItemStack(ModItems.enderTag), Items.paper);
 		addRecipe(new ItemStack(Blocks.mycelium), Blocks.grass);
-		addRecipe(new ItemStack(Items.emerald), Items.diamond, Items.gold_ingot, "mobHead", new ItemStack(Items.potionitem, 1, 8196));
-		addRecipe(new ItemStack(Items.diamond), Items.emerald, Items.gold_ingot, "mobHead", new ItemStack(Items.potionitem, 1, 8194));
+		addRecipe(new ItemStack(Items.emerald), Items.diamond, Items.gold_ingot, "itemSkull", new ItemStack(Items.potionitem, 1, 8196));
+		addRecipe(new ItemStack(Items.diamond), Items.emerald, Items.gold_ingot, "itemSkull", new ItemStack(Items.potionitem, 1, 8194));
 		addRecipe(new ItemStack(Items.experience_bottle), new ItemStack(Items.potionitem, 1, 8197), ModItems.endstoneRod);
 		addRecipe(new ItemStack(Items.ender_pearl), Items.ghast_tear, Items.sugar, Items.glowstone_dust, Items.experience_bottle);
 		if (GanysEnd.enableTimeManipulator)
@@ -121,8 +121,8 @@ public class EnderFurnaceRecipe {
 					if (stack1.getItemDamage() == stack2.getItemDamage() || stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 						if (stack1.hasTagCompound())
 							return stack2.hasTagCompound() ? stack1.getTagCompound().equals(stack2.getTagCompound()) : false;
-						else
-							return true;
+							else
+								return true;
 		} else if (obj instanceof String) {
 			for (ItemStack stack : OreDictionary.getOres((String) obj))
 				if (stacksMatch(stack, stack2))
