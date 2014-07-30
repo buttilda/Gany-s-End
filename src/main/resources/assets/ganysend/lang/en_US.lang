@@ -74,6 +74,19 @@ item.ganysend.itemNewSkullocelotSiameseHead.name=Siamese Cat Head
 item.ganysend.itemNewSkullbatHead.name=Bat Head
 item.ganysend.itemNewSkullslimeHead.name=Slime Head
 item.ganysend.itemNewSkullmagmaCubeHead.name=Magma Cube Head
+item.ganysend.itemNewSkullhorseBlackHead.name=Horse Head (Black)
+item.ganysend.itemNewSkullhorseBrownHead.name=Horse Head (Brown)
+item.ganysend.itemNewSkullhorseChestnutHead.name=Horse Head (Chestnut)
+item.ganysend.itemNewSkullhorseCreamyHead.name=Horse Head (Creamy)
+item.ganysend.itemNewSkullhorseDarkBrownHead.name=Horse Head (Dark Brown)
+item.ganysend.itemNewSkullhorseGreyHead.name=Horse Head (Grey)
+item.ganysend.itemNewSkullhorseWhiteHead.name=Horse Head (White)
+item.ganysend.itemNewSkulldonkeyHead.name=Donkey Head
+item.ganysend.itemNewSkullmuleHead.name=Mule Head
+item.ganysend.itemNewSkullhorseUndeadHead.name=Undead Horse Head
+item.ganysend.itemNewSkullhorseSkeletonHead.name=Skeleton Horse Head
+item.ganysend.itemNewSkullsnowManHead.name=Snow Golem Head
+item.ganysend.itemNewSkullsilverfishHead.name=Silverfish Head
 
 # Block localizations
 tile.ganysend.enderFlower.name=Ender Flower

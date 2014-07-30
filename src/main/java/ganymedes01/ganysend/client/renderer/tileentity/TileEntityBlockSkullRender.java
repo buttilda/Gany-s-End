@@ -46,7 +46,8 @@ public class TileEntityBlockSkullRender extends TileEntitySpecialRenderer {
 	}
 
 	public void renderHead(float x, float y, float z, int meta, float skullRotation, int skullType, GameProfile playerName) {
-		bindTexture(SkullTypes.values()[skullType].getTexture(playerName));
+		SkullTypes type = SkullTypes.values()[skullType];
+		bindTexture(type.getTexture(playerName));
 
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_CULL_FACE);
@@ -57,30 +58,36 @@ public class TileEntityBlockSkullRender extends TileEntitySpecialRenderer {
 		GL11.glScalef(-1.0F, -1.0F, 1.0F);
 		model = ModelHead.getHead(skullType);
 		model.render(skullRotation);
-		renderSpecial(skullType, skullRotation);
+		renderSpecial(type, skullRotation);
 
 		if (GL11.glIsEnabled(GL11.GL_BLEND))
 			GL11.glDisable(GL11.GL_BLEND);
 		GL11.glPopMatrix();
 	}
 
-	private void renderSpecial(int skullType, float skullRotation) {
-		ResourceLocation secondTex = SkullTypes.values()[skullType].getSecondTexture();
+	private void renderSpecial(SkullTypes skullType, float skullRotation) {
+		ResourceLocation secondTex = skullType.getSecondTexture();
+
 		if (secondTex != null) {
 			bindTexture(secondTex);
-			if (skullType == SkullTypes.sheep.ordinal() || skullType == SkullTypes.bighorn.ordinal()) {
-				int c = 12;
-				if (skullType == SkullTypes.bighorn.ordinal())
-					GL11.glColor3f(EntitySheep.fleeceColorTable[c][0], EntitySheep.fleeceColorTable[c][1], EntitySheep.fleeceColorTable[c][2]);
-				model.renderOverlay(skullRotation);
-			} else if (skullType == SkullTypes.mooshroom.ordinal()) {
-				GL11.glScaled(1, -1, 1);
-				GL11.glTranslated(0, 1, 0);
-				GL11.glEnable(GL11.GL_CULL_FACE);
-				renderer.renderBlockAsItem(Blocks.red_mushroom, 0, 1.0F);
-				GL11.glDisable(GL11.GL_CULL_FACE);
-			} else
-				model.render(skullRotation);
+			switch (skullType) {
+				case sheep:
+				case bighorn:
+					int c = 12;
+					if (skullType == SkullTypes.bighorn)
+						GL11.glColor3f(EntitySheep.fleeceColorTable[c][0], EntitySheep.fleeceColorTable[c][1], EntitySheep.fleeceColorTable[c][2]);
+					model.renderOverlay(skullRotation);
+					return;
+				case mooshroom:
+					GL11.glScaled(1, -1, 1);
+					GL11.glTranslated(0, 1, 0);
+					GL11.glEnable(GL11.GL_CULL_FACE);
+					renderer.renderBlockAsItem(Blocks.red_mushroom, 0, 1.0F);
+					GL11.glDisable(GL11.GL_CULL_FACE);
+					return;
+				default:
+					model.render(skullRotation);
+			}
 		}
 	}
 

@@ -1,8 +1,10 @@
 package ganymedes01.ganysend.core.utils;
 
 import ganymedes01.ganysend.ModItems;
-import ganymedes01.ganysend.items.Skull;
 import ganymedes01.ganysend.lib.SkullTypes;
+
+import java.util.UUID;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,8 +19,10 @@ import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.monster.EntityZombie;
@@ -26,6 +30,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityMooshroom;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityPig;
@@ -36,6 +41,10 @@ import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
+
+import com.mojang.authlib.GameProfile;
 
 /**
  * Gany's End
@@ -93,8 +102,10 @@ public class HeadsHelper {
 				return new ItemStack(ModItems.skull, 1, SkullTypes.witch.ordinal());
 			else if (target instanceof EntityWither)
 				return new ItemStack(ModItems.skull, 1 + (target.worldObj.rand.nextInt(100) == 0 ? 1 + target.worldObj.rand.nextInt(2) : 0), SkullTypes.wither.ordinal());
+			else if (target instanceof EntitySilverfish)
+				return new ItemStack(ModItems.skull, 1, SkullTypes.silverfish.ordinal());
 		} else if (target instanceof EntityPlayer)
-			return Skull.createHeadFor((EntityPlayer) target);
+			return createHeadFor((EntityPlayer) target);
 		else if (target instanceof EntityAnimal) {
 			if (target instanceof EntityPig)
 				return new ItemStack(ModItems.skull, 1, SkullTypes.pig.ordinal());
@@ -120,6 +131,35 @@ public class HeadsHelper {
 					case 3:
 						return new ItemStack(ModItems.skull, 1, SkullTypes.ocelotSiamese.ordinal());
 				}
+			else if (target instanceof EntityHorse) {
+				int type = ((EntityHorse) target).getHorseType();
+
+				if (type == 0)
+					switch (((EntityHorse) target).getHorseVariant() & 255) {
+						case 0:
+							return new ItemStack(ModItems.skull, 1, SkullTypes.horseWhite.ordinal());
+						case 1:
+							return new ItemStack(ModItems.skull, 1, SkullTypes.horseCreamy.ordinal());
+						case 2:
+							return new ItemStack(ModItems.skull, 1, SkullTypes.horseChestnut.ordinal());
+						case 3:
+							return new ItemStack(ModItems.skull, 1, SkullTypes.horseBrown.ordinal());
+						case 4:
+							return new ItemStack(ModItems.skull, 1, SkullTypes.horseBlack.ordinal());
+						case 5:
+							return new ItemStack(ModItems.skull, 1, SkullTypes.horseGrey.ordinal());
+						case 6:
+							return new ItemStack(ModItems.skull, 1, SkullTypes.horseDarkBrown.ordinal());
+					}
+				else if (type == 1)
+					return new ItemStack(ModItems.skull, 1, SkullTypes.donkey.ordinal());
+				else if (type == 2)
+					return new ItemStack(ModItems.skull, 1, SkullTypes.mule.ordinal());
+				else if (type == 3)
+					return new ItemStack(ModItems.skull, 1, SkullTypes.horseUndead.ordinal());
+				else if (type == 4)
+					return new ItemStack(ModItems.skull, 1, SkullTypes.horseSkeleton.ordinal());
+			}
 		} else if (target instanceof EntityVillager)
 			return new ItemStack(ModItems.skull, 1, SkullTypes.villager.ordinal());
 		else if (target instanceof EntityIronGolem)
@@ -136,9 +176,28 @@ public class HeadsHelper {
 			if (target instanceof EntityMagmaCube)
 				return new ItemStack(ModItems.skull, 1, SkullTypes.magmaCube.ordinal());
 			return new ItemStack(ModItems.skull, 1, SkullTypes.slime.ordinal());
-		}
+		} else if (target instanceof EntitySnowman)
+			return new ItemStack(ModItems.skull, 1, SkullTypes.snowMan.ordinal());
 
 		return null;
+	}
+
+	public static ItemStack createHeadFor(String username) {
+		return createHeadFor(new GameProfile(UUID.nameUUIDFromBytes(username.getBytes()), username));
+	}
+
+	public static ItemStack createHeadFor(EntityPlayer player) {
+		return createHeadFor(player.getGameProfile());
+	}
+
+	public static ItemStack createHeadFor(GameProfile profile) {
+		ItemStack stack = new ItemStack(ModItems.skull, 1, SkullTypes.player.ordinal());
+		stack.setTagCompound(new NBTTagCompound());
+		NBTTagCompound profileData = new NBTTagCompound();
+		NBTUtil.func_152460_a(profileData, profile);
+		stack.getTagCompound().setTag("SkullOwner", profileData);
+
+		return stack;
 	}
 
 	private static ItemStack getTFMobHead(Entity entity) {

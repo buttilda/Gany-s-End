@@ -49,8 +49,7 @@ public class ModelHead extends ModelSkeletonHead {
 		if (heads == null) {
 			heads = new HashMap<SkullTypes, ModelHead>();
 			for (SkullTypes skull : SkullTypes.values())
-				if (skull.canShow())
-					heads.put(skull, new ModelHead().setHeadType(skull));
+				heads.put(skull, new ModelHead().setHeadType(skull));
 		}
 
 		SkullTypes skull = SkullTypes.values()[type];
@@ -218,6 +217,27 @@ public class ModelHead extends ModelSkeletonHead {
 			case magmaCube:
 				setMagmaCube();
 				break;
+			case horseBlack:
+			case horseBrown:
+			case horseChestnut:
+			case horseCreamy:
+			case horseDarkBrown:
+			case horseGrey:
+			case horseWhite:
+			case horseSkeleton:
+			case horseUndead:
+				setHorse(false);
+				break;
+			case donkey:
+			case mule:
+				setHorse(true);
+				break;
+			case snowMan:
+				setSnowman();
+				break;
+			case silverfish:
+				setSilverfish();
+				break;
 			case blaze:
 			case blizz:
 			case druid:
@@ -225,6 +245,101 @@ public class ModelHead extends ModelSkeletonHead {
 				break;
 		}
 		return this;
+	}
+
+	private void setSilverfish() {
+		float f = -1.9F;
+		float f1 = -24;
+		head = new ModelRenderer(this, 0, 0);
+
+		ModelRenderer[] silverfishBodyParts = new ModelRenderer[7];
+		ModelRenderer[] silverfishWings;
+		int[][] silverfishBoxLength = new int[][] { { 3, 2, 2 }, { 4, 3, 2 }, { 6, 4, 3 }, { 3, 3, 3 }, { 2, 2, 3 }, { 2, 1, 2 }, { 1, 1, 2 } };
+		int[][] silverfishTexturePositions = new int[][] { { 0, 0 }, { 0, 4 }, { 0, 9 }, { 0, 16 }, { 0, 22 }, { 11, 0 }, { 13, 4 } };
+
+		float[] field_78170_c = new float[7];
+
+		for (int i = 0; i < silverfishBodyParts.length; ++i) {
+			silverfishBodyParts[i] = new ModelRenderer(this, silverfishTexturePositions[i][0], silverfishTexturePositions[i][1]);
+			silverfishBodyParts[i].addBox(silverfishBoxLength[i][0] * -0.5F, 0.0F + f1, silverfishBoxLength[i][2] * -0.5F, silverfishBoxLength[i][0], silverfishBoxLength[i][1], silverfishBoxLength[i][2]);
+			silverfishBodyParts[i].setRotationPoint(0.0F, 24 - silverfishBoxLength[i][1], f);
+			field_78170_c[i] = f;
+
+			if (i < silverfishBodyParts.length - 1)
+				f += (silverfishBoxLength[i][2] + silverfishBoxLength[i + 1][2]) * 0.5F;
+
+			if (i < 3)
+				head.addChild(silverfishBodyParts[i]);
+		}
+
+		silverfishWings = new ModelRenderer[2];
+		silverfishWings[0] = new ModelRenderer(this, 20, 0);
+		silverfishWings[0].addBox(-5.0F, 0.0F + f1, silverfishBoxLength[2][2] * -0.5F, 10, 8, silverfishBoxLength[2][2]);
+		silverfishWings[0].setRotationPoint(0.0F, 16.0F, field_78170_c[2]);
+		silverfishWings[1] = new ModelRenderer(this, 20, 18);
+		silverfishWings[1].addBox(-3.0F, 0.0F + f1, silverfishBoxLength[4][2] * -0.5F, 6, 5, silverfishBoxLength[1][2]);
+		silverfishWings[1].setRotationPoint(0.0F, 19.0F, field_78170_c[1]);
+
+		head.addChild(silverfishWings[0]);
+		head.addChild(silverfishWings[1]);
+		hideOverlay();
+	}
+
+	private void setSnowman() {
+		textureWidth = 64;
+		textureHeight = 64;
+		head = new ModelRenderer(this, 0, 0);
+		head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
+		head.setRotationPoint(0.0F, 0.0F, 0.0F);
+		hideOverlay();
+	}
+
+	private void setHorse(boolean isMule) {
+		textureWidth = 128;
+		textureHeight = 128;
+
+		head = new ModelRenderer(this, 0, 0);
+
+		float f1 = -2;
+		float f2 = -4;
+		ModelRenderer head2 = new ModelRenderer(this, 0, 0);
+		head2.addBox(-2.5F, -10.0F + f2, -1.5F + f1, 5, 5, 7);
+		ModelRenderer mouthTop = new ModelRenderer(this, 24, 18);
+		mouthTop.addBox(-2.0F, -10.0F + f2, -7.0F + f1, 4, 3, 6);
+		ModelRenderer mouthBottom = new ModelRenderer(this, 24, 27);
+		mouthBottom.addBox(-2.0F, -7.0F + f2, -6.5F + f1, 4, 2, 5);
+		ModelRenderer neck = new ModelRenderer(this, 0, 12);
+		neck.addBox(-2.05F, -9.8F + f2, -2.0F + f1, 4, 14, 8);
+		ModelRenderer mane = new ModelRenderer(this, 58, 0);
+		mane.addBox(-1.0F, -11.5F + f2, 5.0F + f1, 2, 16, 4);
+
+		if (isMule) {
+			ModelRenderer muleLeftEar = new ModelRenderer(this, 0, 12);
+			muleLeftEar.addBox(-2.0F, -16.0F + f2, 4.0F + f1, 2, 7, 1);
+			ModelRenderer muleRightEar = new ModelRenderer(this, 0, 12);
+			muleRightEar.addBox(0.0F, -16.0F + f2, 4.0F + f1, 2, 7, 1);
+			setRotation(muleLeftEar, 0, 0, -0.06F);
+			setRotation(muleRightEar, 0, 0, 0.06F);
+
+			head.addChild(muleRightEar);
+			head.addChild(muleLeftEar);
+		} else {
+			ModelRenderer horseLeftEar = new ModelRenderer(this, 0, 0);
+			horseLeftEar.addBox(0.45F, -12.0F + f2, 4.0F + f1, 2, 3, 1);
+			ModelRenderer horseRightEar = new ModelRenderer(this, 0, 0);
+			horseRightEar.addBox(-2.45F, -12.0F + f2, 4.0F + f1, 2, 3, 1);
+
+			head.addChild(horseRightEar);
+			head.addChild(horseLeftEar);
+		}
+
+		head.addChild(head2);
+		head.addChild(neck);
+		head.addChild(mane);
+		head.addChild(mouthTop);
+		head.addChild(mouthBottom);
+
+		hideOverlay();
 	}
 
 	private void setMagmaCube() {

@@ -3,6 +3,7 @@ package ganymedes01.ganysend.recipes;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.ModItems;
+import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -35,13 +36,21 @@ public class ModRecipes {
 		OreDictionary.registerOre("blockEndium", ModBlocks.endiumBlock);
 		OreDictionary.registerOre("blockEnderPearl", new ItemStack(ModBlocks.enderpearlBlock, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("enderFlower", ModBlocks.enderFlower);
-		OreDictionary.registerOre("itemSkull", new ItemStack(Items.skull, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("itemSkull", new ItemStack(ModItems.skull, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Blocks.brown_mushroom));
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Blocks.red_mushroom));
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Items.rotten_flesh));
 		if (GanysEnd.enableEnderBag)
 			OreDictionary.registerOre("enderChest", Blocks.ender_chest);
+
+		OreDictionary.registerOre("itemSkull", new ItemStack(ModItems.skull, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("itemSkull", new ItemStack(Items.skull, 1, OreDictionary.WILDCARD_VALUE));
+		for (SkullTypes type : SkullTypes.values())
+			OreDictionary.registerOre("skull" + type.name().substring(0, 1).toUpperCase() + type.name().substring(1), new ItemStack(ModItems.skull, 1, type.ordinal()));
+		OreDictionary.registerOre("skullSkeleton", new ItemStack(Items.skull, 1, 0));
+		OreDictionary.registerOre("skullWitherSkeleton", new ItemStack(Items.skull, 1, 1));
+		OreDictionary.registerOre("skullZombie", new ItemStack(Items.skull, 1, 2));
+		OreDictionary.registerOre("skullPlayer", new ItemStack(Items.skull, 1, 3));
+		OreDictionary.registerOre("skullCreeper", new ItemStack(Items.skull, 1, 4));
 	}
 
 	private static void registerArmourRecipes() {
