@@ -1,7 +1,6 @@
 package ganymedes01.ganysend.integration;
 
 import ganymedes01.ganysend.ModBlocks;
-import ganymedes01.ganysend.core.utils.HeadsHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -10,16 +9,15 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class TE3Manager extends Integration {
 
 	@Override
 	public void init() {
-		HeadsHelper.useThermalExpansionMobs = true;
 		addMagmaCruicibleRecipe(2000, new ItemStack(ModBlocks.enderFlower), new FluidStack(FluidRegistry.getFluid("ender"), 30));
 	}
 

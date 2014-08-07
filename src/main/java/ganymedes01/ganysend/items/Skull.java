@@ -6,7 +6,7 @@ import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.SkullTypes;
 import ganymedes01.ganysend.lib.Strings;
-import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
+import ganymedes01.ganysend.tileentities.TileEntityBlockSkull;
 
 import java.util.List;
 import java.util.UUID;
@@ -74,7 +74,7 @@ public class Skull extends ItemSkull {
 				if (side == 1)
 					angle = MathHelper.floor_double(player.rotationYaw * 16.0F / 360.0F + 0.5D) & 15;
 
-				TileEntityBlockNewSkull tile = Utils.getTileEntity(world, x, y, z, TileEntityBlockNewSkull.class);
+				TileEntityBlockSkull tile = Utils.getTileEntity(world, x, y, z, TileEntityBlockSkull.class);
 
 				if (tile != null) {
 					GameProfile profile = null;

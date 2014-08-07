@@ -46,6 +46,8 @@ import net.minecraft.nbt.NBTUtil;
 
 import com.mojang.authlib.GameProfile;
 
+import cpw.mods.fml.common.Loader;
+
 /**
  * Gany's End
  *
@@ -55,21 +57,24 @@ import com.mojang.authlib.GameProfile;
 
 public class HeadsHelper {
 
-	public static boolean useTwilightForrestMobs = false;
-	public static boolean useThermalExpansionMobs = false;
-
-	public static final ItemStack getHeadfromEntity(EntityLivingBase target) {
+	public static ItemStack getHeadfromEntity(EntityLivingBase target) {
 		if (target.isChild())
 			return null;
 
-		if (useTwilightForrestMobs) {
+		if (Loader.isModLoaded("TwilightForest")) {
 			ItemStack head = getTFMobHead(target);
 			if (head != null)
 				return head;
 		}
 
-		if (useThermalExpansionMobs) {
-			ItemStack head = getTEMobHead(EntityList.getEntityString(target));
+		if (Loader.isModLoaded("ThermalExpansion")) {
+			ItemStack head = getTEMobHead(target);
+			if (head != null)
+				return head;
+		}
+
+		if (Loader.isModLoaded("Natura")) {
+			ItemStack head = getNaturaHead(target);
 			if (head != null)
 				return head;
 		}
@@ -172,7 +177,7 @@ public class HeadsHelper {
 			return new ItemStack(ModItems.skull, 1, SkullTypes.enderDragon.ordinal());
 		else if (target instanceof EntityBat)
 			return new ItemStack(ModItems.skull, 1, SkullTypes.bat.ordinal());
-		else if (target instanceof EntitySlime) {
+		else if (target instanceof EntitySlime && ((EntitySlime) target).getSlimeSize() == 1) {
 			if (target instanceof EntityMagmaCube)
 				return new ItemStack(ModItems.skull, 1, SkullTypes.magmaCube.ordinal());
 			return new ItemStack(ModItems.skull, 1, SkullTypes.slime.ordinal());
@@ -262,14 +267,43 @@ public class HeadsHelper {
 			return new ItemStack(ModItems.skull, 1, SkullTypes.hostileWolf.ordinal());
 		else if (mobName.equals("TwilightForest.Forest Squirrel"))
 			return new ItemStack(ModItems.skull, 1, SkullTypes.hostileWolf.ordinal());
+		else if (mobName.equals("TwilightForest.Swarm Spider"))
+			return new ItemStack(ModItems.skull, 1, SkullTypes.swarmSpider.ordinal());
+		else if (mobName.equals("TwilightForest.Redscale Broodling"))
+			return new ItemStack(ModItems.skull, 1, SkullTypes.towerBroodling.ordinal());
+		else if (mobName.equals("TwilightForest.WinterWolf"))
+			return new ItemStack(ModItems.skull, 1, SkullTypes.winterWolf.ordinal());
+		else if (mobName.equals("TwilightForest.Maze Slime") && ((EntitySlime) entity).getSlimeSize() == 1)
+			return new ItemStack(ModItems.skull, 1, SkullTypes.mazeSlime.ordinal());
+		else if (mobName.equals("TwilightForest.Tower Termite"))
+			return new ItemStack(ModItems.skull, 1, SkullTypes.towerwoodBorer.ordinal());
 		else
 			return null;
 	}
 
-	private static ItemStack getTEMobHead(String mobName) {
-		if (mobName != null)
-			if (mobName.equals("Blizz"))
-				return new ItemStack(ModItems.skull, 1, SkullTypes.blizz.ordinal());
-		return null;
+	private static ItemStack getTEMobHead(Entity entity) {
+		String mobName = EntityList.getEntityString(entity);
+
+		if (mobName == null)
+			return null;
+		if (mobName.equals("Blizz"))
+			return new ItemStack(ModItems.skull, 1, SkullTypes.blizz.ordinal());
+		else
+			return null;
+	}
+
+	private static ItemStack getNaturaHead(Entity entity) {
+		String mobName = EntityList.getEntityString(entity);
+
+		if (mobName == null)
+			return null;
+		else if (mobName.equals("Natura.Imp"))
+			return new ItemStack(ModItems.skull, 1, SkullTypes.imp.ordinal());
+		else if (mobName.equals("Natura.NitroCreeper"))
+			return new ItemStack(ModItems.skull, 1, SkullTypes.nitroCreeper.ordinal());
+		else if (mobName.equals("Natura.FlameSpiderBaby"))
+			return new ItemStack(ModItems.skull, 1, SkullTypes.heatscarSpider.ordinal());
+		else
+			return null;
 	}
 }

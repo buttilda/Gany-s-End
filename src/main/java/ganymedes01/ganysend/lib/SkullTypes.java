@@ -83,7 +83,15 @@ public enum SkullTypes {
 	horseUndead(Strings.MC_PREFIX + "horse/horse_zombie"),
 	horseSkeleton(Strings.MC_PREFIX + "horse/horse_skeleton"),
 	snowMan(Strings.MC_PREFIX + "snowman"),
-	silverfish(Strings.MC_PREFIX + "silverfish");
+	silverfish(Strings.MC_PREFIX + "silverfish"),
+	swarmSpider(Strings.TF_PREFIX + "swarmspider", "TwilightForest"),
+	towerBroodling(Strings.TF_PREFIX + "towerbroodling", "TwilightForest"),
+	winterWolf(Strings.TF_PREFIX + "winterwolf", "TwilightForest"),
+	mazeSlime(Strings.TF_PREFIX + "mazeslime", "TwilightForest"),
+	towerwoodBorer(Strings.TF_PREFIX + "towertermite", "TwilightForest"),
+	imp(Strings.NA_PREFIX + "imp", "Natura"),
+	nitroCreeper(Strings.NA_PREFIX + "creeperunstable", "Natura"),
+	heatscarSpider(Strings.NA_PREFIX + "flamespider", "Natura");
 
 	private final String mod;
 	private final ResourceLocation texture;
@@ -126,24 +134,30 @@ public enum SkullTypes {
 			case caveSpider:
 			case hedgeSpider:
 			case kingSpider:
+			case swarmSpider:
+			case towerBroodling:
+			case heatscarSpider:
 				return SPIDER_EYES;
 			default:
 				return null;
 		}
 	}
 
-	private static final Map<String, ResourceLocation> map = new HashMap<String, ResourceLocation>();
+	private static final Map<String, ResourceLocation> skins = new HashMap<String, ResourceLocation>();
 
 	private ResourceLocation getPlayerSkin(GameProfile profile) {
 		if (profile != null) {
-			ResourceLocation texture = map.get(profile.getName());
-			if (texture == null) {
-				texture = AbstractClientPlayer.getLocationSkin(profile.getName());
-				AbstractClientPlayer.getDownloadImageSkin(texture, profile.getName());
-				map.put(profile.getName(), texture);
+			String name = profile.getName();
+			if (name != null && !name.isEmpty()) {
+				ResourceLocation texture = skins.get(name);
+				if (texture == null) {
+					texture = AbstractClientPlayer.getLocationSkin(name);
+					AbstractClientPlayer.getDownloadImageSkin(texture, name);
+					skins.put(profile.getName(), texture);
+				}
+				return texture;
 			}
-			return texture;
-		} else
-			return AbstractClientPlayer.locationStevePng;
+		}
+		return AbstractClientPlayer.locationStevePng;
 	}
 }

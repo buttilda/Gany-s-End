@@ -16,7 +16,7 @@ import ganymedes01.ganysend.inventory.ContainerVoidCrate;
 import ganymedes01.ganysend.lib.GUIsID;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityAdvancedFilteringHopper;
-import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
+import ganymedes01.ganysend.tileentities.TileEntityBlockSkull;
 import ganymedes01.ganysend.tileentities.TileEntityBlockShifter;
 import ganymedes01.ganysend.tileentities.TileEntityCreativeSpeedyHopper;
 import ganymedes01.ganysend.tileentities.TileEntityEnderFurnace;
@@ -54,7 +54,7 @@ public class CommonProxy implements IGuiHandler {
 
 	public void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntityBlockShifter.class, Utils.getUnlocalizedName(Strings.BLOCK_SHIFTER_NAME));
-		GameRegistry.registerTileEntity(TileEntityBlockNewSkull.class, Utils.getUnlocalizedName(Strings.BLOCK_NEW_SKULL_NAME));
+		GameRegistry.registerTileEntity(TileEntityBlockSkull.class, Utils.getUnlocalizedName(Strings.BLOCK_NEW_SKULL_NAME));
 		GameRegistry.registerTileEntity(TileEntityFilteringHopper.class, Utils.getUnlocalizedName(Strings.BASIC_FILTERING_HOPPER_NAME));
 		GameRegistry.registerTileEntity(TileEntityAdvancedFilteringHopper.class, Utils.getUnlocalizedName(Strings.ADVANCED_FILTERING_HOPPER_NAME));
 		GameRegistry.registerTileEntity(TileEntitySpeedyHopper.class, Utils.getUnlocalizedName(Strings.SPEEDY_HOPPER_NAME));

@@ -17,7 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class TileEntityBlockNewSkull extends TileEntitySkull {
+public class TileEntityBlockSkull extends TileEntitySkull {
 
 	private int skullType, skullRotation;
 	private GameProfile profile = null;

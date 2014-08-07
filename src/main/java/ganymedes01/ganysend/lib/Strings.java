@@ -72,6 +72,7 @@ public class Strings {
 	public static final String MC_PREFIX = "textures/entity/";
 	public static final String TF_PREFIX = "twilightforest:textures/model/";
 	public static final String TE_PREFIX = "thermalfoundation:textures/entity/";
+	public static final String NA_PREFIX = "natura:textures/mob/";
 
 	// Version check
 	public static final String VERSION_CHECK_INIT = "Starting version check.";

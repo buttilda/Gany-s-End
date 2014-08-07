@@ -16,7 +16,7 @@ import ganymedes01.ganysend.core.handlers.RenderCapeHandler;
 import ganymedes01.ganysend.core.handlers.RenderPlayerHandler;
 import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
 import ganymedes01.ganysend.core.utils.VersionHelper;
-import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
+import ganymedes01.ganysend.tileentities.TileEntityBlockSkull;
 import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
 import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
 import net.minecraft.init.Items;
@@ -54,7 +54,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerTileEntities() {
 		super.registerTileEntities();
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockNewSkull.class, new TileEntityBlockSkullRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockSkull.class, new TileEntityBlockSkullRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInventoryBinder.class, new TileEntityInventoryBinderRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfiniteWaterSource.class, new TileEntityInfiniteWaterSourceRender());
 	}

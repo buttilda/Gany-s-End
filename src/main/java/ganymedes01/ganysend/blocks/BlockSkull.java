@@ -5,7 +5,7 @@ import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.SkullTypes;
 import ganymedes01.ganysend.lib.Strings;
-import ganymedes01.ganysend.tileentities.TileEntityBlockNewSkull;
+import ganymedes01.ganysend.tileentities.TileEntityBlockSkull;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -101,7 +101,7 @@ public class BlockSkull extends BlockContainer implements IInfusionStabiliser {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityBlockNewSkull();
+		return new TileEntityBlockSkull();
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class BlockSkull extends BlockContainer implements IInfusionStabiliser {
 			return null;
 
 		ItemStack stack = new ItemStack(item, 1, getDamageValue(world, x, y, z));
-		TileEntityBlockNewSkull tile = Utils.getTileEntity(world, x, y, z, TileEntityBlockNewSkull.class);
+		TileEntityBlockSkull tile = Utils.getTileEntity(world, x, y, z, TileEntityBlockSkull.class);
 		if (tile != null)
 			if (tile.func_145904_a() == SkullTypes.player.ordinal() && tile.func_152108_a() != null) {
 				stack.setTagCompound(new NBTTagCompound());
@@ -133,7 +133,7 @@ public class BlockSkull extends BlockContainer implements IInfusionStabiliser {
 	@Override
 	public int getDamageValue(World world, int x, int y, int z) {
 		TileEntity tileentity = world.getTileEntity(x, y, z);
-		return tileentity != null && tileentity instanceof TileEntityBlockNewSkull ? ((TileEntityBlockNewSkull) tileentity).func_145904_a() : super.getDamageValue(world, x, y, z);
+		return tileentity != null && tileentity instanceof TileEntityBlockSkull ? ((TileEntityBlockSkull) tileentity).func_145904_a() : super.getDamageValue(world, x, y, z);
 	}
 
 	@Override
@@ -150,7 +150,7 @@ public class BlockSkull extends BlockContainer implements IInfusionStabiliser {
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int meta, int fortune) {
 		ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
 
-		TileEntityBlockNewSkull tile = Utils.getTileEntity(world, x, y, z, TileEntityBlockNewSkull.class);
+		TileEntityBlockSkull tile = Utils.getTileEntity(world, x, y, z, TileEntityBlockSkull.class);
 		if (tile == null)
 			return drops;
 		ItemStack stack = new ItemStack(ModItems.skull, 1, tile.func_145904_a());
