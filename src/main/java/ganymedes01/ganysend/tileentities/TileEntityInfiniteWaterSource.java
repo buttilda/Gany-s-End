@@ -19,6 +19,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -46,6 +48,11 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 		if (fluid == null)
 			return null;
 		return fluid.copy();
+	}
+
+	@SideOnly(Side.CLIENT)
+	public FluidStack getFluidForRendering() {
+		return fluid;
 	}
 
 	@Override

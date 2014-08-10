@@ -5,7 +5,6 @@ import ganymedes01.ganysend.lib.RenderIDs;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
@@ -97,45 +96,36 @@ public class BlockInventoryBinderRender implements ISimpleBlockRenderingHandler 
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess blockAccess, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.setBrightness(block.getMixedBrightnessForBlock(blockAccess, x, y, z));
-		int colorMult = block.colorMultiplier(blockAccess, x, y, z);
-		float R = (colorMult >> 16 & 255) / 255.0F;
-		float G = (colorMult >> 8 & 255) / 255.0F;
-		float B = (colorMult & 255) / 255.0F;
+		renderer.renderAllFaces = true;
 
-		if (EntityRenderer.anaglyphEnable) {
-			R = (R * 30.0F + G * 59.0F + B * 11.0F) / 100.0F;
-			G = (R * 30.0F + G * 70.0F) / 100.0F;
-			B = (R * 30.0F + B * 70.0F) / 100.0F;
-		}
+		renderer.setRenderBounds(0, 0, 0, 1, 1, 1);
+		renderer.renderStandardBlock(block, x, y, z);
 
-		tessellator.setColorOpaque_F(R, G, B);
+		renderer.setRenderBounds(1, 14F / 16F, 1, 0, 2F / 16F, 0);
+		renderer.renderStandardBlock(block, x, y, z);
 
-		IIcon icon = block.getIcon(0, 0);
-		float off = 14.0F / 16.0F;
+		renderer.setRenderBounds(1, 1, 14F / 16F, 0, 0, 2F / 16F);
+		renderer.renderStandardBlock(block, x, y, z);
 
-		renderer.renderFaceXPos(block, x, y, z, icon);
-		renderer.renderFaceXPos(block, x - off, y, z, icon);
-		renderer.renderFaceXNeg(block, x, y, z, icon);
-		renderer.renderFaceXNeg(block, x + off, y, z, icon);
-		renderer.renderFaceZPos(block, x, y, z, icon);
-		renderer.renderFaceZPos(block, x, y, z - off, icon);
-		renderer.renderFaceZNeg(block, x, y, z, icon);
-		renderer.renderFaceZNeg(block, x, y, z + off, icon);
-		renderer.renderFaceYPos(block, x, y, z, icon);
-		renderer.renderFaceYPos(block, x, y - off, z, icon);
-		renderer.renderFaceYNeg(block, x, y, z, icon);
-		renderer.renderFaceYNeg(block, x, y + off, z, icon);
+		renderer.setRenderBounds(14F / 16F, 1, 1, 2F / 16F, 0, 0);
+		renderer.renderStandardBlock(block, x, y, z);
+		//
+		//		renderer.setRenderBounds(0, 0, 0, 1, 2F / 16F, 1);
+		//		renderer.renderStandardBlock(block, x, y, z);
+		//
+		//		renderer.setRenderBounds(0, 0, 0, 1, 1, 2F / 16F);
+		//		renderer.renderStandardBlock(block, x, y, z);
+		//
+		//		renderer.setRenderBounds(14F / 16F, 0, 0, 1, 1, 1);
+		//		renderer.renderStandardBlock(block, x, y, z);
+		//
+		//		renderer.setRenderBounds(0, 14F / 16F, 0, 1, 1, 1);
+		//		renderer.renderStandardBlock(block, x, y, z);
+		//
+		//		renderer.setRenderBounds(0, 0, 14F / 16F, 1, 1, 1);
+		//		renderer.renderStandardBlock(block, x, y, z);
 
-		icon = block.getIcon(0, 1);
-		renderer.renderFaceXPos(block, x - off, y, z, icon);
-		renderer.renderFaceXNeg(block, x + off, y, z, icon);
-		renderer.renderFaceZPos(block, x, y, z - off, icon);
-		renderer.renderFaceZNeg(block, x, y, z + off, icon);
-		renderer.renderFaceYPos(block, x, y - off, z, icon);
-		renderer.renderFaceYNeg(block, x, y + off, z, icon);
-
+		renderer.renderAllFaces = false;
 		return true;
 	}
 

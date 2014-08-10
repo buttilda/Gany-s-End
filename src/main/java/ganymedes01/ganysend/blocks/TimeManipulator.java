@@ -25,17 +25,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class TimeManipulator extends BlockContainer {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] bottomIcons, topIcons;
-	@SideOnly(Side.CLIENT)
-	private IIcon surface;
 
 	public TimeManipulator() {
 		super(Material.rock);
@@ -142,9 +140,30 @@ public class TimeManipulator extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		return meta > 0 ? surface : side < 4 ? bottomIcons[side] :
+		if (side == 0 || side == 1)
+			return blockIcon;
 
-		topIcons[side - 4];
+		side -= 2;
+		switch (meta) {
+			case 0:
+				return bottomIcons[new int[] { 3, 0, 2, 1 }[side]];
+			case 1:
+				return bottomIcons[new int[] { 2, 1, 0, 3 }[side]];
+			case 2:
+				return bottomIcons[new int[] { 0, 3, 1, 2 }[side]];
+			case 3:
+				return bottomIcons[new int[] { 1, 2, 3, 0 }[side]];
+			case 4:
+				return topIcons[new int[] { 3, 0, 2, 1 }[side]];
+			case 5:
+				return topIcons[new int[] { 2, 1, 0, 3 }[side]];
+			case 6:
+				return topIcons[new int[] { 0, 3, 1, 2 }[side]];
+			case 7:
+				return topIcons[new int[] { 1, 2, 3, 0 }[side]];
+			default:
+				return blockIcon;
+		}
 	}
 
 	@Override
@@ -161,7 +180,6 @@ public class TimeManipulator extends BlockContainer {
 		topIcons[2] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_top_left"));
 		topIcons[3] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_top_back"));
 
-		surface = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_surface"));
-		blockIcon = reg.registerIcon("planks_spruce");
+		blockIcon = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_surface"));
 	}
 }

@@ -2,15 +2,18 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -27,6 +30,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class InfiniteWaterSource extends BlockContainer {
 
+	@SideOnly(Side.CLIENT)
+	public static IIcon axis, node, head;
+
 	public InfiniteWaterSource() {
 		this(Material.rock);
 		setBlockName(Utils.getUnlocalizedName(Strings.INFINITE_WATER_SOURCE_NAME));
@@ -41,6 +47,15 @@ public class InfiniteWaterSource extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister reg) {
+		super.registerBlockIcons(reg);
+		axis = reg.registerIcon(Utils.getBlockTexture(Strings.INFINITE_WATER_SOURCE_NAME + "_axis"));
+		node = reg.registerIcon(Utils.getBlockTexture(Strings.INFINITE_WATER_SOURCE_NAME + "_node"));
+		head = reg.registerIcon(Utils.getBlockTexture(Strings.INFINITE_WATER_SOURCE_NAME + "_head"));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess access, int x, int y, int z, int side) {
 		return true;
 	}
@@ -51,14 +66,8 @@ public class InfiniteWaterSource extends BlockContainer {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderBlockPass() {
-		return 1;
-	}
-
-	@Override
 	public int getRenderType() {
-		return -1;
+		return RenderIDs.INFINITE_WATER_SOURCE;
 	}
 
 	@Override

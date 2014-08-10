@@ -11,12 +11,10 @@ import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.relauncher.Side;
@@ -24,15 +22,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class InventoryBinder extends BlockContainer {
-
-	@SideOnly(Side.CLIENT)
-	private IIcon inside;
 
 	public InventoryBinder() {
 		super(Material.rock);
@@ -77,18 +72,5 @@ public class InventoryBinder extends BlockContainer {
 	@Override
 	public int getRenderType() {
 		return RenderIDs.INVENTORY_BINDER;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return meta == 1 ? inside : super.getIcon(side, meta);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		super.registerBlockIcons(reg);
-		inside = reg.registerIcon(Utils.getBlockTexture(Strings.INVENTORY_BINDER_NAME) + "_inside");
 	}
 }
