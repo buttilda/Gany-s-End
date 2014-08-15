@@ -3,29 +3,35 @@ package ganymedes01.ganysend.items;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemSimpleFoiled;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class InfiniteBucket extends ItemSimpleFoiled {
 
 	public InfiniteBucket() {
 		setMaxStackSize(1);
+		setContainerItem(this);
 		setCreativeTab(GanysEnd.endTab);
 		setTextureName(Utils.getItemTexture(Strings.INFINITE_BUCKET_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.INFINITE_BUCKET_NAME));
@@ -38,68 +44,30 @@ public class InfiniteBucket extends ItemSimpleFoiled {
 	}
 
 	@Override
-	public boolean hasContainerItem() {
-		return true;
-	}
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		if (side < 0 || side > 5)
+			return false;
+		ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[side];
 
-	@Override
-	public ItemStack getContainerItem(ItemStack stack) {
-		return new ItemStack(this);
-	}
-
-	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		MovingObjectPosition movingobjectposition = getMovingObjectPositionFromPlayer(world, player, false);
-		if (movingobjectposition == null)
-			return stack;
-		else if (movingobjectposition.typeOfHit == MovingObjectType.BLOCK) {
-			int x = movingobjectposition.blockX;
-			int y = movingobjectposition.blockY;
-			int z = movingobjectposition.blockZ;
-			if (!world.canMineBlock(player, x, y, z))
-				return stack;
-			else {
-				switch (movingobjectposition.sideHit) {
-					case 0:
-						y--;
-						break;
-					case 1:
-						y++;
-						break;
-					case 2:
-						z--;
-						break;
-					case 3:
-						z++;
-						break;
-					case 4:
-						x--;
-						break;
-					case 5:
-						x++;
-						break;
-				}
-
-				tryPlaceWater(world, x, y, z);
-			}
+		IFluidHandler tile = Utils.getTileEntity(world, x, y, z, IFluidHandler.class);
+		if (tile != null) {
+			if (!world.isRemote)
+				tile.fill(dir, new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME), true);
+			return true;
 		}
-		return stack;
-	}
 
-	public static void tryPlaceWater(World world, int x, int y, int z) {
-		Material material = world.getBlock(x, y, z).getMaterial();
-
-		if (!world.isAirBlock(x, y, z) && material.isSolid())
-			return;
-		else if (world.provider.dimensionId == -1) {
-			world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
-			for (int i = 0; i < 8; i++)
-				world.spawnParticle("largesmoke", x + Math.random(), y + Math.random(), z + Math.random(), 0.0D, 0.0D, 0.0D);
-		} else {
-			if (!world.isRemote && !material.isSolid() && !material.isLiquid())
-				world.func_147480_a(x, y, z, true);
-
-			world.setBlock(x, y, z, Blocks.water, 0, 3);
+		Block block = world.getBlock(x, y, z);
+		if (block != Blocks.vine && block != Blocks.tallgrass && block != Blocks.deadbush && !block.isReplaceable(world, x, y, z)) {
+			x += dir.offsetX;
+			y += dir.offsetY;
+			z += dir.offsetZ;
 		}
+		if (player == null || player.canPlayerEdit(x, y, z, side, stack)) {
+			if (!world.isRemote)
+				((ItemBucket) Items.water_bucket).tryPlaceContainedLiquid(world, x, y, z);
+			return true;
+		}
+
+		return false;
 	}
 }

@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.dispenser;
 
-import ganymedes01.ganysend.items.InfiniteBucket;
+import ganymedes01.ganysend.ModItems;
+import ganymedes01.ganysend.core.utils.Utils;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
@@ -10,9 +11,9 @@ import net.minecraft.world.World;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class DispenserBehaviorInfiniteBucket extends BehaviorDefaultDispenseItem {
@@ -25,7 +26,7 @@ public class DispenserBehaviorInfiniteBucket extends BehaviorDefaultDispenseItem
 		int y = block.getYInt() + enumfacing.getFrontOffsetY();
 		int z = block.getZInt() + enumfacing.getFrontOffsetZ();
 
-		InfiniteBucket.tryPlaceWater(world, x, y, z);
+		ModItems.infiniteBucket.onItemUse(stack, Utils.getPlayer(world), world, x, y, z, enumfacing.ordinal(), 0, 0, 0);
 
 		return stack;
 	}
