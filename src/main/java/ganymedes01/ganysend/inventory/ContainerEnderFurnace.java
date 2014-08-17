@@ -11,9 +11,9 @@ import net.minecraft.item.ItemStack;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ContainerEnderFurnace extends Container {
@@ -62,7 +62,7 @@ public class ContainerEnderFurnace extends Container {
 			itemstack = itemstack1.copy();
 
 			if (slotIndex <= 5) {
-				if (!mergeItemStack(itemstack1, 5, 42, true))
+				if (!mergeItemStack(itemstack1, 6, 42, true))
 					return null;
 			} else if (furnace.isFuel(itemstack1)) {
 				if (!mergeItemStack(itemstack1, 0, 1, false))
