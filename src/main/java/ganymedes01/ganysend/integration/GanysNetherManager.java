@@ -2,6 +2,7 @@ package ganymedes01.ganysend.integration;
 
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.ModItems;
+import ganymedes01.ganysend.core.utils.HeadsHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -9,9 +10,9 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class GanysNetherManager extends Integration {
@@ -20,10 +21,7 @@ public class GanysNetherManager extends Integration {
 	public void init() {
 		addMagmaticCentrifugeRecipe(new ItemStack(ModBlocks.rawEndium), new ItemStack(ModBlocks.rawEndium), new ItemStack(ModItems.endiumIngot, 3), new ItemStack(ModItems.endiumIngot, 1, 1));
 
-		ItemStack head = new ItemStack(ModItems.skull, 1, 3);
-		head.setTagCompound(new NBTTagCompound());
-		head.getTagCompound().setString("SkullOwner", "ganymedes01");
-		addStackToUndertakers(head, 50);
+		addStackToUndertakers(HeadsHelper.createHeadFor("ganymedes01"), 50);
 	}
 
 	@Override
