@@ -96,7 +96,7 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		return new FluidTankInfo[] { new FluidTankInfo(fluid, fluid.amount) };
+		return new FluidTankInfo[] { new FluidTankInfo(fluid, FluidContainerRegistry.BUCKET_VOLUME) };
 	}
 
 	@Override
