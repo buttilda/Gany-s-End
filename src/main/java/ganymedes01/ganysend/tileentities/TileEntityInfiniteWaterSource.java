@@ -76,12 +76,15 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-		return drain(from, resource.amount, doDrain);
+		return resource != null && resource.isFluidEqual(fluid) ? drain(from, resource.amount, doDrain) : null;
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		return fluid;
+		FluidStack f = getFluid();
+		if (f != null)
+			f.amount = Math.min(f.amount, maxDrain);
+		return f;
 	}
 
 	@Override
