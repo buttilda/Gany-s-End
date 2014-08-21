@@ -79,7 +79,7 @@ public class EndiumBow extends ItemBow implements IEndiumTool {
 	private boolean hasArrowsAvailable(EntityPlayer player, ItemStack stack) {
 		IInventory inventory = getTaggedInventory(player.worldObj, stack);
 
-		return inventory != null && (InventoryUtils.inventoryContainsStack(inventory, new ItemStack(Items.arrow)) || player.worldObj.isRemote) || player.inventory.hasItem(Items.arrow);
+		return inventory != null && (InventoryUtils.inventoryContains(inventory, new ItemStack(Items.arrow), false) || player.worldObj.isRemote) || player.inventory.hasItem(Items.arrow);
 	}
 
 	private boolean consumesArrow(EntityPlayer player, ItemStack stack) {

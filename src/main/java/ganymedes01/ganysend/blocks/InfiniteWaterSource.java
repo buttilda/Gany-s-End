@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
@@ -81,7 +82,7 @@ public class InfiniteWaterSource extends BlockContainer {
 
 		ItemStack stack = player.getCurrentEquippedItem();
 		if (FluidContainerRegistry.isEmptyContainer(stack)) {
-			player.inventory.addItemStackToInventory(FluidContainerRegistry.fillFluidContainer(tile.getFluid(), stack));
+			InventoryUtils.addToPlayerInventory(player, FluidContainerRegistry.fillFluidContainer(tile.getFluid(), stack), x, y, z);
 			stack.stackSize--;
 			if (stack.stackSize == 0)
 				stack = null;
