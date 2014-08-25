@@ -8,9 +8,9 @@ import net.minecraft.tileentity.TileEntity;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class TileEntityBlockShifter extends TileEntity {
@@ -29,13 +29,15 @@ public class TileEntityBlockShifter extends TileEntity {
 
 	@Override
 	public void updateEntity() {
-		if (!worldObj.isRemote)
-			if (receiverDim == worldObj.provider.dimensionId)
-				if (tagged)
-					if (direction)
-						teleportFromTo(xCoord, yCoord + 1, zCoord, receiverX, receiverY + 1, receiverZ);
-					else
-						teleportFromTo(receiverX, receiverY + 1, receiverZ, xCoord, yCoord + 1, zCoord);
+		if (worldObj.isRemote)
+			return;
+
+		if (receiverDim == worldObj.provider.dimensionId)
+			if (tagged)
+				if (direction)
+					teleportFromTo(xCoord, yCoord + 1, zCoord, receiverX, receiverY + 1, receiverZ);
+				else
+					teleportFromTo(receiverX, receiverY + 1, receiverZ, xCoord, yCoord + 1, zCoord);
 	}
 
 	protected void teleportFromTo(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {
@@ -73,6 +75,7 @@ public class TileEntityBlockShifter extends TileEntity {
 		nbt.setInteger("receiverZ", receiverZ);
 		nbt.setInteger("receiverDim", receiverDim);
 		nbt.setBoolean("tagged", tagged);
+		nbt.setBoolean("direction", direction);
 	}
 
 	@Override
@@ -83,5 +86,6 @@ public class TileEntityBlockShifter extends TileEntity {
 		receiverZ = nbt.getInteger("receiverZ");
 		receiverDim = nbt.getInteger("receiverDim");
 		tagged = nbt.getBoolean("tagged");
+		direction = nbt.getBoolean("direction");
 	}
 }
