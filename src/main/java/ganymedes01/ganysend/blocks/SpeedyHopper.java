@@ -1,7 +1,6 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntitySpeedyHopper;
 import net.minecraft.block.BlockHopper;
@@ -14,9 +13,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class SpeedyHopper extends BasicFilteringHopper {
@@ -49,11 +48,5 @@ public class SpeedyHopper extends BasicFilteringHopper {
 	protected void registerExtraIcons(IIconRegister reg) {
 		blockBottom = BlockHopper.getHopperIcon("hopper_outside");
 		blockInside = BlockHopper.getHopperIcon("hopper_inside");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getItemIconName() {
-		return Reference.ITEM_BLOCK_TEXTURE_PATH + Strings.SPEEDY_HOPPER_NAME;
 	}
 }

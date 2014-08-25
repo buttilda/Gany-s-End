@@ -25,6 +25,7 @@ public class BlockTimeManipulatorRender implements ISimpleBlockRenderingHandler 
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		GL11.glTranslatef(0, -0.25F, 0);
 		GL11.glScalef(0.5F, 0.5F, 0.5F);
+		GL11.glTranslated(-0.5, -0.5, -0.5);
 
 		float pixel = 1.0F / 16.0F;
 

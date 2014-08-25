@@ -27,6 +27,8 @@ public class BlockInfiniteWaterSourceRender implements ISimpleBlockRenderingHand
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+		GL11.glTranslated(-0.5, -0.5, -0.5);
+
 		// AXIS
 		renderer.setOverrideBlockTexture(InfiniteWaterSource.axis);
 		renderer.setRenderBounds(7F / 16F, 1F / 16F, 7F / 16F, 9F / 16F, 15F / 16F, 9F / 16F);
@@ -73,7 +75,6 @@ public class BlockInfiniteWaterSourceRender implements ISimpleBlockRenderingHand
 			GL11.glPushMatrix();
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 			TileEntityInfiniteWaterSourceRender.renderCore(renderer, FluidRegistry.WATER.getStillIcon(), block.getIcon(0, 0), FluidRegistry.WATER.getColor());
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glPopMatrix();

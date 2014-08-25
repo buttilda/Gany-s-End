@@ -4,7 +4,6 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.GUIsID;
-import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
@@ -22,9 +21,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class BasicFilteringHopper extends BlockHopper {
@@ -105,6 +104,6 @@ public class BasicFilteringHopper extends BlockHopper {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getItemIconName() {
-		return Reference.ITEM_BLOCK_TEXTURE_PATH + Strings.BASIC_FILTERING_HOPPER_NAME;
+		return null;
 	}
 }
