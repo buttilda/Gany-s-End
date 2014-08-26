@@ -1,9 +1,11 @@
 package ganymedes01.ganysend.tileentities;
 
 import ganymedes01.ganysend.network.IPacketHandlingTile;
+import ganymedes01.ganysend.network.PacketHandler;
+import ganymedes01.ganysend.network.packet.PacketTileEntity;
+import ganymedes01.ganysend.network.packet.PacketTileEntity.TileData;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,6 +13,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StringUtils;
 
 import com.mojang.authlib.GameProfile;
 
@@ -25,8 +28,8 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 
 public class TileEntityInventoryBinder extends TileEntity implements IInventory, IPacketHandlingTile {
 
-	private String playerName;
-	private GameProfile profile;
+	protected String playerName;
+	protected GameProfile profile;
 
 	public TileEntityInventoryBinder() {
 		this(null);
@@ -39,7 +42,8 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory,
 	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setString("playerName", playerName);
+		if (!StringUtils.isNullOrEmpty(playerName))
+			nbt.setString("playerName", playerName);
 
 		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
@@ -68,14 +72,23 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory,
 
 	public void setPlayerName(String name) {
 		playerName = name;
+		if (!worldObj.isRemote)
+			PacketHandler.sendToAll(new PacketTileEntity(xCoord, yCoord, zCoord, new TileData() {
+
+				@Override
+				public void writeData(ByteBuf buffer) {
+					ByteBufUtils.writeUTF8String(buffer, playerName);
+				}
+			}));
 	}
 
-	private InventoryPlayer getPlayerInventory() {
-		return worldObj.getPlayerEntityByName(playerName) != null ? worldObj.getPlayerEntityByName(playerName).inventory : null;
+	protected IInventory getPlayerInventory() {
+		EntityPlayer player = worldObj.getPlayerEntityByName(playerName);
+		return player != null ? player.inventory : null;
 	}
 
-	private boolean isConnected() {
-		return worldObj.getPlayerEntityByName(playerName) != null;
+	public boolean isConnected() {
+		return StringUtils.isNullOrEmpty(playerName) ? false : worldObj.getPlayerEntityByName(playerName) != null;
 	}
 
 	@Override
@@ -177,7 +190,8 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory,
 	@Override
 	public void writeToNBT(NBTTagCompound data) {
 		super.writeToNBT(data);
-		data.setString("playerName", playerName);
+		if (StringUtils.isNullOrEmpty(playerName))
+			data.setString("playerName", playerName);
 	}
 
 	@Override

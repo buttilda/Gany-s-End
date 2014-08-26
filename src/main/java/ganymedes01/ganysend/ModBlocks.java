@@ -2,9 +2,10 @@ package ganymedes01.ganysend;
 
 import ganymedes01.ganysend.blocks.AdvancedExclusiveFilteringHopper;
 import ganymedes01.ganysend.blocks.AdvancedFilteringHopper;
+import ganymedes01.ganysend.blocks.AnchoredEnderChest;
 import ganymedes01.ganysend.blocks.BasicFilteringHopper;
-import ganymedes01.ganysend.blocks.BlockSkull;
 import ganymedes01.ganysend.blocks.BlockShifter;
+import ganymedes01.ganysend.blocks.BlockSkull;
 import ganymedes01.ganysend.blocks.CreativeInfiniteFluidSource;
 import ganymedes01.ganysend.blocks.CreativeSpeedyHopper;
 import ganymedes01.ganysend.blocks.Emulator;
@@ -37,9 +38,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ModBlocks {
@@ -72,6 +73,7 @@ public class ModBlocks {
 	public static final Block enderFurnace = new EnderFurnace();
 	public static final Block creativeSpeedyHopper = new CreativeSpeedyHopper();
 	public static final Block creativeInfiniteFluidSource = new CreativeInfiniteFluidSource();
+	public static final Block anchoredEnderChest = new AnchoredEnderChest();
 
 	public static void init() {
 		registerBlock(enderFlower);
@@ -102,6 +104,7 @@ public class ModBlocks {
 		registerBlock(enderFurnace);
 		registerBlock(creativeSpeedyHopper);
 		registerBlock(creativeInfiniteFluidSource);
+		registerBlock(anchoredEnderChest);
 	}
 
 	private static void registerBlock(Block block) {

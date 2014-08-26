@@ -2,12 +2,14 @@ package ganymedes01.ganysend.core.proxy;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModItems;
+import ganymedes01.ganysend.client.renderer.block.BlockChestRenderer;
 import ganymedes01.ganysend.client.renderer.block.BlockFilteringHopperRender;
 import ganymedes01.ganysend.client.renderer.block.BlockInfiniteWaterSourceRender;
 import ganymedes01.ganysend.client.renderer.block.BlockInventoryBinderRender;
 import ganymedes01.ganysend.client.renderer.block.BlockRawEndiumRender;
 import ganymedes01.ganysend.client.renderer.block.BlockTimeManipulatorRender;
 import ganymedes01.ganysend.client.renderer.item.ItemSkullRender;
+import ganymedes01.ganysend.client.renderer.tileentity.TileEntityAnchoredEnderChestRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockSkullRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInfiniteWaterSourceRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInventoryBinderRender;
@@ -15,6 +17,7 @@ import ganymedes01.ganysend.core.handlers.RenderCapeHandler;
 import ganymedes01.ganysend.core.handlers.RenderPlayerHandler;
 import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
 import ganymedes01.ganysend.core.utils.VersionHelper;
+import ganymedes01.ganysend.tileentities.TileEntityAnchoredEnderChest;
 import ganymedes01.ganysend.tileentities.TileEntityBlockSkull;
 import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
 import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
@@ -55,6 +58,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockSkull.class, new TileEntityBlockSkullRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInventoryBinder.class, new TileEntityInventoryBinderRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfiniteWaterSource.class, new TileEntityInfiniteWaterSourceRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAnchoredEnderChest.class, new TileEntityAnchoredEnderChestRender());
 	}
 
 	@Override
@@ -68,5 +72,6 @@ public class ClientProxy extends CommonProxy {
 			RenderingRegistry.registerBlockHandler(new BlockTimeManipulatorRender());
 		RenderingRegistry.registerBlockHandler(new BlockRawEndiumRender());
 		RenderingRegistry.registerBlockHandler(new BlockInfiniteWaterSourceRender());
+		RenderingRegistry.registerBlockHandler(new BlockChestRenderer());
 	}
 }

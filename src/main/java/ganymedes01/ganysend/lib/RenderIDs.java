@@ -16,4 +16,5 @@ public class RenderIDs {
 	public static final int INVENTORY_BINDER = RenderingRegistry.getNextAvailableRenderId();
 	public static final int RAW_ENDIUM = RenderingRegistry.getNextAvailableRenderId();
 	public static final int INFINITE_WATER_SOURCE = RenderingRegistry.getNextAvailableRenderId();
+	public static final int ANCHORED_ENDER_CHEST = RenderingRegistry.getNextAvailableRenderId();
 }

@@ -39,6 +39,7 @@ public class Strings {
 	public static final String ENDER_FURNACE_NAME = "enderFurnace";
 	public static final String CREATIVE_SPEEDY_HOPPER_NAME = "creativeSpeedyHopper";
 	public static final String CREATIVE_INFINITE_FLUID_SOURCE_NAME = "creativeInfiniteFluidSource";
+	public static final String ANCHORED_ENDER_CHEST_NAME = "anchoredEnderChest";
 
 	// Item names
 	public static final String ENDER_TAG_NAME = "enderTag";
