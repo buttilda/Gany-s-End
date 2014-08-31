@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidContainerItem;
 
 /**
  * Gany's End
@@ -39,13 +40,20 @@ public class CreativeInfiniteFluidSource extends InfiniteWaterSource {
 			return false;
 
 		ItemStack stack = player.getCurrentEquippedItem();
+		if (stack == null)
+			return false;
+
 		if (FluidContainerRegistry.isEmptyContainer(stack)) {
 			InventoryUtils.addToPlayerInventory(player, FluidContainerRegistry.fillFluidContainer(tile.getFluid(), stack), x, y, z);
 			stack.stackSize--;
 			if (stack.stackSize == 0)
 				stack = null;
 			return true;
-		} else {
+		} else if (stack.getItem() instanceof IFluidContainerItem) {
+			IFluidContainerItem item = (IFluidContainerItem) stack.getItem();
+			FluidStack fluid = item.getFluid(stack);
+			tile.setFluid(fluid);
+		} else if (stack.getItem() == Items.potionitem) {
 			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(stack);
 			if (fluid == null) {
 				fluid = FluidRegistry.getFluidStack("potion", FluidContainerRegistry.getFluidForFilledItem(new ItemStack(Items.potionitem)).amount);
