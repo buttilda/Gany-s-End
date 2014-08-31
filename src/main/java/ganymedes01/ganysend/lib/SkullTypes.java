@@ -1,11 +1,7 @@
 package ganymedes01.ganysend.lib;
 
+import ganymedes01.ganysend.core.utils.TextureUtils;
 import ganymedes01.ganysend.core.utils.Utils;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 
@@ -115,7 +111,7 @@ public enum SkullTypes {
 
 	public ResourceLocation getTexture(GameProfile name) {
 		if (this == player)
-			return getPlayerSkin(name);
+			return TextureUtils.getPlayerSkin(name);
 		return texture;
 	}
 
@@ -141,23 +137,5 @@ public enum SkullTypes {
 			default:
 				return null;
 		}
-	}
-
-	private static final Map<String, ResourceLocation> skins = new HashMap<String, ResourceLocation>();
-
-	private ResourceLocation getPlayerSkin(GameProfile profile) {
-		if (profile != null) {
-			String name = profile.getName();
-			if (name != null && !name.isEmpty()) {
-				ResourceLocation texture = skins.get(name);
-				if (texture == null) {
-					texture = AbstractClientPlayer.getLocationSkin(name);
-					AbstractClientPlayer.getDownloadImageSkin(texture, name);
-					skins.put(profile.getName(), texture);
-				}
-				return texture;
-			}
-		}
-		return AbstractClientPlayer.locationStevePng;
 	}
 }

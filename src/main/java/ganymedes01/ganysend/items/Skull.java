@@ -83,6 +83,8 @@ public class Skull extends ItemSkull {
 						NBTTagCompound nbt = stack.getTagCompound();
 						if (nbt.hasKey("SkullOwner", 10))
 							profile = NBTUtil.func_152459_a(nbt.getCompoundTag("SkullOwner"));
+						else if (nbt.hasKey("SkullOwner", 8))
+							profile = new GameProfile(null, nbt.getString("SkullOwner"));
 					}
 
 					tile.setType(stack.getItemDamage(), profile);
