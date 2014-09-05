@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.blocks;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
@@ -29,6 +30,8 @@ public class AnchoredEnderChest extends InventoryBinder {
 
 	public AnchoredEnderChest() {
 		super();
+		if (!GanysEnd.enableAnchoredEnderChest)
+			setCreativeTab(null);
 		setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
 		setBlockName(Utils.getUnlocalizedName(Strings.ANCHORED_ENDER_CHEST_NAME));
 	}

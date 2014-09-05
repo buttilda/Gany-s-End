@@ -82,7 +82,9 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumSword), " x ", "xyx", 'x', Items.diamond, 'y', ModItems.endiumSword));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumBow), " x ", "xyx", 'x', Items.diamond, 'y', ModItems.endiumBow));
 		if (GanysEnd.enableEnderBag)
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderBag), "zwz", "wyw", "xxx", 'x', Items.ender_pearl, 'y', "enderChest", 'z', new ItemStack(Blocks.wool, 1, 15), 'w', new ItemStack(Blocks.wool, 1, 13)));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderBag), "zwz", "wyw", "xxx", 'x', Items.ender_pearl, 'y', "enderChest", 'z', new ItemStack(Items.string), 'w', new ItemStack(Items.leather)));
+		if (GanysEnd.enableAnchoredEnderChest)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.anchoredEnderChest), "xxx", "xyx", "xzx", 'x', "ingotGold", 'y', "enderChest", 'z', new ItemStack(Blocks.anvil)));
 
 		// Vanilla
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.experience_bottle, 8), "yyy", "yxy", "yyy", 'x', "ingotEndium", 'y', new ItemStack(Items.potionitem, 1, 0)));

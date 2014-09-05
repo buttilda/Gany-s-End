@@ -11,9 +11,9 @@ import codechicken.nei.api.IConfigureNEI;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class NEIGanysEndConfig implements IConfigureNEI {
@@ -33,6 +33,8 @@ public class NEIGanysEndConfig implements IConfigureNEI {
 			API.hideItem(new ItemStack(ModBlocks.blockShifter));
 			API.hideItem(new ItemStack(ModBlocks.entityShifter));
 		}
+		if (!GanysEnd.enableAnchoredEnderChest)
+			API.hideItem(new ItemStack(ModBlocks.anchoredEnderChest));
 	}
 
 	@Override

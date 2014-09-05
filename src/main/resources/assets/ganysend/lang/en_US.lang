@@ -117,6 +117,7 @@ tile.ganysend.endWalls1.name=Ender Pearl Brick Wall
 tile.ganysend.voidCrate.name=Void Crate
 tile.ganysend.enderFurnace.name=Ender Furnace
 tile.ganysend.creativeInfiniteFluidSource.name=Creative Infinite Fluid Source
+tile.ganysend.anchoredEnderChest.name=Anchored Ender Chest
 
 # GUI localizations
 container.ganysend.basicFilteringHopper=Basic Filtering Hopper

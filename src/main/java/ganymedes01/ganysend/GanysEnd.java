@@ -60,6 +60,7 @@ public class GanysEnd {
 	public static boolean enableRandomHeadDrop = true;
 	public static boolean enableVanillaHeadsDrop = true;
 	public static boolean enableEnderBag = true;
+	public static boolean enableAnchoredEnderChest = true;
 	public static boolean enableRawEndiumRecipe = false;
 
 	@EventHandler
@@ -88,7 +89,7 @@ public class GanysEnd {
 
 		ModIntegrator.init();
 
-		if (GanysEnd.enableEnderBag)
+		if (GanysEnd.enableEnderBag || GanysEnd.enableAnchoredEnderChest)
 			try {
 				Block blockEnderChest = (Block) Class.forName("codechicken.enderstorage.EnderStorage").getDeclaredField("blockEnderChest").get(null);
 				for (int i = 0; i < 0x1000; i++)
