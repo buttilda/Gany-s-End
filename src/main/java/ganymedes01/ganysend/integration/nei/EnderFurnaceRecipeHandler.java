@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.integration.nei;
 
 import ganymedes01.ganysend.client.gui.inventory.GuiEnderFurnace;
+import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
@@ -12,12 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.oredict.OreDictionary;
 
 import org.lwjgl.opengl.GL11;
 
@@ -27,9 +25,9 @@ import codechicken.nei.recipe.TemplateRecipeHandler;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
@@ -40,14 +38,8 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 		if (fuels == null) {
 			fuels = new ArrayList<PositionedStack>();
 
-			for (Entry<Object, Integer> entry : EnderFurnaceRecipe.fuelMap.entrySet()) {
-				Object obj = getStack(entry.getKey());
-				if (obj instanceof ItemStack)
-					fuels.add(new PositionedStack(obj, 8, 34));
-				else
-					for (ItemStack stack : (ItemStack[]) obj)
-						fuels.add(new PositionedStack(stack, 8, 34));
-			}
+			for (Entry<Object, Integer> entry : EnderFurnaceRecipe.fuelMap.entrySet())
+				fuels.add(new PositionedStack(entry.getKey(), 8, 34));
 		}
 	}
 
@@ -105,28 +97,15 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 	@Override
 	public void loadCraftingRecipes(ItemStack result) {
 		for (EnderFurnaceRecipe recipe : EnderFurnaceRecipe.recipes)
-			if (EnderFurnaceRecipe.stacksMatch(recipe.getOutput(), result))
+			if (InventoryUtils.areStacksTheSame(recipe.getOutput(), result, false))
 				arecipes.add(new CachedEnderFurnaceRecipe(recipe));
 	}
 
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient) {
-		label: for (EnderFurnaceRecipe recipe : EnderFurnaceRecipe.recipes)
-			for (Object stack : recipe.getInput())
-				if (EnderFurnaceRecipe.stacksMatch(stack, ingredient)) {
-					arecipes.add(new CachedEnderFurnaceRecipe(recipe));
-					continue label;
-				}
-	}
-
-	private static Object getStack(Object obj) {
-		if (obj instanceof String)
-			return OreDictionary.getOres((String) obj).toArray(new ItemStack[0]);
-		else if (obj instanceof Item)
-			return new ItemStack((Item) obj);
-		else if (obj instanceof Block)
-			return new ItemStack((Block) obj);
-		return obj;
+		for (EnderFurnaceRecipe recipe : EnderFurnaceRecipe.recipes)
+			if (recipe.isPartOfInput(ingredient))
+				arecipes.add(new CachedEnderFurnaceRecipe(recipe));
 	}
 
 	class CachedEnderFurnaceRecipe extends CachedRecipe {
@@ -144,7 +123,7 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 				for (int j = 0; j < 2; j++) {
 					int index = i + j * 2;
 					if (index < input.length && input[index] != null)
-						this.input[index] = new PositionedStack(getStack(input[index]), 46 + i * 18, 16 + j * 18);
+						this.input[index] = new PositionedStack(input[index], 46 + i * 18, 16 + j * 18);
 				}
 		}
 
