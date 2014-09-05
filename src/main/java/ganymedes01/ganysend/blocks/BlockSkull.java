@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.ModItems;
+import ganymedes01.ganysend.core.utils.HeadsHelper;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.SkullTypes;
@@ -18,8 +19,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -120,12 +119,8 @@ public class BlockSkull extends BlockContainer implements IInfusionStabiliser {
 		ItemStack stack = new ItemStack(item, 1, getDamageValue(world, x, y, z));
 		TileEntityBlockSkull tile = Utils.getTileEntity(world, x, y, z, TileEntityBlockSkull.class);
 		if (tile != null)
-			if (tile.func_145904_a() == SkullTypes.player.ordinal() && tile.func_152108_a() != null) {
-				stack.setTagCompound(new NBTTagCompound());
-				NBTTagCompound profileData = new NBTTagCompound();
-				NBTUtil.func_152460_a(profileData, tile.func_152108_a());
-				stack.getTagCompound().setTag("SkullOwner", profileData);
-			}
+			if (tile.func_145904_a() == SkullTypes.player.ordinal() && tile.func_152108_a() != null)
+				stack = HeadsHelper.createHeadFor(tile.func_152108_a());
 
 		return stack;
 	}
@@ -155,12 +150,9 @@ public class BlockSkull extends BlockContainer implements IInfusionStabiliser {
 			return drops;
 		ItemStack stack = new ItemStack(ModItems.skull, 1, tile.func_145904_a());
 
-		if (tile.func_145904_a() == SkullTypes.player.ordinal() && tile.func_152108_a() != null) {
-			stack.setTagCompound(new NBTTagCompound());
-			NBTTagCompound profileData = new NBTTagCompound();
-			NBTUtil.func_152460_a(profileData, tile.func_152108_a());
-			stack.getTagCompound().setTag("SkullOwner", profileData);
-		}
+		if (tile.func_145904_a() == SkullTypes.player.ordinal() && tile.func_152108_a() != null)
+			stack = HeadsHelper.createHeadFor(tile.func_152108_a());
+
 		drops.add(stack);
 
 		return drops;
