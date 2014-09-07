@@ -61,6 +61,8 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory,
 	}
 
 	public GameProfile getProfile() {
+		if (StringUtils.isNullOrEmpty(playerName))
+			return null;
 		if (profile == null)
 			profile = new GameProfile(null, playerName);
 		return profile;
@@ -190,7 +192,7 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory,
 	@Override
 	public void writeToNBT(NBTTagCompound data) {
 		super.writeToNBT(data);
-		if (StringUtils.isNullOrEmpty(playerName))
+		if (!StringUtils.isNullOrEmpty(playerName))
 			data.setString("playerName", playerName);
 	}
 
