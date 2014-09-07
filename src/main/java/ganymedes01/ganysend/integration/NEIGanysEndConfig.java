@@ -6,6 +6,7 @@ import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.integration.nei.EnderFurnaceRecipeHandler;
 import ganymedes01.ganysend.lib.Reference;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 
@@ -35,6 +36,8 @@ public class NEIGanysEndConfig implements IConfigureNEI {
 		}
 		if (!GanysEnd.enableAnchoredEnderChest)
 			API.hideItem(new ItemStack(ModBlocks.anchoredEnderChest));
+		if (GanysEnd.isHeadcrumbsLoaded)
+			API.hideItem(new ItemStack(ModItems.skull, 1, OreDictionary.WILDCARD_VALUE));
 	}
 
 	@Override

@@ -4,7 +4,6 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
-import ganymedes01.ganysend.lib.SkullTypes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +28,7 @@ public class EnderFurnaceRecipe {
 	public static final ArrayList<EnderFurnaceRecipe> recipes = new ArrayList<EnderFurnaceRecipe>();
 	public static final HashMap<Object, Integer> fuelMap = new HashMap<Object, Integer>();
 
-	static {
+	public static void init() {
 		addFuel(Items.ender_pearl, 1600);
 		addFuel(Items.ender_eye, 2000);
 		addFuel(Blocks.end_stone, 10);
@@ -42,8 +41,8 @@ public class EnderFurnaceRecipe {
 		addRecipe(new ItemStack(ModBlocks.enderpearlBlock, 1, 1), ModBlocks.enderpearlBlock);
 		addRecipe(new ItemStack(Blocks.stone), Blocks.netherrack);
 		addRecipe(new ItemStack(Blocks.stonebrick), Blocks.nether_brick);
-		addRecipe(new ItemStack(Blocks.dragon_egg), new ItemStack(ModItems.skull, 1, SkullTypes.enderDragon.ordinal()));
-		addRecipe(new ItemStack(Items.nether_star), new ItemStack(ModItems.skull, 1, SkullTypes.wither.ordinal()));
+		addRecipe(new ItemStack(Blocks.dragon_egg), "skullEnderDragon");
+		addRecipe(new ItemStack(Items.nether_star), "skullWither");
 		addRecipe(new ItemStack(ModItems.endiumIngot, 2), "oreEndium");
 		addRecipe(new ItemStack(ModItems.enderTag), Items.paper);
 		addRecipe(new ItemStack(Blocks.mycelium), Blocks.grass);

@@ -10,6 +10,7 @@ import ganymedes01.ganysend.integration.ModIntegrator;
 import ganymedes01.ganysend.integration.ThaumcraftManager;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.network.PacketHandler;
+import ganymedes01.ganysend.recipes.EnderFurnaceRecipe;
 import ganymedes01.ganysend.recipes.ModRecipes;
 import ganymedes01.ganysend.world.EndWorldGenerator;
 
@@ -23,6 +24,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.FlowerEntry;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -63,6 +65,8 @@ public class GanysEnd {
 	public static boolean enableAnchoredEnderChest = true;
 	public static boolean enableRawEndiumRecipe = false;
 
+	public static boolean isHeadcrumbsLoaded = false;
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ModIntegrator.preInit();
@@ -73,12 +77,17 @@ public class GanysEnd {
 
 		ModBlocks.init();
 		ModItems.init();
-		ModRecipes.init();
 		ModEnchants.init();
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		isHeadcrumbsLoaded = Loader.isModLoaded("headcrumbs");
+		if (isHeadcrumbsLoaded)
+			ModItems.skull.setCreativeTab(null);
+		ModRecipes.init();
+		EnderFurnaceRecipe.init();
+
 		PacketHandler.init();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
