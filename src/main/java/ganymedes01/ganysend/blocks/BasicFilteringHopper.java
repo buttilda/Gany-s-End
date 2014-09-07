@@ -8,14 +8,10 @@ import ganymedes01.ganysend.lib.GUIsID;
 import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
-
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHopper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -119,7 +115,7 @@ public class BasicFilteringHopper extends BlockHopper {
 	@Override
 	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 origin, Vec3 direction) {
 		int meta = world.getBlockMetadata(x, y, z);
-		return RayTraceUtils.getRayTraceFromBlock(world, x, y, z, origin, direction, getConnBoxes(meta));
+		return RayTraceUtils.getRayTraceFromBlock(world, x, y, z, origin, direction, getBoxes(meta));
 	}
 
 	@Override
@@ -129,7 +125,7 @@ public class BasicFilteringHopper extends BlockHopper {
 
 		int meta = world.getBlockMetadata(x, y, z);
 
-		AxisAlignedBB[] hits = getConnBoxes(meta);
+		AxisAlignedBB[] hits = getBoxes(meta);
 		MovingObjectPosition mop = RayTraceUtils.getRayTraceFromBlock(world, x, y, z, player, hits);
 
 		AxisAlignedBB box = null;
@@ -140,25 +136,7 @@ public class BasicFilteringHopper extends BlockHopper {
 		return box == null ? hits[0] : box;
 	}
 
-	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB bounds, List boundsList, Entity entity) {
-		int meta = world.getBlockMetadata(x, y, z);
-
-		for (AxisAlignedBB box : getConnBoxes(meta))
-			if (box != null) {
-				box.minX += x;
-				box.maxX += x;
-				box.minY += y;
-				box.maxY += y;
-				box.minZ += z;
-				box.maxZ += z;
-				if (bounds.intersectsWith(box))
-					boundsList.add(box);
-			}
-	}
-
-	private AxisAlignedBB[] getConnBoxes(int meta) {
+	private AxisAlignedBB[] getBoxes(int meta) {
 		AxisAlignedBB[] boxes = new AxisAlignedBB[3];
 
 		boxes[0] = AxisAlignedBB.getBoundingBox(0, 10F / 16F, 0, 1, 1, 1);
