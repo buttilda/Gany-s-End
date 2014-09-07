@@ -2,19 +2,28 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
+import ganymedes01.ganysend.core.utils.RayTraceUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.GUIsID;
 import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
+
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHopper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -105,5 +114,77 @@ public class BasicFilteringHopper extends BlockHopper {
 	@SideOnly(Side.CLIENT)
 	public String getItemIconName() {
 		return null;
+	}
+
+	@Override
+	public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 origin, Vec3 direction) {
+		int meta = world.getBlockMetadata(x, y, z);
+		return RayTraceUtils.getRayTraceFromBlock(world, x, y, z, origin, direction, getConnBoxes(meta));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
+		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+
+		int meta = world.getBlockMetadata(x, y, z);
+
+		AxisAlignedBB[] hits = getConnBoxes(meta);
+		MovingObjectPosition mop = RayTraceUtils.getRayTraceFromBlock(world, x, y, z, player, hits);
+
+		AxisAlignedBB box = null;
+		if (mop != null)
+			box = hits[mop.subHit];
+		if (box != null)
+			box = AxisAlignedBB.getBoundingBox(x + box.minX, y + box.minY, z + box.minZ, x + box.maxX, y + box.maxY, z + box.maxZ);
+		return box == null ? hits[0] : box;
+	}
+
+	@Override
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB bounds, List boundsList, Entity entity) {
+		int meta = world.getBlockMetadata(x, y, z);
+
+		for (AxisAlignedBB box : getConnBoxes(meta))
+			if (box != null) {
+				box.minX += x;
+				box.maxX += x;
+				box.minY += y;
+				box.maxY += y;
+				box.minZ += z;
+				box.maxZ += z;
+				if (bounds.intersectsWith(box))
+					boundsList.add(box);
+			}
+	}
+
+	private AxisAlignedBB[] getConnBoxes(int meta) {
+		AxisAlignedBB[] boxes = new AxisAlignedBB[3];
+
+		boxes[0] = AxisAlignedBB.getBoundingBox(0, 10F / 16F, 0, 1, 1, 1);
+		boxes[1] = AxisAlignedBB.getBoundingBox(4F / 16F, 4F / 16F, 4F / 16F, 12F / 16F, 10F / 16F, 12F / 16F);
+
+		double d1 = 6F / 16F;
+		double d2 = 4F / 16F;
+
+		switch (BlockHopper.getDirectionFromMetadata(meta)) {
+			case 0:
+				boxes[2] = AxisAlignedBB.getBoundingBox(d1, 0, d1, 1 - d1, 4F / 16F, 1 - d1);
+				break;
+			case 2:
+				boxes[2] = AxisAlignedBB.getBoundingBox(d1, d2, 0, 1 - d1, d2 + d2, d2);
+				break;
+			case 3:
+				boxes[2] = AxisAlignedBB.getBoundingBox(d1, d2, 1 - d2, 1 - d1, d2 + d2, 1);
+				break;
+			case 4:
+				boxes[2] = AxisAlignedBB.getBoundingBox(0, d2, d1, d2, d2 + d2, 1 - d1);
+				break;
+			case 5:
+				boxes[2] = AxisAlignedBB.getBoundingBox(1 - d2, d2, d1, 1, d2 + d2, 1 - d1);
+				break;
+		}
+
+		return boxes;
 	}
 }
