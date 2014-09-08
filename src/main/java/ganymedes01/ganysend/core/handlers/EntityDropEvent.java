@@ -43,8 +43,8 @@ public class EntityDropEvent {
 
 		ItemStack weapon = getWeapon(event.source);
 
+		// Drop heads
 		if (!GanysEnd.isHeadcrumbsLoaded) {
-			// Drop heads
 			boolean isScythe = weapon != null && weapon.getItem() == ModItems.enderScythe;
 			if (isScythe || shouldDoRandomDrop(event.entityLiving.worldObj.rand, event.lootingLevel)) {
 				ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);

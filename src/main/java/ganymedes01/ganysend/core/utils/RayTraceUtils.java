@@ -10,6 +10,13 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+/**
+ * Gany's End
+ *
+ * @author ganymedes01
+ *
+ */
+
 public class RayTraceUtils {
 
 	public static MovingObjectPosition getRayTraceFromBlock(World world, int x, int y, int z, EntityPlayer player, AxisAlignedBB... boxes) {

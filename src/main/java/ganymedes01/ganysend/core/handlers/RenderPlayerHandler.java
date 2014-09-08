@@ -1,14 +1,18 @@
 package ganymedes01.ganysend.core.handlers;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockSkullRender;
 import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 
 import org.lwjgl.opengl.GL11;
+
+import com.mojang.authlib.GameProfile;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -34,9 +38,13 @@ public class RenderPlayerHandler {
 			ItemStack head = event.entityPlayer.inventory.armorItemInSlot(3);
 			if (head != null && head.getItem() == ModItems.skull)
 				setHiddenState(model, true);
-			else
+			else if (head == null || !isHeadcrumbsHead(head.getItem()))
 				setHiddenState(model, false);
 		}
+	}
+
+	private boolean isHeadcrumbsHead(Item item) {
+		return GanysEnd.headcrumbsHead != null && GanysEnd.headcrumbsHead == item;
 	}
 
 	@SubscribeEvent
@@ -90,7 +98,15 @@ public class RenderPlayerHandler {
 						break;
 				}
 
-				TileEntityBlockSkullRender.instance.renderHead(-0.5F, 0.0F, -0.5F + offset * 0.0625F, 1, 180.0F, head.getItemDamage(), head.hasTagCompound() ? NBTUtil.func_152459_a(head.getTagCompound().getCompoundTag("SkullOwner")) : null);
+				GameProfile profile = null;
+				if (head.hasTagCompound())
+					if (head.getTagCompound().hasKey("SkullOwner", 10))
+						profile = NBTUtil.func_152459_a(head.getTagCompound().getCompoundTag("SkullOwner"));
+					else if (head.getTagCompound().hasKey("SkullOwner", 8)) {
+						String username = head.getTagCompound().getString("SkullOwner");
+						profile = new GameProfile(null, username);
+					}
+				TileEntityBlockSkullRender.instance.renderHead(-0.5F, 0.0F, -0.5F + offset * 0.0625F, 1, 180.0F, head.getItemDamage(), profile);
 				GL11.glPopMatrix();
 			}
 		}

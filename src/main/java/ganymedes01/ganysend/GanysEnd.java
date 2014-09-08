@@ -20,6 +20,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.FlowerEntry;
@@ -66,6 +67,7 @@ public class GanysEnd {
 	public static boolean enableRawEndiumRecipe = false;
 
 	public static boolean isHeadcrumbsLoaded = false;
+	public static Item headcrumbsHead = null;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -122,6 +124,16 @@ public class GanysEnd {
 			}
 		} catch (Exception e) {
 		}
+
+		if (isHeadcrumbsLoaded)
+			try {
+				Class<?> cls = Class.forName("ganymedes01.headcrumbs.ModItems");
+				Field f = cls.getDeclaredField("skull");
+				if (!f.isAccessible())
+					f.setAccessible(true);
+				headcrumbsHead = (Item) f.get(null);
+			} catch (Exception e) {
+			}
 	}
 
 	@EventHandler
