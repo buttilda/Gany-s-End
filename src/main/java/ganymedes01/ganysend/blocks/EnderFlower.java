@@ -2,6 +2,7 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
 
 import java.util.List;
@@ -33,9 +34,15 @@ public class EnderFlower extends BlockFlower {
 	public EnderFlower() {
 		super(0);
 		setLightLevel(0.3F);
+		setStepSound(soundTypeGrass);
 		setCreativeTab(GanysEnd.endTab);
 		setBlockName(Utils.getUnlocalizedName(Strings.ENDER_FLOWER_NAME));
 		setBlockTextureName(Utils.getBlockTexture(Strings.ENDER_FLOWER_NAME));
+	}
+
+	@Override
+	public int getRenderType() {
+		return RenderIDs.ENDER_FLOWER;
 	}
 
 	@Override

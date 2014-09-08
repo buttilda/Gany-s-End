@@ -3,6 +3,7 @@ package ganymedes01.ganysend.core.proxy;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.client.renderer.block.BlockChestRenderer;
+import ganymedes01.ganysend.client.renderer.block.BlockEnderFlowerRenderer;
 import ganymedes01.ganysend.client.renderer.block.BlockFilteringHopperRender;
 import ganymedes01.ganysend.client.renderer.block.BlockInfiniteWaterSourceRender;
 import ganymedes01.ganysend.client.renderer.block.BlockInventoryBinderRender;
@@ -73,5 +74,6 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new BlockRawEndiumRender());
 		RenderingRegistry.registerBlockHandler(new BlockInfiniteWaterSourceRender());
 		RenderingRegistry.registerBlockHandler(new BlockChestRenderer());
+		RenderingRegistry.registerBlockHandler(new BlockEnderFlowerRenderer());
 	}
 }
