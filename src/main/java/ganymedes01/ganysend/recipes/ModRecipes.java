@@ -30,6 +30,7 @@ public class ModRecipes {
 	}
 
 	private static void registerOreDictionary() {
+		OreDictionary.registerOre("chestWood", Blocks.chest);
 		OreDictionary.registerOre("oreEndium", ModBlocks.rawEndium);
 		OreDictionary.registerOre("ingotEndium", new ItemStack(ModItems.endiumIngot));
 		OreDictionary.registerOre("nuggetEndium", new ItemStack(ModItems.endiumIngot, 1, 1));
@@ -125,7 +126,7 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.infiniteWaterSource), "yzy", "zxz", "yzy", 'x', ModItems.infiniteBucket, 'y', Items.iron_ingot, 'z', Items.ender_pearl);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 0), "xxx", "xxx", 'x', ModBlocks.endstoneBrick);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.endWalls, 6, 1), "xxx", "xxx", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 1));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.voidCrate), "xyx", "xzx", "xwx", 'x', "logWood", 'y', Blocks.chest, 'z', Items.ender_pearl, 'w', Blocks.obsidian));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.voidCrate), "xyx", "xzx", "xwx", 'x', "logWood", 'y', "chestWood", 'z', Items.ender_pearl, 'w', Blocks.obsidian));
 		if (GanysEnd.enableRawEndiumRecipe)
 			GameRegistry.addRecipe(new ItemStack(ModBlocks.rawEndium), "zyz", "yxy", "zyz", 'x', Items.ender_eye, 'y', Blocks.end_stone, 'z', Blocks.obsidian);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.enderFurnace), "xxx", "xyx", "xxx", 'x', new ItemStack(Blocks.end_stone), 'y', Items.ender_eye);
