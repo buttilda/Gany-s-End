@@ -52,6 +52,8 @@ public class ModRecipes {
 		OreDictionary.registerOre("skullZombie", new ItemStack(Items.skull, 1, 2));
 		OreDictionary.registerOre("skullPlayer", new ItemStack(Items.skull, 1, 3));
 		OreDictionary.registerOre("skullCreeper", new ItemStack(Items.skull, 1, 4));
+
+		OreDictionary.registerOre("transdimBlock", new ItemStack(ModBlocks.anchoredEnderChest));
 	}
 
 	private static void registerArmourRecipes() {
