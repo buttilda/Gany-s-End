@@ -15,6 +15,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
@@ -44,7 +45,9 @@ public class EnderFurnaceRecipe {
 		addRecipe(new ItemStack(Blocks.dragon_egg), "skullEnderDragon");
 		addRecipe(new ItemStack(Items.nether_star), "skullWither");
 		addRecipe(new ItemStack(ModItems.endiumIngot, 2), "oreEndium");
-		addRecipe(new ItemStack(ModItems.enderTag), Items.paper);
+		ItemStack enderTag = new ItemStack(ModItems.enderTag);
+		enderTag.setTagCompound(new NBTTagCompound());
+		addRecipe(enderTag, Items.paper);
 		addRecipe(new ItemStack(Blocks.mycelium), Blocks.grass);
 		addRecipe(new ItemStack(Items.emerald), Items.diamond, Items.gold_ingot, "itemSkull", new ItemStack(Items.potionitem, 1, 8196));
 		addRecipe(new ItemStack(Items.diamond), Items.emerald, Items.gold_ingot, "itemSkull", new ItemStack(Items.potionitem, 1, 8194));

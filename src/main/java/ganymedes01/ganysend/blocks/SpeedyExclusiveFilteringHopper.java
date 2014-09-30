@@ -1,6 +1,8 @@
 package ganymedes01.ganysend.blocks;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -47,5 +49,11 @@ public class SpeedyExclusiveFilteringHopper extends BasicFilteringHopper {
 		blockOutside = reg.registerIcon(Utils.getBlockTexture(Strings.EXCLUSIVE_FILTERING_HOPPER_NAME) + "_outside_speedy");
 		blockTop = reg.registerIcon(Utils.getBlockTexture(Strings.EXCLUSIVE_FILTERING_HOPPER_NAME) + "_top");
 		registerExtraIcons(reg);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getItemIconName() {
+		return GanysEnd.enable2DHoppers ? Reference.ITEM_BLOCK_TEXTURE_PATH + Strings.SPEEDY_EXCLUSIVE_FILTERING_HOPPER_NAME : null;
 	}
 }

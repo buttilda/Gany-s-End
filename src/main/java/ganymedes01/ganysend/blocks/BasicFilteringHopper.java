@@ -5,6 +5,7 @@ import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.RayTraceUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.GUIsID;
+import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
@@ -109,7 +110,7 @@ public class BasicFilteringHopper extends BlockHopper {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getItemIconName() {
-		return null;
+		return GanysEnd.enable2DHoppers ? Reference.ITEM_BLOCK_TEXTURE_PATH + Strings.BASIC_FILTERING_HOPPER_NAME : null;
 	}
 
 	@Override

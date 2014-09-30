@@ -13,29 +13,21 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EnderTag extends Item {
 
 	public EnderTag() {
 		setMaxStackSize(1);
-		setTextureName("paper");
 		setCreativeTab(GanysEnd.endTab);
+		setTextureName(Utils.getItemTexture(Strings.ENDER_TAG_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDER_TAG_NAME));
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int pass) {
-		return Utils.getColour(26, 75, 75);
 	}
 
 	@Override

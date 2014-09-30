@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.client.renderer.block;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.blocks.BasicFilteringHopper;
 import ganymedes01.ganysend.lib.RenderIDs;
 import net.minecraft.block.Block;
@@ -39,7 +40,7 @@ public class BlockFilteringHopperRender implements ISimpleBlockRenderingHandler 
 
 	@Override
 	public boolean shouldRender3DInInventory(int modelId) {
-		return true;
+		return !GanysEnd.enable2DHoppers;
 	}
 
 	@Override

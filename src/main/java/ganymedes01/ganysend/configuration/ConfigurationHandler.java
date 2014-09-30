@@ -62,6 +62,7 @@ public class ConfigurationHandler {
 		GanysEnd.enableEnderBag = configBoolean("enableEnderBag", true, GanysEnd.enableEnderBag);
 		GanysEnd.enableRawEndiumRecipe = configBoolean("enableRawEndiumRecipe", true, GanysEnd.enableRawEndiumRecipe);
 		GanysEnd.enableVanillaHeadsDrop = configBoolean("enableVanillaHeadsDrop", false, GanysEnd.enableVanillaHeadsDrop);
+		GanysEnd.enable2DHoppers = configBoolean("enable2DHoppers", false, GanysEnd.enable2DHoppers);
 
 		if (configFile.hasChanged())
 			configFile.save();
