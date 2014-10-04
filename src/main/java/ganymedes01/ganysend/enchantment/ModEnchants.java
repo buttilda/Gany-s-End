@@ -4,9 +4,9 @@ import net.minecraft.enchantment.Enchantment;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ModEnchants {
@@ -15,5 +15,6 @@ public class ModEnchants {
 
 	public static void init() {
 		imperviousness = new ImperviousnessEnchantment();
+		Enchantment.addToBookList(imperviousness);
 	}
 }

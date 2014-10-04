@@ -8,16 +8,20 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable;
+import net.minecraftforge.event.terraingen.TerrainGen;
 import cpw.mods.fml.common.IWorldGenerator;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EndWorldGenerator implements IWorldGenerator {
+
+	private final WorldGenMinable endiumGenerator = new WorldGenMinable(ModBlocks.rawEndium, 0, 7, Blocks.end_stone);
 
 	@Override
 	public void generate(Random rand, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
@@ -37,7 +41,8 @@ public class EndWorldGenerator implements IWorldGenerator {
 					}
 
 			for (int i = 0; i < 15; i++)
-				new WorldGenMinable(ModBlocks.rawEndium, 0, 7, Blocks.end_stone).generate(world, rand, chunkX * 16 + rand.nextInt(16), 20 + rand.nextInt(100), chunkZ * 16 + rand.nextInt(16));
+				if (TerrainGen.generateOre(world, rand, endiumGenerator, chunkX, chunkZ, GenerateMinable.EventType.CUSTOM))
+					endiumGenerator.generate(world, rand, chunkX * 16 + rand.nextInt(16), 20 + rand.nextInt(100), chunkZ * 16 + rand.nextInt(16));
 		}
 	}
 
