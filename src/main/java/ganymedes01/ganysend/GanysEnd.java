@@ -64,8 +64,9 @@ public class GanysEnd {
 	public static boolean enableVanillaHeadsDrop = true;
 	public static boolean enableEnderBag = true;
 	public static boolean enableAnchoredEnderChest = true;
-	public static boolean enableRawEndiumRecipe = false;
 	public static boolean enable2DHoppers = false;
+	public static boolean enableEnderFlower = true;
+	public static boolean enableEndiumGen = true;
 
 	public static boolean isHeadcrumbsLoaded = false;
 	public static Item headcrumbsHead = null;

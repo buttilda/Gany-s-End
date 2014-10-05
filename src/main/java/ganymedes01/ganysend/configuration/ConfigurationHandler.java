@@ -60,9 +60,10 @@ public class ConfigurationHandler {
 		GanysEnd.enableRandomHeadDrop = configBoolean("enableRandomHeadDrop", false, GanysEnd.enableRandomHeadDrop);
 		GanysEnd.enableTimeManipulator = configBoolean("enableTimeManipulator", true, GanysEnd.enableTimeManipulator);
 		GanysEnd.enableEnderBag = configBoolean("enableEnderBag", true, GanysEnd.enableEnderBag);
-		GanysEnd.enableRawEndiumRecipe = configBoolean("enableRawEndiumRecipe", true, GanysEnd.enableRawEndiumRecipe);
 		GanysEnd.enableVanillaHeadsDrop = configBoolean("enableVanillaHeadsDrop", false, GanysEnd.enableVanillaHeadsDrop);
 		GanysEnd.enable2DHoppers = configBoolean("enable2DHoppers", false, GanysEnd.enable2DHoppers);
+		GanysEnd.enableEndiumGen = configBoolean("enableEndiumWorldGen", false, GanysEnd.enableEndiumGen);
+		GanysEnd.enableEnderFlower = configBoolean("enableEnderFlower", false, GanysEnd.enableEnderFlower);
 
 		if (configFile.hasChanged())
 			configFile.save();

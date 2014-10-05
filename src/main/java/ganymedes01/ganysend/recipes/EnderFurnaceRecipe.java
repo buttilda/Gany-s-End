@@ -33,7 +33,8 @@ public class EnderFurnaceRecipe {
 		addFuel(Items.ender_pearl, 1600);
 		addFuel(Items.ender_eye, 2000);
 		addFuel(Blocks.end_stone, 10);
-		addFuel("enderFlower", 100);
+		if (GanysEnd.enableEnderFlower)
+			addFuel("enderFlower", 100);
 		addFuel("blockEnderPearl", 1600);
 
 		addRecipe(new ItemStack(Items.ender_pearl, 4), "itemSkull", "itemSkull");
@@ -73,11 +74,13 @@ public class EnderFurnaceRecipe {
 		addRecipe(new ItemStack(Items.record_ward), new ItemStack(Items.skull), Items.redstone, new ItemStack(Items.dye, 1, 2), new ItemStack(Items.dye, 1, 10));
 		addRecipe(new ItemStack(Items.record_11), Items.record_stal, Items.gunpowder, Items.gunpowder, Items.gunpowder);
 		addRecipe(new ItemStack(Items.record_wait), new ItemStack(Items.skull), Items.redstone, new ItemStack(Items.dye, 1, 6), new ItemStack(Items.dye, 1, 6));
-		for (int i = 0; i < 16; i++)
-			if (i == 4)
-				addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), ModBlocks.enderFlower, ModBlocks.enderFlower);
-			else
-				addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), ModBlocks.enderFlower);
+		if (GanysEnd.enableEnderFlower)
+			for (int i = 0; i < 16; i++)
+				if (i == 4)
+					addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), ModBlocks.enderFlower, ModBlocks.enderFlower);
+				else
+					addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), ModBlocks.enderFlower);
+		addRecipe(new ItemStack(ModBlocks.rawEndium), new ItemStack(Blocks.diamond_ore));
 	}
 
 	public static int getBurnTime(ItemStack stack) {

@@ -35,8 +35,8 @@ public class EnderFlower extends BlockFlower {
 		super(0);
 		setLightLevel(0.3F);
 		setStepSound(soundTypeGrass);
-		setCreativeTab(GanysEnd.endTab);
 		setBlockName(Utils.getUnlocalizedName(Strings.ENDER_FLOWER_NAME));
+		setCreativeTab(GanysEnd.enableEnderFlower ? GanysEnd.endTab : null);
 		setBlockTextureName(Utils.getBlockTexture(Strings.ENDER_FLOWER_NAME));
 	}
 
