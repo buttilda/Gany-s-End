@@ -60,11 +60,8 @@ public class EnderFurnaceRecipe {
 			} else {
 				String line = XMLHelper.readFile(recipesFile);
 				Iterator<String> iterator = XMLHelper.getIterator("recipe", line);
-				while (iterator.hasNext()) {
-					String s = iterator.next();
-					System.out.println(s);
-					recipes.add(new EnderFurnaceRecipe(s));
-				}
+				while (iterator.hasNext())
+					recipes.add(new EnderFurnaceRecipe(iterator.next()));
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Problem reading Ender Furnace recipes!" + e);
