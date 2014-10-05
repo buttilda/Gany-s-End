@@ -14,7 +14,6 @@ import ganymedes01.ganysend.recipes.EnderFurnaceRecipe;
 import ganymedes01.ganysend.recipes.ModRecipes;
 import ganymedes01.ganysend.world.EndWorldGenerator;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -75,7 +74,7 @@ public class GanysEnd {
 	public void preInit(FMLPreInitializationEvent event) {
 		ModIntegrator.preInit();
 
-		ConfigurationHandler.INSTANCE.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MASTER + File.separator + Reference.MOD_ID + ".cfg"));
+		ConfigurationHandler.INSTANCE.init(event);
 
 		GameRegistry.registerWorldGenerator(new EndWorldGenerator(), 0);
 

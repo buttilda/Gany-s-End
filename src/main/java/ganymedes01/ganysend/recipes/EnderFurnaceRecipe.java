@@ -4,9 +4,14 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
+import ganymedes01.ganysend.core.utils.XMLHelper;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -28,6 +33,11 @@ public class EnderFurnaceRecipe {
 
 	public static final ArrayList<EnderFurnaceRecipe> recipes = new ArrayList<EnderFurnaceRecipe>();
 	public static final HashMap<Object, Integer> fuelMap = new HashMap<Object, Integer>();
+	private static File recipesFile;
+
+	public static void init(File file) {
+		recipesFile = file;
+	}
 
 	public static void init() {
 		addFuel(Items.ender_pearl, 1600);
@@ -37,6 +47,31 @@ public class EnderFurnaceRecipe {
 			addFuel("enderFlower", 100);
 		addFuel("blockEnderPearl", 1600);
 
+		try {
+			if (!recipesFile.exists()) {
+				addDefaultRecipes();
+				BufferedWriter bw = XMLHelper.getWriter(recipesFile);
+				for (EnderFurnaceRecipe recipe : recipes) {
+					bw.write(recipe.toString());
+					bw.newLine();
+					bw.newLine();
+				}
+				bw.close();
+			} else {
+				String line = XMLHelper.readFile(recipesFile);
+				Iterator<String> iterator = XMLHelper.getIterator("recipe", line);
+				while (iterator.hasNext()) {
+					String s = iterator.next();
+					System.out.println(s);
+					recipes.add(new EnderFurnaceRecipe(s));
+				}
+			}
+		} catch (IOException e) {
+			throw new RuntimeException("Problem reading Ender Furnace recipes!" + e);
+		}
+	}
+
+	private static void addDefaultRecipes() {
 		addRecipe(new ItemStack(Items.ender_pearl, 4), "itemSkull", "itemSkull");
 		addRecipe(new ItemStack(Blocks.end_stone), Blocks.stone);
 		addRecipe(new ItemStack(ModBlocks.endstoneBrick), Blocks.stonebrick);
@@ -77,10 +112,10 @@ public class EnderFurnaceRecipe {
 		if (GanysEnd.enableEnderFlower)
 			for (int i = 0; i < 16; i++)
 				if (i == 4)
-					addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), ModBlocks.enderFlower, ModBlocks.enderFlower);
+					addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), "enderFlower", "enderFlower");
 				else
-					addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), ModBlocks.enderFlower);
-		addRecipe(new ItemStack(ModBlocks.rawEndium), new ItemStack(Blocks.diamond_ore));
+					addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), "enderFlower");
+		addRecipe(new ItemStack(ModBlocks.rawEndium), "oreDiamond");
 	}
 
 	public static int getBurnTime(ItemStack stack) {
@@ -104,17 +139,16 @@ public class EnderFurnaceRecipe {
 	}
 
 	public static void addFuel(Object fuel, int burnTime) {
-		Object valid = getValidObject(fuel);
+		Object valid = fuel instanceof String ? OreDictionary.getOres((String) fuel) : getValidObject(fuel);
 		if (fuel != null)
 			fuelMap.put(valid, burnTime);
 	}
 
-	@SuppressWarnings("unchecked")
 	private static boolean areStacksTheSame(Object obj, ItemStack target) {
 		if (obj instanceof ItemStack)
 			return InventoryUtils.areStacksTheSame((ItemStack) obj, target, false);
-		else if (obj instanceof List) {
-			List<ItemStack> list = (List<ItemStack>) obj;
+		else if (obj instanceof String) {
+			List<ItemStack> list = OreDictionary.getOres((String) obj);
 			for (ItemStack stack : list)
 				if (InventoryUtils.areStacksTheSame(stack, target, false))
 					return true;
@@ -124,13 +158,11 @@ public class EnderFurnaceRecipe {
 	}
 
 	private static Object getValidObject(Object obj) {
-		if (obj instanceof String)
-			return OreDictionary.getOres((String) obj);
-		else if (obj instanceof Item)
+		if (obj instanceof Item)
 			return new ItemStack((Item) obj);
 		else if (obj instanceof Block)
 			return new ItemStack((Block) obj);
-		else if (obj instanceof ItemStack)
+		else if (obj instanceof ItemStack || obj instanceof String)
 			return obj;
 
 		return null;
@@ -139,11 +171,10 @@ public class EnderFurnaceRecipe {
 	private final Object[] inputs;
 	private final ItemStack output;
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	EnderFurnaceRecipe(ItemStack output, Object... input) {
 		this.output = output;
 
-		List list = new ArrayList();
+		List<Object> list = new ArrayList<Object>();
 		for (Object obj : input) {
 			Object valid = getValidObject(obj);
 			if (obj != null)
@@ -151,6 +182,16 @@ public class EnderFurnaceRecipe {
 		}
 
 		inputs = list.toArray();
+	}
+
+	EnderFurnaceRecipe(String line) {
+		output = (ItemStack) XMLHelper.processEntry(XMLHelper.getEntry(line, "output"));
+		List<Object> inputs = new ArrayList<Object>();
+		for (int i = 1; i <= 4; i++)
+			if (line.contains("input" + i))
+				inputs.add(XMLHelper.processEntry(XMLHelper.getEntry(line, "input" + i)));
+
+		this.inputs = inputs.toArray();
 	}
 
 	public boolean matches(ItemStack... stacks) {
@@ -189,5 +230,19 @@ public class EnderFurnaceRecipe {
 
 	public Object[] getInput() {
 		return inputs;
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(XMLHelper.makeEntry("output", output));
+
+		int count = 1;
+		for (Object input : inputs) {
+			buffer.append(XMLHelper.makeEntry("input" + count, input));
+			count++;
+		}
+
+		return XMLHelper.makeGroup("recipe", buffer.toString());
 	}
 }

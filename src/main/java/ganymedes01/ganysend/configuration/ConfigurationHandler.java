@@ -6,11 +6,13 @@ import ganymedes01.ganysend.integration.ModIntegrator;
 import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
+import ganymedes01.ganysend.recipes.EnderFurnaceRecipe;
 
 import java.io.File;
 
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
@@ -39,8 +41,9 @@ public class ConfigurationHandler {
 		return configFile.get("Mod Integration", "Integrate " + modID, true).setRequiresMcRestart(true).getBoolean(true);
 	}
 
-	public void init(File file) {
-		configFile = new Configuration(file);
+	public void init(FMLPreInitializationEvent event) {
+		configFile = new Configuration(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MASTER + File.separator + Reference.MOD_ID + ".cfg"));
+		EnderFurnaceRecipe.init(new File(event.getModConfigurationDirectory(), Reference.MASTER + File.separator + "EnderFurnaceRecipes.xml"));
 
 		syncConfigs();
 	}

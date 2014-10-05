@@ -16,6 +16,7 @@ import java.util.Map.Entry;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.oredict.OreDictionary;
 
 import org.lwjgl.opengl.GL11;
 
@@ -117,6 +118,9 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 			result = new PositionedStack(recipe.getOutput(), 124, 25);
 
 			Object[] input = recipe.getInput();
+			for (int i = 0; i < input.length; i++)
+				if (input[i] instanceof String)
+					input[i] = OreDictionary.getOres((String) input[i]);
 
 			this.input = new PositionedStack[input.length];
 			for (int i = 0; i < 2; i++)
