@@ -105,7 +105,7 @@ public class GanysEnd {
 			try {
 				Block blockEnderChest = (Block) Class.forName("codechicken.enderstorage.EnderStorage").getDeclaredField("blockEnderChest").get(null);
 				for (int i = 0; i < 0x1000; i++)
-					OreDictionary.registerOre("enderChest", new ItemStack(blockEnderChest, 1, i));
+					OreDictionary.registerOre("chestEnder", new ItemStack(blockEnderChest, 1, i));
 			} catch (Exception e) {
 			}
 	}

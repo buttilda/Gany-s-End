@@ -41,8 +41,8 @@ public class ModRecipes {
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Blocks.brown_mushroom));
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Blocks.red_mushroom));
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Items.rotten_flesh));
-		if (GanysEnd.enableEnderBag)
-			OreDictionary.registerOre("enderChest", Blocks.ender_chest);
+		if (GanysEnd.enableEnderBag || GanysEnd.enableAnchoredEnderChest)
+			OreDictionary.registerOre("chestEnder", Blocks.ender_chest);
 
 		OreDictionary.registerOre("itemSkull", new ItemStack(ModItems.skull, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("itemSkull", new ItemStack(Items.skull, 1, OreDictionary.WILDCARD_VALUE));
@@ -86,9 +86,9 @@ public class ModRecipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumSword), " x ", "xyx", 'x', Items.diamond, 'y', ModItems.endiumSword));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.reinforcedEndiumBow), " x ", "xyx", 'x', Items.diamond, 'y', ModItems.endiumBow));
 		if (GanysEnd.enableEnderBag)
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderBag), "zwz", "wyw", "xxx", 'x', Items.ender_pearl, 'y', "enderChest", 'z', new ItemStack(Items.string), 'w', new ItemStack(Items.leather)));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderBag), "zwz", "wyw", "xxx", 'x', Items.ender_pearl, 'y', "chestEnder", 'z', new ItemStack(Items.string), 'w', new ItemStack(Items.leather)));
 		if (GanysEnd.enableAnchoredEnderChest)
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.anchoredEnderChest), "xxx", "xyx", "xzx", 'x', "ingotGold", 'y', "enderChest", 'z', new ItemStack(Blocks.anvil)));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.anchoredEnderChest), "xxx", "xyx", "xzx", 'x', "ingotGold", 'y', "chestEnder", 'z', new ItemStack(Blocks.anvil)));
 
 		// Vanilla
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.experience_bottle, 8), "yyy", "yxy", "yyy", 'x', "ingotEndium", 'y', new ItemStack(Items.potionitem, 1, 0)));
