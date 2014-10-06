@@ -43,7 +43,7 @@ public class ConfigurationHandler {
 
 	public void init(FMLPreInitializationEvent event) {
 		configFile = new Configuration(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MASTER + File.separator + Reference.MOD_ID + ".cfg"));
-		EnderFurnaceRecipe.init(new File(event.getModConfigurationDirectory(), Reference.MASTER + File.separator + "EnderFurnaceRecipes.xml"));
+		EnderFurnaceRecipe.init(new File(event.getModConfigurationDirectory(), Reference.MASTER + File.separator + "EnderFurnaceRecipes.xml"), new File(event.getModConfigurationDirectory(), Reference.MASTER + File.separator + "EnderFurnaceFuels.xml"));
 
 		syncConfigs();
 	}

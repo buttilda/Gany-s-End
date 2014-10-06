@@ -33,19 +33,40 @@ public class EnderFurnaceRecipe {
 
 	public static final ArrayList<EnderFurnaceRecipe> recipes = new ArrayList<EnderFurnaceRecipe>();
 	public static final HashMap<Object, Integer> fuelMap = new HashMap<Object, Integer>();
-	private static File recipesFile;
+	private static File recipesFile, fuelsFile;
 
-	public static void init(File recipes) {
+	public static void init(File recipes, File fuels) {
 		recipesFile = recipes;
+		fuelsFile = fuels;
 	}
 
 	public static void init() {
-		addFuel(Items.ender_pearl, 1600);
-		addFuel(Items.ender_eye, 2000);
-		addFuel(Blocks.end_stone, 10);
-		if (GanysEnd.enableEnderFlower)
-			addFuel("flowerEnder", 100);
-		addFuel("blockEnderPearl", 1600);
+		try {
+			if (!fuelsFile.exists()) {
+				addDefaultFuels();
+				BufferedWriter bw = XMLHelper.getWriter(fuelsFile);
+				for (Entry<Object, Integer> entry : fuelMap.entrySet()) {
+					StringBuffer buffer = new StringBuffer();
+					buffer.append(XMLHelper.makeEntry("input", entry.getKey()));
+					buffer.append(XMLHelper.makeEntry("burntime", entry.getValue()));
+					bw.write(XMLHelper.makeGroup("fuel", buffer.toString()));
+					bw.newLine();
+					bw.newLine();
+				}
+				bw.close();
+			} else {
+				String line = XMLHelper.readFile(fuelsFile);
+				Iterator<String> iterator = XMLHelper.getIterator("fuel", line);
+				while (iterator.hasNext()) {
+					String entry = iterator.next();
+					String input = XMLHelper.getEntry(entry, "input");
+					String burntime = XMLHelper.getEntry(entry, "burntime");
+					fuelMap.put(XMLHelper.processEntry(input), Integer.parseInt(burntime));
+				}
+			}
+		} catch (IOException e) {
+			throw new RuntimeException("Problem reading Ender Furnace fuels!" + e);
+		}
 
 		try {
 			if (!recipesFile.exists()) {
@@ -66,6 +87,14 @@ public class EnderFurnaceRecipe {
 		} catch (IOException e) {
 			throw new RuntimeException("Problem reading Ender Furnace recipes!" + e);
 		}
+	}
+
+	private static void addDefaultFuels() {
+		addFuel(Items.ender_pearl, 1600);
+		addFuel(Items.ender_eye, 2000);
+		addFuel(Blocks.end_stone, 10);
+		addFuel("flowerEnder", 100);
+		addFuel("blockEnderPearl", 1600);
 	}
 
 	private static void addDefaultRecipes() {
@@ -136,7 +165,7 @@ public class EnderFurnaceRecipe {
 	}
 
 	public static void addFuel(Object fuel, int burnTime) {
-		Object valid = fuel instanceof String ? OreDictionary.getOres((String) fuel) : getValidObject(fuel);
+		Object valid = getValidObject(fuel);
 		if (fuel != null)
 			fuelMap.put(valid, burnTime);
 	}

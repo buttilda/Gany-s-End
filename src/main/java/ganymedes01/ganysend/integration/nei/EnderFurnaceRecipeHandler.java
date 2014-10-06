@@ -39,8 +39,12 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 		if (fuels == null) {
 			fuels = new ArrayList<PositionedStack>();
 
-			for (Entry<Object, Integer> entry : EnderFurnaceRecipe.fuelMap.entrySet())
-				fuels.add(new PositionedStack(entry.getKey(), 8, 34));
+			for (Entry<Object, Integer> entry : EnderFurnaceRecipe.fuelMap.entrySet()) {
+				Object obj = entry.getKey();
+				if (obj instanceof String)
+					obj = OreDictionary.getOres((String) obj);
+				fuels.add(new PositionedStack(obj, 8, 34));
+			}
 		}
 	}
 
