@@ -37,7 +37,7 @@ public class ModRecipes {
 		OreDictionary.registerOre("blockEndium", ModBlocks.endiumBlock);
 		OreDictionary.registerOre("blockEnderPearl", new ItemStack(ModBlocks.enderpearlBlock, 1, OreDictionary.WILDCARD_VALUE));
 		if (GanysEnd.enableEnderFlower)
-			OreDictionary.registerOre("enderFlower", ModBlocks.enderFlower);
+			OreDictionary.registerOre("flowerEnder", ModBlocks.enderFlower);
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Blocks.brown_mushroom));
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Blocks.red_mushroom));
 		OreDictionary.registerOre("nightGemMaterial", new ItemStack(Items.rotten_flesh));
@@ -92,7 +92,7 @@ public class ModRecipes {
 
 		// Vanilla
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.experience_bottle, 8), "yyy", "yxy", "yyy", 'x', "ingotEndium", 'y', new ItemStack(Items.potionitem, 1, 0)));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.ender_pearl), "xxx", "xxx", "x x", 'x', "enderFlower"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.ender_pearl), "xxx", "xxx", "x x", 'x', "flowerEnder"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.ender_pearl, 9), "blockEnderPearl"));
 	}
 
@@ -109,8 +109,8 @@ public class ModRecipes {
 		}
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.emulator), "xyx", "yyy", "xyx", 'x', Items.ender_pearl, 'y', Blocks.hardened_clay);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.emulator), "xyx", "yyy", "xyx", 'x', Items.ender_pearl, 'y', Blocks.stained_hardened_clay);
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.emulator, 8), "xyx", "yyy", "xyx", 'x', "enderFlower", 'y', Blocks.hardened_clay));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.emulator, 8), "xyx", "yyy", "xyx", 'x', "enderFlower", 'y', Blocks.stained_hardened_clay));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.emulator, 8), "xyx", "yyy", "xyx", 'x', "flowerEnder", 'y', Blocks.hardened_clay));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.emulator, 8), "xyx", "yyy", "xyx", 'x', "flowerEnder", 'y', Blocks.stained_hardened_clay));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.endiumBlock), "xxx", "xxx", "xxx", 'x', "ingotEndium"));
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.basicFilteringHopper), " z ", "yxy", 'x', Blocks.hopper, 'y', Items.ender_pearl, 'z', Items.gold_ingot);
 		GameRegistry.addRecipe(new ItemStack(ModBlocks.exclusiveFilteringHopper), "yxy", 'x', ModBlocks.basicFilteringHopper, 'y', Items.redstone);

@@ -35,8 +35,8 @@ public class EnderFurnaceRecipe {
 	public static final HashMap<Object, Integer> fuelMap = new HashMap<Object, Integer>();
 	private static File recipesFile;
 
-	public static void init(File file) {
-		recipesFile = file;
+	public static void init(File recipes) {
+		recipesFile = recipes;
 	}
 
 	public static void init() {
@@ -44,7 +44,7 @@ public class EnderFurnaceRecipe {
 		addFuel(Items.ender_eye, 2000);
 		addFuel(Blocks.end_stone, 10);
 		if (GanysEnd.enableEnderFlower)
-			addFuel("enderFlower", 100);
+			addFuel("flowerEnder", 100);
 		addFuel("blockEnderPearl", 1600);
 
 		try {
@@ -109,9 +109,9 @@ public class EnderFurnaceRecipe {
 		if (GanysEnd.enableEnderFlower)
 			for (int i = 0; i < 16; i++)
 				if (i == 4)
-					addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), "enderFlower", "enderFlower");
+					addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), "flowerEnder", "flowerEnder");
 				else
-					addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), "enderFlower");
+					addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), "flowerEnder");
 		addRecipe(new ItemStack(ModBlocks.rawEndium), "oreDiamond");
 	}
 

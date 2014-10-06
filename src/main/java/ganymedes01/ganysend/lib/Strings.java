@@ -10,7 +10,7 @@ package ganymedes01.ganysend.lib;
 public class Strings {
 
 	// Block names
-	public static final String ENDER_FLOWER_NAME = "enderFlower";
+	public static final String ENDER_FLOWER_NAME = "flowerEnder";
 	public static final String ENDSTONE_BRICK_NAME = "endstoneBrick";
 	public static final String ENDERPEARL_BLOCK_NAME = "enderpearlBlock";
 	public static final String ENDERPEARL_BRICK_NAME = "enderpearlBrick";
