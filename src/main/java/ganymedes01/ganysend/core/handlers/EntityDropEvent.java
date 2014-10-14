@@ -45,7 +45,7 @@ public class EntityDropEvent {
 
 		// Drop heads
 		if (!GanysEnd.isHeadcrumbsLoaded) {
-			boolean isScythe = weapon != null && weapon.getItem() == ModItems.enderScythe;
+			boolean isScythe = weapon != null && weapon.getItem() == ModItems.enderScythe && GanysEnd.enableScythe;
 			if (isScythe || shouldDoRandomDrop(event.entityLiving.worldObj.rand, event.lootingLevel)) {
 				ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
 				if (stack != null)
@@ -55,6 +55,8 @@ public class EntityDropEvent {
 		}
 
 		// Collect drops
+		if (!GanysEnd.enableEndiumTools)
+			return;
 		if (weapon != null && weapon.getItem() instanceof IEndiumTool)
 			if (weapon.stackTagCompound != null)
 				if (weapon.getTagCompound().getBoolean("Tagged")) {

@@ -38,7 +38,7 @@ public class EndiumAxe extends ItemAxe implements IEndiumTool {
 	protected EndiumAxe(ToolMaterial material) {
 		super(material);
 		setHarvestLevel("axe", 3);
-		setCreativeTab(GanysEnd.endTab);
+		setCreativeTab(GanysEnd.enableEndiumTools ? GanysEnd.endTab : null);
 	}
 
 	@Override

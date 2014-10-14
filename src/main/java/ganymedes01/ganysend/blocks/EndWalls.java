@@ -19,8 +19,8 @@ public class EndWalls extends BlockWall {
 
 	public EndWalls() {
 		super(ModBlocks.endstoneBrick);
-		setCreativeTab(GanysEnd.endTab);
 		setBlockName(Utils.getUnlocalizedName(Strings.END_WALLS_NAME));
+		setCreativeTab(GanysEnd.enableDecorativeBlocks ? GanysEnd.endTab : null);
 	}
 
 	@Override

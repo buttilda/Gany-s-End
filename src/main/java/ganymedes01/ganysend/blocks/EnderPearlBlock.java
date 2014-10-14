@@ -18,9 +18,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EnderPearlBlock extends Block {
@@ -32,8 +32,8 @@ public class EnderPearlBlock extends Block {
 		super(Material.iron);
 		setHardness(1.5F);
 		setResistance(10.0F);
-		setCreativeTab(GanysEnd.endTab);
 		setBlockName(Utils.getUnlocalizedName(Strings.ENDERPEARL_BLOCK_NAME));
+		setCreativeTab(GanysEnd.enableDecorativeBlocks ? GanysEnd.endTab : null);
 	}
 
 	@Override

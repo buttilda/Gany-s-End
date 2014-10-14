@@ -38,7 +38,7 @@ public class EndiumShovel extends ItemSpade implements IEndiumTool {
 	protected EndiumShovel(ToolMaterial material) {
 		super(material);
 		setHarvestLevel("shovel", 3);
-		setCreativeTab(GanysEnd.endTab);
+		setCreativeTab(GanysEnd.enableEndiumTools ? GanysEnd.endTab : null);
 	}
 
 	@Override

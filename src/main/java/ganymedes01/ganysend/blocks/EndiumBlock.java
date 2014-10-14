@@ -15,9 +15,9 @@ import net.minecraft.world.World;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EndiumBlock extends Block {
@@ -26,8 +26,8 @@ public class EndiumBlock extends Block {
 		super(Material.cloth);
 		setHardness(0.2F);
 		setResistance(0.5F);
-		setCreativeTab(GanysEnd.endTab);
 		setStepSound(soundTypeMetal);
+		setCreativeTab(GanysEnd.enableEndium ? GanysEnd.endTab : null);
 		setBlockName(Utils.getUnlocalizedName(Strings.ENDIUM_BLOCK_NAME));
 		setBlockTextureName(Utils.getItemTexture(Strings.ENDIUM_BLOCK_NAME));
 	}

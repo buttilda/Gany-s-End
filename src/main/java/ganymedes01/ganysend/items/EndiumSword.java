@@ -38,7 +38,7 @@ public class EndiumSword extends ItemSword implements IEndiumTool {
 	protected EndiumSword(ToolMaterial material) {
 		super(material);
 		setHarvestLevel("sword", 3);
-		setCreativeTab(GanysEnd.endTab);
+		setCreativeTab(GanysEnd.enableEndiumTools ? GanysEnd.endTab : null);
 	}
 
 	@Override

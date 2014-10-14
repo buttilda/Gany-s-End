@@ -36,7 +36,7 @@ public abstract class EndiumArmour extends ItemArmor {
 		super(ModMaterials.ENDIUM_ARMOUR, 0, type);
 		this.type = type;
 		setMaxStackSize(1);
-		setCreativeTab(GanysEnd.endTab);
+		setCreativeTab(GanysEnd.enableEndiumArmour ? GanysEnd.endTab : null);
 	}
 
 	@Override

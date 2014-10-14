@@ -32,8 +32,8 @@ public class InfiniteBucket extends ItemSimpleFoiled {
 	public InfiniteBucket() {
 		setMaxStackSize(1);
 		setContainerItem(this);
-		setCreativeTab(GanysEnd.endTab);
 		setTextureName(Utils.getItemTexture(Strings.INFINITE_BUCKET_NAME));
+		setCreativeTab(GanysEnd.enableInfiniteBucket ? GanysEnd.endTab : null);
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.INFINITE_BUCKET_NAME));
 	}
 

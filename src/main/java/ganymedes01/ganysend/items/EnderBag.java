@@ -10,17 +10,17 @@ import net.minecraft.world.World;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EnderBag extends Item {
 
 	public EnderBag() {
 		setMaxStackSize(1);
-		setCreativeTab(GanysEnd.endTab);
 		setTextureName(Utils.getItemTexture(Strings.ENDER_BAG_NAME));
+		setCreativeTab(GanysEnd.enableEnderBag ? GanysEnd.endTab : null);
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDER_BAG_NAME));
 	}
 

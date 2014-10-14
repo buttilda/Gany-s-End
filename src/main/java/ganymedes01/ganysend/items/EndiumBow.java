@@ -39,9 +39,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class EndiumBow extends ItemBow implements IEndiumTool {
 
 	public EndiumBow() {
-		setCreativeTab(GanysEnd.endTab);
 		setMaxDamage(ModMaterials.ENDIUM_TOOLS.getMaxUses());
 		setTextureName(Utils.getItemTexture(Strings.ENDIUM_BOW_NAME));
+		setCreativeTab(GanysEnd.enableEndiumTools ? GanysEnd.endTab : null);
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_BOW_NAME));
 	}
 

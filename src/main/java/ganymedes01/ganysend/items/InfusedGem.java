@@ -17,9 +17,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class InfusedGem extends Item {
@@ -32,8 +32,8 @@ public class InfusedGem extends Item {
 		setMaxDamage(0);
 		setMaxStackSize(16);
 		setHasSubtypes(true);
-		setCreativeTab(GanysEnd.endTab);
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.INFUSED_GEM_NAME));
+		setCreativeTab(GanysEnd.enableTimeManipulator ? GanysEnd.endTab : null);
 	}
 
 	@Override

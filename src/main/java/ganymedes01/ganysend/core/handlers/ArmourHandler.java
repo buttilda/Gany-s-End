@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.core.handlers;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.items.EndiumBow;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +26,9 @@ public class ArmourHandler {
 	// Helmet
 	@SubscribeEvent
 	public void onLivingUpdate(LivingUpdateEvent event) {
+		if (!GanysEnd.enableEndiumArmour)
+			return;
+
 		if (!event.entityLiving.worldObj.isRemote)
 			if (event.entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) event.entityLiving;
@@ -44,6 +48,9 @@ public class ArmourHandler {
 	// Chestplate
 	@SubscribeEvent
 	public void onLivingDamage(LivingAttackEvent event) {
+		if (!GanysEnd.enableEndiumArmour)
+			return;
+
 		if (!event.entityLiving.worldObj.isRemote)
 			if (event.entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) event.entityLiving;
@@ -58,6 +65,9 @@ public class ArmourHandler {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onFOVChange(FOVUpdateEvent event) {
+		if (!GanysEnd.enableEndiumArmour)
+			return;
+
 		EntityPlayer player = event.entity;
 		if (player.getCurrentArmor(1) != null && player.getCurrentArmor(1).getItem() == ModItems.endiumLeggings)
 			if (event.newfov > 1.0F)

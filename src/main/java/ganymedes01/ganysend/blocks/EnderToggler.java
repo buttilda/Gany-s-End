@@ -14,9 +14,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EnderToggler extends Block {
@@ -28,8 +28,8 @@ public class EnderToggler extends Block {
 		super(Material.iron);
 		setHardness(1.5F);
 		setResistance(10.0F);
-		setCreativeTab(GanysEnd.endTab);
 		setBlockName(Utils.getUnlocalizedName(Strings.ENDER_TOGGLER_NAME));
+		setCreativeTab(GanysEnd.enableEnderToggler ? GanysEnd.endTab : null);
 	}
 
 	@Override

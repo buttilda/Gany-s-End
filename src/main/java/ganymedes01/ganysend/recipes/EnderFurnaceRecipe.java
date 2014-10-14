@@ -41,6 +41,9 @@ public class EnderFurnaceRecipe {
 	}
 
 	public static void init() {
+		if (!GanysEnd.enableEnderFurnace)
+			return;
+
 		try {
 			if (!fuelsFile.exists()) {
 				addDefaultFuels();
@@ -115,8 +118,7 @@ public class EnderFurnaceRecipe {
 		addRecipe(new ItemStack(Items.diamond), Items.emerald, Items.gold_ingot, "itemSkull", new ItemStack(Items.potionitem, 1, 8194));
 		addRecipe(new ItemStack(Items.experience_bottle), new ItemStack(Items.potionitem, 1, 8197), ModItems.endstoneRod);
 		addRecipe(new ItemStack(Items.ender_pearl), Items.ghast_tear, Items.sugar, Items.glowstone_dust, Items.experience_bottle);
-		if (GanysEnd.enableTimeManipulator)
-			addRecipe(new ItemStack(Blocks.dragon_egg), ModBlocks.timeManipulator);
+		addRecipe(new ItemStack(Blocks.dragon_egg), ModBlocks.timeManipulator);
 		addRecipe(new ItemStack(Items.cooked_fished), Items.fish);
 		addRecipe(new ItemStack(Items.potato), Items.poisonous_potato);
 		addRecipe(new ItemStack(Items.beef), Items.rotten_flesh);
@@ -135,12 +137,11 @@ public class EnderFurnaceRecipe {
 		addRecipe(new ItemStack(Items.record_ward), new ItemStack(Items.skull), Items.redstone, new ItemStack(Items.dye, 1, 2), new ItemStack(Items.dye, 1, 10));
 		addRecipe(new ItemStack(Items.record_11), Items.record_stal, Items.gunpowder, Items.gunpowder, Items.gunpowder);
 		addRecipe(new ItemStack(Items.record_wait), new ItemStack(Items.skull), Items.redstone, new ItemStack(Items.dye, 1, 6), new ItemStack(Items.dye, 1, 6));
-		if (GanysEnd.enableEnderFlower)
-			for (int i = 0; i < 16; i++)
-				if (i == 4)
-					addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), "flowerEnder", "flowerEnder");
-				else
-					addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), "flowerEnder");
+		for (int i = 0; i < 16; i++)
+			if (i == 4)
+				addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), "flowerEnder", "flowerEnder");
+			else
+				addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), "flowerEnder");
 		addRecipe(new ItemStack(ModBlocks.rawEndium), "oreDiamond");
 	}
 

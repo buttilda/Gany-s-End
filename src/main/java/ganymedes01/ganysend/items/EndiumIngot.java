@@ -16,9 +16,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EndiumIngot extends Item {
@@ -29,7 +29,7 @@ public class EndiumIngot extends Item {
 	public EndiumIngot() {
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		setCreativeTab(GanysEnd.endTab);
+		setCreativeTab(GanysEnd.enableEndium ? GanysEnd.endTab : null);
 		setTextureName(Utils.getItemTexture(Strings.ENDIUM_INGOT_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_INGOT_NAME));
 	}

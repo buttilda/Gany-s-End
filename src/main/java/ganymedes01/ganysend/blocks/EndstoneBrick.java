@@ -8,9 +8,9 @@ import net.minecraft.block.material.Material;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EndstoneBrick extends Block {
@@ -19,8 +19,8 @@ public class EndstoneBrick extends Block {
 		super(Material.rock);
 		setHardness(3.0F);
 		setResistance(15.0F);
-		setCreativeTab(GanysEnd.endTab);
 		setBlockName(Utils.getUnlocalizedName(Strings.ENDSTONE_BRICK_NAME));
 		setBlockTextureName(Utils.getBlockTexture(Strings.ENDSTONE_BRICK_NAME));
+		setCreativeTab(GanysEnd.enableDecorativeBlocks ? GanysEnd.endTab : null);
 	}
 }

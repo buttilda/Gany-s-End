@@ -41,7 +41,7 @@ public class Skull extends ItemSkull {
 	public Skull() {
 		setMaxDamage(0);
 		setHasSubtypes(true);
-		setCreativeTab(GanysEnd.endTab);
+		setCreativeTab(GanysEnd.isHeadcrumbsLoaded || !GanysEnd.enableSkulls ? null : GanysEnd.endTab);
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ITEM_NEW_SKULL_NAME));
 	}
 

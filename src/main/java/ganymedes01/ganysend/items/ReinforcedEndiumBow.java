@@ -19,8 +19,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ReinforcedEndiumBow extends EndiumBow {
 
 	public ReinforcedEndiumBow() {
-		setCreativeTab(GanysEnd.endTab);
 		setMaxDamage(ModMaterials.REIN_ENDIUM_TOOLS.getMaxUses());
+		setCreativeTab(GanysEnd.enableEndiumTools ? GanysEnd.endTab : null);
 		setTextureName(Utils.getItemTexture(Strings.REINFORCED_ENDIUM_BOW_NAME));
 		setUnlocalizedName(Utils.getUnlocalizedName(Strings.REINFORCED_ENDIUM_BOW_NAME));
 	}

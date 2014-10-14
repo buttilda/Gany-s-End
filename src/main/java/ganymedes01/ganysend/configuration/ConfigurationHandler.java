@@ -59,14 +59,29 @@ public class ConfigurationHandler {
 		// Others
 		GanysEnd.togglerShouldMakeSound = configBoolean("togglersShouldMakeSound", false, GanysEnd.togglerShouldMakeSound);
 		GanysEnd.shouldDoVersionCheck = configBoolean("shouldDoVersionCheck", true, GanysEnd.shouldDoVersionCheck);
-		GanysEnd.activateShifters = configBoolean("activateShifters", true, GanysEnd.activateShifters);
+		GanysEnd.enableShifters = configBoolean("activateShifters", true, GanysEnd.enableShifters);
 		GanysEnd.enableRandomHeadDrop = configBoolean("enableRandomHeadDrop", false, GanysEnd.enableRandomHeadDrop);
 		GanysEnd.enableTimeManipulator = configBoolean("enableTimeManipulator", true, GanysEnd.enableTimeManipulator);
 		GanysEnd.enableEnderBag = configBoolean("enableEnderBag", true, GanysEnd.enableEnderBag);
 		GanysEnd.enableVanillaHeadsDrop = configBoolean("enableVanillaHeadsDrop", false, GanysEnd.enableVanillaHeadsDrop);
 		GanysEnd.enable2DHoppers = configBoolean("enable2DHoppers", false, GanysEnd.enable2DHoppers);
-		GanysEnd.enableEndiumGen = configBoolean("enableEndiumWorldGen", false, GanysEnd.enableEndiumGen);
-		GanysEnd.enableEnderFlower = configBoolean("enableEnderFlower", false, GanysEnd.enableEnderFlower);
+		GanysEnd.enableEndiumGen = configBoolean("enableEndiumWorldGen", true, GanysEnd.enableEndiumGen);
+		GanysEnd.enableEnderFlower = configBoolean("enableEnderFlower", true, GanysEnd.enableEnderFlower);
+		GanysEnd.enableEndiumArmour = configBoolean("enableEndiumArmour", true, GanysEnd.enableEndiumArmour);
+		GanysEnd.enableEndiumTools = configBoolean("enableEndiumTools", true, GanysEnd.enableEndiumTools);
+		GanysEnd.enableHoppers = configBoolean("enableHoppers", true, GanysEnd.enableHoppers);
+		GanysEnd.enableAnchoredEnderChest = configBoolean("enableAnchoredEnderChest", true, GanysEnd.enableAnchoredEnderChest);
+		GanysEnd.enableDecorativeBlocks = configBoolean("enableDecorativeBlocks", true, GanysEnd.enableDecorativeBlocks);
+		GanysEnd.enableVoidCrate = configBoolean("enableVoidCrate", true, GanysEnd.enableVoidCrate);
+		GanysEnd.enableInfiniteWaterSource = configBoolean("enableInfiniteWaterSource", true, GanysEnd.enableInfiniteWaterSource);
+		GanysEnd.enableInventoryBinder = configBoolean("enableInventoryBinder", true, GanysEnd.enableInventoryBinder);
+		GanysEnd.enableEnderFurnace = configBoolean("enableEnderFurnace", true, GanysEnd.enableEnderFurnace);
+		GanysEnd.enableEmulator = configBoolean("enableEmulator", true, GanysEnd.enableEmulator);
+		GanysEnd.enableScythe = configBoolean("enableScythe", true, GanysEnd.enableScythe);
+		GanysEnd.enableInfiniteBucket = configBoolean("enableInfiniteBucket", true, GanysEnd.enableInfiniteBucket);
+		GanysEnd.enableSkulls = configBoolean("enableSkulls", true, GanysEnd.enableSkulls);
+		GanysEnd.enableEnderToggler = configBoolean("enableEnderToggler", true, GanysEnd.enableEnderToggler);
+		GanysEnd.enableEndium = configBoolean("enableEndium", true, GanysEnd.enableEndium);
 
 		if (configFile.hasChanged())
 			configFile.save();

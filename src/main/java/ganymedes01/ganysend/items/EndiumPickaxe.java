@@ -38,7 +38,7 @@ public class EndiumPickaxe extends ItemPickaxe implements IEndiumTool {
 	protected EndiumPickaxe(ToolMaterial material) {
 		super(material);
 		setHarvestLevel("pickaxe", 3);
-		setCreativeTab(GanysEnd.endTab);
+		setCreativeTab(GanysEnd.enableEndiumTools ? GanysEnd.endTab : null);
 	}
 
 	@Override

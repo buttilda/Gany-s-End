@@ -18,6 +18,6 @@ public class EndStairs extends BlockStairs {
 		setHardness(1.5F);
 		setLightOpacity(0);
 		setResistance(10.0F);
-		setCreativeTab(GanysEnd.endTab);
+		setCreativeTab(GanysEnd.enableDecorativeBlocks ? GanysEnd.endTab : null);
 	}
 }

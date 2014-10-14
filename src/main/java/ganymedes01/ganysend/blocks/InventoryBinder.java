@@ -27,8 +27,8 @@ public class InventoryBinder extends BlockContainer {
 	public InventoryBinder() {
 		super(Material.rock);
 		setHardness(10.0F);
-		setCreativeTab(GanysEnd.endTab);
 		setBlockName(Utils.getUnlocalizedName(Strings.INVENTORY_BINDER_NAME));
+		setCreativeTab(GanysEnd.enableInventoryBinder ? GanysEnd.endTab : null);
 		setBlockTextureName(Utils.getBlockTexture(Strings.INVENTORY_BINDER_NAME));
 	}
 

@@ -12,9 +12,9 @@ import net.minecraft.world.IBlockAccess;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class RawEndium extends Block {
@@ -24,9 +24,9 @@ public class RawEndium extends Block {
 		setHardness(51F);
 		setResistance(2001.0F);
 		setHarvestLevel("pickaxe", 3);
-		setCreativeTab(GanysEnd.endTab);
-		setBlockTextureName(Utils.getBlockTexture(Strings.RAW_ENDIUM_NAME));
+		setCreativeTab(GanysEnd.enableEndium ? GanysEnd.endTab : null);
 		setBlockName(Utils.getUnlocalizedName(Strings.RAW_ENDIUM_NAME));
+		setBlockTextureName(Utils.getBlockTexture(Strings.RAW_ENDIUM_NAME));
 	}
 
 	@Override

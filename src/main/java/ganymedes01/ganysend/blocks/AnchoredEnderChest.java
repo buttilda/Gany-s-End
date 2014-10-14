@@ -30,10 +30,9 @@ public class AnchoredEnderChest extends InventoryBinder {
 
 	public AnchoredEnderChest() {
 		super();
-		if (!GanysEnd.enableAnchoredEnderChest)
-			setCreativeTab(null);
 		setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
 		setBlockName(Utils.getUnlocalizedName(Strings.ANCHORED_ENDER_CHEST_NAME));
+		setCreativeTab(GanysEnd.enableAnchoredEnderChest ? GanysEnd.endTab : null);
 	}
 
 	@Override

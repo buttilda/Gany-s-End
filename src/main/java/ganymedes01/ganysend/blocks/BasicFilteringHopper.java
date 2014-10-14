@@ -41,7 +41,7 @@ public class BasicFilteringHopper extends BlockHopper {
 		setHardness(3.0F);
 		setResistance(8.0F);
 		setStepSound(soundTypeWood);
-		setCreativeTab(GanysEnd.endTab);
+		setCreativeTab(GanysEnd.enableHoppers ? GanysEnd.endTab : null);
 		setBlockName(Utils.getUnlocalizedName(Strings.BASIC_FILTERING_HOPPER_NAME));
 	}
 

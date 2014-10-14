@@ -30,6 +30,9 @@ public class RenderPlayerHandler {
 
 	@SubscribeEvent
 	public void renderPlayerEvent(RenderPlayerEvent.Pre event) {
+		if (!GanysEnd.enableSkulls)
+			return;
+
 		if (event.entityPlayer != null) {
 			ModelBiped model = event.renderer.modelBipedMain;
 			if (model == null)
@@ -49,6 +52,9 @@ public class RenderPlayerHandler {
 
 	@SubscribeEvent
 	public void renderHelmetEvent(RenderPlayerEvent.Specials.Post event) {
+		if (!GanysEnd.enableSkulls)
+			return;
+
 		if (event.entityPlayer != null) {
 			ModelBiped model = event.renderer.modelBipedMain;
 

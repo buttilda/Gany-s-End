@@ -15,9 +15,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class Emulator extends Block {
@@ -25,8 +25,8 @@ public class Emulator extends Block {
 	public Emulator() {
 		super(Material.portal);
 		setHardness(0.3F);
-		setCreativeTab(GanysEnd.endTab);
 		setBlockName(Utils.getUnlocalizedName(Strings.EMULATOR_NAME));
+		setCreativeTab(GanysEnd.enableEmulator ? GanysEnd.endTab : null);
 		setBlockTextureName(Utils.getBlockTexture(Strings.EMULATOR_NAME));
 	}
 

@@ -33,7 +33,7 @@ public class BlockShifter extends BlockContainer {
 		super(Material.iron);
 		setHardness(1.5F);
 		setResistance(10.0F);
-		if (GanysEnd.activateShifters)
+		if (GanysEnd.enableShifters)
 			setCreativeTab(GanysEnd.endTab);
 		setBlockName(Utils.getUnlocalizedName(Strings.BLOCK_SHIFTER_NAME));
 	}

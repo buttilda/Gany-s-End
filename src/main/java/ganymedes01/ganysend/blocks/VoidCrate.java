@@ -19,9 +19,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class VoidCrate extends BlockContainer {
@@ -32,8 +32,8 @@ public class VoidCrate extends BlockContainer {
 	public VoidCrate() {
 		super(Material.iron);
 		setHardness(2.0F);
-		setCreativeTab(GanysEnd.endTab);
 		setBlockName(Utils.getUnlocalizedName(Strings.VOID_CRATE_NAME));
+		setCreativeTab(GanysEnd.enableVoidCrate ? GanysEnd.endTab : null);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.core.handlers;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
@@ -40,6 +41,9 @@ public class HandlerEvents {
 
 	@SubscribeEvent
 	public void endBonemealEvent(BonemealEvent event) {
+		if (!GanysEnd.enableEnderFlower)
+			return;
+
 		if (event.world.provider.dimensionId == 1 && event.block == Blocks.end_stone)
 			if (event.world.isAirBlock(event.x, event.y + 1, event.z)) {
 				event.world.setBlock(event.x, event.y + 1, event.z, ModBlocks.enderFlower);
@@ -49,6 +53,9 @@ public class HandlerEvents {
 
 	@SubscribeEvent
 	public void onBlockHarvested(HarvestDropsEvent event) {
+		if (!GanysEnd.enableEndiumTools)
+			return;
+
 		if (event.harvester != null)
 			if (event.dropChance > 0.0F)
 				if (!event.drops.isEmpty()) {

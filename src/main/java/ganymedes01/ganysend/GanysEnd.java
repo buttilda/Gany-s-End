@@ -57,7 +57,7 @@ public class GanysEnd {
 
 	public static boolean togglerShouldMakeSound = true;
 	public static boolean shouldDoVersionCheck = true;
-	public static boolean activateShifters = true;
+	public static boolean enableShifters = true;
 	public static boolean enableTimeManipulator = true;
 	public static boolean enableRandomHeadDrop = true;
 	public static boolean enableVanillaHeadsDrop = true;
@@ -66,6 +66,20 @@ public class GanysEnd {
 	public static boolean enable2DHoppers = false;
 	public static boolean enableEnderFlower = true;
 	public static boolean enableEndiumGen = true;
+	public static boolean enableEndiumArmour = true;
+	public static boolean enableEndiumTools = true;
+	public static boolean enableHoppers = true;
+	public static boolean enableDecorativeBlocks = true;
+	public static boolean enableVoidCrate = true;
+	public static boolean enableInfiniteWaterSource = true;
+	public static boolean enableInventoryBinder = true;
+	public static boolean enableEnderFurnace = true;
+	public static boolean enableEmulator = true;
+	public static boolean enableScythe = true;
+	public static boolean enableInfiniteBucket = true;
+	public static boolean enableSkulls = true;
+	public static boolean enableEnderToggler = true;
+	public static boolean enableEndium = true;
 
 	public static boolean isHeadcrumbsLoaded = false;
 	public static Item headcrumbsHead = null;

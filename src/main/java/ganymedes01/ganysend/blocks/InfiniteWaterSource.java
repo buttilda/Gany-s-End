@@ -42,7 +42,7 @@ public class InfiniteWaterSource extends BlockContainer {
 	protected InfiniteWaterSource(Material material) {
 		super(material);
 		setHardness(3.5F);
-		setCreativeTab(GanysEnd.endTab);
+		setCreativeTab(GanysEnd.enableInfiniteWaterSource ? GanysEnd.endTab : null);
 		setBlockTextureName(Utils.getBlockTexture(Strings.INFINITE_WATER_SOURCE_NAME));
 	}
 

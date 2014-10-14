@@ -27,9 +27,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EnderFurnace extends BlockContainer {
@@ -40,8 +40,8 @@ public class EnderFurnace extends BlockContainer {
 	public EnderFurnace() {
 		super(Material.rock);
 		setHardness(5.0F);
-		setCreativeTab(GanysEnd.endTab);
 		setBlockName(Utils.getUnlocalizedName(Strings.ENDER_FURNACE_NAME));
+		setCreativeTab(GanysEnd.enableEnderFurnace ? GanysEnd.endTab : null);
 	}
 
 	@Override
