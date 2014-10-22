@@ -1,7 +1,8 @@
 package ganymedes01.ganysend.core.handlers;
 
 import ganymedes01.ganysend.lib.IMCKeys;
-import ganymedes01.ganysend.recipes.EnderFurnaceRecipe;
+import ganymedes01.ganysend.recipes.EnderFurnaceFuelsRegistry;
+import ganymedes01.ganysend.recipes.EnderFurnaceRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +14,9 @@ import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class InterModComms {
@@ -48,7 +49,7 @@ public class InterModComms {
 				inputs.add(input);
 			}
 
-		EnderFurnaceRecipe.addRecipe(output, inputs.toArray());
+		EnderFurnaceRegistry.INSTANCE.addRecipe(output, inputs.toArray());
 	}
 
 	private static void addEnderFurnaceFuel(IMCMessage message) {
@@ -65,6 +66,6 @@ public class InterModComms {
 
 		int burnTime = nbt.getInteger("burnTime");
 
-		EnderFurnaceRecipe.addFuel(fuel, burnTime);
+		EnderFurnaceFuelsRegistry.INSTANCE.addFuel(fuel, burnTime);
 	}
 }

@@ -2,7 +2,8 @@ package ganymedes01.ganysend.tileentities;
 
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.lib.Strings;
-import ganymedes01.ganysend.recipes.EnderFurnaceRecipe;
+import ganymedes01.ganysend.recipes.EnderFurnaceFuelsRegistry;
+import ganymedes01.ganysend.recipes.EnderFurnaceRegistry;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
@@ -11,9 +12,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class TileEntityEnderFurnace extends GanysInventory implements ISidedInventory {
@@ -49,7 +50,7 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 			burnTime--;
 
 		if (burnTime <= 0 && canSmelt()) {
-			currentBurnTime = burnTime = EnderFurnaceRecipe.getBurnTime(inventory[0]);
+			currentBurnTime = burnTime = EnderFurnaceFuelsRegistry.INSTANCE.getBurnTime(inventory[0]);
 
 			if (burnTime > 0)
 				if (inventory[0] != null) {
@@ -86,9 +87,9 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 
 	private void smelt() {
 		if (inventory[5] == null)
-			inventory[5] = EnderFurnaceRecipe.getOuput(getRecipeInput());
+			inventory[5] = EnderFurnaceRegistry.INSTANCE.getOuput(getRecipeInput());
 		else
-			inventory[5].stackSize += EnderFurnaceRecipe.getOuput(getRecipeInput()).stackSize;
+			inventory[5].stackSize += EnderFurnaceRegistry.INSTANCE.getOuput(getRecipeInput()).stackSize;
 		for (int i = 1; i <= 4; i++) {
 			if (inventory[i] == null)
 				continue;
@@ -102,7 +103,7 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 
 	private boolean canSmelt() {
 		if (update) {
-			ItemStack result = EnderFurnaceRecipe.getOuput(getRecipeInput());
+			ItemStack result = EnderFurnaceRegistry.INSTANCE.getOuput(getRecipeInput());
 
 			if (result == null)
 				canSmelt = false;
@@ -161,7 +162,7 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 	}
 
 	public boolean isFuel(ItemStack stack) {
-		return EnderFurnaceRecipe.getBurnTime(stack) > 0;
+		return EnderFurnaceFuelsRegistry.INSTANCE.getBurnTime(stack) > 0;
 	}
 
 	@Override

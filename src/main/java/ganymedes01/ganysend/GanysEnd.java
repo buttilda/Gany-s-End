@@ -10,7 +10,8 @@ import ganymedes01.ganysend.integration.ModIntegrator;
 import ganymedes01.ganysend.integration.ThaumcraftManager;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.network.PacketHandler;
-import ganymedes01.ganysend.recipes.EnderFurnaceRecipe;
+import ganymedes01.ganysend.recipes.EnderFurnaceFuelsRegistry;
+import ganymedes01.ganysend.recipes.EnderFurnaceRegistry;
 import ganymedes01.ganysend.recipes.ModRecipes;
 import ganymedes01.ganysend.world.EndWorldGenerator;
 
@@ -103,7 +104,9 @@ public class GanysEnd {
 		if (isHeadcrumbsLoaded)
 			ModItems.skull.setCreativeTab(null);
 		ModRecipes.init();
-		EnderFurnaceRecipe.init();
+
+		EnderFurnaceRegistry.INSTANCE.init();
+		EnderFurnaceFuelsRegistry.INSTANCE.init();
 
 		PacketHandler.init();
 

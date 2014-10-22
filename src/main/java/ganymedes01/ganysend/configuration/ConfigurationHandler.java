@@ -6,7 +6,7 @@ import ganymedes01.ganysend.integration.ModIntegrator;
 import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
-import ganymedes01.ganysend.recipes.EnderFurnaceRecipe;
+import ganymedes01.ganysend.recipes.RecipeRegistry;
 
 import java.io.File;
 
@@ -41,9 +41,17 @@ public class ConfigurationHandler {
 		return configFile.get("Mod Integration", "Integrate " + modID, true).setRequiresMcRestart(true).getBoolean(true);
 	}
 
+	private File fixFile(File file, String name, String extension) {
+		File parent = file.getParentFile();
+		return new File(parent, File.separator + Reference.MASTER + File.separator + name + extension);
+	}
+
 	public void init(FMLPreInitializationEvent event) {
 		configFile = new Configuration(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MASTER + File.separator + Reference.MOD_ID + ".cfg"));
-		EnderFurnaceRecipe.init(new File(event.getModConfigurationDirectory(), Reference.MASTER + File.separator + "EnderFurnaceRecipes.xml"), new File(event.getModConfigurationDirectory(), Reference.MASTER + File.separator + "EnderFurnaceFuels.xml"));
+
+		File recipes = fixFile(event.getSuggestedConfigurationFile(), "Recipes", "");
+		recipes.mkdirs();
+		RecipeRegistry.baseFile = recipes;
 
 		syncConfigs();
 	}

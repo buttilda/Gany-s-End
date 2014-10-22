@@ -5,13 +5,15 @@ import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
+import ganymedes01.ganysend.recipes.EnderFurnaceFuelsRegistry;
+import ganymedes01.ganysend.recipes.EnderFurnaceFuelsRegistry.FuelEntry;
 import ganymedes01.ganysend.recipes.EnderFurnaceRecipe;
+import ganymedes01.ganysend.recipes.EnderFurnaceRegistry;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
@@ -39,8 +41,8 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 		if (fuels == null) {
 			fuels = new ArrayList<PositionedStack>();
 
-			for (Entry<Object, Integer> entry : EnderFurnaceRecipe.fuelMap.entrySet()) {
-				Object obj = entry.getKey();
+			for (FuelEntry entry : EnderFurnaceFuelsRegistry.INSTANCE.getRecipes()) {
+				Object obj = entry.getFuel();
 				if (obj instanceof String)
 					obj = OreDictionary.getOres((String) obj);
 				fuels.add(new PositionedStack(obj, 8, 34));
@@ -93,7 +95,7 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 	@Override
 	public void loadCraftingRecipes(String outputId, Object... results) {
 		if (outputId.equals(getRecipeId()))
-			for (EnderFurnaceRecipe recipe : EnderFurnaceRecipe.recipes)
+			for (EnderFurnaceRecipe recipe : EnderFurnaceRegistry.INSTANCE.getRecipes())
 				arecipes.add(new CachedEnderFurnaceRecipe(recipe));
 		else
 			super.loadCraftingRecipes(outputId, results);
@@ -101,14 +103,14 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 
 	@Override
 	public void loadCraftingRecipes(ItemStack result) {
-		for (EnderFurnaceRecipe recipe : EnderFurnaceRecipe.recipes)
+		for (EnderFurnaceRecipe recipe : EnderFurnaceRegistry.INSTANCE.getRecipes())
 			if (InventoryUtils.areStacksTheSame(recipe.getOutput(), result, false))
 				arecipes.add(new CachedEnderFurnaceRecipe(recipe));
 	}
 
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient) {
-		for (EnderFurnaceRecipe recipe : EnderFurnaceRecipe.recipes)
+		for (EnderFurnaceRecipe recipe : EnderFurnaceRegistry.INSTANCE.getRecipes())
 			if (recipe.isPartOfInput(ingredient))
 				arecipes.add(new CachedEnderFurnaceRecipe(recipe));
 	}
