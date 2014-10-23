@@ -170,7 +170,9 @@ public class XMLHelper {
 						throw new RuntimeException(e);
 					}
 				return stack;
-			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+			} catch (NumberFormatException e) {
+				throw new RuntimeException("Error when parsing entry: <" + value + ">", e);
+			} catch (ArrayIndexOutOfBoundsException e) {
 				throw new RuntimeException("Error when parsing entry: <" + value + ">", e);
 			}
 	}
