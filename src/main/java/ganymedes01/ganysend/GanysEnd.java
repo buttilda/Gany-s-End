@@ -105,8 +105,10 @@ public class GanysEnd {
 			ModItems.skull.setCreativeTab(null);
 		ModRecipes.init();
 
-		EnderFurnaceRegistry.INSTANCE.init();
-		EnderFurnaceFuelsRegistry.INSTANCE.init();
+		if (enableEnderFurnace) {
+			EnderFurnaceRegistry.INSTANCE.init();
+			EnderFurnaceFuelsRegistry.INSTANCE.init();
+		}
 
 		PacketHandler.init();
 
