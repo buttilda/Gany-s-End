@@ -26,15 +26,16 @@ public class XMLParser {
 		try {
 			if (isStringValue(value))
 				return parseStringNode(node);
-			else if (isItemStackValue(value))
-				return parseItemStackNode(node);
 			else if (isFluidStackValue(value))
 				return parseFluidStackNode(node);
+			else if (isItemStackValue(value))
+				return parseItemStackNode(node);
+			else
+				return null;
 		} catch (Exception e) {
-			throw new RuntimeException("Error when parsing entry: <" + value + ">", e);
+			e.printStackTrace();
+			throw new RuntimeException("Error parsing node: " + node, e);
 		}
-
-		return null;
 	}
 
 	public static String parseStringNode(XMLNode node) {
@@ -42,8 +43,7 @@ public class XMLParser {
 	}
 
 	static boolean isStringValue(String nodeValue) {
-		String[] array = nodeValue.split(" ");
-		return array[0].startsWith("\"") && array[0].endsWith("\"");
+		return nodeValue.startsWith("\"") && nodeValue.endsWith("\"");
 	}
 
 	static boolean isItemStackValue(String nodeValue) {

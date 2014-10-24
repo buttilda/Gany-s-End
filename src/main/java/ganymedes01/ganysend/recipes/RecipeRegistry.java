@@ -27,7 +27,7 @@ public abstract class RecipeRegistry<T> {
 	private final List<T> registry = new ArrayList<T>();
 	protected final File recipesFile;
 	protected final String name;
-	protected String comment = 	"\nRecipes marked as \"default\" will be reset every time the game launches.\n" +
+	protected String comment =  "\nRecipes marked as \"default\" will be reset every time the game launches.\n" +
 								"If you wish to disable a recipe change its status to \"ignored\"\n" +
 								"If you want to add a custom recipe, mark it as \"custom\". If you mark it as default, it will be deleted!!\n" +
 								"If you alter a default recipe don't forget to also mark it as \"custom\"\n" +
@@ -96,7 +96,8 @@ public abstract class RecipeRegistry<T> {
 							registry.add(makeRecipe(node));
 							XMLHelper.writeNode(bw, node.toString());
 						} catch (Exception e) {
-							commentOutNode(bw, node.toString(), "it threw an error when it was being read: " + e.getMessage());
+							commentOutNode(bw, node.toString(), "it threw an error when it was being read: " + e.getCause());
+							throw e;
 						}
 					else if (node.compareValues(prop, "ignored"))
 						XMLHelper.writeNode(bw, node.toString());
