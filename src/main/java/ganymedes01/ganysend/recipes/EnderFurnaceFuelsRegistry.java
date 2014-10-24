@@ -2,8 +2,8 @@ package ganymedes01.ganysend.recipes;
 
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.xml.XMLBuilder;
-import ganymedes01.ganysend.core.utils.xml.XMLHelper;
 import ganymedes01.ganysend.core.utils.xml.XMLNode;
+import ganymedes01.ganysend.core.utils.xml.XMLParser;
 import ganymedes01.ganysend.recipes.EnderFurnaceFuelsRegistry.FuelEntry;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class EnderFurnaceFuelsRegistry extends RecipeRegistry<FuelEntry> {
 
 	@Override
 	protected FuelEntry makeRecipe(XMLNode node) {
-		return new FuelEntry(XMLHelper.processEntry(node.getNode("fuel"), ItemStack.class), Integer.parseInt(node.getNode("burnTime").getValue()));
+		return new FuelEntry(XMLParser.parseNode(node.getNode("fuel")), Integer.parseInt(node.getNode("burnTime").getValue()));
 	}
 
 	@Override

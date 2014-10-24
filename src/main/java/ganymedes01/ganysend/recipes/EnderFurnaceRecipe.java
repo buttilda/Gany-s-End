@@ -2,8 +2,8 @@ package ganymedes01.ganysend.recipes;
 
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.xml.XMLBuilder;
-import ganymedes01.ganysend.core.utils.xml.XMLHelper;
 import ganymedes01.ganysend.core.utils.xml.XMLNode;
+import ganymedes01.ganysend.core.utils.xml.XMLParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +39,12 @@ public class EnderFurnaceRecipe {
 	}
 
 	EnderFurnaceRecipe(XMLNode node) {
-		output = (ItemStack) XMLHelper.processEntry(node.getNode("output"), ItemStack.class);
+		output = XMLParser.parseItemStackNode(node.getNode("output"));
 		List<Object> inputs = new ArrayList<Object>();
 		for (int i = 1; i <= 4; i++) {
 			XMLNode n = node.getNode("input" + i);
 			if (n != null)
-				inputs.add(XMLHelper.processEntry(n, ItemStack.class));
+				inputs.add(XMLParser.parseNode(n));
 		}
 
 		this.inputs = inputs.toArray();
