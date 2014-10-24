@@ -42,11 +42,11 @@ public class XMLParser {
 		return node.value.replace("\"", "");
 	}
 
-	static boolean isStringValue(String nodeValue) {
+	public static boolean isStringValue(String nodeValue) {
 		return nodeValue.startsWith("\"") && nodeValue.endsWith("\"");
 	}
 
-	static boolean isItemStackValue(String nodeValue) {
+	public static boolean isItemStackValue(String nodeValue) {
 		String[] array = nodeValue.split(" ");
 		return array.length == 3 || array.length == 4 && array[3].startsWith("{");
 	}
@@ -67,7 +67,7 @@ public class XMLParser {
 		return stack;
 	}
 
-	static boolean isFluidStackValue(String nodeValue) {
+	public static boolean isFluidStackValue(String nodeValue) {
 		String[] array = nodeValue.split(" ");
 		return array.length == 2 || array.length == 3 && array[2].startsWith("{");
 	}
