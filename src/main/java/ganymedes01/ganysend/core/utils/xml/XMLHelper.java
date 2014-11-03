@@ -53,26 +53,22 @@ public class XMLHelper {
 	public static String readFile(File file) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String l, line = "";
-		boolean foundComment = false;
 		while ((l = br.readLine()) != null)
-			if (foundComment) {
-				int ind = l.indexOf("-->");
-				if (ind >= 0) {
-					l = l.substring(ind + 3);
-					line += l;
-					foundComment = false;
-				}
-			} else {
-				int ind = l.indexOf("<!--");
-				if (ind >= 0) {
-					foundComment = true;
-					l = l.substring(0, ind);
-				}
-				line += l;
-			}
+			line += l;
 		br.close();
 
 		line = line.replace("\t", "");
+
+		int begin = line.indexOf("<!--");
+		while (begin > 0) {
+			int end = line.indexOf("-->") + 3;
+			if (end > begin) {
+				line = line.replace(line.substring(begin, end), "");
+				begin = line.indexOf("<!--");
+			} else
+				throw new RuntimeException("Comment opened but not closed!");
+		}
+
 		return line.substring(line.indexOf('>') + 1);
 	}
 
