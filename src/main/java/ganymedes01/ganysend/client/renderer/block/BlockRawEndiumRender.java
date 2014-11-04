@@ -31,8 +31,9 @@ public class BlockRawEndiumRender implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess blockAccess, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		renderer.renderStandardBlock(Blocks.end_stone, x, y, z);
-		return renderer.renderStandardBlock(block, x, y, z);
+		boolean base = renderer.renderStandardBlock(Blocks.end_stone, x, y, z);
+		boolean overlay = !renderer.hasOverrideBlockTexture() && renderer.renderStandardBlock(block, x, y, z);
+		return base || overlay;
 	}
 
 	@Override
