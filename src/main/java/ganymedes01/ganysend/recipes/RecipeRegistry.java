@@ -97,7 +97,7 @@ public abstract class RecipeRegistry<T> {
 							XMLHelper.writeNode(bw, node.toString());
 						} catch (Exception e) {
 							commentOutNode(bw, node.toString(), "it threw an error when it was being read: " + e.getCause());
-							throw e;
+							throw new RuntimeException(e);
 						}
 					else if (node.compareValues(prop, "ignored"))
 						XMLHelper.writeNode(bw, node.toString());
