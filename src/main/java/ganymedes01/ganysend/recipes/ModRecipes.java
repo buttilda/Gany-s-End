@@ -49,6 +49,8 @@ public class ModRecipes {
 			OreDictionary.registerOre("nightGemMaterial", new ItemStack(Blocks.brown_mushroom));
 			OreDictionary.registerOre("nightGemMaterial", new ItemStack(Blocks.red_mushroom));
 			OreDictionary.registerOre("nightGemMaterial", new ItemStack(Items.rotten_flesh));
+			OreDictionary.registerOre("gemNight", new ItemStack(ModItems.infusedGem));
+			OreDictionary.registerOre("gemDay", new ItemStack(ModItems.infusedGem, 1, 1));
 		}
 
 		if (GanysEnd.enableEnderBag || GanysEnd.enableAnchoredEnderChest)
