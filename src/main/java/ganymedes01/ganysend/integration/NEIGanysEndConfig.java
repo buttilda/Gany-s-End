@@ -21,8 +21,10 @@ public class NEIGanysEndConfig implements IConfigureNEI {
 
 	@Override
 	public void loadConfig() {
-		API.registerRecipeHandler(new EnderFurnaceRecipeHandler());
-		API.registerUsageHandler(new EnderFurnaceRecipeHandler());
+		if (GanysEnd.enableEnderFurnace) {
+			API.registerRecipeHandler(new EnderFurnaceRecipeHandler());
+			API.registerUsageHandler(new EnderFurnaceRecipeHandler());
+		}
 
 		API.hideItem(new ItemStack(ModBlocks.enderToggler_air));
 		API.hideItem(new ItemStack(ModBlocks.blockNewSkull));
