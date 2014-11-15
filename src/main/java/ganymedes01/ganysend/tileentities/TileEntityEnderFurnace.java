@@ -48,22 +48,19 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 		boolean inventoryChanged = false;
 		if (burnTime > 0)
 			burnTime--;
-
-		if (burnTime <= 0 && canSmelt()) {
+		else if (canSmelt()) {
 			currentBurnTime = burnTime = EnderFurnaceFuelsRegistry.INSTANCE.getBurnTime(inventory[0]);
 
 			if (burnTime > 0)
 				if (inventory[0] != null) {
-					inventory[0].stackSize--;
-					if (inventory[0].stackSize <= 0)
+					if (--inventory[0].stackSize <= 0)
 						inventory[0] = inventory[0].getItem().getContainerItem(inventory[0]);
 					inventoryChanged = true;
 				}
 		}
 
 		if (burnTime > 0 && canSmelt()) {
-			cookTime++;
-			if (cookTime >= 200) {
+			if (++cookTime >= 200) {
 				cookTime = 0;
 				smelt();
 				inventoryChanged = true;
@@ -90,13 +87,9 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 			inventory[5] = EnderFurnaceRegistry.INSTANCE.getOuput(getRecipeInput());
 		else
 			inventory[5].stackSize += EnderFurnaceRegistry.INSTANCE.getOuput(getRecipeInput()).stackSize;
-		for (int i = 1; i <= 4; i++) {
-			if (inventory[i] == null)
-				continue;
-			inventory[i].stackSize--;
-			if (inventory[i].stackSize <= 0)
+		for (int i = 1; i <= 4; i++)
+			if (inventory[i] != null && --inventory[i].stackSize <= 0)
 				inventory[i] = null;
-		}
 
 		markDirty();
 	}

@@ -124,17 +124,20 @@ public class EnderFurnaceRecipeHandler extends TemplateRecipeHandler {
 			result = new PositionedStack(recipe.getOutput(), 124, 25);
 
 			Object[] input = recipe.getInput();
-			for (int i = 0; i < input.length; i++)
-				if (input[i] instanceof String)
-					input[i] = OreDictionary.getOres((String) input[i]);
-
 			this.input = new PositionedStack[input.length];
 			for (int i = 0; i < 2; i++)
 				for (int j = 0; j < 2; j++) {
 					int index = i + j * 2;
 					if (index < input.length && input[index] != null)
-						this.input[index] = new PositionedStack(input[index], 46 + i * 18, 16 + j * 18);
+						this.input[index] = makePosStack(input[index], 46 + i * 18, 16 + j * 18);
 				}
+		}
+
+		private PositionedStack makePosStack(Object obj, int x, int y) {
+			if (obj instanceof String)
+				return new PositionedStack(OreDictionary.getOres((String) obj), x, y);
+			else
+				return new PositionedStack(obj, x, y);
 		}
 
 		@Override

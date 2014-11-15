@@ -104,12 +104,10 @@ public class EnderFurnaceRecipe {
 	private boolean areStacksTheSame(Object obj, ItemStack target) {
 		if (obj instanceof ItemStack)
 			return InventoryUtils.areStacksTheSame((ItemStack) obj, target, false);
-		else if (obj instanceof String) {
-			List<ItemStack> list = OreDictionary.getOres((String) obj);
-			for (ItemStack stack : list)
+		else if (obj instanceof String)
+			for (ItemStack stack : OreDictionary.getOres((String) obj))
 				if (InventoryUtils.areStacksTheSame(stack, target, false))
 					return true;
-		}
 
 		return false;
 	}
@@ -121,7 +119,7 @@ public class EnderFurnaceRecipe {
 			return new ItemStack((Block) obj);
 		else if (obj instanceof ItemStack || obj instanceof String)
 			return obj;
-
-		return null;
+		else
+			throw new IllegalArgumentException("Inputs must be: Item, Block, ItemStack or String. The type " + obj.getClass() + " is invalid.");
 	}
 }
