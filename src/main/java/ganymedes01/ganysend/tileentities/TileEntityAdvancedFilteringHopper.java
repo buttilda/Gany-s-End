@@ -9,9 +9,9 @@ import net.minecraft.nbt.NBTTagList;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class TileEntityAdvancedFilteringHopper extends TileEntityFilteringHopper {
@@ -104,30 +104,30 @@ public class TileEntityAdvancedFilteringHopper extends TileEntityFilteringHopper
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		NBTTagList tags = nbt.getTagList("Filters", 10);
+		NBTTagList tags = nbt.getTagList("filters", 10);
 		filter = new ItemStack[5];
 
 		for (int i = 0; i < tags.tagCount(); i++) {
 			NBTTagCompound data = tags.getCompoundTagAt(i);
 			int j = data.getByte("Slot") & 255;
-			if (j >= 0 && j < inventory.length)
+			if (j >= 0 && j < filter.length)
 				filter[j] = ItemStack.loadItemStackFromNBT(data);
 		}
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound data) {
-		super.writeToNBT(data);
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
 		NBTTagList tags = new NBTTagList();
 
 		for (int i = 0; i < filter.length; i++)
-			if (inventory[i] != null) {
-				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setByte("Slot", (byte) i);
-				filter[i].writeToNBT(nbt);
-				tags.appendTag(nbt);
+			if (filter[i] != null) {
+				NBTTagCompound data = new NBTTagCompound();
+				data.setByte("Slot", (byte) i);
+				filter[i].writeToNBT(data);
+				tags.appendTag(data);
 			}
 
-		data.setTag("Filters", tags);
+		nbt.setTag("filters", tags);
 	}
 }
