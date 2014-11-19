@@ -21,9 +21,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class TileEntityFilteringHopper extends TileEntity implements IInventory {
@@ -351,5 +351,9 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		data.setInteger("TransferCooldown", transferCooldown);
 		data.setInteger("MAX_COOL_DOWN", MAX_COOL_DOWN);
 		data.setBoolean("OPPOSITE", EXCLUSIVE);
+	}
+
+	public void dropFilters() {
+		InventoryUtils.dropStack(worldObj, xCoord, yCoord, zCoord, filter);
 	}
 }

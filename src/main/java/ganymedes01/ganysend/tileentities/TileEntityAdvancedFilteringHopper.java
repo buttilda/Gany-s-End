@@ -130,4 +130,10 @@ public class TileEntityAdvancedFilteringHopper extends TileEntityFilteringHopper
 
 		nbt.setTag("filters", tags);
 	}
+
+	@Override
+	public void dropFilters() {
+		for (int i = 0; i < filter.length; i++)
+			InventoryUtils.dropStack(worldObj, xCoord, yCoord, zCoord, filter[i]);
+	}
 }
