@@ -108,8 +108,6 @@ enchantment.imperviousness=Impenetrabilità
 
 # Others localizations
 itemGroup.ganysend=Gany's End
-death.attack.ganysEndBehead=%1$s è stato decapitato
-death.attack.ganysEndBehead.player=%1$s è stato decapitato da %2$s
-nottagged=Non Agganciato
-pullallbut=Metti Tutto Tranne:
-pullonly=Metti Solo:
+string.ganysend.nottagged=Non Agganciato
+string.ganysend.pullallbut=Metti Tutto Tranne:
+string.ganysend.pullonly=Metti Solo:

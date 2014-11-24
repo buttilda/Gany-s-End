@@ -139,9 +139,13 @@ fluid.endium=Molten Endium
 
 # Others localizations
 itemGroup.ganysend=Gany's End
-nottagged=Not Tagged
-pullallbut=Pull all but:
-pullonly=Pull Only:
+
+# Strings
+string.ganysend.nottagged=Not Tagged
+string.ganysend.pullallbut=Pull all but:
+string.ganysend.pullonly=Pull Only:
 string.ganysend.creativeOnly=Creative Only
 string.ganysend.rightClickContainer=Right click with container to set fluid
+
+# Materials
 material.endium=Endium

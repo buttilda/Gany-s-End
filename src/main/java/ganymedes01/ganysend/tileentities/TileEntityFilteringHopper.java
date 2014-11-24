@@ -2,6 +2,7 @@ package ganymedes01.ganysend.tileentities;
 
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 
 import java.util.Iterator;
@@ -40,14 +41,14 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	public void setBasic() {
 		MAX_COOL_DOWN = 8;
 		EXCLUSIVE = false;
-		line = StatCollector.translateToLocal("pullonly");
+		line = StatCollector.translateToLocal("string." + Reference.MOD_ID + ".pullonly");
 		name = Utils.getConainerName(Strings.BASIC_FILTERING_HOPPER_NAME);
 	}
 
 	public void setExclusive() {
 		MAX_COOL_DOWN = 8;
 		EXCLUSIVE = true;
-		line = StatCollector.translateToLocal("pullallbut");
+		line = StatCollector.translateToLocal("string." + Reference.MOD_ID + ".pullallbut");
 		name = Utils.getConainerName(Strings.EXCLUSIVE_FILTERING_HOPPER_NAME);
 	}
 

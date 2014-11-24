@@ -46,13 +46,13 @@ public class HandlerEvents {
 				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".rightClickContainer"));
 			} else if (block == ModBlocks.creativeSpeedyHopper)
 				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".creativeOnly"));
-		} else if (EntityDropEvent.isTinkersEndiumTool(event.itemStack)) {
+		} else if (EntityDropEvent.isEndiumTool(event.itemStack)) {
 			NBTTagCompound nbt = event.itemStack.getTagCompound();
 			if (nbt != null && nbt.hasKey("Position") && nbt.hasKey("Dimension")) {
 				String pos = nbt.getIntArray("Position")[0] + ", " + nbt.getIntArray("Position")[1] + ", " + nbt.getIntArray("Position")[2];
 				event.toolTip.add(nbt.getInteger("Dimension") + " : " + pos);
 			} else
-				event.toolTip.add(StatCollector.translateToLocal("nottagged"));
+				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".nottagged"));
 		}
 	}
 

@@ -6,9 +6,6 @@ import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.IEndiumTool;
 import ganymedes01.ganysend.lib.ModMaterials;
 import ganymedes01.ganysend.lib.Strings;
-
-import java.util.List;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -21,7 +18,6 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -192,17 +188,6 @@ public class EndiumBow extends ItemBow implements IEndiumTool {
 	}
 
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
-		if (stack.stackTagCompound == null)
-			stack.setTagCompound(new NBTTagCompound());
-		if (stack.stackTagCompound.hasKey("Position") && stack.stackTagCompound.hasKey("Dimension"))
-			list.add(Integer.toString(stack.stackTagCompound.getInteger("Dimension")) + " : " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[0]) + ", " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[1]) + ", " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[2]));
-		else
-			list.add(StatCollector.translateToLocal("nottagged"));
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public EnumRarity getRarity(ItemStack stack) {
 		return EnumRarity.uncommon;
@@ -226,10 +211,10 @@ public class EndiumBow extends ItemBow implements IEndiumTool {
 
 			if (charge >= 18)
 				return pass != 0 ? overlays[2] : getItemIconForUseDuration(2);
-			if (charge > 13)
-				return pass != 0 ? overlays[1] : getItemIconForUseDuration(1);
-			if (charge > 0)
-				return pass != 0 ? overlays[0] : getItemIconForUseDuration(0);
+				if (charge > 13)
+					return pass != 0 ? overlays[1] : getItemIconForUseDuration(1);
+					if (charge > 0)
+						return pass != 0 ? overlays[0] : getItemIconForUseDuration(0);
 		}
 
 		return pass != 0 ? standby : super.getIcon(stack, pass, player, usingItem, useRemaining);

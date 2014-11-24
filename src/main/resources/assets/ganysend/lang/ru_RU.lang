@@ -136,8 +136,8 @@ enchantment.imperviousness=Стойкость
 
 # Others localizations
 itemGroup.ganysend=Gany's End 
-nottagged=Не отмечено
-pullallbut=Втягивать всё, кроме:
-pullonly=Только втягивать:
+string.ganysend.nottagged=Не отмечено
+string.ganysend.pullallbut=Втягивать всё, кроме:
+string.ganysend.pullonly=Только втягивать:
 string.ganysend.creativeOnly=Только для творчества
 string.ganysend.rightClickContainer=ПКМ с контейнером в руке, чтобы выбрать жидкость

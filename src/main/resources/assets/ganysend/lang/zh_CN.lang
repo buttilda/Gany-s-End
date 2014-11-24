@@ -136,8 +136,8 @@ enchantment.imperviousness=防水
 
 # Others localizations
 itemGroup.ganysend=Gany's End
-nottagged=无目标容器
-pullallbut=不传输:
-pullonly=仅传输:
+string.ganysend.nottagged=无目标容器
+string.ganysend.pullallbut=不传输:
+string.ganysend.pullonly=仅传输:
 string.ganysend.creativeOnly=仅限创造模式
 string.ganysend.rightClickContainer=右键流体容器来设定无限化的流体
