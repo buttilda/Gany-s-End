@@ -4,9 +4,11 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModMaterials;
 import ganymedes01.ganysend.lib.Strings;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -18,6 +20,9 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 public class EnderScythe extends ItemSword {
+
+	@SideOnly(Side.CLIENT)
+	private IIcon overlay;
 
 	public EnderScythe() {
 		super(ModMaterials.ENDIUM_TOOLS);
@@ -40,6 +45,25 @@ public class EnderScythe extends ItemSword {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack stack, int pass) {
+		return pass == 0;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
+		super.registerIcons(reg);
+		overlay = reg.registerIcon(getIconString() + "_overlay");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIconFromDamageForRenderPass(int meta, int pass) {
+		return pass == 0 ? itemIcon : overlay;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
 		return true;
 	}
 }

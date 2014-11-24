@@ -9,6 +9,7 @@ import ganymedes01.ganysend.lib.Strings;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +20,6 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -37,6 +37,11 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 public class EndiumBow extends ItemBow implements IEndiumTool {
+
+	@SideOnly(Side.CLIENT)
+	private IIcon[] overlays;
+	@SideOnly(Side.CLIENT)
+	private IIcon standby;
 
 	public EndiumBow() {
 		setMaxDamage(ModMaterials.ENDIUM_TOOLS.getMaxUses());
@@ -180,7 +185,6 @@ public class EndiumBow extends ItemBow implements IEndiumTool {
 				stack.stackTagCompound.setIntArray("Position", new int[] { x, y, z });
 				stack.stackTagCompound.setInteger("Dimension", world.provider.dimensionId);
 				stack.stackTagCompound.setBoolean("Tagged", true);
-				stack.setTagInfo("ench", new NBTTagList());
 				player.swingItem();
 				return true;
 			}
@@ -205,23 +209,52 @@ public class EndiumBow extends ItemBow implements IEndiumTool {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean hasEffect(ItemStack stack, int pass) {
+		return pass == 0 && stack.hasTagCompound() && stack.stackTagCompound.hasKey("Position");
+	}
+
+	@Override
 	public int getItemEnchantability() {
 		return ModMaterials.ENDIUM_TOOLS.getEnchantability();
 	}
 
 	@Override
-	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
+	public IIcon getIcon(ItemStack stack, int pass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
 		if (player.getItemInUse() != null) {
 			int charge = stack.getMaxItemUseDuration() - useRemaining;
 
 			if (charge >= 18)
-				return getItemIconForUseDuration(2);
+				return pass != 0 ? overlays[2] : getItemIconForUseDuration(2);
 			if (charge > 13)
-				return getItemIconForUseDuration(1);
+				return pass != 0 ? overlays[1] : getItemIconForUseDuration(1);
 			if (charge > 0)
-				return getItemIconForUseDuration(0);
+				return pass != 0 ? overlays[0] : getItemIconForUseDuration(0);
 		}
 
-		return super.getIcon(stack, renderPass, player, usingItem, useRemaining);
+		return pass != 0 ? standby : super.getIcon(stack, pass, player, usingItem, useRemaining);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIconFromDamageForRenderPass(int meta, int pass) {
+		return pass == 0 ? itemIcon : standby;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
+		super.registerIcons(reg);
+		standby = reg.registerIcon(getIconString() + "_standby_overlay");
+		overlays = new IIcon[bowPullIconNameArray.length];
+
+		for (int i = 0; i < overlays.length; i++)
+			overlays[i] = reg.registerIcon(getIconString() + "_" + bowPullIconNameArray[i] + "_overlay");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
+		return true;
 	}
 }

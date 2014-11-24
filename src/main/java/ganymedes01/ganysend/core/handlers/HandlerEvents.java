@@ -11,12 +11,16 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -26,6 +30,9 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
  */
 
 public class HandlerEvents {
+
+	@SideOnly(Side.CLIENT)
+	public static IIcon endium_still, endium_flow;
 
 	@SubscribeEvent
 	public void tooltip(ItemTooltipEvent event) {
@@ -82,5 +89,14 @@ public class HandlerEvents {
 								}
 							}
 				}
+	}
+
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void loadTextures(TextureStitchEvent.Pre event) {
+		if (event.map.getTextureType() == 0) {
+			endium_still = event.map.registerIcon(Utils.getBlockTexture("endium_still"));
+			endium_flow = event.map.registerIcon(Utils.getBlockTexture("endium_flow"));
+		}
 	}
 }

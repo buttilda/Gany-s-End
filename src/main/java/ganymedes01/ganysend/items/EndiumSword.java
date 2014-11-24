@@ -8,13 +8,14 @@ import ganymedes01.ganysend.lib.Strings;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -28,6 +29,9 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 public class EndiumSword extends ItemSword implements IEndiumTool {
+
+	@SideOnly(Side.CLIENT)
+	private IIcon overlay;
 
 	public EndiumSword() {
 		this(ModMaterials.ENDIUM_TOOLS);
@@ -63,7 +67,6 @@ public class EndiumSword extends ItemSword implements IEndiumTool {
 				stack.stackTagCompound.setIntArray("Position", new int[] { x, y, z });
 				stack.stackTagCompound.setInteger("Dimension", world.provider.dimensionId);
 				stack.stackTagCompound.setBoolean("Tagged", true);
-				stack.setTagInfo("ench", new NBTTagList());
 				player.swingItem();
 				return false;
 			}
@@ -85,5 +88,30 @@ public class EndiumSword extends ItemSword implements IEndiumTool {
 	@SideOnly(Side.CLIENT)
 	public EnumRarity getRarity(ItemStack stack) {
 		return EnumRarity.uncommon;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean hasEffect(ItemStack stack, int pass) {
+		return pass == 0 && stack.hasTagCompound() && stack.stackTagCompound.hasKey("Position");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
+		super.registerIcons(reg);
+		overlay = reg.registerIcon(getIconString() + "_overlay");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIconFromDamageForRenderPass(int meta, int pass) {
+		return pass == 0 ? itemIcon : overlay;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
+		return true;
 	}
 }

@@ -134,6 +134,9 @@ container.ganysend.enderFurnace=Ender Furnace
 # Enchantments
 enchantment.imperviousness=Imperviousness
 
+# Fluids
+fluid.endium=Molten Endium
+
 # Others localizations
 itemGroup.ganysend=Gany's End
 nottagged=Not Tagged
@@ -141,3 +144,4 @@ pullallbut=Pull all but:
 pullonly=Pull Only:
 string.ganysend.creativeOnly=Creative Only
 string.ganysend.rightClickContainer=Right click with container to set fluid
+material.endium=Endium
