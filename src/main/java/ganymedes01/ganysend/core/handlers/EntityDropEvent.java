@@ -57,7 +57,7 @@ public class EntityDropEvent {
 		// Collect drops
 		if (!GanysEnd.enableEndiumTools)
 			return;
-		if (weapon != null && weapon.getItem() instanceof IEndiumTool)
+		if (weapon != null && isEndiumTool(weapon))
 			if (weapon.stackTagCompound != null)
 				if (weapon.getTagCompound().getBoolean("Tagged")) {
 					NBTTagCompound data = weapon.getTagCompound();
@@ -106,5 +106,14 @@ public class EntityDropEvent {
 		EntityItem entityItem = new EntityItem(entity.worldObj, entity.posX, entity.posY, entity.posZ, stack);
 		entityItem.delayBeforeCanPickup = 10;
 		list.add(entityItem);
+	}
+
+	public static boolean isEndiumTool(ItemStack stack) {
+		return isTinkersEndiumTool(stack) || stack.getItem() instanceof IEndiumTool;
+	}
+
+	// TODO this is only temporary
+	public static boolean isTinkersEndiumTool(ItemStack stack) {
+		return stack.hasTagCompound() && stack.getTagCompound().hasKey("InfiTool") && stack.getTagCompound().getCompoundTag("InfiTool").getInteger("Head") == 666;
 	}
 }
