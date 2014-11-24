@@ -6,15 +6,19 @@ import ganymedes01.ganysend.core.handlers.HandlerEvents;
 import ganymedes01.ganysend.lib.ModMaterials;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import tconstruct.TConstruct;
 import tconstruct.library.TConstructRegistry;
 import tconstruct.library.crafting.Smeltery;
+import tconstruct.library.event.ToolCraftEvent;
+import tconstruct.library.tools.ToolMaterial;
 import tconstruct.library.util.IPattern;
 import tconstruct.smeltery.TinkerSmeltery;
 import tconstruct.tools.TinkerTools;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Gany's End
@@ -75,6 +79,8 @@ public class TinkersConstructManager extends Integration {
 				TConstructRegistry.getTableCasting().addCastingRecipe(metalCast, new FluidStack(endium, amount), cast, 50);
 				Smeltery.addMelting(metalCast, ModBlocks.endiumBlock, 0, 100, new FluidStack(endium, amount));
 			}
+
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@Override
@@ -84,5 +90,13 @@ public class TinkersConstructManager extends Integration {
 	@Override
 	public String getModID() {
 		return "TConstruct";
+	}
+
+	@SubscribeEvent
+	public void toolBuiltEvent(ToolCraftEvent.NormalTool event) {
+		for (ToolMaterial mat : event.materials)
+			if (mat != null)
+				if ("Endium".equals(mat.materialName))
+					event.toolTag.setBoolean("EndiumTool", true);
 	}
 }

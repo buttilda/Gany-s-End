@@ -112,8 +112,7 @@ public class EntityDropEvent {
 		return isTinkersEndiumTool(stack) || stack.getItem() instanceof IEndiumTool;
 	}
 
-	// TODO this is only temporary
 	public static boolean isTinkersEndiumTool(ItemStack stack) {
-		return stack.hasTagCompound() && stack.getTagCompound().hasKey("InfiTool") && stack.getTagCompound().getCompoundTag("InfiTool").getInteger("Head") == 666;
+		return stack.hasTagCompound() && stack.getTagCompound().getBoolean("EndiumTool");
 	}
 }
