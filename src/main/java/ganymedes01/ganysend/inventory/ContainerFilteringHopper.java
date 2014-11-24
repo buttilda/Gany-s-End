@@ -10,9 +10,9 @@ import net.minecraft.item.ItemStack;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ContainerFilteringHopper extends Container {
@@ -74,5 +74,23 @@ public class ContainerFilteringHopper extends Container {
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
 		return true;
+	}
+
+	@Override
+	public ItemStack slotClick(int slotIndex, int button, int shift, EntityPlayer player) {
+		if (slotIndex > 0) {
+			Slot slot = getSlot(slotIndex);
+			if (slot instanceof FilterSlot) {
+				if (slot.getHasStack())
+					slot.putStack(null);
+				else if (player.inventory.getItemStack() != null) {
+					ItemStack copy = player.inventory.getItemStack().copy();
+					copy.stackSize = 1;
+					slot.putStack(copy);
+				}
+				return null;
+			}
+		}
+		return super.slotClick(slotIndex, button, shift, player);
 	}
 }

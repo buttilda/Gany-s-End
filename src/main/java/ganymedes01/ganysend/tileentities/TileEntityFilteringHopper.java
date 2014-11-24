@@ -352,8 +352,4 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		data.setInteger("MAX_COOL_DOWN", MAX_COOL_DOWN);
 		data.setBoolean("OPPOSITE", EXCLUSIVE);
 	}
-
-	public void dropFilters() {
-		InventoryUtils.dropStack(worldObj, xCoord, yCoord, zCoord, filter);
-	}
 }

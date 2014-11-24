@@ -84,10 +84,8 @@ public class BasicFilteringHopper extends BlockHopper {
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
 		TileEntityFilteringHopper tile = Utils.getTileEntity(world, x, y, z, TileEntityFilteringHopper.class);
-		if (tile != null) {
+		if (tile != null)
 			InventoryUtils.dropInventoryContents(tile);
-			tile.dropFilters();
-		}
 		world.func_147453_f(x, y, z, block);
 		world.removeTileEntity(x, y, z);
 	}
