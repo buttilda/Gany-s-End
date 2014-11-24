@@ -20,6 +20,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -46,13 +47,13 @@ public class HandlerEvents {
 			} else if (block == ModBlocks.creativeSpeedyHopper)
 				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".creativeOnly"));
 		} else if (EntityDropEvent.isTinkersEndiumTool(event.itemStack)) {
-				NBTTagCompound nbt = event.itemStack.getTagCompound();
-				if (nbt != null && nbt.hasKey("Position") && nbt.hasKey("Dimension")) {
-					String pos = nbt.getIntArray("Position")[0] + ", " + nbt.getIntArray("Position")[1] + ", " + nbt.getIntArray("Position")[2];
-					event.toolTip.add(nbt.getInteger("Dimension") + " : " + pos);
-				} else
-					event.toolTip.add(StatCollector.translateToLocal("nottagged"));
-			}
+			NBTTagCompound nbt = event.itemStack.getTagCompound();
+			if (nbt != null && nbt.hasKey("Position") && nbt.hasKey("Dimension")) {
+				String pos = nbt.getIntArray("Position")[0] + ", " + nbt.getIntArray("Position")[1] + ", " + nbt.getIntArray("Position")[2];
+				event.toolTip.add(nbt.getInteger("Dimension") + " : " + pos);
+			} else
+				event.toolTip.add(StatCollector.translateToLocal("nottagged"));
+		}
 	}
 
 	@SubscribeEvent
@@ -67,7 +68,7 @@ public class HandlerEvents {
 			}
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onBlockHarvested(HarvestDropsEvent event) {
 		if (!GanysEnd.enableEndiumTools)
 			return;
