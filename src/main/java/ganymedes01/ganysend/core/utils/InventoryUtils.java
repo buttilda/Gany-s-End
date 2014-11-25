@@ -24,7 +24,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class InventoryUtils {
 
 	public static void addToPlayerInventory(EntityPlayer player, ItemStack stack, double x, double y, double z) {
-		if (!player.worldObj.isRemote) {
+		if (!player.worldObj.isRemote && stack != null) {
 			EntityItem entity = new EntityItem(player.worldObj, x + 0.5, y, z + 0.5, stack);
 			entity.motionX = 0;
 			entity.motionY = 0;
