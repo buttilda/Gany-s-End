@@ -1,13 +1,14 @@
 package ganymedes01.ganysend.inventory.slots;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class FilterSlot extends Slot {
@@ -19,5 +20,10 @@ public class FilterSlot extends Slot {
 	@Override
 	public int getSlotStackLimit() {
 		return 1;
+	}
+
+	@Override
+	public boolean canTakeStack(EntityPlayer player) {
+		return false;
 	}
 }

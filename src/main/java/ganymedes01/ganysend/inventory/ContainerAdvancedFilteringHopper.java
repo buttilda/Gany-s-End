@@ -69,7 +69,7 @@ public class ContainerAdvancedFilteringHopper extends Container {
 
 	@Override
 	public ItemStack slotClick(int slotIndex, int button, int shift, EntityPlayer player) {
-		if (slotIndex > 0) {
+		if (slotIndex >= 0) {
 			Slot slot = getSlot(slotIndex);
 			if (slot instanceof FilterSlot) {
 				if (slot.getHasStack())
