@@ -78,6 +78,6 @@ public class EndiumIngot extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack stack, int pass) {
-		return pass == 0;
+		return true;
 	}
 }
