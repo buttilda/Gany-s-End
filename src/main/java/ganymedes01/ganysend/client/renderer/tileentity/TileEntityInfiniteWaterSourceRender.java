@@ -63,13 +63,15 @@ public class TileEntityInfiniteWaterSourceRender extends TileEntitySpecialRender
 
 		drawCube(renderer, coreIcon);
 
-		double num = 0.002;
-		renderer.setRenderBounds(num, num, num, 1 - num, 1 - num, 1 - num);
-		Color c = new Color(colour);
-		GL11.glColor3f(c.getRed() / 255F, c.getGreen() / 255F, c.getBlue() / 255F);
-		GL11.glDisable(GL11.GL_LIGHTING);
-		drawCube(renderer, fluidIcon);
-		GL11.glEnable(GL11.GL_LIGHTING);
+		if (fluidIcon != null) {
+			double num = 0.002;
+			renderer.setRenderBounds(num, num, num, 1 - num, 1 - num, 1 - num);
+			Color c = new Color(colour);
+			GL11.glColor3f(c.getRed() / 255F, c.getGreen() / 255F, c.getBlue() / 255F);
+			GL11.glDisable(GL11.GL_LIGHTING);
+			drawCube(renderer, fluidIcon);
+			GL11.glEnable(GL11.GL_LIGHTING);
+		}
 	}
 
 	private static void drawCube(RenderBlocks renderer, IIcon icon) {
