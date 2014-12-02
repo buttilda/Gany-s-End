@@ -48,7 +48,7 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 		boolean inventoryChanged = false;
 		if (burnTime > 0)
 			burnTime--;
-		else if (canSmelt()) {
+		if (canSmelt() && burnTime <= 0) {
 			currentBurnTime = burnTime = EnderFurnaceFuelsRegistry.INSTANCE.getBurnTime(inventory[0]);
 
 			if (burnTime > 0)
