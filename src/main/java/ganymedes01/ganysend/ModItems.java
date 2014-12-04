@@ -8,7 +8,6 @@ import ganymedes01.ganysend.items.EnderTag;
 import ganymedes01.ganysend.items.EndiumAxe;
 import ganymedes01.ganysend.items.EndiumBoots;
 import ganymedes01.ganysend.items.EndiumBow;
-import ganymedes01.ganysend.items.EndiumBucket;
 import ganymedes01.ganysend.items.EndiumChestplate;
 import ganymedes01.ganysend.items.EndiumHelmet;
 import ganymedes01.ganysend.items.EndiumIngot;
@@ -63,7 +62,7 @@ public class ModItems {
 	public static final Item reinforcedEndiumSword = new ReinforcedEndiumSword();
 	public static final Item reinforcedEndiumBow = new ReinforcedEndiumBow();
 	public static final Item enderBag = new EnderBag();
-	public static final Item endiumBucket = new EndiumBucket();
+	//	public static final Item endiumBucket = new EndiumBucket();
 
 	// Armour
 	public static final Item endiumHelmet = new EndiumHelmet();
