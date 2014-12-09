@@ -66,13 +66,11 @@ public class TinkersConstructManager extends Integration {
 		Smeltery.addMelting(ModBlocks.endiumBlock, 0, 100, new FluidStack(endium, TConstruct.blockLiquidValue));
 		Smeltery.addMelting(ModBlocks.rawEndium, 0, 1000, new FluidStack(endium, TConstruct.oreLiquidValue));
 		TConstructRegistry.getBasinCasting().addCastingRecipe(new ItemStack(ModBlocks.endiumBlock), new FluidStack(endium, TConstruct.blockLiquidValue), 50);
+		TConstructRegistry.getTableCasting().addCastingRecipe(new ItemStack(ModItems.endiumIngot), new FluidStack(endium, TConstruct.ingotLiquidValue), new ItemStack(TinkerSmeltery.metalPattern), 50);
 
 		for (int i = 0; i < TinkerTools.patternOutputs.length; i++)
 			if (TinkerTools.patternOutputs[i] != null) {
 				ItemStack cast = new ItemStack(TinkerSmeltery.metalPattern, 1, i + 1);
-
-				TConstructRegistry.getTableCasting().addCastingRecipe(cast, new FluidStack(TinkerSmeltery.moltenAlubrassFluid, TConstruct.ingotLiquidValue), new ItemStack(TinkerTools.patternOutputs[i], 1, Short.MAX_VALUE), false, 50);
-				TConstructRegistry.getTableCasting().addCastingRecipe(cast, new FluidStack(TinkerSmeltery.moltenGoldFluid, TConstruct.ingotLiquidValue * 2), new ItemStack(TinkerTools.patternOutputs[i], 1, Short.MAX_VALUE), false, 50);
 
 				int amount = ((IPattern) TinkerSmeltery.metalPattern).getPatternCost(cast) * TConstruct.ingotLiquidValue / 2;
 				ItemStack metalCast = new ItemStack(TinkerTools.patternOutputs[i], 1, materialID);
