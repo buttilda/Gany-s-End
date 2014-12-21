@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.command.IEntitySelector;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -173,10 +172,10 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		return false;
 	}
 
-	protected IInventory getInventoryAbove() {
+	protected final IInventory getInventoryAbove() {
 		IInventory iinventory = Utils.getTileEntity(worldObj, xCoord, yCoord + 1, zCoord, IInventory.class);
 		if (iinventory == null) {
-			List<?> list = worldObj.getEntitiesWithinAABBExcludingEntity((Entity) null, AxisAlignedBB.getBoundingBox(xCoord, yCoord + 1, zCoord, xCoord + 1, yCoord + 2, zCoord + 1), IEntitySelector.selectInventories);
+			List<?> list = worldObj.getEntitiesWithinAABBExcludingEntity(null, AxisAlignedBB.getBoundingBox(xCoord, yCoord + 1, zCoord, xCoord + 1, yCoord + 2, zCoord + 1), IEntitySelector.selectInventories);
 			if (list != null && list.size() > 0)
 				iinventory = (IInventory) list.get(worldObj.rand.nextInt(list.size()));
 		}
