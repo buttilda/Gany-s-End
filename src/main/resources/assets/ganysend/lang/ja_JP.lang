@@ -1,0 +1,152 @@
+# Item localizations
+item.ganysend.endiumHelmet.name=エンディウムのヘルメット
+item.ganysend.endiumChestplate.name=エンディウムのチェストプレート
+item.ganysend.endiumLeggings.name=エンディウムのレギンス
+item.ganysend.endiumBoots.name=エンディウムのブーツ
+
+item.ganysend.enderTag.name=エンダータグ
+item.ganysend.endiumNugget.name=エンディウム塊
+item.ganysend.endiumIngot.name=エンディウムインゴット
+item.ganysend.endstoneRod.name=エンドストーンの棒
+item.ganysend.enderScythe.name=エンドの鎌
+item.ganysend.infiniteBucket.name=無限のバケツ
+item.ganysend.infusedGem_night.name=薄暮の宝玉
+item.ganysend.infusedGem_day.name=暁天の宝玉
+item.ganysend.endiumPickaxe.name=エンディウムのツルハシ
+item.ganysend.endiumAxe.name=エンディウムの斧
+item.ganysend.endiumShovel.name=エンディウムのシャベル
+item.ganysend.endiumSword.name=エンディウムの剣
+item.ganysend.endiumBow.name=エンディウムの弓
+item.ganysend.reinforcedEndiumPickaxe.name=エンディウムの強化ツルハシ
+item.ganysend.reinforcedEndiumAxe.name=エンディウムの強化斧
+item.ganysend.reinforcedEndiumShovel.name=エンディウムの強化シャベル
+item.ganysend.reinforcedEndiumSword.name=エンディウムの大剣
+item.ganysend.reinforcedEndiumBow.name=エンディウムの強化弓
+item.ganysend.enderBag.name=エンダーかばん
+item.ganysend.endiumBucket.name=エンディウムバケツ
+
+# Heads
+item.ganysend.itemNewSkullpigmanHead.name=ピッグマンの頭
+item.ganysend.itemNewSkullblazeHead.name=ブレイズの頭
+item.ganysend.itemNewSkullendermanHead.name=エンダーマンの頭
+item.ganysend.itemNewSkullplayerHead.name=頭
+item.ganysend.itemNewSkullspiderHead.name=クモの頭
+item.ganysend.itemNewSkullcaveSpiderHead.name=洞窟クモの頭
+item.ganysend.itemNewSkullpigHead.name=ブタの頭
+item.ganysend.itemNewSkullcowHead.name=ウシの頭
+item.ganysend.itemNewSkullmooshroomHead.name=ムーシュルームの頭
+item.ganysend.itemNewSkullsheepHead.name=ヒツジの頭
+item.ganysend.itemNewSkullwolfHead.name=オオカミの頭
+item.ganysend.itemNewSkullvillagerHead.name=村人の頭
+item.ganysend.itemNewSkullchickenHead.name=ニワトリの頭
+item.ganysend.itemNewSkullwitchHead.name=ウィッチの頭
+item.ganysend.itemNewSkullzombieVillagerHead.name=村人ゾンビの頭
+item.ganysend.itemNewSkullironGolemHead.name=アイアンゴーレムの頭
+item.ganysend.itemNewSkullsquidHead.name=イカの頭
+item.ganysend.itemNewSkullwitherHead.name=ウィザーの頭
+item.ganysend.itemNewSkullghastHead.name=ガストの頭
+item.ganysend.itemNewSkullmistWolfHead.name=ミストウルフの頭
+item.ganysend.itemNewSkullminiGhastHead.name=カーマイトガストリングの頭
+item.ganysend.itemNewSkullguardGhastHead.name=カーマイトガストガードの頭
+item.ganysend.itemNewSkullkingSpiderHead.name=キングスパイダーの頭
+item.ganysend.itemNewSkullkoboldHead.name=コボルドの頭
+item.ganysend.itemNewSkullslimeBeetleHead.name=スライムビートルの頭
+item.ganysend.itemNewSkullfireBeetleHead.name=ファイアービートルの頭
+item.ganysend.itemNewSkullpinchBeetleHead.name=ペンチビートルの頭
+item.ganysend.itemNewSkulltowerGolemHead.name=カーマイトゴーレムの頭
+item.ganysend.itemNewSkullbunnyDutchHead.name=オランダウサギの頭
+item.ganysend.itemNewSkullbunnyBrownHead.name=茶ウサギの頭
+item.ganysend.itemNewSkullbunnyWhiteHead.name=白ウサギの頭
+item.ganysend.itemNewSkullpenguinHead.name=ペンギンの頭
+item.ganysend.itemNewSkullbighornHead.name=オオツノヒツジの頭
+item.ganysend.itemNewSkullwildDeerHead.name=シカの頭
+item.ganysend.itemNewSkullwildBoarHead.name=イノシシの頭
+item.ganysend.itemNewSkullredcapHead.name=レッドキャップの頭
+item.ganysend.itemNewSkulldruidHead.name=スケルトンドルイドの頭
+item.ganysend.itemNewSkullhedgeSpiderHead.name=生垣クモの頭
+item.ganysend.itemNewSkullblizzHead.name=ブリズの頭
+item.ganysend.itemNewSkullenderDragonHead.name=エンダードラゴンの頭
+item.ganysend.itemNewSkullhostileWolfHead.name=凶暴なオオカミの頭
+item.ganysend.itemNewSkullsquirrelHead.name=リスの頭
+item.ganysend.itemNewSkullocelotHead.name=オセロットの頭
+item.ganysend.itemNewSkullocelotBlackHead.name=黒ネコの頭
+item.ganysend.itemNewSkullocelotRedHead.name=赤毛ネコの頭
+item.ganysend.itemNewSkullocelotSiameseHead.name=シャムネコの頭
+item.ganysend.itemNewSkullbatHead.name=コウモリの頭
+item.ganysend.itemNewSkullslimeHead.name=スライムの頭
+item.ganysend.itemNewSkullmagmaCubeHead.name=マグマキューブの頭
+item.ganysend.itemNewSkullhorseBlackHead.name=ウマの頭 (黒)
+item.ganysend.itemNewSkullhorseBrownHead.name=ウマの頭 (茶)
+item.ganysend.itemNewSkullhorseChestnutHead.name=ウマの頭 (栗色)
+item.ganysend.itemNewSkullhorseCreamyHead.name=ウマの頭 (鳥の子色)
+item.ganysend.itemNewSkullhorseDarkBrownHead.name=ウマの頭 (こげ茶)
+item.ganysend.itemNewSkullhorseGreyHead.name=ウマの頭 (灰)
+item.ganysend.itemNewSkullhorseWhiteHead.name=ウマの頭 (白)
+item.ganysend.itemNewSkulldonkeyHead.name=ロバの頭
+item.ganysend.itemNewSkullmuleHead.name=ラバの頭
+item.ganysend.itemNewSkullhorseUndeadHead.name=ゾンビ ウマの頭
+item.ganysend.itemNewSkullhorseSkeletonHead.name=スケルトン ウマの頭
+item.ganysend.itemNewSkullsnowManHead.name=スノウゴーレムの頭
+item.ganysend.itemNewSkullsilverfishHead.name=シルバーフィッシュの頭
+
+# Block localizations
+tile.ganysend.enderFlower.name=エンダーフラワー
+tile.ganysend.endstoneBrick.name=エンドストーンレンガ
+tile.ganysend.enderpearlBlock.name=エンダーパールブロック
+tile.ganysend.enderpearlBrick.name=エンダーパールレンガ
+tile.ganysend.endstoneStairs.name=エンドストーンの階段
+tile.ganysend.enderpearlBrickStairs.name=エンダーパールレンガの階段
+tile.ganysend.enderToggler.name=エンダートグル
+tile.ganysend.blockShifter.name=ブロック転移装置
+tile.ganysend.rawEndium.name=エンディウム鉱石
+tile.ganysend.endiumBlock.name=エンディウムブロック
+tile.ganysend.emulator.name=ブロックエミュレータ
+tile.ganysend.basicFilteringHopper.name=基本フィルター付きホッパー
+tile.ganysend.exclusiveFilteringHopper.name=反転フィルター付きホッパー
+tile.ganysend.speedyBasicFilteringHopper.name=基本フィルター付き高速ホッパー
+tile.ganysend.speedyExclusiveFilteringHopper.name=反転フィルター付き高速ホッパー
+tile.ganysend.speedyHopper.name=高速ホッパー
+tile.ganysend.creativeSpeedyHopper.name=クリエイティブ専用高速ホッパー
+tile.ganysend.advancedFilteringHopper.name=改良型フィルター付きホッパー
+tile.ganysend.advancedExclusiveFilteringHopper.name=改良型反転フィルター付きホッパー
+tile.ganysend.timeManipulator.name=タイムマニピュレーター
+tile.ganysend.entityShifter.name=物体転移装置
+tile.ganysend.inventoryBinder.name=インベントリバインダー
+tile.ganysend.infiniteWaterSource.name=無限水生成機
+tile.ganysend.endWalls0.name=エンドストーンレンガの壁
+tile.ganysend.endWalls1.name=エンダーパールレンガの壁
+tile.ganysend.voidCrate.name=虚無の木箱
+tile.ganysend.enderFurnace.name=エンダーかまど
+tile.ganysend.creativeInfiniteFluidSource.name=クリエイティブ専用無限水生成機
+tile.ganysend.anchoredEnderChest.name=アンカーエンダーチェスト
+
+# GUI lo#GUI
+container.ganysend.basicFilteringHopper=基本フィルター付きホッパー
+container.ganysend.exclusiveFilteringHopper=反転フィルター付きホッパー
+container.ganysend.speedyHopper=高速ホッパー
+container.ganysend.creativeSpeedyHopper=クリエイティブ専用高速ホッパー
+container.ganysend.speedyBasicFilteringHopper=基本フィルター付き高速ホッパー
+container.ganysend.speedyExclusiveFilteringHopper=反転フィルター付き高速ホッパー
+container.ganysend.advancedFilteringHopper=改良型フィルター付きホッパー
+container.ganysend.advancedExclusiveFilteringHopper=改良型反転フィルター付きホッパー
+container.ganysend.voidCrate=虚無の木箱
+container.ganysend.enderFurnace=エンダーかまど
+
+# Enchantments
+enchantment.imperviousness=不浸透性
+
+# Fluids
+fluid.endium=溶融エンディウム
+
+# Others localizations
+itemGroup.ganysend=Gany's End
+
+# Strings
+string.ganysend.nottagged=タグ未登録
+string.ganysend.pullallbut=Pull all but:
+string.ganysend.pullonly=Pull Only:
+string.ganysend.creativeOnly=クリエイティブ専用
+string.ganysend.rightClickContainer=Right click with container to set fluid
+
+# Materials
+material.endium=エンディウム
