@@ -23,6 +23,7 @@ item.ganysend.reinforcedEndiumShovel.name=Укреплённая лопата и
 item.ganysend.reinforcedEndiumSword.name=Укреплённый меч из эндия
 item.ganysend.reinforcedEndiumBow.name=Укреплённый лук из эндия
 item.ganysend.enderBag.name=Мешочек Края
+item.ganysend.endiumBucket.name=Ведро эндия
 
 # Heads
 item.ganysend.itemNewSkullpigmanHead.name=Голова зомби-свиночеловека
@@ -97,7 +98,7 @@ tile.ganysend.endstoneStairs.name=Ступеньки из камня Края
 tile.ganysend.enderpearlBrickStairs.name=Ступеньки из кирпича из жемчуга Края
 tile.ganysend.enderToggler.name=Переключатель Края
 tile.ganysend.blockShifter.name=Сдвигатель блоков
-tile.ganysend.rawEndium.name=Сырой эндиум
+tile.ganysend.rawEndium.name=Сырой эндий
 tile.ganysend.endiumBlock.name=Блок эндия
 tile.ganysend.emulator.name=Эмулятор
 tile.ganysend.basicFilteringHopper.name=Обычная фильтрующая воронка
@@ -134,10 +135,18 @@ container.ganysend.enderFurnace=Печь Края
 # Enchantments
 enchantment.imperviousness=Стойкость
 
+# Fluids
+fluid.endium=Расплавленный эндий
+
 # Others localizations
-itemGroup.ganysend=Gany's End 
+itemGroup.ganysend=Gany's End
+
+# Strings
 string.ganysend.nottagged=Не отмечено
 string.ganysend.pullallbut=Втягивать всё, кроме:
 string.ganysend.pullonly=Только втягивать:
 string.ganysend.creativeOnly=Только для творчества
 string.ganysend.rightClickContainer=ПКМ с контейнером в руке, чтобы выбрать жидкость
+
+# Materials
+material.endium=Эндий
