@@ -48,7 +48,7 @@ public class XMLParser {
 
 	public static boolean isItemStackValue(String nodeValue) {
 		String[] array = nodeValue.split(" ");
-		return array.length == 3 || array.length == 4 && array[3].startsWith("{");
+		return array.length == 3 || array.length >= 4 && array[3].startsWith("{");
 	}
 
 	public static ItemStack parseItemStackNode(XMLNode node) {
@@ -59,7 +59,10 @@ public class XMLParser {
 		ItemStack stack = new ItemStack(item, size, meta);
 		if (data.length >= 4)
 			try {
-				NBTBase nbtbase = JsonToNBT.func_150315_a(data[3]);
+				String nbt = "";
+				for (int i = 3; i < data.length; i++)
+					nbt += " " + data[i];
+				NBTBase nbtbase = JsonToNBT.func_150315_a(nbt);
 				stack.setTagCompound((NBTTagCompound) nbtbase);
 			} catch (Exception e) {
 				throw new RuntimeException(e);
@@ -69,7 +72,7 @@ public class XMLParser {
 
 	public static boolean isFluidStackValue(String nodeValue) {
 		String[] array = nodeValue.split(" ");
-		return array.length == 2 || array.length == 3 && array[2].startsWith("{");
+		return array.length == 2 || array.length >= 3 && array[2].startsWith("{");
 	}
 
 	public static FluidStack parseFluidStackNode(XMLNode node) {
@@ -79,7 +82,10 @@ public class XMLParser {
 		FluidStack stack = new FluidStack(fluid, amount);
 		if (data.length >= 3)
 			try {
-				NBTBase nbtbase = JsonToNBT.func_150315_a(data[2]);
+				String nbt = "";
+				for (int i = 2; i < data.length; i++)
+					nbt += " " + data[i];
+				NBTBase nbtbase = JsonToNBT.func_150315_a(nbt);
 				stack.tag = (NBTTagCompound) nbtbase;
 			} catch (Exception e) {
 				throw new RuntimeException(e);
