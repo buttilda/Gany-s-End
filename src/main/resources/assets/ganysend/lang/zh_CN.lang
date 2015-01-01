@@ -1,28 +1,29 @@
 # Item localizations
-item.ganysend.endiumHelmet.name=末影头盔
-item.ganysend.endiumChestplate.name=末影胸甲
-item.ganysend.endiumLeggings.name=末影护腿
-item.ganysend.endiumBoots.name=末影靴子
+item.ganysend.endiumHelmet.name=末金头盔
+item.ganysend.endiumChestplate.name=末金胸甲
+item.ganysend.endiumLeggings.name=末金护腿
+item.ganysend.endiumBoots.name=末金靴子
 
 item.ganysend.enderTag.name=末影标签
-item.ganysend.endiumNugget.name=末影粒
-item.ganysend.endiumIngot.name=末影锭
+item.ganysend.endiumNugget.name=末金粒
+item.ganysend.endiumIngot.name=末金锭
 item.ganysend.endstoneRod.name=末地石棍
 item.ganysend.enderScythe.name=末影镰刀
 item.ganysend.infiniteBucket.name=无限水桶
 item.ganysend.infusedGem_night.name=夜之宝石
 item.ganysend.infusedGem_day.name=日之宝石
-item.ganysend.endiumPickaxe.name=末影镐
-item.ganysend.endiumAxe.name=末影斧
-item.ganysend.endiumShovel.name=末影锹
-item.ganysend.endiumSword.name=末影剑
-item.ganysend.endiumBow.name=末影弓
-item.ganysend.reinforcedEndiumPickaxe.name=强化末影镐
-item.ganysend.reinforcedEndiumAxe.name=强化末影斧
-item.ganysend.reinforcedEndiumShovel.name=强化末影锹
-item.ganysend.reinforcedEndiumSword.name=强化末影剑
-item.ganysend.reinforcedEndiumBow.name= 强化末影弓
+item.ganysend.endiumPickaxe.name=末金镐
+item.ganysend.endiumAxe.name=末金斧
+item.ganysend.endiumShovel.name=末金锹
+item.ganysend.endiumSword.name=末金剑
+item.ganysend.endiumBow.name=末金弓
+item.ganysend.reinforcedEndiumPickaxe.name=强化末金镐
+item.ganysend.reinforcedEndiumAxe.name=强化末金斧
+item.ganysend.reinforcedEndiumShovel.name=强化末金锹
+item.ganysend.reinforcedEndiumSword.name=强化末金剑
+item.ganysend.reinforcedEndiumBow.name= 强化末金弓
 item.ganysend.enderBag.name=末影背包
+item.ganysend.endiumBucket.name=末金桶
 
 # Heads
 item.ganysend.itemNewSkullpigmanHead.name=僵尸猪人头颅
@@ -89,7 +90,7 @@ item.ganysend.itemNewSkullsnowManHead.name=雪傀儡头颅
 item.ganysend.itemNewSkullsilverfishHead.name=蠹虫头颅
 
 # Block localizations
-tile.ganysend.enderFlower.name=末影之花
+tile.ganysend.enderFlower.name=末地之花
 tile.ganysend.endstoneBrick.name=末地石砖块
 tile.ganysend.enderpearlBlock.name=末影珍珠块
 tile.ganysend.enderpearlBrick.name=末影珍珠砖块
@@ -97,18 +98,18 @@ tile.ganysend.endstoneStairs.name=末地石楼梯
 tile.ganysend.enderpearlBrickStairs.name=末影珍珠砖楼梯
 tile.ganysend.enderToggler.name=末影藏匿方块
 tile.ganysend.blockShifter.name=方块转移器
-tile.ganysend.rawEndium.name=末影矿石
-tile.ganysend.endiumBlock.name=末影方块
+tile.ganysend.rawEndium.name=末金矿石
+tile.ganysend.endiumBlock.name=末金块
 tile.ganysend.emulator.name=伪装方块
 tile.ganysend.basicFilteringHopper.name=基础过滤漏斗
 tile.ganysend.exclusiveFilteringHopper.name=高级过滤漏斗
 tile.ganysend.speedyBasicFilteringHopper.name=基础极速过滤漏斗
 tile.ganysend.speedyExclusiveFilteringHopper.name=高级极速过滤漏斗
 tile.ganysend.speedyHopper.name=极速漏斗
-tile.ganysend.creativeSpeedyHopper.name=创造模式极速漏斗
+tile.ganysend.creativeSpeedyHopper.name=究极极速漏斗
 tile.ganysend.advancedFilteringHopper.name=先进过滤漏斗
 tile.ganysend.advancedExclusiveFilteringHopper.name=超级过滤漏斗
-tile.ganysend.timeManipulator.name=日夜时钟
+tile.ganysend.timeManipulator.name=柯罗诺斯之钟
 tile.ganysend.entityShifter.name=实体转移器
 tile.ganysend.inventoryBinder.name=物品栏传送装置
 tile.ganysend.infiniteWaterSource.name=无限水源装置
@@ -116,14 +117,14 @@ tile.ganysend.endWalls0.name=末地石砖墙
 tile.ganysend.endWalls1.name=末影珍珠砖墙
 tile.ganysend.voidCrate.name=虚空货箱
 tile.ganysend.enderFurnace.name=末影熔炉
-tile.ganysend.creativeInfiniteFluidSource.name=无限流体装置 (仅限创造模式)
+tile.ganysend.creativeInfiniteFluidSource.name=无限流体装置
 tile.ganysend.anchoredEnderChest.name=末影锚箱
 
 # GUI localizations
 container.ganysend.basicFilteringHopper=基础过滤漏斗
 container.ganysend.exclusiveFilteringHopper=高级过滤漏斗
 container.ganysend.speedyHopper=极速漏斗
-container.ganysend.creativeSpeedyHopper=创造模式极速漏斗
+container.ganysend.creativeSpeedyHopper=究极极速漏斗
 container.ganysend.speedyBasicFilteringHopper=基础极速过滤漏斗
 container.ganysend.speedyExclusiveFilteringHopper=高级极速过滤漏斗
 container.ganysend.advancedFilteringHopper=先进过滤漏斗
@@ -134,10 +135,18 @@ container.ganysend.enderFurnace=末影熔炉
 # Enchantments
 enchantment.imperviousness=防水
 
+# Fluids
+fluid.endium=熔融末金
+
 # Others localizations
 itemGroup.ganysend=Gany's End
+
+# Strings
 string.ganysend.nottagged=无目标容器
 string.ganysend.pullallbut=不传输:
 string.ganysend.pullonly=仅传输:
 string.ganysend.creativeOnly=仅限创造模式
-string.ganysend.rightClickContainer=右键流体容器来设定无限化的流体
+string.ganysend.rightClickContainer=右键流体容器来使其无限化
+
+# Materials
+material.endium=末金
