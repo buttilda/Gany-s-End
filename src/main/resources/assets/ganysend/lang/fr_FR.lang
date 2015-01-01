@@ -1,0 +1,151 @@
+# Item localizations
+item.ganysend.endiumHelmet.name=Casque d'Endium
+item.ganysend.endiumChestplate.name=Plastron d'Endium
+item.ganysend.endiumLeggings.name=Jambières d'Endium
+item.ganysend.endiumBoots.name=Bottes d'Endium
+
+item.ganysend.enderTag.name=Attache du Néant
+item.ganysend.endiumNugget.name=Pépite d'Endium
+item.ganysend.endiumIngot.name=Lingot d'Endium
+item.ganysend.endstoneRod.name=Bâton de Pierre Blanche
+item.ganysend.enderScythe.name=Faux du Néant
+item.ganysend.infiniteBucket.name=Seau Infini
+item.ganysend.infusedGem_night.name=Gemme Nocturne
+item.ganysend.infusedGem_day.name=Gemme Diurne
+item.ganysend.endiumPickaxe.name=Pioche d'Endium
+item.ganysend.endiumAxe.name=Hâche d'Endium
+item.ganysend.endiumShovel.name=Pelle d'Endium
+item.ganysend.endiumSword.name=Epée d'Endium
+item.ganysend.endiumBow.name=Arc d'Endium
+item.ganysend.reinforcedEndiumPickaxe.name=Pioche d'Endium Renforcé
+item.ganysend.reinforcedEndiumAxe.name=Hâche d'Endium Renforcée
+item.ganysend.reinforcedEndiumShovel.name=Pelle d'Endium Renforcée
+item.ganysend.reinforcedEndiumSword.name=Epée d'Endium Renforcée
+item.ganysend.reinforcedEndiumBow.name=Arc d'Endium Renforcé
+item.ganysend.enderBag.name=Sac du Néant
+item.ganysend.endiumBucket.name=Seau d'Endium
+
+# Heads
+item.ganysend.itemNewSkullpigmanHead.name=Tête de Cochon-Zombie
+item.ganysend.itemNewSkullblazeHead.name=Tête de Blaze
+item.ganysend.itemNewSkullendermanHead.name=Tête d'Enderman
+item.ganysend.itemNewSkullplayerHead.name=Tête
+item.ganysend.itemNewSkullspiderHead.name=Tête d'Araignée
+item.ganysend.itemNewSkullcaveSpiderHead.name=Tête d'Araignée Bleue
+item.ganysend.itemNewSkullpigHead.name=Tête de Cochon
+item.ganysend.itemNewSkullcowHead.name=Tête de Vache
+item.ganysend.itemNewSkullmooshroomHead.name=Tête de Champimeuh
+item.ganysend.itemNewSkullsheepHead.name=Tête de Mouton
+item.ganysend.itemNewSkullwolfHead.name=Tête de Loup
+item.ganysend.itemNewSkullvillagerHead.name=Tête de Villageois
+item.ganysend.itemNewSkullchickenHead.name=Tête de Poulet
+item.ganysend.itemNewSkullwitchHead.name=Tête de Sorcière
+item.ganysend.itemNewSkullzombieVillagerHead.name=Tête de Villageois Zombie
+item.ganysend.itemNewSkullironGolemHead.name=Tête de Golem de Fer
+item.ganysend.itemNewSkullsquidHead.name=Tête de Poulpe
+item.ganysend.itemNewSkullwitherHead.name=Tête de Wither
+item.ganysend.itemNewSkullghastHead.name=Tête de Ghast
+item.ganysend.itemNewSkullmistWolfHead.name=Tête de Loup de Brume
+item.ganysend.itemNewSkullminiGhastHead.name=Carminite Ghastling Head
+item.ganysend.itemNewSkullguardGhastHead.name=Carminite Ghastguard Head
+item.ganysend.itemNewSkullkingSpiderHead.name=King Spider Head
+item.ganysend.itemNewSkullkoboldHead.name=Tête de Gobelin
+item.ganysend.itemNewSkullslimeBeetleHead.name=Tête de Scaraslime
+item.ganysend.itemNewSkullfireBeetleHead.name=Tête de Scarardent
+item.ganysend.itemNewSkullpinchBeetleHead.name=Tête de Lucane
+item.ganysend.itemNewSkulltowerGolemHead.name=Tête de Golem de Carminite
+item.ganysend.itemNewSkullbunnyDutchHead.name=Tête d'Hollandais
+item.ganysend.itemNewSkullbunnyBrownHead.name=Tête de Lapin Marron
+item.ganysend.itemNewSkullbunnyWhiteHead.name=Tête de Lapin Blanc
+item.ganysend.itemNewSkullpenguinHead.name=Tête de Pingouin
+item.ganysend.itemNewSkullbighornHead.name=Tête de Bélier
+item.ganysend.itemNewSkullwildDeerHead.name=Tête de Cerf
+item.ganysend.itemNewSkullwildBoarHead.name=Tête de Sanglier
+item.ganysend.itemNewSkullredcapHead.name=Tête-Rouge
+item.ganysend.itemNewSkulldruidHead.name=Tête de Squelette Druide
+item.ganysend.itemNewSkullhedgeSpiderHead.name=Tête d'Araignée des Buissons
+item.ganysend.itemNewSkullblizzHead.name=Tête de Blizz
+item.ganysend.itemNewSkullenderDragonHead.name=Ender Dragon Head
+item.ganysend.itemNewSkullhostileWolfHead.name=Hostile Wolf Head
+item.ganysend.itemNewSkullsquirrelHead.name=Forest Squirrel Head
+item.ganysend.itemNewSkullocelotHead.name=Tête d'Ocelot
+item.ganysend.itemNewSkullocelotBlackHead.name=Tête de Chat Noir
+item.ganysend.itemNewSkullocelotRedHead.name=Tête de Chat Rous
+item.ganysend.itemNewSkullocelotSiameseHead.name=Tête de Chat Siamois
+item.ganysend.itemNewSkullbatHead.name=Tête de Chauve-Souris
+item.ganysend.itemNewSkullslimeHead.name=Tête de Slime
+item.ganysend.itemNewSkullmagmaCubeHead.name=Tête de Cube de Magma
+item.ganysend.itemNewSkullhorseBlackHead.name=Tête de Cheval (Noir)
+item.ganysend.itemNewSkullhorseBrownHead.name=Tête de Cheval (Marron)
+item.ganysend.itemNewSkullhorseChestnutHead.name=Tête de Cheval (Noisette)
+item.ganysend.itemNewSkullhorseCreamyHead.name=Tête de Cheval (Crême)
+item.ganysend.itemNewSkullhorseDarkBrownHead.name=Tête de Cheval (Marron foncé)
+item.ganysend.itemNewSkullhorseGreyHead.name=Tête de Cheval (Grise)
+item.ganysend.itemNewSkullhorseWhiteHead.name=Tête de Cheval (Blanche)
+item.ganysend.itemNewSkulldonkeyHead.name=Tête d'Âne
+item.ganysend.itemNewSkullmuleHead.name=Tête de Mule (lol)
+item.ganysend.itemNewSkullhorseUndeadHead.name=Tête de Cheval Mort-Vivant
+item.ganysend.itemNewSkullhorseSkeletonHead.name=Tête de Cheval Squelette
+item.ganysend.itemNewSkullsnowManHead.name=Tête de Bonhomme de Neige
+item.ganysend.itemNewSkullsilverfishHead.name=Tête de Poisson d'Argent
+
+# Block localizations
+tile.ganysend.enderFlower.name=Fleur du Néant
+tile.ganysend.endstoneBrick.name=Briques de Pierre Blanche
+tile.ganysend.enderpearlBlock.name=Bloc de Perle du Néant
+tile.ganysend.enderpearlBrick.name=Briques de Perle du Néant
+tile.ganysend.endstoneStairs.name=Escaliers de Pierre Blanche
+tile.ganysend.enderpearlBrickStairs.name=Escaliers de Perle du Néant
+tile.ganysend.enderToggler.name=Interrupteur du Néant
+tile.ganysend.blockShifter.name=Téléporteur de Bloc
+tile.ganysend.rawEndium.name=Endium Cru
+tile.ganysend.endiumBlock.name=Bloc d'Endium
+tile.ganysend.emulator.name=Emulateur
+tile.ganysend.basicFilteringHopper.name=Entonnoir de Tri Basique
+tile.ganysend.exclusiveFilteringHopper.name=Entonnoir de Tri Exclusif
+tile.ganysend.speedyBasicFilteringHopper.name=Entonnoir de Tri Basique Rapide
+tile.ganysend.speedyExclusiveFilteringHopper.name=Entonnoir de Tri Exclusif Rapide
+tile.ganysend.speedyHopper.name=Entonnoir Rapide
+tile.ganysend.creativeSpeedyHopper.name=Entonnoir Rapide Créatif
+tile.ganysend.advancedFilteringHopper.name=Entonnoir de Tri Avancé
+tile.ganysend.advancedExclusiveFilteringHopper.name=Entonnoir de Tri Exclusif Avancé
+tile.ganysend.timeManipulator.name=Manipulateur Temporel
+tile.ganysend.entityShifter.name=Téléporteur d'Entités
+tile.ganysend.inventoryBinder.name=Lieur d'Inventaires
+tile.ganysend.infiniteWaterSource.name=Source d'Eau Infinie
+tile.ganysend.endWalls0.name=Muret de Briques de Piere Blanche
+tile.ganysend.endWalls1.name=Muret de Briques de Perle du Néant
+tile.ganysend.voidCrate.name=Caisse-Vide
+tile.ganysend.enderFurnace.name=Fourneau du Néant
+tile.ganysend.creativeInfiniteFluidSource.name=Source d'Eau Infinie Créative
+tile.ganysend.anchoredEnderChest.name=Coffre du Néant Lié
+
+# GUI localizations
+container.ganysend.basicFilteringHopper=Entonnoir de Tri Basique
+container.ganysend.exclusiveFilteringHopper=Entonnoir de Tri Exclusif
+container.ganysend.speedyHopper=Entonnoir Rapide
+container.ganysend.creativeSpeedyHopper=Entonnoir Rapide Créatif
+container.ganysend.speedyBasicFilteringHopper=Entonnoir de Tri Basique Avancé
+container.ganysend.speedyExclusiveFilteringHopper=Entonnoir de Tri Exclusif Avancé
+container.ganysend.advancedFilteringHopper=Entonnoir de Tri Avancé
+container.ganysend.advancedExclusiveFilteringHopper=Entonnoir de Tri Exclusif Avancé
+container.ganysend.voidCrate=Caisse-Vide
+container.ganysend.enderFurnace=Fourneau du Néant
+
+# Enchantments
+enchantment.imperviousness=Imperméabilité
+
+# Fluids
+fluid.endium=Endium Fondu
+# Others localizations
+itemGroup.ganysend=Gany's End
+
+# Strings
+string.ganysend.nottagged=Non-attaché
+string.ganysend.pullallbut=Extrait tout sauf:
+string.ganysend.pullonly=Extrait uniquement:
+string.ganysend.creativeOnly=Creatif Uniquement
+string.ganysend.rightClickContainer=Cliquer-droit avec un containeur pour définir le fluide
+
+# Materials
+material.endium=Endium
