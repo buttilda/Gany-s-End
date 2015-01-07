@@ -2,6 +2,7 @@ package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 
 import java.util.List;
@@ -60,6 +61,6 @@ public class EnderTag extends Item {
 		if (stack.stackTagCompound.hasKey("Position") && stack.stackTagCompound.hasKey("Dimension"))
 			list.add(Integer.toString(stack.stackTagCompound.getInteger("Dimension")) + " : " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[0]) + ", " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[1]) + ", " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[2]));
 		else
-			list.add(StatCollector.translateToLocal("nottagged"));
+			list.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".nottagged"));
 	}
 }
