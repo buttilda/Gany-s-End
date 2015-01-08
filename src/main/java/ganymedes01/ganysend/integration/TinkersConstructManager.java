@@ -42,7 +42,7 @@ public class TinkersConstructManager extends Integration {
 		int primaryColor = 0x2A233E;
 
 		TConstructRegistry.addToolMaterial(materialID, materialName, level, durability, miningspeed, 1, handleModifier, 0, 0, "", primaryColor);
-		TConstructRegistry.addBowMaterial(materialID, durability, 30, 1);
+		TConstructRegistry.addBowMaterial(materialID, 30, 1);
 
 		TConstructRegistry.addDefaultToolPartMaterial(materialID);
 		TConstructRegistry.addDefaultShardMaterial(materialID);
