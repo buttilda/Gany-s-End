@@ -43,7 +43,7 @@ public class HandlerEvents {
 		if (block != Blocks.air) {
 			if (block == ModBlocks.creativeInfiniteFluidSource) {
 				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".creativeOnly"));
-				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".rightClickContainer"));
+				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".leftClickContainer"));
 			} else if (block == ModBlocks.creativeSpeedyHopper)
 				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".creativeOnly"));
 		} else if (EntityDropEvent.isEndiumTool(event.itemStack)) {

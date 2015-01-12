@@ -27,47 +27,49 @@ public class CreativeInfiniteFluidSource extends InfiniteWaterSource {
 
 	public CreativeInfiniteFluidSource() {
 		super(Material.rock);
+		setHardness(-1);
 		setBlockName(Utils.getUnlocalizedName(Strings.CREATIVE_INFINITE_FLUID_SOURCE_NAME));
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
 		if (player.getCurrentEquippedItem() == null)
-			return false;
+			return;
 
 		TileEntityInfiniteWaterSource tile = Utils.getTileEntity(world, x, y, z, TileEntityInfiniteWaterSource.class);
 		if (tile == null)
-			return false;
+			return;
 
 		ItemStack stack = player.getCurrentEquippedItem();
 		if (stack == null)
-			return false;
+			return;
 
 		if (FluidContainerRegistry.isEmptyContainer(stack)) {
-			InventoryUtils.addToPlayerInventory(player, FluidContainerRegistry.fillFluidContainer(tile.getFluid(), stack), x, y, z);
-			stack.stackSize--;
-			if (stack.stackSize == 0)
-				stack = null;
-			return true;
+			ItemStack filled = FluidContainerRegistry.fillFluidContainer(tile.getFluid(), stack);
+			if (filled != null) {
+				InventoryUtils.addToPlayerInventory(player, filled, x, y, z);
+				stack.stackSize--;
+				if (stack.stackSize == 0)
+					stack = null;
+			}
 		} else if (stack.getItem() instanceof IFluidContainerItem) {
 			IFluidContainerItem item = (IFluidContainerItem) stack.getItem();
 			FluidStack fluid = item.getFluid(stack);
 			tile.setFluid(fluid);
-		} else if (stack.getItem() == Items.potionitem) {
+		} else {
 			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(stack);
 			if (fluid == null) {
-				fluid = FluidRegistry.getFluidStack("potion", FluidContainerRegistry.getFluidForFilledItem(new ItemStack(Items.potionitem)).amount);
-				if (fluid != null) {
-					fluid.tag = new NBTTagCompound();
-					fluid.tag.setInteger("potionMeta", stack.getItemDamage());
+				if (stack.getItem() == Items.potionitem) {
+					fluid = FluidRegistry.getFluidStack("potion", FluidContainerRegistry.getFluidForFilledItem(new ItemStack(Items.potionitem)).amount);
+					if (fluid != null) {
+						fluid.tag = new NBTTagCompound();
+						fluid.tag.setInteger("potionMeta", stack.getItemDamage());
+						tile.setFluid(fluid);
+					}
 				}
-			}
-			if (fluid != null) {
+			} else
 				tile.setFluid(fluid);
-				return true;
-			}
 		}
-		return false;
 	}
 
 	@Override

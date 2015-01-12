@@ -82,13 +82,17 @@ public class InfiniteWaterSource extends BlockContainer {
 
 		ItemStack stack = player.getCurrentEquippedItem();
 		if (FluidContainerRegistry.isEmptyContainer(stack)) {
-			InventoryUtils.addToPlayerInventory(player, FluidContainerRegistry.fillFluidContainer(tile.getFluid(), stack), x, y, z);
-			stack.stackSize--;
-			if (stack.stackSize == 0)
-				stack = null;
-			return true;
-		} else
-			return false;
+			ItemStack filled = FluidContainerRegistry.fillFluidContainer(tile.getFluid(), stack);
+			if (filled != null) {
+				InventoryUtils.addToPlayerInventory(player, filled, x, y, z);
+				stack.stackSize--;
+				if (stack.stackSize == 0)
+					stack = null;
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	@Override
