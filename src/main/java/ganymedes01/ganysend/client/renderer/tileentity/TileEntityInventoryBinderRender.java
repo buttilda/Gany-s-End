@@ -26,6 +26,9 @@ public class TileEntityInventoryBinderRender extends TileEntitySpecialRenderer {
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float rotation) {
 		TileEntityInventoryBinder tilePlayerInv = (TileEntityInventoryBinder) tile;
 		String name = tilePlayerInv.getPlayerName();
+		if (name == null)
+			return;
+
 		double headRotation = 0.0F;
 		EntityPlayer player = tilePlayerInv.getWorldObj().getPlayerEntityByName(name);
 		if (player != null)
