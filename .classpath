@@ -6,6 +6,6 @@
 	<classpathentry kind="lib" path="libs/CodeChickenLib.jar"/>
 	<classpathentry kind="lib" path="libs/NEI.jar"/>
 	<classpathentry kind="lib" path="libs/Thaumcraft-1.7.10-4.2.1.4.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/TinkersConstruct"/>
+	<classpathentry kind="lib" path="libs/TConstruct-1.7.10-1.8.2a.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
