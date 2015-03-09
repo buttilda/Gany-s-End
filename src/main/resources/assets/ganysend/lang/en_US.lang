@@ -150,3 +150,7 @@ string.ganysend.lightClickContainer=Left-click with container to set fluid
 
 # Materials
 material.endium=Endium
+
+# Version Check
+versioncheck.ganyssurface.message=§6Gany's End §fis §coutdated§f.
+versioncheck.ganyssurface.download=Download %s
