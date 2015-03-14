@@ -150,3 +150,66 @@ string.ganysend.rightClickContainer=ПКМ с контейнером в руке
 
 # Materials
 material.endium=Эндий
+
+# Version Check
+versioncheck.ganyssurface.message=§6Модификация §fGany's End §cустарела§f.
+versioncheck.ganyssurface.download=Загрузить версию %s
+
+# Custom Names
+tool.pickaxe.endium=Кирка из эндия
+tool.shovel.endium=Лопата из эндия
+tool.hatchet.endium=Топорик из эндия
+tool.broadsword.endium=Палаш из эндия
+tool.longsword.endium=Полуторный меч из эндия
+tool.rapier.endium=Рапира из эндия
+tool.dagger.endium=Кинжал из эндия
+tool.cutlass.endium=Сабля из эндия
+tool.fryingpan.endium=Сковорода из эндия
+tool.battlesign.endium=Боевая табличка из эндия
+tool.mattock.endium=Мотыготопор из эндия
+tool.chisel.endium=Стамеска из эндия
+tool.lumberaxe.endium=Большой топор из эндия
+tool.cleaver.endium=Тесак из эндия
+tool.scythe.endium=Коса из эндия
+tool.excavator.endium=Копалка из эндия
+tool.hammer.endium=Молот из эндия
+tool.battleaxe.endium=Боевой топор из эндия
+tool.shortbow.endium=Короткий лук из эндия
+tool.longbow.endium=Длинный лук из эндия
+tool.crossbow.endium=Арбалет из эндия
+tool.shuriken.endium=Сюрикэн из эндия
+tool.arrowammo.endium=Стрелы из эндия
+tool.boltammo.endium=Болты из эндия
+tool.throwingknife.endium=Метательный нож из эндия
+tool.javelin.endium=Копьё из эндия
+toolpart.ToolRod.endium=Стержень из эндия
+toolpart.PickaxeHead.endium=Обух кирки из эндия
+toolpart.SignHead.endium=Боевая табличка из эндия
+toolpart.Chunk.endium=Кусок из эндия
+toolpart.ShovelHead.endium=Штык лопаты из эндия
+toolpart.AxeHead.endium=Обух топора из эндия
+toolpart.Binding.endium=Крепление из эндия
+toolpart.ToughBinding.endium=Прочное крепление из эндия
+toolpart.ToughRod.endium=Прочный стержень из эндия
+toolpart.LargePlate.endium=Большая пластина из эндия
+toolpart.SwordBlade.endium=Лезвие меча из эндия
+toolpart.LargeGuard.endium=Широкая гарда из эндия
+toolpart.MediumGuard.endium=Малая гарда из эндия
+toolpart.Crossbar.endium=Поперечная гарда из эндия
+toolpart.KnifeBlade.endium=Лезвие ножа из эндия
+toolpart.FullGuard.endium=Полная гарда из эндия
+toolpart.FrypanHead.endium=Сковорода из эндия
+toolpart.SignHead.endium=Табличка из эндия
+toolpart.ChiselHead.endium=Лезвие стамески из эндия
+toolpart.ScytheHead.endium=Лезвие косы из эндия
+toolpart.LumberAxeHead.endium=Большой обух топора из эндия
+toolpart.ExcavatorHead.endium=Пластина копалки из эндия
+toolpart.ToolShard.endium=Осколок эндия
+toolpart.LargeSwordBlade.endium=Большое лезвие меча из эндия
+toolpart.HammerHead.endium=Боёк молота из эндия
+toolpart.ArrowHead.endium=Наконечник стрелы из эндия
+toolpart.Shuriken.endium=Сюрикэн из эндия
+toolpart.CrossbowLimb.endium=Плечо арбалета из эндия
+toolpart.CrossbowBody.endium=Основа арбалета из эндия
+toolpart.BowLimb.endium=Плечо лука из эндия
+toolpart.Bolt.endium=Болт из эндия
