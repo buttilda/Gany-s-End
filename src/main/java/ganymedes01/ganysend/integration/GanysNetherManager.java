@@ -1,9 +1,8 @@
 package ganymedes01.ganysend.integration;
 
 import ganymedes01.ganysend.core.utils.HeadsHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import cpw.mods.fml.common.event.FMLInterModComms;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 
 /**
  * Gany's End
@@ -16,7 +15,8 @@ public class GanysNetherManager extends Integration {
 
 	@Override
 	public void init() {
-		addStackToUndertakers(HeadsHelper.createHeadFor("ganymedes01"), 50);
+		ChestGenHooks info = ChestGenHooks.getInfo("ganysnether.undertaker");
+		info.addItem(new WeightedRandomChestContent(HeadsHelper.createHeadFor("ganymedes01"), 0, 1, 5));
 	}
 
 	@Override
@@ -26,19 +26,5 @@ public class GanysNetherManager extends Integration {
 	@Override
 	public String getModID() {
 		return "ganysnether";
-	}
-
-	private void addStackToUndertakers(ItemStack stack, int weight) {
-		if (stack != null && stack.stackSize > 0 && weight > 0) {
-			NBTTagCompound data = new NBTTagCompound();
-
-			data.setInteger("weight", weight);
-
-			NBTTagCompound tagCompound = new NBTTagCompound();
-			stack.writeToNBT(tagCompound);
-			data.setTag("stack", tagCompound);
-
-			FMLInterModComms.sendMessage("ganysnether", "addStackToUndertakers", data);
-		}
 	}
 }
