@@ -146,7 +146,7 @@ string.ganysend.nottagged=Не отмечено
 string.ganysend.pullallbut=Втягивать всё, кроме:
 string.ganysend.pullonly=Только втягивать:
 string.ganysend.creativeOnly=Только для творчества
-string.ganysend.rightClickContainer=ПКМ с контейнером в руке, чтобы выбрать жидкость
+string.ganysend.leftClickContainer=ПКМ с контейнером в руке, чтобы выбрать жидкость
 
 # Materials
 material.endium=Эндий

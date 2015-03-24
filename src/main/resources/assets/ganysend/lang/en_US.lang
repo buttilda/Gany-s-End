@@ -146,7 +146,7 @@ string.ganysend.nottagged=Not Tagged
 string.ganysend.pullallbut=Pull all but:
 string.ganysend.pullonly=Pull Only:
 string.ganysend.creativeOnly=Creative Only
-string.ganysend.lightClickContainer=Left-click with container to set fluid
+string.ganysend.leftClickContainer=Left-click with container to set fluid
 
 # Materials
 material.endium=Endium

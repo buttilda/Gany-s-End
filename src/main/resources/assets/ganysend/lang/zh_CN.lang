@@ -146,7 +146,7 @@ string.ganysend.nottagged=无目标容器
 string.ganysend.pullallbut=不传输:
 string.ganysend.pullonly=仅传输:
 string.ganysend.creativeOnly=仅限创造模式
-string.ganysend.rightClickContainer=右键流体容器来使其无限化
+string.ganysend.leftClickContainer=右键流体容器来使其无限化
 
 # Materials
 material.endium=末金

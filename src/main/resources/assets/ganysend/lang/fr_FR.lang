@@ -145,7 +145,7 @@ string.ganysend.nottagged=Non-attaché
 string.ganysend.pullallbut=Extrait tout sauf:
 string.ganysend.pullonly=Extrait uniquement:
 string.ganysend.creativeOnly=Creatif Uniquement
-string.ganysend.rightClickContainer=Cliquer-droit avec un containeur pour définir le fluide
+string.ganysend.leftClickContainer=Cliquer-droit avec un containeur pour définir le fluide
 
 # Materials
 material.endium=Endium

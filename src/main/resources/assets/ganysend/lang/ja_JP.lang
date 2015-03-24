@@ -146,7 +146,6 @@ string.ganysend.nottagged=タグ未登録
 string.ganysend.pullallbut=Pull all but:
 string.ganysend.pullonly=Pull Only:
 string.ganysend.creativeOnly=クリエイティブ専用
-string.ganysend.rightClickContainer=Right click with container to set fluid
 
 # Materials
 material.endium=エンディウム
