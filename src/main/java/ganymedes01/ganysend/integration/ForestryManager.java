@@ -11,19 +11,19 @@ public class ForestryManager extends Integration {
 
 	@Override
 	public void init() {
-		//		StringBuffer message = new StringBuffer();
-		//		message.append(ModBlocks.endstoneBrick.blockID + ";");
-		//		message.append(ModBlocks.enderpearlBlock.blockID + ":1;");
-		//		FMLInterModComms.sendMessage(getModID(), "add-backpack-items", "builder@" + message.toString());
+		// StringBuffer message = new StringBuffer();
+		// message.append(ModBlocks.endstoneBrick.blockID + ";");
+		// message.append(ModBlocks.enderpearlBlock.blockID + ":1;");
+		// FMLInterModComms.sendMessage(getModID(), "add-backpack-items", "builder@" + message.toString());
 		//
-		//		message = new StringBuffer();
-		//		message.append(ModBlocks.rawEndium.blockID + ";");
-		//		message.append(ModItems.endiumIngot.itemID + ":0;");
-		//		FMLInterModComms.sendMessage(getModID(), "add-backpack-items", "miner@" + message.toString());
+		// message = new StringBuffer();
+		// message.append(ModBlocks.rawEndium.blockID + ";");
+		// message.append(ModItems.endiumIngot.itemID + ":0;");
+		// FMLInterModComms.sendMessage(getModID(), "add-backpack-items", "miner@" + message.toString());
 		//
-		//		message = new StringBuffer();
-		//		message.append(ModBlocks.enderFlower.blockID + ";");
-		//		FMLInterModComms.sendMessage(getModID(), "add-backpack-items", "forester@" + message.toString());
+		// message = new StringBuffer();
+		// message.append(ModBlocks.enderFlower.blockID + ";");
+		// FMLInterModComms.sendMessage(getModID(), "add-backpack-items", "forester@" + message.toString());
 	}
 
 	@Override

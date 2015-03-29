@@ -62,7 +62,7 @@ public class ModItems {
 	public static final Item reinforcedEndiumSword = new ReinforcedEndiumSword();
 	public static final Item reinforcedEndiumBow = new ReinforcedEndiumBow();
 	public static final Item enderBag = new EnderBag();
-	//	public static final Item endiumBucket = new EndiumBucket();
+	// public static final Item endiumBucket = new EndiumBucket();
 
 	// Armour
 	public static final Item endiumHelmet = new EndiumHelmet();

@@ -211,10 +211,10 @@ public class EndiumBow extends ItemBow implements IEndiumTool {
 
 			if (charge >= 18)
 				return pass != 0 ? overlays[2] : getItemIconForUseDuration(2);
-				if (charge > 13)
-					return pass != 0 ? overlays[1] : getItemIconForUseDuration(1);
-					if (charge > 0)
-						return pass != 0 ? overlays[0] : getItemIconForUseDuration(0);
+			if (charge > 13)
+				return pass != 0 ? overlays[1] : getItemIconForUseDuration(1);
+			if (charge > 0)
+				return pass != 0 ? overlays[0] : getItemIconForUseDuration(0);
 		}
 
 		return pass != 0 ? standby : super.getIcon(stack, pass, player, usingItem, useRemaining);

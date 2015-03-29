@@ -19,8 +19,7 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 public class GanysEndAPI {
 
 	/**
-	 * Adds a recipe to the Ender Furnace input parameter must have between 1
-	 * and 4 items
+	 * Adds a recipe to the Ender Furnace input parameter must have between 1 and 4 items
 	 * 
 	 * @param output
 	 * @param input

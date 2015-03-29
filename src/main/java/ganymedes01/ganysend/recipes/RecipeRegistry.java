@@ -27,7 +27,8 @@ public abstract class RecipeRegistry<T> {
 	private final List<T> registry = new ArrayList<T>();
 	protected final File recipesFile;
 	protected final String name;
-	protected String comment =  "\nRecipes marked as \"default\" will be reset every time the game launches.\n" +
+	// @formatter:off
+	protected String comment = 	"\nRecipes marked as \"default\" will be reset every time the game launches.\n" +
 								"If you wish to disable a recipe change its status to \"ignored\"\n" +
 								"If you want to add a custom recipe, mark it as \"custom\". If you mark it as default, it will be deleted!!\n" +
 								"If you alter a default recipe don't forget to also mark it as \"custom\"\n" +
@@ -35,7 +36,8 @@ public abstract class RecipeRegistry<T> {
 								"The syntax for an item stack is the same as you'd use in the /give command. NBT tags are supported! (e.g. minecraft:skull 1 3 {SkullOwner:\"ganymedes01\"})\n" +
 								"The syntax for a fluid stack is simiar to the item stack, it should be the fluid name followed by the amount. NBT tags are also supported! (e.g. water 1000)\n" +
 								"The syntax for ore dictionary values is the value between double-quotes. (e.g. \"ingotIron\")\n";
-
+	// @formatter:on
+	
 	protected RecipeRegistry(String name) {
 		this.name = name;
 		recipesFile = new File(baseFile, this.name + ".xml");

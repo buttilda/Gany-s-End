@@ -109,21 +109,6 @@ public class BlockInventoryBinderRender implements ISimpleBlockRenderingHandler 
 
 		renderer.setRenderBounds(14F / 16F, 1, 1, 2F / 16F, 0, 0);
 		renderer.renderStandardBlock(block, x, y, z);
-		//
-		//		renderer.setRenderBounds(0, 0, 0, 1, 2F / 16F, 1);
-		//		renderer.renderStandardBlock(block, x, y, z);
-		//
-		//		renderer.setRenderBounds(0, 0, 0, 1, 1, 2F / 16F);
-		//		renderer.renderStandardBlock(block, x, y, z);
-		//
-		//		renderer.setRenderBounds(14F / 16F, 0, 0, 1, 1, 1);
-		//		renderer.renderStandardBlock(block, x, y, z);
-		//
-		//		renderer.setRenderBounds(0, 14F / 16F, 0, 1, 1, 1);
-		//		renderer.renderStandardBlock(block, x, y, z);
-		//
-		//		renderer.setRenderBounds(0, 0, 14F / 16F, 1, 1, 1);
-		//		renderer.renderStandardBlock(block, x, y, z);
 
 		renderer.renderAllFaces = false;
 		return true;
