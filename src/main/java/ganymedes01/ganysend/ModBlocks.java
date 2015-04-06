@@ -29,9 +29,10 @@ import ganymedes01.ganysend.blocks.SpeedyHopper;
 import ganymedes01.ganysend.blocks.TimeManipulator;
 import ganymedes01.ganysend.blocks.VoidCrate;
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.items.blocks.ItemEndWalls;
-import ganymedes01.ganysend.items.blocks.ItemEnderPearlBlock;
 import ganymedes01.ganysend.lib.Strings;
+
+import java.lang.reflect.Field;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -76,46 +77,33 @@ public class ModBlocks {
 	public static final Block anchoredEnderChest = new AnchoredEnderChest();
 
 	public static void init() {
-		registerBlock(enderFlower);
-		registerBlock(endstoneBrick);
-		registerBlock(enderpearlBlock, ItemEnderPearlBlock.class);
-		registerBlock(endstoneStairs);
-		registerBlock(enderpearlStairs);
-		registerBlock(enderToggler);
-		registerBlock(enderToggler_air);
-		registerBlock(blockShifter);
-		registerBlock(entityShifter);
-		registerBlock(rawEndium);
-		registerBlock(endiumBlock);
-		registerBlock(emulator);
-		registerBlock(blockNewSkull);
-		registerBlock(basicFilteringHopper);
-		registerBlock(exclusiveFilteringHopper);
-		registerBlock(speedyBasicFilteringHopper);
-		registerBlock(speedyExclusiveFilteringHopper);
-		registerBlock(speedyHopper);
-		registerBlock(advancedFilteringHopper);
-		registerBlock(advancedExclusiveFilteringHopper);
-		registerBlock(timeManipulator);
-		registerBlock(inventoryBinder);
-		registerBlock(infiniteWaterSource);
-		registerBlock(endWalls, ItemEndWalls.class);
-		registerBlock(voidCrate);
-		registerBlock(enderFurnace);
-		registerBlock(creativeSpeedyHopper);
-		registerBlock(creativeInfiniteFluidSource);
-		registerBlock(anchoredEnderChest);
+		try {
+			for (Field f : ModBlocks.class.getDeclaredFields()) {
+				Object obj = f.get(null);
+				if (obj instanceof Block)
+					registerBlock((Block) obj);
+				else if (obj instanceof Block[])
+					for (Block block : (Block[]) obj)
+						if (block != null)
+							registerBlock(block);
+			}
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private static void registerBlock(Block block) {
 		String name = block.getUnlocalizedName();
 		String[] strings = name.split("\\.");
-		GameRegistry.registerBlock(block, strings[strings.length - 1]);
+
+		if (block instanceof ISubBlocksBlock)
+			GameRegistry.registerBlock(block, ((ISubBlocksBlock) block).getItemBlockClass(), strings[strings.length - 1]);
+		else
+			GameRegistry.registerBlock(block, strings[strings.length - 1]);
 	}
 
-	private static void registerBlock(Block block, Class<? extends ItemBlock> item) {
-		String name = block.getUnlocalizedName();
-		String[] strings = name.split("\\.");
-		GameRegistry.registerBlock(block, item, strings[strings.length - 1]);
+	public static interface ISubBlocksBlock {
+
+		Class<? extends ItemBlock> getItemBlockClass();
 	}
 }

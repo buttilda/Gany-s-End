@@ -2,7 +2,9 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
+import ganymedes01.ganysend.ModBlocks.ISubBlocksBlock;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.items.blocks.ItemEndWalls;
 import ganymedes01.ganysend.lib.Strings;
 
 import java.util.List;
@@ -10,12 +12,13 @@ import java.util.List;
 import net.minecraft.block.BlockWall;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EndWalls extends BlockWall {
+public class EndWalls extends BlockWall implements ISubBlocksBlock {
 
 	public EndWalls() {
 		super(ModBlocks.endstoneBrick);
@@ -40,5 +43,10 @@ public class EndWalls extends BlockWall {
 	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
 		list.add(new ItemStack(id, 1, 0));
 		list.add(new ItemStack(id, 1, 1));
+	}
+
+	@Override
+	public Class<? extends ItemBlock> getItemBlockClass() {
+		return ItemEndWalls.class;
 	}
 }
