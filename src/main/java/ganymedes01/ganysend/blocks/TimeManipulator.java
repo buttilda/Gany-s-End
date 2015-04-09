@@ -42,7 +42,7 @@ public class TimeManipulator extends BlockContainer {
 		setStepSound(soundTypeWood);
 		if (GanysEnd.enableTimeManipulator)
 			setCreativeTab(GanysEnd.endTab);
-		setBlockName(Utils.getUnlocalizedName(Strings.TIME_MANIPULATOR_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.TIME_MANIPULATOR_NAME));
 	}
 
 	@Override

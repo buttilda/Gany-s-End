@@ -28,7 +28,7 @@ public class EndiumBlock extends Block {
 		setResistance(0.5F);
 		setStepSound(soundTypeMetal);
 		setCreativeTab(GanysEnd.enableEndium ? GanysEnd.endTab : null);
-		setBlockName(Utils.getUnlocalizedName(Strings.ENDIUM_BLOCK_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.ENDIUM_BLOCK_NAME));
 		setBlockTextureName(Utils.getItemTexture(Strings.ENDIUM_BLOCK_NAME));
 	}
 

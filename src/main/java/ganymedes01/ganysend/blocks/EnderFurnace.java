@@ -40,7 +40,7 @@ public class EnderFurnace extends BlockContainer {
 	public EnderFurnace() {
 		super(Material.rock);
 		setHardness(5.0F);
-		setBlockName(Utils.getUnlocalizedName(Strings.ENDER_FURNACE_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.ENDER_FURNACE_NAME));
 		setCreativeTab(GanysEnd.enableEnderFurnace ? GanysEnd.endTab : null);
 	}
 

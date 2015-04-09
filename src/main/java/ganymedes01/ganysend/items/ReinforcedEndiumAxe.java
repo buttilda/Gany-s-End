@@ -21,7 +21,7 @@ public class ReinforcedEndiumAxe extends EndiumAxe {
 		super(ModMaterials.REIN_ENDIUM_TOOLS);
 		setHarvestLevel("axe", 3);
 		setTextureName(Utils.getItemTexture(Strings.REINFORCED_ENDIUM_AXE_NAME));
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.REINFORCED_ENDIUM_AXE_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.REINFORCED_ENDIUM_AXE_NAME));
 	}
 
 	@Override

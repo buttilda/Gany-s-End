@@ -22,7 +22,7 @@ public class ItemEndWalls extends ItemBlock {
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return "tile." + Utils.getUnlocalizedName(Strings.END_WALLS_NAME) + stack.getItemDamage();
+		return "tile." + Utils.getUnlocalisedName(Strings.END_WALLS_NAME) + stack.getItemDamage();
 	}
 
 	@Override

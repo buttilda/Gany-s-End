@@ -28,7 +28,7 @@ public class EnderToggler extends Block {
 		super(Material.iron);
 		setHardness(1.5F);
 		setResistance(10.0F);
-		setBlockName(Utils.getUnlocalizedName(Strings.ENDER_TOGGLER_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.ENDER_TOGGLER_NAME));
 		setCreativeTab(GanysEnd.enableEnderToggler ? GanysEnd.endTab : null);
 	}
 

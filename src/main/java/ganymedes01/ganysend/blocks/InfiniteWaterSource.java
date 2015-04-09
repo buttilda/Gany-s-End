@@ -36,7 +36,7 @@ public class InfiniteWaterSource extends BlockContainer {
 
 	public InfiniteWaterSource() {
 		this(Material.rock);
-		setBlockName(Utils.getUnlocalizedName(Strings.INFINITE_WATER_SOURCE_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.INFINITE_WATER_SOURCE_NAME));
 	}
 
 	protected InfiniteWaterSource(Material material) {

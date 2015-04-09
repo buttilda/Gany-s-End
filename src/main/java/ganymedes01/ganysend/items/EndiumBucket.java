@@ -31,7 +31,7 @@ public class EndiumBucket extends Item implements IFluidContainerItem, IEndiumTo
 		setMaxStackSize(1);
 		setTextureName(Utils.getItemTexture(Strings.ENDIUM_BUCKET_NAME));
 		setCreativeTab(GanysEnd.enableEndiumTools ? GanysEnd.endTab : null);
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_BUCKET_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_BUCKET_NAME));
 	}
 
 	@Override

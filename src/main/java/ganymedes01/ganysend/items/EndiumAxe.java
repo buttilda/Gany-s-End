@@ -32,7 +32,7 @@ public class EndiumAxe extends ItemAxe implements IEndiumTool {
 	public EndiumAxe() {
 		this(ModMaterials.ENDIUM_TOOLS);
 		setTextureName(Utils.getItemTexture(Strings.ENDIUM_AXE_NAME));
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_AXE_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_AXE_NAME));
 	}
 
 	protected EndiumAxe(ToolMaterial material) {

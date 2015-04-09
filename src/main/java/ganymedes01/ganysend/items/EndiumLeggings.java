@@ -20,7 +20,7 @@ public class EndiumLeggings extends EndiumArmour {
 	public EndiumLeggings() {
 		super(2);
 		setTextureName(Utils.getItemTexture(Strings.ENDIUM_LEGGINGS_NAME));
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_LEGGINGS_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_LEGGINGS_NAME));
 	}
 
 	@Override

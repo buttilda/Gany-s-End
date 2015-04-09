@@ -19,7 +19,7 @@ public class EndstoneBrick extends Block {
 		super(Material.rock);
 		setHardness(3.0F);
 		setResistance(15.0F);
-		setBlockName(Utils.getUnlocalizedName(Strings.ENDSTONE_BRICK_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.ENDSTONE_BRICK_NAME));
 		setBlockTextureName(Utils.getBlockTexture(Strings.ENDSTONE_BRICK_NAME));
 		setCreativeTab(GanysEnd.enableDecorativeBlocks ? GanysEnd.endTab : null);
 	}

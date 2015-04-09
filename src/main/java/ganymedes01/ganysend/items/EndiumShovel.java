@@ -32,7 +32,7 @@ public class EndiumShovel extends ItemSpade implements IEndiumTool {
 	public EndiumShovel() {
 		this(ModMaterials.ENDIUM_TOOLS);
 		setTextureName(Utils.getItemTexture(Strings.ENDIUM_SHOVEL_NAME));
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_SHOVEL_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_SHOVEL_NAME));
 	}
 
 	protected EndiumShovel(ToolMaterial material) {

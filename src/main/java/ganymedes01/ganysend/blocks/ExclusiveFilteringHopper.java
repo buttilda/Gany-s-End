@@ -23,7 +23,7 @@ public class ExclusiveFilteringHopper extends BasicFilteringHopper {
 
 	public ExclusiveFilteringHopper() {
 		super();
-		setBlockName(Utils.getUnlocalizedName(Strings.EXCLUSIVE_FILTERING_HOPPER_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.EXCLUSIVE_FILTERING_HOPPER_NAME));
 	}
 
 	@Override

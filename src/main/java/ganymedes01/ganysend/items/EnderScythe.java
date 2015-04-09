@@ -28,7 +28,7 @@ public class EnderScythe extends ItemSword {
 		super(ModMaterials.ENDIUM_TOOLS);
 		setCreativeTab(GanysEnd.enableScythe ? GanysEnd.endTab : null);
 		setTextureName(Utils.getItemTexture(Strings.ENDER_SCYTHE_NAME));
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDER_SCYTHE_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDER_SCYTHE_NAME));
 	}
 
 	@Override

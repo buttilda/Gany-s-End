@@ -32,7 +32,7 @@ public class VoidCrate extends BlockContainer {
 	public VoidCrate() {
 		super(Material.iron);
 		setHardness(2.0F);
-		setBlockName(Utils.getUnlocalizedName(Strings.VOID_CRATE_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.VOID_CRATE_NAME));
 		setCreativeTab(GanysEnd.enableVoidCrate ? GanysEnd.endTab : null);
 	}
 

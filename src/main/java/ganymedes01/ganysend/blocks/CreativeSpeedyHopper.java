@@ -23,7 +23,7 @@ public class CreativeSpeedyHopper extends SpeedyHopper {
 	public CreativeSpeedyHopper() {
 		super();
 		setHardness(-1);
-		setBlockName(Utils.getUnlocalizedName(Strings.CREATIVE_SPEEDY_HOPPER_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.CREATIVE_SPEEDY_HOPPER_NAME));
 	}
 
 	@Override

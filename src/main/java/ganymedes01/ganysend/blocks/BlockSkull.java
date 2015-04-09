@@ -46,7 +46,7 @@ public class BlockSkull extends BlockContainer implements IInfusionStabiliser {
 		super(Material.circuits);
 		setHardness(1.0F);
 		setStepSound(soundTypeStone);
-		setBlockName(Utils.getUnlocalizedName(Strings.BLOCK_NEW_SKULL_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.BLOCK_NEW_SKULL_NAME));
 	}
 
 	@Override

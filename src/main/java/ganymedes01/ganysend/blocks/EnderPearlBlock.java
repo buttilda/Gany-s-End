@@ -35,7 +35,7 @@ public class EnderPearlBlock extends Block implements ISubBlocksBlock {
 		super(Material.iron);
 		setHardness(1.5F);
 		setResistance(10.0F);
-		setBlockName(Utils.getUnlocalizedName(Strings.ENDERPEARL_BLOCK_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.ENDERPEARL_BLOCK_NAME));
 		setCreativeTab(GanysEnd.enableDecorativeBlocks ? GanysEnd.endTab : null);
 	}
 

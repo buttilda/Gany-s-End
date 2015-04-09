@@ -28,7 +28,7 @@ public class EnderTogglerAir extends Block {
 		super(Material.iron);
 		setHardness(-1.0F);
 		setResistance(6000000.0F);
-		setBlockName(Utils.getUnlocalizedName(Strings.ENDER_TOGGLER_AIR_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.ENDER_TOGGLER_AIR_NAME));
 		setBlockTextureName(Utils.getBlockTexture(Strings.ENDER_TOGGLER_AIR_NAME));
 	}
 

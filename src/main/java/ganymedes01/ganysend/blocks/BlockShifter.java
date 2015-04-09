@@ -35,7 +35,7 @@ public class BlockShifter extends BlockContainer {
 		setResistance(10.0F);
 		if (GanysEnd.enableShifters)
 			setCreativeTab(GanysEnd.endTab);
-		setBlockName(Utils.getUnlocalizedName(Strings.BLOCK_SHIFTER_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.BLOCK_SHIFTER_NAME));
 	}
 
 	@Override

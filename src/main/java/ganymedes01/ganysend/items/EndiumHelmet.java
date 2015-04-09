@@ -20,7 +20,7 @@ public class EndiumHelmet extends EndiumArmour {
 	public EndiumHelmet() {
 		super(0);
 		setTextureName(Utils.getItemTexture(Strings.ENDIUM_HELMET_NAME));
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_HELMET_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_HELMET_NAME));
 	}
 
 	@Override

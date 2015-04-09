@@ -22,7 +22,7 @@ public class EndWalls extends BlockWall implements ISubBlocksBlock {
 
 	public EndWalls() {
 		super(ModBlocks.endstoneBrick);
-		setBlockName(Utils.getUnlocalizedName(Strings.END_WALLS_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.END_WALLS_NAME));
 		setCreativeTab(GanysEnd.enableDecorativeBlocks ? GanysEnd.endTab : null);
 	}
 

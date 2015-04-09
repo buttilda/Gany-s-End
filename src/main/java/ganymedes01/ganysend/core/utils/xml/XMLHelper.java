@@ -136,7 +136,7 @@ public class XMLHelper {
 			return "\"" + obj + "\"";
 		else if (obj instanceof FluidStack) {
 			FluidStack stack = (FluidStack) obj;
-			return FluidRegistry.getFluidName(stack.fluidID) + " " + stack.amount + (stack.tag != null ? " " + stack.tag : "");
+			return FluidRegistry.getFluidName(stack) + " " + stack.amount + (stack.tag != null ? " " + stack.tag : "");
 		}
 
 		return obj.toString();

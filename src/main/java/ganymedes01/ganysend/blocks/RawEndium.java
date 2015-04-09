@@ -25,7 +25,7 @@ public class RawEndium extends Block {
 		setResistance(2001.0F);
 		setHarvestLevel("pickaxe", 3);
 		setCreativeTab(GanysEnd.enableEndium ? GanysEnd.endTab : null);
-		setBlockName(Utils.getUnlocalizedName(Strings.RAW_ENDIUM_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.RAW_ENDIUM_NAME));
 		setBlockTextureName(Utils.getBlockTexture(Strings.RAW_ENDIUM_NAME));
 	}
 

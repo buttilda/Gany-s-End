@@ -43,7 +43,7 @@ public class EndiumBow extends ItemBow implements IEndiumTool {
 		setMaxDamage(ModMaterials.ENDIUM_TOOLS.getMaxUses());
 		setTextureName(Utils.getItemTexture(Strings.ENDIUM_BOW_NAME));
 		setCreativeTab(GanysEnd.enableEndiumTools ? GanysEnd.endTab : null);
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_BOW_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_BOW_NAME));
 	}
 
 	private IInventory getTaggedInventory(World world, ItemStack stack) {

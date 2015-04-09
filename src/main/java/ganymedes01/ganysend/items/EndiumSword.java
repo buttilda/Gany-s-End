@@ -32,7 +32,7 @@ public class EndiumSword extends ItemSword implements IEndiumTool {
 	public EndiumSword() {
 		this(ModMaterials.ENDIUM_TOOLS);
 		setTextureName(Utils.getItemTexture(Strings.ENDIUM_SWORD_NAME));
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_SWORD_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_SWORD_NAME));
 	}
 
 	protected EndiumSword(ToolMaterial material) {

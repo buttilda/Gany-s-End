@@ -28,7 +28,7 @@ public class EnderTag extends Item {
 		setMaxStackSize(1);
 		setTextureName(Utils.getItemTexture(Strings.ENDER_TAG_NAME));
 		setCreativeTab(GanysEnd.enableShifters ? GanysEnd.endTab : null);
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDER_TAG_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDER_TAG_NAME));
 	}
 
 	@Override

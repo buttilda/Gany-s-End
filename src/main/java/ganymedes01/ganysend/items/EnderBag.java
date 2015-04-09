@@ -21,7 +21,7 @@ public class EnderBag extends Item {
 		setMaxStackSize(1);
 		setTextureName(Utils.getItemTexture(Strings.ENDER_BAG_NAME));
 		setCreativeTab(GanysEnd.enableEnderBag ? GanysEnd.endTab : null);
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDER_BAG_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDER_BAG_NAME));
 	}
 
 	@Override

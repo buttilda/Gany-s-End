@@ -25,7 +25,7 @@ public class AdvancedFilteringHopper extends BasicFilteringHopper {
 
 	public AdvancedFilteringHopper() {
 		super();
-		setBlockName(Utils.getUnlocalizedName(Strings.ADVANCED_FILTERING_HOPPER_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.ADVANCED_FILTERING_HOPPER_NAME));
 	}
 
 	@Override

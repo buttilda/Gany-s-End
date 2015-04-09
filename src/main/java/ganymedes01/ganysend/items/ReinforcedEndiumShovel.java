@@ -21,7 +21,7 @@ public class ReinforcedEndiumShovel extends EndiumShovel {
 		super(ModMaterials.REIN_ENDIUM_TOOLS);
 		setHarvestLevel("shovel", 3);
 		setTextureName(Utils.getItemTexture(Strings.REINFORCED_ENDIUM_SHOVEL_NAME));
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.REINFORCED_ENDIUM_SHOVEL_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.REINFORCED_ENDIUM_SHOVEL_NAME));
 	}
 
 	@Override

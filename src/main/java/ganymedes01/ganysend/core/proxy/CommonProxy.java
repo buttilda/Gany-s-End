@@ -54,19 +54,19 @@ public class CommonProxy implements IGuiHandler {
 	}
 
 	public void registerTileEntities() {
-		GameRegistry.registerTileEntity(TileEntityBlockShifter.class, Utils.getUnlocalizedName(Strings.BLOCK_SHIFTER_NAME));
-		GameRegistry.registerTileEntity(TileEntityBlockSkull.class, Utils.getUnlocalizedName(Strings.BLOCK_NEW_SKULL_NAME));
-		GameRegistry.registerTileEntity(TileEntityFilteringHopper.class, Utils.getUnlocalizedName(Strings.BASIC_FILTERING_HOPPER_NAME));
-		GameRegistry.registerTileEntity(TileEntityAdvancedFilteringHopper.class, Utils.getUnlocalizedName(Strings.ADVANCED_FILTERING_HOPPER_NAME));
-		GameRegistry.registerTileEntity(TileEntitySpeedyHopper.class, Utils.getUnlocalizedName(Strings.SPEEDY_HOPPER_NAME));
-		GameRegistry.registerTileEntity(TileEntityTimeManipulator.class, Utils.getUnlocalizedName(Strings.TIME_MANIPULATOR_NAME));
-		GameRegistry.registerTileEntity(TileEntityEntityShifter.class, Utils.getUnlocalizedName(Strings.ENTITY_SHIFTER_NAME));
-		GameRegistry.registerTileEntity(TileEntityInventoryBinder.class, Utils.getUnlocalizedName(Strings.INVENTORY_BINDER_NAME));
-		GameRegistry.registerTileEntity(TileEntityInfiniteWaterSource.class, Utils.getUnlocalizedName(Strings.INFINITE_WATER_SOURCE_NAME));
-		GameRegistry.registerTileEntity(TileEntityVoidCrate.class, Utils.getUnlocalizedName(Strings.VOID_CRATE_NAME));
-		GameRegistry.registerTileEntity(TileEntityEnderFurnace.class, Utils.getUnlocalizedName(Strings.ENDER_FURNACE_NAME));
-		GameRegistry.registerTileEntity(TileEntityCreativeSpeedyHopper.class, Utils.getUnlocalizedName(Strings.CREATIVE_SPEEDY_HOPPER_NAME));
-		GameRegistry.registerTileEntity(TileEntityAnchoredEnderChest.class, Utils.getUnlocalizedName(Strings.ANCHORED_ENDER_CHEST_NAME));
+		GameRegistry.registerTileEntity(TileEntityBlockShifter.class, Utils.getUnlocalisedName(Strings.BLOCK_SHIFTER_NAME));
+		GameRegistry.registerTileEntity(TileEntityBlockSkull.class, Utils.getUnlocalisedName(Strings.BLOCK_NEW_SKULL_NAME));
+		GameRegistry.registerTileEntity(TileEntityFilteringHopper.class, Utils.getUnlocalisedName(Strings.BASIC_FILTERING_HOPPER_NAME));
+		GameRegistry.registerTileEntity(TileEntityAdvancedFilteringHopper.class, Utils.getUnlocalisedName(Strings.ADVANCED_FILTERING_HOPPER_NAME));
+		GameRegistry.registerTileEntity(TileEntitySpeedyHopper.class, Utils.getUnlocalisedName(Strings.SPEEDY_HOPPER_NAME));
+		GameRegistry.registerTileEntity(TileEntityTimeManipulator.class, Utils.getUnlocalisedName(Strings.TIME_MANIPULATOR_NAME));
+		GameRegistry.registerTileEntity(TileEntityEntityShifter.class, Utils.getUnlocalisedName(Strings.ENTITY_SHIFTER_NAME));
+		GameRegistry.registerTileEntity(TileEntityInventoryBinder.class, Utils.getUnlocalisedName(Strings.INVENTORY_BINDER_NAME));
+		GameRegistry.registerTileEntity(TileEntityInfiniteWaterSource.class, Utils.getUnlocalisedName(Strings.INFINITE_WATER_SOURCE_NAME));
+		GameRegistry.registerTileEntity(TileEntityVoidCrate.class, Utils.getUnlocalisedName(Strings.VOID_CRATE_NAME));
+		GameRegistry.registerTileEntity(TileEntityEnderFurnace.class, Utils.getUnlocalisedName(Strings.ENDER_FURNACE_NAME));
+		GameRegistry.registerTileEntity(TileEntityCreativeSpeedyHopper.class, Utils.getUnlocalisedName(Strings.CREATIVE_SPEEDY_HOPPER_NAME));
+		GameRegistry.registerTileEntity(TileEntityAnchoredEnderChest.class, Utils.getUnlocalisedName(Strings.ANCHORED_ENDER_CHEST_NAME));
 	}
 
 	public void registerRenderers() {

@@ -25,7 +25,7 @@ public class Emulator extends Block {
 	public Emulator() {
 		super(Material.portal);
 		setHardness(0.3F);
-		setBlockName(Utils.getUnlocalizedName(Strings.EMULATOR_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.EMULATOR_NAME));
 		setCreativeTab(GanysEnd.enableEmulator ? GanysEnd.endTab : null);
 		setBlockTextureName(Utils.getBlockTexture(Strings.EMULATOR_NAME));
 	}

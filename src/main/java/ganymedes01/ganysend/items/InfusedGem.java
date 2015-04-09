@@ -32,7 +32,7 @@ public class InfusedGem extends Item {
 		setMaxDamage(0);
 		setMaxStackSize(16);
 		setHasSubtypes(true);
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.INFUSED_GEM_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.INFUSED_GEM_NAME));
 		setCreativeTab(GanysEnd.enableTimeManipulator ? GanysEnd.endTab : null);
 	}
 
@@ -65,7 +65,7 @@ public class InfusedGem extends Item {
 		if (meta < 0 || meta >= types.length)
 			meta = 0;
 
-		return "item." + Utils.getUnlocalizedName(Strings.INFUSED_GEM_NAME) + "_" + types[meta];
+		return "item." + Utils.getUnlocalisedName(Strings.INFUSED_GEM_NAME) + "_" + types[meta];
 	}
 
 	@Override

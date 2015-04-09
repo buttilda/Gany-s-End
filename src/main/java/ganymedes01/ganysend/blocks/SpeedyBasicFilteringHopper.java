@@ -23,7 +23,7 @@ public class SpeedyBasicFilteringHopper extends BasicFilteringHopper {
 
 	public SpeedyBasicFilteringHopper() {
 		super();
-		setBlockName(Utils.getUnlocalizedName(Strings.SPEEDY_BASIC_FILTERING_HOPPER_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.SPEEDY_BASIC_FILTERING_HOPPER_NAME));
 	}
 
 	@Override

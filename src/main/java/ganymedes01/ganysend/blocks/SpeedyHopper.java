@@ -24,7 +24,7 @@ public class SpeedyHopper extends BasicFilteringHopper {
 
 	public SpeedyHopper() {
 		super();
-		setBlockName(Utils.getUnlocalizedName(Strings.SPEEDY_HOPPER_NAME));
+		setBlockName(Utils.getUnlocalisedName(Strings.SPEEDY_HOPPER_NAME));
 	}
 
 	@Override

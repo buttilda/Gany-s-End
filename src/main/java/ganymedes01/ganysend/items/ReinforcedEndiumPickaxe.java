@@ -21,7 +21,7 @@ public class ReinforcedEndiumPickaxe extends EndiumPickaxe {
 		super(ModMaterials.REIN_ENDIUM_TOOLS);
 		setHarvestLevel("pickaxe", 3);
 		setTextureName(Utils.getItemTexture(Strings.REINFORCED_ENDIUM_PICKAXE_NAME));
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.REINFORCED_ENDIUM_PICKAXE_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.REINFORCED_ENDIUM_PICKAXE_NAME));
 	}
 
 	@Override

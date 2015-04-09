@@ -1,23 +1,25 @@
 package ganymedes01.ganysend.network;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.util.StringUtils;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import cpw.mods.fml.common.network.ByteBufUtils;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ByteBufHelper {
 
 	public static void writeFluidStack(FluidStack fluid, ByteBuf buffer) {
 		if (fluid == null)
-			buffer.writeInt(-1);
+			ByteBufUtils.writeUTF8String(buffer, "");
 		else {
-			buffer.writeInt(fluid.fluidID);
+			ByteBufUtils.writeUTF8String(buffer, FluidRegistry.getFluidName(fluid.getFluid()));
 			buffer.writeInt(fluid.amount);
 			ByteBufUtils.writeTag(buffer, fluid.tag);
 		}
@@ -26,9 +28,9 @@ public class ByteBufHelper {
 	public static FluidStack readFluidStack(ByteBuf buffer) {
 		FluidStack fluid = null;
 
-		int fluidID = buffer.readInt();
-		if (fluidID > -1)
-			fluid = new FluidStack(fluidID, buffer.readInt(), ByteBufUtils.readTag(buffer));
+		String fluidName = ByteBufUtils.readUTF8String(buffer);
+		if (StringUtils.isNullOrEmpty(fluidName))
+			fluid = new FluidStack(FluidRegistry.getFluid(fluidName), buffer.readInt(), ByteBufUtils.readTag(buffer));
 
 		return fluid;
 	}

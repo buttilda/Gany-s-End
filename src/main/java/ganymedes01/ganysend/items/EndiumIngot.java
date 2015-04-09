@@ -31,7 +31,7 @@ public class EndiumIngot extends Item {
 		setHasSubtypes(true);
 		setCreativeTab(GanysEnd.enableEndium ? GanysEnd.endTab : null);
 		setTextureName(Utils.getItemTexture(Strings.ENDIUM_INGOT_NAME));
-		setUnlocalizedName(Utils.getUnlocalizedName(Strings.ENDIUM_INGOT_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_INGOT_NAME));
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class EndiumIngot extends Item {
 		if (meta < 0 || meta >= 2)
 			meta = 0;
 
-		return "item." + (meta == 0 ? Utils.getUnlocalizedName(Strings.ENDIUM_INGOT_NAME) : Utils.getUnlocalizedName(Strings.ENDIUM_NUGGET_NAME));
+		return "item." + (meta == 0 ? Utils.getUnlocalisedName(Strings.ENDIUM_INGOT_NAME) : Utils.getUnlocalisedName(Strings.ENDIUM_NUGGET_NAME));
 	}
 
 	@Override
