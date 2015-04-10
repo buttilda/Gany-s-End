@@ -47,19 +47,22 @@ public class TinkersConstructManager extends Integration {
 		TConstructRegistry.addDefaultToolPartMaterial(materialID);
 		TConstructRegistry.addDefaultShardMaterial(materialID);
 
-		Fluid endium = new Fluid("endium") {
+		Fluid endium;
+		if ((endium = FluidRegistry.getFluid("endium")) == null) {
+			endium = new Fluid("endium") {
 
-			@Override
-			public IIcon getStillIcon() {
-				return HandlerEvents.endium_still;
-			}
+				@Override
+				public IIcon getStillIcon() {
+					return HandlerEvents.endium_still;
+				}
 
-			@Override
-			public IIcon getFlowingIcon() {
-				return HandlerEvents.endium_flow;
-			}
-		};
-		FluidRegistry.registerFluid(endium);
+				@Override
+				public IIcon getFlowingIcon() {
+					return HandlerEvents.endium_flow;
+				}
+			};
+			FluidRegistry.registerFluid(endium);
+		}
 
 		Smeltery.addMelting(new ItemStack(ModItems.endiumIngot, 1, 0), ModBlocks.endiumBlock, 0, 100, new FluidStack(endium, TConstruct.ingotLiquidValue));
 		Smeltery.addMelting(new ItemStack(ModItems.endiumIngot, 1, 1), ModBlocks.endiumBlock, 0, 100, new FluidStack(endium, TConstruct.nuggetLiquidValue));
