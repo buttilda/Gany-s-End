@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.client.gui.inventory;
 
+import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.inventory.ContainerAdvancedFilteringHopper;
 import ganymedes01.ganysend.lib.Strings;
@@ -8,17 +9,14 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 @SideOnly(Side.CLIENT)
@@ -42,7 +40,7 @@ public class GuiAdvancedFilteringHopper extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		OpenGLHelper.colour(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(new ResourceLocation(Utils.getGUITexture(Strings.ADVANCED_FILTERING_HOPPER_NAME)));
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;

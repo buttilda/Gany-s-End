@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.client.renderer.item;
 
+import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockSkullRender;
 import ganymedes01.ganysend.core.utils.TextureUtils;
 import ganymedes01.ganysend.lib.SkullTypes;
@@ -8,8 +9,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraftforge.client.IItemRenderer;
-
-import org.lwjgl.opengl.GL11;
 
 import com.mojang.authlib.GameProfile;
 
@@ -72,12 +71,12 @@ public class ItemSkullRender implements IItemRenderer {
 				case mule:
 				case horseUndead:
 				case horseSkeleton:
-					GL11.glScaled(0.75, 0.75, 0.75);
-					GL11.glTranslated(0, -0.45, 0);
+					OpenGLHelper.scale(0.75, 0.75, 0.75);
+					OpenGLHelper.translate(0, -0.45, 0);
 					break;
 				case enderDragon:
 				case pinchBeetle:
-					GL11.glScaled(0.75, 0.75, 0.75);
+					OpenGLHelper.scale(0.75, 0.75, 0.75);
 					break;
 				default:
 					break;
@@ -94,7 +93,7 @@ public class ItemSkullRender implements IItemRenderer {
 				renderSkull(0.75F, 0.25F, 0.4F, skullType, profile, isVanilla);
 				break;
 			case INVENTORY:
-				GL11.glScaled(1.5, 1.5, 1.5);
+				OpenGLHelper.scale(1.5, 1.5, 1.5);
 				renderSkull(0.75F, 0.30F, 0.5F, skullType, profile, isVanilla);
 				break;
 			default:
@@ -103,12 +102,12 @@ public class ItemSkullRender implements IItemRenderer {
 	}
 
 	private void renderSkull(float x, float y, float z, int type, GameProfile name, boolean isVanilla) {
-		GL11.glPushMatrix();
-		GL11.glTranslatef(x, y, z);
+		OpenGLHelper.pushMatrix();
+		OpenGLHelper.translate(x, y, z);
 		if (isVanilla)
 			TileEntitySkullRenderer.field_147536_b.func_152674_a(0, 0, 0, 0, 0, type, name);
 		else
 			TileEntityBlockSkullRender.instance.renderHead(0, 0, 0, 0, 0, type, name);
-		GL11.glPopMatrix();
+		OpenGLHelper.popMatrix();
 	}
 }

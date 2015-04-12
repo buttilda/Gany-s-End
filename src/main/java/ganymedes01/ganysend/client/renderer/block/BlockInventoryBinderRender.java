@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.client.renderer.block;
 
+import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockSkullRender;
 import ganymedes01.ganysend.lib.RenderIDs;
 import net.minecraft.block.Block;
@@ -9,8 +10,6 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
-import org.lwjgl.opengl.GL11;
 
 import com.mojang.authlib.GameProfile;
 
@@ -31,7 +30,7 @@ public class BlockInventoryBinderRender implements ISimpleBlockRenderingHandler 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		Tessellator tessellator = Tessellator.instance;
-		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		OpenGLHelper.translate(-0.5F, -0.5F, -0.5F);
 
 		IIcon icon = block.getIcon(0, 0);
 

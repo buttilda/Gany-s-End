@@ -1,12 +1,10 @@
 package ganymedes01.ganysend.client.renderer.block;
 
+import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.lib.RenderIDs;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,9 +21,9 @@ public class BlockTimeManipulatorRender implements ISimpleBlockRenderingHandler 
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		GL11.glTranslatef(0, -0.25F, 0);
-		GL11.glScalef(0.5F, 0.5F, 0.5F);
-		GL11.glTranslated(-0.5, -0.5, -0.5);
+		OpenGLHelper.translate(0, -0.25F, 0);
+		OpenGLHelper.scale(0.5F, 0.5F, 0.5F);
+		OpenGLHelper.translate(-0.5, -0.5, -0.5);
 
 		float pixel = 1.0F / 16.0F;
 
@@ -36,7 +34,7 @@ public class BlockTimeManipulatorRender implements ISimpleBlockRenderingHandler 
 		BlockRendererHelper.renderSimpleBlock(block, 3, renderer);
 
 		// TOP
-		GL11.glTranslatef(0.0F, 0.87F, 0.0F);
+		OpenGLHelper.translate(0.0F, 0.87F, 0.0F);
 		renderer.setRenderBounds(2 * pixel, 0.0F, 2 * pixel, 14 * pixel, 14 * pixel, 14 * pixel);
 		BlockRendererHelper.renderSimpleBlock(block, 7, renderer);
 		renderer.setRenderBounds(0.0D, pixel * 14, 0.0D, 1.0F, 1.0F, 1.0F);

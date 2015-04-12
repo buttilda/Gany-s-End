@@ -1,14 +1,12 @@
 package ganymedes01.ganysend.client.renderer.tileentity;
 
+import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.client.model.ModelHead;
 import ganymedes01.ganysend.lib.SkullTypes;
 import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -38,13 +36,13 @@ public class TileEntityInventoryBinderRender extends TileEntitySpecialRenderer {
 
 		ModelHead model = ModelHead.getHead(SkullTypes.player.ordinal());
 		bindTexture(SkullTypes.player.getTexture(tilePlayerInv.getProfile()));
-		GL11.glPushMatrix();
-		GL11.glDisable(GL11.GL_CULL_FACE);
-		GL11.glTranslatef((float) x + 0.5F, (float) y + 0.25F, (float) z + 0.5F);
-		GL11.glScalef(1.0F, -1.0F, -1.0F);
-		GL11.glRotatef(270 + (float) headRotation, 0, 1, 0);
+		OpenGLHelper.pushMatrix();
+		OpenGLHelper.disableCull();
+		OpenGLHelper.translate((float) x + 0.5F, (float) y + 0.25F, (float) z + 0.5F);
+		OpenGLHelper.scale(1.0F, -1.0F, -1.0F);
+		OpenGLHelper.rotate(270 + (float) headRotation, 0, 1, 0);
 		model.render(0);
-		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glPopMatrix();
+		OpenGLHelper.enableCull();
+		OpenGLHelper.popMatrix();
 	}
 }

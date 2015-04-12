@@ -2,6 +2,7 @@ package ganymedes01.ganysend.client.renderer.block;
 
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.blocks.InfiniteWaterSource;
+import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInfiniteWaterSourceRender;
 import ganymedes01.ganysend.lib.RenderIDs;
 import net.minecraft.block.Block;
@@ -27,7 +28,7 @@ public class BlockInfiniteWaterSourceRender implements ISimpleBlockRenderingHand
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		GL11.glTranslated(-0.5, -0.5, -0.5);
+		OpenGLHelper.translate(-0.5, -0.5, -0.5);
 
 		// AXIS
 		renderer.setOverrideBlockTexture(InfiniteWaterSource.axis);
@@ -72,12 +73,12 @@ public class BlockInfiniteWaterSourceRender implements ISimpleBlockRenderingHand
 
 		// CORE
 		if (block == ModBlocks.infiniteWaterSource) {
-			GL11.glPushMatrix();
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			OpenGLHelper.pushMatrix();
+			OpenGLHelper.enableBlend();
+			OpenGLHelper.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			TileEntityInfiniteWaterSourceRender.renderCore(renderer, FluidRegistry.WATER.getStillIcon(), block.getIcon(0, 0), FluidRegistry.WATER.getColor());
-			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glPopMatrix();
+			OpenGLHelper.disableBlend();
+			OpenGLHelper.popMatrix();
 		}
 	}
 

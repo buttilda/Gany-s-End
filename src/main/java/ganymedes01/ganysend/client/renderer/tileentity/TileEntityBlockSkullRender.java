@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.client.renderer.tileentity;
 
+import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.client.model.ModelHead;
 import ganymedes01.ganysend.lib.SkullTypes;
 import ganymedes01.ganysend.tileentities.TileEntityBlockSkull;
@@ -13,7 +14,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import com.mojang.authlib.GameProfile;
 
@@ -50,22 +50,21 @@ public class TileEntityBlockSkullRender extends TileEntitySpecialRenderer {
 		SkullTypes type = SkullTypes.values()[skullType];
 		bindTexture(type.getTexture(playerName));
 
-		GL11.glPushMatrix();
-		GL11.glDisable(GL11.GL_CULL_FACE);
-		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
+		OpenGLHelper.pushMatrix();
+		OpenGLHelper.disableCull();
+		OpenGLHelper.enableRescaleNormal();
+		OpenGLHelper.enableAlpha();
 
 		translateHead(x, y, z, meta, skullRotation);
 		skullRotation = adjustRotation(meta, skullRotation);
 
-		GL11.glScalef(-1.0F, -1.0F, 1.0F);
+		OpenGLHelper.scale(-1.0F, -1.0F, 1.0F);
 		model = ModelHead.getHead(skullType);
 		model.render(skullRotation);
 		renderSpecial(type, skullRotation);
 
-		if (GL11.glIsEnabled(GL11.GL_BLEND))
-			GL11.glDisable(GL11.GL_BLEND);
-		GL11.glPopMatrix();
+		OpenGLHelper.disableBlend();
+		OpenGLHelper.popMatrix();
 	}
 
 	private void renderSpecial(SkullTypes skullType, float skullRotation) {
@@ -78,15 +77,15 @@ public class TileEntityBlockSkullRender extends TileEntitySpecialRenderer {
 				case bighorn:
 					int c = 12;
 					if (skullType == SkullTypes.bighorn)
-						GL11.glColor3f(EntitySheep.fleeceColorTable[c][0], EntitySheep.fleeceColorTable[c][1], EntitySheep.fleeceColorTable[c][2]);
+						OpenGLHelper.colour(EntitySheep.fleeceColorTable[c][0], EntitySheep.fleeceColorTable[c][1], EntitySheep.fleeceColorTable[c][2]);
 					model.renderOverlay(skullRotation);
 					return;
 				case mooshroom:
-					GL11.glScaled(1, -1, 1);
-					GL11.glTranslated(0, 1, 0);
-					GL11.glEnable(GL11.GL_CULL_FACE);
+					OpenGLHelper.scale(1, -1, 1);
+					OpenGLHelper.translate(0, 1, 0);
+					OpenGLHelper.enableCull();
 					renderer.renderBlockAsItem(Blocks.red_mushroom, 0, 1.0F);
-					GL11.glDisable(GL11.GL_CULL_FACE);
+					OpenGLHelper.disableCull();
 					return;
 				case spider:
 				case caveSpider:
@@ -97,17 +96,17 @@ public class TileEntityBlockSkullRender extends TileEntitySpecialRenderer {
 				case swarmSpider:
 				case towerBroodling:
 				case heatscarSpider:
-					GL11.glEnable(GL11.GL_BLEND);
-					GL11.glDisable(GL11.GL_ALPHA_TEST);
-					GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
-					GL11.glDepthMask(true);
+					OpenGLHelper.enableBlend();
+					OpenGLHelper.disableAlpha();
+					OpenGLHelper.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
+					OpenGLHelper.depthMask(true);
 					char c0 = 61680;
 					int j = c0 % 65536;
 					int k = c0 / 65536;
 					OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, j / 1.0F, k / 1.0F);
 					model.render(skullRotation);
-					GL11.glDisable(GL11.GL_BLEND);
-					GL11.glEnable(GL11.GL_ALPHA_TEST);
+					OpenGLHelper.disableBlend();
+					OpenGLHelper.enableAlpha();
 					return;
 				default:
 					return;
@@ -118,19 +117,19 @@ public class TileEntityBlockSkullRender extends TileEntitySpecialRenderer {
 	private void translateHead(float x, float y, float z, int meta, float skullRotation) {
 		switch (meta) {
 			case 1:
-				GL11.glTranslatef(x + 0.5F, y, z + 0.5F);
+				OpenGLHelper.translate(x + 0.5F, y, z + 0.5F);
 				break;
 			case 2:
-				GL11.glTranslatef(x + 0.5F, y + 0.25F, z + 0.74F);
+				OpenGLHelper.translate(x + 0.5F, y + 0.25F, z + 0.74F);
 				break;
 			case 3:
-				GL11.glTranslatef(x + 0.5F, y + 0.25F, z + 0.26F);
+				OpenGLHelper.translate(x + 0.5F, y + 0.25F, z + 0.26F);
 				break;
 			case 4:
-				GL11.glTranslatef(x + 0.74F, y + 0.25F, z + 0.5F);
+				OpenGLHelper.translate(x + 0.74F, y + 0.25F, z + 0.5F);
 				break;
 			default:
-				GL11.glTranslatef(x + 0.26F, y + 0.25F, z + 0.5F);
+				OpenGLHelper.translate(x + 0.26F, y + 0.25F, z + 0.5F);
 				break;
 		}
 	}

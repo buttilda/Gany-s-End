@@ -2,6 +2,7 @@ package ganymedes01.ganysend.core.handlers;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModItems;
+import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockSkullRender;
 import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.client.model.ModelBiped;
@@ -9,8 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraftforge.client.event.RenderPlayerEvent;
-
-import org.lwjgl.opengl.GL11;
 
 import com.mojang.authlib.GameProfile;
 
@@ -60,14 +59,14 @@ public class RenderPlayerHandler {
 
 			ItemStack head = event.entityPlayer.inventory.armorItemInSlot(3);
 			if (head != null && head.getItem() == ModItems.skull) {
-				GL11.glColor3f(1.0F, 1.0F, 1.0F);
+				OpenGLHelper.colour(1.0F, 1.0F, 1.0F);
 
 				setHiddenState(model, false);
 				model.bipedHead.postRender(0.0625F);
 				setHiddenState(model, true);
 
-				GL11.glPushMatrix();
-				GL11.glScalef(1.0F, -1.0F, -1.0F);
+				OpenGLHelper.pushMatrix();
+				OpenGLHelper.scale(1.0F, -1.0F, -1.0F);
 
 				float offset;
 				switch (SkullTypes.values()[head.getItemDamage()]) {
@@ -113,7 +112,7 @@ public class RenderPlayerHandler {
 						profile = new GameProfile(null, username);
 					}
 				TileEntityBlockSkullRender.instance.renderHead(-0.5F, 0.0F, -0.5F + offset * 0.0625F, 1, 180.0F, head.getItemDamage(), profile);
-				GL11.glPopMatrix();
+				OpenGLHelper.popMatrix();
 			}
 		}
 	}

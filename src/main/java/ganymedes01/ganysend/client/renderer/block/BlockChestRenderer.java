@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.client.renderer.block;
 
+import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
@@ -8,9 +9,6 @@ import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -31,13 +29,13 @@ public class BlockChestRenderer implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		GL11.glPushMatrix();
-		GL11.glRotated(90, 0, 1, 0);
+		OpenGLHelper.pushMatrix();
+		OpenGLHelper.rotate(90, 0, 1, 0);
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURE);
-		GL11.glScaled(1, -1, -1);
-		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		OpenGLHelper.scale(1, -1, -1);
+		OpenGLHelper.translate(-0.5F, -0.5F, -0.5F);
 		chest.renderAll();
-		GL11.glPopMatrix();
+		OpenGLHelper.popMatrix();
 	}
 
 	@Override

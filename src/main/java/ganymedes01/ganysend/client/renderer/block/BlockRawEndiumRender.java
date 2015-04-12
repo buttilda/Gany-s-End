@@ -1,13 +1,11 @@
 package ganymedes01.ganysend.client.renderer.block;
 
+import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.lib.RenderIDs;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -24,7 +22,7 @@ public class BlockRawEndiumRender implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public void renderInventoryBlock(Block block, int meta, int modelID, RenderBlocks renderer) {
-		GL11.glTranslated(-0.5, -0.5, -0.5);
+		OpenGLHelper.translate(-0.5, -0.5, -0.5);
 		BlockRendererHelper.renderSimpleBlock(Blocks.end_stone, meta, renderer);
 		BlockRendererHelper.renderSimpleBlock(block, meta, renderer);
 	}

@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.client.model;
 
+import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.lib.SkullTypes;
 
 import java.util.HashMap;
@@ -60,23 +61,23 @@ public class ModelHead extends ModelSkeletonHead {
 	private static void transform(SkullTypes skull) {
 		switch (skull) {
 			case squid:
-				GL11.glScaled(2F / 3F, 2F / 3F, 2F / 3F);
+				OpenGLHelper.scale(2F / 3F, 2F / 3F, 2F / 3F);
 				break;
 			case enderDragon:
-				GL11.glScaled(0.5, 0.5, 0.5);
+				OpenGLHelper.scale(0.5, 0.5, 0.5);
 				break;
 			case mistWolf:
 			case winterWolf:
-				GL11.glScaled(1.5, 1.5, 1.5);
+				OpenGLHelper.scale(1.5, 1.5, 1.5);
 				break;
 			case bat:
-				GL11.glScaled(0.5, 0.5, 0.5);
+				OpenGLHelper.scale(0.5, 0.5, 0.5);
 				break;
 			case slime:
 			case mazeSlime:
-				GL11.glEnable(GL11.GL_NORMALIZE);
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+				OpenGLHelper.enableNormalise();
+				OpenGLHelper.enableBlend();
+				OpenGLHelper.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				break;
 			default:
 				break;

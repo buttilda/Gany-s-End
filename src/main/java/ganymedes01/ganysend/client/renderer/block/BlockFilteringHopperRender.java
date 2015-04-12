@@ -2,6 +2,7 @@ package ganymedes01.ganysend.client.renderer.block;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.blocks.BasicFilteringHopper;
+import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.lib.RenderIDs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHopper;
@@ -10,9 +11,6 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -29,7 +27,7 @@ public class BlockFilteringHopperRender implements ISimpleBlockRenderingHandler 
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		GL11.glTranslated(-0.5, -0.5, -0.5);
+		OpenGLHelper.translate(-0.5, -0.5, -0.5);
 		renderHopperInventory(renderer, (BasicFilteringHopper) block);
 	}
 
