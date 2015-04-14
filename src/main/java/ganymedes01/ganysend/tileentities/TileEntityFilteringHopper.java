@@ -12,6 +12,7 @@ import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -121,8 +122,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 				ItemStack copy = inventory[i].copy();
 				copy.stackSize = 1;
 				if (InventoryUtils.addStackToInventory(inventoryToInsert, copy, getSideToInsert())) {
-					inventory[i].stackSize--;
-					if (inventory[i].stackSize <= 0)
+					if (--inventory[i].stackSize <= 0)
 						inventory[i] = null;
 					return true;
 				}
@@ -142,6 +142,8 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 
 		for (int slot : InventoryUtils.getSlotsFromSide(inventoryToPull, 0)) {
 			ItemStack stack = inventoryToPull.getStackInSlot(slot);
+			if (inventoryToPull instanceof ISidedInventory && !((ISidedInventory) inventoryToPull).canExtractItem(slot, stack, 0))
+				continue;
 			if (stack != null && shouldPull(stack)) {
 				ItemStack copy = stack.copy();
 				copy.stackSize = 1;
