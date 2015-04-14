@@ -10,8 +10,8 @@ item.ganysend.endiumIngot.name=Слиток эндия
 item.ganysend.endstoneRod.name=Стержень из камня Края
 item.ganysend.enderScythe.name=Коса Края
 item.ganysend.infiniteBucket.name=Бесконечное ведро
-item.ganysend.infusedGem_night.name=Камень, наполненный ночью
-item.ganysend.infusedGem_day.name=Камень, наполненный днём
+item.ganysend.infusedGem_night.name=Наполненный ночью камень
+item.ganysend.infusedGem_day.name=Наполненный днём камень
 item.ganysend.endiumPickaxe.name=Кирка из эндия
 item.ganysend.endiumAxe.name=Топор из эндия
 item.ganysend.endiumShovel.name=Лопата из эндия
@@ -146,7 +146,7 @@ string.ganysend.nottagged=Не отмечено
 string.ganysend.pullallbut=Втягивать всё, кроме:
 string.ganysend.pullonly=Только втягивать:
 string.ganysend.creativeOnly=Только для творчества
-string.ganysend.leftClickContainer=ПКМ с контейнером в руке, чтобы выбрать жидкость
+string.ganysend.leftClickContainer=ЛКМ с контейнером в руке, чтобы выбрать жидкость
 
 # Materials
 material.endium=Эндий
