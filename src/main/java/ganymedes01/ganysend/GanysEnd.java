@@ -83,6 +83,7 @@ public class GanysEnd {
 	public static boolean enableEndium = true;
 
 	public static boolean isHeadcrumbsLoaded = false;
+	public static boolean isBotaniaLoaded = false;
 	public static Item headcrumbsHead = null;
 
 	@EventHandler
@@ -101,6 +102,7 @@ public class GanysEnd {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		isHeadcrumbsLoaded = Loader.isModLoaded("headcrumbs");
+		isBotaniaLoaded = Loader.isModLoaded("Botania");
 		if (isHeadcrumbsLoaded)
 			ModItems.skull.setCreativeTab(null);
 		ModRecipes.init();

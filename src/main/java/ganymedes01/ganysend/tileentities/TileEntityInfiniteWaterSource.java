@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.tileentities;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.network.ByteBufHelper;
 import ganymedes01.ganysend.network.IPacketHandlingTile;
@@ -63,9 +64,18 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 			return;
 
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			IFluidHandler tile = Utils.getTileEntity(worldObj, xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, IFluidHandler.class);
-			if (tile != null)
-				tile.fill(dir.getOpposite(), fluid.copy(), true);
+			TileEntity tile = Utils.getTileEntity(worldObj, xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, TileEntity.class);
+			if (tile instanceof IFluidHandler)
+				((IFluidHandler) tile).fill(dir.getOpposite(), fluid.copy(), true);
+			else if (GanysEnd.isBotaniaLoaded)
+				try {
+					Class<?> IPetalApothecary = Class.forName("vazkii.botania.api.item.IPetalApothecary");
+					if (IPetalApothecary.isInstance(tile))
+						if (!(boolean) IPetalApothecary.getMethod("hasWater").invoke(tile))
+							IPetalApothecary.getMethod("setWater", boolean.class).invoke(tile, true);
+				} catch (Exception e) {
+					GanysEnd.isBotaniaLoaded = false;
+				}
 		}
 	}
 
