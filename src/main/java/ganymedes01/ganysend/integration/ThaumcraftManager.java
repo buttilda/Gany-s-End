@@ -19,16 +19,16 @@ import thaumcraft.api.research.ResearchPage;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ThaumcraftManager extends Integration {
 
 	@Override
 	public void init() {
-		ThaumcraftApi.addSmeltingBonus(new ItemStack(ModItems.endiumIngot), new ItemStack(ModItems.endiumIngot, 0, 1));
+		ThaumcraftApi.addSmeltingBonus("oreEndium", new ItemStack(ModItems.endiumIngot, 0, 1));
 		ThaumcraftApi.portableHoleBlackList.add(ModBlocks.enderToggler_air);
 
 		addAspectsToItem(ModItems.endiumIngot, new Aspect[] { Aspect.ELDRITCH, Aspect.TRAVEL, Aspect.MAGIC, Aspect.SENSES, Aspect.DARKNESS }, new int[] { 4, 4, 7, 2, 2 });
