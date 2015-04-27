@@ -66,6 +66,7 @@ public class Strings {
 	public static final String REINFORCED_ENDIUM_BOW_NAME = "reinforcedEndiumBow";
 	public static final String ENDER_BAG_NAME = "enderBag";
 	public static final String ENDIUM_BUCKET_NAME = "endiumBucket";
+	public static final String REINFORCED_ENDER_SCYTHE_NAME = "reinforcedEnderScythe";
 
 	// Enchantments
 	public static final String IMPERVIOUSNESS_NAME = "enchantment.imperviousness";

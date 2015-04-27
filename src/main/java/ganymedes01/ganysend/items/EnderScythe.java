@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.api.IEndiumScythe;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModMaterials;
 import ganymedes01.ganysend.lib.Strings;
@@ -19,13 +20,17 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class EnderScythe extends ItemSword {
+public class EnderScythe extends ItemSword implements IEndiumScythe {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon overlay;
 
 	public EnderScythe() {
-		super(ModMaterials.ENDIUM_TOOLS);
+		this(ModMaterials.ENDIUM_TOOLS);
+	}
+
+	public EnderScythe(ToolMaterial material) {
+		super(material);
 		setCreativeTab(GanysEnd.enableScythe ? GanysEnd.endTab : null);
 		setTextureName(Utils.getItemTexture(Strings.ENDER_SCYTHE_NAME));
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDER_SCYTHE_NAME));

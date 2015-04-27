@@ -95,8 +95,10 @@ public class ModRecipes {
 		if (GanysEnd.enableEndiumTools || GanysEnd.enableScythe)
 			addShapedRecipe(new ItemStack(ModItems.endstoneRod, 4), "x", "x", 'x', Blocks.end_stone);
 
-		if (GanysEnd.enableScythe)
+		if (GanysEnd.enableScythe) {
 			addShapedRecipe(ModItems.enderScythe, "xxy", " y ", "y  ", 'x', "ingotEndium", 'y', ModItems.endstoneRod);
+			addShapedRecipe(ModItems.reinforcedEnderScythe, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.enderScythe);
+		}
 
 		if (GanysEnd.enableInfiniteBucket)
 			addShapedRecipe(ModItems.infiniteBucket, "xxx", "zxz", "yzy", 'x', Items.water_bucket, 'y', Items.ender_pearl, 'z', "ingotGold");

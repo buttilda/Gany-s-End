@@ -1,7 +1,7 @@
 package ganymedes01.ganysend.core.handlers;
 
 import ganymedes01.ganysend.GanysEnd;
-import ganymedes01.ganysend.ModItems;
+import ganymedes01.ganysend.api.IEndiumScythe;
 import ganymedes01.ganysend.core.utils.HeadsHelper;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
@@ -45,7 +45,7 @@ public class EntityDropEvent {
 
 		// Drop heads
 		if (!GanysEnd.isHeadcrumbsLoaded) {
-			boolean isScythe = weapon != null && weapon.getItem() == ModItems.enderScythe && GanysEnd.enableScythe;
+			boolean isScythe = GanysEnd.enableScythe && weapon != null && weapon.getItem() instanceof IEndiumScythe;
 			if (isScythe || shouldDoRandomDrop(event.entityLiving.worldObj.rand, event.lootingLevel)) {
 				ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
 				if (stack != null)
