@@ -44,14 +44,20 @@ public class EntityDropEvent {
 		ItemStack weapon = getWeapon(event.source);
 
 		// Drop heads
-		if (!GanysEnd.isHeadcrumbsLoaded) {
-			boolean isScythe = GanysEnd.enableScythe && weapon != null && weapon.getItem() instanceof IEndiumScythe;
-			if (isScythe || shouldDoRandomDrop(event.entityLiving.worldObj.rand, event.lootingLevel)) {
+		if (!GanysEnd.isHeadcrumbsLoaded)
+			if (shouldDoRandomDrop(event.entityLiving.worldObj.rand, event.lootingLevel)) {
 				ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
 				if (stack != null)
-					if (isScythe || canDropThisHead(stack))
+					if (canDropThisHead(stack))
 						addDrop(stack, event.entityLiving, event.drops);
 			}
+
+		// Scythe drop
+		if (GanysEnd.enableScythe && weapon != null && weapon.getItem() instanceof IEndiumScythe) {
+			ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
+			if (stack != null)
+				if (canDropThisHead(stack))
+					addDrop(stack, event.entityLiving, event.drops);
 		}
 
 		// Collect drops

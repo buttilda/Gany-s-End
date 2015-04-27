@@ -1,8 +1,10 @@
 package ganymedes01.ganysend.core.utils;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.lib.SkullTypes;
 
+import java.lang.reflect.Method;
 import java.util.UUID;
 
 import net.minecraft.entity.Entity;
@@ -60,6 +62,15 @@ public class HeadsHelper {
 	public static ItemStack getHeadfromEntity(EntityLivingBase target) {
 		if (target.isChild())
 			return null;
+
+		if (GanysEnd.isHeadcrumbsLoaded)
+			try {
+				Class<?> cls = Class.forName("ganymedes01.headcrumbs.utils.HeadUtils");
+				Method m = cls.getMethod("getHeadfromEntity", EntityLivingBase.class);
+				return (ItemStack) m.invoke(null, target);
+			} catch (Exception e) {
+				return null;
+			}
 
 		if (Loader.isModLoaded("TwilightForest")) {
 			ItemStack head = getTFMobHead(target);
