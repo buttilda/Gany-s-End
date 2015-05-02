@@ -97,6 +97,7 @@ public class GanysEnd {
 		ModBlocks.init();
 		ModItems.init();
 		ModEnchants.init();
+		ModRecipes.registerOreDictionary();
 	}
 
 	@EventHandler

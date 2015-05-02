@@ -24,14 +24,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class ModRecipes {
 
 	public static void init() {
-		registerOreDictionary();
-
 		registerBlockRecipes();
 		registerItemRecipes();
 		registerArmourRecipes();
 	}
 
-	private static void registerOreDictionary() {
+	public static void registerOreDictionary() {
 		OreDictionary.registerOre("chestWood", Blocks.chest);
 
 		if (GanysEnd.enableEndium) {
