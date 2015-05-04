@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.RayTraceUtils;
 import ganymedes01.ganysend.core.utils.Utils;
@@ -32,7 +33,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class BasicFilteringHopper extends BlockHopper {
+public class BasicFilteringHopper extends BlockHopper implements IConfigurable {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon blockOutside, blockTop, blockBottom, blockInside;
@@ -167,5 +168,10 @@ public class BasicFilteringHopper extends BlockHopper {
 		}
 
 		return boxes;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableHoppers;
 	}
 }

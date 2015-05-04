@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.Utils;
@@ -36,7 +37,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class Skull extends ItemSkull {
+public class Skull extends ItemSkull implements IConfigurable {
 
 	public Skull() {
 		setMaxDamage(0);
@@ -145,5 +146,10 @@ public class Skull extends ItemSkull {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg) {
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableSkulls;
 	}
 }

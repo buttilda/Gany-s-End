@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
@@ -22,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class InventoryBinder extends BlockContainer {
+public class InventoryBinder extends BlockContainer implements IConfigurable {
 
 	public InventoryBinder() {
 		super(Material.rock);
@@ -59,5 +60,10 @@ public class InventoryBinder extends BlockContainer {
 	@Override
 	public int getRenderType() {
 		return RenderIDs.INVENTORY_BINDER;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableInventoryBinder;
 	}
 }

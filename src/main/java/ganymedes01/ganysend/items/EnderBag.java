@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +16,7 @@ import net.minecraft.world.World;
  *
  */
 
-public class EnderBag extends Item {
+public class EnderBag extends Item implements IConfigurable {
 
 	public EnderBag() {
 		setMaxStackSize(1);
@@ -31,5 +32,10 @@ public class EnderBag extends Item {
 
 		player.displayGUIChest(player.getInventoryEnderChest());
 		return stack;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableEnderBag;
 	}
 }

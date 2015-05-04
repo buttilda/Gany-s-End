@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.enchantment.ModEnchants;
@@ -26,7 +27,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public abstract class EndiumArmour extends ItemArmor {
+public abstract class EndiumArmour extends ItemArmor implements IConfigurable {
 
 	private final int type;
 	private int coolDown;
@@ -111,4 +112,9 @@ public abstract class EndiumArmour extends ItemArmor {
 	}
 
 	abstract void handleInWater(EntityPlayer player, ItemStack stack, boolean isWaterproof);
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableEndiumArmour;
+	}
 }

@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
@@ -20,7 +21,7 @@ import net.minecraft.world.World;
  *
  */
 
-public class EndiumBlock extends Block {
+public class EndiumBlock extends Block implements IConfigurable {
 
 	public EndiumBlock() {
 		super(Material.cloth);
@@ -42,5 +43,10 @@ public class EndiumBlock extends Block {
 	@Override
 	public boolean isBeaconBase(IBlockAccess worldObj, int x, int y, int z, int beaconX, int beaconY, int beaconZ) {
 		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableEndium;
 	}
 }

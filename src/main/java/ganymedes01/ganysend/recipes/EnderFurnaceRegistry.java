@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.recipes;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.xml.XMLNode;
@@ -37,22 +38,29 @@ public class EnderFurnaceRegistry extends RecipeRegistry<EnderFurnaceRecipe> {
 	protected void addDefaultRecipes() {
 		addRecipe(new ItemStack(Items.ender_pearl, 4), "itemSkull", "itemSkull");
 		addRecipe(new ItemStack(Blocks.end_stone), Blocks.stone);
-		addRecipe(new ItemStack(ModBlocks.endstoneBrick), Blocks.stonebrick);
-		addRecipe(new ItemStack(ModBlocks.enderpearlBlock, 1, 1), ModBlocks.enderpearlBlock);
+		if (GanysEnd.enableDecorativeBlocks) {
+			addRecipe(new ItemStack(ModBlocks.endstoneBrick), Blocks.stonebrick);
+			addRecipe(new ItemStack(ModBlocks.enderpearlBlock, 1, 1), ModBlocks.enderpearlBlock);
+		}
 		addRecipe(new ItemStack(Blocks.stone), Blocks.netherrack);
 		addRecipe(new ItemStack(Blocks.stonebrick), Blocks.nether_brick);
 		addRecipe(new ItemStack(Blocks.dragon_egg), "skullEnderDragon");
 		addRecipe(new ItemStack(Items.nether_star), "skullWither");
-		addRecipe(new ItemStack(ModItems.endiumIngot, 2), "oreEndium");
-		ItemStack enderTag = new ItemStack(ModItems.enderTag);
-		enderTag.setTagCompound(new NBTTagCompound());
-		addRecipe(enderTag, Items.paper);
+		if (GanysEnd.enableEndium)
+			addRecipe(new ItemStack(ModItems.endiumIngot, 2), "oreEndium");
+		if (GanysEnd.enableShifters) {
+			ItemStack enderTag = new ItemStack(ModItems.enderTag);
+			enderTag.setTagCompound(new NBTTagCompound());
+			addRecipe(enderTag, Items.paper);
+		}
 		addRecipe(new ItemStack(Blocks.mycelium), Blocks.grass);
 		addRecipe(new ItemStack(Items.emerald), Items.diamond, Items.gold_ingot, "itemSkull", new ItemStack(Items.potionitem, 1, 8196));
 		addRecipe(new ItemStack(Items.diamond), Items.emerald, Items.gold_ingot, "itemSkull", new ItemStack(Items.potionitem, 1, 8194));
-		addRecipe(new ItemStack(Items.experience_bottle), new ItemStack(Items.potionitem, 1, 8197), ModItems.endstoneRod);
+		if (GanysEnd.enableEndiumTools || GanysEnd.enableScythe)
+			addRecipe(new ItemStack(Items.experience_bottle), new ItemStack(Items.potionitem, 1, 8197), ModItems.endstoneRod);
 		addRecipe(new ItemStack(Items.ender_pearl), Items.ghast_tear, Items.sugar, Items.glowstone_dust, Items.experience_bottle);
-		addRecipe(new ItemStack(Blocks.dragon_egg), ModBlocks.timeManipulator);
+		if (GanysEnd.enableTimeManipulator)
+			addRecipe(new ItemStack(Blocks.dragon_egg), ModBlocks.timeManipulator);
 		addRecipe(new ItemStack(Items.cooked_fished), Items.fish);
 		addRecipe(new ItemStack(Items.potato), Items.poisonous_potato);
 		addRecipe(new ItemStack(Items.beef), Items.rotten_flesh);
@@ -76,7 +84,8 @@ public class EnderFurnaceRegistry extends RecipeRegistry<EnderFurnaceRecipe> {
 				addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), "flowerEnder", "flowerEnder");
 			else
 				addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), "flowerEnder");
-		addRecipe(new ItemStack(ModBlocks.rawEndium), "oreDiamond");
+		if (GanysEnd.enableEndium)
+			addRecipe(new ItemStack(ModBlocks.rawEndium), "oreDiamond");
 	}
 
 	public void addRecipe(ItemStack output, Object... input) {

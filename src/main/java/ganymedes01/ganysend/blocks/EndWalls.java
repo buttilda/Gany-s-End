@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.ModBlocks.ISubBlocksBlock;
 import ganymedes01.ganysend.core.utils.Utils;
@@ -18,7 +19,7 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class EndWalls extends BlockWall implements ISubBlocksBlock {
+public class EndWalls extends BlockWall implements ISubBlocksBlock, IConfigurable {
 
 	public EndWalls() {
 		super(ModBlocks.endstoneBrick);
@@ -48,5 +49,10 @@ public class EndWalls extends BlockWall implements ISubBlocksBlock {
 	@Override
 	public Class<? extends ItemBlock> getItemBlockClass() {
 		return ItemEndWalls.class;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableDecorativeBlocks;
 	}
 }

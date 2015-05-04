@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.GUIsID;
@@ -24,7 +25,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class VoidCrate extends BlockContainer {
+public class VoidCrate extends BlockContainer implements IConfigurable {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
@@ -73,5 +74,10 @@ public class VoidCrate extends BlockContainer {
 		icons = new IIcon[2];
 		for (int i = 0; i < 2; i++)
 			icons[i] = reg.registerIcon(Utils.getBlockTexture(Strings.VOID_CRATE_NAME) + i);
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableVoidCrate;
 	}
 }

@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.RenderIDs;
@@ -29,7 +30,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class InfiniteWaterSource extends BlockContainer {
+public class InfiniteWaterSource extends BlockContainer implements IConfigurable {
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon axis, node, head;
@@ -130,5 +131,10 @@ public class InfiniteWaterSource extends BlockContainer {
 		world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 		for (int i = 0; i < 8; i++)
 			world.spawnParticle("largesmoke", x + Math.random(), y + 1.2D, z + Math.random(), 0.0D, 0.0D, 0.0D);
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableInfiniteWaterSource;
 	}
 }

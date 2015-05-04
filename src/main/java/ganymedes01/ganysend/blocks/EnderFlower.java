@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
@@ -29,7 +30,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class EnderFlower extends BlockFlower {
+public class EnderFlower extends BlockFlower implements IConfigurable {
 
 	public EnderFlower() {
 		super(0);
@@ -77,5 +78,10 @@ public class EnderFlower extends BlockFlower {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
 		list.add(new ItemStack(item, 1, 0));
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableEnderFlower;
 	}
 }

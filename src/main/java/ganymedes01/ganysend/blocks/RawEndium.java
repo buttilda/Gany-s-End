@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
@@ -17,7 +18,7 @@ import net.minecraft.world.IBlockAccess;
  *
  */
 
-public class RawEndium extends Block {
+public class RawEndium extends Block implements IConfigurable {
 
 	public RawEndium() {
 		super(Material.iron);
@@ -37,5 +38,10 @@ public class RawEndium extends Block {
 	@Override
 	public int getRenderType() {
 		return RenderIDs.RAW_ENDIUM;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableEndium;
 	}
 }

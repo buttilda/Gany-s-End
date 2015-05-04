@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
@@ -22,7 +23,7 @@ import net.minecraft.world.World;
  *
  */
 
-public class EnderTag extends Item {
+public class EnderTag extends Item implements IConfigurable {
 
 	public EnderTag() {
 		setMaxStackSize(1);
@@ -62,5 +63,10 @@ public class EnderTag extends Item {
 			list.add(Integer.toString(stack.stackTagCompound.getInteger("Dimension")) + " : " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[0]) + ", " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[1]) + ", " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[2]));
 		else
 			list.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".nottagged"));
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableShifters;
 	}
 }

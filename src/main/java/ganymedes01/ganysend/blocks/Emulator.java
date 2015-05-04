@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
@@ -20,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class Emulator extends Block {
+public class Emulator extends Block implements IConfigurable {
 
 	public Emulator() {
 		super(Material.portal);
@@ -95,5 +96,10 @@ public class Emulator extends Block {
 
 	private boolean checkBounds(Block block) {
 		return block.getBlockBoundsMaxX() == maxX && block.getBlockBoundsMaxY() == maxY && block.getBlockBoundsMaxZ() == maxZ && block.getBlockBoundsMinX() == minX && block.getBlockBoundsMinY() == minY && block.getBlockBoundsMinZ() == minZ;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableEmulator;
 	}
 }

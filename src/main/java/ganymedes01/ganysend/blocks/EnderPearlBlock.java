@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModBlocks.ISubBlocksBlock;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.items.blocks.ItemEnderPearlBlock;
@@ -26,7 +27,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class EnderPearlBlock extends Block implements ISubBlocksBlock {
+public class EnderPearlBlock extends Block implements ISubBlocksBlock, IConfigurable {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] blockIcon;
@@ -69,5 +70,10 @@ public class EnderPearlBlock extends Block implements ISubBlocksBlock {
 	@Override
 	public Class<? extends ItemBlock> getItemBlockClass() {
 		return ItemEnderPearlBlock.class;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableDecorativeBlocks;
 	}
 }

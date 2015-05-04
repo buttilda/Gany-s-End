@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.GUIsID;
@@ -32,7 +33,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class EnderFurnace extends BlockContainer {
+public class EnderFurnace extends BlockContainer implements IConfigurable {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
@@ -129,7 +130,7 @@ public class EnderFurnace extends BlockContainer {
 		if (tile != null)
 			return tile.lightLevel == 15 ? icons[2] : icons[3];
 
-		return super.getIcon(world, x, y, z, side);
+			return super.getIcon(world, x, y, z, side);
 	}
 
 	@Override
@@ -159,5 +160,10 @@ public class EnderFurnace extends BlockContainer {
 		icons = new IIcon[4];
 		for (int i = 0; i < icons.length; i++)
 			icons[i] = reg.registerIcon(Utils.getBlockTexture(Strings.ENDER_FURNACE_NAME + i));
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableEnderFurnace;
 	}
 }

@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 
@@ -21,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class EndiumIngot extends Item {
+public class EndiumIngot extends Item implements IConfigurable {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
@@ -79,5 +80,10 @@ public class EndiumIngot extends Item {
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack stack, int pass) {
 		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableEndium;
 	}
 }

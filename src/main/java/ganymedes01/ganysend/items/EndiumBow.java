@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.IEndiumTool;
@@ -32,7 +33,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class EndiumBow extends ItemBow implements IEndiumTool {
+public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] overlays;
@@ -241,5 +242,10 @@ public class EndiumBow extends ItemBow implements IEndiumTool {
 	@SideOnly(Side.CLIENT)
 	public boolean requiresMultipleRenderPasses() {
 		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableEndiumTools;
 	}
 }

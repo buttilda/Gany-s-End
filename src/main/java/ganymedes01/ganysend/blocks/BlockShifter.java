@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
@@ -24,7 +25,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class BlockShifter extends BlockContainer {
+public class BlockShifter extends BlockContainer implements IConfigurable {
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon blockSide, blockBottom, blockTop;
@@ -33,8 +34,7 @@ public class BlockShifter extends BlockContainer {
 		super(Material.iron);
 		setHardness(1.5F);
 		setResistance(10.0F);
-		if (GanysEnd.enableShifters)
-			setCreativeTab(GanysEnd.endTab);
+		setCreativeTab(GanysEnd.enableShifters ? GanysEnd.endTab : null);
 		setBlockName(Utils.getUnlocalisedName(Strings.BLOCK_SHIFTER_NAME));
 	}
 
@@ -93,5 +93,10 @@ public class BlockShifter extends BlockContainer {
 		blockSide = reg.registerIcon(Utils.getBlockTexture(Strings.BLOCK_SHIFTER_NAME) + "_side");
 		blockBottom = reg.registerIcon(Utils.getBlockTexture(Strings.BLOCK_SHIFTER_NAME) + "_bottom");
 		blockTop = reg.registerIcon(Utils.getBlockTexture(Strings.BLOCK_SHIFTER_NAME) + "_top");
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableShifters;
 	}
 }

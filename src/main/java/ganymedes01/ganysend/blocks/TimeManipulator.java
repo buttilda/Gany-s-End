@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.RenderIDs;
@@ -30,7 +31,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class TimeManipulator extends BlockContainer {
+public class TimeManipulator extends BlockContainer implements IConfigurable {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] bottomIcons, topIcons;
@@ -40,8 +41,7 @@ public class TimeManipulator extends BlockContainer {
 		setHardness(10.0F);
 		setResistance(25.0F);
 		setStepSound(soundTypeWood);
-		if (GanysEnd.enableTimeManipulator)
-			setCreativeTab(GanysEnd.endTab);
+		setCreativeTab(GanysEnd.enableTimeManipulator ? GanysEnd.endTab : null);
 		setBlockName(Utils.getUnlocalisedName(Strings.TIME_MANIPULATOR_NAME));
 	}
 
@@ -181,5 +181,10 @@ public class TimeManipulator extends BlockContainer {
 		topIcons[3] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_top_back"));
 
 		blockIcon = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_surface"));
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableTimeManipulator;
 	}
 }

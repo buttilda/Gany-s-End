@@ -1,5 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
+import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.HeadsHelper;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
@@ -40,7 +42,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 
 @Optional.Interface(iface = "thaumcraft.api.crafting.IInfusionStabiliser", modid = "Thaumcraft")
-public class BlockSkull extends BlockContainer implements IInfusionStabiliser {
+public class BlockSkull extends BlockContainer implements IInfusionStabiliser, IConfigurable {
 
 	public BlockSkull() {
 		super(Material.circuits);
@@ -184,5 +186,10 @@ public class BlockSkull extends BlockContainer implements IInfusionStabiliser {
 	@Optional.Method(modid = "Thaumcraft")
 	public boolean canStabaliseInfusion(World world, int x, int y, int z) {
 		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableSkulls;
 	}
 }

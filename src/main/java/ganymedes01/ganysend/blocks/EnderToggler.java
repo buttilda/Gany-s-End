@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
@@ -19,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class EnderToggler extends Block {
+public class EnderToggler extends Block implements IConfigurable {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon blockSide, blockBottom, blockTop;
@@ -68,5 +69,10 @@ public class EnderToggler extends Block {
 		blockSide = reg.registerIcon(Utils.getBlockTexture(Strings.ENDER_TOGGLER_NAME) + "_side");
 		blockBottom = reg.registerIcon(Utils.getBlockTexture(Strings.ENDER_TOGGLER_NAME) + "_bottom");
 		blockTop = reg.registerIcon(Utils.getBlockTexture(Strings.ENDER_TOGGLER_NAME) + "_top");
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableEnderToggler;
 	}
 }

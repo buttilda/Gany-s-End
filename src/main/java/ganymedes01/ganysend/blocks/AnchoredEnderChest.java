@@ -87,4 +87,9 @@ public class AnchoredEnderChest extends InventoryBinder {
 	public IIcon getIcon(int side, int meta) {
 		return Blocks.ender_chest.getIcon(side, meta);
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableAnchoredEnderChest;
+	}
 }

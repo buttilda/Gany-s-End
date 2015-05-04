@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
@@ -22,7 +23,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class InfusedGem extends Item {
+public class InfusedGem extends Item implements IConfigurable {
 
 	private static final String[] types = new String[] { "night", "day" };
 	@SideOnly(Side.CLIENT)
@@ -75,5 +76,10 @@ public class InfusedGem extends Item {
 
 		for (int i = 0; i < types.length; i++)
 			icons[i] = reg.registerIcon(Reference.ITEM_BLOCK_TEXTURE_PATH + Strings.INFUSED_GEM_NAME + "_" + types[i]);
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableTimeManipulator;
 	}
 }

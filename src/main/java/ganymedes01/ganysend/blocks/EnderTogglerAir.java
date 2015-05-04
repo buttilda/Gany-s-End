@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
@@ -17,12 +18,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
-public class EnderTogglerAir extends Block {
+public class EnderTogglerAir extends Block implements IConfigurable {
 
 	public EnderTogglerAir() {
 		super(Material.iron);
@@ -93,5 +94,10 @@ public class EnderTogglerAir extends Block {
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
 		if (!world.isBlockIndirectlyGettingPowered(x, y, z))
 			world.setBlock(x, y, z, ModBlocks.enderToggler, 0, 2);
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableEnderToggler;
 	}
 }

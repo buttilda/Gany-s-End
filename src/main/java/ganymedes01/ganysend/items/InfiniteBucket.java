@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
@@ -27,7 +28,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class InfiniteBucket extends ItemSimpleFoiled {
+public class InfiniteBucket extends ItemSimpleFoiled implements IConfigurable {
 
 	public InfiniteBucket() {
 		setMaxStackSize(1);
@@ -69,5 +70,10 @@ public class InfiniteBucket extends ItemSimpleFoiled {
 		}
 
 		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableInfiniteBucket;
 	}
 }
