@@ -26,7 +26,7 @@ public class NEIGanysEndConfig implements IConfigureNEI {
 
 		if (GanysEnd.enableEnderToggler)
 			API.hideItem(new ItemStack(ModBlocks.enderToggler_air));
-		if (GanysEnd.enableSkulls)
+		if (GanysEnd.enableSkulls || GanysEnd.isHeadcrumbsLoaded)
 			API.hideItem(new ItemStack(ModBlocks.blockNewSkull));
 	}
 

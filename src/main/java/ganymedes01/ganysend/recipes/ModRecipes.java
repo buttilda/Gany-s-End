@@ -117,7 +117,7 @@ public class ModRecipes {
 			addShapedRecipe(ModItems.reinforcedEndiumShovel, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.endiumShovel);
 			addShapedRecipe(ModItems.reinforcedEndiumSword, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.endiumSword);
 			addShapedRecipe(ModItems.reinforcedEndiumBow, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.endiumBow);
-			// addShapedRecipe(ModItems.endiumBucket, "x x", " x ", 'x', "ingotEndium");
+			addShapedRecipe(ModItems.endiumBucket, "x x", " x ", 'x', "ingotEndium");
 		}
 
 		if (GanysEnd.enableEnderBag)

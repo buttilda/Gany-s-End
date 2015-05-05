@@ -1,6 +1,7 @@
 package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.IEndiumTool;
 import ganymedes01.ganysend.lib.Strings;
@@ -25,7 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  *
  */
 
-public class EndiumBucket extends Item implements IFluidContainerItem, IEndiumTool {
+public class EndiumBucket extends Item implements IFluidContainerItem, IEndiumTool, IConfigurable {
 
 	public EndiumBucket() {
 		setMaxStackSize(1);
@@ -106,5 +107,10 @@ public class EndiumBucket extends Item implements IFluidContainerItem, IEndiumTo
 	public FluidStack drain(ItemStack container, int maxDrain, boolean doDrain) {
 		IFluidHandler tile = getFluidHandler(container);
 		return tile != null ? tile.drain(ForgeDirection.UNKNOWN, maxDrain, doDrain) : null;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GanysEnd.enableEndiumTools;
 	}
 }
