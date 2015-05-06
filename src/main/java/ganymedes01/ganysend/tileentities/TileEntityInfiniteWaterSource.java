@@ -67,11 +67,11 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 			TileEntity tile = Utils.getTileEntity(worldObj, xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, TileEntity.class);
 			if (tile instanceof IFluidHandler)
 				((IFluidHandler) tile).fill(dir.getOpposite(), fluid.copy(), true);
-			else if (GanysEnd.isBotaniaLoaded)
+			else if (GanysEnd.isBotaniaLoaded && fluid.getFluid() == FluidRegistry.WATER)
 				try {
 					Class<?> IPetalApothecary = Class.forName("vazkii.botania.api.item.IPetalApothecary");
 					if (IPetalApothecary.isInstance(tile))
-						if (!(boolean) IPetalApothecary.getMethod("hasWater").invoke(tile))
+						if (!(Boolean) IPetalApothecary.getMethod("hasWater").invoke(tile))
 							IPetalApothecary.getMethod("setWater", boolean.class).invoke(tile, true);
 				} catch (Exception e) {
 					GanysEnd.isBotaniaLoaded = false;

@@ -97,7 +97,7 @@ public class InfiniteBucket extends Item implements IConfigurable {
 			try {
 				Class<?> IPetalApothecary = Class.forName("vazkii.botania.api.item.IPetalApothecary");
 				if (IPetalApothecary.isInstance(tile))
-					if (!(boolean) IPetalApothecary.getMethod("hasWater").invoke(tile))
+					if (!(Boolean) IPetalApothecary.getMethod("hasWater").invoke(tile))
 						IPetalApothecary.getMethod("setWater", boolean.class).invoke(tile, true);
 			} catch (Exception e) {
 				GanysEnd.isBotaniaLoaded = false;
