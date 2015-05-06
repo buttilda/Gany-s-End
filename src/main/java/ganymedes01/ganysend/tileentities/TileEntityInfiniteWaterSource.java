@@ -8,6 +8,8 @@ import ganymedes01.ganysend.network.PacketHandler;
 import ganymedes01.ganysend.network.packet.PacketTileEntity;
 import ganymedes01.ganysend.network.packet.PacketTileEntity.TileData;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.block.BlockCauldron;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -64,10 +66,19 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 			return;
 
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			TileEntity tile = Utils.getTileEntity(worldObj, xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, TileEntity.class);
+			int xx = xCoord + dir.offsetX;
+			int yy = yCoord + dir.offsetY;
+			int zz = zCoord + dir.offsetZ;
+			TileEntity tile = Utils.getTileEntity(worldObj, xx, yy, zz, TileEntity.class);
 			if (tile instanceof IFluidHandler)
 				((IFluidHandler) tile).fill(dir.getOpposite(), fluid.copy(), true);
-			else if (GanysEnd.isBotaniaLoaded && fluid.getFluid() == FluidRegistry.WATER)
+			else if (worldObj.getBlock(xx, yy, zz) == Blocks.cauldron) {
+				int filled = BlockCauldron.func_150027_b(worldObj.getBlockMetadata(xx, yy, zz));
+				if (filled < 3) {
+					worldObj.setBlockMetadataWithNotify(xx, yy, zz, 3, 2);
+					worldObj.func_147453_f(xx, yy, zz, Blocks.cauldron);
+				}
+			} else if (GanysEnd.isBotaniaLoaded && fluid.getFluid() == FluidRegistry.WATER)
 				try {
 					Class<?> IPetalApothecary = Class.forName("vazkii.botania.api.item.IPetalApothecary");
 					if (IPetalApothecary.isInstance(tile))
