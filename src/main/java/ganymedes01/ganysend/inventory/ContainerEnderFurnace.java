@@ -4,7 +4,6 @@ import ganymedes01.ganysend.inventory.slots.BetterSlot;
 import ganymedes01.ganysend.tileentities.TileEntityEnderFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -16,11 +15,12 @@ import net.minecraft.item.ItemStack;
  *
  */
 
-public class ContainerEnderFurnace extends Container {
+public class ContainerEnderFurnace extends GanysContainer {
 
 	private final TileEntityEnderFurnace furnace;
 
 	public ContainerEnderFurnace(InventoryPlayer inventory, TileEntityEnderFurnace tile) {
+		super(tile);
 		furnace = tile;
 
 		addSlotToContainer(new BetterSlot(tile, 0, 13, 44));
@@ -82,10 +82,5 @@ public class ContainerEnderFurnace extends Container {
 		}
 
 		return itemstack;
-	}
-
-	@Override
-	public boolean canInteractWith(EntityPlayer player) {
-		return true;
 	}
 }

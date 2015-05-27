@@ -3,21 +3,20 @@ package ganymedes01.ganysend.inventory;
 import ganymedes01.ganysend.tileentities.TileEntityVoidCrate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
-public class ContainerVoidCrate extends Container {
+public class ContainerVoidCrate extends GanysContainer {
 
 	public ContainerVoidCrate(InventoryPlayer inventory, TileEntityVoidCrate tile) {
-
+		super(tile);
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++)
 				addSlotToContainer(new Slot(tile, j + i * 8, 8 + j * 18, i * 18 + 11));
@@ -58,10 +57,5 @@ public class ContainerVoidCrate extends Container {
 		}
 
 		return itemstack;
-	}
-
-	@Override
-	public boolean canInteractWith(EntityPlayer player) {
-		return true;
 	}
 }

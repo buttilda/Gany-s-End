@@ -5,7 +5,6 @@ import ganymedes01.ganysend.tileentities.TileEntityAdvancedFilteringHopper;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
@@ -16,11 +15,12 @@ import net.minecraft.item.ItemStack;
  *
  */
 
-public class ContainerAdvancedFilteringHopper extends Container {
+public class ContainerAdvancedFilteringHopper extends GanysContainer {
 
 	private final TileEntityAdvancedFilteringHopper hopper;
 
 	public ContainerAdvancedFilteringHopper(InventoryPlayer inventory, TileEntityAdvancedFilteringHopper tile) {
+		super(tile);
 		hopper = tile;
 
 		for (int i = 0; i < tile.getSizeInventory(); i++)
@@ -60,11 +60,6 @@ public class ContainerAdvancedFilteringHopper extends Container {
 		}
 
 		return itemstack;
-	}
-
-	@Override
-	public boolean canInteractWith(EntityPlayer player) {
-		return true;
 	}
 
 	@Override
