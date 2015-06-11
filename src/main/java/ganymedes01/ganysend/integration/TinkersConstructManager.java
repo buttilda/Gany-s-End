@@ -70,6 +70,7 @@ public class TinkersConstructManager extends Integration {
 		Smeltery.addMelting(ModBlocks.rawEndium, 0, 1000, new FluidStack(endium, TConstruct.oreLiquidValue));
 		TConstructRegistry.getBasinCasting().addCastingRecipe(new ItemStack(ModBlocks.endiumBlock), new FluidStack(endium, TConstruct.blockLiquidValue), 50);
 		TConstructRegistry.getTableCasting().addCastingRecipe(new ItemStack(ModItems.endiumIngot), new FluidStack(endium, TConstruct.ingotLiquidValue), new ItemStack(TinkerSmeltery.metalPattern), 50);
+		TConstructRegistry.getTableCasting().addCastingRecipe(new ItemStack(ModItems.endiumIngot, 1, 1), new FluidStack(endium, TConstruct.nuggetLiquidValue), new ItemStack(TinkerSmeltery.metalPattern, 1, 27), 50);
 
 		for (int i = 0; i < TinkerTools.patternOutputs.length; i++)
 			if (TinkerTools.patternOutputs[i] != null) {
