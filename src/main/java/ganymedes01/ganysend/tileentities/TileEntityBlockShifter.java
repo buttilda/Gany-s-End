@@ -1,8 +1,6 @@
 package ganymedes01.ganysend.tileentities;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -44,26 +42,28 @@ public class TileEntityBlockShifter extends TileEntity {
 		if (!worldObj.isAirBlock(fromX, fromY, fromZ))
 			if (worldObj.isAirBlock(toX, toY, toZ)) {
 				Block teleported = worldObj.getBlock(fromX, fromY, fromZ);
-				if (teleported.getBlockHardness(worldObj, fromX, fromY, fromZ) > 0.0F)
-					if (worldObj.getTileEntity(fromX, fromY, fromZ) != null) {
-						worldObj.setBlock(toX, toY, toZ, teleported, worldObj.getBlockMetadata(fromX, fromY, fromZ), 3);
+				if (teleported.getBlockHardness(worldObj, fromX, fromY, fromZ) > 0.0F) {
+					TileEntity fromTile = worldObj.getTileEntity(fromX, fromY, fromZ);
+					if (fromTile != null) {
+						int meta = worldObj.getBlockMetadata(fromX, fromY, fromZ);
+						worldObj.setBlock(toX, toY, toZ, teleported);
+						worldObj.setBlockMetadataWithNotify(toX, toY, toZ, meta, 3);
 						NBTTagCompound data = new NBTTagCompound();
-						worldObj.getTileEntity(fromX, fromY, fromZ).writeToNBT(data);
-						worldObj.setTileEntity(toX, toY, toZ, TileEntity.createAndLoadEntity(data));
-						if (worldObj.getTileEntity(fromX, fromY, fromZ) instanceof IInventory) {
-							IInventory invt = (IInventory) worldObj.getTileEntity(fromX, fromY, fromZ);
-							for (int i = 0; i < invt.getSizeInventory(); i++)
-								invt.setInventorySlotContents(i, null);
-						}
+						fromTile.writeToNBT(data);
+						TileEntity toTile = TileEntity.createAndLoadEntity(data);
+						toTile.xCoord = toX;
+						toTile.yCoord = toY;
+						toTile.zCoord = toZ;
+						worldObj.setTileEntity(toX, toY, toZ, toTile);
+						fromTile.invalidate();
 						worldObj.setBlockToAir(fromX, fromY, fromZ);
-						worldObj.notifyBlockOfNeighborChange(fromX, fromY - 1, fromZ, Blocks.air);
-						worldObj.notifyBlockOfNeighborChange(toX, toY, toZ, teleported);
 					} else {
-						worldObj.setBlock(toX, toY, toZ, teleported, worldObj.getBlockMetadata(fromX, fromY, fromZ), 3);
+						int meta = worldObj.getBlockMetadata(fromX, fromY, fromZ);
+						worldObj.setBlock(toX, toY, toZ, teleported);
+						worldObj.setBlockMetadataWithNotify(toX, toY, toZ, meta, 3);
 						worldObj.setBlockToAir(fromX, fromY, fromZ);
-						worldObj.notifyBlocksOfNeighborChange(toX, toY, toZ, teleported);
-						worldObj.notifyBlocksOfNeighborChange(fromX, fromY, fromZ, teleported);
 					}
+				}
 			}
 	}
 
