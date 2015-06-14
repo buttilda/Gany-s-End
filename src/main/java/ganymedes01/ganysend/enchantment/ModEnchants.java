@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.enchantment;
 
+import ganymedes01.ganysend.GanysEnd;
 import net.minecraft.enchantment.Enchantment;
 
 /**
@@ -14,7 +15,9 @@ public class ModEnchants {
 	public static Enchantment imperviousness;
 
 	public static void init() {
-		imperviousness = new ImperviousnessEnchantment();
-		Enchantment.addToBookList(imperviousness);
+		if (GanysEnd.enableEndiumArmour) {
+			imperviousness = new ImperviousnessEnchantment();
+			Enchantment.addToBookList(imperviousness);
+		}
 	}
 }

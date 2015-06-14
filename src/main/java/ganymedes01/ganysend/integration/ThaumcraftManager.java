@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.integration;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.enchantment.ModEnchants;
@@ -44,7 +45,8 @@ public class ThaumcraftManager extends Integration {
 	}
 
 	public void postPostInit() {
-		addInfusionEnchantmentRecipe(Enchantment.enchantmentsList[ModEnchants.imperviousness.effectId], 4, new AspectList().add(Aspect.SLIME, 6).add(Aspect.WATER, 4).add(Aspect.MAGIC, 10), ItemApi.getItem("itemResource", 14), new ItemStack(Items.dye, 1, 2), new ItemStack(Items.slime_ball));
+		if (GanysEnd.enableEndiumArmour)
+			addInfusionEnchantmentRecipe(Enchantment.enchantmentsList[ModEnchants.imperviousness.effectId], 4, new AspectList().add(Aspect.SLIME, 6).add(Aspect.WATER, 4).add(Aspect.MAGIC, 10), ItemApi.getItem("itemResource", 14), new ItemStack(Items.dye, 1, 2), new ItemStack(Items.slime_ball));
 	}
 
 	@Override
