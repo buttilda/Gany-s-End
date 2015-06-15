@@ -25,17 +25,21 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockChestRenderer implements ISimpleBlockRenderingHandler {
 
 	private final ModelChest chest = new ModelChest();
-	private final ResourceLocation TEXTURE = Utils.getResource(Utils.getEntityTexture(Strings.ANCHORED_ENDER_CHEST_NAME + "_on"));
+	private final ResourceLocation TEXTURE_ON = Utils.getResource(Utils.getEntityTexture(Strings.ANCHORED_ENDER_CHEST_NAME + "_on"));
+	private final ResourceLocation TEXTURE_OFF = Utils.getResource(Utils.getEntityTexture(Strings.ANCHORED_ENDER_CHEST_NAME + "_off"));
+
+	public static boolean USE_ON_TEXTURE = true;
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		OpenGLHelper.pushMatrix();
 		OpenGLHelper.rotate(90, 0, 1, 0);
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(TEXTURE);
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(USE_ON_TEXTURE ? TEXTURE_ON : TEXTURE_OFF);
 		OpenGLHelper.scale(1, -1, -1);
 		OpenGLHelper.translate(-0.5F, -0.5F, -0.5F);
 		chest.renderAll();
 		OpenGLHelper.popMatrix();
+		BlockChestRenderer.USE_ON_TEXTURE = true;
 	}
 
 	@Override

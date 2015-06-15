@@ -9,6 +9,7 @@ import ganymedes01.ganysend.client.renderer.block.BlockInfiniteWaterSourceRender
 import ganymedes01.ganysend.client.renderer.block.BlockInventoryBinderRender;
 import ganymedes01.ganysend.client.renderer.block.BlockRawEndiumRender;
 import ganymedes01.ganysend.client.renderer.block.BlockTimeManipulatorRender;
+import ganymedes01.ganysend.client.renderer.entity.EntityAnchoredEnderChestMinecartRenderer;
 import ganymedes01.ganysend.client.renderer.item.AnchoredEnderChestMinecartRender;
 import ganymedes01.ganysend.client.renderer.item.ItemSkullRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityAnchoredEnderChestRender;
@@ -19,6 +20,7 @@ import ganymedes01.ganysend.core.handlers.RenderCapeHandler;
 import ganymedes01.ganysend.core.handlers.RenderPlayerHandler;
 import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
 import ganymedes01.ganysend.core.utils.VersionHelper;
+import ganymedes01.ganysend.entities.EntityAnchoredEnderChestMinecart;
 import ganymedes01.ganysend.tileentities.TileEntityAnchoredEnderChest;
 import ganymedes01.ganysend.tileentities.TileEntityBlockSkull;
 import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
@@ -76,6 +78,7 @@ public class ClientProxy extends CommonProxy {
 		if (GanysEnd.enableAnchoredEnderChest) {
 			MinecraftForgeClient.registerItemRenderer(ModItems.anchoredEnderChestMinecart, new AnchoredEnderChestMinecartRender());
 			RenderingRegistry.registerBlockHandler(new BlockChestRenderer());
+			RenderingRegistry.registerEntityRenderingHandler(EntityAnchoredEnderChestMinecart.class, new EntityAnchoredEnderChestMinecartRenderer());
 		}
 
 		if (GanysEnd.enableHoppers)

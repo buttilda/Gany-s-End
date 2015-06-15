@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.StringUtils;
 import net.minecraft.world.World;
 
 /**
@@ -22,20 +23,37 @@ import net.minecraft.world.World;
 
 public class EntityAnchoredEnderChestMinecart extends EntityMinecartChest {
 
-	private String playerName;
-
 	public EntityAnchoredEnderChestMinecart(World world) {
 		super(world);
 	}
 
-	public EntityAnchoredEnderChestMinecart(World world, double x, double y, double z, String playerName) {
+	public EntityAnchoredEnderChestMinecart(World world, double x, double y, double z) {
 		super(world, x, y, z);
-		this.playerName = playerName;
+	}
+
+	public boolean isConnected() {
+		String playerName = getPlayerName();
+		return StringUtils.isNullOrEmpty(playerName) ? false : worldObj.getPlayerEntityByName(playerName) != null;
 	}
 
 	private IInventory getPlayerInventory() {
+		String playerName = getPlayerName();
 		EntityPlayer player = playerName != null ? worldObj.getPlayerEntityByName(playerName) : null;
 		return player != null ? player.getInventoryEnderChest() : null;
+	}
+
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		dataWatcher.addObject(23, "");
+	}
+
+	private String getPlayerName() {
+		return dataWatcher.getWatchableObjectString(23);
+	}
+
+	public void setPlayerName(String name) {
+		dataWatcher.updateObject(23, name);
 	}
 
 	@Override
@@ -133,12 +151,17 @@ public class EntityAnchoredEnderChestMinecart extends EntityMinecartChest {
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		nbt.setString("PlayerName", playerName);
+		nbt.setString("PlayerName", getPlayerName());
 	}
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		playerName = nbt.getString("PlayerName");
+		setPlayerName(nbt.getString("PlayerName"));
+	}
+
+	@Override
+	public boolean interactFirst(EntityPlayer player) {
+		return isConnected() && super.interactFirst(player);
 	}
 }
