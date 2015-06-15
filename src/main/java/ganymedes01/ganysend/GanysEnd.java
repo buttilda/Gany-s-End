@@ -120,6 +120,7 @@ public class GanysEnd {
 		proxy.registerEvents();
 		proxy.registerTileEntities();
 		proxy.registerRenderers();
+		proxy.registerEntities();
 
 		ModIntegrator.init();
 

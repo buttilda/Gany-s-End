@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.core.proxy;
 
+import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.client.gui.inventory.GuiAdvancedFilteringHopper;
 import ganymedes01.ganysend.client.gui.inventory.GuiBasicFilteringHopper;
 import ganymedes01.ganysend.client.gui.inventory.GuiEnderFurnace;
@@ -9,6 +10,7 @@ import ganymedes01.ganysend.core.handlers.ArmourHandler;
 import ganymedes01.ganysend.core.handlers.EntityDropEvent;
 import ganymedes01.ganysend.core.handlers.HandlerEvents;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.entities.EntityAnchoredEnderChestMinecart;
 import ganymedes01.ganysend.inventory.ContainerAdvancedFilteringHopper;
 import ganymedes01.ganysend.inventory.ContainerEnderFurnace;
 import ganymedes01.ganysend.inventory.ContainerFilteringHopper;
@@ -34,6 +36,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -54,19 +57,35 @@ public class CommonProxy implements IGuiHandler {
 	}
 
 	public void registerTileEntities() {
-		GameRegistry.registerTileEntity(TileEntityBlockShifter.class, Utils.getUnlocalisedName(Strings.BLOCK_SHIFTER_NAME));
-		GameRegistry.registerTileEntity(TileEntityBlockSkull.class, Utils.getUnlocalisedName(Strings.BLOCK_NEW_SKULL_NAME));
-		GameRegistry.registerTileEntity(TileEntityFilteringHopper.class, Utils.getUnlocalisedName(Strings.BASIC_FILTERING_HOPPER_NAME));
-		GameRegistry.registerTileEntity(TileEntityAdvancedFilteringHopper.class, Utils.getUnlocalisedName(Strings.ADVANCED_FILTERING_HOPPER_NAME));
-		GameRegistry.registerTileEntity(TileEntitySpeedyHopper.class, Utils.getUnlocalisedName(Strings.SPEEDY_HOPPER_NAME));
-		GameRegistry.registerTileEntity(TileEntityTimeManipulator.class, Utils.getUnlocalisedName(Strings.TIME_MANIPULATOR_NAME));
-		GameRegistry.registerTileEntity(TileEntityEntityShifter.class, Utils.getUnlocalisedName(Strings.ENTITY_SHIFTER_NAME));
-		GameRegistry.registerTileEntity(TileEntityInventoryBinder.class, Utils.getUnlocalisedName(Strings.INVENTORY_BINDER_NAME));
-		GameRegistry.registerTileEntity(TileEntityInfiniteWaterSource.class, Utils.getUnlocalisedName(Strings.INFINITE_WATER_SOURCE_NAME));
-		GameRegistry.registerTileEntity(TileEntityVoidCrate.class, Utils.getUnlocalisedName(Strings.VOID_CRATE_NAME));
-		GameRegistry.registerTileEntity(TileEntityEnderFurnace.class, Utils.getUnlocalisedName(Strings.ENDER_FURNACE_NAME));
-		GameRegistry.registerTileEntity(TileEntityCreativeSpeedyHopper.class, Utils.getUnlocalisedName(Strings.CREATIVE_SPEEDY_HOPPER_NAME));
-		GameRegistry.registerTileEntity(TileEntityAnchoredEnderChest.class, Utils.getUnlocalisedName(Strings.ANCHORED_ENDER_CHEST_NAME));
+		if (GanysEnd.enableShifters) {
+			GameRegistry.registerTileEntity(TileEntityBlockShifter.class, Utils.getUnlocalisedName(Strings.BLOCK_SHIFTER_NAME));
+			GameRegistry.registerTileEntity(TileEntityEntityShifter.class, Utils.getUnlocalisedName(Strings.ENTITY_SHIFTER_NAME));
+		}
+		if (GanysEnd.enableSkulls)
+			GameRegistry.registerTileEntity(TileEntityBlockSkull.class, Utils.getUnlocalisedName(Strings.BLOCK_NEW_SKULL_NAME));
+		if (GanysEnd.enableHoppers) {
+			GameRegistry.registerTileEntity(TileEntityFilteringHopper.class, Utils.getUnlocalisedName(Strings.BASIC_FILTERING_HOPPER_NAME));
+			GameRegistry.registerTileEntity(TileEntityAdvancedFilteringHopper.class, Utils.getUnlocalisedName(Strings.ADVANCED_FILTERING_HOPPER_NAME));
+			GameRegistry.registerTileEntity(TileEntitySpeedyHopper.class, Utils.getUnlocalisedName(Strings.SPEEDY_HOPPER_NAME));
+			GameRegistry.registerTileEntity(TileEntityCreativeSpeedyHopper.class, Utils.getUnlocalisedName(Strings.CREATIVE_SPEEDY_HOPPER_NAME));
+		}
+		if (GanysEnd.enableTimeManipulator)
+			GameRegistry.registerTileEntity(TileEntityTimeManipulator.class, Utils.getUnlocalisedName(Strings.TIME_MANIPULATOR_NAME));
+		if (GanysEnd.enableInventoryBinder)
+			GameRegistry.registerTileEntity(TileEntityInventoryBinder.class, Utils.getUnlocalisedName(Strings.INVENTORY_BINDER_NAME));
+		if (GanysEnd.enableInfiniteWaterSource)
+			GameRegistry.registerTileEntity(TileEntityInfiniteWaterSource.class, Utils.getUnlocalisedName(Strings.INFINITE_WATER_SOURCE_NAME));
+		if (GanysEnd.enableVoidCrate)
+			GameRegistry.registerTileEntity(TileEntityVoidCrate.class, Utils.getUnlocalisedName(Strings.VOID_CRATE_NAME));
+		if (GanysEnd.enableEnderFurnace)
+			GameRegistry.registerTileEntity(TileEntityEnderFurnace.class, Utils.getUnlocalisedName(Strings.ENDER_FURNACE_NAME));
+		if (GanysEnd.enableAnchoredEnderChest)
+			GameRegistry.registerTileEntity(TileEntityAnchoredEnderChest.class, Utils.getUnlocalisedName(Strings.ANCHORED_ENDER_CHEST_NAME));
+	}
+
+	public void registerEntities() {
+		if (GanysEnd.enableAnchoredEnderChest)
+			EntityRegistry.registerModEntity(EntityAnchoredEnderChestMinecart.class, Strings.ANCHORED_ENDER_CHEST_MINECART_NAME, 0, GanysEnd.instance, 80, 3, true);
 	}
 
 	public void registerRenderers() {

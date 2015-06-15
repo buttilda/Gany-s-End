@@ -9,6 +9,7 @@ import ganymedes01.ganysend.client.renderer.block.BlockInfiniteWaterSourceRender
 import ganymedes01.ganysend.client.renderer.block.BlockInventoryBinderRender;
 import ganymedes01.ganysend.client.renderer.block.BlockRawEndiumRender;
 import ganymedes01.ganysend.client.renderer.block.BlockTimeManipulatorRender;
+import ganymedes01.ganysend.client.renderer.item.AnchoredEnderChestMinecartRender;
 import ganymedes01.ganysend.client.renderer.item.ItemSkullRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityAnchoredEnderChestRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockSkullRender;
@@ -56,24 +57,38 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerTileEntities() {
 		super.registerTileEntities();
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockSkull.class, new TileEntityBlockSkullRender());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInventoryBinder.class, new TileEntityInventoryBinderRender());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfiniteWaterSource.class, new TileEntityInfiniteWaterSourceRender());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAnchoredEnderChest.class, new TileEntityAnchoredEnderChestRender());
+		if (GanysEnd.enableSkulls)
+			ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockSkull.class, new TileEntityBlockSkullRender());
+		if (GanysEnd.enableInventoryBinder)
+			ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInventoryBinder.class, new TileEntityInventoryBinderRender());
+		if (GanysEnd.enableInfiniteWaterSource)
+			ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInfiniteWaterSource.class, new TileEntityInfiniteWaterSourceRender());
+		if (GanysEnd.enableAnchoredEnderChest)
+			ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAnchoredEnderChest.class, new TileEntityAnchoredEnderChestRender());
 	}
 
 	@Override
 	public void registerRenderers() {
-		MinecraftForgeClient.registerItemRenderer(ModItems.skull, new ItemSkullRender());
-		MinecraftForgeClient.registerItemRenderer(Items.skull, new ItemSkullRender());
+		if (GanysEnd.enableSkulls) {
+			MinecraftForgeClient.registerItemRenderer(ModItems.skull, new ItemSkullRender());
+			MinecraftForgeClient.registerItemRenderer(Items.skull, new ItemSkullRender());
+		}
+		if (GanysEnd.enableAnchoredEnderChest) {
+			MinecraftForgeClient.registerItemRenderer(ModItems.anchoredEnderChestMinecart, new AnchoredEnderChestMinecartRender());
+			RenderingRegistry.registerBlockHandler(new BlockChestRenderer());
+		}
 
-		RenderingRegistry.registerBlockHandler(new BlockFilteringHopperRender());
-		RenderingRegistry.registerBlockHandler(new BlockInventoryBinderRender());
+		if (GanysEnd.enableHoppers)
+			RenderingRegistry.registerBlockHandler(new BlockFilteringHopperRender());
+		if (GanysEnd.enableInventoryBinder)
+			RenderingRegistry.registerBlockHandler(new BlockInventoryBinderRender());
 		if (GanysEnd.enableTimeManipulator)
 			RenderingRegistry.registerBlockHandler(new BlockTimeManipulatorRender());
-		RenderingRegistry.registerBlockHandler(new BlockRawEndiumRender());
-		RenderingRegistry.registerBlockHandler(new BlockInfiniteWaterSourceRender());
-		RenderingRegistry.registerBlockHandler(new BlockChestRenderer());
-		RenderingRegistry.registerBlockHandler(new BlockEnderFlowerRenderer());
+		if (GanysEnd.enableEndium)
+			RenderingRegistry.registerBlockHandler(new BlockRawEndiumRender());
+		if (GanysEnd.enableInfiniteWaterSource)
+			RenderingRegistry.registerBlockHandler(new BlockInfiniteWaterSourceRender());
+		if (GanysEnd.enableEnderFlower)
+			RenderingRegistry.registerBlockHandler(new BlockEnderFlowerRenderer());
 	}
 }

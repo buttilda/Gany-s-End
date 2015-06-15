@@ -122,8 +122,10 @@ public class ModRecipes {
 		if (GanysEnd.enableEnderBag)
 			addShapedRecipe(ModItems.enderBag, "zwz", "wyw", "xxx", 'x', Items.ender_pearl, 'y', "chestEnder", 'z', Items.string, 'w', Items.leather);
 
-		if (GanysEnd.enableAnchoredEnderChest)
+		if (GanysEnd.enableAnchoredEnderChest) {
 			addShapedRecipe(ModBlocks.anchoredEnderChest, "xxx", "xyx", "xzx", 'x', "ingotGold", 'y', "chestEnder", 'z', new ItemStack(Blocks.anvil));
+			addShapedRecipe(new ItemStack(ModItems.anchoredEnderChestMinecart), "x", "y", 'x', ModBlocks.anchoredEnderChest, 'y', Items.minecart);
+		}
 
 		if (GanysEnd.enableEnderFlower)
 			addShapedRecipe(Items.ender_pearl, "xxx", "xxx", "x x", 'x', "flowerEnder");

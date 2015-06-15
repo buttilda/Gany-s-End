@@ -24,6 +24,7 @@ item.ganysend.reinforcedEndiumSword.name=Reinforced Endium Sword
 item.ganysend.reinforcedEndiumBow.name= Reinforced Endium Bow
 item.ganysend.enderBag.name=Ender Bag
 item.ganysend.reinforcedEnderScythe.name= Reinforced Ender Scythe
+item.ganysend.anchoredEnderChestMinecart.name=Anchored Ender Chest Minecart
 
 # Heads
 item.ganysend.itemNewSkullpigmanHead.name=Pigman Head
@@ -134,6 +135,9 @@ container.ganysend.enderFurnace=Ender Furnace
 
 # Enchantments
 enchantment.imperviousness=Imperviousness
+
+# Entities
+entity.ganysend.anchoredEnderChestMinecart.name=Anchored Ender Chest Minecart
 
 # Fluids
 fluid.endium=Molten Endium

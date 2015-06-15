@@ -18,6 +18,7 @@ import ganymedes01.ganysend.items.EndiumSword;
 import ganymedes01.ganysend.items.EndstoneRod;
 import ganymedes01.ganysend.items.InfiniteBucket;
 import ganymedes01.ganysend.items.InfusedGem;
+import ganymedes01.ganysend.items.ItemAnchoredEnderChestMinecart;
 import ganymedes01.ganysend.items.ReinforcedEnderScythe;
 import ganymedes01.ganysend.items.ReinforcedEndiumAxe;
 import ganymedes01.ganysend.items.ReinforcedEndiumBow;
@@ -64,6 +65,7 @@ public class ModItems {
 	public static final Item reinforcedEndiumBow = new ReinforcedEndiumBow();
 	public static final Item enderBag = new EnderBag();
 	public static final Item reinforcedEnderScythe = new ReinforcedEnderScythe();
+	public static final Item anchoredEnderChestMinecart = new ItemAnchoredEnderChestMinecart();
 
 	// Armour
 	public static final Item endiumHelmet = new EndiumHelmet();
