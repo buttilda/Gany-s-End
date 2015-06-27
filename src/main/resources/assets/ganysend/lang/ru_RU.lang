@@ -23,7 +23,8 @@ item.ganysend.reinforcedEndiumShovel.name=Укреплённая лопата и
 item.ganysend.reinforcedEndiumSword.name=Укреплённый меч из эндия
 item.ganysend.reinforcedEndiumBow.name=Укреплённый лук из эндия
 item.ganysend.enderBag.name=Мешочек Края
-item.ganysend.endiumBucket.name=Ведро эндия
+item.ganysend.reinforcedEnderScythe.name=Укреплённая коса Края
+item.ganysend.anchoredEnderChestMinecart.name=Вагонетка с якорным сундуком Края
 
 # Heads
 item.ganysend.itemNewSkullpigmanHead.name=Голова зомби-свиночеловека
@@ -90,7 +91,7 @@ item.ganysend.itemNewSkullsnowManHead.name=Голова снежного гол�
 item.ganysend.itemNewSkullsilverfishHead.name=Голова чешуйницы
 
 # Block localizations
-tile.ganysend.enderFlower.name=Цветок края
+tile.ganysend.enderFlower.name=Цветок Края
 tile.ganysend.endstoneBrick.name=Кирпич из камня Края
 tile.ganysend.enderpearlBlock.name=Блок жемчуга Края
 tile.ganysend.enderpearlBrick.name=Кирпич из жемчуга Края
@@ -113,8 +114,8 @@ tile.ganysend.timeManipulator.name=Манипулятор времени
 tile.ganysend.entityShifter.name=Сдвигатель существ
 tile.ganysend.inventoryBinder.name=Связыватель инвентаря
 tile.ganysend.infiniteWaterSource.name=Бесконечный источник воды
-tile.ganysend.endWalls0.name=Стена из кирпича из камня Края
-tile.ganysend.endWalls1.name=Стена из кирпича из жемчуга Края
+tile.ganysend.endWalls0.name=Стена из каменного кирпича Края
+tile.ganysend.endWalls1.name=Стена из жемчужного кирпича Края
 tile.ganysend.voidCrate.name=Пустотный ящик
 tile.ganysend.enderFurnace.name=Печь Края
 tile.ganysend.creativeInfiniteFluidSource.name=Творческий бесконечный источник жидкости
@@ -134,6 +135,9 @@ container.ganysend.enderFurnace=Печь Края
 
 # Enchantments
 enchantment.imperviousness=Стойкость
+
+# Entities
+entity.ganysend.anchoredEnderChestMinecart.name=Вагонетка с якорным сундуком Края
 
 # Fluids
 fluid.endium=Расплавленный эндий
@@ -185,7 +189,6 @@ tool.javelin.endium=Копьё из эндия
 toolpart.ToolRod.endium=Стержень из эндия
 toolpart.PickaxeHead.endium=Обух кирки из эндия
 toolpart.SignHead.endium=Боевая табличка из эндия
-toolpart.Chunk.endium=Кусок из эндия
 toolpart.ShovelHead.endium=Штык лопаты из эндия
 toolpart.AxeHead.endium=Обух топора из эндия
 toolpart.Binding.endium=Крепление из эндия
