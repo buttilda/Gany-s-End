@@ -56,8 +56,7 @@ public class EntityDropEvent {
 		if (GanysEnd.enableScythe && weapon != null && weapon.getItem() instanceof IEndiumScythe) {
 			ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
 			if (stack != null)
-				if (canDropThisHead(stack))
-					addDrop(stack, event.entityLiving, event.drops);
+				addDrop(stack, event.entityLiving, event.drops);
 		}
 
 		// Collect drops
