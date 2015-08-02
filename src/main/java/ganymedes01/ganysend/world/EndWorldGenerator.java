@@ -34,10 +34,10 @@ public class EndWorldGenerator implements IWorldGenerator {
 							int blockX = chunkX * 16 + x;
 							int blockY = y + 1;
 							int blockZ = chunkZ * 16 + z;
-							if (world.getBlock(blockX, blockY - 1, blockZ) == Blocks.end_stone)
-								if (world.isAirBlock(blockX, blockY, blockZ))
-									if (!isSurrounded(world, blockX, blockY, blockZ))
-										if (rand.nextInt(60) == 30)
+							if (rand.nextInt(60) == 30)
+								if (world.getBlock(blockX, blockY - 1, blockZ) == Blocks.end_stone)
+									if (world.isAirBlock(blockX, blockY, blockZ))
+										if (!isSurrounded(world, blockX, blockY, blockZ))
 											world.setBlock(blockX, blockY, blockZ, ModBlocks.enderFlower);
 						}
 
