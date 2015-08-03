@@ -90,7 +90,8 @@ public class BlockInventoryBinderRender implements ISimpleBlockRenderingHandler 
 
 		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
 		GameProfile profile = player != null ? player.getGameProfile() : null;
-		TileEntityBlockSkullRender.instance.renderHead(0.25F, 0, 0, 6, 1, 3, profile);
+		if (TileEntityBlockSkullRender.instance != null)
+			TileEntityBlockSkullRender.instance.renderHead(0.25F, 0, 0, 6, 1, 3, profile);
 	}
 
 	@Override
