@@ -7,6 +7,7 @@ import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.IEndiumTool;
 import ganymedes01.ganysend.lib.ModMaterials;
 import ganymedes01.ganysend.lib.Strings;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -206,8 +207,13 @@ public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable {
 	}
 
 	@Override
-	public IIcon getIcon(ItemStack stack, int pass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
-		if (player.getItemInUse() != null) {
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(ItemStack stack, int pass) {
+		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+		int useRemaining = player.getItemInUseCount();
+		ItemStack usingItem = player.getItemInUse();
+
+		if (usingItem != null && usingItem == stack) {
 			int charge = stack.getMaxItemUseDuration() - useRemaining;
 
 			if (charge >= 18)
@@ -216,15 +222,10 @@ public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable {
 				return pass != 0 ? overlays[1] : getItemIconForUseDuration(1);
 			if (charge > 0)
 				return pass != 0 ? overlays[0] : getItemIconForUseDuration(0);
-		}
+		} else
+			return pass == 0 ? itemIcon : standby;
 
-		return pass != 0 ? standby : super.getIcon(stack, pass, player, usingItem, useRemaining);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamageForRenderPass(int meta, int pass) {
-		return pass == 0 ? itemIcon : standby;
+		return pass != 0 ? standby : super.getIcon(stack, pass, player, stack, useRemaining);
 	}
 
 	@Override
