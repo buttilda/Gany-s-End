@@ -5,14 +5,13 @@ import ganymedes01.ganysend.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.event.FMLInterModComms;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EE3Manager extends Integration {
@@ -23,8 +22,6 @@ public class EE3Manager extends Integration {
 		addEMCValueToBlock(ModBlocks.rawEndium, 2052);
 		addEMCValueToItem(ModItems.endiumIngot, 2052);
 		addEMCValueToItem(ModItems.infiniteBucket, 8196);
-		addEMCValue(new ItemStack(ModItems.skull, 1, OreDictionary.WILDCARD_VALUE), 2048);
-		addEMCValue(new ItemStack(ModItems.skull, 1, 17), 49152);
 	}
 
 	private void addEMCValueToBlock(Block block, float value) {

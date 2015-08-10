@@ -11,21 +11,16 @@ import ganymedes01.ganysend.client.renderer.block.BlockRawEndiumRender;
 import ganymedes01.ganysend.client.renderer.block.BlockTimeManipulatorRender;
 import ganymedes01.ganysend.client.renderer.entity.EntityAnchoredEnderChestMinecartRenderer;
 import ganymedes01.ganysend.client.renderer.item.AnchoredEnderChestMinecartRender;
-import ganymedes01.ganysend.client.renderer.item.ItemSkullRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityAnchoredEnderChestRender;
-import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockSkullRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInfiniteWaterSourceRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInventoryBinderRender;
 import ganymedes01.ganysend.core.handlers.RenderCapeHandler;
-import ganymedes01.ganysend.core.handlers.RenderPlayerHandler;
 import ganymedes01.ganysend.core.handlers.VersionCheckTickHandler;
 import ganymedes01.ganysend.core.utils.VersionHelper;
 import ganymedes01.ganysend.entities.EntityAnchoredEnderChestMinecart;
 import ganymedes01.ganysend.tileentities.TileEntityAnchoredEnderChest;
-import ganymedes01.ganysend.tileentities.TileEntityBlockSkull;
 import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
 import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
-import net.minecraft.init.Items;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -50,8 +45,6 @@ public class ClientProxy extends CommonProxy {
 			FMLCommonHandler.instance().bus().register(new VersionCheckTickHandler());
 		}
 
-		MinecraftForge.EVENT_BUS.register(new RenderPlayerHandler());
-
 		if (!Loader.isModLoaded("ganysnether"))
 			MinecraftForge.EVENT_BUS.register(new RenderCapeHandler());
 	}
@@ -59,8 +52,6 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerTileEntities() {
 		super.registerTileEntities();
-		if (GanysEnd.enableSkulls)
-			ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlockSkull.class, new TileEntityBlockSkullRender());
 		if (GanysEnd.enableInventoryBinder)
 			ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInventoryBinder.class, new TileEntityInventoryBinderRender());
 		if (GanysEnd.enableInfiniteWaterSource)
@@ -71,10 +62,6 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenderers() {
-		if (GanysEnd.enableSkulls) {
-			MinecraftForgeClient.registerItemRenderer(ModItems.skull, new ItemSkullRender());
-			MinecraftForgeClient.registerItemRenderer(Items.skull, new ItemSkullRender());
-		}
 		if (GanysEnd.enableAnchoredEnderChest) {
 			MinecraftForgeClient.registerItemRenderer(ModItems.anchoredEnderChestMinecart, new AnchoredEnderChestMinecartRender());
 			RenderingRegistry.registerBlockHandler(new BlockChestRenderer());

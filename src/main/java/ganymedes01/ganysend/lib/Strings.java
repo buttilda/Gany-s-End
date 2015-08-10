@@ -22,7 +22,6 @@ public class Strings {
 	public static final String RAW_ENDIUM_NAME = "rawEndium";
 	public static final String ENDIUM_BLOCK_NAME = "endiumBlock";
 	public static final String EMULATOR_NAME = "emulator";
-	public static final String BLOCK_NEW_SKULL_NAME = "blockNewSkull";
 	public static final String BASIC_FILTERING_HOPPER_NAME = "basicFilteringHopper";
 	public static final String SPEEDY_BASIC_FILTERING_HOPPER_NAME = "speedyBasicFilteringHopper";
 	public static final String EXCLUSIVE_FILTERING_HOPPER_NAME = "exclusiveFilteringHopper";
@@ -52,7 +51,6 @@ public class Strings {
 	public static final String ENDIUM_LEGGINGS_NAME = "endiumLeggings";
 	public static final String ENDIUM_BOOTS_NAME = "endiumBoots";
 	public static final String INFINITE_BUCKET_NAME = "infiniteBucket";
-	public static final String ITEM_NEW_SKULL_NAME = "itemNewSkull";
 	public static final String INFUSED_GEM_NAME = "infusedGem";
 	public static final String ENDIUM_PICKAXE_NAME = "endiumPickaxe";
 	public static final String ENDIUM_AXE_NAME = "endiumAxe";
@@ -65,21 +63,13 @@ public class Strings {
 	public static final String REINFORCED_ENDIUM_SWORD_NAME = "reinforcedEndiumSword";
 	public static final String REINFORCED_ENDIUM_BOW_NAME = "reinforcedEndiumBow";
 	public static final String ENDER_BAG_NAME = "enderBag";
-	public static final String ENDIUM_BUCKET_NAME = "endiumBucket";
 	public static final String REINFORCED_ENDER_SCYTHE_NAME = "reinforcedEnderScythe";
 	public static final String ANCHORED_ENDER_CHEST_MINECART_NAME = "anchoredEnderChestMinecart";
 
 	// Enchantments
 	public static final String IMPERVIOUSNESS_NAME = "enchantment.imperviousness";
 
-	// Others
-	public static final String MC_PREFIX = "textures/entity/";
-	public static final String TF_PREFIX = "twilightforest:textures/model/";
-	public static final String TE_PREFIX = "thermalfoundation:textures/entity/";
-	public static final String NA_PREFIX = "natura:textures/mob/";
-
 	// Version check
-	public static final String VERSION_CHECK_INIT = "Starting version check.";
 	public static final String VERSION_CHECK_FAIL = "Version check failed.";
 	public static final String CURRENT_MESSAGE = "The version " + Reference.VERSION_NUMBER + " is the current version.";
 	public static final String OUTDATED_MESSAGE = "The version " + Reference.VERSION_NUMBER + " is outdated. Current version: " + Reference.LATEST_VERSION;

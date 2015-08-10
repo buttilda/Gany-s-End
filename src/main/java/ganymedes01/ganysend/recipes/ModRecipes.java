@@ -3,7 +3,6 @@ package ganymedes01.ganysend.recipes;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.ModItems;
-import ganymedes01.ganysend.lib.SkullTypes;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -39,8 +38,10 @@ public class ModRecipes {
 			OreDictionary.registerOre("blockEndium", ModBlocks.endiumBlock);
 		}
 
-		if (GanysEnd.enableDecorativeBlocks)
+		if (GanysEnd.enableDecorativeBlocks) {
 			OreDictionary.registerOre("blockEnderPearl", new ItemStack(ModBlocks.enderpearlBlock, 1, OreDictionary.WILDCARD_VALUE));
+			OreDictionary.registerOre("brickEndStone", new ItemStack(ModBlocks.endstoneBrick, 1, OreDictionary.WILDCARD_VALUE));
+		}
 
 		if (GanysEnd.enableEnderFlower)
 			OreDictionary.registerOre("flowerEnder", ModBlocks.enderFlower);
@@ -57,10 +58,7 @@ public class ModRecipes {
 			OreDictionary.registerOre("chestEnder", Blocks.ender_chest);
 
 		if (GanysEnd.enableSkulls) {
-			OreDictionary.registerOre("itemSkull", new ItemStack(ModItems.skull, 1, OreDictionary.WILDCARD_VALUE));
 			OreDictionary.registerOre("itemSkull", new ItemStack(Items.skull, 1, OreDictionary.WILDCARD_VALUE));
-			for (SkullTypes type : SkullTypes.values())
-				OreDictionary.registerOre("skull" + type.name().substring(0, 1).toUpperCase() + type.name().substring(1), new ItemStack(ModItems.skull, 1, type.ordinal()));
 			OreDictionary.registerOre("skullSkeleton", new ItemStack(Items.skull, 1, 0));
 			OreDictionary.registerOre("skullWitherSkeleton", new ItemStack(Items.skull, 1, 1));
 			OreDictionary.registerOre("skullZombie", new ItemStack(Items.skull, 1, 2));
@@ -145,9 +143,9 @@ public class ModRecipes {
 			addShapedRecipe(new ItemStack(ModBlocks.endstoneBrick, 4), "xx", "xx", 'x', Blocks.end_stone);
 			addShapedRecipe(new ItemStack(ModBlocks.enderpearlBlock, 1, 0), "xxx", "xxx", "xxx", 'x', Items.ender_pearl);
 			addShapedRecipe(new ItemStack(ModBlocks.enderpearlBlock, 4, 1), "xx", "xx", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 0));
-			addShapedRecipe(new ItemStack(ModBlocks.endstoneStairs, 4), "x  ", "xx ", "xxx", 'x', ModBlocks.endstoneBrick);
+			addShapedRecipe(new ItemStack(ModBlocks.endstoneStairs, 4), "x  ", "xx ", "xxx", 'x', "brickEndStone");
 			addShapedRecipe(new ItemStack(ModBlocks.enderpearlStairs, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 1));
-			addShapedRecipe(new ItemStack(ModBlocks.endWalls, 6, 0), "xxx", "xxx", 'x', ModBlocks.endstoneBrick);
+			addShapedRecipe(new ItemStack(ModBlocks.endWalls, 6, 0), "xxx", "xxx", 'x', "brickEndStone");
 			addShapedRecipe(new ItemStack(ModBlocks.endWalls, 6, 1), "xxx", "xxx", 'x', new ItemStack(ModBlocks.enderpearlBlock, 1, 1));
 		}
 

@@ -25,7 +25,6 @@ import ganymedes01.ganysend.items.ReinforcedEndiumBow;
 import ganymedes01.ganysend.items.ReinforcedEndiumPickaxe;
 import ganymedes01.ganysend.items.ReinforcedEndiumShovel;
 import ganymedes01.ganysend.items.ReinforcedEndiumSword;
-import ganymedes01.ganysend.items.Skull;
 
 import java.lang.reflect.Field;
 
@@ -51,7 +50,6 @@ public class ModItems {
 	public static final Item endstoneRod = new EndstoneRod();
 	public static final Item enderScythe = new EnderScythe();
 	public static final Item infiniteBucket = new InfiniteBucket();
-	public static final Item skull = new Skull();
 	public static final Item infusedGem = new InfusedGem();
 	public static final Item endiumPickaxe = new EndiumPickaxe();
 	public static final Item endiumAxe = new EndiumAxe();
