@@ -37,7 +37,7 @@ public class InventoryBinder extends BlockContainer implements IConfigurable {
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
 		if (player != null && player instanceof EntityPlayer) {
 			TileEntityInventoryBinder tile = Utils.getTileEntity(world, x, y, z, TileEntityInventoryBinder.class);
-			tile.setPlayerName(((EntityPlayer) player).getCommandSenderName());
+			tile.setPlayerProfile(((EntityPlayer) player).getGameProfile());
 		}
 	}
 

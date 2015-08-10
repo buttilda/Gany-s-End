@@ -46,7 +46,7 @@ public class BlockFilteringHopperRender implements ISimpleBlockRenderingHandler 
 		return RenderIDs.FILTERING_HOPPER;
 	}
 
-	public boolean renderHopperWorld(RenderBlocks renderer, BasicFilteringHopper hopper, int x, int y, int z, int meta) {
+	private boolean renderHopperWorld(RenderBlocks renderer, BasicFilteringHopper hopper, int x, int y, int z, int meta) {
 		Tessellator tess = Tessellator.instance;
 		double d0 = 0.625D;
 		renderer.setRenderBounds(0.0D, d0, 0.0D, 1.0D, 1.0D, 1.0D);
@@ -115,7 +115,7 @@ public class BlockFilteringHopperRender implements ISimpleBlockRenderingHandler 
 		return true;
 	}
 
-	public boolean renderHopperInventory(RenderBlocks renderer, BasicFilteringHopper hopper) {
+	private boolean renderHopperInventory(RenderBlocks renderer, BasicFilteringHopper hopper) {
 		Tessellator tess = Tessellator.instance;
 
 		IIcon outside = hopper.getIconFromString("hopper_outside");

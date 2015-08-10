@@ -1,23 +1,21 @@
 package ganymedes01.ganysend.tileentities;
 
-import ganymedes01.ganysend.network.IPacketHandlingTile;
-import ganymedes01.ganysend.network.PacketHandler;
-import ganymedes01.ganysend.network.packet.PacketTileEntity;
-import ganymedes01.ganysend.network.packet.PacketTileEntity.TileData;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StringUtils;
+import net.minecraftforge.common.util.Constants;
 
+import com.google.common.collect.Iterables;
 import com.mojang.authlib.GameProfile;
-
-import cpw.mods.fml.common.network.ByteBufUtils;
+import com.mojang.authlib.properties.Property;
 
 /**
  * Gany's End
@@ -26,25 +24,14 @@ import cpw.mods.fml.common.network.ByteBufUtils;
  *
  */
 
-public class TileEntityInventoryBinder extends TileEntity implements IInventory, IPacketHandlingTile {
+public class TileEntityInventoryBinder extends TileEntity implements IInventory {
 
-	protected String playerName;
 	protected GameProfile profile;
-
-	public TileEntityInventoryBinder() {
-		this(null);
-	}
-
-	public TileEntityInventoryBinder(String name) {
-		playerName = name;
-	}
 
 	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
-		if (!StringUtils.isNullOrEmpty(playerName))
-			nbt.setString("playerName", playerName);
-
+		NBTUtil.func_152460_a(nbt, profile);
 		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
 	}
 
@@ -52,152 +39,132 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory,
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
 		NBTTagCompound nbt = packet.func_148857_g();
 		if (packet.func_148853_f() == 0)
-			playerName = nbt.getString("playerName");
-	}
-
-	@Override
-	public void readPacketData(ByteBuf buffer) {
-		playerName = ByteBufUtils.readUTF8String(buffer);
+			profile = NBTUtil.func_152459_a(nbt);
 	}
 
 	public GameProfile getProfile() {
-		if (StringUtils.isNullOrEmpty(playerName))
-			return null;
-		if (profile == null)
-			profile = new GameProfile(null, playerName);
 		return profile;
 	}
 
-	public String getPlayerName() {
-		return playerName;
+	public void setPlayerProfile(GameProfile profile) {
+		this.profile = profile;
+		markDirty();
 	}
 
-	public void setPlayerName(String name) {
-		playerName = name;
-		if (!worldObj.isRemote)
-			PacketHandler.sendToAll(new PacketTileEntity(xCoord, yCoord, zCoord, new TileData() {
-
-				@Override
-				public void writeData(ByteBuf buffer) {
-					ByteBufUtils.writeUTF8String(buffer, playerName);
-				}
-			}));
-	}
-
-	protected IInventory getPlayerInventory() {
-		EntityPlayer player = worldObj.getPlayerEntityByName(playerName);
+	public IInventory getPlayerInventory() {
+		if (profile == null || StringUtils.isNullOrEmpty(profile.getName()))
+			return null;
+		EntityPlayer player = worldObj.getPlayerEntityByName(profile.getName());
 		return player != null ? player.inventory : null;
-	}
-
-	public boolean isConnected() {
-		return StringUtils.isNullOrEmpty(playerName) ? false : worldObj.getPlayerEntityByName(playerName) != null;
 	}
 
 	@Override
 	public int getSizeInventory() {
-		if (isConnected())
-			return getPlayerInventory().getSizeInventory() - 4;
-		else
-			return 0;
+		IInventory inventory = getPlayerInventory();
+		return inventory != null ? getPlayerInventory().getSizeInventory() - 4 : 0;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		if (isConnected())
-			return getPlayerInventory().getStackInSlot(slot);
-		else
-			return null;
+		IInventory inventory = getPlayerInventory();
+		return inventory != null ? inventory.getStackInSlot(slot) : null;
 	}
 
 	@Override
 	public ItemStack decrStackSize(int slot, int size) {
-		if (isConnected())
-			return getPlayerInventory().decrStackSize(slot, size);
-		else
-			return null;
+		IInventory inventory = getPlayerInventory();
+		return inventory != null ? inventory.decrStackSize(slot, size) : null;
 	}
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
-		if (isConnected())
-			return getPlayerInventory().getStackInSlotOnClosing(slot);
-		else
-			return null;
+		IInventory inventory = getPlayerInventory();
+		return inventory != null ? inventory.getStackInSlotOnClosing(slot) : null;
 	}
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-		if (isConnected())
-			getPlayerInventory().setInventorySlotContents(slot, stack);
+		IInventory inventory = getPlayerInventory();
+		if (inventory != null)
+			inventory.setInventorySlotContents(slot, stack);
 	}
 
 	@Override
 	public String getInventoryName() {
-		if (isConnected())
-			return getPlayerInventory().getInventoryName();
-		else
-			return null;
+		IInventory inventory = getPlayerInventory();
+		return inventory != null ? inventory.getInventoryName() : null;
 	}
 
 	@Override
 	public boolean hasCustomInventoryName() {
-		if (isConnected())
-			return getPlayerInventory().hasCustomInventoryName();
-		else
-			return false;
+		IInventory inventory = getPlayerInventory();
+		return inventory != null && inventory.hasCustomInventoryName();
 	}
 
 	@Override
 	public int getInventoryStackLimit() {
-		if (isConnected())
-			return getPlayerInventory().getInventoryStackLimit();
-		else
-			return 0;
+		IInventory inventory = getPlayerInventory();
+		return inventory != null ? inventory.getInventoryStackLimit() : 0;
 	}
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		if (isConnected())
-			return getPlayerInventory().isUseableByPlayer(player);
-		else
-			return false;
+		IInventory inventory = getPlayerInventory();
+		return inventory != null && inventory.isUseableByPlayer(player);
 	}
 
 	@Override
 	public void openInventory() {
-		if (isConnected())
-			getPlayerInventory().openInventory();
+		IInventory inventory = getPlayerInventory();
+		if (inventory != null)
+			inventory.openInventory();
 	}
 
 	@Override
 	public void closeInventory() {
-		if (isConnected())
-			getPlayerInventory().closeInventory();
+		IInventory inventory = getPlayerInventory();
+		if (inventory != null)
+			inventory.closeInventory();
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		if (isConnected())
-			return getPlayerInventory().isItemValidForSlot(slot, stack);
+		IInventory inventory = getPlayerInventory();
+		return inventory != null && inventory.isItemValidForSlot(slot, stack);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		if (nbt.hasKey("playerName", Constants.NBT.TAG_STRING))
+			profile = new GameProfile(null, nbt.getString("playerName"));
 		else
-			return false;
+			profile = NBTUtil.func_152459_a(nbt);
+		updateProfile();
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound data) {
-		super.readFromNBT(data);
-		playerName = data.getString("playerName");
-	}
-
-	@Override
-	public void writeToNBT(NBTTagCompound data) {
-		super.writeToNBT(data);
-		if (!StringUtils.isNullOrEmpty(playerName))
-			data.setString("playerName", playerName);
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		if (profile != null)
+			NBTUtil.func_152460_a(nbt, profile);
 	}
 
 	@Override
 	public boolean canUpdate() {
 		return false;
+	}
+
+	protected void updateProfile() {
+		if (profile != null && !StringUtils.isNullOrEmpty(profile.getName()))
+			if (!profile.isComplete() || !profile.getProperties().containsKey("textures")) {
+				GameProfile gameprofile = MinecraftServer.getServer().func_152358_ax().func_152655_a(profile.getName());
+				if (gameprofile != null) {
+					Property property = (Property) Iterables.getFirst(gameprofile.getProperties().get("textures"), (Object) null);
+					if (property == null)
+						gameprofile = MinecraftServer.getServer().func_147130_as().fillProfileProperties(gameprofile, true);
+					profile = gameprofile;
+				}
+			}
 	}
 }

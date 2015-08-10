@@ -1,12 +1,23 @@
 package ganymedes01.ganysend.client.renderer.tileentity;
 
 import ganymedes01.ganysend.client.OpenGLHelper;
-import ganymedes01.ganysend.client.model.ModelHead;
-import ganymedes01.ganysend.lib.SkullTypes;
 import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
+
+import java.util.Map;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -20,29 +31,44 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class TileEntityInventoryBinderRender extends TileEntitySpecialRenderer {
 
+	private final ModelBiped biped = new ModelBiped(0.0F);
+
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float rotation) {
+	@SuppressWarnings("unchecked")
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTicks) {
 		TileEntityInventoryBinder tilePlayerInv = (TileEntityInventoryBinder) tile;
-		String name = tilePlayerInv.getPlayerName();
-		if (name == null)
+		GameProfile profile = tilePlayerInv.getProfile();
+		if (profile == null)
 			return;
 
-		double headRotation = 0.0F;
-		EntityPlayer player = tilePlayerInv.getWorldObj().getPlayerEntityByName(name);
-		if (player != null)
-			headRotation = Math.atan2(player.posZ - 0.5F - tile.zCoord, player.posX - 0.5F - tile.xCoord) * 180 / Math.PI;
-		else
-			headRotation = (float) (2 * 720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL);
-
-		ModelHead model = ModelHead.getHead(SkullTypes.player.ordinal());
-		bindTexture(SkullTypes.player.getTexture(tilePlayerInv.getProfile()));
+		EntityPlayer player = tilePlayerInv.getWorldObj().getPlayerEntityByName(profile.getName());
 		OpenGLHelper.pushMatrix();
-		OpenGLHelper.disableCull();
-		OpenGLHelper.translate((float) x + 0.5F, (float) y + 0.25F, (float) z + 0.5F);
-		OpenGLHelper.scale(1.0F, -1.0F, -1.0F);
-		OpenGLHelper.rotate(270 + (float) headRotation, 0, 1, 0);
-		model.render(0);
-		OpenGLHelper.enableCull();
+		OpenGLHelper.translate(x + 0.5, y + 0.75, z + 0.5);
+		OpenGLHelper.scale(0.4, 0.4, 0.4);
+		if (player != null) {
+			OpenGLHelper.rotate(180, 0, 1, 0);
+			RenderManager.instance.renderEntitySimple(player, partialTicks);
+		} else {
+			biped.isChild = false;
+			OpenGLHelper.colour(0xFFFFFF);
+			OpenGLHelper.enableRescaleNormal();
+			OpenGLHelper.translate(0, -0.25, 0);
+			OpenGLHelper.scale(1, -1, -1);
+			OpenGLHelper.scale(0.95, 0.95, 0.95);
+			OpenGLHelper.rotate((float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL), 0, 1, 0);
+
+			ResourceLocation texture = AbstractClientPlayer.locationStevePng;
+
+			if (profile != null) {
+				Minecraft minecraft = Minecraft.getMinecraft();
+				Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> map = minecraft.func_152342_ad().func_152788_a(profile);
+				if (map.containsKey(Type.SKIN))
+					texture = minecraft.func_152342_ad().func_152792_a(map.get(Type.SKIN), Type.SKIN);
+			}
+
+			bindTexture(texture);
+			biped.render(null, 0, 0, 0, 0, 0, 1F / 16F);
+		}
 		OpenGLHelper.popMatrix();
 	}
 }

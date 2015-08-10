@@ -16,17 +16,17 @@ public class TileEntityAnchoredEnderChest extends TileEntityInventoryBinder {
 	public float prevLidAngle, lidAngle;
 
 	@Override
-	protected IInventory getPlayerInventory() {
-		EntityPlayer player = worldObj.getPlayerEntityByName(playerName);
+	public IInventory getPlayerInventory() {
+		if (profile == null)
+			return null;
+		EntityPlayer player = worldObj.getPlayerEntityByName(profile.getName());
 		return player != null ? player.getInventoryEnderChest() : null;
 	}
 
 	@Override
 	public int getSizeInventory() {
-		if (isConnected())
-			return getPlayerInventory().getSizeInventory();
-		else
-			return 0;
+		IInventory inventory = getPlayerInventory();
+		return inventory != null ? inventory.getSizeInventory() : 0;
 	}
 
 	@Override
@@ -82,5 +82,9 @@ public class TileEntityAnchoredEnderChest extends TileEntityInventoryBinder {
 	@Override
 	public boolean canUpdate() {
 		return true;
+	}
+
+	@Override
+	protected void updateProfile() {
 	}
 }

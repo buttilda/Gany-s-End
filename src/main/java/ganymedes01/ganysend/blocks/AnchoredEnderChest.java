@@ -39,7 +39,7 @@ public class AnchoredEnderChest extends InventoryBinder {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote && !world.getBlock(x, y + 1, z).isNormalCube()) {
 			TileEntityAnchoredEnderChest tile = Utils.getTileEntity(world, x, y, z, TileEntityAnchoredEnderChest.class);
-			if (tile != null && tile.isConnected())
+			if (tile != null && tile.getPlayerInventory() != null)
 				player.displayGUIChest(tile);
 		}
 		return true;

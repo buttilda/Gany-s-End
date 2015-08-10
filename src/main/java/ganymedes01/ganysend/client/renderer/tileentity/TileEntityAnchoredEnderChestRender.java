@@ -31,7 +31,7 @@ public class TileEntityAnchoredEnderChestRender extends TileEntitySpecialRendere
 		TileEntityAnchoredEnderChest chest = (TileEntityAnchoredEnderChest) tile;
 		int meta = chest.hasWorldObj() ? chest.getBlockMetadata() : 0;
 
-		bindTexture(chest.isConnected() ? TEXTURE_ON : TEXTURE_OFF);
+		bindTexture(chest.getPlayerInventory() != null ? TEXTURE_ON : TEXTURE_OFF);
 		OpenGLHelper.pushMatrix();
 		OpenGLHelper.enableRescaleNormal();
 		OpenGLHelper.colour(1.0F, 1.0F, 1.0F, 1.0F);

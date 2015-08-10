@@ -1,18 +1,15 @@
 package ganymedes01.ganysend.client.renderer.block;
 
 import ganymedes01.ganysend.client.OpenGLHelper;
-import ganymedes01.ganysend.client.renderer.tileentity.TileEntityBlockSkullRender;
 import ganymedes01.ganysend.lib.RenderIDs;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
-import com.mojang.authlib.GameProfile;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -26,6 +23,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class BlockInventoryBinderRender implements ISimpleBlockRenderingHandler {
+
+	private final ModelBiped biped = new ModelBiped(0.0F);
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
@@ -88,10 +87,15 @@ public class BlockInventoryBinderRender implements ISimpleBlockRenderingHandler 
 		renderer.renderFaceZNeg(block, 0.0F, 0.0F, 14.0F / 16.0F, icon);
 		tessellator.draw();
 
-		EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
-		GameProfile profile = player != null ? player.getGameProfile() : null;
-		if (TileEntityBlockSkullRender.instance != null)
-			TileEntityBlockSkullRender.instance.renderHead(0.25F, 0, 0, 6, 1, 3, profile);
+		biped.isChild = false;
+		OpenGLHelper.colour(0xFFFFFF);
+		OpenGLHelper.enableRescaleNormal();
+		OpenGLHelper.translate(0.5, 0.75, 0.5);
+		OpenGLHelper.scale(0.5, 0.5, 0.5);
+		OpenGLHelper.scale(1, -1, -1);
+		OpenGLHelper.rotate((float) (720.0 * (System.currentTimeMillis() & 0x3FFFL) / 0x3FFFL), 0, 1, 0);
+		Minecraft.getMinecraft().renderEngine.bindTexture(AbstractClientPlayer.locationStevePng);
+		biped.render(null, 0, 0, 0, 0, 0, 1F / 16F);
 	}
 
 	@Override
