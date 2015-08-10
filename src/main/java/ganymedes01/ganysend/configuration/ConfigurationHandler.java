@@ -87,7 +87,6 @@ public class ConfigurationHandler {
 		GanysEnd.enableEmulator = configBoolean("enableEmulator", true, GanysEnd.enableEmulator);
 		GanysEnd.enableScythe = configBoolean("enableScythe", true, GanysEnd.enableScythe);
 		GanysEnd.enableInfiniteBucket = configBoolean("enableInfiniteBucket", true, GanysEnd.enableInfiniteBucket);
-		GanysEnd.enableSkulls = configBoolean("enableSkulls", true, GanysEnd.enableSkulls);
 		GanysEnd.enableEnderToggler = configBoolean("enableEnderToggler", true, GanysEnd.enableEnderToggler);
 		GanysEnd.enableEndium = configBoolean("enableEndium", true, GanysEnd.enableEndium);
 

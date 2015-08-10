@@ -77,7 +77,6 @@ public class GanysEnd {
 	public static boolean enableEmulator = true;
 	public static boolean enableScythe = true;
 	public static boolean enableInfiniteBucket = true;
-	public static boolean enableSkulls = true;
 	public static boolean enableEnderToggler = true;
 	public static boolean enableEndium = true;
 

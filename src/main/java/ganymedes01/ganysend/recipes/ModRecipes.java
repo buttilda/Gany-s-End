@@ -31,6 +31,13 @@ public class ModRecipes {
 	public static void registerOreDictionary() {
 		OreDictionary.registerOre("chestWood", Blocks.chest);
 
+		OreDictionary.registerOre("itemSkull", new ItemStack(Items.skull, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("skullSkeleton", new ItemStack(Items.skull, 1, 0));
+		OreDictionary.registerOre("skullWitherSkeleton", new ItemStack(Items.skull, 1, 1));
+		OreDictionary.registerOre("skullZombie", new ItemStack(Items.skull, 1, 2));
+		OreDictionary.registerOre("skullPlayer", new ItemStack(Items.skull, 1, 3));
+		OreDictionary.registerOre("skullCreeper", new ItemStack(Items.skull, 1, 4));
+
 		if (GanysEnd.enableEndium) {
 			OreDictionary.registerOre("oreEndium", ModBlocks.rawEndium);
 			OreDictionary.registerOre("ingotEndium", new ItemStack(ModItems.endiumIngot));
@@ -56,15 +63,6 @@ public class ModRecipes {
 
 		if (GanysEnd.enableEnderBag || GanysEnd.enableAnchoredEnderChest)
 			OreDictionary.registerOre("chestEnder", Blocks.ender_chest);
-
-		if (GanysEnd.enableSkulls) {
-			OreDictionary.registerOre("itemSkull", new ItemStack(Items.skull, 1, OreDictionary.WILDCARD_VALUE));
-			OreDictionary.registerOre("skullSkeleton", new ItemStack(Items.skull, 1, 0));
-			OreDictionary.registerOre("skullWitherSkeleton", new ItemStack(Items.skull, 1, 1));
-			OreDictionary.registerOre("skullZombie", new ItemStack(Items.skull, 1, 2));
-			OreDictionary.registerOre("skullPlayer", new ItemStack(Items.skull, 1, 3));
-			OreDictionary.registerOre("skullCreeper", new ItemStack(Items.skull, 1, 4));
-		}
 
 		if (GanysEnd.enableAnchoredEnderChest)
 			OreDictionary.registerOre("transdimBlock", new ItemStack(ModBlocks.anchoredEnderChest));
