@@ -92,8 +92,8 @@ string.ganysend.leftClickContainer=ЛКМ с контейнером в руке,
 material.endium=Эндий
 
 # Version Check
-versioncheck.ganyssurface.message=§6Модификация §fGany's End §cустарела§f.
-versioncheck.ganyssurface.download=Загрузить версию %s
+versioncheck.ganysend.message=§6Модификация §fGany's End §cустарела§f.
+versioncheck.ganysend.download=Загрузить версию %s
 
 # Custom Names
 tool.pickaxe.endium=Кирка из эндия
