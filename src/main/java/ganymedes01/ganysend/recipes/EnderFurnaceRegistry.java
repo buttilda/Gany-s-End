@@ -44,8 +44,6 @@ public class EnderFurnaceRegistry extends RecipeRegistry<EnderFurnaceRecipe> {
 		}
 		addRecipe(new ItemStack(Blocks.stone), Blocks.netherrack);
 		addRecipe(new ItemStack(Blocks.stonebrick), Blocks.nether_brick);
-		addRecipe(new ItemStack(Blocks.dragon_egg), "skullEnderDragon");
-		addRecipe(new ItemStack(Items.nether_star), "skullWither");
 		if (GanysEnd.enableEndium)
 			addRecipe(new ItemStack(ModItems.endiumIngot, 2), "oreEndium");
 		if (GanysEnd.enableShifters) {

@@ -9,6 +9,7 @@ import java.util.List;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.Constants;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 
@@ -43,9 +44,7 @@ public class InterModComms {
 
 		for (int i = 0; i < 4; i++)
 			if (nbt.hasKey("input" + i)) {
-				Object input = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("input" + i));
-				if (input == null)
-					input = nbt.getString("input" + i);
+				Object input = nbt.hasKey("input" + i, Constants.NBT.TAG_COMPOUND) ? ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("input" + i)) : nbt.getString("input" + i);
 				inputs.add(input);
 			}
 
