@@ -189,7 +189,7 @@ public class ModRecipes {
 			addShapedRecipe(ModBlocks.voidCrate, "xyx", "xzx", "xwx", 'x', "logWood", 'y', "chestWood", 'z', Items.ender_pearl, 'w', Blocks.obsidian);
 
 		if (GanysEnd.enableEnderFurnace)
-			addShapedRecipe(ModBlocks.enderFurnace, "xxx", "xyx", "xxx", 'x', new ItemStack(Blocks.end_stone), 'y', Items.ender_eye);
+			addShapedRecipe(ModBlocks.enderFurnace, "xxx", "xyx", "xxx", 'x', new ItemStack(Blocks.end_stone), 'y', "ingotEndium");
 	}
 
 	public static void addShapedRecipe(Block block, Object... objects) {
