@@ -66,9 +66,9 @@ public abstract class RecipeRegistry<T> {
 				String file = XMLHelper.readFile(recipesFile);
 				List<XMLNode> nodes = new ArrayList<XMLNode>();
 				XMLHelper.getNodes(file, nodes); // Will fill the list with 1 master node containing all of the other nodes.
-				nodes = nodes.get(0).getNodes(); // Use the nodes held by the master nodes
+				nodes = nodes.get(0).getNodes(); // Use the nodes held by the master node
 
-				// Remove any nodes tagged as "default"
+				// Remove any nodes tagged as "default" since those will be added in later from the pre-made list
 				removeDefaults(nodes);
 
 				// Remove from the defaults list any nodes tagged as ignored in the file then add the defaults list into the ones read from the file
@@ -123,8 +123,7 @@ public abstract class RecipeRegistry<T> {
 			for (XMLNode n : file)
 				if (n.equalNoProps(node) && n.checkPropertyValue("status", "ignored"))
 					ignored.add(node);
-		for (XMLNode node : ignored)
-			defaults.remove(node);
+		defaults.removeAll(ignored);
 	}
 
 	private void removeDefaults(List<XMLNode> nodes) {
@@ -132,8 +131,7 @@ public abstract class RecipeRegistry<T> {
 		for (XMLNode node : nodes)
 			if (node.checkPropertyValue("status", "default"))
 				defaults.add(node);
-		for (XMLNode node : defaults)
-			nodes.remove(node);
+		nodes.removeAll(defaults);
 	}
 
 	public List<T> getRecipes() {

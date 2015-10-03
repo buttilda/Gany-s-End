@@ -79,10 +79,11 @@ public class XMLNode {
 	}
 
 	public boolean equalNoProps(XMLNode node) {
-		if (name.equals(node.name))
-			if (!(value == null ^ node.value == null))
-				if (value == null || value.equals(node.value))
-					return true;
+		if (name.equals(node.name)) // Check if the names are the same
+			if (!(value == null ^ node.value == null)) // Check if both have a value or neither has a value
+				if (value == null || value.equals(node.value)) // if they don't have a value, check if it's the same
+					if (!(hasNodes() ^ node.hasNodes())) // Check if both have sub-nodes or neither has sub-nodes
+						return nodes == null || nodes.equals(node.nodes); // if they don't have sub-nodes, check if it's they're the same
 		return false;
 	}
 
