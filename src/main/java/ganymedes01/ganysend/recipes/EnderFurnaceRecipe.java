@@ -106,7 +106,7 @@ public class EnderFurnaceRecipe {
 			return InventoryUtils.areStacksTheSame((ItemStack) obj, target, false);
 		else if (obj instanceof String)
 			for (ItemStack stack : OreDictionary.getOres((String) obj))
-				if (InventoryUtils.areStacksTheSame(stack, target, false))
+				if (OreDictionary.itemMatches(stack, target, false))
 					return true;
 
 		return false;
