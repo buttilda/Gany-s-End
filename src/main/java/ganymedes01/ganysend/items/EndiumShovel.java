@@ -2,8 +2,8 @@ package ganymedes01.ganysend.items;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
+import ganymedes01.ganysend.api.IEndiumTool;
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.lib.IEndiumTool;
 import ganymedes01.ganysend.lib.ModMaterials;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.client.renderer.texture.IIconRegister;

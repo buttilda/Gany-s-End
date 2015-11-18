@@ -2,10 +2,10 @@ package ganymedes01.ganysend.core.handlers;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.api.IEndiumScythe;
+import ganymedes01.ganysend.api.IEndiumTool;
 import ganymedes01.ganysend.core.utils.HeadsHelper;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.lib.IEndiumTool;
 
 import java.util.LinkedList;
 import java.util.List;

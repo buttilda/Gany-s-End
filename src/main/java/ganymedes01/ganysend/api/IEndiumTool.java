@@ -1,4 +1,4 @@
-package ganymedes01.ganysend.lib;
+package ganymedes01.ganysend.api;
 
 /**
  * Gany's End

@@ -11,11 +11,11 @@ public class Reference {
 
 	public static final String MOD_ID = "ganysend";
 	public static final String MOD_NAME = "Gany's End";
-	public static final String DEPENDENCIES = "required-after:Forge@[10.13.4.1448,);after:EnderStorage";
+	public static final String DEPENDENCIES = "required-after:Forge@[10.13.4.1558,);after:EnderStorage";
 	public static final String CHANNEL = "GanysEnd";
 	public static final String MASTER = "GanysMods";
-	public static final String VERSION_NUMBER = "1.11.1";
-	public static final int RAW_VERSION_NUMBER = 1111;
+	public static final String VERSION_NUMBER = "1.11.2";
+	public static final int RAW_VERSION_NUMBER = 1112;
 	public static String LATEST_VERSION;
 	public static final String ITEM_BLOCK_TEXTURE_PATH = MOD_ID + ":";
 	public static final String ARMOUR_TEXTURE_PATH = ITEM_BLOCK_TEXTURE_PATH + "textures/models/armor/";
