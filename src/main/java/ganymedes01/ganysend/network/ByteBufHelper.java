@@ -1,9 +1,9 @@
 package ganymedes01.ganysend.network;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import cpw.mods.fml.common.network.ByteBufUtils;
 
 /**
  * Gany's End

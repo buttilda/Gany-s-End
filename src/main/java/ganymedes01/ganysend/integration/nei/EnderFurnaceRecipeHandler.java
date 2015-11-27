@@ -1,5 +1,13 @@
 package ganymedes01.ganysend.integration.nei;
 
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import codechicken.lib.gui.GuiDraw;
+import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.TemplateRecipeHandler;
 import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.client.gui.inventory.GuiEnderFurnace;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
@@ -10,19 +18,10 @@ import ganymedes01.ganysend.recipes.EnderFurnaceFuelsRegistry;
 import ganymedes01.ganysend.recipes.EnderFurnaceFuelsRegistry.FuelEntry;
 import ganymedes01.ganysend.recipes.EnderFurnaceRecipe;
 import ganymedes01.ganysend.recipes.EnderFurnaceRegistry;
-
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
-import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
 
 /**
  * Gany's End

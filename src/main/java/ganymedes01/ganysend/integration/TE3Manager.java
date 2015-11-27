@@ -1,11 +1,11 @@
 package ganymedes01.ganysend.integration;
 
+import cpw.mods.fml.common.event.FMLInterModComms;
 import ganymedes01.ganysend.ModBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import cpw.mods.fml.common.event.FMLInterModComms;
 
 /**
  * Gany's End

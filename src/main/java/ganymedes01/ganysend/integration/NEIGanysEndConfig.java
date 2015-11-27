@@ -1,12 +1,12 @@
 package ganymedes01.ganysend.integration;
 
+import codechicken.nei.api.API;
+import codechicken.nei.api.IConfigureNEI;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.integration.nei.EnderFurnaceRecipeHandler;
 import ganymedes01.ganysend.lib.Reference;
 import net.minecraft.item.ItemStack;
-import codechicken.nei.api.API;
-import codechicken.nei.api.IConfigureNEI;
 
 /**
  * Gany's End

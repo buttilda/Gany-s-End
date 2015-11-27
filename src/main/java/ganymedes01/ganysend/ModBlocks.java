@@ -1,5 +1,8 @@
 package ganymedes01.ganysend;
 
+import java.lang.reflect.Field;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 import ganymedes01.ganysend.blocks.AdvancedExclusiveFilteringHopper;
 import ganymedes01.ganysend.blocks.AdvancedFilteringHopper;
 import ganymedes01.ganysend.blocks.AnchoredEnderChest;
@@ -29,12 +32,8 @@ import ganymedes01.ganysend.blocks.TimeManipulator;
 import ganymedes01.ganysend.blocks.VoidCrate;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
-
-import java.lang.reflect.Field;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * Gany's End

@@ -1,11 +1,11 @@
 package ganymedes01.ganysend.integration;
 
-import ganymedes01.ganysend.lib.Reference;
-
 import java.util.ArrayList;
 
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
+
+import ganymedes01.ganysend.lib.Reference;
 
 /**
  * Gany's End

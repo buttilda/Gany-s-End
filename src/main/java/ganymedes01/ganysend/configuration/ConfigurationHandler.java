@@ -1,5 +1,10 @@
 package ganymedes01.ganysend.configuration;
 
+import java.io.File;
+
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.integration.Integration;
 import ganymedes01.ganysend.integration.ModIntegrator;
@@ -7,13 +12,7 @@ import ganymedes01.ganysend.lib.ModIDs;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.recipes.RecipeRegistry;
-
-import java.io.File;
-
 import net.minecraftforge.common.config.Configuration;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Gany's End

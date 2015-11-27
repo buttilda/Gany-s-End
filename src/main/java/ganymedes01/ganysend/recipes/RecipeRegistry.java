@@ -1,8 +1,5 @@
 package ganymedes01.ganysend.recipes;
 
-import ganymedes01.ganysend.core.utils.xml.XMLHelper;
-import ganymedes01.ganysend.core.utils.xml.XMLNode;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +8,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import ganymedes01.ganysend.core.utils.xml.XMLHelper;
+import ganymedes01.ganysend.core.utils.xml.XMLNode;
 
 /**
  * Gany's End

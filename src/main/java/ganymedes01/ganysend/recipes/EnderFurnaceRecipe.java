@@ -1,13 +1,12 @@
 package ganymedes01.ganysend.recipes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.xml.XMLBuilder;
 import ganymedes01.ganysend.core.utils.xml.XMLNode;
 import ganymedes01.ganysend.core.utils.xml.XMLParser;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

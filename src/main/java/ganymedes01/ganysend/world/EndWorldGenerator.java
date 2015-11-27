@@ -1,17 +1,16 @@
 package ganymedes01.ganysend.world;
 
-import ganymedes01.ganysend.GanysEnd;
-import ganymedes01.ganysend.ModBlocks;
-
 import java.util.Random;
 
+import cpw.mods.fml.common.IWorldGenerator;
+import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.ModBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import cpw.mods.fml.common.IWorldGenerator;
 
 /**
  * Gany's End

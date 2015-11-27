@@ -1,20 +1,6 @@
 package ganymedes01.ganysend.network;
 
-import ganymedes01.ganysend.lib.Reference;
-import ganymedes01.ganysend.network.packet.CustomPacket;
-import ganymedes01.ganysend.network.packet.PacketTileEntity;
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandler.Sharable;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
-
 import java.util.EnumMap;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.network.Packet;
 
 import com.google.common.collect.Maps;
 
@@ -25,6 +11,18 @@ import cpw.mods.fml.common.network.FMLOutboundHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ganymedes01.ganysend.lib.Reference;
+import ganymedes01.ganysend.network.packet.CustomPacket;
+import ganymedes01.ganysend.network.packet.PacketTileEntity;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandler.Sharable;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.network.Packet;
 
 /**
  * Gany's End

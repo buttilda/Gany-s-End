@@ -1,11 +1,11 @@
 package ganymedes01.ganysend.integration;
 
+import cpw.mods.fml.common.event.FMLInterModComms;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.common.event.FMLInterModComms;
 
 /**
  * Gany's End

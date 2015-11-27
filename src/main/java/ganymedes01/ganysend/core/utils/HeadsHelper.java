@@ -1,9 +1,10 @@
 package ganymedes01.ganysend.core.utils;
 
-import ganymedes01.ganysend.GanysEnd;
-
 import java.lang.reflect.Method;
 
+import com.mojang.authlib.GameProfile;
+
+import ganymedes01.ganysend.GanysEnd;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityPigZombie;
@@ -14,8 +15,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
-
-import com.mojang.authlib.GameProfile;
 
 /**
  * Gany's End

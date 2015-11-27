@@ -1,13 +1,12 @@
 package ganymedes01.ganysend.recipes;
 
+import java.util.List;
+
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.xml.XMLBuilder;
 import ganymedes01.ganysend.core.utils.xml.XMLNode;
 import ganymedes01.ganysend.core.utils.xml.XMLParser;
 import ganymedes01.ganysend.recipes.EnderFurnaceFuelsRegistry.FuelEntry;
-
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

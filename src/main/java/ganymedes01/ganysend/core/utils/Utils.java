@@ -1,12 +1,13 @@
 package ganymedes01.ganysend.core.utils;
 
-import ganymedes01.ganysend.lib.Reference;
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
 
+import com.mojang.authlib.GameProfile;
+
+import ganymedes01.ganysend.lib.Reference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -16,8 +17,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.oredict.OreDictionary;
-
-import com.mojang.authlib.GameProfile;
 
 /**
  * Gany's End

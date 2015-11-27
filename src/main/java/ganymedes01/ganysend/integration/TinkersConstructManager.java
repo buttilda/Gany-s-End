@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.integration;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.handlers.HandlerEvents;
@@ -18,7 +19,6 @@ import tconstruct.library.tools.ToolMaterial;
 import tconstruct.library.util.IPattern;
 import tconstruct.smeltery.TinkerSmeltery;
 import tconstruct.tools.TinkerTools;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Gany's End
