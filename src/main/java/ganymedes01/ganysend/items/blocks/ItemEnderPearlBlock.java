@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ItemEnderPearlBlock extends ItemBlock {
@@ -27,6 +27,6 @@ public class ItemEnderPearlBlock extends ItemBlock {
 
 	@Override
 	public int getMetadata(int meta) {
-		return meta;
+		return meta > 1 ? 1 : meta;
 	}
 }

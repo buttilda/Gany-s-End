@@ -41,7 +41,7 @@ public class EnderPearlBlock extends Block implements ISubBlocksBlock, IConfigur
 
 	@Override
 	public int damageDropped(int meta) {
-		return meta;
+		return meta > 1 ? 1 : meta;
 	}
 
 	@Override
@@ -55,6 +55,8 @@ public class EnderPearlBlock extends Block implements ISubBlocksBlock, IConfigur
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
+		if (meta > 1)
+			meta = 1;
 		return blockIcon[meta];
 	}
 
