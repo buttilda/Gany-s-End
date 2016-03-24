@@ -2,18 +2,15 @@ package ganymedes01.ganysend.items;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -25,8 +22,6 @@ import net.minecraft.util.IIcon;
 public class InfusedGem extends Item implements IConfigurable {
 
 	private static final String[] types = new String[] { "night", "day" };
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
 
 	public InfusedGem() {
 		setMaxDamage(0);
@@ -38,24 +33,14 @@ public class InfusedGem extends Item implements IConfigurable {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void getSubItems(Item id, CreativeTabs tab, List list) {
+	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list) {
 		for (int i = 0; i < types.length; i++)
-			list.add(new ItemStack(id, 1, i));
+			list.add(new ItemStack(item, 1, i));
 	}
 
 	@Override
 	public int getMetadata(int meta) {
 		return meta;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int meta) {
-		if (meta < 0 || meta >= types.length)
-			meta = 0;
-
-		return icons[meta];
 	}
 
 	@Override
@@ -66,15 +51,6 @@ public class InfusedGem extends Item implements IConfigurable {
 			meta = 0;
 
 		return "item." + Utils.getUnlocalisedName(Strings.INFUSED_GEM_NAME) + "_" + types[meta];
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
-		icons = new IIcon[types.length];
-
-		for (int i = 0; i < types.length; i++)
-			icons[i] = reg.registerIcon(Reference.ITEM_BLOCK_TEXTURE_PATH + Strings.INFUSED_GEM_NAME + "_" + types[i]);
 	}
 
 	@Override

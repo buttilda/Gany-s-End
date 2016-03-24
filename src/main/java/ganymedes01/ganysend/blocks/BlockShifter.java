@@ -14,8 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -25,9 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 
 public class BlockShifter extends BlockContainer implements IConfigurable {
-
-	@SideOnly(Side.CLIENT)
-	protected IIcon blockSide, blockBottom, blockTop;
 
 	public BlockShifter() {
 		super(Material.iron);
@@ -78,20 +73,6 @@ public class BlockShifter extends BlockContainer implements IConfigurable {
 				}
 			}
 		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return side == 0 ? blockBottom : side == 1 ? blockTop : blockSide;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		blockSide = reg.registerIcon(Utils.getBlockTexture(Strings.BLOCK_SHIFTER_NAME) + "_side");
-		blockBottom = reg.registerIcon(Utils.getBlockTexture(Strings.BLOCK_SHIFTER_NAME) + "_bottom");
-		blockTop = reg.registerIcon(Utils.getBlockTexture(Strings.BLOCK_SHIFTER_NAME) + "_top");
 	}
 
 	@Override

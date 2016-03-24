@@ -2,11 +2,15 @@ package ganymedes01.ganysend.tileentities;
 
 import ganymedes01.ganysend.core.utils.Utils;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityLockable;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.IChatComponent;
 
 /**
  * Gany's End
@@ -15,7 +19,7 @@ import net.minecraft.tileentity.TileEntity;
  *
  */
 
-public class GanysInventory extends TileEntity implements IInventory {
+public abstract class GanysInventory extends TileEntityLockable implements IInventory {
 
 	protected ItemStack[] inventory;
 	private final String invName;
@@ -62,7 +66,7 @@ public class GanysInventory extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
+	public ItemStack removeStackFromSlot(int slot) {
 		try {
 			if (inventory[slot] != null) {
 				ItemStack itemstack = inventory[slot];
@@ -86,13 +90,18 @@ public class GanysInventory extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public String getInventoryName() {
+	public String getName() {
 		return Utils.getConainerName(invName);
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomName() {
 		return false;
+	}
+
+	@Override
+	public IChatComponent getDisplayName() {
+		return new ChatComponentTranslation(getName());
 	}
 
 	@Override
@@ -102,15 +111,15 @@ public class GanysInventory extends TileEntity implements IInventory {
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this;
+		return worldObj.getTileEntity(pos) == this;
 	}
 
 	@Override
-	public void openInventory() {
+	public void openInventory(EntityPlayer player) {
 	}
 
 	@Override
-	public void closeInventory() {
+	public void closeInventory(EntityPlayer player) {
 	}
 
 	@Override
@@ -147,5 +156,34 @@ public class GanysInventory extends TileEntity implements IInventory {
 			}
 
 		nbt.setTag("Items", tags);
+	}
+
+	@Override
+	public int getField(int id) {
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+	}
+
+	@Override
+	public int getFieldCount() {
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		inventory = new ItemStack[inventory.length];
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer player) {
+		return null;
+	}
+
+	@Override
+	public String getGuiID() {
+		return null;
 	}
 }

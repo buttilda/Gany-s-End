@@ -17,7 +17,6 @@ public class ReinforcedEnderScythe extends EnderScythe {
 	public ReinforcedEnderScythe() {
 		super(ModMaterials.REIN_ENDIUM_TOOLS);
 		setCreativeTab(GanysEnd.enableScythe ? GanysEnd.endTab : null);
-		setTextureName(Utils.getItemTexture(Strings.REINFORCED_ENDER_SCYTHE_NAME));
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.REINFORCED_ENDER_SCYTHE_NAME));
 	}
 }

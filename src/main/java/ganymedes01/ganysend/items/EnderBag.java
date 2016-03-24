@@ -20,7 +20,6 @@ public class EnderBag extends Item implements IConfigurable {
 
 	public EnderBag() {
 		setMaxStackSize(1);
-		setTextureName(Utils.getItemTexture(Strings.ENDER_BAG_NAME));
 		setCreativeTab(GanysEnd.enableEnderBag ? GanysEnd.endTab : null);
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDER_BAG_NAME));
 	}

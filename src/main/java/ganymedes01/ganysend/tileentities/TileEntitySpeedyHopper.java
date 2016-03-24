@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class TileEntitySpeedyHopper extends TileEntityFilteringHopper {
@@ -24,7 +24,7 @@ public class TileEntitySpeedyHopper extends TileEntityFilteringHopper {
 	}
 
 	@Override
-	public String getInventoryName() {
+	public String getName() {
 		return Utils.getConainerName(Strings.SPEEDY_HOPPER_NAME);
 	}
 

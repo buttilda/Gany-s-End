@@ -150,11 +150,6 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory 
 			NBTUtil.func_152460_a(nbt, profile);
 	}
 
-	@Override
-	public boolean canUpdate() {
-		return false;
-	}
-
 	protected void updateProfile() {
 		if (profile != null && !StringUtils.isNullOrEmpty(profile.getName()))
 			if (!profile.isComplete() || !profile.getProperties().containsKey("textures")) {

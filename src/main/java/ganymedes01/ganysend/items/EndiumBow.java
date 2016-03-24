@@ -1,7 +1,5 @@
 package ganymedes01.ganysend.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.api.IEndiumTool;
@@ -9,8 +7,6 @@ import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModMaterials;
 import ganymedes01.ganysend.lib.Strings;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,11 +17,12 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -36,20 +33,14 @@ import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
 public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon[] overlays;
-	@SideOnly(Side.CLIENT)
-	private IIcon standby;
-
 	public EndiumBow() {
 		setMaxDamage(ModMaterials.ENDIUM_TOOLS.getMaxUses());
-		setTextureName(Utils.getItemTexture(Strings.ENDIUM_BOW_NAME));
 		setCreativeTab(GanysEnd.enableEndiumTools ? GanysEnd.endTab : null);
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_BOW_NAME));
 	}
 
 	private IInventory getTaggedInventory(World world, ItemStack stack) {
-		if (stack.stackTagCompound != null)
+		if (stack.hasTagCompound())
 			if (stack.getTagCompound().getBoolean("Tagged")) {
 				NBTTagCompound data = stack.getTagCompound();
 				int x = data.getIntArray("Position")[0];
@@ -163,9 +154,9 @@ public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable {
 
 	@Override
 	public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-		if (stack.stackTagCompound == null)
+		if (!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
-		stack.stackTagCompound.setBoolean("Tagged", false);
+		stack.getTagCompound().setBoolean("Tagged", false);
 	}
 
 	@Override
@@ -192,57 +183,18 @@ public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public EnumRarity getRarity(ItemStack stack) {
-		return EnumRarity.uncommon;
+		return EnumRarity.UNCOMMON;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack, int pass) {
-		return pass == 0 && stack.hasTagCompound() && stack.stackTagCompound.hasKey("Position");
+	public boolean hasEffect(ItemStack stack) {
+		return stack.hasTagCompound() && stack.getTagCompound().hasKey("Position");
 	}
 
 	@Override
 	public int getItemEnchantability() {
 		return ModMaterials.ENDIUM_TOOLS.getEnchantability();
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(ItemStack stack, int pass) {
-		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-		int useRemaining = player.getItemInUseCount();
-		ItemStack usingItem = player.getItemInUse();
-
-		if (usingItem != null && usingItem == stack) {
-			int charge = stack.getMaxItemUseDuration() - useRemaining;
-
-			if (charge >= 18)
-				return pass != 0 ? overlays[2] : getItemIconForUseDuration(2);
-			if (charge > 13)
-				return pass != 0 ? overlays[1] : getItemIconForUseDuration(1);
-			if (charge > 0)
-				return pass != 0 ? overlays[0] : getItemIconForUseDuration(0);
-		} else
-			return pass == 0 ? itemIcon : standby;
-
-		return pass != 0 ? standby : super.getIcon(stack, pass, player, stack, useRemaining);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
-		super.registerIcons(reg);
-		standby = reg.registerIcon(getIconString() + "_standby_overlay");
-		overlays = new IIcon[bowPullIconNameArray.length];
-
-		for (int i = 0; i < overlays.length; i++)
-			overlays[i] = reg.registerIcon(getIconString() + "_" + bowPullIconNameArray[i] + "_overlay");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses() {
-		return true;
 	}
 
 	@Override

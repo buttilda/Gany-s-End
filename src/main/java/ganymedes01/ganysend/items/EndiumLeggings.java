@@ -10,16 +10,15 @@ import net.minecraft.util.DamageSource;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EndiumLeggings extends EndiumArmour {
 
 	public EndiumLeggings() {
 		super(2);
-		setTextureName(Utils.getItemTexture(Strings.ENDIUM_LEGGINGS_NAME));
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_LEGGINGS_NAME));
 	}
 

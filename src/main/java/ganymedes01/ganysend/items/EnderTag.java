@@ -26,22 +26,21 @@ public class EnderTag extends Item implements IConfigurable {
 
 	public EnderTag() {
 		setMaxStackSize(1);
-		setTextureName(Utils.getItemTexture(Strings.ENDER_TAG_NAME));
 		setCreativeTab(GanysEnd.enableShifters ? GanysEnd.endTab : null);
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDER_TAG_NAME));
 	}
 
 	@Override
 	public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-		if (stack.stackTagCompound == null)
+		if (!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
-		stack.stackTagCompound.setBoolean("Tagged", false);
+		stack.getTagCompound().setBoolean("Tagged", false);
 	}
 
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		if (stack.getItem() == this) {
-			if (stack.stackTagCompound == null)
+			if (!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
 			stack.stackTagCompound.setIntArray("Position", new int[] { x, y, z });
 			stack.stackTagCompound.setInteger("Dimension", world.provider.dimensionId);
@@ -56,7 +55,7 @@ public class EnderTag extends Item implements IConfigurable {
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
-		if (stack.stackTagCompound == null)
+		if (!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
 		if (stack.stackTagCompound.hasKey("Position") && stack.stackTagCompound.hasKey("Dimension"))
 			list.add(Integer.toString(stack.stackTagCompound.getInteger("Dimension")) + " : " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[0]) + ", " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[1]) + ", " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[2]));

@@ -7,21 +7,22 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
-public class TileEntityTimeManipulator extends TileEntity implements IPacketHandlingTile {
+public class TileEntityTimeManipulator extends TileEntity implements IPacketHandlingTile, ITickable {
 
 	public boolean revertTime, advanceTime;
 
 	@Override
-	public void updateEntity() {
-		if (worldObj.provider.dimensionId != 0)
+	public void update() {
+		if (worldObj.provider.getDimensionId() != 0)
 			return;
 		if (revertTime && !advanceTime)
 			if (worldObj.provider.getWorldTime() >= 50)

@@ -1,18 +1,16 @@
 package ganymedes01.ganysend.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.api.IEndiumScythe;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModMaterials;
 import ganymedes01.ganysend.lib.Strings;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.IIcon;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -23,9 +21,6 @@ import net.minecraft.util.IIcon;
 
 public class EnderScythe extends ItemSword implements IEndiumScythe, IConfigurable {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon overlay;
-
 	public EnderScythe() {
 		this(ModMaterials.ENDIUM_TOOLS);
 	}
@@ -33,14 +28,13 @@ public class EnderScythe extends ItemSword implements IEndiumScythe, IConfigurab
 	public EnderScythe(ToolMaterial material) {
 		super(material);
 		setCreativeTab(GanysEnd.enableScythe ? GanysEnd.endTab : null);
-		setTextureName(Utils.getItemTexture(Strings.ENDER_SCYTHE_NAME));
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDER_SCYTHE_NAME));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public EnumRarity getRarity(ItemStack stack) {
-		return EnumRarity.epic;
+		return EnumRarity.EPIC;
 	}
 
 	@Override
@@ -50,26 +44,7 @@ public class EnderScythe extends ItemSword implements IEndiumScythe, IConfigurab
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack, int pass) {
-		return pass == 0;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
-		super.registerIcons(reg);
-		overlay = reg.registerIcon(getIconString() + "_overlay");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamageForRenderPass(int meta, int pass) {
-		return pass == 0 ? itemIcon : overlay;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses() {
+	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
 

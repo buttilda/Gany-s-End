@@ -1,18 +1,16 @@
 package ganymedes01.ganysend.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.entities.EntityAnchoredEnderChestMinecart;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.BlockRailBase;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemMinecart;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -26,7 +24,6 @@ public class ItemAnchoredEnderChestMinecart extends ItemMinecart implements ICon
 	public ItemAnchoredEnderChestMinecart() {
 		super(0);
 		setCreativeTab(GanysEnd.enableAnchoredEnderChest ? GanysEnd.endTab : null);
-		setTextureName(Utils.getItemTexture(Strings.ANCHORED_ENDER_CHEST_MINECART_NAME));
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ANCHORED_ENDER_CHEST_MINECART_NAME));
 	}
 

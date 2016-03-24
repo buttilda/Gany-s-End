@@ -2,8 +2,6 @@ package ganymedes01.ganysend.items;
 
 import java.util.Map;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModItems;
@@ -18,6 +16,8 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -42,7 +42,7 @@ public abstract class EndiumArmour extends ItemArmor implements IConfigurable {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public EnumRarity getRarity(ItemStack stack) {
-		return EnumRarity.epic;
+		return EnumRarity.EPIC;
 	}
 
 	@Override

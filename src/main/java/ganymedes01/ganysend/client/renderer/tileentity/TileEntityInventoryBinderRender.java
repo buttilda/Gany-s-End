@@ -38,7 +38,7 @@ public class TileEntityInventoryBinderRender extends TileEntitySpecialRenderer<T
 		if (profile == null)
 			return;
 
-		EntityPlayer player = tilePlayerInv.getWorldObj().getPlayerEntityByName(profile.getName());
+		EntityPlayer player = tilePlayerInv.getWorld().getPlayerEntityByName(profile.getName());
 		OpenGLHelper.pushMatrix();
 		OpenGLHelper.translate(x + 0.5, y + 0.75, z + 0.5);
 		OpenGLHelper.scale(0.4, 0.4, 0.4);

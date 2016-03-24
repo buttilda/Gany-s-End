@@ -8,16 +8,15 @@ import net.minecraft.util.DamageSource;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EndiumChestplate extends EndiumArmour {
 
 	public EndiumChestplate() {
 		super(1);
-		setTextureName(Utils.getItemTexture(Strings.ENDIUM_CHESTPLATE_NAME));
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_CHESTPLATE_NAME));
 	}
 

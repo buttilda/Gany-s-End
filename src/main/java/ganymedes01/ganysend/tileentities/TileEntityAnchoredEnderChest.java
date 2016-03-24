@@ -2,6 +2,7 @@ package ganymedes01.ganysend.tileentities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.util.ITickable;
 
 /**
  * Gany's End
@@ -10,7 +11,7 @@ import net.minecraft.inventory.IInventory;
  *
  */
 
-public class TileEntityAnchoredEnderChest extends TileEntityInventoryBinder {
+public class TileEntityAnchoredEnderChest extends TileEntityInventoryBinder implements ITickable {
 
 	public int playersUsing;
 	public float prevLidAngle, lidAngle;
@@ -30,7 +31,7 @@ public class TileEntityAnchoredEnderChest extends TileEntityInventoryBinder {
 	}
 
 	@Override
-	public void updateEntity() {
+	public void update() {
 		prevLidAngle = lidAngle;
 
 		if (playersUsing > 0 && lidAngle == 0.0F)
@@ -77,11 +78,6 @@ public class TileEntityAnchoredEnderChest extends TileEntityInventoryBinder {
 	public void closeInventory() {
 		playersUsing--;
 		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 0, playersUsing);
-	}
-
-	@Override
-	public boolean canUpdate() {
-		return true;
 	}
 
 	@Override

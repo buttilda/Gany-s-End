@@ -17,7 +17,6 @@ public class EndstoneRod extends Item implements IConfigurable {
 
 	public EndstoneRod() {
 		setFull3D();
-		setTextureName(Utils.getItemTexture(Strings.ENDSTONE_ROD_NAME));
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDSTONE_ROD_NAME));
 		setCreativeTab(GanysEnd.enableEndiumTools || GanysEnd.enableScythe ? GanysEnd.endTab : null);
 	}

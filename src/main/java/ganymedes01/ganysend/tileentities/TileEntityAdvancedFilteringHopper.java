@@ -76,7 +76,7 @@ public class TileEntityAdvancedFilteringHopper extends TileEntityFilteringHopper
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
+	public ItemStack removeStackFromSlot(int slot) {
 		if (slot >= FILER_SLOT)
 			return filter[slot - FILER_SLOT];
 		if (inventory[slot] != null) {

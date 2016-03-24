@@ -9,8 +9,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -29,21 +30,21 @@ public class InventoryUtils {
 			entity.motionX = 0;
 			entity.motionY = 0;
 			entity.motionZ = 0;
-			entity.delayBeforeCanPickup = 0;
+			entity.setDefaultPickupDelay();
 			player.worldObj.spawnEntityInWorld(entity);
 
 			entity.onCollideWithPlayer(player);
 		}
 	}
 
-	public static void dropStack(World world, int x, int y, int z, ItemStack stack) {
+	public static void dropStack(World world, BlockPos pos, ItemStack stack) {
 		if (!world.isRemote && stack != null && world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
 			float f = 0.7F;
 			double d0 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 			double d1 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 			double d2 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
-			EntityItem entityItem = new EntityItem(world, x + d0, y + d1, z + d2, stack);
-			entityItem.delayBeforeCanPickup = 10;
+			EntityItem entityItem = new EntityItem(world, pos.getX() + d0, pos.getY() + d1, pos.getZ() + d2, stack);
+			entityItem.setDefaultPickupDelay();
 			world.spawnEntityInWorld(entityItem);
 		}
 	}
@@ -54,17 +55,17 @@ public class InventoryUtils {
 			entityItem.motionX = 0;
 			entityItem.motionY = 0;
 			entityItem.motionZ = 0;
-			entityItem.delayBeforeCanPickup = 10;
+			entityItem.setDefaultPickupDelay();
 			world.spawnEntityInWorld(entityItem);
 		}
 	}
 
-	public static int[] getSlotsFromSide(IInventory iinventory, int side) {
+	public static int[] getSlotsFromSide(IInventory iinventory, EnumFacing side) {
 		if (iinventory == null)
 			return null;
 
 		if (iinventory instanceof ISidedInventory)
-			return ((ISidedInventory) iinventory).getAccessibleSlotsFromSide(side);
+			return ((ISidedInventory) iinventory).getSlotsForFace(side);
 		else {
 			int[] slots = new int[iinventory.getSizeInventory()];
 			for (int i = 0; i < slots.length; i++)
@@ -81,7 +82,7 @@ public class InventoryUtils {
 	 * @param maxStackSize
 	 * @return extracted stack
 	 */
-	public static ItemStack extractFromInventory(IInventory iinventory, int side) {
+	public static ItemStack extractFromInventory(IInventory iinventory, EnumFacing side) {
 		return extractFromInventory(iinventory, side, 1);
 	}
 
@@ -93,12 +94,12 @@ public class InventoryUtils {
 	 * @param maxStackSize
 	 * @return extracted stack
 	 */
-	public static ItemStack extractFromInventory(IInventory iinventory, int side, int maxStackSize) {
+	public static ItemStack extractFromInventory(IInventory iinventory, EnumFacing side, int maxStackSize) {
 		IInventory invt = getInventory(iinventory);
 		return extractFromSlots(invt, side, maxStackSize, getSlotsFromSide(invt, side));
 	}
 
-	private static ItemStack extractFromSlots(IInventory iinventory, int side, int maxStackSize, int[] slots) {
+	private static ItemStack extractFromSlots(IInventory iinventory, EnumFacing side, int maxStackSize, int[] slots) {
 		for (int slot : slots) {
 			ItemStack invtStack = iinventory.getStackInSlot(slot);
 			if (invtStack != null)
@@ -132,10 +133,10 @@ public class InventoryUtils {
 	}
 
 	public static boolean addStackToInventory(IInventory iinventory, ItemStack stack) {
-		return addStackToInventory(iinventory, stack, 0);
+		return addStackToInventory(iinventory, stack, EnumFacing.DOWN);
 	}
 
-	public static boolean addStackToInventory(IInventory iinventory, ItemStack stack, int side) {
+	public static boolean addStackToInventory(IInventory iinventory, ItemStack stack, EnumFacing side) {
 		if (iinventory == null)
 			return false;
 
@@ -146,7 +147,7 @@ public class InventoryUtils {
 		return addToSlots(invt, stack, side, getSlotsFromSide(invt, side));
 	}
 
-	private static boolean addToSlots(IInventory iinventory, ItemStack stack, int side, int[] slots) {
+	private static boolean addToSlots(IInventory iinventory, ItemStack stack, EnumFacing side, int[] slots) {
 		for (int slot : slots) {
 			if (iinventory instanceof ISidedInventory) {
 				if (!((ISidedInventory) iinventory).canInsertItem(slot, stack, side))
@@ -255,22 +256,8 @@ public class InventoryUtils {
 		return inventory;
 	}
 
-	public static void dropInventoryContents(TileEntity tile) {
-		if (tile == null || !(tile instanceof IInventory))
-			return;
-		IInventory iinventory = (IInventory) tile;
-		for (int i = 0; i < iinventory.getSizeInventory(); i++) {
-			ItemStack stack = iinventory.getStackInSlot(i);
-			if (stack != null && stack.getItem() != null && stack.stackSize > 0) {
-				dropStack(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord, stack.copy());
-				iinventory.setInventorySlotContents(i, null);
-			}
-		}
-		tile.markDirty();
-	}
-
 	public static boolean inventoryContains(IInventory iinventory, ItemStack stack, boolean ignoreSize) {
-		return inventoryContains(iinventory, stack, ignoreSize, getSlotsFromSide(iinventory, 0));
+		return inventoryContains(iinventory, stack, ignoreSize, getSlotsFromSide(iinventory, EnumFacing.DOWN));
 	}
 
 	public static boolean inventoryContains(IInventory iinventory, ItemStack stack, boolean ignoreSize, int... slots) {

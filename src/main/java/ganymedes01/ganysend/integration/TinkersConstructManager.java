@@ -1,24 +1,16 @@
 package ganymedes01.ganysend.integration;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.handlers.HandlerEvents;
 import ganymedes01.ganysend.lib.ModMaterials;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import tconstruct.TConstruct;
-import tconstruct.library.TConstructRegistry;
-import tconstruct.library.crafting.Smeltery;
-import tconstruct.library.event.ToolCraftEvent;
-import tconstruct.library.tools.ToolMaterial;
-import tconstruct.library.util.IPattern;
-import tconstruct.smeltery.TinkerSmeltery;
-import tconstruct.tools.TinkerTools;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Gany's End

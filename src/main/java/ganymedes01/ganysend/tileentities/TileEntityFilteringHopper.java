@@ -7,18 +7,27 @@ import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
-import net.minecraft.command.IEntitySelector;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.IHopper;
+import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.EntitySelectors;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.items.VanillaInventoryCodeHooks;
 
 /**
  * Gany's End
@@ -27,7 +36,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  *
  */
 
-public class TileEntityFilteringHopper extends TileEntity implements IInventory {
+public class TileEntityFilteringHopper extends TileEntityLockable implements IInventory, IHopper, ITickable {
 
 	protected ItemStack[] inventory = new ItemStack[5];
 	private ItemStack filter;
@@ -83,11 +92,6 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		return MAX_COOL_DOWN;
 	}
 
-	@Override
-	public String getInventoryName() {
-		return name;
-	}
-
 	protected boolean shouldPull(ItemStack stack) {
 		if (getStackInSlot(FILER_SLOT) == null)
 			return false;
@@ -95,7 +99,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	}
 
 	@Override
-	public void updateEntity() {
+	public void update() {
 		if (worldObj.isRemote)
 			return;
 
@@ -110,6 +114,9 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	}
 
 	protected boolean insertItemToInventory() {
+		if (VanillaInventoryCodeHooks.insertHook(this, getSideToInsert()))
+			return true;
+
 		IInventory inventoryToInsert = getInventoryToInsert();
 		if (inventoryToInsert == null)
 			return false;
@@ -134,16 +141,19 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	}
 
 	protected boolean suckItemFromInventory() {
+		if (VanillaInventoryCodeHooks.extractHook(this))
+			return true;
+
 		IInventory inventoryToPull = getInventoryAbove();
 
 		if (inventoryToPull == null)
 			return false;
 
-		for (int slot : InventoryUtils.getSlotsFromSide(inventoryToPull, 0)) {
+		for (int slot : InventoryUtils.getSlotsFromSide(inventoryToPull, EnumFacing.DOWN)) {
 			ItemStack stack = inventoryToPull.getStackInSlot(slot);
 			if (stack == null)
 				continue;
-			if (inventoryToPull instanceof ISidedInventory && !((ISidedInventory) inventoryToPull).canExtractItem(slot, stack, 0))
+			if (inventoryToPull instanceof ISidedInventory && !((ISidedInventory) inventoryToPull).canExtractItem(slot, stack, EnumFacing.DOWN))
 				continue;
 			if (shouldPull(stack)) {
 				ItemStack copy = stack.copy();
@@ -160,9 +170,11 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		return false;
 	}
 
-	@SuppressWarnings("unchecked")
 	protected boolean suckEntitiesAbove() {
-		List<EntityItem> list = worldObj.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord + 1.0D, zCoord, xCoord + 1.0D, yCoord + 2.0D, zCoord + 1.0D), IEntitySelector.selectAnything);
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+		List<EntityItem> list = worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(x - 0.5, y - 0.5, z - 0.5, x + 0.5, y + 0.5, z + 0.5), EntitySelectors.selectAnything);
 		if (!list.isEmpty()) {
 			Iterator<EntityItem> iterator = list.iterator();
 			while (iterator.hasNext()) {
@@ -176,9 +188,12 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	}
 
 	protected final IInventory getInventoryAbove() {
-		IInventory iinventory = Utils.getTileEntity(worldObj, xCoord, yCoord + 1, zCoord, IInventory.class);
+		IInventory iinventory = Utils.getTileEntity(worldObj, pos.up(), IInventory.class);
 		if (iinventory == null) {
-			List<?> list = worldObj.getEntitiesWithinAABBExcludingEntity(null, AxisAlignedBB.getBoundingBox(xCoord, yCoord + 1, zCoord, xCoord + 1, yCoord + 2, zCoord + 1), IEntitySelector.selectInventories);
+			int x = pos.getX();
+			int y = pos.getY();
+			int z = pos.getZ();
+			List<Entity> list = worldObj.getEntitiesInAABBexcluding(null, new AxisAlignedBB(x - 0.5, y - 0.5, z - 0.5, x + 0.5, y + 0.5, z + 0.5), EntitySelectors.selectInventories);
 			if (list != null && list.size() > 0)
 				iinventory = (IInventory) list.get(worldObj.rand.nextInt(list.size()));
 		}
@@ -187,33 +202,12 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	}
 
 	protected IInventory getInventoryToInsert() {
-		int x = xCoord, y = yCoord, z = zCoord;
-		switch (getBlockMetadata()) {
-			case 0:
-				y--;
-				break;
-			case 2:
-				z--;
-				break;
-			case 3:
-				z++;
-				break;
-			case 4:
-				x--;
-				break;
-			case 5:
-				x++;
-				break;
-			default:
-				return null;
-		}
-
-		IInventory tile = Utils.getTileEntity(worldObj, x, y, z, IInventory.class);
-		return tile;
+		BlockPos sidePos = pos.offset(getSideToInsert());
+		return Utils.getTileEntity(worldObj, sidePos, IInventory.class);
 	}
 
-	public int getSideToInsert() {
-		return ForgeDirection.VALID_DIRECTIONS[getBlockMetadata()].ordinal();
+	public EnumFacing getSideToInsert() {
+		return EnumFacing.VALUES[getBlockMetadata()];
 	}
 
 	@Override
@@ -266,7 +260,7 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
+	public ItemStack removeStackFromSlot(int slot) {
 		if (slot == FILER_SLOT)
 			return filter;
 		if (inventory[slot] != null) {
@@ -292,11 +286,6 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
-
-	@Override
 	public int getInventoryStackLimit() {
 		return 64;
 	}
@@ -304,14 +293,6 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		return true;
-	}
-
-	@Override
-	public void openInventory() {
-	}
-
-	@Override
-	public void closeInventory() {
 	}
 
 	@Override
@@ -362,5 +343,73 @@ public class TileEntityFilteringHopper extends TileEntity implements IInventory 
 		data.setInteger("TransferCooldown", transferCooldown);
 		data.setInteger("MAX_COOL_DOWN", MAX_COOL_DOWN);
 		data.setBoolean("OPPOSITE", EXCLUSIVE);
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public boolean hasCustomName() {
+		return false;
+	}
+
+	@Override
+	public IChatComponent getDisplayName() {
+		return new ChatComponentTranslation(getName());
+	}
+
+	@Override
+	public void openInventory(EntityPlayer player) {
+	}
+
+	@Override
+	public void closeInventory(EntityPlayer player) {
+	}
+
+	@Override
+	public int getField(int id) {
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+	}
+
+	@Override
+	public int getFieldCount() {
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		inventory = new ItemStack[inventory.length];
+		filter = null;
+	}
+
+	@Override
+	public double getXPos() {
+		return pos.getX();
+	}
+
+	@Override
+	public double getYPos() {
+		return pos.getY();
+	}
+
+	@Override
+	public double getZPos() {
+		return pos.getZ();
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
+		return null;
+	}
+
+	@Override
+	public String getGuiID() {
+		return null;
 	}
 }

@@ -10,16 +10,15 @@ import net.minecraft.util.DamageSource;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class EndiumHelmet extends EndiumArmour {
 
 	public EndiumHelmet() {
 		super(0);
-		setTextureName(Utils.getItemTexture(Strings.ENDIUM_HELMET_NAME));
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_HELMET_NAME));
 	}
 
