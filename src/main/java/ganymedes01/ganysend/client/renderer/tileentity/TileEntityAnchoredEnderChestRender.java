@@ -1,15 +1,14 @@
 package ganymedes01.ganysend.client.renderer.tileentity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityAnchoredEnderChest;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -19,7 +18,7 @@ import net.minecraft.util.ResourceLocation;
  */
 
 @SideOnly(Side.CLIENT)
-public class TileEntityAnchoredEnderChestRender extends TileEntitySpecialRenderer {
+public class TileEntityAnchoredEnderChestRender extends TileEntitySpecialRenderer<TileEntityAnchoredEnderChest> {
 
 	private static final ResourceLocation TEXTURE_ON = Utils.getResource(Utils.getEntityTexture(Strings.ANCHORED_ENDER_CHEST_NAME + "_on"));
 	private static final ResourceLocation TEXTURE_OFF = Utils.getResource(Utils.getEntityTexture(Strings.ANCHORED_ENDER_CHEST_NAME + "_off"));
@@ -27,8 +26,8 @@ public class TileEntityAnchoredEnderChestRender extends TileEntitySpecialRendere
 	private final ModelChest MODEL = new ModelChest();
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTick) {
-		TileEntityAnchoredEnderChest chest = (TileEntityAnchoredEnderChest) tile;
+	public void renderTileEntityAt(TileEntityAnchoredEnderChest tile, double x, double y, double z, float partialTick, int destroyStage) {
+		TileEntityAnchoredEnderChest chest = tile;
 		int meta = chest.hasWorldObj() ? chest.getBlockMetadata() : 0;
 
 		bindTexture(chest.getPlayerInventory() != null ? TEXTURE_ON : TEXTURE_OFF);

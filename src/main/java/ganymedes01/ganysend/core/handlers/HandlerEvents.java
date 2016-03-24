@@ -1,10 +1,5 @@
 package ganymedes01.ganysend.core.handlers;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
@@ -16,7 +11,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -24,6 +18,11 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -61,9 +60,9 @@ public class HandlerEvents {
 		if (!GanysEnd.enableEnderFlower)
 			return;
 
-		if (event.world.provider.dimensionId == 1 && event.block == Blocks.end_stone)
-			if (event.world.isAirBlock(event.x, event.y + 1, event.z)) {
-				event.world.setBlock(event.x, event.y + 1, event.z, ModBlocks.enderFlower);
+		if (event.world.provider.getDimensionId() == 1 && event.block == Blocks.end_stone)
+			if (event.world.isAirBlock(event.pos.up())) {
+				event.world.setBlockState(event.pos.up(), ModBlocks.enderFlower.getDefaultState());
 				event.setResult(Result.ALLOW);
 			}
 	}
@@ -87,7 +86,7 @@ public class HandlerEvents {
 							int z = data.getIntArray("Position")[2];
 							int dim = data.getInteger("Dimension");
 
-							if (event.world.provider.dimensionId != dim)
+							if (event.world.provider.getDimensionId() != dim)
 								return;
 							IInventory tile = Utils.getTileEntity(event.world, x, y, z, IInventory.class);
 							if (tile != null) {
@@ -121,7 +120,7 @@ public class HandlerEvents {
 						if (!stack.hasTagCompound())
 							stack.setTagCompound(new NBTTagCompound());
 						stack.stackTagCompound.setIntArray("Position", new int[] { x, y, z });
-						stack.stackTagCompound.setInteger("Dimension", world.provider.dimensionId);
+						stack.stackTagCompound.setInteger("Dimension", world.provider.getDimensionId());
 						stack.stackTagCompound.setBoolean("Tagged", true);
 						player.swingItem();
 					}

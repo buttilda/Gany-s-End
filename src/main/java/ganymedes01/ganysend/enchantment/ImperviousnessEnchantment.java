@@ -6,18 +6,19 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class ImperviousnessEnchantment extends Enchantment {
 
 	public ImperviousnessEnchantment() {
-		super(ModIDs.IMPERVIOUSNESS_ID, 5, EnumEnchantmentType.armor);
+		super(ModIDs.IMPERVIOUSNESS_ID, new ResourceLocation("imperviousness"), 5, EnumEnchantmentType.ARMOR);
 		addToBookList(this);
 		setName("imperviousness");
 	}

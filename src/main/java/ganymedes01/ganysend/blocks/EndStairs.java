@@ -2,8 +2,8 @@ package ganymedes01.ganysend.blocks;
 
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.block.state.IBlockState;
 
 /**
  * Gany's End
@@ -14,8 +14,8 @@ import net.minecraft.block.BlockStairs;
 
 public class EndStairs extends BlockStairs implements IConfigurable {
 
-	public EndStairs(Block block, int meta) {
-		super(block, meta);
+	public EndStairs(IBlockState state) {
+		super(state);
 		setHardness(1.5F);
 		setLightOpacity(0);
 		setResistance(10.0F);

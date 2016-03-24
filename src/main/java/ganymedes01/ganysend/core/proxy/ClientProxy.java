@@ -1,20 +1,8 @@
 package ganymedes01.ganysend.core.proxy;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModItems;
-import ganymedes01.ganysend.client.renderer.block.BlockChestRenderer;
-import ganymedes01.ganysend.client.renderer.block.BlockEnderFlowerRenderer;
-import ganymedes01.ganysend.client.renderer.block.BlockFilteringHopperRender;
-import ganymedes01.ganysend.client.renderer.block.BlockInfiniteWaterSourceRender;
-import ganymedes01.ganysend.client.renderer.block.BlockInventoryBinderRender;
-import ganymedes01.ganysend.client.renderer.block.BlockRawEndiumRender;
-import ganymedes01.ganysend.client.renderer.block.BlockTimeManipulatorRender;
 import ganymedes01.ganysend.client.renderer.entity.EntityAnchoredEnderChestMinecartRenderer;
-import ganymedes01.ganysend.client.renderer.item.AnchoredEnderChestMinecartRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityAnchoredEnderChestRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInfiniteWaterSourceRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInventoryBinderRender;
@@ -27,6 +15,9 @@ import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
 import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Loader;
 
 /**
  * Gany's End
@@ -42,7 +33,7 @@ public class ClientProxy extends CommonProxy {
 		super.registerEvents();
 		if (GanysEnd.shouldDoVersionCheck) {
 			VersionHelper.execute();
-			FMLCommonHandler.instance().bus().register(new VersionCheckTickHandler());
+			MinecraftForge.EVENT_BUS.register(new VersionCheckTickHandler());
 		}
 
 		if (!Loader.isModLoaded("ganysnether"))
@@ -64,21 +55,7 @@ public class ClientProxy extends CommonProxy {
 	public void registerRenderers() {
 		if (GanysEnd.enableAnchoredEnderChest) {
 			MinecraftForgeClient.registerItemRenderer(ModItems.anchoredEnderChestMinecart, new AnchoredEnderChestMinecartRender());
-			RenderingRegistry.registerBlockHandler(new BlockChestRenderer());
 			RenderingRegistry.registerEntityRenderingHandler(EntityAnchoredEnderChestMinecart.class, new EntityAnchoredEnderChestMinecartRenderer());
 		}
-
-		if (GanysEnd.enableHoppers)
-			RenderingRegistry.registerBlockHandler(new BlockFilteringHopperRender());
-		if (GanysEnd.enableInventoryBinder)
-			RenderingRegistry.registerBlockHandler(new BlockInventoryBinderRender());
-		if (GanysEnd.enableTimeManipulator)
-			RenderingRegistry.registerBlockHandler(new BlockTimeManipulatorRender());
-		if (GanysEnd.enableEndium)
-			RenderingRegistry.registerBlockHandler(new BlockRawEndiumRender());
-		if (GanysEnd.enableInfiniteWaterSource)
-			RenderingRegistry.registerBlockHandler(new BlockInfiniteWaterSourceRender());
-		if (GanysEnd.enableEnderFlower)
-			RenderingRegistry.registerBlockHandler(new BlockEnderFlowerRenderer());
 	}
 }

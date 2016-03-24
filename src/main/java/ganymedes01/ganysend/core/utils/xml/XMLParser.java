@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -53,7 +54,7 @@ public class XMLParser {
 
 	public static ItemStack parseItemStackNode(XMLNode node) {
 		String[] data = node.value.split(" ");
-		Item item = (Item) Item.itemRegistry.getObject(data[0]);
+		Item item = Item.itemRegistry.getObject(new ResourceLocation(data[0]));
 		int size = Integer.parseInt(data[1]);
 		int meta = Integer.parseInt(data[2]);
 		ItemStack stack = new ItemStack(item, size, meta);
@@ -62,7 +63,7 @@ public class XMLParser {
 				String nbt = "";
 				for (int i = 3; i < data.length; i++)
 					nbt += " " + data[i];
-				NBTBase nbtbase = JsonToNBT.func_150315_a(nbt);
+				NBTBase nbtbase = JsonToNBT.getTagFromJson(nbt);
 				stack.setTagCompound((NBTTagCompound) nbtbase);
 			} catch (Exception e) {
 				throw new RuntimeException(e);
@@ -85,7 +86,7 @@ public class XMLParser {
 				String nbt = "";
 				for (int i = 2; i < data.length; i++)
 					nbt += " " + data[i];
-				NBTBase nbtbase = JsonToNBT.func_150315_a(nbt);
+				NBTBase nbtbase = JsonToNBT.getTagFromJson(nbt);
 				stack.tag = (NBTTagCompound) nbtbase;
 			} catch (Exception e) {
 				throw new RuntimeException(e);

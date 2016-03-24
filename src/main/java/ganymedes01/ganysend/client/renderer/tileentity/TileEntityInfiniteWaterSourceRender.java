@@ -2,17 +2,15 @@ package ganymedes01.ganysend.client.renderer.tileentity;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import thaumcraft.client.lib.RenderBlocks;
 
 /**
  * Gany's End
@@ -22,13 +20,13 @@ import net.minecraftforge.fluids.FluidStack;
  */
 
 @SideOnly(Side.CLIENT)
-public class TileEntityInfiniteWaterSourceRender extends TileEntitySpecialRenderer {
+public class TileEntityInfiniteWaterSourceRender extends TileEntitySpecialRenderer<TileEntityInfiniteWaterSource> {
 
 	private final RenderBlocks renderer = new RenderBlocks();
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float angle) {
-		TileEntityInfiniteWaterSource source = (TileEntityInfiniteWaterSource) tile;
+	public void renderTileEntityAt(TileEntityInfiniteWaterSource tile, double x, double y, double z, float partialTick, int destroyStage) {
+		TileEntityInfiniteWaterSource source = tile;
 		FluidStack fluid = source.getFluidForRendering();
 		if (fluid == null)
 			return;

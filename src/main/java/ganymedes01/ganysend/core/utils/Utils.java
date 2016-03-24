@@ -11,6 +11,7 @@ import ganymedes01.ganysend.lib.Reference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -78,8 +79,8 @@ public class Utils {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> T getTileEntity(IBlockAccess world, int x, int y, int z, Class<T> cls) {
-		TileEntity tile = world.getTileEntity(x, y, z);
+	public static <T> T getTileEntity(IBlockAccess world, BlockPos pos, Class<T> cls) {
+		TileEntity tile = world.getTileEntity(pos);
 		if (!cls.isInstance(tile))
 			return null;
 		return (T) tile;

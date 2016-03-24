@@ -1,11 +1,11 @@
 package ganymedes01.ganysend.client.renderer.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.client.renderer.block.BlockChestRenderer;
 import ganymedes01.ganysend.entities.EntityAnchoredEnderChestMinecart;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderMinecart;
-import net.minecraft.entity.item.EntityMinecart;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -15,12 +15,15 @@ import net.minecraft.entity.item.EntityMinecart;
  */
 
 @SideOnly(Side.CLIENT)
-public class EntityAnchoredEnderChestMinecartRenderer extends RenderMinecart {
+public class EntityAnchoredEnderChestMinecartRenderer extends RenderMinecart<EntityAnchoredEnderChestMinecart> {
+
+	public EntityAnchoredEnderChestMinecartRenderer(RenderManager renderManager) {
+		super(renderManager);
+	}
 
 	@Override
-	public void doRender(EntityMinecart entity, double x, double y, double z, float f0, float f1) {
-		if (entity instanceof EntityAnchoredEnderChestMinecart)
-			BlockChestRenderer.USE_ON_TEXTURE = ((EntityAnchoredEnderChestMinecart) entity).isConnected();
+	public void doRender(EntityAnchoredEnderChestMinecart entity, double x, double y, double z, float f0, float f1) {
+		BlockChestRenderer.USE_ON_TEXTURE = entity.isConnected();
 		super.doRender(entity, x, y, z, f0, f1);
 	}
 }

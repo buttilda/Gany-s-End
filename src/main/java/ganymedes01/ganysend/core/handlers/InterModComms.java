@@ -3,14 +3,14 @@ package ganymedes01.ganysend.core.handlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
-import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import ganymedes01.ganysend.lib.IMCKeys;
 import ganymedes01.ganysend.recipes.EnderFurnaceFuelsRegistry;
 import ganymedes01.ganysend.recipes.EnderFurnaceRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fml.common.event.FMLInterModComms.IMCEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms.IMCMessage;
 
 /**
  * Gany's End

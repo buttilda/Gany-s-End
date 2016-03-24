@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityWeatherEffect;
@@ -16,9 +15,9 @@ import net.minecraft.util.AxisAlignedBB;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class TileEntityEntityShifter extends TileEntityBlockShifter {
@@ -35,7 +34,7 @@ public class TileEntityEntityShifter extends TileEntityBlockShifter {
 	@Override
 	@SuppressWarnings("rawtypes")
 	protected void teleportFromTo(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {
-		List list = worldObj.selectEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(fromX, fromY, fromZ, fromX + 1.0D, fromY + 1.0D, fromZ + 1.0D), IEntitySelector.selectAnything);
+		List list = worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.fromBounds(fromX, fromY, fromZ, fromX + 1.0D, fromY + 1.0D, fromZ + 1.0D));
 		if (!list.isEmpty()) {
 			Iterator iterator = list.iterator();
 			while (iterator.hasNext()) {
@@ -62,7 +61,7 @@ public class TileEntityEntityShifter extends TileEntityBlockShifter {
 
 	private void teleportEntityItem(EntityItem item, int toX, int toY, int toZ) {
 		EntityItem newEntity = new EntityItem(worldObj, toX + 0.5D, toY, toZ + 0.5D, item.getEntityItem());
-		newEntity.copyDataFrom(item, true);
+		newEntity.setEntityItemStack(item.getEntityItem().copy());
 		newEntity.setLocationAndAngles(toX, toY, toZ, item.rotationYaw, item.rotationPitch);
 		worldObj.spawnEntityInWorld(newEntity);
 		item.setDead();

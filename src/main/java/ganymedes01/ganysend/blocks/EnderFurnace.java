@@ -1,9 +1,5 @@
 package ganymedes01.ganysend.blocks;
 
-import java.util.Random;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
@@ -14,13 +10,10 @@ import ganymedes01.ganysend.tileentities.TileEntityEnderFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -33,9 +26,6 @@ import net.minecraft.world.World;
  */
 
 public class EnderFurnace extends BlockContainer implements IConfigurable {
-
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
 
 	public EnderFurnace() {
 		super(Material.rock);
@@ -115,50 +105,6 @@ public class EnderFurnace extends BlockContainer implements IConfigurable {
 		if (tile != null)
 			return tile.lightLevel;
 		return 0;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-		if (side == 0 || side == 1)
-			return icons[0];
-		if (side != world.getBlockMetadata(x, y, z))
-			return icons[1];
-
-		TileEntityEnderFurnace tile = Utils.getTileEntity(world, x, y, z, TileEntityEnderFurnace.class);
-		if (tile != null)
-			return tile.lightLevel == 15 ? icons[2] : icons[3];
-
-			return super.getIcon(world, x, y, z, side);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
-		TileEntityEnderFurnace tile = Utils.getTileEntity(world, x, y, z, TileEntityEnderFurnace.class);
-		if (tile != null && tile.lightLevel > 0)
-			for (int i = 0; i < 5; i++)
-				Blocks.ender_chest.randomDisplayTick(world, x, y, z, rand);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		meta = 3;
-		if (side == 0 || side == 1)
-			return icons[0];
-		else if (side != meta)
-			return icons[1];
-		else
-			return icons[3];
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		icons = new IIcon[4];
-		for (int i = 0; i < icons.length; i++)
-			icons[i] = reg.registerIcon(Utils.getBlockTexture(Strings.ENDER_FURNACE_NAME + i));
 	}
 
 	@Override

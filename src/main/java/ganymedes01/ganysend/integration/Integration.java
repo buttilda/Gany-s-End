@@ -1,12 +1,12 @@
 package ganymedes01.ganysend.integration;
 
-import cpw.mods.fml.common.Loader;
+import net.minecraftforge.fml.common.Loader;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public abstract class Integration {

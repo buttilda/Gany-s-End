@@ -2,25 +2,25 @@ package ganymedes01.ganysend.api;
 
 import java.lang.reflect.Field;
 
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.event.FMLInterModComms;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.common.FMLLog;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class GanysEndAPI {
 
 	/**
 	 * Adds a recipe to the Ender Furnace input parameter must have between 1 and 4 items
-	 * 
+	 *
 	 * @param output
 	 * @param input
 	 *            (Can contain ItemStacks and/or Strings)
@@ -46,7 +46,7 @@ public class GanysEndAPI {
 
 	/**
 	 * Adds an item that can be burned in the Ender Furnace
-	 * 
+	 *
 	 * @param fuel
 	 *            (Can be an ItemStack or a String)
 	 * @param burnTime

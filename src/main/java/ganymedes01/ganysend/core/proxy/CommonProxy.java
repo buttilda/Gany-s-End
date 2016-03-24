@@ -1,9 +1,5 @@
 package ganymedes01.ganysend.core.proxy;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.client.gui.inventory.GuiAdvancedFilteringHopper;
 import ganymedes01.ganysend.client.gui.inventory.GuiBasicFilteringHopper;
@@ -35,8 +31,12 @@ import ganymedes01.ganysend.tileentities.TileEntityTimeManipulator;
 import ganymedes01.ganysend.tileentities.TileEntityVoidCrate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * Gany's End
@@ -48,7 +48,7 @@ import net.minecraftforge.common.MinecraftForge;
 public class CommonProxy implements IGuiHandler {
 
 	public void registerEvents() {
-		FMLCommonHandler.instance().bus().register(ConfigurationHandler.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(ConfigurationHandler.INSTANCE);
 
 		MinecraftForge.EVENT_BUS.register(new HandlerEvents());
 		MinecraftForge.EVENT_BUS.register(new EntityDropEvent());
@@ -90,7 +90,7 @@ public class CommonProxy implements IGuiHandler {
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		TileEntity tile = world.getTileEntity(x, y, z);
+		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 		switch (ID) {
 			case GUIsID.BASIC_FILTERING_HOPPER:
 				return new ContainerFilteringHopper(player.inventory, (TileEntityFilteringHopper) tile);
@@ -106,7 +106,7 @@ public class CommonProxy implements IGuiHandler {
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		TileEntity tile = world.getTileEntity(x, y, z);
+		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 		switch (ID) {
 			case GUIsID.BASIC_FILTERING_HOPPER:
 				return new GuiBasicFilteringHopper(player.inventory, (TileEntityFilteringHopper) tile);

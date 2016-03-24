@@ -59,7 +59,7 @@ public class EnderFurnaceRegistry extends RecipeRegistry<EnderFurnaceRecipe> {
 		addRecipe(new ItemStack(Items.ender_pearl), Items.ghast_tear, Items.sugar, Items.glowstone_dust, Items.experience_bottle);
 		if (GanysEnd.enableTimeManipulator)
 			addRecipe(new ItemStack(Blocks.dragon_egg), ModBlocks.timeManipulator);
-		addRecipe(new ItemStack(Items.cooked_fished), Items.fish);
+		addRecipe(new ItemStack(Items.cooked_fish), Items.fish);
 		addRecipe(new ItemStack(Items.potato), Items.poisonous_potato);
 		addRecipe(new ItemStack(Items.beef), Items.rotten_flesh);
 		addRecipe(new ItemStack(Blocks.tallgrass, 1, 2), Blocks.deadbush);

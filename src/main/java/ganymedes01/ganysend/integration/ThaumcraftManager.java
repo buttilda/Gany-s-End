@@ -1,22 +1,13 @@
 package ganymedes01.ganysend.integration;
 
-import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
 import ganymedes01.ganysend.ModItems;
-import ganymedes01.ganysend.enchantment.ModEnchants;
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.crafting.InfusionEnchantmentRecipe;
-import thaumcraft.api.research.ResearchCategories;
-import thaumcraft.api.research.ResearchItem;
-import thaumcraft.api.research.ResearchPage;
 
 /**
  * Gany's End
@@ -42,26 +33,9 @@ public class ThaumcraftManager extends Integration {
 	public void postInit() {
 	}
 
-	public void postPostInit() {
-		if (GanysEnd.enableEndiumArmour)
-			addInfusionEnchantmentRecipe(Enchantment.enchantmentsList[ModEnchants.imperviousness.effectId], 4, new AspectList().add(Aspect.SLIME, 6).add(Aspect.WATER, 4).add(Aspect.MAGIC, 10), ItemApi.getItem("itemResource", 14), new ItemStack(Items.dye, 1, 2), new ItemStack(Items.slime_ball));
-	}
-
 	@Override
 	public String getModID() {
 		return "Thaumcraft";
-	}
-
-	private void addInfusionEnchantmentRecipe(Enchantment ench, int instability, AspectList aspects, ItemStack... ingredients) {
-		InfusionEnchantmentRecipe recipe = ThaumcraftApi.addInfusionEnchantmentRecipe("INFUSIONENCHANTMENT", ench, instability, aspects, ingredients);
-		ResearchItem research = ResearchCategories.getResearch("INFUSIONENCHANTMENT");
-
-		ResearchPage[] pages = new ResearchPage[research.getPages().length + 1];
-		for (int i = 0; i < research.getPages().length; i++)
-			pages[i] = research.getPages()[i];
-		pages[pages.length - 1] = new ResearchPage(recipe);
-
-		research.setPages(pages);
 	}
 
 	private void addAspectsToItem(Block id, Aspect[] aspects, int[] amounts) {

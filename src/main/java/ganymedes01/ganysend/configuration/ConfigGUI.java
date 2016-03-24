@@ -3,11 +3,11 @@ package ganymedes01.ganysend.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-import cpw.mods.fml.client.config.GuiConfig;
-import cpw.mods.fml.client.config.IConfigElement;
 import ganymedes01.ganysend.lib.Reference;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
+import net.minecraftforge.fml.client.config.GuiConfig;
+import net.minecraftforge.fml.client.config.IConfigElement;
 
 /**
  * Gany's End
@@ -22,7 +22,6 @@ public class ConfigGUI extends GuiConfig {
 		super(parent, getElements(), Reference.MOD_ID, Reference.MOD_ID, false, false, GuiConfig.getAbridgedConfigPath(ConfigurationHandler.INSTANCE.configFile.toString()));
 	}
 
-	@SuppressWarnings({ "rawtypes" })
 	private static List<IConfigElement> getElements() {
 		List<IConfigElement> list = new ArrayList<IConfigElement>();
 		for (String category : ConfigurationHandler.INSTANCE.usedCategories)

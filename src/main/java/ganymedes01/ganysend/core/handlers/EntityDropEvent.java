@@ -4,8 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.api.IEndiumScythe;
 import ganymedes01.ganysend.api.IEndiumTool;
@@ -20,9 +18,12 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * Gany's End
@@ -62,7 +63,7 @@ public class EntityDropEvent {
 		if (!GanysEnd.enableEndiumTools)
 			return;
 		if (weapon != null && isEndiumTool(weapon))
-			if (weapon.stackTagCompound != null)
+			if (weapon.hasTagCompound())
 				if (weapon.getTagCompound().getBoolean("Tagged")) {
 					NBTTagCompound data = weapon.getTagCompound();
 					int x = data.getIntArray("Position")[0];
@@ -70,8 +71,8 @@ public class EntityDropEvent {
 					int z = data.getIntArray("Position")[2];
 					int dim = data.getInteger("Dimension");
 
-					if (event.entityLiving.worldObj.provider.dimensionId == dim) {
-						IInventory tile = Utils.getTileEntity(event.entityLiving.worldObj, x, y, z, IInventory.class);
+					if (event.entityLiving.worldObj.provider.getDimensionId() == dim) {
+						IInventory tile = Utils.getTileEntity(event.entityLiving.worldObj, new BlockPos(x, y, z), IInventory.class);
 						if (tile != null) {
 							List<EntityItem> deads = new LinkedList<EntityItem>();
 							for (EntityItem entityitem : event.drops) {
@@ -108,7 +109,7 @@ public class EntityDropEvent {
 			return;
 
 		EntityItem entityItem = new EntityItem(entity.worldObj, entity.posX, entity.posY, entity.posZ, stack);
-		entityItem.delayBeforeCanPickup = 10;
+		entityItem.setDefaultPickupDelay();
 		list.add(entityItem);
 	}
 

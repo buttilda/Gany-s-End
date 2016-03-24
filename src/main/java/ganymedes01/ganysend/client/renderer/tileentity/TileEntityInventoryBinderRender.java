@@ -6,8 +6,6 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.client.OpenGLHelper;
 import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
 import net.minecraft.client.Minecraft;
@@ -16,8 +14,9 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -27,14 +26,14 @@ import net.minecraft.util.ResourceLocation;
  */
 
 @SideOnly(Side.CLIENT)
-public class TileEntityInventoryBinderRender extends TileEntitySpecialRenderer {
+public class TileEntityInventoryBinderRender extends TileEntitySpecialRenderer<TileEntityInventoryBinder> {
 
 	private final ModelBiped biped = new ModelBiped(0.0F);
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTicks) {
-		TileEntityInventoryBinder tilePlayerInv = (TileEntityInventoryBinder) tile;
+	public void renderTileEntityAt(TileEntityInventoryBinder tile, double x, double y, double z, float partialTicks, int destroyStage) {
+		TileEntityInventoryBinder tilePlayerInv = tile;
 		GameProfile profile = tilePlayerInv.getProfile();
 		if (profile == null)
 			return;

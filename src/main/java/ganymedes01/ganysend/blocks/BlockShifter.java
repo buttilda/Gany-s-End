@@ -1,7 +1,5 @@
 package ganymedes01.ganysend.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModItems;
@@ -11,12 +9,13 @@ import ganymedes01.ganysend.tileentities.TileEntityBlockShifter;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -44,12 +43,12 @@ public class BlockShifter extends BlockContainer implements IConfigurable {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
+	public void onNeighborBlockChange(World world, BlockPos pos, Block neighbour) {
 		if (world.isRemote)
 			return;
-		TileEntityBlockShifter tile = Utils.getTileEntity(world, x, y, z, TileEntityBlockShifter.class);
+		TileEntityBlockShifter tile = Utils.getTileEntity(world, pos, TileEntityBlockShifter.class);
 		if (tile != null)
-			tile.direction = world.isBlockIndirectlyGettingPowered(x, y, z);
+			tile.direction = world.isBlockIndirectlyGettingPowered(pos);
 	}
 
 	@Override

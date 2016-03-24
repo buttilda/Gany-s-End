@@ -2,7 +2,6 @@ package ganymedes01.ganysend;
 
 import java.lang.reflect.Field;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import ganymedes01.ganysend.dispenser.DispenserBehaviorInfiniteBucket;
 import ganymedes01.ganysend.dispenser.DispenserBehaviorInfusedGem;
 import ganymedes01.ganysend.items.EnderBag;
@@ -33,6 +32,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * Gany's End

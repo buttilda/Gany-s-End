@@ -63,7 +63,7 @@ public class HeadsHelper {
 		ItemStack stack = new ItemStack(Items.skull, 1, 3);
 		stack.setTagCompound(new NBTTagCompound());
 		NBTTagCompound profileData = new NBTTagCompound();
-		NBTUtil.func_152460_a(profileData, profile);
+		NBTUtil.writeGameProfile(profileData, profile);
 		stack.getTagCompound().setTag("SkullOwner", profileData);
 
 		return stack;
