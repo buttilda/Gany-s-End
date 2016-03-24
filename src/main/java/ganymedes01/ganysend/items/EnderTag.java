@@ -12,6 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -38,13 +40,14 @@ public class EnderTag extends Item implements IConfigurable {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (stack.getItem() == this) {
 			if (!stack.hasTagCompound())
 				stack.setTagCompound(new NBTTagCompound());
-			stack.stackTagCompound.setIntArray("Position", new int[] { x, y, z });
-			stack.stackTagCompound.setInteger("Dimension", world.provider.dimensionId);
-			stack.stackTagCompound.setBoolean("Tagged", true);
+			NBTTagCompound nbt = stack.getTagCompound();
+			nbt.setIntArray("Position", new int[] { pos.getX(), pos.getY(), pos.getZ() });
+			nbt.setInteger("Dimension", world.provider.getDimensionId());
+			nbt.setBoolean("Tagged", true);
 			stack.setTagInfo("ench", new NBTTagList());
 			player.swingItem();
 			return true;
@@ -57,9 +60,11 @@ public class EnderTag extends Item implements IConfigurable {
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
 		if (!stack.hasTagCompound())
 			stack.setTagCompound(new NBTTagCompound());
-		if (stack.stackTagCompound.hasKey("Position") && stack.stackTagCompound.hasKey("Dimension"))
-			list.add(Integer.toString(stack.stackTagCompound.getInteger("Dimension")) + " : " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[0]) + ", " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[1]) + ", " + Integer.toString(stack.stackTagCompound.getIntArray("Position")[2]));
-		else
+		NBTTagCompound nbt = stack.getTagCompound();
+		if (nbt.hasKey("Position") && nbt.hasKey("Dimension")) {
+			int[] pos = nbt.getIntArray("Position");
+			list.add(Integer.toString(nbt.getInteger("Dimension")) + " : " + pos[0] + ", " + pos[1] + ", " + pos[2]);
+		} else
 			list.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".nottagged"));
 	}
 

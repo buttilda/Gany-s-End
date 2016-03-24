@@ -71,7 +71,6 @@ public class ConfigurationHandler {
 		GanysEnd.enableTimeManipulator = configBoolean("enableTimeManipulator", true, GanysEnd.enableTimeManipulator);
 		GanysEnd.enableEnderBag = configBoolean("enableEnderBag", true, GanysEnd.enableEnderBag);
 		GanysEnd.enableVanillaHeadsDrop = configBoolean("enableVanillaHeadsDrop", false, GanysEnd.enableVanillaHeadsDrop);
-		GanysEnd.enable2DHoppers = configBoolean("enable2DHoppers", false, GanysEnd.enable2DHoppers);
 		GanysEnd.enableEndiumGen = configBoolean("enableEndiumWorldGen", true, GanysEnd.enableEndiumGen);
 		GanysEnd.enableEnderFlower = configBoolean("enableEnderFlower", true, GanysEnd.enableEnderFlower);
 		GanysEnd.enableEndiumArmour = configBoolean("enableEndiumArmour", true, GanysEnd.enableEndiumArmour);

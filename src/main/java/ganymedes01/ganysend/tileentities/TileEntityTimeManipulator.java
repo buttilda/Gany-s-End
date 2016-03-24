@@ -42,17 +42,17 @@ public class TileEntityTimeManipulator extends TileEntity implements IPacketHand
 	}
 
 	@Override
-	public Packet getDescriptionPacket() {
+	public Packet<?> getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setBoolean("revertTime", revertTime);
 		nbt.setBoolean("advanceTime", advanceTime);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+		return new S35PacketUpdateTileEntity(pos, 0, nbt);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-		NBTTagCompound nbt = pkt.func_148857_g();
-		if (pkt.func_148853_f() == 0) {
+		NBTTagCompound nbt = pkt.getNbtCompound();
+		if (pkt.getTileEntityType() == 0) {
 			revertTime = nbt.getBoolean("revertTime");
 			advanceTime = nbt.getBoolean("advanceTime");
 		}
@@ -73,8 +73,8 @@ public class TileEntityTimeManipulator extends TileEntity implements IPacketHand
 	}
 
 	public void sendUpdates() {
-		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 0, revertTime ? 1 : 0);
-		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 1, advanceTime ? 1 : 0);
+		worldObj.addBlockEvent(pos, getBlockType(), 0, revertTime ? 1 : 0);
+		worldObj.addBlockEvent(pos, getBlockType(), 1, advanceTime ? 1 : 0);
 	}
 
 	@Override

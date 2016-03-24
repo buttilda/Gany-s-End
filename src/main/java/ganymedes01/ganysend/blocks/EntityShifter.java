@@ -17,7 +17,7 @@ public class EntityShifter extends BlockShifter {
 
 	public EntityShifter() {
 		super();
-		setBlockName(Utils.getUnlocalisedName(Strings.ENTITY_SHIFTER_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENTITY_SHIFTER_NAME));
 	}
 
 	@Override

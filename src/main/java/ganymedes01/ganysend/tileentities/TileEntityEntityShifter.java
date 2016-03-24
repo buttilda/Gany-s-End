@@ -1,7 +1,6 @@
 package ganymedes01.ganysend.tileentities;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
@@ -12,6 +11,7 @@ import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 
 /**
  * Gany's End
@@ -32,13 +32,17 @@ public class TileEntityEntityShifter extends TileEntityBlockShifter {
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
-	protected void teleportFromTo(int fromX, int fromY, int fromZ, int toX, int toY, int toZ) {
-		List list = worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.fromBounds(fromX, fromY, fromZ, fromX + 1.0D, fromY + 1.0D, fromZ + 1.0D));
-		if (!list.isEmpty()) {
-			Iterator iterator = list.iterator();
-			while (iterator.hasNext()) {
-				Entity entity = (Entity) iterator.next();
+	protected void teleportFromTo(BlockPos from, BlockPos to) {
+		int fromX = from.getX();
+		int fromY = from.getY();
+		int fromZ = from.getZ();
+		int toX = to.getX();
+		int toY = to.getY();
+		int toZ = to.getZ();
+
+		List<Entity> list = worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.fromBounds(fromX, fromY, fromZ, fromX + 1.0D, fromY + 1.0D, fromZ + 1.0D));
+		if (!list.isEmpty())
+			for (Entity entity : list) {
 				if (entity.worldObj == worldObj)
 					for (Class<? extends Entity> clazz : blackListedEntities)
 						if (clazz.isAssignableFrom(entity.getClass()))
@@ -51,7 +55,6 @@ public class TileEntityEntityShifter extends TileEntityBlockShifter {
 					teleportEntityGeneral(entity, toX, toY, toZ);
 				worldObj.playSoundEffect(fromX, fromY, fromZ, "mob.endermen.portal", 1.0F, 1.0F);
 			}
-		}
 	}
 
 	private void teleportEntityLiving(EntityLivingBase living, int toX, int toY, int toZ) {

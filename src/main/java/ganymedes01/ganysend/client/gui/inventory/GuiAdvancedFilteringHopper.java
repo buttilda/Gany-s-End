@@ -22,6 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiAdvancedFilteringHopper extends GuiContainer {
 
+	private static final ResourceLocation TEXTURE = Utils.getResource(Utils.getGUITexture(Strings.ADVANCED_FILTERING_HOPPER_NAME));
 	private final TileEntityAdvancedFilteringHopper hopper;
 
 	public GuiAdvancedFilteringHopper(InventoryPlayer inventory, TileEntityAdvancedFilteringHopper tile) {
@@ -31,7 +32,7 @@ public class GuiAdvancedFilteringHopper extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		String invtName = StatCollector.translateToLocal(hopper.getInventoryName());
+		String invtName = StatCollector.translateToLocal(hopper.getName());
 		fontRendererObj.drawString(invtName, xSize / 2 - fontRendererObj.getStringWidth(invtName) / 2, 6, 4210752);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 
@@ -41,7 +42,7 @@ public class GuiAdvancedFilteringHopper extends GuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		OpenGLHelper.colour(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(new ResourceLocation(Utils.getGUITexture(Strings.ADVANCED_FILTERING_HOPPER_NAME)));
+		mc.renderEngine.bindTexture(TEXTURE);
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;
 		drawTexturedModalRect(j, k, 0, 0, xSize, ySize);

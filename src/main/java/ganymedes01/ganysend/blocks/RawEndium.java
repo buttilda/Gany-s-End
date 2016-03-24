@@ -26,7 +26,7 @@ public class RawEndium extends Block implements IConfigurable {
 		setResistance(2001.0F);
 		setHarvestLevel("pickaxe", 3);
 		setCreativeTab(GanysEnd.enableEndium ? GanysEnd.endTab : null);
-		setBlockName(Utils.getUnlocalisedName(Strings.RAW_ENDIUM_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.RAW_ENDIUM_NAME));
 	}
 
 	@Override

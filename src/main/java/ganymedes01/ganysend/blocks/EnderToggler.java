@@ -8,7 +8,6 @@ import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -19,14 +18,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EnderToggler extends Block implements IConfigurable {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon blockSide, blockBottom, blockTop;
-
 	public EnderToggler() {
 		super(Material.iron);
 		setHardness(1.5F);
 		setResistance(10.0F);
-		setBlockName(Utils.getUnlocalisedName(Strings.ENDER_TOGGLER_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDER_TOGGLER_NAME));
 		setCreativeTab(GanysEnd.enableEnderToggler ? GanysEnd.endTab : null);
 	}
 

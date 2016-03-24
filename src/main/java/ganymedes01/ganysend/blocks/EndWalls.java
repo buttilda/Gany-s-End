@@ -2,8 +2,6 @@ package ganymedes01.ganysend.blocks;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModBlocks;
@@ -16,25 +14,15 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EndWalls extends BlockWall implements ISubBlocksBlock, IConfigurable {
 
 	public EndWalls() {
 		super(ModBlocks.endstoneBrick);
-		setBlockName(Utils.getUnlocalisedName(Strings.END_WALLS_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.END_WALLS_NAME));
 		setCreativeTab(GanysEnd.enableDecorativeBlocks ? GanysEnd.endTab : null);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		switch (meta) {
-			case 0:
-				return ModBlocks.endstoneBrick.getBlockTextureFromSide(0);
-			default:
-				return ModBlocks.enderpearlBlock.getIcon(0, 1);
-		}
 	}
 
 	@Override

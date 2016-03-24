@@ -59,7 +59,6 @@ public class GanysEnd {
 	public static boolean enableVanillaHeadsDrop = true;
 	public static boolean enableEnderBag = true;
 	public static boolean enableAnchoredEnderChest = true;
-	public static boolean enable2DHoppers = false;
 	public static boolean enableEnderFlower = true;
 	public static boolean enableEndiumGen = true;
 	public static boolean enableEndiumArmour = true;
@@ -77,7 +76,6 @@ public class GanysEnd {
 	public static boolean enableEndium = true;
 
 	public static boolean isHeadcrumbsLoaded = false;
-	public static boolean isBotaniaLoaded = false;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -91,12 +89,16 @@ public class GanysEnd {
 		ModItems.init();
 		ModEnchants.init();
 		ModRecipes.registerOreDictionary();
+
+		proxy.registerEvents();
+		proxy.registerTileEntities();
+		proxy.registerEntities();
+		proxy.registerRenderers();
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		isHeadcrumbsLoaded = Loader.isModLoaded("headcrumbs");
-		isBotaniaLoaded = Loader.isModLoaded("Botania");
 		ModRecipes.init();
 
 		if (enableEnderFurnace) {
@@ -107,11 +109,6 @@ public class GanysEnd {
 		PacketHandler.init();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
-
-		proxy.registerEvents();
-		proxy.registerTileEntities();
-		proxy.registerRenderers();
-		proxy.registerEntities();
 
 		ModIntegrator.init();
 
@@ -134,8 +131,10 @@ public class GanysEnd {
 				Field f = BiomeGenBase.class.getDeclaredField("flowers");
 				f.setAccessible(true);
 				for (FlowerEntry entry : (List<FlowerEntry>) f.get(biome))
-					if (entry.block != null)
-						OreDictionary.registerOre("dayGemMaterial", new ItemStack(entry.block, 1, entry.metadata));
+					if (entry.state != null) {
+						Block block = entry.state.getBlock();
+						OreDictionary.registerOre("dayGemMaterial", new ItemStack(block, 1, block.getMetaFromState(entry.state)));
+					}
 			}
 		} catch (Exception e) {
 		}

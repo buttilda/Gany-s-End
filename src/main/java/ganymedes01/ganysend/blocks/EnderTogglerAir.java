@@ -2,8 +2,6 @@ package ganymedes01.ganysend.blocks;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModBlocks;
@@ -14,6 +12,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -26,10 +25,9 @@ public class EnderTogglerAir extends Block implements IConfigurable {
 
 	public EnderTogglerAir() {
 		super(Material.iron);
-		setHardness(-1.0F);
+		setBlockUnbreakable();
 		setResistance(6000000.0F);
-		setBlockName(Utils.getUnlocalisedName(Strings.ENDER_TOGGLER_AIR_NAME));
-		setBlockTextureName(Utils.getBlockTexture(Strings.ENDER_TOGGLER_AIR_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDER_TOGGLER_AIR_NAME));
 	}
 
 	@Override

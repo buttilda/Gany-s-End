@@ -32,7 +32,7 @@ public class BasicFilteringHopper extends BlockHopper implements IConfigurable {
 		setResistance(8.0F);
 		setStepSound(soundTypeWood);
 		setCreativeTab(GanysEnd.enableHoppers ? GanysEnd.endTab : null);
-		setBlockName(Utils.getUnlocalisedName(Strings.BASIC_FILTERING_HOPPER_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.BASIC_FILTERING_HOPPER_NAME));
 	}
 
 	@Override

@@ -1,18 +1,15 @@
 package ganymedes01.ganysend.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.GUIsID;
 import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityAdvancedFilteringHopper;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -25,7 +22,7 @@ public class AdvancedFilteringHopper extends BasicFilteringHopper {
 
 	public AdvancedFilteringHopper() {
 		super();
-		setBlockName(Utils.getUnlocalisedName(Strings.ADVANCED_FILTERING_HOPPER_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ADVANCED_FILTERING_HOPPER_NAME));
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
@@ -19,14 +20,12 @@ import net.minecraft.world.World;
 public class DispenserBehaviorInfiniteBucket extends BehaviorDefaultDispenseItem {
 
 	@Override
-	public ItemStack dispenseStack(IBlockSource block, ItemStack stack) {
-		EnumFacing enumfacing = BlockDispenser.func_149937_b(block.getBlockMetadata());
-		World world = block.getWorld();
-		int x = block.getXInt() + enumfacing.getFrontOffsetX();
-		int y = block.getYInt() + enumfacing.getFrontOffsetY();
-		int z = block.getZInt() + enumfacing.getFrontOffsetZ();
+	public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
+		EnumFacing facing = BlockDispenser.getFacing(source.getBlockMetadata());
+		World world = source.getWorld();
+		BlockPos pos = source.getBlockPos().offset(facing);
 
-		ModItems.infiniteBucket.onItemUse(stack, Utils.getPlayer(world), world, x, y, z, enumfacing.ordinal(), 0, 0, 0);
+		ModItems.infiniteBucket.onItemUse(stack, Utils.getPlayer(world), world, pos, facing, 0, 0, 0);
 
 		return stack;
 	}

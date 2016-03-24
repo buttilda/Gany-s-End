@@ -6,6 +6,8 @@ import java.util.List;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModItems;
+import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -28,6 +30,7 @@ public class EndiumBlock extends Block implements IConfigurable {
 		setResistance(0.5F);
 		setStepSound(soundTypeMetal);
 		setCreativeTab(GanysEnd.enableEndium ? GanysEnd.endTab : null);
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_BLOCK_NAME));
 	}
 
 	@Override

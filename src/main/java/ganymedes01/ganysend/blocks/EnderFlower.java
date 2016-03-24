@@ -26,7 +26,7 @@ public class EnderFlower extends BlockBush implements IConfigurable {
 	public EnderFlower() {
 		setLightLevel(0.3F);
 		setStepSound(soundTypeGrass);
-		setBlockName(Utils.getUnlocalisedName(Strings.ENDER_FLOWER_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDER_FLOWER_NAME));
 		setCreativeTab(GanysEnd.enableEnderFlower ? GanysEnd.endTab : null);
 	}
 

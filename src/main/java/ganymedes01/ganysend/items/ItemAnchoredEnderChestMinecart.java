@@ -9,8 +9,9 @@ import net.minecraft.block.BlockRailBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemMinecart;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -22,28 +23,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemAnchoredEnderChestMinecart extends ItemMinecart implements IConfigurable {
 
 	public ItemAnchoredEnderChestMinecart() {
-		super(0);
+		super(null);
 		setCreativeTab(GanysEnd.enableAnchoredEnderChest ? GanysEnd.endTab : null);
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ANCHORED_ENDER_CHEST_MINECART_NAME));
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (BlockRailBase.func_150051_a(world.getBlock(x, y, z))) {
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (BlockRailBase.isRailBlock(world.getBlockState(pos))) {
 			if (!world.isRemote) {
-				EntityAnchoredEnderChestMinecart minecart = new EntityAnchoredEnderChestMinecart(world, x + 0.5F, y + 0.5F, z + 0.5F);
-				minecart.setPlayerName(player.getCommandSenderName());
+				EntityAnchoredEnderChestMinecart minecart = new EntityAnchoredEnderChestMinecart(world, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F);
+				minecart.setPlayerName(player.getName());
 				world.spawnEntityInWorld(minecart);
 			}
 			stack.stackSize--;
 			return true;
 		} else
 			return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
 	}
 
 	@Override

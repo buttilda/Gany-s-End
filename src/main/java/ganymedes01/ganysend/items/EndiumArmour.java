@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -99,7 +100,7 @@ public abstract class EndiumArmour extends ItemArmor implements IConfigurable {
 			int xCoord = MathHelper.floor_double(player.posX);
 			int yCoord = MathHelper.floor_double(player.posY) + 1;
 			int zCoord = MathHelper.floor_double(player.posZ);
-			if (world.canLightningStrikeAt(xCoord, yCoord, zCoord))
+			if (world.canLightningStrike(new BlockPos(xCoord, yCoord, zCoord)))
 				coolDown--;
 			if (coolDown <= 0) {
 				stack.damageItem(1, player);

@@ -1,7 +1,5 @@
 package ganymedes01.ganysend.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
@@ -9,10 +7,9 @@ import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Facing;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -26,9 +23,8 @@ public class Emulator extends Block implements IConfigurable {
 	public Emulator() {
 		super(Material.portal);
 		setHardness(0.3F);
-		setBlockName(Utils.getUnlocalisedName(Strings.EMULATOR_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.EMULATOR_NAME));
 		setCreativeTab(GanysEnd.enableEmulator ? GanysEnd.endTab : null);
-		setBlockTextureName(Utils.getBlockTexture(Strings.EMULATOR_NAME));
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class EndstoneBrick extends Block implements IConfigurable {
 		super(Material.rock);
 		setHardness(3.0F);
 		setResistance(15.0F);
-		setBlockName(Utils.getUnlocalisedName(Strings.ENDSTONE_BRICK_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDSTONE_BRICK_NAME));
 		setCreativeTab(GanysEnd.enableDecorativeBlocks ? GanysEnd.endTab : null);
 	}
 

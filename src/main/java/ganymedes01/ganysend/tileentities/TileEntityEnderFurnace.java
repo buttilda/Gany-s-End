@@ -9,6 +9,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ITickable;
 
 /**
  * Gany's End
@@ -17,7 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
  *
  */
 
-public class TileEntityEnderFurnace extends GanysInventory implements ISidedInventory {
+public class TileEntityEnderFurnace extends GanysInventory implements ISidedInventory, ITickable {
 
 	private int burnTime, currentBurnTime, cookTime;
 	private boolean update, canSmelt;
@@ -41,7 +42,7 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 	}
 
 	@Override
-	public void updateEntity() {
+	public void update() {
 		if (worldObj.isRemote)
 			return;
 

@@ -30,7 +30,7 @@ public class EnderFurnace extends BlockContainer implements IConfigurable {
 	public EnderFurnace() {
 		super(Material.rock);
 		setHardness(5.0F);
-		setBlockName(Utils.getUnlocalisedName(Strings.ENDER_FURNACE_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDER_FURNACE_NAME));
 		setCreativeTab(GanysEnd.enableEnderFurnace ? GanysEnd.endTab : null);
 	}
 

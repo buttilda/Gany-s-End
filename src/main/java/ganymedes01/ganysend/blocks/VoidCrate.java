@@ -13,7 +13,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -24,13 +23,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class VoidCrate extends BlockContainer implements IConfigurable {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
-
 	public VoidCrate() {
 		super(Material.iron);
 		setHardness(2.0F);
-		setBlockName(Utils.getUnlocalisedName(Strings.VOID_CRATE_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.VOID_CRATE_NAME));
 		setCreativeTab(GanysEnd.enableVoidCrate ? GanysEnd.endTab : null);
 	}
 

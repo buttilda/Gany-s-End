@@ -27,8 +27,8 @@ public class CreativeInfiniteFluidSource extends InfiniteWaterSource {
 
 	public CreativeInfiniteFluidSource() {
 		super(Material.rock);
-		setHardness(-1);
-		setBlockName(Utils.getUnlocalisedName(Strings.CREATIVE_INFINITE_FLUID_SOURCE_NAME));
+		setBlockUnbreakable();
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.CREATIVE_INFINITE_FLUID_SOURCE_NAME));
 	}
 
 	@Override

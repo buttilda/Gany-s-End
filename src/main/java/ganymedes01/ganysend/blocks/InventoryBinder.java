@@ -1,11 +1,8 @@
 package ganymedes01.ganysend.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
 import net.minecraft.block.BlockContainer;
@@ -15,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -28,9 +26,8 @@ public class InventoryBinder extends BlockContainer implements IConfigurable {
 	public InventoryBinder() {
 		super(Material.rock);
 		setHardness(10.0F);
-		setBlockName(Utils.getUnlocalisedName(Strings.INVENTORY_BINDER_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.INVENTORY_BINDER_NAME));
 		setCreativeTab(GanysEnd.enableInventoryBinder ? GanysEnd.endTab : null);
-		setBlockTextureName(Utils.getBlockTexture(Strings.INVENTORY_BINDER_NAME));
 	}
 
 	@Override

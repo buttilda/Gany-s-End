@@ -29,7 +29,7 @@ public class BlockShifter extends BlockContainer implements IConfigurable {
 		setHardness(1.5F);
 		setResistance(10.0F);
 		setCreativeTab(GanysEnd.enableShifters ? GanysEnd.endTab : null);
-		setBlockName(Utils.getUnlocalisedName(Strings.BLOCK_SHIFTER_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.BLOCK_SHIFTER_NAME));
 	}
 
 	@Override

@@ -38,7 +38,7 @@ public class InventoryUtils {
 	}
 
 	public static void dropStack(World world, BlockPos pos, ItemStack stack) {
-		if (!world.isRemote && stack != null && world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
+		if (!world.isRemote && stack != null) {
 			float f = 0.7F;
 			double d0 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
 			double d1 = world.rand.nextFloat() * f + (1.0F - f) * 0.5D;
@@ -50,7 +50,7 @@ public class InventoryUtils {
 	}
 
 	public static void dropStackNoRandom(World world, int x, int y, int z, ItemStack stack) {
-		if (!world.isRemote && stack != null && world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
+		if (!world.isRemote && stack != null) {
 			EntityItem entityItem = new EntityItem(world, x + 0.5, y, z + 0.5, stack);
 			entityItem.motionX = 0;
 			entityItem.motionY = 0;
@@ -251,7 +251,7 @@ public class InventoryUtils {
 				adjacent = chest.adjacentChestZPos;
 
 			if (adjacent != null)
-				return new InventoryLargeChest("", inventory, adjacent);
+				return new InventoryLargeChest("", (TileEntityChest) inventory, adjacent);
 		}
 		return inventory;
 	}

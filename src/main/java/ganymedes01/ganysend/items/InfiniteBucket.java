@@ -5,7 +5,6 @@ import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -13,6 +12,8 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemSimpleFoiled;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -44,42 +45,23 @@ public class InfiniteBucket extends ItemSimpleFoiled implements IConfigurable {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (side < 0 || side > 5)
-			return false;
-		ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[side];
-
-		IFluidHandler tile = Utils.getTileEntity(world, x, y, z, IFluidHandler.class);
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+		IFluidHandler tile = Utils.getTileEntity(world, pos, IFluidHandler.class);
 		if (tile != null) {
 			if (!world.isRemote)
-				tile.fill(dir, new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME), true);
+				tile.fill(side, new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME), true);
 			return true;
-		} else if (world.getBlock(x, y, z) == Blocks.cauldron) {
-			int filled = BlockCauldron.func_150027_b(world.getBlockMetadata(x, y, z));
-			if (filled < 3) {
-				world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-				world.func_147453_f(x, y, z, Blocks.cauldron);
-				return true;
-			}
-		} else if (GanysEnd.isBotaniaLoaded)
-			try {
-				Class<?> IPetalApothecary = Class.forName("vazkii.botania.api.item.IPetalApothecary");
-				if (IPetalApothecary.isInstance(tile))
-					if (!(Boolean) IPetalApothecary.getMethod("hasWater").invoke(tile))
-						IPetalApothecary.getMethod("setWater", boolean.class).invoke(tile, true);
-			} catch (Exception e) {
-				GanysEnd.isBotaniaLoaded = false;
-			}
-
-		Block block = world.getBlock(x, y, z);
-		if (block != Blocks.vine && block != Blocks.tallgrass && block != Blocks.deadbush && !block.isReplaceable(world, x, y, z)) {
-			x += dir.offsetX;
-			y += dir.offsetY;
-			z += dir.offsetZ;
+		} else if (world.getBlockState(pos).getBlock() == Blocks.cauldron) {
+			Blocks.cauldron.setWaterLevel(world, pos, world.getBlockState(pos), 3);
+			return true;
 		}
-		if (player == null || player.canPlayerEdit(x, y, z, side, stack)) {
+
+		Block block = world.getBlockState(pos).getBlock();
+		if (block != Blocks.vine && block != Blocks.tallgrass && block != Blocks.deadbush && !block.isReplaceable(world, pos))
+			pos = pos.offset(side);
+		if (player == null || player.canPlayerEdit(pos, side, stack)) {
 			if (!world.isRemote)
-				((ItemBucket) Items.water_bucket).tryPlaceContainedLiquid(world, x, y, z);
+				((ItemBucket) Items.water_bucket).tryPlaceContainedLiquid(world, pos);
 			return true;
 		}
 

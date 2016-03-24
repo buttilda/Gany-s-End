@@ -17,6 +17,8 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -43,13 +45,14 @@ public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable {
 		if (stack.hasTagCompound())
 			if (stack.getTagCompound().getBoolean("Tagged")) {
 				NBTTagCompound data = stack.getTagCompound();
-				int x = data.getIntArray("Position")[0];
-				int y = data.getIntArray("Position")[1];
-				int z = data.getIntArray("Position")[2];
+				int[] pos = data.getIntArray("Position");
+				int x = pos[0];
+				int y = pos[1];
+				int z = pos[2];
 				int dim = data.getInteger("Dimension");
 
-				if (world.provider.dimensionId == dim)
-					return Utils.getTileEntity(world, x, y, z, IInventory.class);
+				if (world.provider.getDimensionId() == dim)
+					return Utils.getTileEntity(world, new BlockPos(x, y, z), IInventory.class);
 			}
 		return null;
 	}
@@ -165,17 +168,18 @@ public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		IInventory tile = Utils.getTileEntity(world, x, y, z, IInventory.class);
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+		IInventory tile = Utils.getTileEntity(world, pos, IInventory.class);
 		if (tile != null)
 			if (stack.getItem() == this) {
-				if (stack.stackTagCompound == null)
+				if (!stack.hasTagCompound())
 					stack.setTagCompound(new NBTTagCompound());
-				stack.stackTagCompound.setIntArray("Position", new int[] { x, y, z });
-				stack.stackTagCompound.setInteger("Dimension", world.provider.dimensionId);
-				stack.stackTagCompound.setBoolean("Tagged", true);
+				NBTTagCompound nbt = stack.getTagCompound();
+				nbt.setIntArray("Position", new int[] { pos.getX(), pos.getY(), pos.getZ() });
+				nbt.setInteger("Dimension", world.provider.getDimensionId());
+				nbt.setBoolean("Tagged", true);
 				player.swingItem();
-				return true;
+				return false;
 			}
 		return false;
 	}

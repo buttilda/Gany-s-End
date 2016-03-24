@@ -6,6 +6,8 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
 import net.minecraft.block.state.pattern.BlockHelper;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -36,20 +38,20 @@ public class EndWorldGenerator implements IWorldGenerator {
 						int blockX = chunkX * 16 + x;
 						int blockY = y + 1;
 						int blockZ = chunkZ * 16 + z;
+						BlockPos pos = new BlockPos(blockX, blockY, blockZ);
 						if (rand.nextInt(60) == 30)
-							if (world.getBlock(blockX, blockY - 1, blockZ) == Blocks.end_stone)
-								if (world.isAirBlock(blockX, blockY, blockZ))
-									if (!isSurrounded(world, blockX, blockY, blockZ))
-										world.setBlock(blockX, blockY, blockZ, ModBlocks.enderFlower);
+							if (world.getBlockState(pos.down()).getBlock() == Blocks.end_stone)
+								if (world.isAirBlock(pos) && !isSurrounded(world, pos))
+									world.setBlockState(pos, ModBlocks.enderFlower.getDefaultState());
 					}
 
 		if (GanysEnd.enableEndiumGen)
 			for (int i = 0; i < 15; i++)
-				if (TerrainGen.generateOre(world, rand, endiumGenerator, chunkX, chunkZ, GenerateMinable.EventType.CUSTOM))
-					endiumGenerator.generate(world, rand, chunkX * 16 + rand.nextInt(16), 20 + rand.nextInt(100), chunkZ * 16 + rand.nextInt(16));
+				if (TerrainGen.generateOre(world, rand, endiumGenerator, new BlockPos(chunkX, 0, chunkZ), GenerateMinable.EventType.CUSTOM))
+					endiumGenerator.generate(world, rand, new BlockPos(chunkX * 16 + rand.nextInt(16), 20 + rand.nextInt(100), chunkZ * 16 + rand.nextInt(16)));
 	}
 
-	private boolean isSurrounded(World world, int x, int y, int z) {
-		return !(world.isAirBlock(x + 1, y, z) && world.isAirBlock(x - 1, y, z) && world.isAirBlock(x, y, z + 1) && world.isAirBlock(x, y, z - 1));
+	private boolean isSurrounded(World world, BlockPos pos) {
+		return !(world.isAirBlock(pos.offset(EnumFacing.EAST)) && world.isAirBlock(pos.offset(EnumFacing.WEST)) && world.isAirBlock(pos.offset(EnumFacing.NORTH)) && world.isAirBlock(pos.offset(EnumFacing.SOUTH)));
 	}
 }

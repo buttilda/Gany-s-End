@@ -2,11 +2,8 @@ package ganymedes01.ganysend.blocks;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityAnchoredEnderChest;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,8 +12,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -30,7 +27,7 @@ public class AnchoredEnderChest extends InventoryBinder {
 	public AnchoredEnderChest() {
 		super();
 		setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0.875F, 0.9375F);
-		setBlockName(Utils.getUnlocalisedName(Strings.ANCHORED_ENDER_CHEST_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ANCHORED_ENDER_CHEST_NAME));
 		setCreativeTab(GanysEnd.enableAnchoredEnderChest ? GanysEnd.endTab : null);
 	}
 

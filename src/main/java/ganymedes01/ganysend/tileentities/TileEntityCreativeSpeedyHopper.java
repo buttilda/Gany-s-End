@@ -6,7 +6,6 @@ import java.util.List;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
-import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -14,15 +13,15 @@ import net.minecraft.util.AxisAlignedBB;
 
 /**
  * Gany's End
- * 
+ *
  * @author ganymedes01
- * 
+ *
  */
 
 public class TileEntityCreativeSpeedyHopper extends TileEntitySpeedyHopper {
 
 	@Override
-	public String getInventoryName() {
+	public String getName() {
 		return Utils.getConainerName(Strings.CREATIVE_SPEEDY_HOPPER_NAME);
 	}
 

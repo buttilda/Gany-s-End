@@ -35,7 +35,7 @@ public class TileEntityAnchoredEnderChest extends TileEntityInventoryBinder impl
 		prevLidAngle = lidAngle;
 
 		if (playersUsing > 0 && lidAngle == 0.0F)
-			worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, "random.chestopen", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			worldObj.playSoundEffect(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, "random.chestopen", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 
 		if (playersUsing == 0 && lidAngle > 0.0F || playersUsing > 0 && lidAngle < 1.0F) {
 			float oldAngle = lidAngle;
@@ -49,7 +49,7 @@ public class TileEntityAnchoredEnderChest extends TileEntityInventoryBinder impl
 				lidAngle = 1.0F;
 
 			if (lidAngle < 0.5F && oldAngle >= 0.5F)
-				worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, "random.chestclosed", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
+				worldObj.playSoundEffect(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, "random.chestclosed", 0.5F, worldObj.rand.nextFloat() * 0.1F + 0.9F);
 
 			if (lidAngle < 0.0F)
 				lidAngle = 0.0F;
@@ -71,13 +71,13 @@ public class TileEntityAnchoredEnderChest extends TileEntityInventoryBinder impl
 			playersUsing = 0;
 
 		playersUsing++;
-		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 0, playersUsing);
+		worldObj.addBlockEvent(pos, getBlockType(), 0, playersUsing);
 	}
 
 	@Override
 	public void closeInventory() {
 		playersUsing--;
-		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 0, playersUsing);
+		worldObj.addBlockEvent(pos, getBlockType(), 0, playersUsing);
 	}
 
 	@Override

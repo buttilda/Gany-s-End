@@ -7,6 +7,7 @@ import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityEnderFurnace;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiEnderFurnace extends GuiContainer {
 
+	private static final ResourceLocation TEXTURE = Utils.getResource(Utils.getGUITexture(Strings.ENDER_FURNACE_NAME));
 	private final TileEntityEnderFurnace furnace;
 
 	public GuiEnderFurnace(InventoryPlayer inventory, TileEntityEnderFurnace tile) {
@@ -30,14 +32,14 @@ public class GuiEnderFurnace extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		fontRendererObj.drawString(StatCollector.translateToLocal(furnace.getInventoryName()), xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal(furnace.getInventoryName())) / 2, 6, 4210752);
+		fontRendererObj.drawString(StatCollector.translateToLocal(furnace.getName()), xSize / 2 - fontRendererObj.getStringWidth(StatCollector.translateToLocal(furnace.getName())) / 2, 6, 4210752);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		OpenGLHelper.colour(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(Utils.getResource(Utils.getGUITexture(Strings.ENDER_FURNACE_NAME)));
+		mc.renderEngine.bindTexture(TEXTURE);
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;
 		drawTexturedModalRect(j, k, 0, 0, xSize, ySize);

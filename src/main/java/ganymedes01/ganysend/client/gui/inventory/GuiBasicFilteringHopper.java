@@ -22,23 +22,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiBasicFilteringHopper extends GuiContainer {
 
-	private final ResourceLocation backGround;
+	private final ResourceLocation TEXTURE;
 	private final TileEntityFilteringHopper hopper;
 
 	public GuiBasicFilteringHopper(InventoryPlayer inventory, TileEntityFilteringHopper tile) {
 		super(new ContainerFilteringHopper(inventory, tile));
 		hopper = tile;
 		if (tile.isFilter())
-			backGround = new ResourceLocation(Utils.getGUITexture(Strings.BASIC_FILTERING_HOPPER_NAME));
+			TEXTURE = new ResourceLocation(Utils.getGUITexture(Strings.BASIC_FILTERING_HOPPER_NAME));
 		else {
 			ySize = 133;
-			backGround = new ResourceLocation("textures/gui/container/hopper.png");
+			TEXTURE = new ResourceLocation("textures/gui/container/hopper.png");
 		}
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		String invtName = StatCollector.translateToLocal(hopper.getInventoryName());
+		String invtName = StatCollector.translateToLocal(hopper.getName());
 		fontRendererObj.drawString(invtName, xSize / 2 - fontRendererObj.getStringWidth(invtName) / 2, 6, 4210752);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 
@@ -48,7 +48,7 @@ public class GuiBasicFilteringHopper extends GuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
 		OpenGLHelper.colour(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(backGround);
+		mc.renderEngine.bindTexture(TEXTURE);
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;
 		drawTexturedModalRect(j, k, 0, 0, xSize, ySize);

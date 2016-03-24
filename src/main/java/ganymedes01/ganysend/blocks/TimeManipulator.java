@@ -2,26 +2,22 @@ package ganymedes01.ganysend.blocks;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.lib.RenderIDs;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityTimeManipulator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -32,16 +28,13 @@ import net.minecraft.world.World;
 
 public class TimeManipulator extends BlockContainer implements IConfigurable {
 
-	@SideOnly(Side.CLIENT)
-	private IIcon[] bottomIcons, topIcons;
-
 	public TimeManipulator() {
 		super(Material.rock);
 		setHardness(10.0F);
 		setResistance(25.0F);
 		setStepSound(soundTypeWood);
 		setCreativeTab(GanysEnd.enableTimeManipulator ? GanysEnd.endTab : null);
-		setBlockName(Utils.getUnlocalisedName(Strings.TIME_MANIPULATOR_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.TIME_MANIPULATOR_NAME));
 	}
 
 	@Override
@@ -129,57 +122,6 @@ public class TimeManipulator extends BlockContainer implements IConfigurable {
 	@SideOnly(Side.CLIENT)
 	public boolean renderAsNormalBlock() {
 		return false;
-	}
-
-	@Override
-	public int getRenderType() {
-		return RenderIDs.TIME_MANIPULATOR;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		if (side == 0 || side == 1)
-			return blockIcon;
-
-		side -= 2;
-		switch (meta) {
-			case 0:
-				return bottomIcons[new int[] { 3, 0, 2, 1 }[side]];
-			case 1:
-				return bottomIcons[new int[] { 2, 1, 0, 3 }[side]];
-			case 2:
-				return bottomIcons[new int[] { 0, 3, 1, 2 }[side]];
-			case 3:
-				return bottomIcons[new int[] { 1, 2, 3, 0 }[side]];
-			case 4:
-				return topIcons[new int[] { 3, 0, 2, 1 }[side]];
-			case 5:
-				return topIcons[new int[] { 2, 1, 0, 3 }[side]];
-			case 6:
-				return topIcons[new int[] { 0, 3, 1, 2 }[side]];
-			case 7:
-				return topIcons[new int[] { 1, 2, 3, 0 }[side]];
-			default:
-				return blockIcon;
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		bottomIcons = new IIcon[4];
-		bottomIcons[0] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_bottom_front"));
-		bottomIcons[1] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_bottom_right"));
-		bottomIcons[2] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_bottom_left"));
-		bottomIcons[3] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_bottom_back"));
-		topIcons = new IIcon[4];
-		topIcons[0] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_top_front"));
-		topIcons[1] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_top_right"));
-		topIcons[2] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_top_left"));
-		topIcons[3] = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_top_back"));
-
-		blockIcon = reg.registerIcon(Utils.getBlockTexture(Strings.TIME_MANIPULATOR_NAME + "_surface"));
 	}
 
 	@Override
