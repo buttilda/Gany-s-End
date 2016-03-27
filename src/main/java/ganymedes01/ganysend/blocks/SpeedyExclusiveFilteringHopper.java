@@ -22,7 +22,7 @@ public class SpeedyExclusiveFilteringHopper extends BasicFilteringHopper {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		TileEntityFilteringHopper tile = new TileEntityFilteringHopper();
+		TileEntityFilteringHopper tile = new TileEntityFilteringHopper(1);
 		tile.setExclusive();
 		tile.setSpeedy();
 		return tile;

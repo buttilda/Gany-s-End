@@ -9,6 +9,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 /**
  * Gany's End
@@ -31,10 +34,13 @@ public class ContainerFilteringHopper extends Container {
 		else
 			b1 = 20;
 
-		for (int i = 0; i < tile.getSizeInventory(); i++)
-			addSlotToContainer(new Slot(tile, i, b0 + i * 18, b1));
+		IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+		IItemHandler filters = tile.getFilters();
+
+		for (int i = 0; i < itemHandler.getSlots(); i++)
+			addSlotToContainer(new SlotItemHandler(itemHandler, i, b0 + i * 18, b1));
 		if (tile.isFilter())
-			addSlotToContainer(new FilterSlot(tile, TileEntityFilteringHopper.FILER_SLOT, 80, 53));
+			addSlotToContainer(new FilterSlot(filters, 0, 80, 53));
 
 		byte b2 = 84;
 		if (!tile.isFilter())
@@ -55,13 +61,16 @@ public class ContainerFilteringHopper extends Container {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (slotIndex < hopper.getSizeInventory()) {
-				if (!mergeItemStack(itemstack1, hopper.getSizeInventory() + 1, inventorySlots.size(), true))
+			IItemHandler itemHandler = hopper.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+			IItemHandler filters = hopper.getFilters();
+
+			if (slotIndex < itemHandler.getSlots()) {
+				if (!mergeItemStack(itemstack1, itemHandler.getSlots() + filters.getSlots(), inventorySlots.size(), true))
 					return null;
-			} else if (slotIndex < hopper.getSizeInventory() + 1) {
-				if (!mergeItemStack(itemstack1, hopper.getSizeInventory() + 1, inventorySlots.size(), true))
+			} else if (slotIndex < itemHandler.getSlots() + filters.getSlots()) {
+				if (!mergeItemStack(itemstack1, itemHandler.getSlots() + filters.getSlots(), inventorySlots.size(), true))
 					return null;
-			} else if (!mergeItemStack(itemstack1, 0, hopper.getSizeInventory(), false))
+			} else if (!mergeItemStack(itemstack1, 0, itemHandler.getSlots(), false))
 				return null;
 
 			if (itemstack1.stackSize == 0)

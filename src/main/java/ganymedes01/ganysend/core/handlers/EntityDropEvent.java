@@ -8,22 +8,22 @@ import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.api.IEndiumScythe;
 import ganymedes01.ganysend.api.IEndiumTool;
 import ganymedes01.ganysend.core.utils.HeadsHelper;
-import ganymedes01.ganysend.core.utils.InventoryUtils;
-import ganymedes01.ganysend.core.utils.Utils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 /**
  * Gany's End
@@ -54,9 +54,15 @@ public class EntityDropEvent {
 
 		// Scythe drop
 		if (GanysEnd.enableScythe && weapon != null && weapon.getItem() instanceof IEndiumScythe) {
-			ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
-			if (stack != null)
-				addDrop(stack, event.entityLiving, event.drops);
+			IEndiumScythe scythe = (IEndiumScythe) weapon.getItem();
+			int charges = scythe.getCharges(weapon);
+			if (charges > 0) {
+				ItemStack stack = HeadsHelper.getHeadfromEntity(event.entityLiving);
+				if (stack != null) {
+					addDrop(stack, event.entityLiving, event.drops);
+					scythe.reduceCharge(weapon);
+				}
+			}
 		}
 
 		// Collect drops
@@ -72,16 +78,25 @@ public class EntityDropEvent {
 					int dim = data.getInteger("Dimension");
 
 					if (event.entityLiving.worldObj.provider.getDimensionId() == dim) {
-						IInventory tile = Utils.getTileEntity(event.entityLiving.worldObj, new BlockPos(x, y, z), IInventory.class);
-						if (tile != null) {
-							List<EntityItem> deads = new LinkedList<EntityItem>();
-							for (EntityItem entityitem : event.drops) {
-								InventoryUtils.addEntitytoInventory(tile, entityitem);
-								if (entityitem.isDead)
-									deads.add(entityitem);
+						TileEntity tile = event.entityLiving.worldObj.getTileEntity(new BlockPos(x, y, z));
+						if (tile != null && tile.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+							IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+
+							List<EntityItem> dead = new LinkedList<EntityItem>();
+							label: for (EntityItem entityitem : event.drops) {
+								ItemStack stack = entityitem.getEntityItem();
+								for (int i = 0; i < itemHandler.getSlots(); i++) {
+									stack = itemHandler.insertItem(i, stack, false);
+									if (stack == null || stack.stackSize <= 0) {
+										dead.add(entityitem);
+										continue label;
+									}
+								}
 							}
-							for (EntityItem entityitem : deads)
+							for (EntityItem entityitem : dead) {
 								event.drops.remove(entityitem);
+								entityitem.setDead();
+							}
 						}
 					}
 				}

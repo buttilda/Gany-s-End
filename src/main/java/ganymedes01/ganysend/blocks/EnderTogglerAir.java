@@ -50,7 +50,7 @@ public class EnderTogglerAir extends Block implements IConfigurable {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, BlockPos pos, Random rand) {
+	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		int max = 5;
 		for (int j = 1; j <= max; j++) {
 			double d0 = x + j * 0.20D;

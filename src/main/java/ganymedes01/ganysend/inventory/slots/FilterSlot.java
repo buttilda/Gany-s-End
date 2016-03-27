@@ -1,8 +1,8 @@
 package ganymedes01.ganysend.inventory.slots;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 /**
  * Gany's End
@@ -11,10 +11,10 @@ import net.minecraft.inventory.Slot;
  *
  */
 
-public class FilterSlot extends Slot {
+public class FilterSlot extends SlotItemHandler {
 
-	public FilterSlot(IInventory inventory, int slot, int posX, int posY) {
-		super(inventory, slot, posX, posY);
+	public FilterSlot(IItemHandler itemHandler, int slot, int posX, int posY) {
+		super(itemHandler, slot, posX, posY);
 	}
 
 	@Override

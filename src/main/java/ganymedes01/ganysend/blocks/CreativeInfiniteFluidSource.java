@@ -6,10 +6,12 @@ import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -32,11 +34,11 @@ public class CreativeInfiniteFluidSource extends InfiniteWaterSource {
 	}
 
 	@Override
-	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
+	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
 		if (player.getCurrentEquippedItem() == null)
 			return;
 
-		TileEntityInfiniteWaterSource tile = Utils.getTileEntity(world, x, y, z, TileEntityInfiniteWaterSource.class);
+		TileEntityInfiniteWaterSource tile = Utils.getTileEntity(world, pos, TileEntityInfiniteWaterSource.class);
 		if (tile == null)
 			return;
 
@@ -47,7 +49,7 @@ public class CreativeInfiniteFluidSource extends InfiniteWaterSource {
 		if (FluidContainerRegistry.isEmptyContainer(stack)) {
 			ItemStack filled = FluidContainerRegistry.fillFluidContainer(tile.getFluid(), stack);
 			if (filled != null) {
-				InventoryUtils.addToPlayerInventory(player, filled, x, y, z);
+				InventoryUtils.addToPlayerInventory(player, filled, pos);
 				stack.stackSize--;
 				if (stack.stackSize == 0)
 					stack = null;
@@ -73,8 +75,8 @@ public class CreativeInfiniteFluidSource extends InfiniteWaterSource {
 	}
 
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
-		TileEntityInfiniteWaterSource tile = Utils.getTileEntity(world, x, y, z, TileEntityInfiniteWaterSource.class);
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+		TileEntityInfiniteWaterSource tile = Utils.getTileEntity(world, pos, TileEntityInfiniteWaterSource.class);
 		if (tile == null)
 			return;
 

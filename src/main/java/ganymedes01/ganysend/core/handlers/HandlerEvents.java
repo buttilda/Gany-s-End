@@ -1,21 +1,28 @@
 package ganymedes01.ganysend.core.handlers;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.ModBlocks;
-import ganymedes01.ganysend.core.utils.InventoryUtils;
+import ganymedes01.ganysend.api.IEndiumScythe;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -25,6 +32,9 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 
 /**
  * Gany's End
@@ -41,7 +51,7 @@ public class HandlerEvents {
 	@SubscribeEvent
 	public void tooltip(ItemTooltipEvent event) {
 		Block block = Block.getBlockFromItem(event.itemStack.getItem());
-		if (block != Blocks.air) {
+		if (block != Blocks.air && block != null) {
 			if (block == ModBlocks.creativeInfiniteFluidSource) {
 				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".creativeOnly"));
 				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".leftClickContainer"));
@@ -49,7 +59,7 @@ public class HandlerEvents {
 				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".creativeOnly"));
 		} else if (EntityDropEvent.isEndiumTool(event.itemStack)) {
 			NBTTagCompound nbt = event.itemStack.getTagCompound();
-			if (nbt != null && nbt.hasKey("Position") && nbt.hasKey("Dimension")) {
+			if (nbt != null && nbt.getBoolean("Tagged")) {
 				String pos = nbt.getIntArray("Position")[0] + ", " + nbt.getIntArray("Position")[1] + ", " + nbt.getIntArray("Position")[2];
 				event.toolTip.add(nbt.getInteger("Dimension") + " : " + pos);
 			} else
@@ -90,12 +100,23 @@ public class HandlerEvents {
 
 							if (event.world.provider.getDimensionId() != dim)
 								return;
-							IInventory tile = Utils.getTileEntity(event.world, new BlockPos(x, y, z), IInventory.class);
-							if (tile != null) {
-								event.dropChance = -1.0F;
-								for (ItemStack stack : event.drops)
-									if (!InventoryUtils.addStackToInventory(tile, stack))
-										InventoryUtils.dropStack(event.world, event.pos, stack);
+							TileEntity tile = event.world.getTileEntity(new BlockPos(x, y, z));
+							if (tile != null && tile.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+								IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+
+								List<ItemStack> inserted = new LinkedList<ItemStack>();
+								label: for (ItemStack stack : event.drops) {
+									ItemStack old = stack;
+									for (int i = 0; i < itemHandler.getSlots(); i++) {
+										stack = itemHandler.insertItem(i, stack, false);
+										if (stack == null) {
+											inserted.add(old);
+											continue label;
+										} else
+											old.stackSize = stack.stackSize;
+									}
+								}
+								event.drops.removeAll(inserted);
 							}
 						}
 				}
@@ -137,5 +158,30 @@ public class HandlerEvents {
 		//			endium_still = event.map.registerIcon(Utils.getBlockTexture("endium_still"));
 		//			endium_flow = event.map.registerIcon(Utils.getBlockTexture("endium_flow"));
 		//		}
+	}
+
+	@SubscribeEvent
+	public void onLightningStrike(EntityStruckByLightningEvent event) {
+		Entity entity = event.entity;
+		if (entity.worldObj.isRemote)
+			return;
+
+		IItemHandler itemHandler = null;
+		if (entity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP))
+			itemHandler = entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+		else if (entity instanceof EntityPlayer) // TODO remove when forge properly integrates it
+			itemHandler = new PlayerInvWrapper(((EntityPlayer) entity).inventory);
+
+		if (entity.worldObj.rand.nextFloat() > 0.5F)
+			for (int i = 0; i < itemHandler.getSlots(); i++) {
+				ItemStack stack = itemHandler.getStackInSlot(i);
+				if (stack != null && stack.getItem() instanceof IEndiumScythe) {
+					ItemStack copy = stack.copy();
+
+					itemHandler.extractItem(i, stack.stackSize, false);
+					((IEndiumScythe) stack.getItem()).addCharge(copy);
+					itemHandler.insertItem(i, copy, false);
+				}
+			}
 	}
 }

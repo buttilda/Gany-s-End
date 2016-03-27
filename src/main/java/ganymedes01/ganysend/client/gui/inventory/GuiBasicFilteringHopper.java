@@ -38,7 +38,7 @@ public class GuiBasicFilteringHopper extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		String invtName = StatCollector.translateToLocal(hopper.getName());
+		String invtName = StatCollector.translateToLocal(Strings.BASIC_FILTERING_HOPPER_NAME);
 		fontRendererObj.drawString(invtName, xSize / 2 - fontRendererObj.getStringWidth(invtName) / 2, 6, 4210752);
 		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
 

@@ -22,7 +22,7 @@ public class ExclusiveFilteringHopper extends BasicFilteringHopper {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		TileEntityFilteringHopper tile = new TileEntityFilteringHopper();
+		TileEntityFilteringHopper tile = new TileEntityFilteringHopper(1);
 		tile.setExclusive();
 		return tile;
 	}

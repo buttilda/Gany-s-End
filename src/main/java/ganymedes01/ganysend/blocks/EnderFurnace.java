@@ -80,11 +80,11 @@ public class EnderFurnace extends BlockContainer implements IConfigurable {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		worldIn.setBlockState(pos, state.withProperty(VARIANTS, placer.getHorizontalFacing().getOpposite()), 2);
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		world.setBlockState(pos, state.withProperty(VARIANTS, placer.getHorizontalFacing().getOpposite()), 2);
 
 		if (stack.hasDisplayName()) {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
+			TileEntity tileentity = world.getTileEntity(pos);
 
 			if (tileentity instanceof TileEntityFurnace)
 				((TileEntityFurnace) tileentity).setCustomInventoryName(stack.getDisplayName());

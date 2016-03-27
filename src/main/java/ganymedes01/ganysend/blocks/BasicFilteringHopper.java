@@ -37,7 +37,7 @@ public class BasicFilteringHopper extends BlockHopper implements IConfigurable {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		TileEntityFilteringHopper tile = new TileEntityFilteringHopper();
+		TileEntityFilteringHopper tile = new TileEntityFilteringHopper(1);
 		tile.setBasic();
 		return tile;
 	}

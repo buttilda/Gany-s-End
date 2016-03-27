@@ -33,7 +33,7 @@ import net.minecraftforge.items.ItemStackHandler;
 public class TileEntityFilteringHopper extends TileEntity implements ITickable {
 
 	protected final IItemHandler itemHandler = new ItemStackHandler(5);
-	protected final IItemHandler filter;
+	protected final IItemHandler filters;
 
 	protected int transferCooldown = -1;
 	protected int MAX_COOL_DOWN;
@@ -41,8 +41,12 @@ public class TileEntityFilteringHopper extends TileEntity implements ITickable {
 	protected String line;
 	protected String name;
 
-	protected TileEntityFilteringHopper(int filterSize) {
-		filter = new ItemStackHandler(filterSize);
+	public TileEntityFilteringHopper(int filterSize) {
+		filters = new ItemStackHandler(filterSize);
+	}
+
+	public IItemHandler getFilters() {
+		return filters;
 	}
 
 	public void setBasic() {
@@ -91,8 +95,11 @@ public class TileEntityFilteringHopper extends TileEntity implements ITickable {
 	}
 
 	protected boolean shouldTransfer(ItemStack stack) {
-		for (int i = 0; i < filter.getSlots(); i++) {
-			ItemStack filterStack = filter.getStackInSlot(i);
+		if (!isFilter())
+			return true;
+
+		for (int i = 0; i < filters.getSlots(); i++) {
+			ItemStack filterStack = filters.getStackInSlot(i);
 			if (filterStack == null)
 				continue;
 			if (InventoryUtils.areStacksTheSame(stack, filterStack, false))
@@ -233,7 +240,7 @@ public class TileEntityFilteringHopper extends TileEntity implements ITickable {
 
 			for (int j = 0; j < destination.getSlots(); j++)
 				if (destination.insertItem(j, stack, true) == null) {
-					destination.insertItem(j, destination.extractItem(i, 1, false), false);
+					destination.insertItem(j, origin.extractItem(i, 1, false), false);
 					return true;
 				}
 		}

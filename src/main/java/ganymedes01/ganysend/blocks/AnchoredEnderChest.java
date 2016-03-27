@@ -66,15 +66,15 @@ public class AnchoredEnderChest extends InventoryBinder {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
-		super.onBlockPlacedBy(world, x, y, z, player, stack);
-		Blocks.ender_chest.onBlockPlacedBy(world, x, y, z, player, stack);
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		super.onBlockPlacedBy(world, pos, state, placer, stack);
+		Blocks.ender_chest.onBlockPlacedBy(world, pos, state, placer, stack);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, BlockPos pos, Random rand) {
-		Blocks.ender_chest.randomDisplayTick(world, x, y, z, rand);
+	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
+		Blocks.ender_chest.randomDisplayTick(world, pos, state, rand);
 	}
 
 	@Override

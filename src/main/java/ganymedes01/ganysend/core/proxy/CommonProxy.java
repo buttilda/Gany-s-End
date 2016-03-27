@@ -11,7 +11,6 @@ import ganymedes01.ganysend.core.handlers.EntityDropEvent;
 import ganymedes01.ganysend.core.handlers.HandlerEvents;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.entities.EntityAnchoredEnderChestMinecart;
-import ganymedes01.ganysend.inventory.ContainerAdvancedFilteringHopper;
 import ganymedes01.ganysend.inventory.ContainerEnderFurnace;
 import ganymedes01.ganysend.inventory.ContainerFilteringHopper;
 import ganymedes01.ganysend.inventory.ContainerVoidCrate;
@@ -93,9 +92,8 @@ public class CommonProxy implements IGuiHandler {
 		TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 		switch (ID) {
 			case GUIsID.BASIC_FILTERING_HOPPER:
-				return new ContainerFilteringHopper(player.inventory, (TileEntityFilteringHopper) tile);
 			case GUIsID.ADVANCED_FILTERING_HOPPER:
-				return new ContainerAdvancedFilteringHopper(player.inventory, (TileEntityAdvancedFilteringHopper) tile);
+				return new ContainerFilteringHopper(player.inventory, (TileEntityFilteringHopper) tile);
 			case GUIsID.VOID_CRATE:
 				return new ContainerVoidCrate(player.inventory, (TileEntityVoidCrate) tile);
 			case GUIsID.ENDER_FURNACE:
