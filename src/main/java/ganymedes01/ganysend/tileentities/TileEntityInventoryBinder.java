@@ -1,8 +1,6 @@
 package ganymedes01.ganysend.tileentities;
 
-import com.google.common.collect.Iterables;
 import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -12,8 +10,9 @@ import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntitySkull;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.util.StringUtils;
 import net.minecraftforge.common.util.Constants;
 
@@ -29,17 +28,17 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory 
 	protected GameProfile profile;
 
 	@Override
-	public Packet getDescriptionPacket() {
+	public Packet<?> getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
-		NBTUtil.func_152460_a(nbt, profile);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+		NBTUtil.writeGameProfile(nbt, profile);
+		return new S35PacketUpdateTileEntity(pos, 0, nbt);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-		NBTTagCompound nbt = packet.func_148857_g();
-		if (packet.func_148853_f() == 0)
-			profile = NBTUtil.func_152459_a(nbt);
+		NBTTagCompound nbt = packet.getNbtCompound();
+		if (packet.getTileEntityType() == 0)
+			profile = NBTUtil.readGameProfileFromNBT(nbt);
 	}
 
 	public GameProfile getProfile() {
@@ -77,9 +76,9 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory 
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
+	public ItemStack removeStackFromSlot(int slot) {
 		IInventory inventory = getPlayerInventory();
-		return inventory != null ? inventory.getStackInSlotOnClosing(slot) : null;
+		return inventory != null ? inventory.removeStackFromSlot(slot) : null;
 	}
 
 	@Override
@@ -90,15 +89,21 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory 
 	}
 
 	@Override
-	public String getInventoryName() {
+	public String getName() {
 		IInventory inventory = getPlayerInventory();
-		return inventory != null ? inventory.getInventoryName() : null;
+		return inventory != null ? inventory.getName() : null;
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomName() {
 		IInventory inventory = getPlayerInventory();
-		return inventory != null && inventory.hasCustomInventoryName();
+		return inventory != null && inventory.hasCustomName();
+	}
+
+	@Override
+	public IChatComponent getDisplayName() {
+		IInventory inventory = getPlayerInventory();
+		return inventory != null ? inventory.getDisplayName() : null;
 	}
 
 	@Override
@@ -114,17 +119,17 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory 
 	}
 
 	@Override
-	public void openInventory() {
+	public void openInventory(EntityPlayer player) {
 		IInventory inventory = getPlayerInventory();
 		if (inventory != null)
-			inventory.openInventory();
+			inventory.openInventory(player);
 	}
 
 	@Override
-	public void closeInventory() {
+	public void closeInventory(EntityPlayer player) {
 		IInventory inventory = getPlayerInventory();
 		if (inventory != null)
-			inventory.closeInventory();
+			inventory.closeInventory(player);
 	}
 
 	@Override
@@ -139,7 +144,7 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory 
 		if (nbt.hasKey("playerName", Constants.NBT.TAG_STRING))
 			profile = new GameProfile(null, nbt.getString("playerName"));
 		else
-			profile = NBTUtil.func_152459_a(nbt);
+			profile = NBTUtil.readGameProfileFromNBT(nbt);
 		updateProfile();
 	}
 
@@ -147,19 +152,36 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory 
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		if (profile != null)
-			NBTUtil.func_152460_a(nbt, profile);
+			NBTUtil.writeGameProfile(nbt, profile);
 	}
 
 	protected void updateProfile() {
-		if (profile != null && !StringUtils.isNullOrEmpty(profile.getName()))
-			if (!profile.isComplete() || !profile.getProperties().containsKey("textures")) {
-				GameProfile gameprofile = MinecraftServer.getServer().func_152358_ax().func_152655_a(profile.getName());
-				if (gameprofile != null) {
-					Property property = (Property) Iterables.getFirst(gameprofile.getProperties().get("textures"), (Object) null);
-					if (property == null)
-						gameprofile = MinecraftServer.getServer().func_147130_as().fillProfileProperties(gameprofile, true);
-					profile = gameprofile;
-				}
-			}
+		TileEntitySkull.updateGameprofile(getProfile());
+	}
+
+	@Override
+	public int getField(int id) {
+		IInventory inventory = getPlayerInventory();
+		return inventory != null ? inventory.getField(id) : 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		IInventory inventory = getPlayerInventory();
+		if (inventory != null)
+			inventory.setField(id, value);
+	}
+
+	@Override
+	public int getFieldCount() {
+		IInventory inventory = getPlayerInventory();
+		return inventory != null ? inventory.getFieldCount() : 0;
+	}
+
+	@Override
+	public void clear() {
+		IInventory inventory = getPlayerInventory();
+		if (inventory != null)
+			inventory.clear();
 	}
 }

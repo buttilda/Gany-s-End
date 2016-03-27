@@ -1,6 +1,6 @@
 package ganymedes01.ganysend.tileentities;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -41,27 +41,21 @@ public class TileEntityBlockShifter extends TileEntity implements ITickable {
 
 	protected void teleportFromTo(BlockPos from, BlockPos to) {
 		if (!worldObj.isAirBlock(from) && worldObj.isAirBlock(to)) {
-			Block teleported = worldObj.getBlock(fromX, fromY, fromZ);
-			if (teleported.getBlockHardness(worldObj, fromX, fromY, fromZ) > 0.0F) {
-				TileEntity fromTile = worldObj.getTileEntity(fromX, fromY, fromZ);
+			IBlockState teleported = worldObj.getBlockState(from);
+			if (teleported.getBlock().getBlockHardness(worldObj, from) > 0.0F) {
+				TileEntity fromTile = worldObj.getTileEntity(from);
 				if (fromTile != null) {
-					int meta = worldObj.getBlockMetadata(fromX, fromY, fromZ);
-					worldObj.setBlock(toX, toY, toZ, teleported);
-					worldObj.setBlockMetadataWithNotify(toX, toY, toZ, meta, 3);
+					worldObj.setBlockState(to, teleported);
 					NBTTagCompound data = new NBTTagCompound();
 					fromTile.writeToNBT(data);
 					TileEntity toTile = TileEntity.createAndLoadEntity(data);
-					toTile.xCoord = toX;
-					toTile.yCoord = toY;
-					toTile.zCoord = toZ;
-					worldObj.setTileEntity(toX, toY, toZ, toTile);
+					toTile.setPos(to);
+					worldObj.setTileEntity(to, toTile);
 					fromTile.invalidate();
-					worldObj.setBlockToAir(fromX, fromY, fromZ);
+					worldObj.setBlockToAir(from);
 				} else {
-					int meta = worldObj.getBlockMetadata(fromX, fromY, fromZ);
-					worldObj.setBlock(toX, toY, toZ, teleported);
-					worldObj.setBlockMetadataWithNotify(toX, toY, toZ, meta, 3);
-					worldObj.setBlockToAir(fromX, fromY, fromZ);
+					worldObj.setBlockState(to, teleported);
+					worldObj.setBlockToAir(from);
 				}
 			}
 		}

@@ -7,12 +7,17 @@ import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.GUIsID;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityVoidCrate;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 /**
  * Gany's End
@@ -31,21 +36,25 @@ public class VoidCrate extends BlockContainer implements IConfigurable {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		InventoryUtils.dropInventoryContents(world.getTileEntity(x, y, z));
-		super.breakBlock(world, x, y, z, block, meta);
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		IItemHandler itemHandler = world.getTileEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+		for (int i = 0; i < itemHandler.getSlots(); i++) {
+			ItemStack stack = itemHandler.getStackInSlot(i);
+			InventoryUtils.dropStack(world, pos, stack);
+		}
+		super.breakBlock(world, pos, state);
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (world.isRemote)
 			return true;
 		if (player.isSneaking())
 			return false;
 		else {
-			TileEntityVoidCrate tile = Utils.getTileEntity(world, x, y, z, TileEntityVoidCrate.class);
+			TileEntityVoidCrate tile = Utils.getTileEntity(world, pos, TileEntityVoidCrate.class);
 			if (tile != null)
-				player.openGui(GanysEnd.instance, GUIsID.VOID_CRATE, world, x, y, z);
+				player.openGui(GanysEnd.instance, GUIsID.VOID_CRATE, world, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 	}

@@ -1,15 +1,18 @@
 package ganymedes01.ganysend.tileentities;
 
-import ganymedes01.ganysend.core.utils.InventoryUtils;
-import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.recipes.EnderFurnaceFuelsRegistry;
 import ganymedes01.ganysend.recipes.EnderFurnaceRegistry;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 /**
  * Gany's End
@@ -18,23 +21,42 @@ import net.minecraft.util.ITickable;
  *
  */
 
-public class TileEntityEnderFurnace extends GanysInventory implements ISidedInventory, ITickable {
+public class TileEntityEnderFurnace extends TileEntity implements ITickable {
+
+	private final IItemHandler fuelSlots = new ItemStackHandler(1) {
+		@Override
+		public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+			return EnderFurnaceFuelsRegistry.INSTANCE.getBurnTime(stack) > 0 ? super.insertItem(slot, stack, simulate) : stack;
+		}
+
+		@Override
+		public ItemStack extractItem(int slot, int amount, boolean simulate) {
+			return null;
+		}
+	};
+	private final IItemHandler inputSlots = new ItemStackHandler(4) {
+		@Override
+		public ItemStack extractItem(int slot, int amount, boolean simulate) {
+			return null;
+		}
+	};
+	private final IItemHandler outputSlots = new ItemStackHandler(1) {
+		@Override
+		public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+			return stack;
+		}
+	};
 
 	private int burnTime, currentBurnTime, cookTime;
-	private boolean update, canSmelt;
+	private boolean update = true, canSmelt;
 	public int lightLevel = 0;
-
-	public TileEntityEnderFurnace() {
-		super(6, Strings.ENDER_FURNACE_NAME);
-		update = true;
-	}
 
 	@Override
 	public boolean receiveClientEvent(int eventId, int eventData) {
 		switch (eventId) {
 			case 1:
 				lightLevel = eventData;
-				worldObj.func_147451_t(xCoord, yCoord, zCoord);
+				worldObj.notifyLightSet(pos);
 				return true;
 			default:
 				return false;
@@ -50,14 +72,12 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 		if (burnTime > 0)
 			burnTime--;
 		if (canSmelt() && burnTime <= 0) {
-			currentBurnTime = burnTime = EnderFurnaceFuelsRegistry.INSTANCE.getBurnTime(inventory[0]);
+			currentBurnTime = burnTime = EnderFurnaceFuelsRegistry.INSTANCE.getBurnTime(fuelSlots.getStackInSlot(0));
 
-			if (burnTime > 0)
-				if (inventory[0] != null) {
-					if (--inventory[0].stackSize <= 0)
-						inventory[0] = inventory[0].getItem().getContainerItem(inventory[0]);
-					inventoryChanged = true;
-				}
+			if (burnTime > 0) {
+				fuelSlots.extractItem(0, 1, false);
+				inventoryChanged = true;
+			}
 		}
 
 		if (burnTime > 0 && canSmelt()) {
@@ -80,17 +100,14 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 		lightLevel = burnTime > 0 ? 15 : 0;
 
 		if (lightLevel != old)
-			worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 1, lightLevel);
+			worldObj.addBlockEvent(pos, getBlockType(), 1, lightLevel);
 	}
 
 	private void smelt() {
-		if (inventory[5] == null)
-			inventory[5] = EnderFurnaceRegistry.INSTANCE.getOuput(getRecipeInput());
-		else
-			inventory[5].stackSize += EnderFurnaceRegistry.INSTANCE.getOuput(getRecipeInput()).stackSize;
-		for (int i = 1; i <= 4; i++)
-			if (inventory[i] != null && --inventory[i].stackSize <= 0)
-				inventory[i] = null;
+		outputSlots.insertItem(0, EnderFurnaceRegistry.INSTANCE.getOuput(getRecipeInput()), false);
+
+		for (int i = 0; i < 4; i++)
+			outputSlots.extractItem(i, 1, false);
 
 		markDirty();
 	}
@@ -101,12 +118,8 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 
 			if (result == null)
 				canSmelt = false;
-			else if (inventory[5] == null)
-				canSmelt = true;
-			else if (InventoryUtils.areStacksTheSame(inventory[5], result, false))
-				canSmelt = inventory[5].getMaxStackSize() >= inventory[5].stackSize + result.stackSize;
 			else
-				canSmelt = false;
+				canSmelt = outputSlots.insertItem(0, result, true) == null;
 
 			update = false;
 		}
@@ -114,15 +127,15 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 	}
 
 	private ItemStack[] getRecipeInput() {
-		return new ItemStack[] { inventory[1], inventory[2], inventory[3], inventory[4] };
+		return new ItemStack[] { inputSlots.getStackInSlot(0), inputSlots.getStackInSlot(1), inputSlots.getStackInSlot(2), inputSlots.getStackInSlot(3) };
 	}
 
 	@Override
 	public void markDirty() {
 		super.markDirty();
 		update = true;
-		worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 1, lightLevel);
-		worldObj.func_147479_m(xCoord, yCoord, zCoord);
+		worldObj.addBlockEvent(pos, getBlockType(), 1, lightLevel);
+		worldObj.notifyLightSet(pos);
 	}
 
 	public void sendGUIData(Container container, ICrafting craft) {
@@ -155,30 +168,6 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 		return (int) (scale * ((float) cookTime / 200));
 	}
 
-	public boolean isFuel(ItemStack stack) {
-		return EnderFurnaceFuelsRegistry.INSTANCE.getBurnTime(stack) > 0;
-	}
-
-	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
-		return side == 1 ? new int[] { 1, 2, 3, 4 } : side == 0 ? new int[] { 5 } : new int[] { 0 };
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return slot == 5 ? false : slot == 0 ? isFuel(stack) : true;
-	}
-
-	@Override
-	public boolean canInsertItem(int slot, ItemStack stack, int side) {
-		return isItemValidForSlot(slot, stack);
-	}
-
-	@Override
-	public boolean canExtractItem(int slot, ItemStack stack, int side) {
-		return slot == 5;
-	}
-
 	@Override
 	public void readFromNBT(NBTTagCompound data) {
 		super.readFromNBT(data);
@@ -194,5 +183,23 @@ public class TileEntityEnderFurnace extends GanysInventory implements ISidedInve
 		data.setInteger("burnTime", burnTime);
 		data.setInteger("currentBurnTime", currentBurnTime);
 		data.setInteger("cookTime", cookTime);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		if (facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+			if (facing == EnumFacing.DOWN)
+				return (T) outputSlots;
+			else if (facing == EnumFacing.UP)
+				return (T) inputSlots;
+			else
+				return (T) fuelSlots;
+		return super.getCapability(capability, facing);
+	}
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 	}
 }

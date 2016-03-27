@@ -66,7 +66,7 @@ public class TileEntityAnchoredEnderChest extends TileEntityInventoryBinder impl
 	}
 
 	@Override
-	public void openInventory() {
+	public void openInventory(EntityPlayer player) {
 		if (playersUsing < 0)
 			playersUsing = 0;
 
@@ -75,7 +75,7 @@ public class TileEntityAnchoredEnderChest extends TileEntityInventoryBinder impl
 	}
 
 	@Override
-	public void closeInventory() {
+	public void closeInventory(EntityPlayer player) {
 		playersUsing--;
 		worldObj.addBlockEvent(pos, getBlockType(), 0, playersUsing);
 	}

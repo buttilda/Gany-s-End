@@ -47,8 +47,8 @@ public class ModBlocks {
 	public static final Block enderFlower = new EnderFlower();
 	public static final Block endstoneBrick = new EndstoneBrick();
 	public static final Block enderpearlBlock = new EnderPearlBlock();
-	public static final Block endstoneStairs = new EndStairs(endstoneBrick, 0).setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDSTONE_STAIRS_NAME));
-	public static final Block enderpearlStairs = new EndStairs(enderpearlBlock, 1).setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDERPEARL_BRICK_STAIRS_NAME));
+	public static final Block endstoneStairs = new EndStairs(endstoneBrick.getStateFromMeta(0)).setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDSTONE_STAIRS_NAME));
+	public static final Block enderpearlStairs = new EndStairs(enderpearlBlock.getStateFromMeta(1)).setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDERPEARL_BRICK_STAIRS_NAME));
 	public static final Block enderToggler = new EnderToggler();
 	public static final Block enderToggler_air = new EnderTogglerAir();
 	public static final Block blockShifter = new BlockShifter();

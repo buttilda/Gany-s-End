@@ -1,20 +1,33 @@
 package ganymedes01.ganysend.tileentities;
 
-import ganymedes01.ganysend.lib.Strings;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityVoidCrate extends GanysInventory implements ITickable {
+public class TileEntityVoidCrate extends TileEntity implements ITickable {
 
-	public TileEntityVoidCrate() {
-		super(65, Strings.VOID_CRATE_NAME);
-	}
+	private final IItemHandlerModifiable itemHandler = new ItemStackHandler(65);
 
 	@Override
 	public void update() {
 		if (worldObj.isRemote)
 			return;
 
-		if (inventory[64] != null)
-			inventory[64] = null;
+		itemHandler.setStackInSlot(64, null);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		return (T) (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? itemHandler : null);
+	}
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 	}
 }

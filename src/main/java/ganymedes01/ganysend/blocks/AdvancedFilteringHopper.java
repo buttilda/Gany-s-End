@@ -3,13 +3,14 @@ package ganymedes01.ganysend.blocks;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.GUIsID;
-import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityAdvancedFilteringHopper;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -26,17 +27,13 @@ public class AdvancedFilteringHopper extends BasicFilteringHopper {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (world.isRemote)
 			return true;
-		if (player.isSneaking())
-			return false;
-		else {
-			TileEntityAdvancedFilteringHopper tile = Utils.getTileEntity(world, x, y, z, TileEntityAdvancedFilteringHopper.class);
-			if (tile != null)
-				player.openGui(GanysEnd.instance, GUIsID.ADVANCED_FILTERING_HOPPER, world, x, y, z);
-			return true;
-		}
+		TileEntityAdvancedFilteringHopper tile = Utils.getTileEntity(world, pos, TileEntityAdvancedFilteringHopper.class);
+		if (tile != null)
+			player.openGui(GanysEnd.instance, GUIsID.ADVANCED_FILTERING_HOPPER, world, pos.getX(), pos.getY(), pos.getZ());
+		return true;
 	}
 
 	@Override
@@ -44,25 +41,5 @@ public class AdvancedFilteringHopper extends BasicFilteringHopper {
 		TileEntityAdvancedFilteringHopper tile = new TileEntityAdvancedFilteringHopper();
 		tile.setBasic();
 		return tile;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return side == 1 ? blockTop : blockOutside;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		blockOutside = reg.registerIcon(Utils.getBlockTexture(Strings.ADVANCED_FILTERING_HOPPER_NAME));
-		blockTop = reg.registerIcon(Utils.getBlockTexture(Strings.BASIC_FILTERING_HOPPER_NAME) + "_top");
-		registerExtraIcons(reg);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getItemIconName() {
-		return GanysEnd.enable2DHoppers ? Reference.ITEM_BLOCK_TEXTURE_PATH + Strings.ADVANCED_FILTERING_HOPPER_NAME : null;
 	}
 }

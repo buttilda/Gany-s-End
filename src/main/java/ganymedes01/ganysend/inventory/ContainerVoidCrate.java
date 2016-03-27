@@ -3,8 +3,14 @@ package ganymedes01.ganysend.inventory;
 import ganymedes01.ganysend.tileentities.TileEntityVoidCrate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 /**
  * Gany's End
@@ -13,15 +19,19 @@ import net.minecraft.item.ItemStack;
  *
  */
 
-public class ContainerVoidCrate extends GanysContainer {
+public class ContainerVoidCrate extends Container {
+
+	private final TileEntityVoidCrate tile;
 
 	public ContainerVoidCrate(InventoryPlayer inventory, TileEntityVoidCrate tile) {
-		super(tile);
+		this.tile = tile;
+
+		IItemHandler slots = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++)
-				addSlotToContainer(new Slot(tile, j + i * 8, 8 + j * 18, i * 18 + 11));
+				addSlotToContainer(new SlotItemHandler(slots, j + i * 8, 8 + j * 18, i * 18 + 11));
 
-		addSlotToContainer(new Slot(tile, 64, 152, 137));
+		addSlotToContainer(new SlotItemHandler(slots, 64, 152, 137));
 
 		for (int i = 0; i < 3; i++)
 			for (int j = 0; j < 9; j++)
@@ -33,7 +43,7 @@ public class ContainerVoidCrate extends GanysContainer {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(slotIndex);
+		Slot slot = inventorySlots.get(slotIndex);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
@@ -57,5 +67,12 @@ public class ContainerVoidCrate extends GanysContainer {
 		}
 
 		return itemstack;
+	}
+
+	@Override
+	public boolean canInteractWith(EntityPlayer player) {
+		World worldObj = tile.getWorld();
+		BlockPos pos = tile.getPos();
+		return worldObj.getTileEntity(pos) != tile ? false : player.getDistanceSq(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= 64;
 	}
 }

@@ -3,13 +3,11 @@ package ganymedes01.ganysend.tileentities;
 import java.util.Iterator;
 import java.util.List;
 
-import ganymedes01.ganysend.core.utils.InventoryUtils;
-import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EntitySelectors;
+import net.minecraftforge.items.IItemHandler;
 
 /**
  * Gany's End
@@ -21,36 +19,34 @@ import net.minecraft.util.AxisAlignedBB;
 public class TileEntityCreativeSpeedyHopper extends TileEntitySpeedyHopper {
 
 	@Override
-	public String getName() {
-		return Utils.getConainerName(Strings.CREATIVE_SPEEDY_HOPPER_NAME);
-	}
-
-	@Override
 	protected boolean suckItemFromInventory() {
-		IInventory inventoryToPull = getInventoryAbove();
+		IItemHandler inventoryToPull = getInventoryToExtract();
 
 		if (inventoryToPull == null)
 			return false;
 
-		for (int slot : InventoryUtils.getSlotsFromSide(inventoryToPull, 0)) {
-			ItemStack stack = inventoryToPull.getStackInSlot(slot);
-			if (stack != null && shouldPull(stack))
-				return InventoryUtils.extractFromInventory(inventoryToPull, -1, 0) != null;
+		for (int i = 0; i < inventoryToPull.getSlots(); i++) {
+			ItemStack stack = inventoryToPull.getStackInSlot(i);
+			if (stack != null)
+				if (inventoryToPull.extractItem(i, stack.stackSize, false) != null)
+					return true;
 		}
 
 		return false;
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	protected boolean suckEntitiesAbove() {
-		List<EntityItem> list = worldObj.selectEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord + 1.0D, zCoord, xCoord + 1.0D, yCoord + 2.0D, zCoord + 1.0D), IEntitySelector.selectAnything);
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+		List<EntityItem> list = worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(x - 0.5, y - 0.5, z - 0.5, x + 0.5, y + 0.5, z + 0.5), EntitySelectors.selectAnything);
 		if (!list.isEmpty()) {
 			Iterator<EntityItem> iterator = list.iterator();
 			while (iterator.hasNext()) {
 				EntityItem entity = iterator.next();
 				if (entity.worldObj == worldObj)
-					if (shouldPull(entity.getEntityItem())) {
+					if (shouldTransfer(entity.getEntityItem())) {
 						entity.setDead();
 						return true;
 					}
@@ -61,15 +57,17 @@ public class TileEntityCreativeSpeedyHopper extends TileEntitySpeedyHopper {
 
 	@Override
 	protected boolean insertItemToInventory() {
-		IInventory inventoryToInsert = getInventoryToInsert();
+		IItemHandler inventoryToInsert = getInventoryToInsert();
 		if (inventoryToInsert == null)
 			return false;
 
-		for (int i = 0; i < inventory.length; i++)
-			if (inventory[i] == null)
-				continue;
-			else if (shouldPull(inventory[i]))
-				InventoryUtils.addStackToInventory(inventoryToInsert, inventory[i].copy(), getSideToInsert());
+		for (int i = 0; i < itemHandler.getSlots(); i++) {
+			ItemStack stack = itemHandler.getStackInSlot(i);
+			if (stack != null && shouldTransfer(stack))
+				for (int j = 0; j < inventoryToInsert.getSlots(); j++)
+					if (inventoryToInsert.insertItem(j, stack.copy(), false) == null)
+						return true;
+		}
 
 		return true;
 	}

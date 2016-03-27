@@ -12,8 +12,11 @@ import ganymedes01.ganysend.entities.EntityAnchoredEnderChestMinecart;
 import ganymedes01.ganysend.tileentities.TileEntityAnchoredEnderChest;
 import ganymedes01.ganysend.tileentities.TileEntityInfiniteWaterSource;
 import ganymedes01.ganysend.tileentities.TileEntityInventoryBinder;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Loader;
 
@@ -52,6 +55,12 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerRenderers() {
 		if (GanysEnd.enableAnchoredEnderChest)
-			RenderingRegistry.registerEntityRenderingHandler(EntityAnchoredEnderChestMinecart.class, new EntityAnchoredEnderChestMinecartRenderer());
+			RenderingRegistry.registerEntityRenderingHandler(EntityAnchoredEnderChestMinecart.class, new IRenderFactory<EntityAnchoredEnderChestMinecart>() {
+
+				@Override
+				public Render<? super EntityAnchoredEnderChestMinecart> createRenderFor(RenderManager manager) {
+					return new EntityAnchoredEnderChestMinecartRenderer(manager);
+				}
+			});
 	}
 }

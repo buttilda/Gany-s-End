@@ -4,8 +4,11 @@ import ganymedes01.ganysend.inventory.slots.FilterSlot;
 import ganymedes01.ganysend.tileentities.TileEntityFilteringHopper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 
 /**
  * Gany's End
@@ -14,12 +17,11 @@ import net.minecraft.item.ItemStack;
  *
  */
 
-public class ContainerFilteringHopper extends GanysContainer {
+public class ContainerFilteringHopper extends Container {
 
 	private final TileEntityFilteringHopper hopper;
 
 	public ContainerFilteringHopper(InventoryPlayer inventory, TileEntityFilteringHopper tile) {
-		super(tile);
 		hopper = tile;
 
 		byte b0 = 44;
@@ -47,7 +49,7 @@ public class ContainerFilteringHopper extends GanysContainer {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(slotIndex);
+		Slot slot = inventorySlots.get(slotIndex);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
@@ -87,5 +89,12 @@ public class ContainerFilteringHopper extends GanysContainer {
 			}
 		}
 		return super.slotClick(slotIndex, button, shift, player);
+	}
+
+	@Override
+	public boolean canInteractWith(EntityPlayer player) {
+		World worldObj = hopper.getWorld();
+		BlockPos pos = hopper.getPos();
+		return worldObj.getTileEntity(pos) != hopper ? false : player.getDistanceSq(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= 64;
 	}
 }

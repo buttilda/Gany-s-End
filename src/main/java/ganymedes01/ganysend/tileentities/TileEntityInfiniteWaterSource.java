@@ -1,8 +1,5 @@
 package ganymedes01.ganysend.tileentities;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.network.ByteBufHelper;
 import ganymedes01.ganysend.network.IPacketHandlingTile;
@@ -10,20 +7,23 @@ import ganymedes01.ganysend.network.PacketHandler;
 import ganymedes01.ganysend.network.packet.PacketTileEntity;
 import ganymedes01.ganysend.network.packet.PacketTileEntity.TileData;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.block.BlockCauldron;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Gany's End
@@ -32,7 +32,7 @@ import net.minecraftforge.fluids.IFluidHandler;
  *
  */
 
-public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidHandler, IPacketHandlingTile {
+public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidHandler, IPacketHandlingTile, ITickable {
 
 	private FluidStack fluid = new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME);
 
@@ -59,49 +59,34 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 	}
 
 	@Override
-	public void updateEntity() {
+	public void update() {
 		if (worldObj.isRemote)
 			return;
 		if (fluid == null)
 			return;
 
-		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			int xx = xCoord + dir.offsetX;
-			int yy = yCoord + dir.offsetY;
-			int zz = zCoord + dir.offsetZ;
-			TileEntity tile = Utils.getTileEntity(worldObj, xx, yy, zz, TileEntity.class);
+		for (EnumFacing side : EnumFacing.VALUES) {
+			BlockPos sidePos = pos.offset(side);
+			TileEntity tile = Utils.getTileEntity(worldObj, sidePos, TileEntity.class);
 			if (tile instanceof IFluidHandler)
-				((IFluidHandler) tile).fill(dir.getOpposite(), fluid.copy(), true);
-			else if (worldObj.getBlock(xx, yy, zz) == Blocks.cauldron) {
-				int filled = BlockCauldron.func_150027_b(worldObj.getBlockMetadata(xx, yy, zz));
-				if (filled < 3) {
-					worldObj.setBlockMetadataWithNotify(xx, yy, zz, 3, 2);
-					worldObj.func_147453_f(xx, yy, zz, Blocks.cauldron);
-				}
-			} else if (GanysEnd.isBotaniaLoaded && fluid.getFluid() == FluidRegistry.WATER)
-				try {
-					Class<?> IPetalApothecary = Class.forName("vazkii.botania.api.item.IPetalApothecary");
-					if (IPetalApothecary.isInstance(tile))
-						if (!(Boolean) IPetalApothecary.getMethod("hasWater").invoke(tile))
-							IPetalApothecary.getMethod("setWater", boolean.class).invoke(tile, true);
-				} catch (Exception e) {
-					GanysEnd.isBotaniaLoaded = false;
-				}
+				((IFluidHandler) tile).fill(side.getOpposite(), fluid.copy(), true);
+			else if (worldObj.getBlockState(sidePos).getBlock() == Blocks.cauldron)
+				Blocks.cauldron.setWaterLevel(worldObj, pos, worldObj.getBlockState(pos), 3);
 		}
 	}
 
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+	public int fill(EnumFacing from, FluidStack resource, boolean doFill) {
 		return 0;
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+	public FluidStack drain(EnumFacing from, FluidStack resource, boolean doDrain) {
 		return resource != null && resource.isFluidEqual(fluid) ? drain(from, resource.amount, doDrain) : null;
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+	public FluidStack drain(EnumFacing from, int maxDrain, boolean doDrain) {
 		FluidStack f = getFluid();
 		if (f != null)
 			f.amount = Math.min(f.amount, maxDrain);
@@ -109,17 +94,17 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 	}
 
 	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) {
+	public boolean canFill(EnumFacing from, Fluid fluid) {
 		return false;
 	}
 
 	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid) {
+	public boolean canDrain(EnumFacing from, Fluid fluid) {
 		return true;
 	}
 
 	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+	public FluidTankInfo[] getTankInfo(EnumFacing from) {
 		return new FluidTankInfo[] { new FluidTankInfo(fluid, FluidContainerRegistry.BUCKET_VOLUME) };
 	}
 
@@ -141,17 +126,17 @@ public class TileEntityInfiniteWaterSource extends TileEntity implements IFluidH
 	}
 
 	@Override
-	public Packet getDescriptionPacket() {
+	public Packet<?> getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
 		writeToNBT(nbt);
 
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, nbt);
+		return new S35PacketUpdateTileEntity(pos, 0, nbt);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
-		NBTTagCompound nbt = packet.func_148857_g();
-		if (packet.func_148853_f() == 0)
+		NBTTagCompound nbt = packet.getNbtCompound();
+		if (packet.getTileEntityType() == 0)
 			readFromNBT(nbt);
 	}
 

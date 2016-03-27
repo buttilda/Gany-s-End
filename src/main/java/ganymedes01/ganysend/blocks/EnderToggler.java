@@ -7,6 +7,8 @@ import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 /**
@@ -27,26 +29,26 @@ public class EnderToggler extends Block implements IConfigurable {
 	}
 
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
-		if (world.isBlockIndirectlyGettingPowered(x, y, z))
-			world.setBlock(x, y, z, ModBlocks.enderToggler_air, 0, 2);
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+		if (world.isBlockIndirectlyGettingPowered(pos) > 0)
+			world.setBlockState(pos, ModBlocks.enderToggler_air.getDefaultState(), 2);
 		else
-			world.notifyBlockOfNeighborChange(x, y + 1, z, ModBlocks.enderToggler);
-		if (world.getBlock(x, y - 1, z) == ModBlocks.enderToggler_air) {
-			world.setBlock(x, y, z, ModBlocks.enderToggler_air, 0, 2);
-			world.notifyBlockOfNeighborChange(x, y + 1, z, ModBlocks.enderToggler_air);
+			world.notifyNeighborsOfStateChange(pos.up(), ModBlocks.enderToggler);
+		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.enderToggler_air) {
+			world.setBlockState(pos, ModBlocks.enderToggler_air.getDefaultState(), 2);
+			world.notifyNeighborsOfStateChange(pos.up(), ModBlocks.enderToggler_air);
 		}
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
-		if (world.isBlockIndirectlyGettingPowered(x, y, z)) {
-			world.setBlock(x, y, z, ModBlocks.enderToggler_air, 0, 2);
-			world.notifyBlockOfNeighborChange(x, y + 1, z, ModBlocks.enderToggler_air);
+	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighbourBlock) {
+		if (world.isBlockIndirectlyGettingPowered(pos) > 0) {
+			world.setBlockState(pos, ModBlocks.enderToggler_air.getDefaultState(), 2);
+			world.notifyNeighborsOfStateChange(pos.up(), ModBlocks.enderToggler_air);
 		}
-		if (world.getBlock(x, y - 1, z) == ModBlocks.enderToggler_air) {
-			world.setBlock(x, y, z, ModBlocks.enderToggler_air, 0, 2);
-			world.notifyBlockOfNeighborChange(x, y + 1, z, ModBlocks.enderToggler_air);
+		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.enderToggler_air) {
+			world.setBlockState(pos, ModBlocks.enderToggler_air.getDefaultState(), 2);
+			world.notifyNeighborsOfStateChange(pos.up(), ModBlocks.enderToggler_air);
 		}
 	}
 

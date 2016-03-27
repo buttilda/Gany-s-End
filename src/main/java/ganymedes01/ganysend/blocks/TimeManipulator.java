@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
@@ -116,12 +117,6 @@ public class TimeManipulator extends BlockContainer implements IConfigurable {
 				world.spawnParticle("enchantmenttable", x + rand.nextFloat(), y + 0.5F, z + rand.nextFloat(), 0F, 3F, 0F);
 				world.spawnParticle("enchantmenttable", x + rand.nextFloat(), y + 0.5F, z + rand.nextFloat(), 0F, 3F, 0F);
 			}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean renderAsNormalBlock() {
-		return false;
 	}
 
 	@Override

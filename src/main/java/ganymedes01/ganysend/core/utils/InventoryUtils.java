@@ -5,13 +5,8 @@ import java.util.List;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -58,121 +53,6 @@ public class InventoryUtils {
 			entityItem.setDefaultPickupDelay();
 			world.spawnEntityInWorld(entityItem);
 		}
-	}
-
-	public static int[] getSlotsFromSide(IInventory iinventory, EnumFacing side) {
-		if (iinventory == null)
-			return null;
-
-		if (iinventory instanceof ISidedInventory)
-			return ((ISidedInventory) iinventory).getSlotsForFace(side);
-		else {
-			int[] slots = new int[iinventory.getSizeInventory()];
-			for (int i = 0; i < slots.length; i++)
-				slots[i] = i;
-			return slots;
-		}
-	}
-
-	/**
-	 * Extracts 1 item from the first found stack
-	 *
-	 * @param iinventory
-	 * @param side
-	 * @param maxStackSize
-	 * @return extracted stack
-	 */
-	public static ItemStack extractFromInventory(IInventory iinventory, EnumFacing side) {
-		return extractFromInventory(iinventory, side, 1);
-	}
-
-	/**
-	 * Extracts a stack with size the same or smaller of @param maxStackSize
-	 *
-	 * @param iinventory
-	 * @param side
-	 * @param maxStackSize
-	 * @return extracted stack
-	 */
-	public static ItemStack extractFromInventory(IInventory iinventory, EnumFacing side, int maxStackSize) {
-		IInventory invt = getInventory(iinventory);
-		return extractFromSlots(invt, side, maxStackSize, getSlotsFromSide(invt, side));
-	}
-
-	private static ItemStack extractFromSlots(IInventory iinventory, EnumFacing side, int maxStackSize, int[] slots) {
-		for (int slot : slots) {
-			ItemStack invtStack = iinventory.getStackInSlot(slot);
-			if (invtStack != null)
-				if (iinventory instanceof ISidedInventory ? ((ISidedInventory) iinventory).canExtractItem(slot, invtStack, side) : true) {
-					ItemStack copy = invtStack.copy();
-					if (maxStackSize <= 0)
-						iinventory.setInventorySlotContents(slot, null);
-					else {
-						int amount = Math.min(maxStackSize, invtStack.stackSize);
-						invtStack.stackSize -= amount;
-						copy.stackSize = amount;
-						if (invtStack.stackSize <= 0)
-							iinventory.setInventorySlotContents(slot, null);
-					}
-					return copy;
-				}
-		}
-		return null;
-	}
-
-	public static boolean addEntitytoInventory(IInventory iinventory, EntityItem entity) {
-		if (entity == null)
-			return false;
-
-		boolean flag = addStackToInventory(iinventory, entity.getEntityItem());
-		if (flag)
-			entity.setDead();
-		else if (entity.getEntityItem().stackSize <= 0)
-			entity.setDead();
-		return flag;
-	}
-
-	public static boolean addStackToInventory(IInventory iinventory, ItemStack stack) {
-		return addStackToInventory(iinventory, stack, EnumFacing.DOWN);
-	}
-
-	public static boolean addStackToInventory(IInventory iinventory, ItemStack stack, EnumFacing side) {
-		if (iinventory == null)
-			return false;
-
-		if (stack == null || stack.stackSize <= 0)
-			return false;
-
-		IInventory invt = getInventory(iinventory);
-		return addToSlots(invt, stack, side, getSlotsFromSide(invt, side));
-	}
-
-	private static boolean addToSlots(IInventory iinventory, ItemStack stack, EnumFacing side, int[] slots) {
-		for (int slot : slots) {
-			if (iinventory instanceof ISidedInventory) {
-				if (!((ISidedInventory) iinventory).canInsertItem(slot, stack, side))
-					continue;
-			} else if (!iinventory.isItemValidForSlot(slot, stack))
-				continue;
-
-			if (iinventory.getStackInSlot(slot) == null) {
-				iinventory.setInventorySlotContents(slot, stack.copy());
-				stack.stackSize = 0;
-				return true;
-			} else {
-				ItemStack invtStack = iinventory.getStackInSlot(slot);
-				if (invtStack.stackSize < Math.min(invtStack.getMaxStackSize(), iinventory.getInventoryStackLimit()) && areStacksTheSame(invtStack, stack, false)) {
-					invtStack.stackSize += stack.stackSize;
-					if (invtStack.stackSize > invtStack.getMaxStackSize()) {
-						stack.stackSize = invtStack.stackSize - invtStack.getMaxStackSize();
-						invtStack.stackSize = invtStack.getMaxStackSize();
-					} else
-						stack.stackSize = 0;
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	public static boolean areStacksSameOre(ItemStack stack1, ItemStack stack2) {
@@ -233,50 +113,5 @@ public class InventoryUtils {
 
 	private static boolean isWildcard(int meta) {
 		return meta == OreDictionary.WILDCARD_VALUE;
-	}
-
-	public static IInventory getInventory(IInventory inventory) {
-		if (inventory instanceof TileEntityChest) {
-			TileEntityChest chest = (TileEntityChest) inventory;
-			TileEntityChest adjacent = null;
-			if (chest.adjacentChestXNeg != null)
-				adjacent = chest.adjacentChestXNeg;
-			if (chest.adjacentChestXNeg != null)
-				adjacent = chest.adjacentChestXNeg;
-			if (chest.adjacentChestXPos != null)
-				adjacent = chest.adjacentChestXPos;
-			if (chest.adjacentChestZNeg != null)
-				adjacent = chest.adjacentChestZNeg;
-			if (chest.adjacentChestZPos != null)
-				adjacent = chest.adjacentChestZPos;
-
-			if (adjacent != null)
-				return new InventoryLargeChest("", (TileEntityChest) inventory, adjacent);
-		}
-		return inventory;
-	}
-
-	public static boolean inventoryContains(IInventory iinventory, ItemStack stack, boolean ignoreSize) {
-		return inventoryContains(iinventory, stack, ignoreSize, getSlotsFromSide(iinventory, EnumFacing.DOWN));
-	}
-
-	public static boolean inventoryContains(IInventory iinventory, ItemStack stack, boolean ignoreSize, int... slots) {
-		if (stack == null)
-			return false;
-		iinventory = getInventory(iinventory);
-
-		int totalSize = 0;
-		for (int slot : slots) {
-			ItemStack invtStack = iinventory.getStackInSlot(slot);
-			if (areStacksTheSame(invtStack, stack, false)) {
-				if (ignoreSize)
-					return true;
-				totalSize += invtStack.stackSize;
-			}
-			if (totalSize >= stack.stackSize)
-				return true;
-		}
-
-		return false;
 	}
 }

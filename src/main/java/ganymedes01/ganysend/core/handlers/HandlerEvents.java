@@ -6,11 +6,13 @@ import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Reference;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -34,7 +36,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class HandlerEvents {
 
 	@SideOnly(Side.CLIENT)
-	public static IIcon endium_still, endium_flow;
+	public static TextureAtlasSprite endium_still, endium_flow;
 
 	@SubscribeEvent
 	public void tooltip(ItemTooltipEvent event) {
@@ -88,12 +90,12 @@ public class HandlerEvents {
 
 							if (event.world.provider.getDimensionId() != dim)
 								return;
-							IInventory tile = Utils.getTileEntity(event.world, x, y, z, IInventory.class);
+							IInventory tile = Utils.getTileEntity(event.world, new BlockPos(x, y, z), IInventory.class);
 							if (tile != null) {
 								event.dropChance = -1.0F;
 								for (ItemStack stack : event.drops)
 									if (!InventoryUtils.addStackToInventory(tile, stack))
-										InventoryUtils.dropStack(event.world, event.x, event.y, event.z, stack);
+										InventoryUtils.dropStack(event.world, event.pos, stack);
 							}
 						}
 				}
@@ -104,9 +106,7 @@ public class HandlerEvents {
 		if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
 			World world = event.world;
 			EntityPlayer player = event.entityPlayer;
-			int x = event.x;
-			int y = event.y;
-			int z = event.z;
+			BlockPos pos = event.pos;
 
 			if (world == null || world.isRemote)
 				return;
@@ -115,13 +115,14 @@ public class HandlerEvents {
 			else {
 				ItemStack stack = player.getCurrentEquippedItem();
 				if (stack != null && EntityDropEvent.isTinkersEndiumTool(stack)) {
-					IInventory tile = Utils.getTileEntity(world, x, y, z, IInventory.class);
+					IInventory tile = Utils.getTileEntity(world, pos, IInventory.class);
 					if (tile != null) {
 						if (!stack.hasTagCompound())
 							stack.setTagCompound(new NBTTagCompound());
-						stack.stackTagCompound.setIntArray("Position", new int[] { x, y, z });
-						stack.stackTagCompound.setInteger("Dimension", world.provider.getDimensionId());
-						stack.stackTagCompound.setBoolean("Tagged", true);
+						NBTTagCompound nbt = stack.getTagCompound();
+						nbt.setIntArray("Position", new int[] { pos.getX(), pos.getY(), pos.getZ() });
+						nbt.setInteger("Dimension", world.provider.getDimensionId());
+						nbt.setBoolean("Tagged", true);
 						player.swingItem();
 					}
 				}
@@ -132,9 +133,9 @@ public class HandlerEvents {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void loadTextures(TextureStitchEvent.Pre event) {
-		if (event.map.getTextureType() == 0) {
-			endium_still = event.map.registerIcon(Utils.getBlockTexture("endium_still"));
-			endium_flow = event.map.registerIcon(Utils.getBlockTexture("endium_flow"));
-		}
+		//		if (event.map.getTextureType() == 0) {
+		//			endium_still = event.map.registerIcon(Utils.getBlockTexture("endium_still"));
+		//			endium_flow = event.map.registerIcon(Utils.getBlockTexture("endium_flow"));
+		//		}
 	}
 }

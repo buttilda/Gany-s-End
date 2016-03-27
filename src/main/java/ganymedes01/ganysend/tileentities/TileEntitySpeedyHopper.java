@@ -1,7 +1,5 @@
 package ganymedes01.ganysend.tileentities;
 
-import ganymedes01.ganysend.core.utils.Utils;
-import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -12,6 +10,10 @@ import net.minecraft.item.ItemStack;
  */
 
 public class TileEntitySpeedyHopper extends TileEntityFilteringHopper {
+
+	public TileEntitySpeedyHopper() {
+		super(0);
+	}
 
 	@Override
 	public String getLine() {
@@ -24,17 +26,12 @@ public class TileEntitySpeedyHopper extends TileEntityFilteringHopper {
 	}
 
 	@Override
-	public String getName() {
-		return Utils.getConainerName(Strings.SPEEDY_HOPPER_NAME);
-	}
-
-	@Override
 	public boolean isFilter() {
 		return false;
 	}
 
 	@Override
-	protected boolean shouldPull(ItemStack stack) {
+	protected boolean shouldTransfer(ItemStack stack) {
 		return true;
 	}
 }

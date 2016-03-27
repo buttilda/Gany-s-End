@@ -9,14 +9,25 @@ import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityEnderFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
+import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 /**
  * Gany's End
@@ -27,65 +38,68 @@ import net.minecraft.world.World;
 
 public class EnderFurnace extends BlockContainer implements IConfigurable {
 
+	private static final PropertyDirection VARIANTS = BlockFurnace.FACING;
+
 	public EnderFurnace() {
 		super(Material.rock);
 		setHardness(5.0F);
-		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDER_FURNACE_NAME));
 		setCreativeTab(GanysEnd.enableEnderFurnace ? GanysEnd.endTab : null);
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDER_FURNACE_NAME));
+		setDefaultState(blockState.getBaseState().withProperty(VARIANTS, EnumFacing.NORTH));
 	}
 
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
-		super.onBlockAdded(world, x, y, z);
-		if (!world.isRemote) {
-			Block block = world.getBlock(x, y, z - 1);
-			Block block1 = world.getBlock(x, y, z + 1);
-			Block block2 = world.getBlock(x - 1, y, z);
-			Block block3 = world.getBlock(x + 1, y, z);
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+		setDefaultFacing(worldIn, pos, state);
+	}
 
-			byte b0 = 3;
+	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state) {
+		if (!worldIn.isRemote) {
+			Block block = worldIn.getBlockState(pos.north()).getBlock();
+			Block block1 = worldIn.getBlockState(pos.south()).getBlock();
+			Block block2 = worldIn.getBlockState(pos.west()).getBlock();
+			Block block3 = worldIn.getBlockState(pos.east()).getBlock();
+			EnumFacing enumfacing = state.getValue(VARIANTS);
 
-			if (block1.func_149730_j() && !block.func_149730_j())
-				b0 = 2;
-			if (block2.func_149730_j() && !block3.func_149730_j())
-				b0 = 5;
-			if (block3.func_149730_j() && !block2.func_149730_j())
-				b0 = 4;
+			if (enumfacing == EnumFacing.NORTH && block.isFullBlock() && !block1.isFullBlock())
+				enumfacing = EnumFacing.SOUTH;
+			else if (enumfacing == EnumFacing.SOUTH && block1.isFullBlock() && !block.isFullBlock())
+				enumfacing = EnumFacing.NORTH;
+			else if (enumfacing == EnumFacing.WEST && block2.isFullBlock() && !block3.isFullBlock())
+				enumfacing = EnumFacing.EAST;
+			else if (enumfacing == EnumFacing.EAST && block3.isFullBlock() && !block2.isFullBlock())
+				enumfacing = EnumFacing.WEST;
 
-			world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+			worldIn.setBlockState(pos, state.withProperty(VARIANTS, enumfacing), 2);
 		}
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
-		switch (MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3) {
-			case 0:
-				world.setBlockMetadataWithNotify(x, y, z, 2, 2);
-				break;
-			case 1:
-				world.setBlockMetadataWithNotify(x, y, z, 5, 2);
-				break;
-			case 2:
-				world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-				break;
-			case 3:
-				world.setBlockMetadataWithNotify(x, y, z, 4, 2);
-				break;
+	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		return getDefaultState().withProperty(VARIANTS, placer.getHorizontalFacing().getOpposite());
+	}
+
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		worldIn.setBlockState(pos, state.withProperty(VARIANTS, placer.getHorizontalFacing().getOpposite()), 2);
+
+		if (stack.hasDisplayName()) {
+			TileEntity tileentity = worldIn.getTileEntity(pos);
+
+			if (tileentity instanceof TileEntityFurnace)
+				((TileEntityFurnace) tileentity).setCustomInventoryName(stack.getDisplayName());
 		}
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (world.isRemote)
 			return true;
-		if (player.isSneaking())
-			return false;
-		else {
-			TileEntityEnderFurnace tile = Utils.getTileEntity(world, x, y, z, TileEntityEnderFurnace.class);
-			if (tile != null)
-				player.openGui(GanysEnd.instance, GUIsID.ENDER_FURNACE, world, x, y, z);
-			return true;
-		}
+
+		TileEntityEnderFurnace tile = Utils.getTileEntity(world, pos, TileEntityEnderFurnace.class);
+		if (tile != null)
+			player.openGui(GanysEnd.instance, GUIsID.ENDER_FURNACE, world, pos.getX(), pos.getY(), pos.getZ());
+		return true;
 	}
 
 	@Override
@@ -94,17 +108,52 @@ public class EnderFurnace extends BlockContainer implements IConfigurable {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		InventoryUtils.dropInventoryContents(world.getTileEntity(x, y, z));
-		super.breakBlock(world, x, y, z, block, meta);
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		TileEntity tile = world.getTileEntity(pos);
+		IItemHandler outputSlots = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+		IItemHandler inputSlots = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+		IItemHandler fuelSlots = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.WEST);
+		for (IItemHandler handler : new IItemHandler[] { outputSlots, inputSlots, fuelSlots })
+			for (int i = 0; i < handler.getSlots(); i++) {
+				ItemStack stack = handler.getStackInSlot(i);
+				InventoryUtils.dropStack(world, pos, stack);
+			}
+
+		super.breakBlock(world, pos, state);
 	}
 
 	@Override
-	public int getLightValue(IBlockAccess world, int x, int y, int z) {
-		TileEntityEnderFurnace tile = Utils.getTileEntity(world, x, y, z, TileEntityEnderFurnace.class);
+	public int getLightValue(IBlockAccess world, BlockPos pos) {
+		TileEntityEnderFurnace tile = Utils.getTileEntity(world, pos, TileEntityEnderFurnace.class);
 		if (tile != null)
 			return tile.lightLevel;
 		return 0;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IBlockState getStateForEntityRender(IBlockState state) {
+		return getDefaultState().withProperty(VARIANTS, EnumFacing.SOUTH);
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		EnumFacing enumfacing = EnumFacing.getFront(meta);
+
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y)
+			enumfacing = EnumFacing.NORTH;
+
+		return getDefaultState().withProperty(VARIANTS, enumfacing);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(VARIANTS).getIndex();
+	}
+
+	@Override
+	protected BlockState createBlockState() {
+		return new BlockState(this, new IProperty[] { VARIANTS });
 	}
 
 	@Override

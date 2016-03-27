@@ -1,12 +1,18 @@
 package ganymedes01.ganysend.inventory;
 
-import ganymedes01.ganysend.inventory.slots.BetterSlot;
+import ganymedes01.ganysend.recipes.EnderFurnaceFuelsRegistry;
 import ganymedes01.ganysend.tileentities.TileEntityEnderFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 /**
  * Gany's End
@@ -15,22 +21,24 @@ import net.minecraft.item.ItemStack;
  *
  */
 
-public class ContainerEnderFurnace extends GanysContainer {
+public class ContainerEnderFurnace extends Container {
 
 	private final TileEntityEnderFurnace furnace;
 
 	public ContainerEnderFurnace(InventoryPlayer inventory, TileEntityEnderFurnace tile) {
-		super(tile);
 		furnace = tile;
 
-		addSlotToContainer(new BetterSlot(tile, 0, 13, 44));
+		IItemHandler outputSlots = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+		IItemHandler inputSlots = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+		IItemHandler fuelSlots = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.WEST);
+		addSlotToContainer(new SlotItemHandler(fuelSlots, 0, 13, 44));
 
-		addSlotToContainer(new BetterSlot(tile, 1, 51, 26));
-		addSlotToContainer(new BetterSlot(tile, 2, 69, 26));
-		addSlotToContainer(new BetterSlot(tile, 3, 51, 44));
-		addSlotToContainer(new BetterSlot(tile, 4, 69, 44));
+		addSlotToContainer(new SlotItemHandler(inputSlots, 1, 51, 26));
+		addSlotToContainer(new SlotItemHandler(inputSlots, 2, 69, 26));
+		addSlotToContainer(new SlotItemHandler(inputSlots, 3, 51, 44));
+		addSlotToContainer(new SlotItemHandler(inputSlots, 4, 69, 44));
 
-		addSlotToContainer(new BetterSlot(tile, 5, 128, 34));
+		addSlotToContainer(new SlotItemHandler(outputSlots, 5, 128, 34));
 
 		for (int i = 0; i < 3; i++)
 			for (int j = 0; j < 9; j++)
@@ -44,7 +52,7 @@ public class ContainerEnderFurnace extends GanysContainer {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 		for (int i = 0; i < crafters.size(); i++)
-			furnace.sendGUIData(this, (ICrafting) crafters.get(i));
+			furnace.sendGUIData(this, crafters.get(i));
 	}
 
 	@Override
@@ -55,7 +63,7 @@ public class ContainerEnderFurnace extends GanysContainer {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
 		ItemStack itemstack = null;
-		Slot slot = (Slot) inventorySlots.get(slotIndex);
+		Slot slot = inventorySlots.get(slotIndex);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
@@ -64,7 +72,7 @@ public class ContainerEnderFurnace extends GanysContainer {
 			if (slotIndex <= 5) {
 				if (!mergeItemStack(itemstack1, 6, 42, true))
 					return null;
-			} else if (furnace.isFuel(itemstack1)) {
+			} else if (EnderFurnaceFuelsRegistry.INSTANCE.getBurnTime(itemstack1) > 0) {
 				if (!mergeItemStack(itemstack1, 0, 1, false))
 					return null;
 			} else if (!mergeItemStack(itemstack1, 1, 5, false))
@@ -82,5 +90,12 @@ public class ContainerEnderFurnace extends GanysContainer {
 		}
 
 		return itemstack;
+	}
+
+	@Override
+	public boolean canInteractWith(EntityPlayer player) {
+		World worldObj = furnace.getWorld();
+		BlockPos pos = furnace.getPos();
+		return worldObj.getTileEntity(pos) != furnace ? false : player.getDistanceSq(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= 64;
 	}
 }
