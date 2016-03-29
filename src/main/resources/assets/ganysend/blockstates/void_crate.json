@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "ganysend:void_crate" }
+    }
+}

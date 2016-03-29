@@ -33,12 +33,12 @@ public class ContainerEnderFurnace extends Container {
 		IItemHandler fuelSlots = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.WEST);
 		addSlotToContainer(new SlotItemHandler(fuelSlots, 0, 13, 44));
 
-		addSlotToContainer(new SlotItemHandler(inputSlots, 1, 51, 26));
-		addSlotToContainer(new SlotItemHandler(inputSlots, 2, 69, 26));
-		addSlotToContainer(new SlotItemHandler(inputSlots, 3, 51, 44));
-		addSlotToContainer(new SlotItemHandler(inputSlots, 4, 69, 44));
+		addSlotToContainer(new SlotItemHandler(inputSlots, 0, 51, 26));
+		addSlotToContainer(new SlotItemHandler(inputSlots, 1, 69, 26));
+		addSlotToContainer(new SlotItemHandler(inputSlots, 2, 51, 44));
+		addSlotToContainer(new SlotItemHandler(inputSlots, 3, 69, 44));
 
-		addSlotToContainer(new SlotItemHandler(outputSlots, 5, 128, 34));
+		addSlotToContainer(new SlotItemHandler(outputSlots, 0, 128, 34));
 
 		for (int i = 0; i < 3; i++)
 			for (int j = 0; j < 9; j++)

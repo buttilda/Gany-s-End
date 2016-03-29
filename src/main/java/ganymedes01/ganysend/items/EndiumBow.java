@@ -3,7 +3,6 @@ package ganymedes01.ganysend.items;
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.api.IEndiumTool;
-import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModMaterials;
 import ganymedes01.ganysend.lib.Strings;
@@ -17,6 +16,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -25,6 +25,8 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 /**
  * Gany's End
@@ -41,7 +43,7 @@ public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable {
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDIUM_BOW_NAME));
 	}
 
-	private IInventory getTaggedInventory(World world, ItemStack stack) {
+	private IItemHandler getTaggedInventory(World world, ItemStack stack) {
 		if (stack.hasTagCompound())
 			if (stack.getTagCompound().getBoolean("Tagged")) {
 				NBTTagCompound data = stack.getTagCompound();
@@ -51,22 +53,23 @@ public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable {
 				int z = pos[2];
 				int dim = data.getInteger("Dimension");
 
-				if (world.provider.getDimensionId() == dim)
-					return Utils.getTileEntity(world, new BlockPos(x, y, z), IInventory.class);
+				if (world.provider.getDimensionId() == dim) {
+					TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
+					if (tile != null && tile.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
+						return tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+				}
 			}
 		return null;
 	}
 
 	private boolean consumeArrow(EntityPlayer player, ItemStack stack) {
-		IInventory inventory = getTaggedInventory(player.worldObj, stack);
-		if (inventory != null)
-			for (int i = 0; i < inventory.getSizeInventory(); i++) {
-				ItemStack invtStack = inventory.getStackInSlot(i);
+		IItemHandler itemHandler = getTaggedInventory(player.worldObj, stack);
+		if (itemHandler != null)
+			for (int i = 0; i < itemHandler.getSlots(); i++) {
+				ItemStack invtStack = itemHandler.getStackInSlot(i);
 				if (invtStack != null && invtStack.getItem() == Items.arrow && invtStack.stackSize > 0) {
-					invtStack.stackSize--;
-					if (invtStack.stackSize <= 0)
-						inventory.setInventorySlotContents(i, null);
-					return true;
+					ItemStack extracted = itemHandler.extractItem(i, 1, false);
+					return extracted != null;
 				}
 			}
 
@@ -74,9 +77,17 @@ public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable {
 	}
 
 	private boolean hasArrowsAvailable(EntityPlayer player, ItemStack stack) {
-		IInventory inventory = getTaggedInventory(player.worldObj, stack);
+		IItemHandler itemHandler = getTaggedInventory(player.worldObj, stack);
+		if (itemHandler != null)
+			for (int i = 0; i < itemHandler.getSlots(); i++) {
+				ItemStack invtStack = itemHandler.getStackInSlot(i);
+				if (invtStack != null && invtStack.getItem() == Items.arrow && invtStack.stackSize > 0) {
+					ItemStack extracted = itemHandler.extractItem(i, 1, true);
+					return extracted != null;
+				}
+			}
 
-		return inventory != null && (InventoryUtils.inventoryContains(inventory, new ItemStack(Items.arrow), false) || player.worldObj.isRemote) || player.inventory.hasItem(Items.arrow);
+		return player.inventory.hasItem(Items.arrow);
 	}
 
 	private boolean consumesArrow(EntityPlayer player, ItemStack stack) {

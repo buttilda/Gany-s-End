@@ -25,7 +25,7 @@ public class NEIGanysEndConfig implements IConfigureNEI {
 		}
 
 		if (GanysEnd.enableEnderToggler)
-			API.hideItem(new ItemStack(ModBlocks.enderToggler_air));
+			API.hideItem(new ItemStack(ModBlocks.ender_toggler_air));
 	}
 
 	@Override

@@ -63,7 +63,7 @@ public class EntityAnchoredEnderChestMinecart extends EntityMinecartChest {
 
 	@Override
 	public Block func_145817_o() {
-		return ModBlocks.anchoredEnderChest;
+		return ModBlocks.anchored_ender_chest;
 	}
 
 	@Override

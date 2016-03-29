@@ -1,0 +1,8 @@
+{
+    "parent": "block/outer_stairs",
+    "textures": {
+        "bottom": "ganysend:blocks/endstone_bricks",
+        "top": "ganysend:blocks/endstone_bricks",
+        "side": "ganysend:blocks/endstone_bricks"
+    }
+}

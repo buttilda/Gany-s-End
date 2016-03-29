@@ -31,24 +31,24 @@ public class EnderToggler extends Block implements IConfigurable {
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 		if (world.isBlockIndirectlyGettingPowered(pos) > 0)
-			world.setBlockState(pos, ModBlocks.enderToggler_air.getDefaultState(), 2);
+			world.setBlockState(pos, ModBlocks.ender_toggler_air.getDefaultState(), 2);
 		else
-			world.notifyNeighborsOfStateChange(pos.up(), ModBlocks.enderToggler);
-		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.enderToggler_air) {
-			world.setBlockState(pos, ModBlocks.enderToggler_air.getDefaultState(), 2);
-			world.notifyNeighborsOfStateChange(pos.up(), ModBlocks.enderToggler_air);
+			world.notifyNeighborsOfStateChange(pos.up(), ModBlocks.ender_toggler);
+		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.ender_toggler_air) {
+			world.setBlockState(pos, ModBlocks.ender_toggler_air.getDefaultState(), 2);
+			world.notifyNeighborsOfStateChange(pos.up(), ModBlocks.ender_toggler_air);
 		}
 	}
 
 	@Override
 	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighbourBlock) {
 		if (world.isBlockIndirectlyGettingPowered(pos) > 0) {
-			world.setBlockState(pos, ModBlocks.enderToggler_air.getDefaultState(), 2);
-			world.notifyNeighborsOfStateChange(pos.up(), ModBlocks.enderToggler_air);
+			world.setBlockState(pos, ModBlocks.ender_toggler_air.getDefaultState(), 2);
+			world.notifyNeighborsOfStateChange(pos.up(), ModBlocks.ender_toggler_air);
 		}
-		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.enderToggler_air) {
-			world.setBlockState(pos, ModBlocks.enderToggler_air.getDefaultState(), 2);
-			world.notifyNeighborsOfStateChange(pos.up(), ModBlocks.enderToggler_air);
+		if (world.getBlockState(pos.down()).getBlock() == ModBlocks.ender_toggler_air) {
+			world.setBlockState(pos, ModBlocks.ender_toggler_air.getDefaultState(), 2);
+			world.notifyNeighborsOfStateChange(pos.up(), ModBlocks.ender_toggler_air);
 		}
 	}
 

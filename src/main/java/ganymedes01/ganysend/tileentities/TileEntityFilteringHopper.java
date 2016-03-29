@@ -201,21 +201,25 @@ public class TileEntityFilteringHopper extends TileEntity implements ITickable {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound data) {
-		super.readFromNBT(data);
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		transferCooldown = nbt.getInteger("TransferCooldown");
+		MAX_COOL_DOWN = nbt.getInteger("MaxCoolDown");
+		EXCLUSIVE = nbt.getBoolean("IsExclusive");
 
-		transferCooldown = data.getInteger("TransferCooldown");
-		MAX_COOL_DOWN = data.getInteger("MAX_COOL_DOWN");
-		EXCLUSIVE = data.getBoolean("OPPOSITE");
+		InventoryUtils.readItemHandlerFromNBT(nbt, itemHandler, "ItemHandler");
+		InventoryUtils.readItemHandlerFromNBT(nbt, filters, "HandlerFilter");
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound data) {
-		super.writeToNBT(data);
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		nbt.setInteger("TransferCooldown", transferCooldown);
+		nbt.setInteger("MaxCoolDown", MAX_COOL_DOWN);
+		nbt.setBoolean("IsExclusive", EXCLUSIVE);
 
-		data.setInteger("TransferCooldown", transferCooldown);
-		data.setInteger("MAX_COOL_DOWN", MAX_COOL_DOWN);
-		data.setBoolean("OPPOSITE", EXCLUSIVE);
+		InventoryUtils.writeItemHandlerToNBT(nbt, itemHandler, "ItemHandler");
+		InventoryUtils.writeItemHandlerToNBT(nbt, filters, "HandlerFilter");
 	}
 
 	@Override

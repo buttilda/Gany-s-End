@@ -32,8 +32,8 @@ public class DispenserBehaviorInfusedGem extends BehaviorDefaultDispenseItem {
 			player.setCurrentItemOrArmor(0, stack);
 
 			IBlockState state = world.getBlockState(pos);
-			if (state.getBlock() == ModBlocks.timeManipulator)
-				ModBlocks.timeManipulator.onBlockActivated(world, pos, state, player, facing, 0.0F, 0.0F, 0.0F);
+			if (state.getBlock() == ModBlocks.time_manipulator)
+				ModBlocks.time_manipulator.onBlockActivated(world, pos, state, player, facing, 0.0F, 0.0F, 0.0F);
 		}
 		return stack;
 	}

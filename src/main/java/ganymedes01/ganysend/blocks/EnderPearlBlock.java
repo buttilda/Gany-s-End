@@ -33,7 +33,7 @@ public class EnderPearlBlock extends Block implements ISubBlocksBlock, IConfigur
 
 	public static enum Type implements IStringSerializable {
 		PLAIN,
-		BRICK;
+		BRICKS;
 
 		@Override
 		public String getName() {

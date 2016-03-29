@@ -1,0 +1,7 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "particle": "ganysend:blocks/ender_flower",
+        "cross": "ganysend:blocks/ender_flower"
+    }
+}

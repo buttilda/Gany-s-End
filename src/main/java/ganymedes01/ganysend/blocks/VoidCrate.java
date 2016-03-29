@@ -36,6 +36,11 @@ public class VoidCrate extends BlockContainer implements IConfigurable {
 	}
 
 	@Override
+	public int getRenderType() {
+		return 3;
+	}
+
+	@Override
 	public void breakBlock(World world, BlockPos pos, IBlockState state) {
 		IItemHandler itemHandler = world.getTileEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		for (int i = 0; i < itemHandler.getSlots(); i++) {

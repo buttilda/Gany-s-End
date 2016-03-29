@@ -52,10 +52,10 @@ public class HandlerEvents {
 	public void tooltip(ItemTooltipEvent event) {
 		Block block = Block.getBlockFromItem(event.itemStack.getItem());
 		if (block != Blocks.air && block != null) {
-			if (block == ModBlocks.creativeInfiniteFluidSource) {
+			if (block == ModBlocks.creative_infinite_fluid_source) {
 				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".creativeOnly"));
 				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".leftClickContainer"));
-			} else if (block == ModBlocks.creativeSpeedyHopper)
+			} else if (block == ModBlocks.creative_speedy_hopper)
 				event.toolTip.add(StatCollector.translateToLocal("string." + Reference.MOD_ID + ".creativeOnly"));
 		} else if (EntityDropEvent.isEndiumTool(event.itemStack)) {
 			NBTTagCompound nbt = event.itemStack.getTagCompound();
@@ -74,7 +74,7 @@ public class HandlerEvents {
 
 		if (event.world.provider.getDimensionId() == 1 && event.block == Blocks.end_stone)
 			if (event.world.isAirBlock(event.pos.up())) {
-				event.world.setBlockState(event.pos.up(), ModBlocks.enderFlower.getDefaultState());
+				event.world.setBlockState(event.pos.up(), ModBlocks.ender_flower.getDefaultState());
 				event.setResult(Result.ALLOW);
 			}
 	}

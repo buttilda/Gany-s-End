@@ -14,13 +14,13 @@ import net.minecraft.block.material.Material;
  *
  */
 
-public class EndstoneBrick extends Block implements IConfigurable {
+public class EndstoneBricks extends Block implements IConfigurable {
 
-	public EndstoneBrick() {
+	public EndstoneBricks() {
 		super(Material.rock);
 		setHardness(3.0F);
 		setResistance(15.0F);
-		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDSTONE_BRICK_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDSTONE_BRICKS_NAME));
 		setCreativeTab(GanysEnd.enableDecorativeBlocks ? GanysEnd.endTab : null);
 	}
 

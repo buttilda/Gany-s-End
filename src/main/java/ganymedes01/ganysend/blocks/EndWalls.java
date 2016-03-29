@@ -20,17 +20,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EndWalls extends BlockWall implements ISubBlocksBlock, IConfigurable {
 
 	public EndWalls() {
-		super(ModBlocks.endstoneBrick);
+		super(ModBlocks.endstone_bricks);
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.END_WALLS_NAME));
 		setCreativeTab(GanysEnd.enableDecorativeBlocks ? GanysEnd.endTab : null);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void getSubBlocks(Item id, CreativeTabs tab, List list) {
-		list.add(new ItemStack(id, 1, 0));
-		list.add(new ItemStack(id, 1, 1));
+	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list) {
+		list.add(new ItemStack(item, 1, 0));
+		list.add(new ItemStack(item, 1, 1));
 	}
 
 	@Override

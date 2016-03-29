@@ -71,7 +71,7 @@ public class BlockInfiniteWaterSourceRender implements ISimpleBlockRenderingHand
 		renderer.clearOverrideBlockTexture();
 
 		// CORE
-		if (block == ModBlocks.infiniteWaterSource) {
+		if (block == ModBlocks.infinite_water_source) {
 			OpenGLHelper.pushMatrix();
 			OpenGLHelper.enableBlend();
 			OpenGLHelper.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

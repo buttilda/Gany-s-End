@@ -1,5 +1,7 @@
 package ganymedes01.ganysend.tileentities;
 
+import ganymedes01.ganysend.core.utils.InventoryUtils;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -18,6 +20,18 @@ public class TileEntityVoidCrate extends TileEntity implements ITickable {
 			return;
 
 		itemHandler.setStackInSlot(64, null);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		InventoryUtils.readItemHandlerFromNBT(nbt, itemHandler, "ItemHandler");
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		InventoryUtils.writeItemHandlerToNBT(nbt, itemHandler, "ItemHandler");
 	}
 
 	@Override

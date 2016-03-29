@@ -89,18 +89,18 @@ public class InfiniteWaterSource extends BlockContainer implements IConfigurable
 			if (world.getBlockState(sidePos).getBlock().getMaterial() == Material.lava) {
 				int meta = world.getBlockMetadata(sidePos);
 				if (meta == 0)
-					world.setBlock(sidePos, Blocks.obsidian);
+					world.setBlockState(sidePos, Blocks.obsidian.getDefaultState());
 				else if (meta <= 4)
-					world.setBlock(sidePos, Blocks.cobblestone);
+					world.setBlockState(sidePos, Blocks.cobblestone.getDefaultState());
 				triggerLavaMixEffects(world, sidePos);
 			}
 		}
 	}
 
 	private void triggerLavaMixEffects(World world, BlockPos pos) {
-		world.playSoundEffect(x + 0.5F, y + 0.5F, z + 0.5F, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
+		world.playSoundEffect(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, "random.fizz", 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 		for (int i = 0; i < 8; i++)
-			world.spawnParticle("largesmoke", x + Math.random(), y + 1.2D, z + Math.random(), 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("largesmoke", pos.getX() + Math.random(), pos.getY() + 1.2, pos.getZ() + Math.random(), 0, 0, 0);
 	}
 
 	@Override

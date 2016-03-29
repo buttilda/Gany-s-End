@@ -1,79 +1,67 @@
 # Item localizations
-item.ganysend.endiumHelmet.name=Endium Helmet
-item.ganysend.endiumChestplate.name=Endium Chestplate
-item.ganysend.endiumLeggings.name=Endium Leggings
-item.ganysend.endiumBoots.name=Endium Boots
+item.ganysend.endium_helmet.name=Endium Helmet
+item.ganysend.endium_chestplate.name=Endium Chestplate
+item.ganysend.endium_leggings.name=Endium Leggings
+item.ganysend.endium_boots.name=Endium Boots
 
-item.ganysend.enderTag.name=Ender Tag
-item.ganysend.endiumNugget.name=Endium Nugget
-item.ganysend.endiumIngot.name=Endium Ingot
-item.ganysend.endstoneRod.name=End Stone Rod
-item.ganysend.enderScythe.name=Ender Scythe
-item.ganysend.infiniteBucket.name=Infinite Bucket
-item.ganysend.infusedGem_night.name=Night Infused Gem
-item.ganysend.infusedGem_day.name=Day Infused Gem
-item.ganysend.endiumPickaxe.name=Endium Pickaxe
-item.ganysend.endiumAxe.name=Endium Axe
-item.ganysend.endiumShovel.name=Endium Shovel
-item.ganysend.endiumSword.name=Endium Sword
-item.ganysend.endiumBow.name=Endium Bow
-item.ganysend.reinforcedEndiumPickaxe.name=Reinforced Endium Pickaxe
-item.ganysend.reinforcedEndiumAxe.name=Reinforced Endium Axe
-item.ganysend.reinforcedEndiumShovel.name=Reinforced Endium Shovel
-item.ganysend.reinforcedEndiumSword.name=Reinforced Endium Sword
-item.ganysend.reinforcedEndiumBow.name=Reinforced Endium Bow
-item.ganysend.enderBag.name=Ender Bag
-item.ganysend.reinforcedEnderScythe.name=Reinforced Ender Scythe
-item.ganysend.anchoredEnderChestMinecart.name=Anchored Ender Chest Minecart
+item.ganysend.ender_tag.name=Ender Tag
+item.ganysend.endium_nugget.name=Endium Nugget
+item.ganysend.endium_ingot.name=Endium Ingot
+item.ganysend.endstone_rod.name=End Stone Rod
+item.ganysend.ender_scythe.name=Ender Scythe
+item.ganysend.infinite_bucket.name=Infinite Bucket
+item.ganysend.infused_gem_night.name=Night Infused Gem
+item.ganysend.infused_gem_day.name=Day Infused Gem
+item.ganysend.endium_pickaxe.name=Endium Pickaxe
+item.ganysend.endium_axe.name=Endium Axe
+item.ganysend.endium_shovel.name=Endium Shovel
+item.ganysend.endium_sword.name=Endium Sword
+item.ganysend.endium_bow.name=Endium Bow
+item.ganysend.reinforced_endium_pickaxe.name=Reinforced Endium Pickaxe
+item.ganysend.reinforced_endium_axe.name=Reinforced Endium Axe
+item.ganysend.reinforced_endium_shovel.name=Reinforced Endium Shovel
+item.ganysend.reinforced_endium_sword.name=Reinforced Endium Sword
+item.ganysend.reinforced_endium_bow.name=Reinforced Endium Bow
+item.ganysend.ender_bag.name=Ender Bag
+item.ganysend.reinforced_ender_scythe.name=Reinforced Ender Scythe
+item.ganysend.anchored_ender_chest_minecart.name=Anchored Ender Chest Minecart
 
 # Block localizations
-tile.ganysend.enderFlower.name=Ender Flower
-tile.ganysend.endstoneBrick.name=End Stone Brick
-tile.ganysend.enderpearlBlock.name=Ender Pearl Block
-tile.ganysend.enderpearlBrick.name=Ender Pearl Brick
-tile.ganysend.endstoneStairs.name=End Stone Stairs
-tile.ganysend.enderpearlBrickStairs.name=Ender Pearl Brick Stairs
-tile.ganysend.enderToggler.name=Ender Toggler
-tile.ganysend.blockShifter.name=Block Shifter
-tile.ganysend.rawEndium.name=Raw Endium
-tile.ganysend.endiumBlock.name=Block of Endium
+tile.ganysend.ender_flower.name=Ender Flower
+tile.ganysend.endstone_brick.name=End Stone Brick
+tile.ganysend.enderpearl_block.name=Ender Pearl Block
+tile.ganysend.enderpearl_brick.name=Ender Pearl Brick
+tile.ganysend.endstone_stairs.name=End Stone Stairs
+tile.ganysend.enderpearl_brick_stairs.name=Ender Pearl Brick Stairs
+tile.ganysend.ender_toggler.name=Ender Toggler
+tile.ganysend.block_shifter.name=Block Shifter
+tile.ganysend.raw_endium.name=Raw Endium
+tile.ganysend.endium_block.name=Block of Endium
 tile.ganysend.emulator.name=Emulator
-tile.ganysend.basicFilteringHopper.name=Basic Filtering Hopper
-tile.ganysend.exclusiveFilteringHopper.name=Exclusive Filtering Hopper
-tile.ganysend.speedyBasicFilteringHopper.name=Speedy Basic Filtering Hopper
-tile.ganysend.speedyExclusiveFilteringHopper.name=Speedy Exclusive Filtering Hopper
-tile.ganysend.speedyHopper.name=Speedy Hopper
-tile.ganysend.creativeSpeedyHopper.name=Creative Speedy Hopper
-tile.ganysend.advancedFilteringHopper.name=Advanced Filtering Hopper
-tile.ganysend.advancedExclusiveFilteringHopper.name=Advanced Exclusive Filtering Hopper
-tile.ganysend.timeManipulator.name=Time Manipulator
-tile.ganysend.entityShifter.name=Entity Shifter
-tile.ganysend.inventoryBinder.name=Inventory Binder
-tile.ganysend.infiniteWaterSource.name=Infinite Water Source
-tile.ganysend.endWalls0.name=End Stone Brick Wall
-tile.ganysend.endWalls1.name=Ender Pearl Brick Wall
-tile.ganysend.voidCrate.name=Void Crate
-tile.ganysend.enderFurnace.name=Ender Furnace
-tile.ganysend.creativeInfiniteFluidSource.name=Creative Infinite Fluid Source
-tile.ganysend.anchoredEnderChest.name=Anchored Ender Chest
-
-# GUI localizations
-container.ganysend.basicFilteringHopper=Basic Filtering Hopper
-container.ganysend.exclusiveFilteringHopper=Exclusive Filtering Hopper
-container.ganysend.speedyHopper=Speedy Hopper
-container.ganysend.creativeSpeedyHopper=Creative Speedy Hopper
-container.ganysend.speedyBasicFilteringHopper=Speedy Basic Filtering Hopper
-container.ganysend.speedyExclusiveFilteringHopper=Speedy Excl. Filtering Hopper
-container.ganysend.advancedFilteringHopper=Advanced Filtering Hopper
-container.ganysend.advancedExclusiveFilteringHopper=Advanced Excl. Filtering Hopper
-container.ganysend.voidCrate=Void Crate
-container.ganysend.enderFurnace=Ender Furnace
+tile.ganysend.basic_filtering_hopper.name=Basic Filtering Hopper
+tile.ganysend.exclusive_filtering_hopper.name=Exclusive Filtering Hopper
+tile.ganysend.speedy_basic_filtering_hopper.name=Speedy Basic Filtering Hopper
+tile.ganysend.speedy_exclusive_filtering_hopper.name=Speedy Exclusive Filtering Hopper
+tile.ganysend.speedy_hopper.name=Speedy Hopper
+tile.ganysend.creative_speedy_hopper.name=Creative Speedy Hopper
+tile.ganysend.advanced_filtering_hopper.name=Advanced Filtering Hopper
+tile.ganysend.advanced_exclusive_filtering_hopper.name=Advanced Exclusive Filtering Hopper
+tile.ganysend.time_manipulator.name=Time Manipulator
+tile.ganysend.entity_shifter.name=Entity Shifter
+tile.ganysend.inventory_binder.name=Inventory Binder
+tile.ganysend.infinite_water_source.name=Infinite Water Source
+tile.ganysend.endstone_brick_walls_.name=End Stone Brick Wall
+tile.ganysend.endderpearl_brick_walls.name=Ender Pearl Brick Wall
+tile.ganysend.void_crate.name=Void Crate
+tile.ganysend.ender_furnace.name=Ender Furnace
+tile.ganysend.creative_infinite_fluid_source.name=Creative Infinite Fluid Source
+tile.ganysend.anchored_ender_chest.name=Anchored Ender Chest
 
 # Enchantments
 enchantment.imperviousness=Imperviousness
 
 # Entities
-entity.ganysend.anchoredEnderChestMinecart.name=Anchored Ender Chest Minecart
+entity.ganysend.anchored_ender_chest_minecart.name=Anchored Ender Chest Minecart
 
 # Fluids
 fluid.endium=Molten Endium

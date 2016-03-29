@@ -1,7 +1,10 @@
 package ganymedes01.ganysend.tileentities;
 
+import ganymedes01.ganysend.blocks.EnderFurnace;
+import ganymedes01.ganysend.core.utils.InventoryUtils;
 import ganymedes01.ganysend.recipes.EnderFurnaceFuelsRegistry;
 import ganymedes01.ganysend.recipes.EnderFurnaceRegistry;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -49,19 +52,6 @@ public class TileEntityEnderFurnace extends TileEntity implements ITickable {
 
 	private int burnTime, currentBurnTime, cookTime;
 	private boolean update = true, canSmelt;
-	public int lightLevel = 0;
-
-	@Override
-	public boolean receiveClientEvent(int eventId, int eventData) {
-		switch (eventId) {
-			case 1:
-				lightLevel = eventData;
-				worldObj.notifyLightSet(pos);
-				return true;
-			default:
-				return false;
-		}
-	}
 
 	@Override
 	public void update() {
@@ -89,18 +79,8 @@ public class TileEntityEnderFurnace extends TileEntity implements ITickable {
 		} else
 			cookTime = 0;
 
-		sendClientUpdates();
-
 		if (inventoryChanged)
 			markDirty();
-	}
-
-	private void sendClientUpdates() {
-		int old = lightLevel;
-		lightLevel = burnTime > 0 ? 15 : 0;
-
-		if (lightLevel != old)
-			worldObj.addBlockEvent(pos, getBlockType(), 1, lightLevel);
 	}
 
 	private void smelt() {
@@ -134,8 +114,9 @@ public class TileEntityEnderFurnace extends TileEntity implements ITickable {
 	public void markDirty() {
 		super.markDirty();
 		update = true;
-		worldObj.addBlockEvent(pos, getBlockType(), 1, lightLevel);
-		worldObj.notifyLightSet(pos);
+
+		IBlockState state = worldObj.getBlockState(pos);
+		worldObj.setBlockState(pos, state.withProperty(EnderFurnace.IS_ON, burnTime > 0));
 	}
 
 	public void sendGUIData(Container container, ICrafting craft) {
@@ -169,20 +150,28 @@ public class TileEntityEnderFurnace extends TileEntity implements ITickable {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound data) {
-		super.readFromNBT(data);
-		burnTime = data.getInteger("burnTime");
-		currentBurnTime = data.getInteger("currentBurnTime");
-		cookTime = data.getInteger("cookTime");
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		burnTime = nbt.getInteger("burnTime");
+		currentBurnTime = nbt.getInteger("currentBurnTime");
+		cookTime = nbt.getInteger("cookTime");
 		update = true;
+
+		InventoryUtils.readItemHandlerFromNBT(nbt, fuelSlots, "HandlerFuel");
+		InventoryUtils.readItemHandlerFromNBT(nbt, outputSlots, "HandlerOutput");
+		InventoryUtils.readItemHandlerFromNBT(nbt, inputSlots, "HandlerInput");
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound data) {
-		super.writeToNBT(data);
-		data.setInteger("burnTime", burnTime);
-		data.setInteger("currentBurnTime", currentBurnTime);
-		data.setInteger("cookTime", cookTime);
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		nbt.setInteger("burnTime", burnTime);
+		nbt.setInteger("currentBurnTime", currentBurnTime);
+		nbt.setInteger("cookTime", cookTime);
+
+		InventoryUtils.writeItemHandlerToNBT(nbt, fuelSlots, "HandlerFuel");
+		InventoryUtils.writeItemHandlerToNBT(nbt, outputSlots, "HandlerOutput");
+		InventoryUtils.writeItemHandlerToNBT(nbt, inputSlots, "HandlerInput");
 	}
 
 	@Override

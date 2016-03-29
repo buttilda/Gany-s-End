@@ -56,11 +56,11 @@ public class TinkersConstructManager extends Integration {
 			FluidRegistry.registerFluid(endium);
 		}
 
-		Smeltery.addMelting(new ItemStack(ModItems.endiumIngot, 1, 0), ModBlocks.endiumBlock, 0, 100, new FluidStack(endium, TConstruct.ingotLiquidValue));
-		Smeltery.addMelting(new ItemStack(ModItems.endiumIngot, 1, 1), ModBlocks.endiumBlock, 0, 100, new FluidStack(endium, TConstruct.nuggetLiquidValue));
-		Smeltery.addMelting(ModBlocks.endiumBlock, 0, 100, new FluidStack(endium, TConstruct.blockLiquidValue));
-		Smeltery.addMelting(ModBlocks.rawEndium, 0, 1000, new FluidStack(endium, TConstruct.oreLiquidValue));
-		TConstructRegistry.getBasinCasting().addCastingRecipe(new ItemStack(ModBlocks.endiumBlock), new FluidStack(endium, TConstruct.blockLiquidValue), 50);
+		Smeltery.addMelting(new ItemStack(ModItems.endiumIngot, 1, 0), ModBlocks.endium_block, 0, 100, new FluidStack(endium, TConstruct.ingotLiquidValue));
+		Smeltery.addMelting(new ItemStack(ModItems.endiumIngot, 1, 1), ModBlocks.endium_block, 0, 100, new FluidStack(endium, TConstruct.nuggetLiquidValue));
+		Smeltery.addMelting(ModBlocks.endium_block, 0, 100, new FluidStack(endium, TConstruct.blockLiquidValue));
+		Smeltery.addMelting(ModBlocks.raw_endium, 0, 1000, new FluidStack(endium, TConstruct.oreLiquidValue));
+		TConstructRegistry.getBasinCasting().addCastingRecipe(new ItemStack(ModBlocks.endium_block), new FluidStack(endium, TConstruct.blockLiquidValue), 50);
 		TConstructRegistry.getTableCasting().addCastingRecipe(new ItemStack(ModItems.endiumIngot), new FluidStack(endium, TConstruct.ingotLiquidValue), new ItemStack(TinkerSmeltery.metalPattern), 50);
 		TConstructRegistry.getTableCasting().addCastingRecipe(new ItemStack(ModItems.endiumIngot, 1, 1), new FluidStack(endium, TConstruct.nuggetLiquidValue), new ItemStack(TinkerSmeltery.metalPattern, 1, 27), 50);
 
@@ -71,7 +71,7 @@ public class TinkersConstructManager extends Integration {
 				int amount = ((IPattern) TinkerSmeltery.metalPattern).getPatternCost(cast) * TConstruct.ingotLiquidValue / 2;
 				ItemStack metalCast = new ItemStack(TinkerTools.patternOutputs[i], 1, materialID);
 				TConstructRegistry.getTableCasting().addCastingRecipe(metalCast, new FluidStack(endium, amount), cast, 50);
-				Smeltery.addMelting(metalCast, ModBlocks.endiumBlock, 0, 100, new FluidStack(endium, amount));
+				Smeltery.addMelting(metalCast, ModBlocks.endium_block, 0, 100, new FluidStack(endium, amount));
 			}
 
 		MinecraftForge.EVENT_BUS.register(this);

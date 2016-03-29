@@ -22,7 +22,7 @@ public class ItemEnderPearlBlock extends ItemBlock {
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return "tile." + (stack.getItemDamage() == 0 ? Utils.getUnlocalisedName(Strings.ENDERPEARL_BLOCK_NAME) : Utils.getUnlocalisedName(Strings.ENDERPEARL_BRICK_NAME));
+		return "tile." + (stack.getItemDamage() == 0 ? Utils.getUnlocalisedName(Strings.ENDERPEARL_BLOCK_NAME) : Utils.getUnlocalisedName(Strings.ENDERPEARL_BRICKS_NAME));
 	}
 
 	@Override

@@ -21,12 +21,12 @@ public class ThaumcraftManager extends Integration {
 	@Override
 	public void init() {
 		ThaumcraftApi.addSmeltingBonus("oreEndium", new ItemStack(ModItems.endiumIngot, 0, 1));
-		ThaumcraftApi.portableHoleBlackList.add(ModBlocks.enderToggler_air);
+		ThaumcraftApi.portableHoleBlackList.add(ModBlocks.ender_toggler_air);
 
 		addAspectsToItem(ModItems.endiumIngot, new Aspect[] { Aspect.ELDRITCH, Aspect.TRAVEL, Aspect.MAGIC, Aspect.SENSES, Aspect.DARKNESS }, new int[] { 4, 4, 7, 2, 2 });
 		addAspectsToItem(ModItems.endstoneRod, new Aspect[] { Aspect.DARKNESS, Aspect.EARTH }, new int[] { 1, 1 });
-		addAspectsToItem(ModBlocks.enderFlower, new Aspect[] { Aspect.PLANT, Aspect.SENSES, Aspect.LIFE, Aspect.ELDRITCH, Aspect.MAGIC, Aspect.TRAVEL }, new int[] { 1, 1, 1, 1, 1, 1 });
-		addAspectsToItem(ModBlocks.rawEndium, new Aspect[] { Aspect.ELDRITCH, Aspect.TRAVEL, Aspect.MAGIC, Aspect.SENSES, Aspect.DARKNESS }, new int[] { 4, 4, 7, 2, 2 });
+		addAspectsToItem(ModBlocks.ender_flower, new Aspect[] { Aspect.PLANT, Aspect.SENSES, Aspect.LIFE, Aspect.ELDRITCH, Aspect.MAGIC, Aspect.TRAVEL }, new int[] { 1, 1, 1, 1, 1, 1 });
+		addAspectsToItem(ModBlocks.raw_endium, new Aspect[] { Aspect.ELDRITCH, Aspect.TRAVEL, Aspect.MAGIC, Aspect.SENSES, Aspect.DARKNESS }, new int[] { 4, 4, 7, 2, 2 });
 	}
 
 	@Override

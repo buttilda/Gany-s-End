@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "top": "ganysend:blocks/raw_endium",
+        "side": "ganysend:blocks/raw_endium"
+    }
+}

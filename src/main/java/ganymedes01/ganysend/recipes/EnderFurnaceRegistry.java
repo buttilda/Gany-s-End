@@ -39,8 +39,8 @@ public class EnderFurnaceRegistry extends RecipeRegistry<EnderFurnaceRecipe> {
 		addRecipe(new ItemStack(Items.ender_pearl, 4), "itemSkull", "itemSkull");
 		addRecipe(new ItemStack(Blocks.end_stone), Blocks.stone);
 		if (GanysEnd.enableDecorativeBlocks) {
-			addRecipe(new ItemStack(ModBlocks.endstoneBrick), Blocks.stonebrick);
-			addRecipe(new ItemStack(ModBlocks.enderpearlBlock, 1, 1), ModBlocks.enderpearlBlock);
+			addRecipe(new ItemStack(ModBlocks.endstone_bricks), Blocks.stonebrick);
+			addRecipe(new ItemStack(ModBlocks.enderpearl_block, 1, 1), ModBlocks.enderpearl_block);
 		}
 		addRecipe(new ItemStack(Blocks.stone), Blocks.netherrack);
 		addRecipe(new ItemStack(Blocks.stonebrick), Blocks.nether_brick);
@@ -58,7 +58,7 @@ public class EnderFurnaceRegistry extends RecipeRegistry<EnderFurnaceRecipe> {
 			addRecipe(new ItemStack(Items.experience_bottle), new ItemStack(Items.potionitem, 1, 8197), ModItems.endstoneRod);
 		addRecipe(new ItemStack(Items.ender_pearl), Items.ghast_tear, Items.sugar, Items.glowstone_dust, Items.experience_bottle);
 		if (GanysEnd.enableTimeManipulator)
-			addRecipe(new ItemStack(Blocks.dragon_egg), ModBlocks.timeManipulator);
+			addRecipe(new ItemStack(Blocks.dragon_egg), ModBlocks.time_manipulator);
 		addRecipe(new ItemStack(Items.cooked_fish), Items.fish);
 		addRecipe(new ItemStack(Items.potato), Items.poisonous_potato);
 		addRecipe(new ItemStack(Items.beef), Items.rotten_flesh);
@@ -83,7 +83,7 @@ public class EnderFurnaceRegistry extends RecipeRegistry<EnderFurnaceRecipe> {
 			else
 				addRecipe(new ItemStack(Items.dye, 2, i), new ItemStack(Items.dye, 1, i), "flowerEnder");
 		if (GanysEnd.enableEndium)
-			addRecipe(new ItemStack(ModBlocks.rawEndium), "oreDiamond");
+			addRecipe(new ItemStack(ModBlocks.raw_endium), "oreDiamond");
 	}
 
 	public void addRecipe(ItemStack output, Object... input) {

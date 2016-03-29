@@ -6,8 +6,12 @@ import java.util.List;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
@@ -18,6 +22,17 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 
 public class InventoryUtils {
+
+	public static void writeItemHandlerToNBT(NBTTagCompound nbt, IItemHandler itemHandler, String key) {
+		NBTBase tag = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().writeNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, itemHandler, null);
+		nbt.setTag(key, tag);
+	}
+
+	public static void readItemHandlerFromNBT(NBTTagCompound nbt, IItemHandler itemHandler, String key) {
+		NBTBase tag = nbt.getTag(key);
+		if (tag != null)
+			CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().readNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, itemHandler, null, tag);
+	}
 
 	public static void addToPlayerInventory(EntityPlayer player, ItemStack stack, double x, double y, double z) {
 		if (!player.worldObj.isRemote && stack != null) {

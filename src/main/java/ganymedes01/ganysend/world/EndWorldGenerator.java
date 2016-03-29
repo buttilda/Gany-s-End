@@ -24,7 +24,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class EndWorldGenerator implements IWorldGenerator {
 
-	private final WorldGenMinable endiumGenerator = new WorldGenMinable(ModBlocks.rawEndium.getDefaultState(), 7, BlockHelper.forBlock(Blocks.end_stone));
+	private final WorldGenMinable endiumGenerator = new WorldGenMinable(ModBlocks.raw_endium.getDefaultState(), 7, BlockHelper.forBlock(Blocks.end_stone));
 
 	@Override
 	public void generate(Random rand, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
@@ -42,7 +42,7 @@ public class EndWorldGenerator implements IWorldGenerator {
 						if (rand.nextInt(60) == 30)
 							if (world.getBlockState(pos.down()).getBlock() == Blocks.end_stone)
 								if (world.isAirBlock(pos) && !isSurrounded(world, pos))
-									world.setBlockState(pos, ModBlocks.enderFlower.getDefaultState());
+									world.setBlockState(pos, ModBlocks.ender_flower.getDefaultState());
 					}
 
 		if (GanysEnd.enableEndiumGen)

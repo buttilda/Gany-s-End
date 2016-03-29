@@ -30,7 +30,8 @@ public class TileEntityInventoryBinder extends TileEntity implements IInventory 
 	@Override
 	public Packet<?> getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
-		NBTUtil.writeGameProfile(nbt, profile);
+		if (profile != null)
+			NBTUtil.writeGameProfile(nbt, profile);
 		return new S35PacketUpdateTileEntity(pos, 0, nbt);
 	}
 
