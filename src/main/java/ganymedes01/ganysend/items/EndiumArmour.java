@@ -78,13 +78,13 @@ public abstract class EndiumArmour extends ItemArmor implements IConfigurable {
 			stack.stackSize = 0;
 			player.renderBrokenItemStack(stack);
 			int armourIndex = 0;
-			if (stack.getItem() == ModItems.endiumHelmet)
+			if (stack.getItem() == ModItems.endium_helmet)
 				armourIndex = 4;
-			else if (stack.getItem() == ModItems.endiumChestplate)
+			else if (stack.getItem() == ModItems.endium_chestplate)
 				armourIndex = 3;
-			else if (stack.getItem() == ModItems.endiumLeggings)
+			else if (stack.getItem() == ModItems.endium_leggings)
 				armourIndex = 2;
-			else if (stack.getItem() == ModItems.endiumBoots)
+			else if (stack.getItem() == ModItems.endium_boots)
 				armourIndex = 1;
 
 			player.setCurrentItemOrArmor(armourIndex, null);

@@ -93,11 +93,12 @@ public class GanysEnd {
 		proxy.registerEvents();
 		proxy.registerTileEntities();
 		proxy.registerEntities();
-		proxy.registerRenderers();
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		proxy.registerRenderers();
+
 		isHeadcrumbsLoaded = Loader.isModLoaded("headcrumbs");
 		ModRecipes.init();
 

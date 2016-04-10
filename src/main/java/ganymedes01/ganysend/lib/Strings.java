@@ -15,7 +15,7 @@ public class Strings {
 	public static final String ENDERPEARL_BLOCK_NAME = "enderpearl_block";
 	public static final String ENDERPEARL_BRICKS_NAME = "enderpearl_bricks";
 	public static final String ENDSTONE_STAIRS_NAME = "endstone_stairs";
-	public static final String ENDERPEARL_BRICK_STAIRS_NAME = "enderpearl_brick_stairs";
+	public static final String ENDERPEARL_BRICKS_STAIRS_NAME = "enderpearl_bricks_stairs";
 	public static final String ENDER_TOGGLER_NAME = "ender_toggler";
 	public static final String ENDER_TOGGLER_AIR_NAME = "ender_toggler_air";
 	public static final String BLOCK_SHIFTER_NAME = "block_shifter";
@@ -33,7 +33,7 @@ public class Strings {
 	public static final String ENTITY_SHIFTER_NAME = "entity_shifter";
 	public static final String INVENTORY_BINDER_NAME = "inventory_binder";
 	public static final String INFINITE_WATER_SOURCE_NAME = "infinite_water_source";
-	public static final String END_WALLS_NAME = "endstone_walls";
+	public static final String END_WALL_NAME = "endstone_wall";
 	public static final String VOID_CRATE_NAME = "void_crate";
 	public static final String ENDER_FURNACE_NAME = "ender_furnace";
 	public static final String CREATIVE_SPEEDY_HOPPER_NAME = "creative_speedy_hopper";

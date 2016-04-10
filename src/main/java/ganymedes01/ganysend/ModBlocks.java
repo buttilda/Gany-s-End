@@ -1,6 +1,8 @@
 package ganymedes01.ganysend;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import ganymedes01.ganysend.blocks.AdvancedExclusiveFilteringHopper;
 import ganymedes01.ganysend.blocks.AdvancedFilteringHopper;
@@ -30,8 +32,13 @@ import ganymedes01.ganysend.blocks.SpeedyHopper;
 import ganymedes01.ganysend.blocks.TimeManipulator;
 import ganymedes01.ganysend.blocks.VoidCrate;
 import ganymedes01.ganysend.core.utils.Utils;
+import ganymedes01.ganysend.lib.Reference;
 import ganymedes01.ganysend.lib.Strings;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -48,7 +55,7 @@ public class ModBlocks {
 	public static final Block endstone_bricks = new EndstoneBricks();
 	public static final Block enderpearl_block = new EnderPearlBlock();
 	public static final Block endstone_stairs = new EndStairs(endstone_bricks.getStateFromMeta(0)).setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDSTONE_STAIRS_NAME));
-	public static final Block enderpearl_stairs = new EndStairs(enderpearl_block.getStateFromMeta(1)).setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDERPEARL_BRICK_STAIRS_NAME));
+	public static final Block enderpearl_stairs = new EndStairs(enderpearl_block.getStateFromMeta(1)).setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDERPEARL_BRICKS_STAIRS_NAME));
 	public static final Block ender_toggler = new EnderToggler();
 	public static final Block ender_toggler_air = new EnderTogglerAir();
 	public static final Block block_shifter = new BlockShifter();
@@ -66,7 +73,7 @@ public class ModBlocks {
 	public static final Block entity_shifter = new EntityShifter();
 	public static final Block inventory_binder = new InventoryBinder();
 	public static final Block infinite_water_source = new InfiniteWaterSource();
-	public static final Block end_walls = new EndWalls();
+	public static final Block end_wall = new EndWalls();
 	public static final Block void_crate = new VoidCrate();
 	public static final Block ender_furnace = new EnderFurnace();
 	public static final Block creative_speedy_hopper = new CreativeSpeedyHopper();
@@ -74,19 +81,19 @@ public class ModBlocks {
 	public static final Block anchored_ender_chest = new AnchoredEnderChest();
 
 	public static void init() {
-		try {
-			for (Field f : ModBlocks.class.getDeclaredFields()) {
-				Object obj = f.get(null);
-				if (obj instanceof Block)
-					registerBlock((Block) obj);
-				else if (obj instanceof Block[])
-					for (Block block : (Block[]) obj)
-						if (block != null)
-							registerBlock(block);
+		for (Block block : getBlocks())
+			registerBlock(block);
+	}
+
+	public static void registerRenderers() {
+		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+		for (Block block : getBlocks())
+			if (!(block instanceof IConfigurable) || ((IConfigurable) block).isEnabled()) {
+				String name = block.getUnlocalizedName();
+				String[] strings = name.split("\\.");
+
+				mesher.register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MOD_ID + ":" + strings[strings.length - 1], "inventory"));
 			}
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	private static void registerBlock(Block block) {
@@ -98,6 +105,24 @@ public class ModBlocks {
 				GameRegistry.registerBlock(block, ((ISubBlocksBlock) block).getItemBlockClass(), strings[strings.length - 1]);
 			else
 				GameRegistry.registerBlock(block, strings[strings.length - 1]);
+		}
+	}
+
+	private static List<Block> getBlocks() {
+		List<Block> blocks = new ArrayList<Block>();
+		try {
+			for (Field f : ModBlocks.class.getDeclaredFields()) {
+				Object obj = f.get(null);
+				if (obj instanceof Block)
+					blocks.add((Block) obj);
+				else if (obj instanceof Block[])
+					for (Block block : (Block[]) obj)
+						if (block != null)
+							blocks.add(block);
+			}
+			return blocks;
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

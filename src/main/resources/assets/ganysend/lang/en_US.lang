@@ -28,11 +28,11 @@ item.ganysend.anchored_ender_chest_minecart.name=Anchored Ender Chest Minecart
 
 # Block localizations
 tile.ganysend.ender_flower.name=Ender Flower
-tile.ganysend.endstone_brick.name=End Stone Brick
+tile.ganysend.endstone_bricks.name=End Stone Bricks
 tile.ganysend.enderpearl_block.name=Ender Pearl Block
-tile.ganysend.enderpearl_brick.name=Ender Pearl Brick
-tile.ganysend.endstone_stairs.name=End Stone Stairs
-tile.ganysend.enderpearl_brick_stairs.name=Ender Pearl Brick Stairs
+tile.ganysend.enderpearl_bricks.name=Ender Pearl Bricks
+tile.ganysend.endstone_stairs.name=End Stone Bricks Stairs
+tile.ganysend.enderpearl_bricks_stairs.name=Ender Pearl Bricks Stairs
 tile.ganysend.ender_toggler.name=Ender Toggler
 tile.ganysend.block_shifter.name=Block Shifter
 tile.ganysend.raw_endium.name=Raw Endium
@@ -50,8 +50,8 @@ tile.ganysend.time_manipulator.name=Time Manipulator
 tile.ganysend.entity_shifter.name=Entity Shifter
 tile.ganysend.inventory_binder.name=Inventory Binder
 tile.ganysend.infinite_water_source.name=Infinite Water Source
-tile.ganysend.endstone_brick_walls_.name=End Stone Brick Wall
-tile.ganysend.endderpearl_brick_walls.name=Ender Pearl Brick Wall
+tile.ganysend.endstone_bricks_walls.name=End Stone Bricks Wall
+tile.ganysend.enderpearl_bricks_walls.name=Ender Pearl Bricks Wall
 tile.ganysend.void_crate.name=Void Crate
 tile.ganysend.ender_furnace.name=Ender Furnace
 tile.ganysend.creative_infinite_fluid_source.name=Creative Infinite Fluid Source

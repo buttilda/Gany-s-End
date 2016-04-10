@@ -36,7 +36,7 @@ public class EndiumBlock extends Block implements IConfigurable {
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		ArrayList<ItemStack> list = new ArrayList<ItemStack>();
-		list.add(new ItemStack(ModItems.endiumIngot, 9));
+		list.add(new ItemStack(ModItems.endium_ingot, 9));
 		return list;
 	}
 

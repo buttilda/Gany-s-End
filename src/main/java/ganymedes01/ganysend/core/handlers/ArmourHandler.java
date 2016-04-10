@@ -33,14 +33,14 @@ public class ArmourHandler {
 			if (event.entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) event.entityLiving;
 				boolean isWearing;
-				if (isWearing = player.getCurrentArmor(3) == null || player.getCurrentArmor(3).getItem() != ModItems.endiumHelmet) {
+				if (isWearing = player.getCurrentArmor(3) == null || player.getCurrentArmor(3).getItem() != ModItems.endium_helmet) {
 					if (isWearing) {
 						isWearing = false;
 						PotionEffect NVEffect = player.getActivePotionEffect(Potion.nightVision);
 						if (NVEffect != null && NVEffect.getAmplifier() == -3)
 							player.removePotionEffect(Potion.nightVision.id);
 					}
-				} else if (player.getCurrentArmor(3).getItem() == ModItems.endiumHelmet && !isWearing)
+				} else if (player.getCurrentArmor(3).getItem() == ModItems.endium_helmet && !isWearing)
 					isWearing = true;
 			}
 	}
@@ -54,7 +54,7 @@ public class ArmourHandler {
 		if (!event.entityLiving.worldObj.isRemote)
 			if (event.entityLiving instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) event.entityLiving;
-				if (player.getCurrentArmor(2) != null && player.getCurrentArmor(2).getItem() == ModItems.endiumChestplate)
+				if (player.getCurrentArmor(2) != null && player.getCurrentArmor(2).getItem() == ModItems.endium_chestplate)
 					if (event.source == DamageSource.inFire || event.source == DamageSource.lava || event.source == DamageSource.onFire)
 						if (event.isCancelable())
 							event.setCanceled(true);
@@ -69,7 +69,7 @@ public class ArmourHandler {
 			return;
 
 		EntityPlayer player = event.entity;
-		if (player.getCurrentArmor(1) != null && player.getCurrentArmor(1).getItem() == ModItems.endiumLeggings)
+		if (player.getCurrentArmor(1) != null && player.getCurrentArmor(1).getItem() == ModItems.endium_leggings)
 			if (event.newfov > 1.0F)
 				event.newfov = 1.0F;
 

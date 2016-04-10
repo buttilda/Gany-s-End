@@ -50,7 +50,7 @@ public class TimeManipulator extends BlockContainer implements IConfigurable {
 		TileEntityTimeManipulator tile = Utils.getTileEntity(world, pos, TileEntityTimeManipulator.class);
 		if (tile != null)
 			if (player.getCurrentEquippedItem() != null)
-				if (player.getCurrentEquippedItem().getItem() == ModItems.infusedGem)
+				if (player.getCurrentEquippedItem().getItem() == ModItems.infused_gem)
 					if (player.getCurrentEquippedItem().getItemDamage() == 1) {
 						tile.revertTime = true;
 						tile.advanceTime = false;

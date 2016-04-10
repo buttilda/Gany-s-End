@@ -25,7 +25,7 @@ public class DispenserBehaviorInfiniteBucket extends BehaviorDefaultDispenseItem
 		World world = source.getWorld();
 		BlockPos pos = source.getBlockPos().offset(facing);
 
-		ModItems.infiniteBucket.onItemUse(stack, Utils.getPlayer(world), world, pos, facing, 0, 0, 0);
+		ModItems.infinite_bucket.onItemUse(stack, Utils.getPlayer(world), world, pos, facing, 0, 0, 0);
 
 		return stack;
 	}

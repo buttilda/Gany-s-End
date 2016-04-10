@@ -56,13 +56,13 @@ public class TinkersConstructManager extends Integration {
 			FluidRegistry.registerFluid(endium);
 		}
 
-		Smeltery.addMelting(new ItemStack(ModItems.endiumIngot, 1, 0), ModBlocks.endium_block, 0, 100, new FluidStack(endium, TConstruct.ingotLiquidValue));
-		Smeltery.addMelting(new ItemStack(ModItems.endiumIngot, 1, 1), ModBlocks.endium_block, 0, 100, new FluidStack(endium, TConstruct.nuggetLiquidValue));
+		Smeltery.addMelting(new ItemStack(ModItems.endium_ingot, 1, 0), ModBlocks.endium_block, 0, 100, new FluidStack(endium, TConstruct.ingotLiquidValue));
+		Smeltery.addMelting(new ItemStack(ModItems.endium_ingot, 1, 1), ModBlocks.endium_block, 0, 100, new FluidStack(endium, TConstruct.nuggetLiquidValue));
 		Smeltery.addMelting(ModBlocks.endium_block, 0, 100, new FluidStack(endium, TConstruct.blockLiquidValue));
 		Smeltery.addMelting(ModBlocks.raw_endium, 0, 1000, new FluidStack(endium, TConstruct.oreLiquidValue));
 		TConstructRegistry.getBasinCasting().addCastingRecipe(new ItemStack(ModBlocks.endium_block), new FluidStack(endium, TConstruct.blockLiquidValue), 50);
-		TConstructRegistry.getTableCasting().addCastingRecipe(new ItemStack(ModItems.endiumIngot), new FluidStack(endium, TConstruct.ingotLiquidValue), new ItemStack(TinkerSmeltery.metalPattern), 50);
-		TConstructRegistry.getTableCasting().addCastingRecipe(new ItemStack(ModItems.endiumIngot, 1, 1), new FluidStack(endium, TConstruct.nuggetLiquidValue), new ItemStack(TinkerSmeltery.metalPattern, 1, 27), 50);
+		TConstructRegistry.getTableCasting().addCastingRecipe(new ItemStack(ModItems.endium_ingot), new FluidStack(endium, TConstruct.ingotLiquidValue), new ItemStack(TinkerSmeltery.metalPattern), 50);
+		TConstructRegistry.getTableCasting().addCastingRecipe(new ItemStack(ModItems.endium_ingot, 1, 1), new FluidStack(endium, TConstruct.nuggetLiquidValue), new ItemStack(TinkerSmeltery.metalPattern, 1, 27), 50);
 
 		for (int i = 0; i < TinkerTools.patternOutputs.length; i++)
 			if (TinkerTools.patternOutputs[i] != null) {

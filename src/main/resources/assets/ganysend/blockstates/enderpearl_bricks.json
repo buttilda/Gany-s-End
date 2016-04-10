@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "variant=block": { "model": "ganysend:enderpearl_block" },
+        "variant=bricks": { "model": "ganysend:enderpearl_bricks" }
+    }
+}

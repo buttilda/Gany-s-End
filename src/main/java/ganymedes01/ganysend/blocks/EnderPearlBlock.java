@@ -32,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class EnderPearlBlock extends Block implements ISubBlocksBlock, IConfigurable {
 
 	public static enum Type implements IStringSerializable {
-		PLAIN,
+		BLOCK,
 		BRICKS;
 
 		@Override
@@ -49,7 +49,7 @@ public class EnderPearlBlock extends Block implements ISubBlocksBlock, IConfigur
 		setResistance(10.0F);
 		setCreativeTab(GanysEnd.enableDecorativeBlocks ? GanysEnd.endTab : null);
 		setUnlocalizedName(Utils.getUnlocalisedName(Strings.ENDERPEARL_BLOCK_NAME));
-		setDefaultState(blockState.getBaseState().withProperty(VARIANTS, EnderPearlBlock.Type.PLAIN));
+		setDefaultState(blockState.getBaseState().withProperty(VARIANTS, EnderPearlBlock.Type.BLOCK));
 	}
 
 	@Override

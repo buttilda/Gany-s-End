@@ -1,6 +1,8 @@
 package ganymedes01.ganysend.core.proxy;
 
 import ganymedes01.ganysend.GanysEnd;
+import ganymedes01.ganysend.ModBlocks;
+import ganymedes01.ganysend.ModItems;
 import ganymedes01.ganysend.client.renderer.entity.EntityAnchoredEnderChestMinecartRenderer;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityAnchoredEnderChestRender;
 import ganymedes01.ganysend.client.renderer.tileentity.TileEntityInfiniteWaterSourceRender;
@@ -62,5 +64,8 @@ public class ClientProxy extends CommonProxy {
 					return new EntityAnchoredEnderChestMinecartRenderer(manager);
 				}
 			});
+
+		ModBlocks.registerRenderers();
+		ModItems.registerRenderers();
 	}
 }

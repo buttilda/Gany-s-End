@@ -21,7 +21,7 @@ public class EndWalls extends BlockWall implements ISubBlocksBlock, IConfigurabl
 
 	public EndWalls() {
 		super(ModBlocks.endstone_bricks);
-		setUnlocalizedName(Utils.getUnlocalisedName(Strings.END_WALLS_NAME));
+		setUnlocalizedName(Utils.getUnlocalisedName(Strings.END_WALL_NAME));
 		setCreativeTab(GanysEnd.enableDecorativeBlocks ? GanysEnd.endTab : null);
 	}
 

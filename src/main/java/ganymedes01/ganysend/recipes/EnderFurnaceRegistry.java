@@ -45,9 +45,9 @@ public class EnderFurnaceRegistry extends RecipeRegistry<EnderFurnaceRecipe> {
 		addRecipe(new ItemStack(Blocks.stone), Blocks.netherrack);
 		addRecipe(new ItemStack(Blocks.stonebrick), Blocks.nether_brick);
 		if (GanysEnd.enableEndium)
-			addRecipe(new ItemStack(ModItems.endiumIngot, 2), "oreEndium");
+			addRecipe(new ItemStack(ModItems.endium_ingot, 2), "oreEndium");
 		if (GanysEnd.enableShifters) {
-			ItemStack enderTag = new ItemStack(ModItems.enderTag);
+			ItemStack enderTag = new ItemStack(ModItems.ender_tag);
 			enderTag.setTagCompound(new NBTTagCompound());
 			addRecipe(enderTag, Items.paper);
 		}
@@ -55,7 +55,7 @@ public class EnderFurnaceRegistry extends RecipeRegistry<EnderFurnaceRecipe> {
 		addRecipe(new ItemStack(Items.emerald), Items.diamond, Items.gold_ingot, "itemSkull", new ItemStack(Items.potionitem, 1, 8196));
 		addRecipe(new ItemStack(Items.diamond), Items.emerald, Items.gold_ingot, "itemSkull", new ItemStack(Items.potionitem, 1, 8194));
 		if (GanysEnd.enableEndiumTools || GanysEnd.enableScythe)
-			addRecipe(new ItemStack(Items.experience_bottle), new ItemStack(Items.potionitem, 1, 8197), ModItems.endstoneRod);
+			addRecipe(new ItemStack(Items.experience_bottle), new ItemStack(Items.potionitem, 1, 8197), ModItems.endstone_rod);
 		addRecipe(new ItemStack(Items.ender_pearl), Items.ghast_tear, Items.sugar, Items.glowstone_dust, Items.experience_bottle);
 		if (GanysEnd.enableTimeManipulator)
 			addRecipe(new ItemStack(Blocks.dragon_egg), ModBlocks.time_manipulator);

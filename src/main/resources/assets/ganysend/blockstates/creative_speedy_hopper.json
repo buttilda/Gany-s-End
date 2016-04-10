@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "facing=down": { "model": "ganysend:creative_speedy_hopper_down" },
+        "facing=north": { "model": "ganysend:creative_speedy_hopper_side" },
+        "facing=south": { "model": "ganysend:creative_speedy_hopper_side", "y": 180 },
+        "facing=west": { "model": "ganysend:creative_speedy_hopper_side", "y": 270 },
+        "facing=east": { "model": "ganysend:creative_speedy_hopper_side", "y": 90 }
+    }
+}

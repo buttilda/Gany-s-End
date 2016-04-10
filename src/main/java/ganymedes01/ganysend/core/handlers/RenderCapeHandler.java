@@ -11,17 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Reference;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -97,27 +92,27 @@ public class RenderCapeHandler {
 		return new Color(r, g, b, a);
 	}
 
-	@SubscribeEvent
-	public void onPreRenderSpecials(RenderPlayerEvent.Specials.Pre event) {
-		if (!(event.entityPlayer instanceof AbstractClientPlayer))
-			return;
-		String name = event.entityPlayer.getCommandSenderName();
-		if (usersWithCapes.contains(name)) {
-			AbstractClientPlayer player = (AbstractClientPlayer) event.entityPlayer;
-
-			if (event.entityPlayer.getCommandSenderName().equals("Jeb_Jeb"))
-				setCape(player, JEBJEB_CAPE_DATA);
-			else if (event.entityPlayer.getCommandSenderName().equals("KingPurpleRaptor"))
-				setCape(player, KPR_CAPE_DATA);
-			else
-				setCape(player, CAPE_DATA);
-
-			event.renderCape = true;
-		}
-	}
-
-	private void setCape(AbstractClientPlayer player, ResourceLocation resource) {
-		if (player.getLocationCape() == null || !player.getLocationCape().equals(resource))
-			player.func_152121_a(MinecraftProfileTexture.Type.CAPE, resource);
-	}
+	//	@SubscribeEvent
+	//	public void onPreRenderSpecials(RenderPlayerEvent.Specials.Pre event) {
+	//		if (!(event.entityPlayer instanceof AbstractClientPlayer))
+	//			return;
+	//		String name = event.entityPlayer.getCommandSenderName();
+	//		if (usersWithCapes.contains(name)) {
+	//			AbstractClientPlayer player = (AbstractClientPlayer) event.entityPlayer;
+	//
+	//			if (event.entityPlayer.getCommandSenderName().equals("Jeb_Jeb"))
+	//				setCape(player, JEBJEB_CAPE_DATA);
+	//			else if (event.entityPlayer.getCommandSenderName().equals("KingPurpleRaptor"))
+	//				setCape(player, KPR_CAPE_DATA);
+	//			else
+	//				setCape(player, CAPE_DATA);
+	//
+	//			event.renderCape = true;
+	//		}
+	//	}
+	//
+	//	private void setCape(AbstractClientPlayer player, ResourceLocation resource) {
+	//		if (player.getLocationCape() == null || !player.getLocationCape().equals(resource))
+	//			player.func_152121_a(MinecraftProfileTexture.Type.CAPE, resource);
+	//	}
 }

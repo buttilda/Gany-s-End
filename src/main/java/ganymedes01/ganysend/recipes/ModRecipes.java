@@ -40,8 +40,8 @@ public class ModRecipes {
 
 		if (GanysEnd.enableEndium) {
 			OreDictionary.registerOre("oreEndium", ModBlocks.raw_endium);
-			OreDictionary.registerOre("ingotEndium", new ItemStack(ModItems.endiumIngot));
-			OreDictionary.registerOre("nuggetEndium", new ItemStack(ModItems.endiumIngot, 1, 1));
+			OreDictionary.registerOre("ingotEndium", new ItemStack(ModItems.endium_ingot));
+			OreDictionary.registerOre("nuggetEndium", new ItemStack(ModItems.endium_ingot, 1, 1));
 			OreDictionary.registerOre("blockEndium", ModBlocks.endium_block);
 		}
 
@@ -57,8 +57,8 @@ public class ModRecipes {
 			OreDictionary.registerOre("nightGemMaterial", new ItemStack(Blocks.brown_mushroom));
 			OreDictionary.registerOre("nightGemMaterial", new ItemStack(Blocks.red_mushroom));
 			OreDictionary.registerOre("nightGemMaterial", new ItemStack(Items.rotten_flesh));
-			OreDictionary.registerOre("gemNight", new ItemStack(ModItems.infusedGem));
-			OreDictionary.registerOre("gemDay", new ItemStack(ModItems.infusedGem, 1, 1));
+			OreDictionary.registerOre("gemNight", new ItemStack(ModItems.infused_gem));
+			OreDictionary.registerOre("gemDay", new ItemStack(ModItems.infused_gem, 1, 1));
 		}
 
 		if (GanysEnd.enableEnderBag || GanysEnd.enableAnchoredEnderChest)
@@ -70,60 +70,60 @@ public class ModRecipes {
 
 	private static void registerArmourRecipes() {
 		if (GanysEnd.enableEndiumArmour) {
-			addShapedRecipe(ModItems.endiumHelmet, "xxx", "xyx", 'x', "ingotEndium", 'y', "dyeGreen");
-			addShapedRecipe(ModItems.endiumChestplate, "xyx", "xxx", "xxx", 'x', "ingotEndium", 'y', "dyeGreen");
-			addShapedRecipe(ModItems.endiumLeggings, "xxx", "xyx", "x x", 'x', "ingotEndium", 'y', "dyeGreen");
-			addShapedRecipe(ModItems.endiumBoots, "xyx", "x x", 'x', "ingotEndium", 'y', "dyeGreen");
+			addShapedRecipe(ModItems.endium_helmet, "xxx", "xyx", 'x', "ingotEndium", 'y', "dyeGreen");
+			addShapedRecipe(ModItems.endium_chestplate, "xyx", "xxx", "xxx", 'x', "ingotEndium", 'y', "dyeGreen");
+			addShapedRecipe(ModItems.endium_leggings, "xxx", "xyx", "x x", 'x', "ingotEndium", 'y', "dyeGreen");
+			addShapedRecipe(ModItems.endium_boots, "xyx", "x x", 'x', "ingotEndium", 'y', "dyeGreen");
 		}
 	}
 
 	private static void registerItemRecipes() {
 		if (GanysEnd.enableEndium) {
-			GameRegistry.addSmelting(ModBlocks.raw_endium, new ItemStack(ModItems.endiumIngot), 1F);
-			addShapelessRecipe(new ItemStack(ModItems.endiumIngot, 9), "blockEndium");
-			addShapedRecipe(ModItems.endiumIngot, "xxx", "xxx", "xxx", 'x', "nuggetEndium");
-			addShapelessRecipe(new ItemStack(ModItems.endiumIngot, 9, 1), "ingotEndium");
+			GameRegistry.addSmelting(ModBlocks.raw_endium, new ItemStack(ModItems.endium_ingot), 1F);
+			addShapelessRecipe(new ItemStack(ModItems.endium_ingot, 9), "blockEndium");
+			addShapedRecipe(ModItems.endium_ingot, "xxx", "xxx", "xxx", 'x', "nuggetEndium");
+			addShapelessRecipe(new ItemStack(ModItems.endium_ingot, 9, 1), "ingotEndium");
 			addShapedRecipe(new ItemStack(Items.experience_bottle, 8), "yyy", "yxy", "yyy", 'x', "ingotEndium", 'y', new ItemStack(Items.potionitem));
 		}
 
 		if (GanysEnd.enableEndiumTools || GanysEnd.enableScythe)
-			addShapedRecipe(new ItemStack(ModItems.endstoneRod, 4), "x", "x", 'x', Blocks.end_stone);
+			addShapedRecipe(new ItemStack(ModItems.endstone_rod, 4), "x", "x", 'x', Blocks.end_stone);
 
 		if (GanysEnd.enableScythe) {
-			addShapedRecipe(ModItems.enderScythe, "xxy", " y ", "y  ", 'x', "ingotEndium", 'y', ModItems.endstoneRod);
-			addShapedRecipe(ModItems.reinforcedEnderScythe, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.enderScythe);
+			addShapedRecipe(ModItems.ender_scythe, "xxy", " y ", "y  ", 'x', "ingotEndium", 'y', ModItems.endstone_rod);
+			addShapedRecipe(ModItems.reinforced_ender_scythe, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.ender_scythe);
 		}
 
 		if (GanysEnd.enableInfiniteBucket)
-			addShapedRecipe(ModItems.infiniteBucket, "xxx", "zxz", "yzy", 'x', Items.water_bucket, 'y', Items.ender_pearl, 'z', "ingotGold");
+			addShapedRecipe(ModItems.infinite_bucket, "xxx", "zxz", "yzy", 'x', Items.water_bucket, 'y', Items.ender_pearl, 'z', "ingotGold");
 
 		if (GanysEnd.enableTimeManipulator) {
-			addShapedRecipe(new ItemStack(ModItems.infusedGem, 4, 0), "yyy", "yxy", "yyy", 'x', Items.clock, 'y', "nightGemMaterial");
-			addShapedRecipe(new ItemStack(ModItems.infusedGem, 4, 1), "yyy", "yxy", "yyy", 'x', Items.clock, 'y', "dayGemMaterial");
+			addShapedRecipe(new ItemStack(ModItems.infused_gem, 4, 0), "yyy", "yxy", "yyy", 'x', Items.clock, 'y', "nightGemMaterial");
+			addShapedRecipe(new ItemStack(ModItems.infused_gem, 4, 1), "yyy", "yxy", "yyy", 'x', Items.clock, 'y', "dayGemMaterial");
 		}
 
 		if (GanysEnd.enableEndiumTools) {
-			addShapedRecipe(ModItems.endiumPickaxe, "xxx", " y ", " y ", 'x', "ingotEndium", 'y', ModItems.endstoneRod);
-			addShapedRecipe(ModItems.endiumAxe, "xx", "xy", " y", 'x', "ingotEndium", 'y', ModItems.endstoneRod);
-			addShapedRecipe(ModItems.endiumShovel, "x", "y", "y", 'x', "ingotEndium", 'y', ModItems.endstoneRod);
-			addShapedRecipe(ModItems.endiumSword, "x", "x", "y", 'x', "ingotEndium", 'y', ModItems.endstoneRod);
-			addShapedRecipe(ModItems.endiumBow, " xy", "x y", " xy", 'x', "ingotEndium", 'y', ModItems.endstoneRod);
-			addShapedRecipe(ModItems.reinforcedEndiumAxe, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.endiumAxe);
-			addShapedRecipe(ModItems.reinforcedEndiumPickaxe, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.endiumPickaxe);
-			addShapedRecipe(ModItems.reinforcedEndiumShovel, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.endiumShovel);
-			addShapedRecipe(ModItems.reinforcedEndiumSword, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.endiumSword);
-			addShapedRecipe(ModItems.reinforcedEndiumBow, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.endiumBow);
+			addShapedRecipe(ModItems.endium_pickaxe, "xxx", " y ", " y ", 'x', "ingotEndium", 'y', ModItems.endstone_rod);
+			addShapedRecipe(ModItems.endium_axe, "xx", "xy", " y", 'x', "ingotEndium", 'y', ModItems.endstone_rod);
+			addShapedRecipe(ModItems.endium_shovel, "x", "y", "y", 'x', "ingotEndium", 'y', ModItems.endstone_rod);
+			addShapedRecipe(ModItems.endium_sword, "x", "x", "y", 'x', "ingotEndium", 'y', ModItems.endstone_rod);
+			addShapedRecipe(ModItems.endium_bow, " xy", "x y", " xy", 'x', "ingotEndium", 'y', ModItems.endstone_rod);
+			addShapedRecipe(ModItems.reinforced_endium_axe, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.endium_axe);
+			addShapedRecipe(ModItems.reinforced_endium_pickaxe, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.endium_pickaxe);
+			addShapedRecipe(ModItems.reinforced_endium_shovel, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.endium_shovel);
+			addShapedRecipe(ModItems.reinforced_endium_sword, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.endium_sword);
+			addShapedRecipe(ModItems.reinforced_endium_bow, " x ", "xyx", 'x', "gemDiamond", 'y', ModItems.endium_bow);
 		}
 
 		if (GanysEnd.enableEnderBag)
 			if (GanysEnd.enableAnchoredEnderChest)
-				addShapedRecipe(ModItems.enderBag, "zwz", "wyw", "xxx", 'x', Items.ender_pearl, 'y', ModBlocks.anchored_ender_chest, 'z', Items.string, 'w', Items.leather);
+				addShapedRecipe(ModItems.ender_bag, "zwz", "wyw", "xxx", 'x', Items.ender_pearl, 'y', ModBlocks.anchored_ender_chest, 'z', Items.string, 'w', Items.leather);
 			else
-				addShapedRecipe(ModItems.enderBag, "zwz", "wyw", "xxx", 'x', Items.ender_pearl, 'y', "chestEnder", 'z', Items.string, 'w', Items.leather);
+				addShapedRecipe(ModItems.ender_bag, "zwz", "wyw", "xxx", 'x', Items.ender_pearl, 'y', "chestEnder", 'z', Items.string, 'w', Items.leather);
 
 		if (GanysEnd.enableAnchoredEnderChest) {
 			addShapedRecipe(ModBlocks.anchored_ender_chest, "xxx", "xyx", "xzx", 'x', "blockGold", 'y', "chestEnder", 'z', new ItemStack(Blocks.anvil));
-			addShapedRecipe(new ItemStack(ModItems.anchoredEnderChestMinecart), "x", "y", 'x', ModBlocks.anchored_ender_chest, 'y', Items.minecart);
+			addShapedRecipe(new ItemStack(ModItems.anchored_ender_chest_minecart), "x", "y", 'x', ModBlocks.anchored_ender_chest, 'y', Items.minecart);
 		}
 
 		if (GanysEnd.enableEnderFlower)
@@ -143,8 +143,8 @@ public class ModRecipes {
 			addShapedRecipe(new ItemStack(ModBlocks.enderpearl_block, 4, 1), "xx", "xx", 'x', new ItemStack(ModBlocks.enderpearl_block, 1, 0));
 			addShapedRecipe(new ItemStack(ModBlocks.endstone_stairs, 4), "x  ", "xx ", "xxx", 'x', "brickEndStone");
 			addShapedRecipe(new ItemStack(ModBlocks.enderpearl_stairs, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.enderpearl_block, 1, 1));
-			addShapedRecipe(new ItemStack(ModBlocks.end_walls, 6, 0), "xxx", "xxx", 'x', "brickEndStone");
-			addShapedRecipe(new ItemStack(ModBlocks.end_walls, 6, 1), "xxx", "xxx", 'x', new ItemStack(ModBlocks.enderpearl_block, 1, 1));
+			addShapedRecipe(new ItemStack(ModBlocks.end_wall, 6, 0), "xxx", "xxx", 'x', "brickEndStone");
+			addShapedRecipe(new ItemStack(ModBlocks.end_wall, 6, 1), "xxx", "xxx", 'x', new ItemStack(ModBlocks.enderpearl_block, 1, 1));
 		}
 
 		if (GanysEnd.enableEnderToggler)
@@ -183,7 +183,7 @@ public class ModRecipes {
 			addShapedRecipe(ModBlocks.inventory_binder, "xxx", "yzy", "xxx", 'x', Blocks.end_stone, 'y', Items.ender_pearl, 'z', "itemSkull");
 
 		if (GanysEnd.enableInfiniteWaterSource)
-			addShapedRecipe(ModBlocks.infinite_water_source, "yzy", "zxz", "yzy", 'x', ModItems.infiniteBucket, 'y', "ingotIron", 'z', Items.ender_pearl);
+			addShapedRecipe(ModBlocks.infinite_water_source, "yzy", "zxz", "yzy", 'x', ModItems.infinite_bucket, 'y', "ingotIron", 'z', Items.ender_pearl);
 
 		if (GanysEnd.enableVoidCrate)
 			addShapedRecipe(ModBlocks.void_crate, "xyx", "xzx", "xwx", 'x', "logWood", 'y', "chestWood", 'z', Items.ender_pearl, 'w', Blocks.obsidian);

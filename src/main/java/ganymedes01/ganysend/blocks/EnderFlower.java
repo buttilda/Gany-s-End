@@ -42,6 +42,11 @@ public class EnderFlower extends BlockBush implements IConfigurable {
 
 	@Override
 	public boolean canBlockStay(World world, BlockPos pos, IBlockState state) {
+		return canPlaceBlockAt(world, pos);
+	}
+
+	@Override
+	public boolean canPlaceBlockAt(World world, BlockPos pos) {
 		return world.provider.getDimensionId() == 1 && canPlaceBlockOn(world.getBlockState(pos.down()).getBlock());
 	}
 

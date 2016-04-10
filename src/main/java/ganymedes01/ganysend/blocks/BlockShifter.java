@@ -35,6 +35,11 @@ public class BlockShifter extends BlockContainer implements IConfigurable {
 	}
 
 	@Override
+	public int getRenderType() {
+		return 3;
+	}
+
+	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityBlockShifter();
 	}
@@ -53,7 +58,7 @@ public class BlockShifter extends BlockContainer implements IConfigurable {
 		if (player.inventory.getCurrentItem() == null)
 			return false;
 		ItemStack current = player.inventory.getCurrentItem();
-		if (current.getItem() == ModItems.enderTag && current.hasTagCompound())
+		if (current.getItem() == ModItems.ender_tag && current.hasTagCompound())
 			if (current.getTagCompound().getBoolean("Tagged")) {
 				TileEntityBlockShifter tile = Utils.getTileEntity(world, pos, TileEntityBlockShifter.class);
 				if (tile != null) {

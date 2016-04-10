@@ -1,7 +1,11 @@
 package ganymedes01.ganysend.items;
 
+import java.util.Arrays;
+import java.util.List;
+
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
+import ganymedes01.ganysend.ModItems.ISubItemsItem;
 import ganymedes01.ganysend.api.IEndiumTool;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModMaterials;
@@ -35,7 +39,7 @@ import net.minecraftforge.items.IItemHandler;
  *
  */
 
-public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable {
+public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable, ISubItemsItem {
 
 	public EndiumBow() {
 		setMaxDamage(ModMaterials.ENDIUM_TOOLS.getMaxUses());
@@ -215,5 +219,10 @@ public class EndiumBow extends ItemBow implements IEndiumTool, IConfigurable {
 	@Override
 	public boolean isEnabled() {
 		return GanysEnd.enableEndiumTools;
+	}
+
+	@Override
+	public List<String> getModels() {
+		return Arrays.asList("endium_bow", "endium_bow_pulling_0", "endium_bow_pulling_1", "endium_bow_pulling_2");
 	}
 }

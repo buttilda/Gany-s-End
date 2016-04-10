@@ -1,5 +1,8 @@
 package ganymedes01.ganysend.items;
 
+import java.util.Arrays;
+import java.util.List;
+
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.ModMaterials;
@@ -33,5 +36,10 @@ public class ReinforcedEndiumBow extends EndiumBow {
 	@SideOnly(Side.CLIENT)
 	public EnumRarity getRarity(ItemStack stack) {
 		return EnumRarity.RARE;
+	}
+
+	@Override
+	public List<String> getModels() {
+		return Arrays.asList("reinforced_endium_bow", "reinforced_endium_bow_pulling_0", "reinforced_endium_bow_pulling_1", "reinforced_endium_bow_pulling_2");
 	}
 }

@@ -58,7 +58,7 @@ public class EntityAnchoredEnderChestMinecart extends EntityMinecartChest {
 
 	@Override
 	public ItemStack getCartItem() {
-		return new ItemStack(ModItems.anchoredEnderChestMinecart);
+		return new ItemStack(ModItems.anchored_ender_chest_minecart);
 	}
 
 	@Override
