@@ -84,6 +84,6 @@ public class CreativeInfiniteFluidSource extends InfiniteWaterSource {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbour) {
+	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighbour) {
 	}
 }

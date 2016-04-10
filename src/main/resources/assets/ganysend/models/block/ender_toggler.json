@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "bottom": "ganysend:blocks/ender_toggler_bottom",
+        "top": "ganysend:blocks/ender_toggler_top",
+        "side": "ganysend:blocks/ender_toggler_sides"
+    }
+}

@@ -73,7 +73,8 @@ public class ModBlocks {
 	public static final Block entity_shifter = new EntityShifter();
 	public static final Block inventory_binder = new InventoryBinder();
 	public static final Block infinite_water_source = new InfiniteWaterSource();
-	public static final Block end_wall = new EndWalls();
+	public static final Block endstone_bricks_wall = new EndWalls(endstone_bricks, "endstone_bricks_wall").setHardness(3.0F).setResistance(5.0F);
+	public static final Block enderpearl_bricks_wall = new EndWalls(enderpearl_block, "enderpearl_bricks_wall").setHardness(1.5F).setResistance(3.0F);
 	public static final Block void_crate = new VoidCrate();
 	public static final Block ender_furnace = new EnderFurnace();
 	public static final Block creative_speedy_hopper = new CreativeSpeedyHopper();
@@ -88,12 +89,16 @@ public class ModBlocks {
 	public static void registerRenderers() {
 		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
 		for (Block block : getBlocks())
-			if (!(block instanceof IConfigurable) || ((IConfigurable) block).isEnabled()) {
-				String name = block.getUnlocalizedName();
-				String[] strings = name.split("\\.");
-
-				mesher.register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MOD_ID + ":" + strings[strings.length - 1], "inventory"));
-			}
+			if (!(block instanceof IConfigurable) || ((IConfigurable) block).isEnabled())
+				if (block instanceof ISubBlocksBlock) {
+					List<String> models = ((ISubBlocksBlock) block).getModels();
+					for (int i = 0; i < models.size(); i++)
+						mesher.register(Item.getItemFromBlock(block), i, new ModelResourceLocation(Reference.MOD_ID + ":" + models.get(i), "inventory"));
+				} else {
+					String name = block.getUnlocalizedName();
+					String[] strings = name.split("\\.");
+					mesher.register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(Reference.MOD_ID + ":" + strings[strings.length - 1], "inventory"));
+				}
 	}
 
 	private static void registerBlock(Block block) {
@@ -129,5 +134,7 @@ public class ModBlocks {
 	public static interface ISubBlocksBlock {
 
 		Class<? extends ItemBlock> getItemBlockClass();
+
+		List<String> getModels();
 	}
 }

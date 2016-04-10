@@ -34,6 +34,16 @@ public class EnderTogglerAir extends Block implements IConfigurable {
 	}
 
 	@Override
+	public boolean isFullCube() {
+		return false;
+	}
+
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
+
+	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}

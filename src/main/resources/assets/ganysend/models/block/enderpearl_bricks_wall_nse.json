@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_nse",
+    "textures": {
+        "wall": "ganysend:blocks/enderpearl_bricks"
+    }
+}

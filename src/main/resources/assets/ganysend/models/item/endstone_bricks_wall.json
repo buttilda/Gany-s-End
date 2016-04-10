@@ -1,5 +1,5 @@
 {
-    "parent": "block/endstone_wall_inventory",
+    "parent": "ganysend:block/endstone_bricks_wall_inventory",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

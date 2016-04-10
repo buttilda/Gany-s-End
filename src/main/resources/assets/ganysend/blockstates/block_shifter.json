@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "ganysend:block_shifter" }
+    }
+}

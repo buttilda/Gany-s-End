@@ -1,5 +1,6 @@
 package ganymedes01.ganysend.blocks;
 
+import java.util.Arrays;
 import java.util.List;
 
 import ganymedes01.ganysend.GanysEnd;
@@ -82,6 +83,11 @@ public class EnderPearlBlock extends Block implements ISubBlocksBlock, IConfigur
 	@Override
 	public Class<? extends ItemBlock> getItemBlockClass() {
 		return ItemEnderPearlBlock.class;
+	}
+
+	@Override
+	public List<String> getModels() {
+		return Arrays.asList(Strings.ENDERPEARL_BLOCK_NAME, Strings.ENDERPEARL_BRICKS_NAME);
 	}
 
 	@Override

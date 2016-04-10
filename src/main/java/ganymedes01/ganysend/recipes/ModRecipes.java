@@ -143,8 +143,8 @@ public class ModRecipes {
 			addShapedRecipe(new ItemStack(ModBlocks.enderpearl_block, 4, 1), "xx", "xx", 'x', new ItemStack(ModBlocks.enderpearl_block, 1, 0));
 			addShapedRecipe(new ItemStack(ModBlocks.endstone_stairs, 4), "x  ", "xx ", "xxx", 'x', "brickEndStone");
 			addShapedRecipe(new ItemStack(ModBlocks.enderpearl_stairs, 4), "x  ", "xx ", "xxx", 'x', new ItemStack(ModBlocks.enderpearl_block, 1, 1));
-			addShapedRecipe(new ItemStack(ModBlocks.end_wall, 6, 0), "xxx", "xxx", 'x', "brickEndStone");
-			addShapedRecipe(new ItemStack(ModBlocks.end_wall, 6, 1), "xxx", "xxx", 'x', new ItemStack(ModBlocks.enderpearl_block, 1, 1));
+			addShapedRecipe(new ItemStack(ModBlocks.endstone_bricks_wall, 6, 0), "xxx", "xxx", 'x', "brickEndStone");
+			addShapedRecipe(new ItemStack(ModBlocks.enderpearl_bricks_wall, 6, 1), "xxx", "xxx", 'x', new ItemStack(ModBlocks.enderpearl_block, 1, 1));
 		}
 
 		if (GanysEnd.enableEnderToggler)

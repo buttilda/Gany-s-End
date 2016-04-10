@@ -10,8 +10,10 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -32,21 +34,36 @@ public class TileEntityEnderFurnace extends TileEntity implements ITickable {
 			return EnderFurnaceFuelsRegistry.INSTANCE.getBurnTime(stack) > 0 ? super.insertItem(slot, stack, simulate) : stack;
 		}
 
+		//		@Override
+		//		public ItemStack extractItem(int slot, int amount, boolean simulate) {
+		//			return null;
+		//		}
+
 		@Override
-		public ItemStack extractItem(int slot, int amount, boolean simulate) {
-			return null;
+		protected void onContentsChanged(int slot) {
+			TileEntityEnderFurnace.this.markDirty();
 		}
 	};
 	private final IItemHandler inputSlots = new ItemStackHandler(4) {
+		//		@Override
+		//		public ItemStack extractItem(int slot, int amount, boolean simulate) {
+		//			return null;
+		//		}
+
 		@Override
-		public ItemStack extractItem(int slot, int amount, boolean simulate) {
-			return null;
+		protected void onContentsChanged(int slot) {
+			TileEntityEnderFurnace.this.markDirty();
 		}
 	};
 	private final IItemHandler outputSlots = new ItemStackHandler(1) {
+		//		@Override
+		//		public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+		//			return super.insertItem(slot, stack, simulate);
+		//		}
+
 		@Override
-		public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-			return stack;
+		protected void onContentsChanged(int slot) {
+			TileEntityEnderFurnace.this.markDirty();
 		}
 	};
 
@@ -86,8 +103,8 @@ public class TileEntityEnderFurnace extends TileEntity implements ITickable {
 	private void smelt() {
 		outputSlots.insertItem(0, EnderFurnaceRegistry.INSTANCE.getOuput(getRecipeInput()), false);
 
-		for (int i = 0; i < 4; i++)
-			outputSlots.extractItem(i, 1, false);
+		for (int i = 0; i < inputSlots.getSlots(); i++)
+			inputSlots.extractItem(i, 1, false);
 
 		markDirty();
 	}
@@ -190,5 +207,10 @@ public class TileEntityEnderFurnace extends TileEntity implements ITickable {
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
+	}
+
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+		return oldState.getBlock() != newSate.getBlock();
 	}
 }

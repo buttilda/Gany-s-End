@@ -1,5 +1,7 @@
 package ganymedes01.ganysend.blocks;
 
+import java.util.Random;
+
 import ganymedes01.ganysend.GanysEnd;
 import ganymedes01.ganysend.IConfigurable;
 import ganymedes01.ganysend.core.utils.InventoryUtils;
@@ -23,6 +25,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -163,6 +166,39 @@ public class EnderFurnace extends BlockContainer implements IConfigurable {
 	@Override
 	protected BlockState createBlockState() {
 		return new BlockState(this, new IProperty[] { FACING, IS_ON });
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand) {
+		if (state.getValue(IS_ON)) {
+			EnumFacing facing = state.getValue(FACING);
+			double d0 = pos.getX() + 0.5D;
+			double d1 = pos.getY() + rand.nextDouble() * 6.0D / 16.0D;
+			double d2 = pos.getZ() + 0.5D;
+			double d3 = 0.52D;
+			double d4 = rand.nextDouble() * 0.6D - 0.3D;
+
+			switch (facing) {
+				case WEST:
+					world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 - d3, d1, d2 + d4, 0, 0, 0);
+					world.spawnParticle(EnumParticleTypes.FLAME, d0 - d3, d1, d2 + d4, 0, 0, 0);
+					break;
+				case EAST:
+					world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d3, d1, d2 + d4, 0, 0, 0);
+					world.spawnParticle(EnumParticleTypes.FLAME, d0 + d3, d1, d2 + d4, 0, 0, 0);
+					break;
+				case NORTH:
+					world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 - d3, 0, 0, 0);
+					world.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 - d3, 0, 0, 0);
+					break;
+				case SOUTH:
+					world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + d4, d1, d2 + d3, 0, 0, 0);
+					world.spawnParticle(EnumParticleTypes.FLAME, d0 + d4, d1, d2 + d3, 0, 0, 0);
+				default:
+					break;
+			}
+		}
 	}
 
 	@Override
