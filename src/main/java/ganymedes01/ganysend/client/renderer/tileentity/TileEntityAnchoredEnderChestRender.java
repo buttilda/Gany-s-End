@@ -5,6 +5,7 @@ import ganymedes01.ganysend.core.utils.Utils;
 import ganymedes01.ganysend.lib.Strings;
 import ganymedes01.ganysend.tileentities.TileEntityAnchoredEnderChest;
 import net.minecraft.client.model.ModelChest;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,7 +31,16 @@ public class TileEntityAnchoredEnderChestRender extends TileEntitySpecialRendere
 		TileEntityAnchoredEnderChest chest = tile;
 		int meta = chest.hasWorldObj() ? chest.getBlockMetadata() : 0;
 
-		bindTexture(chest.getPlayerInventory() != null ? TEXTURE_ON : TEXTURE_OFF);
+		if (destroyStage >= 0) {
+			bindTexture(DESTROY_STAGES[destroyStage]);
+			GlStateManager.matrixMode(5890);
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(4.0F, 4.0F, 1.0F);
+			GlStateManager.translate(0.0625F, 0.0625F, 0.0625F);
+			GlStateManager.matrixMode(5888);
+		} else
+			bindTexture(chest.getPlayerInventory() != null ? TEXTURE_ON : TEXTURE_OFF);
+
 		OpenGLHelper.pushMatrix();
 		OpenGLHelper.enableRescaleNormal();
 		OpenGLHelper.colour(1.0F, 1.0F, 1.0F, 1.0F);
@@ -55,5 +65,11 @@ public class TileEntityAnchoredEnderChestRender extends TileEntitySpecialRendere
 		MODEL.renderAll();
 		OpenGLHelper.disableRescaleNormal();
 		OpenGLHelper.popMatrix();
+
+		if (destroyStage >= 0) {
+			GlStateManager.matrixMode(5890);
+			GlStateManager.popMatrix();
+			GlStateManager.matrixMode(5888);
+		}
 	}
 }

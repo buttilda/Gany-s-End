@@ -27,6 +27,6 @@ public class ItemEnderPearlBlock extends ItemBlock {
 
 	@Override
 	public int getMetadata(int meta) {
-		return meta > 1 ? 1 : meta;
+		return Math.min(meta, 1);
 	}
 }

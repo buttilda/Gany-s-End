@@ -83,4 +83,9 @@ public class TileEntityAnchoredEnderChest extends TileEntityInventoryBinder impl
 	@Override
 	protected void updateProfile() {
 	}
+
+	@Override
+	public boolean canRenderBreaking() {
+		return true;
+	}
 }

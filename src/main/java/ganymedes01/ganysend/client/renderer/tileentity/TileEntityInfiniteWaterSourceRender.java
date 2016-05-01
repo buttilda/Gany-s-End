@@ -30,7 +30,7 @@ public class TileEntityInfiniteWaterSourceRender extends TileEntitySpecialRender
 		OpenGLHelper.pushMatrix();
 		OpenGLHelper.enableBlend();
 		OpenGLHelper.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		OpenGLHelper.translate((float) x, (float) y + 1.0F, (float) z + 1.0F);
+		OpenGLHelper.translate(x, y + 1, z + 1);
 		OpenGLHelper.scale(1.0F, -1.0F, -1.0F);
 		bindTexture(TextureMap.locationBlocksTexture);
 		//		renderCore(renderer, fluid.getFluid().getStillIcon(), source.getBlockType().getIcon(0, 0), source.getFluid().getFluid().getColor(source.getFluid()));
